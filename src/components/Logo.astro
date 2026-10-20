@@ -6,13 +6,13 @@ interface Props {
 }
 
 const { href = '/', size = 'md', class: className = '' } = Astro.props;
-const markSize = size === 'sm' ? 28 : 32;
+const markSize = size === 'sm' ? 26 : 30;
 const textSize = size === 'sm' ? 'text-base' : 'text-lg';
 ---
 <a
   href={href}
   class:list={[
-    'inline-flex items-center gap-2 font-display font-semibold tracking-[-0.03em] text-ink',
+    'inline-flex items-center gap-2.5 font-display font-semibold tracking-[-0.035em] text-ink',
     textSize,
     className,
   ]}
@@ -27,9 +27,17 @@ const textSize = size === 'sm' ? 'text-base' : 'text-lg';
     aria-hidden="true"
     class="shrink-0"
   >
-    <rect width="28" height="28" rx="7" fill="currentColor" />
-    <path d="M9 9.5h2.4v9H9zM9 6.5h2.4v1.6H9z" fill="var(--canvas)" />
-    <path d="M14.6 12.1h2.3V18a1.4 1.4 0 0 0 1.5 1.5h.6v1.9h-1.1c-2.2 0-3.3-1.2-3.3-3.4z" fill="var(--canvas)" />
+    <rect width="28" height="28" rx="8" fill="currentColor" />
+    <rect x="11.75" y="12.9" width="4.5" height="9.3" rx="2.25" fill="var(--canvas)" />
+    <rect
+      x="11.5"
+      y="5.85"
+      width="5"
+      height="5"
+      rx="1.1"
+      transform="rotate(45 14 8.35)"
+      fill="var(--canvas)"
+    />
   </svg>
   <span>instanten</span>
 </a>
