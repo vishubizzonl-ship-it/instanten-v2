@@ -4,9 +4,24 @@ import ThemeToggle from './ThemeToggle.astro';
 ---
 <header class="sticky top-0 z-50 w-full border-b border-border-hairline bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70">
   <div class="site-container flex h-[88px] items-center justify-between gap-4">
-    <a href="/" class="flex-shrink-0" aria-label="instanten home">
-      <Logo size="md" />
-    </a>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button
+        type="button"
+        data-menu-open
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink lg:hidden"
+        aria-label="Open menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <a href="/" class="flex-shrink-0" aria-label="instanten home">
+        <Logo size="md" />
+      </a>
+    </div>
 
     <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions">
       <button
@@ -49,19 +64,6 @@ import ThemeToggle from './ThemeToggle.astro';
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="9" cy="9" r="6.2"></circle>
           <path d="m13.6 13.6 3.2 3.2"></path>
-        </svg>
-      </button>
-
-      <button
-        type="button"
-        data-menu-open
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
-        aria-label="Open menu"
-        aria-controls="mobile-drawer"
-        aria-expanded="false"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16"></path>
         </svg>
       </button>
     </div>

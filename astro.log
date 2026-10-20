@@ -16,3 +16,14 @@
 17:53:36 [200] / 23ms
 17:53:47 [200] / 62ms
 18:42:30 [200] / 45ms
+18:46:56 [200] /tools/image-compressor/ 93ms
+18:46:56 [200] /tools/json-formatter/ 21ms
+18:47:02 [200] /category/developer/ 43ms
+18:47:04 [200] /category/developer/ 13ms
+18:47:05 [200] /categories 45ms
+18:47:07 [200] / 17ms
+18:48:10 [200] /tools/ 41ms
+18:48:15 [200] / 21ms
+18:49:46 [watch] /src/styles/app.css
+18:49:53 [200] / 50ms
+18:49:53 [200] / 25ms
