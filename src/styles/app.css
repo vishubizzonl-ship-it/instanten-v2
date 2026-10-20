@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: light;
-  --canvas: #FDFDFF;
-  --canvas-end: #F8F7FF;
+  --canvas: #FFFFFF;
+  --canvas-end: #FFFFFF;
   --surface: #FFFFFF;
   --surface-soft: #F8F7FF;
   --ink: #29294B;
@@ -151,7 +151,7 @@
 
   body {
     min-height: 100vh;
-    background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas-end) 100%);
+    background: var(--canvas);
     color: var(--ink);
     font-family: var(--font-body);
   }
