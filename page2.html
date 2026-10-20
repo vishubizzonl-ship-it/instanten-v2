@@ -1,0 +1,2091 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="generator" content="Astro v6.4.8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="canonical" href="https://instanten.com/"><meta name="description" content="A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites."><meta name="author" content="instanten"><meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><meta name="robots" content="index, follow"><meta property="og:site_name" content="instanten"><meta property="og:title" content="instanten — Useful SaaS Tools, Ready in an Instant"><meta property="og:description" content="A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites."><meta property="og:type" content="website"><meta property="og:url" content="https://instanten.com/"><meta property="og:image" content="https://instanten.com/og-default.svg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="instanten — useful SaaS tools, ready in an instant"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="instanten — Useful SaaS Tools, Ready in an Instant"><meta name="twitter:description" content="A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites."><meta name="twitter:image" content="https://instanten.com/og-default.svg"><meta name="twitter:image:alt" content="instanten — useful SaaS tools, ready in an instant"><title>instanten — Useful SaaS Tools, Ready in an Instant</title><script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark =
+            stored === 'dark' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (_) {}
+      })();
+    </script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"instanten","url":"https://instanten.com/","description":"A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites.","potentialAction":{"@type":"SearchAction","target":"https://instanten.com/search/?q={search_term_string}","query-input":"required name=search_term_string"}}</script><style data-vite-dev-id="/data/data/com.termux/files/home/projects/instanten-v2/src/styles/app.css">/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-emerald-100: oklch(95% 0.052 163.051);
+    --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-600: oklch(59.6% 0.145 163.225);
+    --color-emerald-700: oklch(50.8% 0.118 165.612);
+    --color-violet-100: oklch(94.3% 0.029 294.588);
+    --color-violet-200: oklch(89.4% 0.057 293.283);
+    --color-violet-700: oklch(49.1% 0.27 292.581);
+    --color-black: #000;
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-md: 28rem;
+    --container-2xl: 42rem;
+    --container-3xl: 48rem;
+    --container-4xl: 56rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-9xl: 8rem;
+    --text-9xl--line-height: 1;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: 0.025em;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --blur-sm: 8px;
+    --blur-md: 12px;
+    --aspect-video: 16 / 9;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --text-body-sm: 0.8125rem;
+    --text-caption: 0.75rem;
+    --text-eyebrow: 0.6875rem;
+    --spacing-gutter: 1.5rem;
+    --container-site: 78rem;
+    --shadow-float: var(--shadow-float);
+  }
+}
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html,
+  :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+      -o-tab-size: 4;
+         tab-size: 4;
+    font-family: var(--default-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b,
+  strong {
+    font-weight: bolder;
+  }
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring:where(:not(iframe)) {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol,
+  ul,
+  menu {
+    list-style: none;
+  }
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    vertical-align: middle;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  button,
+  input,
+  select,
+  optgroup,
+  textarea,
+  ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::-moz-placeholder {
+    opacity: 1;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or
+    (contain-intrinsic-size: 1px) {
+    ::-moz-placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit,
+  ::-webkit-datetime-edit-year-field,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-hour-field,
+  ::-webkit-datetime-edit-minute-field,
+  ::-webkit-datetime-edit-second-field,
+  ::-webkit-datetime-edit-millisecond-field,
+  ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button,
+  input:where([type="button"], [type="reset"], [type="submit"]),
+  ::file-selector-button {
+    -webkit-appearance: button;
+       -moz-appearance: button;
+            appearance: button;
+  }
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .invisible {
+    visibility: hidden;
+  }
+  .visible {
+    visibility: visible;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .static {
+    position: static;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .inset-0 {
+    inset: 0px;
+  }
+  .inset-y-0 {
+    inset-block: 0px;
+  }
+  .top-0 {
+    top: 0px;
+  }
+  .top-5 {
+    top: calc(var(--spacing) * 5);
+  }
+  .top-\[88px\] {
+    top: 88px;
+  }
+  .right-0 {
+    right: 0px;
+  }
+  .right-4 {
+    right: calc(var(--spacing) * 4);
+  }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
+  }
+  .bottom-6 {
+    bottom: calc(var(--spacing) * 6);
+  }
+  .left-5 {
+    left: calc(var(--spacing) * 5);
+  }
+  .z-30 {
+    z-index: 30;
+  }
+  .z-40 {
+    z-index: 40;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .z-\[75\] {
+    z-index: 75;
+  }
+  .z-\[80\] {
+    z-index: 80;
+  }
+  .container {
+    width: 100%;
+    @media (width >= 40rem) {
+      max-width: 40rem;
+    }
+    @media (width >= 48rem) {
+      max-width: 48rem;
+    }
+    @media (width >= 64rem) {
+      max-width: 64rem;
+    }
+    @media (width >= 80rem) {
+      max-width: 80rem;
+    }
+    @media (width >= 96rem) {
+      max-width: 96rem;
+    }
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+  .mt-1 {
+    margin-top: var(--spacing);
+  }
+  .mt-1\.5 {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-\[10px\] {
+    margin-top: 10px;
+  }
+  .mt-\[64px\] {
+    margin-top: 64px;
+  }
+  .mb-1 {
+    margin-bottom: var(--spacing);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
+  .mb-12 {
+    margin-bottom: calc(var(--spacing) * 12);
+  }
+  .mb-16 {
+    margin-bottom: calc(var(--spacing) * 16);
+  }
+  .ml-1\.5 {
+    margin-left: calc(var(--spacing) * 1.5);
+  }
+  .ml-auto {
+    margin-left: auto;
+  }
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .aspect-\[16\/9\] {
+    aspect-ratio: 16/9;
+  }
+  .aspect-video {
+    aspect-ratio: var(--aspect-video);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .h-\[88px\] {
+    height: 88px;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .min-h-10 {
+    min-height: calc(var(--spacing) * 10);
+  }
+  .min-h-11 {
+    min-height: calc(var(--spacing) * 11);
+  }
+  .min-h-\[70vh\] {
+    min-height: 70vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
+  .w-9 {
+    width: calc(var(--spacing) * 9);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
+  .w-\[min\(92vw\,22rem\)\] {
+    width: min(92vw, 22rem);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+  .max-w-3xl {
+    max-width: var(--container-3xl);
+  }
+  .max-w-4xl {
+    max-width: var(--container-4xl);
+  }
+  .max-w-\[410px\] {
+    max-width: 410px;
+  }
+  .max-w-\[480px\] {
+    max-width: 480px;
+  }
+  .max-w-\[640px\] {
+    max-width: 640px;
+  }
+  .max-w-\[920px\] {
+    max-width: 920px;
+  }
+  .max-w-\[1296px\] {
+    max-width: 1296px;
+  }
+  .max-w-md {
+    max-width: var(--container-md);
+  }
+  .min-w-\[165px\] {
+    min-width: 165px;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .flex-shrink-0 {
+    flex-shrink: 0;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+  .translate-x-full {
+    --tw-translate-x: 100%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-0 {
+    --tw-translate-y: 0px;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-2 {
+    --tw-translate-y: calc(var(--spacing) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .list-inside {
+    list-style-position: inside;
+  }
+  .list-disc {
+    list-style-type: disc;
+  }
+  .appearance-none {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .items-stretch {
+    align-items: stretch;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
+  }
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+  :where(.space-y-0\.5 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 0.5) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 0.5) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  :where(.space-y-1\.5 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 1.5) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 1.5) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  :where(.space-y-2 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  :where(.space-y-3 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  :where(.space-y-4 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-\[8px\] {
+    border-radius: 8px;
+  }
+  .rounded-\[16px\] {
+    border-radius: 16px;
+  }
+  .rounded-card {
+    border-radius: 1rem;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+  .border-amber-200 {
+    border-color: var(--color-amber-200);
+  }
+  .border-border-hairline {
+    border-color: var(--hairline);
+  }
+  .border-emerald-200 {
+    border-color: var(--color-emerald-200);
+  }
+  .border-violet-200 {
+    border-color: var(--color-violet-200);
+  }
+  .bg-accent\/90 {
+    background-color: var(--accent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--accent) 90%, transparent);
+    }
+  }
+  .bg-amber-100 {
+    background-color: var(--color-amber-100);
+  }
+  .bg-black\/5 {
+    background-color: color-mix(in srgb, #000 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 5%, transparent);
+    }
+  }
+  .bg-black\/45 {
+    background-color: color-mix(in srgb, #000 45%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 45%, transparent);
+    }
+  }
+  .bg-canvas {
+    background-color: var(--canvas);
+  }
+  .bg-canvas\/85 {
+    background-color: var(--canvas);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--canvas) 85%, transparent);
+    }
+  }
+  .bg-emerald-100 {
+    background-color: var(--color-emerald-100);
+  }
+  .bg-hairline-soft {
+    background-color: var(--hairline-soft);
+  }
+  .bg-ink {
+    background-color: var(--ink);
+  }
+  .bg-ink\/90 {
+    background-color: var(--ink);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--ink) 90%, transparent);
+    }
+  }
+  .bg-muted\/30 {
+    background-color: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--muted) 30%, transparent);
+    }
+  }
+  .bg-muted\/50 {
+    background-color: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+    }
+  }
+  .bg-success-soft {
+    background-color: var(--success-soft);
+  }
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  .bg-surface-soft {
+    background-color: var(--surface-soft);
+  }
+  .bg-surface\/80 {
+    background-color: var(--surface);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--surface) 80%, transparent);
+    }
+  }
+  .bg-transparent {
+    background-color: transparent;
+  }
+  .bg-violet-100 {
+    background-color: var(--color-violet-100);
+  }
+  .bg-violet-soft {
+    background-color: var(--violet-soft);
+  }
+  .bg-warning-soft {
+    background-color: var(--warning-soft);
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-gradient-to-r {
+    --tw-gradient-position: to right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-\[url\(\'data\:image\/svg\+xml\;charset\=utf-8\,\%3Csvg\%20xmlns\%3D\%22http\%3A\%2F\%2Fwww\.w3\.org\%2F2000\%2Fsvg\%22\%20width\%3D\%2216\%22\%20height\%3D\%2216\%22\%20viewBox\%3D\%220\%200\%2016\%2016\%22\%20fill\%3D\%22none\%22\%20stroke\%3D\%22currentColor\%22\%20stroke-width\%3D\%222\%22\%20stroke-linecap\%3D\%22round\%22\%20stroke-linejoin\%3D\%22round\%22\%3E\%3Cpath\%20d\%3D\%22M5\%207l3\%203\%203-3\%22\%2F\%3E\%3C\%2Fsvg\%3E\'\)\] {
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%207l3%203%203-3%22%2F%3E%3C%2Fsvg%3E');
+  }
+  .bg-clip-text {
+    -webkit-background-clip: text;
+            background-clip: text;
+  }
+  .bg-\[right_0\.75rem_center\] {
+    background-position: right 0.75rem center;
+  }
+  .bg-no-repeat {
+    background-repeat: no-repeat;
+  }
+  .object-cover {
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .p-0\.5 {
+    padding: calc(var(--spacing) * 0.5);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+  .px-gutter {
+    padding-inline: 1.5rem;
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
+  .py-1 {
+    padding-block: var(--spacing);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
+  }
+  .py-12 {
+    padding-block: calc(var(--spacing) * 12);
+  }
+  .py-16 {
+    padding-block: calc(var(--spacing) * 16);
+  }
+  .py-section {
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
+  }
+  .pt-8 {
+    padding-top: calc(var(--spacing) * 8);
+  }
+  .pt-10 {
+    padding-top: calc(var(--spacing) * 10);
+  }
+  .pt-\[64px\] {
+    padding-top: 64px;
+  }
+  .pr-4 {
+    padding-right: calc(var(--spacing) * 4);
+  }
+  .pr-8 {
+    padding-right: calc(var(--spacing) * 8);
+  }
+  .pb-8 {
+    padding-bottom: calc(var(--spacing) * 8);
+  }
+  .pb-\[64px\] {
+    padding-bottom: 64px;
+  }
+  .pb-section {
+    padding-bottom: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .pl-4 {
+    padding-left: calc(var(--spacing) * 4);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .font-body {
+    font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .font-display {
+    font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .font-mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .text-display {
+    font-size: 3.25rem;
+    line-height: var(--tw-leading, 1.19);
+    letter-spacing: var(--tw-tracking, -0.03em);
+    font-weight: var(--tw-font-weight, 700);
+  }
+  .text-heading-lg {
+    font-size: 2.25rem;
+    line-height: var(--tw-leading, 1.1);
+    letter-spacing: var(--tw-tracking, -0.025em);
+    font-weight: var(--tw-font-weight, 600);
+  }
+  .text-heading-md {
+    font-size: 1.3125rem;
+    line-height: var(--tw-leading, 1.3);
+    letter-spacing: var(--tw-tracking, -0.02em);
+    font-weight: var(--tw-font-weight, 700);
+  }
+  .text-9xl {
+    font-size: var(--text-9xl);
+    line-height: var(--tw-leading, var(--text-9xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-body-lg {
+    font-size: 1.125rem;
+    line-height: var(--tw-leading, 1.56);
+  }
+  .text-body-md {
+    font-size: 0.9375rem;
+    line-height: var(--tw-leading, 1.6);
+  }
+  .text-body-sm {
+    font-size: 0.8125rem;
+    line-height: var(--tw-leading, 1.5);
+  }
+  .text-caption {
+    font-size: 0.75rem;
+    line-height: var(--tw-leading, 1.4);
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+  .text-\[12px\] {
+    font-size: 12px;
+  }
+  .text-\[14px\] {
+    font-size: 14px;
+  }
+  .text-\[15px\] {
+    font-size: 15px;
+  }
+  .text-\[16px\] {
+    font-size: 16px;
+  }
+  .text-\[18px\] {
+    font-size: 18px;
+  }
+  .text-\[21px\] {
+    font-size: 21px;
+  }
+  .text-\[52px\] {
+    font-size: 52px;
+  }
+  .leading-\[18px\] {
+    --tw-leading: 18px;
+    line-height: 18px;
+  }
+  .leading-\[22px\] {
+    --tw-leading: 22px;
+    line-height: 22px;
+  }
+  .leading-\[25px\] {
+    --tw-leading: 25px;
+    line-height: 25px;
+  }
+  .leading-\[28px\] {
+    --tw-leading: 28px;
+    line-height: 28px;
+  }
+  .leading-\[62px\] {
+    --tw-leading: 62px;
+    line-height: 62px;
+  }
+  .leading-normal {
+    --tw-leading: var(--leading-normal);
+    line-height: var(--leading-normal);
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-\[-0\.03em\] {
+    --tw-tracking: -0.03em;
+    letter-spacing: -0.03em;
+  }
+  .tracking-\[-2\.4px\] {
+    --tw-tracking: -2.4px;
+    letter-spacing: -2.4px;
+  }
+  .tracking-\[0\.08em\] {
+    --tw-tracking: 0.08em;
+    letter-spacing: 0.08em;
+  }
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-accent {
+    color: var(--accent);
+  }
+  .text-amber-700 {
+    color: var(--color-amber-700);
+  }
+  .text-body {
+    color: var(--body);
+  }
+  .text-canvas {
+    color: var(--canvas);
+  }
+  .text-emerald-600 {
+    color: var(--color-emerald-600);
+  }
+  .text-emerald-700 {
+    color: var(--color-emerald-700);
+  }
+  .text-faint {
+    color: var(--faint);
+  }
+  .text-ink {
+    color: var(--ink);
+  }
+  .text-muted {
+    color: var(--muted);
+  }
+  .text-muted\/20 {
+    color: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--muted) 20%, transparent);
+    }
+  }
+  .text-muted\/50 {
+    color: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--muted) 50%, transparent);
+    }
+  }
+  .text-success {
+    color: var(--success);
+  }
+  .text-transparent {
+    color: transparent;
+  }
+  .text-violet {
+    color: var(--violet);
+  }
+  .text-violet-700 {
+    color: var(--color-violet-700);
+  }
+  .text-warning {
+    color: var(--warning);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .italic {
+    font-style: italic;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .underline-offset-4 {
+    text-underline-offset: 4px;
+  }
+  .antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .opacity-0 {
+    opacity: 0%;
+  }
+  .opacity-100 {
+    opacity: 100%;
+  }
+  .shadow {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0_2px_8px_-4px_rgba\(0\,0\,0\,0\.08\)\,0_1px_2px_-1px_rgba\(0\,0\,0\,0\.04\)\] {
+    --tw-shadow: 0 2px 8px -4px var(--tw-shadow-color, rgba(0,0,0,0.08)), 0 1px 2px -1px var(--tw-shadow-color, rgba(0,0,0,0.04));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-\[0_2px_8px_-4px_rgba\(0\,0\,0\,0\.12\)\,0_1px_2px_-1px_rgba\(0\,0\,0\,0\.08\)\] {
+    --tw-shadow: 0 2px 8px -4px var(--tw-shadow-color, rgba(0,0,0,0.12)), 0 1px 2px -1px var(--tw-shadow-color, rgba(0,0,0,0.08));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-float {
+    --tw-shadow: var(--shadow-float);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .backdrop-blur-\[2px\] {
+    --tw-backdrop-blur: blur(2px);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-md {
+    --tw-backdrop-blur: blur(var(--blur-md));
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-150 {
+    --tw-duration: 150ms;
+    transition-duration: 150ms;
+  }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .duration-300 {
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .ease-out {
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
+  }
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  @media (hover: hover) {
+    .group-hover\:scale-\[1\.02\]:is(:where(.group):hover *) {
+      scale: 1.02;
+    }
+    .group-hover\:bg-ink\/10:is(:where(.group):hover *) {
+      background-color: var(--ink);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .group-hover\:bg-ink\/10:is(:where(.group):hover *) {
+        background-color: color-mix(in oklab, var(--ink) 10%, transparent);
+      }
+    }
+    .group-hover\:text-muted:is(:where(.group):hover *) {
+      color: var(--muted);
+    }
+    .group-hover\:opacity-100:is(:where(.group):hover *) {
+      opacity: 100%;
+    }
+  }
+  .placeholder\:text-faint::-moz-placeholder {
+    color: var(--faint);
+  }
+  .placeholder\:text-faint::placeholder {
+    color: var(--faint);
+  }
+  @media (hover: hover) {
+    .hover\:border-faint:hover {
+      border-color: var(--faint);
+    }
+    .hover\:border-ink\/30:hover {
+      border-color: var(--ink);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:border-ink\/30:hover {
+        border-color: color-mix(in oklab, var(--ink) 30%, transparent);
+      }
+    }
+    .hover\:border-ink\/50:hover {
+      border-color: var(--ink);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:border-ink\/50:hover {
+        border-color: color-mix(in oklab, var(--ink) 50%, transparent);
+      }
+    }
+    .hover\:bg-black\/10:hover {
+      background-color: color-mix(in srgb, #000 10%, transparent);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-black\/10:hover {
+        background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
+      }
+    }
+    .hover\:bg-hairline-soft:hover {
+      background-color: var(--hairline-soft);
+    }
+    .hover\:bg-ink\/90:hover {
+      background-color: var(--ink);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-ink\/90:hover {
+        background-color: color-mix(in oklab, var(--ink) 90%, transparent);
+      }
+    }
+    .hover\:bg-muted\/10:hover {
+      background-color: var(--muted);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-muted\/10:hover {
+        background-color: color-mix(in oklab, var(--muted) 10%, transparent);
+      }
+    }
+    .hover\:bg-muted\/70:hover {
+      background-color: var(--muted);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-muted\/70:hover {
+        background-color: color-mix(in oklab, var(--muted) 70%, transparent);
+      }
+    }
+    .hover\:text-accent-deep:hover {
+      color: var(--accent-deep);
+    }
+    .hover\:text-ink:hover {
+      color: var(--ink);
+    }
+    .hover\:underline:hover {
+      text-decoration-line: underline;
+    }
+    .hover\:opacity-75:hover {
+      opacity: 75%;
+    }
+    .hover\:opacity-86:hover {
+      opacity: 86%;
+    }
+    .hover\:shadow-\[0_4px_12px_-4px_rgba\(0\,0\,0\,0\.08\)\,0_2px_4px_-2px_rgba\(0\,0\,0\,0\.04\)\]:hover {
+      --tw-shadow: 0 4px 12px -4px var(--tw-shadow-color, rgba(0,0,0,0.08)), 0 2px 4px -2px var(--tw-shadow-color, rgba(0,0,0,0.04));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    .hover\:shadow-\[0_4px_12px_-4px_rgba\(0\,0\,0\,0\.12\)\,0_2px_4px_-2px_rgba\(0\,0\,0\,0\.08\)\]:hover {
+      --tw-shadow: 0 4px 12px -4px var(--tw-shadow-color, rgba(0,0,0,0.12)), 0 2px 4px -2px var(--tw-shadow-color, rgba(0,0,0,0.08));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    .hover\:shadow-sm:hover {
+      --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    .hover\:shadow-whisper:hover {
+      --tw-shadow: var(--shadow-1);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .focus\:border-ink:focus {
+    border-color: var(--ink);
+  }
+  .focus\:border-transparent:focus {
+    border-color: transparent;
+  }
+  .focus\:ring-2:focus {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .focus\:ring-accent:focus {
+    --tw-ring-color: var(--accent);
+  }
+  .focus\:ring-accent-soft:focus {
+    --tw-ring-color: var(--accent-soft);
+  }
+  .focus\:ring-offset-2:focus {
+    --tw-ring-offset-width: 2px;
+    --tw-ring-offset-shadow: var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  }
+  .focus\:outline-none:focus {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  .focus-visible\:visible:focus-visible {
+    visibility: visible;
+  }
+  .focus-visible\:translate-y-0:focus-visible {
+    --tw-translate-y: 0px;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .focus-visible\:opacity-100:focus-visible {
+    opacity: 100%;
+  }
+  .focus-visible\:ring-2:focus-visible {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .focus-visible\:ring-accent:focus-visible {
+    --tw-ring-color: var(--accent);
+  }
+  .focus-visible\:ring-offset-2:focus-visible {
+    --tw-ring-offset-width: 2px;
+    --tw-ring-offset-shadow: var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  }
+  .focus-visible\:outline-none:focus-visible {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  @supports (backdrop-filter: var(--tw)) {
+    .supports-\[backdrop-filter\]\:bg-canvas\/70 {
+      background-color: var(--canvas);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .supports-\[backdrop-filter\]\:bg-canvas\/70 {
+        background-color: color-mix(in oklab, var(--canvas) 70%, transparent);
+      }
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:w-auto {
+      width: auto;
+    }
+    .sm\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sm\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .sm\:flex-row {
+      flex-direction: row;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:hidden {
+      display: none;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:flex {
+      display: flex;
+    }
+    .lg\:hidden {
+      display: none;
+    }
+    .lg\:w-auto {
+      width: auto;
+    }
+    .lg\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .lg\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .lg\:flex-row {
+      flex-direction: row;
+    }
+    .lg\:items-center {
+      align-items: center;
+    }
+    .lg\:justify-between {
+      justify-content: space-between;
+    }
+    .lg\:pt-14 {
+      padding-top: calc(var(--spacing) * 14);
+    }
+    .lg\:pb-10 {
+      padding-bottom: calc(var(--spacing) * 10);
+    }
+    .lg\:text-display {
+      font-size: 3.25rem;
+      line-height: var(--tw-leading, 1.19);
+      letter-spacing: var(--tw-tracking, -0.03em);
+      font-weight: var(--tw-font-weight, 700);
+    }
+  }
+}
+:root {
+  color-scheme: light;
+  --canvas: #FDFDFF;
+  --canvas-end: #F8F7FF;
+  --surface: #FFFFFF;
+  --surface-soft: #F8F7FF;
+  --ink: #29294B;
+  --body: #29294B;
+  --muted: #828282;
+  --faint: #C4C4C4;
+  --hairline: #E1E1E8;
+  --hairline-soft: #F0F0F0;
+  --accent: #514DCC;
+  --accent-start: #9895FF;
+  --accent-end: #514DCC;
+  --accent-deep: #3B2F8A;
+  --accent-soft: #EAE8FD;
+  --success: #067647;
+  --success-soft: #ecfdf3;
+  --warning: #ab570a;
+  --warning-soft: #fff6e5;
+  --violet: #7928ca;
+  --violet-soft: #f3e8ff;
+  --shadow-1: 0 1px 1px rgb(0 0 0 / 0.04);
+  --shadow-2: 0 2px 2px rgb(0 0 0 / 0.04), 0 8px 24px -8px rgb(0 0 0 / 0.14);
+  --shadow-float: 0 8px 32px -8px rgb(0 0 0 / 0.12), 0 2px 8px -4px rgb(0 0 0 / 0.08);
+  --mesh-a: rgb(0 124 240 / 0.2);
+  --mesh-b: rgb(0 223 216 / 0.16);
+  --mesh-c: rgb(121 40 202 / 0.15);
+  --mesh-d: rgb(255 0 128 / 0.12);
+  --mesh-e: rgb(249 203 40 / 0.13);
+}
+.dark {
+  color-scheme: dark;
+  --canvas: #0A0A14;
+  --canvas-end: #12121F;
+  --surface: #151520;
+  --surface-soft: #1A1A2E;
+  --ink: #F0F0F5;
+  --body: #C8C8D8;
+  --muted: #8A8AA0;
+  --faint: #6A6A80;
+  --hairline: #2A2A3A;
+  --hairline-soft: #1A1A28;
+  --accent: #6B5BE8;
+  --accent-deep: #8A7AE8;
+  --accent-soft: #1F1A3A;
+  --success: #4ade80;
+  --success-soft: #0d2418;
+  --warning: #f5a623;
+  --warning-soft: #2b1e08;
+  --violet: #b98cff;
+  --violet-soft: #241532;
+  --shadow-1: 0 1px 1px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 2px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.8);
+  --shadow-float: 0 8px 32px -8px rgb(0 0 0 / 0.6), 0 2px 8px -4px rgb(0 0 0 / 0.4);
+  --mesh-a: rgb(0 124 240 / 0.28);
+  --mesh-b: rgb(0 223 216 / 0.16);
+  --mesh-c: rgb(121 40 202 / 0.26);
+  --mesh-d: rgb(255 0 128 / 0.18);
+  --mesh-e: rgb(249 203 40 / 0.12);
+}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--hairline);
+  }
+  html {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas-end) 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+  }
+  ::-moz-selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  img,
+  svg {
+    display: block;
+  }
+}
+@layer components {
+  .site-container {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-eyebrow);
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field {
+    width: 100%;
+    min-height: 2.5rem;
+    border: 1px solid var(--hairline);
+    border-radius: 0.375rem;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 0.5rem 0.75rem;
+    font-size: var(--text-body-sm);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .field:hover {
+    border-color: var(--faint);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .field::-moz-placeholder {
+    color: var(--faint);
+  }
+  .field::placeholder {
+    color: var(--faint);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    border-radius: 9999px;
+    padding: 0.625rem 1.125rem;
+    font-size: var(--text-body-sm);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--canvas);
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover {
+    opacity: 0.86;
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+  }
+  .btn-secondary:hover {
+    background: var(--surface-soft);
+    border-color: var(--faint);
+  }
+  .btn-sm {
+    min-height: 2rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: var(--text-caption);
+  }
+  .prose-copy p + p {
+    margin-top: 1rem;
+  }
+  .prose-copy a {
+    color: var(--accent-deep);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  .prose-copy a:hover {
+    color: var(--ink);
+  }
+  .hero-mesh {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero-mesh::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    z-index: -1;
+    height: 130%;
+    background: radial-gradient(ellipse 34% 48% at 16% 26%, var(--mesh-a), transparent 64%),
+      radial-gradient(ellipse 30% 44% at 38% 8%, var(--mesh-b), transparent 68%),
+      radial-gradient(ellipse 34% 48% at 66% 22%, var(--mesh-c), transparent 66%),
+      radial-gradient(ellipse 28% 44% at 84% 38%, var(--mesh-d), transparent 68%),
+      radial-gradient(ellipse 30% 38% at 62% 68%, var(--mesh-e), transparent 70%);
+    filter: blur(22px);
+    opacity: 0.9;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, rgb(0 0 0 / 0.7) 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, rgb(0 0 0 / 0.7) 62%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero-rule {
+    height: 2px;
+    width: 6rem;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #007cf0, #00dfd8 24%, #7928ca 52%, #ff0080 76%, #f9cb28);
+  }
+  .pricing-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: calc(infinity * 1px);
+    padding-inline: calc(var(--spacing) * 2);
+    padding-block: calc(var(--spacing) * 0.5);
+    font-size: 0.75rem;
+    line-height: var(--tw-leading, 1.4);
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    &:hover {
+      @media (hover: hover) {
+        opacity: 75%;
+      }
+    }
+  }
+  .pricing-free {
+    background-color: var(--success-soft);
+    color: var(--success);
+  }
+  .pricing-freemium {
+    background-color: var(--warning-soft);
+    color: var(--warning);
+  }
+  .pricing-paid {
+    background-color: var(--violet-soft);
+    color: var(--violet);
+  }
+}
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 0.375rem;
+  background: var(--ink);
+  color: var(--canvas);
+  padding: 0.6rem 0.9rem;
+  font-size: var(--text-body-sm);
+  transition: transform 120ms ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+      --tw-ease: initial;
+    }
+  }
+}</style><style data-vite-dev-id="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro?astro&amp;type=style&amp;index=0&amp;lang.css">@media (max-width: 640px){#search-panel[data-astro-cid-lsfpl5zw]{top:88px;right:0;left:0;max-width:none;border-radius:0;border-left:none;border-right:none}#search-panel[data-astro-cid-lsfpl5zw]>div[data-astro-cid-lsfpl5zw]:last-child{border-radius:0}}</style><script type="module" src="/@vite/client"></script><script type="module" src="/@id/astro/runtime/client/dev-toolbar/entrypoint.js"></script><script>window.__astro_dev_toolbar__ = {"root":"/data/data/com.termux/files/home/projects/instanten-v2/","version":"6.4.8","debugInfo":"Astro                    v6.4.8\nNode                     v24.18.0\nSystem                   android (arm64)\nPackage Manager          npm\nOutput                   static\nAdapter                  none\nIntegrations             @astrojs/sitemap"}</script><script type="module" src="/src/styles/app.css"></script><script type="module" src="/src/components/SearchPanel.astro?astro&type=style&index=0&lang.css"></script></head> <body class="min-h-screen bg-canvas font-body text-ink antialiased" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/layouts/Layout.astro" data-astro-source-loc="109:71"> <a href="#main-content" class="skip-link" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/layouts/Layout.astro" data-astro-source-loc="110:47">Skip to main content</a> <header class="sticky top-0 z-50 w-full border-b border-border-hairline bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="5:144"> <div class="site-container flex h-[88px] items-center justify-between gap-4" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="6:80"> <a href="/" class="flex-shrink-0" aria-label="instanten home" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="7:67"> <a href="/" class="inline-flex items-center gap-2 font-display font-semibold tracking-[-0.03em] text-ink text-lg" aria-label="instanten home" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="20:2"> <svg width="32" height="32" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="shrink-0" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="29:4"> <rect width="28" height="28" rx="7" fill="currentColor" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="30:6"></rect> <path d="M9 9.5h2.4v9H9zM9 6.5h2.4v1.6H9z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="31:6"></path> <path d="M14.6 12.1h2.3V18a1.4 1.4 0 0 0 1.5 1.5h.6v1.9h-1.1c-2.2 0-3.3-1.2-3.3-3.4z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="32:6"></path> </svg> <span data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="34:9">instanten</span> </a> </a> <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="11:80"> <button type="button" data-search-open class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2" aria-haspopup="dialog" aria-controls="search-panel" aria-expanded="false" aria-label="Search tools" title="Search tools (⌘K)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="21:8"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="22:176"> <circle cx="9" cy="9" r="6.2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="23:12"></circle> <path d="m13.6 13.6 3.2 3.2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="24:12"></path> </svg> </button> <button type="button" data-theme-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme (Ctrl+Shift+L)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="10:2"> <svg data-theme-icon="light" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="11:194"> <circle cx="10" cy="10" r="3.7" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="12:6"></circle> <path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.4 4.4l1.5 1.5M14.1 14.1l1.5 1.5M4.4 15.6l1.5-1.5M14.1 5.9l1.5-1.5" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="13:6"></path> </svg> <svg data-theme-icon="dark" class="hidden" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="15:208"> <path d="M17.4 12.5A7.4 7.4 0 0 1 7.5 2.6 7.4 7.4 0 1 0 17.4 12.5Z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="16:6"></path> </svg> </button> <script type="module" src="/src/components/ThemeToggle.astro?astro&type=script&index=0&lang.ts"></script> <a href="/submit/" class="inline-flex h-10 min-w-[165px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap" aria-label="Submit a tool" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="34:8">
+Submit a Tool
+</a> </div> <div class="flex items-center gap-2 lg:hidden" aria-label="Mobile header actions" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="39:87"> <button type="button" data-search-open class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink" aria-haspopup="dialog" aria-controls="search-panel" aria-expanded="false" aria-label="Search tools" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="48:8"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="49:176"> <circle cx="9" cy="9" r="6.2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="50:12"></circle> <path d="m13.6 13.6 3.2 3.2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="51:12"></path> </svg> </button> <button type="button" data-menu-open class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="62:8"> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="63:174"> <path d="M4 7h16M4 12h16M4 17h16" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Header.astro" data-astro-source-loc="64:12"></path> </svg> </button> </div> </div> </header> <div id="search-panel" hidden class="fixed top-[88px] right-4 z-[80] w-full max-w-[480px]" role="dialog" aria-modal="true" aria-labelledby="search-panel-title" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="18:2"> <div data-search-backdrop class="fixed inset-0 bg-black/5 transition-opacity duration-200" aria-hidden="true" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="19:4"></div> <div class="relative overflow-hidden rounded-2xl border border-border-hairline bg-surface shadow-float animate-in fade-in-0 zoom-in-95 duration-200 ease-out" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="27:4"> <div class="flex items-center justify-between border-b border-border-hairline px-6 py-4" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="28:94"> <h2 id="search-panel-title" class="font-display font-semibold text-heading-md text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="29:95">
+What are You Looking For?
+</h2> <button type="button" data-search-close class="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink" aria-label="Close search" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="37:8"> <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="38:176"> <path d="m5 5 10 10M15 5 5 15" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="39:12"></path> </svg> </button> </div> <form action="/search/" method="get" data-search-form class="p-6" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="44:71"> <label for="search-input" class="sr-only" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="45:49">Search tools</label> <div class="flex flex-col sm:flex-row items-stretch gap-3" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="46:66"> <div class="relative flex-1" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="47:38"> <input type="search" id="search-input" name="q" placeholder="Start Typing" class="w-full h-11 pl-4 pr-4 rounded-lg border border-border-hairline bg-surface text-body-lg text-ink placeholder:text-faint outline-none transition-colors focus:border-ink focus:ring-2 focus:ring-accent-soft" autocomplete="off" spellcheck="false" required data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="48:12"> </div> <button type="submit" class="btn btn-primary shrink-0 w-full sm:w-auto px-6 h-11" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="59:91">
+Search
+</button> </div> </form> <div class="border-t border-border-hairline p-6" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="65:54"> <p class="eyebrow mb-3" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="66:31">Browse categories</p> <div class="flex flex-wrap gap-2" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="67:41"> <a href="/search/?category=Developer" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Developer </a><a href="/search/?category=Design" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Design </a><a href="/search/?category=Marketing" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Marketing </a><a href="/search/?category=Writing" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Writing </a><a href="/search/?category=Productivity" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Productivity </a><a href="/search/?category=Utility" class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink" data-astro-cid-lsfpl5zw data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/SearchPanel.astro" data-astro-source-loc="72:12"> Utility </a> </div> </div> </div> </div> <script type="module" src="/src/components/SearchPanel.astro?astro&type=script&index=0&lang.ts"></script> <div id="mobile-drawer" hidden class="fixed inset-0 z-[75] md:hidden" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="33:134"> <div data-menu-backdrop class="absolute inset-0 bg-black/45 backdrop-blur-[2px]" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="34:4"></div> <aside data-drawer-panel class="absolute inset-y-0 right-0 flex w-[min(92vw,22rem)] translate-x-full flex-col border-l border-border-hairline bg-surface shadow-float transition-transform duration-200 ease-out" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="39:4"> <div class="flex h-16 items-center justify-between border-b border-border-hairline px-5" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="40:94"> <a href="/" class="inline-flex items-center gap-2 font-display font-semibold tracking-[-0.03em] text-ink text-base" aria-label="instanten home" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="20:2"> <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="shrink-0" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="29:4"> <rect width="28" height="28" rx="7" fill="currentColor" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="30:6"></rect> <path d="M9 9.5h2.4v9H9zM9 6.5h2.4v1.6H9z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="31:6"></path> <path d="M14.6 12.1h2.3V18a1.4 1.4 0 0 0 1.5 1.5h.6v1.9h-1.1c-2.2 0-3.3-1.2-3.3-3.4z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="32:6"></path> </svg> <span data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="34:9">instanten</span> </a> <button type="button" data-menu-close class="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink" aria-label="Close menu" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="47:8"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="48:176"> <path d="m5 5 10 10M15 5 5 15" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="49:12"></path> </svg> </button> </div> <div class="flex-1 overflow-y-auto px-5 py-4" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="54:51"> <h2 id="drawer-title" class="sr-only" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="55:45">Site menu</h2> <nav aria-label="Mobile navigation" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="57:43"> <ul class="space-y-0.5" role="list" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="58:45"> <li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="60:17"> <a href="/tools/" data-menu-link class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="65:16"> All tools </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="60:17"> <a href="/categories/" data-menu-link class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="65:16"> Categories </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="60:17"> <a href="/pricing/" data-menu-link class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="65:16"> Pricing </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="60:17"> <a href="/makers/" data-menu-link class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="65:16"> Makers </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="60:17"> <a href="/about/" data-menu-link class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="65:16"> About </a> </li> </ul> </nav> <div class="mt-5 pt-5 border-t border-border-hairline" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="73:62"> <h3 class="eyebrow mb-3" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="74:34">Browse by category</h3> <ul class="space-y-1.5" role="list" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="75:45"> <li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/utility/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Utility </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/developer/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Developer </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/design/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Design </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/marketing/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Marketing </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/writing/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Writing </a> </li><li data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="77:17"> <a href="/category/productivity/" data-menu-link class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="82:16"> Productivity </a> </li> </ul> </div> <div class="mt-6 rounded-lg border border-border-hairline bg-canvas p-4" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="90:80"> <p class="eyebrow mb-2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="91:33">Know a useful tool?</p> <p class="mb-3 text-body-sm text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="92:49">Help keep the directory sharp and useful for everyone.</p> <a href="/submit/" data-menu-link class="btn btn-primary w-full" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="93:74">Submit a Tool</a> </div> <div class="mt-6 pt-4 border-t border-border-hairline" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="96:62"> <h3 class="eyebrow mb-3" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="97:34">Connect</h3> <div class="flex items-center gap-2" role="list" aria-label="Social links" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="98:84"> <a href="https://github.com/vishubizzonl-ship-it/instanten-v2" data-menu-link class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="GitHub" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="107:14"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/GitHub.astro" data-astro-source-loc="9:112"> <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/GitHub.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="https://twitter.com/instanten" data-menu-link class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="107:14"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Twitter.astro" data-astro-source-loc="9:112"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 9.355H15.247l-5.584-6.187-5.586 6.187H.58l8.503-9.356L.577 2.25h3.308l4.761 5.327L12 6.527l4.465-4.277Z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Twitter.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="https://linkedin.com/company/instanten" data-menu-link class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="107:14"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/LinkedIn.astro" data-astro-source-loc="9:112"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/LinkedIn.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="mailto:hello@instanten.com" data-menu-link class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="Email" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="107:14"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="9:192"> <rect x="2" y="4" width="20" height="16" rx="2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="10:4"></rect> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="11:4"></path> </svg> </a> </div> </div> <div class="mt-6 pt-4 border-t border-border-hairline" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="114:62"> <button type="button" data-theme-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme (Ctrl+Shift+L)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="10:2"> <svg data-theme-icon="light" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="11:194"> <circle cx="10" cy="10" r="3.7" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="12:6"></circle> <path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.4 4.4l1.5 1.5M14.1 14.1l1.5 1.5M4.4 15.6l1.5-1.5M14.1 5.9l1.5-1.5" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="13:6"></path> </svg> <svg data-theme-icon="dark" class="hidden" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="15:208"> <path d="M17.4 12.5A7.4 7.4 0 0 1 7.5 2.6 7.4 7.4 0 1 0 17.4 12.5Z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ThemeToggle.astro" data-astro-source-loc="16:6"></path> </svg> </button>  </div> </div> <div class="border-t border-border-hairline px-5 py-4" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="119:60"> <div class="flex items-center gap-4 text-caption text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="120:68"> <a href="/privacy/" data-menu-link class="transition-colors hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="121:85">Privacy</a> <a href="/terms/" data-menu-link class="transition-colors hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="122:83">Terms</a> <a href="mailto:hello@instanten.com" class="ml-auto transition-colors hover:text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/MobileDrawer.astro" data-astro-source-loc="123:95">Email</a> </div> </div> </aside> </div> <script type="module" src="/src/components/MobileDrawer.astro?astro&type=script&index=0&lang.ts"></script> <main class="w-full flex-1" id="main-content" tabindex="-1" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/layouts/Layout.astro" data-astro-source-loc="114:65">  <section class="hero-mesh" aria-labelledby="hero-title" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="9:57"> <div class="site-container flex flex-col items-center pt-[64px] pb-[64px] text-center" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="10:90"> <h1 id="hero-title" class="max-w-[920px] font-display font-bold leading-[62px] tracking-[-0.03em] text-[52px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="14:6">
+Useful SaaS tools, ready in an instant.
+</h1> <p class="mt-10 max-w-[640px] text-[18px] leading-[28px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="18:73">
+A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
+</p> <div class="mt-[64px] flex items-center justify-center gap-4" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="22:67"> <div class="hero-rule" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Hero.astro" data-astro-source-loc="23:8"></div> </div> </div> </section> <section class="site-container pt-[64px] pb-[64px]" aria-label="Tool directory" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/pages/index.astro" data-astro-source-loc="52:83"> <section aria-labelledby="tools-heading" id="tools" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolGrid.astro" data-astro-source-loc="13:53"> <h2 id="tools-heading" class="sr-only" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolGrid.astro" data-astro-source-loc="14:42">Tools</h2> <div class="grid gap-6" data-directory-grid style="
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, minmax(0, 400px));
+      }
+    " data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolGrid.astro" data-astro-source-loc="27:4"> <article data-tool-card data-slug="color-palette" data-name="Color Palette" data-category="Design" data-pricing="Paid" data-tags="design,colors,accessibility,design-systems" data-maker="Coolors" data-added="2024-03-15" data-updated="2024-12-10" data-featured="true" data-search="color palette generate harmonious color palettes from a single color. export formats for design tools and code.  design paid coolors design colors accessibility design-systems" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/color-palette/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Color Palette" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/color-palette.svg" alt="Color Palette preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Design </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-violet-soft text-violet" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Paid </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/coolors/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Coolors" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Coolors </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-12-10" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">December 10, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/color-palette/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Color Palette</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Generate harmonious color palettes from a single color. Export formats for design tools and code.</p> </div> </article><article data-tool-card data-slug="css-grid-generator" data-name="CSS Grid Generator" data-category="Design" data-pricing="Free" data-tags="design,css,layout,frontend,grid" data-maker="Sarah Drasner" data-added="2024-06-15" data-updated="2024-11-10" data-featured="true" data-search="css grid generator visually build css grid layouts. drag to create tracks, set gaps, and generate production-ready code.  design free sarah drasner design css layout frontend grid" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/css-grid-generator/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for CSS Grid Generator" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/css-grid-generator.svg" alt="CSS Grid Generator preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Design </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/sarah-drasner/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Sarah Drasner" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Sarah Drasner </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-11-10" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">November 10, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/css-grid-generator/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">CSS Grid Generator</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Visually build CSS Grid layouts. Drag to create tracks, set gaps, and generate production-ready code.</p> </div> </article><article data-tool-card data-slug="image-compressor" data-name="Image Compressor" data-category="Developer" data-pricing="Freemium" data-tags="developer,optimization,images,web-performance" data-maker="Voormedia" data-added="2024-02-10" data-updated="2024-12-01" data-featured="true" data-search="image compressor compress images without losing quality. reduce file sizes for faster loading websites and optimized storage.  developer freemium voormedia developer optimization images web-performance" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/image-compressor/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Image Compressor" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/compressor.svg" alt="Image Compressor preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Developer </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-warning-soft text-warning" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Freemium </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/voormedia/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Voormedia" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Voormedia </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-12-01" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">December 1, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/image-compressor/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Image Compressor</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Compress images without losing quality. Reduce file sizes for faster loading websites and optimized storage.</p> </div> </article><article data-tool-card data-slug="json-formatter" data-name="JSON Formatter" data-category="Developer" data-pricing="Free" data-tags="developer,json,debugging,validation" data-maker="Curious Concept" data-added="2024-01-20" data-updated="2024-10-10" data-featured="true" data-search="json formatter format, validate, and beautify json data. syntax highlighting, error detection, and tree view for easy debugging.  developer free curious concept developer json debugging validation" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/json-formatter/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for JSON Formatter" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/json.svg" alt="JSON Formatter preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Developer </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/curious-concept/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Curious Concept" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Curious Concept </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-10-10" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">October 10, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/json-formatter/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">JSON Formatter</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Format, validate, and beautify JSON data. Syntax highlighting, error detection, and tree view for easy debugging.</p> </div> </article><article data-tool-card data-slug="online-ruler" data-name="Online Ruler" data-category="Utility" data-pricing="Free" data-tags="utility,design,measurement" data-maker="Ginifab" data-added="2024-01-15" data-updated="2024-11-20" data-featured="true" data-search="online ruler measure anything on your screen with pixel-perfect accuracy. a lightweight browser-based ruler for designers and developers.  utility free ginifab utility design measurement" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/online-ruler/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Online Ruler" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/ruler.svg" alt="Online Ruler preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Utility </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/ginifab/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Ginifab" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Ginifab </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-11-20" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">November 20, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/online-ruler/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Online Ruler</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Measure anything on your screen with pixel-perfect accuracy. A lightweight browser-based ruler for designers and developers.</p> </div> </article><article data-tool-card data-slug="base64-encoder" data-name="Base64 Encoder/Decoder" data-category="Developer" data-pricing="Free" data-tags="developer,encoding,base64,data-conversion" data-maker="Base64 Guru" data-added="2024-05-01" data-updated="2024-11-30" data-featured="false" data-search="base64 encoder/decoder encode and decode base64 strings instantly. handle text, files, and images with utf-8 support.  developer free base64 guru developer encoding base64 data-conversion" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/base64-encoder/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Base64 Encoder/Decoder" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/base64-encoder.svg" alt="Base64 Encoder/Decoder preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Developer </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/base64-guru/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Base64 Guru" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Base64 Guru </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-11-30" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">November 30, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/base64-encoder/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Base64 Encoder/Decoder</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Encode and decode Base64 strings instantly. Handle text, files, and images with UTF-8 support.</p> </div> </article><article data-tool-card data-slug="markdown-editor" data-name="Markdown Editor" data-category="Writing" data-pricing="Free" data-tags="writing,markdown,editor,documentation,blogging" data-maker="StackEdit" data-added="2024-07-01" data-updated="2024-12-01" data-featured="false" data-search="markdown editor write and preview markdown with live rendering, syntax highlighting, and export options.  writing free stackedit writing markdown editor documentation blogging" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/markdown-editor/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Markdown Editor" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/markdown-editor.svg" alt="Markdown Editor preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Writing </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/stackedit/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by StackEdit" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> StackEdit </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-12-01" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">December 1, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/markdown-editor/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Markdown Editor</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Write and preview Markdown with live rendering, syntax highlighting, and export options.</p> </div> </article><article data-tool-card data-slug="meta-tag-generator" data-name="Meta Tag Generator" data-category="Marketing" data-pricing="Free" data-tags="marketing,seo,open-graph,twitter-cards,html" data-maker="MetaTags.io" data-added="2024-04-20" data-updated="2024-12-05" data-featured="false" data-search="meta tag generator generate html meta tags for seo, open graph, twitter cards, and more. copy-paste ready.  marketing free metatags.io marketing seo open-graph twitter-cards html" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/meta-tag-generator/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Meta Tag Generator" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/meta-tag-generator.svg" alt="Meta Tag Generator preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Marketing </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/metatags.io/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by MetaTags.io" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> MetaTags.io </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-12-05" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">December 5, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/meta-tag-generator/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Meta Tag Generator</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and more. Copy-paste ready.</p> </div> </article><article data-tool-card data-slug="password-generator" data-name="Password Generator" data-category="Productivity" data-pricing="Free" data-tags="productivity,security,passwords,privacy,encryption" data-maker="Bitwarden" data-added="2024-08-15" data-updated="2024-12-15" data-featured="false" data-search="password generator generate secure random passwords with customizable length, character sets, and entropy estimation.  productivity free bitwarden productivity security passwords privacy encryption" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/password-generator/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for Password Generator" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/password-generator.svg" alt="Password Generator preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Productivity </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/bitwarden/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by Bitwarden" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> Bitwarden </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-12-15" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">December 15, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/password-generator/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">Password Generator</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Generate secure random passwords with customizable length, character sets, and entropy estimation.</p> </div> </article><article data-tool-card data-slug="qr-generator" data-name="QR Generator" data-category="Marketing" data-pricing="Free" data-tags="marketing,qr-codes,branding,analytics" data-maker="QR Code Generator" data-added="2024-03-05" data-updated="2024-11-15" data-featured="false" data-search="qr generator create custom qr codes instantly. generate codes for urls, text, wifi, contacts, and more with design options.  marketing free qr code generator marketing qr-codes branding analytics" class="group flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="61:2"> <a href="/tools/qr-generator/" class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft" aria-label="View details for QR Generator" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="66:4"> <img src="/thumbnails/qr.svg" alt="QR Generator preview" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" loading="lazy" decoding="async" width="400" height="225" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="67:6"> <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="76:155"> Marketing </span> <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="79:108"> <span class="inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption bg-success-soft text-success" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="80:125"> Free </span> </span> </a> <div class="mt-5 flex flex-col" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="86:35"> <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="87:80"> <a href="/maker/qr-code-generator/" class="font-medium transition-colors hover:text-ink" aria-label="View all tools by QR Code Generator" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="93:10"> QR Code Generator </a> <span aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="97:59">·</span> <time datetime="2024-11-15" class="font-medium" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="98:75">November 15, 2024</time> </div> <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="101:86"> <a href="/tools/qr-generator/" class="transition-colors hover:text-accent-deep" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="102:84">QR Generator</a> </h2> <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ToolCard.astro" data-astro-source-loc="105:73">Create custom QR codes instantly. Generate codes for URLs, text, WiFi, contacts, and more with design options.</p> </div> </article> </div> </section>  </section> <nav class="pagination site-container flex items-center justify-center gap-2 py-10" aria-label="Pagination" role="navigation" data-base-url="/" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="28:151">    <a href="/" class="inline-flex h-10 w-10 items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium shadow-[0_2px_8px_-4px_rgba(0,0,0,0.12),0_1px_2px_-1px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2" aria-label="Page 1" aria-current="page" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="49:6"> 1 </a><a href="/?page=2" class="inline-flex h-10 w-10 items-center justify-center rounded-[8px] bg-surface text-body-sm font-medium text-ink shadow-[0_2px_8px_-4px_rgba(0,0,0,0.08),0_1px_2px_-1px_rgba(0,0,0,0.04)] transition-all duration-150 hover:bg-hairline-soft hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.12),0_2px_4px_-2px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2" aria-label="Page 2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="49:6"> 2 </a>   <a href="/?page=2" class="inline-flex h-10 w-10 items-center justify-center rounded-[8px] border border-border-hairline bg-surface text-body transition-all duration-150 hover:border-faint hover:bg-hairline-soft hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.08),0_2px_4px_-2px_rgba(0,0,0,0.04)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2" aria-label="Next page" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="63:86"> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="64:173"><path d="M6 5l5 5-5 5" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Pagination.astro" data-astro-source-loc="64:173"></path></svg> </a> </nav> </main> <footer class="border-t border-border-hairline bg-canvas" role="contentinfo" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="17:78"> <div class="site-container py-12" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="18:37"> <div class="flex flex-col items-center text-center gap-3 max-w-[410px] mx-auto" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="19:85"> <a href="/" class="inline-flex items-center gap-2 font-display font-semibold tracking-[-0.03em] text-ink text-lg" aria-label="instanten home" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="20:2"> <svg width="32" height="32" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="shrink-0" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="29:4"> <rect width="28" height="28" rx="7" fill="currentColor" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="30:6"></rect> <path d="M9 9.5h2.4v9H9zM9 6.5h2.4v1.6H9z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="31:6"></path> <path d="M14.6 12.1h2.3V18a1.4 1.4 0 0 0 1.5 1.5h.6v1.9h-1.1c-2.2 0-3.3-1.2-3.3-3.4z" fill="var(--canvas)" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="32:6"></path> </svg> <span data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Logo.astro" data-astro-source-loc="34:9">instanten</span> </a> <p class="text-[14px] leading-[22px] text-muted" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="21:56">
+A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
+</p> <div class="mt-2 flex items-center justify-center gap-2" role="list" aria-label="Social links" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="24:102"> <a href="https://github.com/vishubizzonl-ship-it/instanten-v2" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="GitHub" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="32:12"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/GitHub.astro" data-astro-source-loc="9:112"> <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/GitHub.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="https://twitter.com/instanten" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="32:12"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Twitter.astro" data-astro-source-loc="9:112"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 9.355H15.247l-5.584-6.187-5.586 6.187H.58l8.503-9.356L.577 2.25h3.308l4.761 5.327L12 6.527l4.465-4.277Z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Twitter.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="https://linkedin.com/company/instanten" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="32:12"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/LinkedIn.astro" data-astro-source-loc="9:112"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/LinkedIn.astro" data-astro-source-loc="10:4"></path> </svg> </a><a href="mailto:hello@instanten.com" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink" aria-label="Email" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="32:12"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="9:192"> <rect x="2" y="4" width="20" height="16" rx="2" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="10:4"></rect> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/icons/Email.astro" data-astro-source-loc="11:4"></path> </svg> </a> </div> <p class="mt-4 text-[12px] leading-normal text-faint" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/Footer.astro" data-astro-source-loc="37:61">
+© 2026 instanten. All rights reserved.
+</p> </div> </div> </footer> <button type="button" data-scroll-top class="invisible fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 translate-y-2 items-center justify-center rounded-full border border-border-hairline bg-surface text-ink opacity-0 shadow-float transition-all duration-200 hover:bg-hairline-soft focus-visible:visible focus-visible:translate-y-0 focus-visible:opacity-100" aria-label="Back to top" title="Back to top" aria-hidden="true" tabindex="-1" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ScrollToTop.astro" data-astro-source-loc="11:2"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ScrollToTop.astro" data-astro-source-loc="12:170"> <path d="M10 15V5M5.5 9.5 10 5l4.5 4.5" data-astro-source-file="/data/data/com.termux/files/home/projects/instanten-v2/src/components/ScrollToTop.astro" data-astro-source-loc="13:6"></path> </svg> </button> <script type="module" src="/src/components/ScrollToTop.astro?astro&type=script&index=0&lang.ts"></script> </body></html>

@@ -1,0 +1,11 @@
+---
+interface Props {
+  class?: string;
+  'aria-hidden'?: boolean;
+}
+
+const { class: className = '', 'aria-hidden': ariaHidden = true } = Astro.props;
+---
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden={ariaHidden} class={className}>
+  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 9.355H15.247l-5.584-6.187-5.586 6.187H.58l8.503-9.356L.577 2.25h3.308l4.761 5.327L12 6.527l4.465-4.277Z"/>
+</svg>

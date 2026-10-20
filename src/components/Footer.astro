@@ -1,71 +1,41 @@
 ---
 import Logo from './Logo.astro';
+import GitHubIcon from './icons/GitHub.astro';
+import TwitterIcon from './icons/Twitter.astro';
+import LinkedInIcon from './icons/LinkedIn.astro';
+import EmailIcon from './icons/Email.astro';
 
 const currentYear = new Date().getFullYear();
 
-const footerLinks = {
-  Directory: [
-    { href: '/tools/', label: 'All tools' },
-    { href: '/categories/', label: 'Categories' },
-    { href: '/pricing/', label: 'Pricing' },
-    { href: '/tags/', label: 'Tags' },
-    { href: '/makers/', label: 'Makers' },
-  ],
-  instanten: [
-    { href: '/about/', label: 'About' },
-    { href: '/submit/', label: 'Submit a tool' },
-    { href: 'mailto:hello@instanten.com', label: 'Contact' },
-  ],
-  Legal: [
-    { href: '/privacy/', label: 'Privacy' },
-    { href: '/terms/', label: 'Terms' },
-  ],
-  Source: [
-    { href: 'https://github.com/vishubizzonl-ship-it/instanten-v2', label: 'GitHub', external: true },
-    { href: 'https://astro.build', label: 'Astro', external: true },
-    { href: '/sitemap-index.xml', label: 'Sitemap' },
-  ],
-} as const;
+const socialLinks = [
+  { href: 'https://github.com/vishubizzonl-ship-it/instanten-v2', label: 'GitHub', icon: GitHubIcon },
+  { href: 'https://twitter.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
+  { href: 'https://linkedin.com/company/instanten', label: 'LinkedIn', icon: LinkedInIcon },
+  { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
+] as const;
 ---
 <footer class="border-t border-border-hairline bg-canvas" role="contentinfo">
-  <div class="site-container py-14 lg:py-16">
-    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
-      <div class="lg:col-span-2">
-        <Logo />
-        <p class="mt-4 max-w-xs text-body-sm leading-relaxed text-muted">
-          A curated directory of useful SaaS tools for developers, designers, writers, and builders.
-          No fluff, no dead links.
-        </p>
-        <p class="mt-4 font-mono text-caption text-faint">
-          {currentYear} · Made for the open web
-        </p>
+  <div class="site-container py-12">
+    <div class="flex flex-col items-center text-center gap-3 max-w-[410px] mx-auto">
+      <Logo size="md" />
+      <p class="text-[14px] leading-[22px] text-muted">
+        A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
+      </p>
+      <div class="mt-2 flex items-center justify-center gap-2" role="list" aria-label="Social links">
+        {socialLinks.map((social) => (
+          <a
+            href={social.href}
+            class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
+            aria-label={social.label}
+            target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
+            rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            <social.icon />
+          </a>
+        ))}
       </div>
-
-      {Object.entries(footerLinks).map(([group, links]) => (
-        <nav aria-label={`${group} links`}>
-          <h2 class="eyebrow mb-3">{group}</h2>
-          <ul class="space-y-2.5" role="list">
-            {links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-body-sm text-body transition-colors hover:text-ink"
-                  target={'external' in link && link.external ? '_blank' : undefined}
-                  rel={'external' in link && link.external ? 'noopener noreferrer' : undefined}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ))}
-    </div>
-
-    <div class="mt-12 flex flex-col gap-3 border-t border-border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="text-caption text-muted">© {currentYear} instanten. All rights reserved.</p>
-      <p class="text-caption text-faint">
-        Tool names and logos belong to their respective owners.
+      <p class="mt-4 text-[12px] leading-normal text-faint">
+        © {currentYear} instanten. All rights reserved.
       </p>
     </div>
   </div>

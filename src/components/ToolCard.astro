@@ -1,5 +1,5 @@
 ---
-import { pricingSlug } from '../utils/filters';
+import { formatDate } from '../utils/filters';
 
 interface Props {
   slug: string;
@@ -12,6 +12,7 @@ interface Props {
   tags?: string[];
   maker?: string;
   addedDate?: string;
+  updatedDate?: string;
   featured?: boolean;
   hidden?: boolean;
   searchText?: string;
@@ -28,6 +29,7 @@ const {
   tags = [],
   maker,
   addedDate,
+  updatedDate,
   featured = false,
   hidden = false,
   searchText = '',
@@ -38,6 +40,9 @@ const pricingClasses = {
   Freemium: 'bg-warning-soft text-warning',
   Paid: 'bg-violet-soft text-violet',
 } as const satisfies Record<'Free' | 'Freemium' | 'Paid', string>;
+
+const displayDate = updatedDate || addedDate;
+const formattedDate = displayDate ? formatDate(displayDate) : '';
 ---
 <article
   data-tool-card
@@ -48,88 +53,55 @@ const pricingClasses = {
   data-tags={tags.join(',')}
   data-maker={maker || ''}
   data-added={addedDate || ''}
+  data-updated={updatedDate || ''}
   data-featured={featured ? 'true' : 'false'}
   data-search={searchText}
   hidden={hidden}
-  class="group flex flex-col overflow-hidden rounded-xl border border-border-hairline bg-surface shadow-whisper transition-colors hover:border-faint"
+  class="group flex flex-col"
 >
   <a
     href={`/tools/${slug}/`}
-    class="relative block aspect-[16/9] overflow-hidden border-b border-border-hairline bg-surface-soft"
+    class="relative block aspect-video overflow-hidden rounded-[16px] bg-surface-soft"
     aria-label={`View details for ${name}`}
   >
     <img
       src={image}
       alt={`${name} preview`}
-      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
       loading="lazy"
       decoding="async"
-      width="640"
-      height="360"
+      width="400"
+      height="225"
     />
-    {featured && (
-      <span class="absolute left-3 top-3 rounded-full border border-white/20 bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm">
-        Featured
+    <span class="absolute left-5 top-5 rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm">
+      {category}
+    </span>
+    <span class="absolute right-5 top-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+      <span class={`inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption ${pricingClasses[pricing]}`}>
+        {pricing}
       </span>
-    )}
+    </span>
   </a>
 
-  <div class="flex flex-1 flex-col p-5">
-    <div class="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-caption">
-      <a
-        href={`/category/${category.toLowerCase()}/`}
-        class="font-medium uppercase tracking-wide text-muted transition-colors hover:text-ink"
-      >
-        {category}
-      </a>
-      <span class="text-faint" aria-hidden="true">/</span>
-      <a
-        href={`/pricing/${pricingSlug(pricing)}/`}
-        class={`rounded-full px-2 py-0.5 font-medium transition-opacity hover:opacity-75 ${pricingClasses[pricing]}`}
-      >
-        {pricing}
-      </a>
+  <div class="mt-5 flex flex-col">
+    <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted">
+      {maker && (
+        <a
+          href={`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`}
+          class="font-medium transition-colors hover:text-ink"
+          aria-label={`View all tools by ${maker}`}
+        >
+          {maker}
+        </a>
+      )}
+      {maker && formattedDate && <span aria-hidden="true">·</span>}
+      {formattedDate && <time datetime={displayDate!} class="font-medium">{formattedDate}</time>}
     </div>
 
-    <h2 class="font-display text-heading-md text-ink">
+    <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink">
       <a href={`/tools/${slug}/`} class="transition-colors hover:text-accent-deep">{name}</a>
     </h2>
 
-    <p class="mt-2 line-clamp-3 flex-1 text-body-sm leading-relaxed text-body">{description}</p>
-
-    {tags.length > 0 && (
-      <div class="mt-4 flex flex-wrap gap-1.5" aria-label={`Tags for ${name}`}>
-        {tags.slice(0, 3).map((tag) => (
-          <a
-            href={`/tag/${tag.toLowerCase()}/`}
-            class="rounded-full border border-border-hairline bg-canvas px-2 py-0.5 text-caption text-muted transition-colors hover:border-faint hover:text-ink"
-          >
-            {tag}
-          </a>
-        ))}
-        {tags.length > 3 && <span class="px-1 py-0.5 text-caption text-faint">+{tags.length - 3}</span>}
-      </div>
-    )}
-
-    <div class="mt-5 flex items-center justify-between gap-3 border-t border-border-hairline pt-4">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 text-body-sm font-medium text-ink transition-colors hover:text-accent-deep"
-        aria-label={`Visit ${name} official website (opens in a new tab)`}
-      >
-        Visit tool
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M7 13h6M13 13V7M13 13 6.5 6.5"></path>
-        </svg>
-      </a>
-      <a
-        href={`/tools/${slug}/`}
-        class="text-caption font-medium text-muted transition-colors hover:text-ink"
-      >
-        Details
-      </a>
-    </div>
+    <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body">{description}</p>
   </div>
 </article>

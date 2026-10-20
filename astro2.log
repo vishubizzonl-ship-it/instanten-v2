@@ -1,0 +1,36 @@
+[vite] connected.
+16:58:43 [types] Generated 1ms
+[vite] connected.
+16:58:44 [content] Syncing content
+16:58:44 [content] Astro config changed
+16:58:44 [content] Clearing content store
+16:58:44 [content] Synced content
+ astro  v6.4.8 ready in 4168 ms
+┃ Local    http://localhost:4332/
+┃ Network  use --host to expose
+16:58:44 watching for file changes...
+▶ Vite 8.3.4 detected in your project.
+  Astro requires Vite 7. Add "overrides": { "vite": "^7" } to your package.json to avoid issues.
+
+16:58:47 [200] / 181ms
+16:58:52 [200] / 27ms
+16:58:59 [200] / 24ms
+16:59:02 [200] / 29ms
+16:59:19 [200] / 26ms
+16:59:41 [200] / 19ms
+17:00:02 [200] / 19ms
+17:00:42 [200] / 20ms
+17:00:48 [200] / 18ms
+17:00:53 [200] / 17ms
+17:01:01 [200] / 55ms
+17:02:13 [watch] src/components/MobileDrawer.astro
+17:07:25 [200] / 137ms
+17:07:27 [200] / 24ms
+17:12:17 [watch] src/components/MobileDrawer.astro
+17:12:47 [200] / 97ms
+17:12:53 [200] / 16ms
+17:12:58 [200] / 18ms
+17:13:16 [200] /tools/image-compressor/ 64ms
+17:36:53 [watch] src/components/MobileDrawer.astro
+17:38:49 [watch] /src/styles/app.css
+17:39:10 [watch] /src/styles/app.css

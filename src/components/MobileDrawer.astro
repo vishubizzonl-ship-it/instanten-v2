@@ -1,41 +1,66 @@
 ---
 import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import GitHubIcon from './icons/GitHub.astro';
+import TwitterIcon from './icons/Twitter.astro';
+import LinkedInIcon from './icons/LinkedIn.astro';
+import EmailIcon from './icons/Email.astro';
 
 const navLinks = [
   { href: '/tools/', label: 'All tools' },
   { href: '/categories/', label: 'Categories' },
   { href: '/pricing/', label: 'Pricing' },
-  { href: '/tags/', label: 'Tags' },
   { href: '/makers/', label: 'Makers' },
   { href: '/about/', label: 'About' },
-  { href: '/submit/', label: 'Submit a tool' },
+] as const;
+
+const categories = [
+  { slug: 'utility', label: 'Utility' },
+  { slug: 'developer', label: 'Developer' },
+  { slug: 'design', label: 'Design' },
+  { slug: 'marketing', label: 'Marketing' },
+  { slug: 'writing', label: 'Writing' },
+  { slug: 'productivity', label: 'Productivity' },
+] as const;
+
+const socialLinks = [
+  { href: 'https://github.com/vishubizzonl-ship-it/instanten-v2', label: 'GitHub', icon: GitHubIcon },
+  { href: 'https://twitter.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
+  { href: 'https://linkedin.com/company/instanten', label: 'LinkedIn', icon: LinkedInIcon },
+  { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
 ] as const;
 ---
-<div id="mobile-drawer" hidden class="fixed inset-0 z-[75] md:hidden" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-  <div data-menu-backdrop class="absolute inset-0 bg-black/45 backdrop-blur-[2px]" aria-hidden="true"></div>
-
-  <aside
-    data-drawer-panel
-    class="absolute inset-y-0 right-0 flex w-[min(92vw,22rem)] translate-x-full flex-col border-l border-border-hairline bg-surface shadow-float transition-transform duration-200 ease-out"
-  >
-    <div class="flex h-16 items-center justify-between border-b border-border-hairline px-5">
-      <Logo size="sm" />
+<div id="mobile-drawer" class="cs-offcanvas fixed inset-y-0 left-0 z-[75] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="cs-offcanvas__header grid grid-cols-[1fr_40px] items-center border-b border-border-hairline px-6 py-4 min-h-[88px]">
+    <div class="cs-logo flex">
+      <Logo size="md" />
+    </div>
+    <nav class="cs-offcanvas__nav flex items-center justify-center w-10 h-10" aria-label="Close menu">
       <button
         type="button"
         data-menu-close
-        class="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink"
+        class="cs-offcanvas__toggle inline-flex items-center justify-center text-muted transition-colors hover:text-ink"
         aria-label="Close menu"
       >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="m5 5 10 10M15 5 5 15"></path>
+        <svg class="cs-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"></path>
         </svg>
       </button>
-    </div>
+    </nav>
+  </div>
 
-    <div class="flex-1 overflow-y-auto px-3 py-4">
+  <aside class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto">
+    <div class="cs-offcanvas__inner flex flex-col h-full p-6">
       <h2 id="drawer-title" class="sr-only">Site menu</h2>
-      <nav aria-label="Mobile navigation">
-        <ul class="space-y-0.5" role="list">
+
+      <div class="cs-offcanvas__button mb-6">
+        <a href="/submit/" data-menu-link class="btn btn-primary w-full inline-flex items-center justify-center">
+          Submit a Tool
+        </a>
+      </div>
+
+      <nav aria-label="Mobile navigation" class="mb-6">
+        <ul class="space-y-1" role="list">
           {navLinks.map((link) => (
             <li>
               <a
@@ -50,56 +75,59 @@ const navLinks = [
         </ul>
       </nav>
 
-      <div class="mt-5 border-t border-border-hairline pt-5">
-        <a
-          href="/search/"
-          data-search-open
-          class="flex min-h-11 items-center gap-2 rounded-md border border-border-hairline bg-canvas px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:border-faint hover:text-ink"
-          aria-haspopup="dialog"
-          aria-controls="search-panel"
-          aria-expanded="false"
-        >
-          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="9" cy="9" r="6.2"></circle>
-            <path d="m13.6 13.6 3.2 3.2"></path>
-          </svg>
-          Search tools
-          <kbd class="ml-auto rounded border border-border-hairline bg-surface px-1.5 py-0.5 font-mono text-[10px] leading-none text-muted">⌘K</kbd>
-        </a>
-      </div>
-
-      <div class="mt-6 rounded-lg border border-border-hairline bg-canvas p-4">
-        <p class="eyebrow mb-2">Know a useful tool?</p>
-        <p class="mb-3 text-body-sm text-muted">Help keep the directory sharp and useful for everyone.</p>
-        <a href="/submit/" data-menu-link class="btn btn-primary w-full">Submit a tool</a>
-      </div>
-    </div>
-
-    <div class="border-t border-border-hairline px-5 py-4">
-      <div class="flex items-center gap-4 text-caption text-muted">
-        <a href="/privacy/" data-menu-link class="transition-colors hover:text-ink">Privacy</a>
-        <a href="/terms/" data-menu-link class="transition-colors hover:text-ink">Terms</a>
-        <a href="mailto:hello@instanten.com" class="ml-auto transition-colors hover:text-ink">Email</a>
+      <div class="mb-6">
+        <h3 class="eyebrow mb-3">Browse by category</h3>
+        <ul class="space-y-1.5" role="list">
+          {categories.map((cat) => (
+            <li>
+              <a
+                href={`/category/${cat.slug}/`}
+                data-menu-link
+                class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink"
+              >
+                {cat.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </aside>
+
+  <div class="cs-offcanvas__bottombar flex items-center justify-between border-t border-border-hairline pt-4 px-6">
+    <div class="flex items-center gap-2" role="list" aria-label="Social links">
+      {socialLinks.map((social) => (
+        <a
+          href={social.href}
+          data-menu-link
+          class="cs-social__link inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
+          aria-label={social.label}
+          target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
+          rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
+          <social.icon />
+        </a>
+      ))}
+    </div>
+    <div class="cs-offcanvas__scheme-toggle">
+      <ThemeToggle />
+    </div>
+  </div>
 </div>
+
+<div id="site-overlay" class="cs-site-overlay fixed inset-0 bg-black/45 z-[74] lg:hidden opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true"></div>
 
 <script>
   const drawer = document.getElementById('mobile-drawer');
-  const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-menu-open]'));
-  const panel = drawer?.querySelector<HTMLElement>('[data-drawer-panel]');
+  const overlay = document.getElementById('site-overlay');
   const closeButton = drawer?.querySelector<HTMLElement>('[data-menu-close]');
-  const backdrop = drawer?.querySelector<HTMLElement>('[data-menu-backdrop]');
-  const closeLinks = Array.from(drawer?.querySelectorAll<HTMLElement>('[data-menu-link]') ?? []);
   let lastFocused: HTMLElement | null = null;
 
   function isOpen(): boolean {
-    return Boolean(drawer && !drawer.hidden);
+    return document.body.classList.contains('cs-offcanvas-active');
   }
 
   function open(event?: Event): void {
-    if (!drawer) return;
     event?.preventDefault();
     if (isOpen()) return;
 
@@ -109,28 +137,32 @@ const navLinks = [
     }
 
     lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    drawer.hidden = false;
+    document.body.classList.add('cs-offcanvas-active');
     document.body.style.overflow = 'hidden';
-    triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
-    window.requestAnimationFrame(() => panel?.classList.remove('translate-x-full'));
+    document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
     window.setTimeout(() => closeButton?.focus(), 180);
   }
 
   function close(): void {
-    if (!drawer || !isOpen()) return;
-    panel?.classList.add('translate-x-full');
-    window.setTimeout(() => {
-      if (drawer) drawer.hidden = true;
-      document.body.style.overflow = '';
-      triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
-      lastFocused?.focus();
-    }, 160);
+    if (!isOpen()) return;
+    document.body.classList.remove('cs-offcanvas-active');
+    document.body.style.overflow = '';
+    document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+    lastFocused?.focus();
   }
 
-  triggers.forEach((trigger) => trigger.addEventListener('click', open));
-  closeButton?.addEventListener('click', close);
-  backdrop?.addEventListener('click', close);
-  closeLinks.forEach((link) => link.addEventListener('click', close));
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const openTrigger = target.closest('[data-menu-open]');
+    const closeTrigger = target.closest('[data-menu-close]');
+    const link = target.closest('[data-menu-link]');
+
+    if (openTrigger) {
+      open(event);
+    } else if (closeTrigger || overlay === target || link) {
+      close();
+    }
+  });
 
   document.addEventListener('keydown', (event) => {
     if (!isOpen()) return;
@@ -161,12 +193,53 @@ const navLinks = [
     }
   });
 
-  window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
     if (event.matches && isOpen()) {
-      if (drawer) drawer.hidden = true;
-      panel?.classList.add('translate-x-full');
+      document.body.classList.remove('cs-offcanvas-active');
       document.body.style.overflow = '';
-      triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+      document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
     }
   });
+
+  const toggleIcon = drawer?.querySelector<HTMLElement>('.cs-offcanvas__toggle .cs-icon');
+  const closeBtn = drawer?.querySelector<HTMLElement>('[data-menu-close]');
+  if (toggleIcon && closeBtn) {
+    closeBtn.addEventListener('mouseenter', () => {
+      toggleIcon.style.transform = 'rotate(180deg)';
+    });
+    closeBtn.addEventListener('mouseleave', () => {
+      toggleIcon.style.transform = 'rotate(0deg)';
+    });
+  }
 </script>
+
+<style>
+  .cs-offcanvas {
+    --cs-offcanvas-width: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    width: 100%;
+    height: 100vh;
+    background: var(--surface);
+  }
+
+  @media (min-width: 768px) {
+    .cs-offcanvas {
+      --cs-offcanvas-width: 33.5rem;
+      transform: translateX(-100%);
+    }
+  }
+
+  :global(.cs-offcanvas-active) .cs-offcanvas {
+    transform: translateX(0);
+  }
+
+  :global(.cs-offcanvas-active) .cs-site-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .cs-offcanvas__toggle .cs-icon {
+    transition: transform 0.25s ease;
+  }
+</style>

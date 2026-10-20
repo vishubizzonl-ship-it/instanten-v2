@@ -27,11 +27,13 @@
   --violet-soft: #f3e8ff;
   --shadow-1: 0 1px 1px rgb(0 0 0 / 0.04);
   --shadow-2: 0 2px 2px rgb(0 0 0 / 0.04), 0 8px 24px -8px rgb(0 0 0 / 0.14);
+  --shadow-float: 0 8px 32px -8px rgb(0 0 0 / 0.12), 0 2px 8px -4px rgb(0 0 0 / 0.08);
   --mesh-a: rgb(0 124 240 / 0.2);
   --mesh-b: rgb(0 223 216 / 0.16);
   --mesh-c: rgb(121 40 202 / 0.15);
   --mesh-d: rgb(255 0 128 / 0.12);
   --mesh-e: rgb(249 203 40 / 0.13);
+  --header-height: 88px;
 }
 
 .dark {
@@ -57,11 +59,13 @@
   --violet-soft: #241532;
   --shadow-1: 0 1px 1px rgb(0 0 0 / 0.4);
   --shadow-2: 0 2px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.8);
+  --shadow-float: 0 8px 32px -8px rgb(0 0 0 / 0.6), 0 2px 8px -4px rgb(0 0 0 / 0.4);
   --mesh-a: rgb(0 124 240 / 0.28);
   --mesh-b: rgb(0 223 216 / 0.16);
   --mesh-c: rgb(121 40 202 / 0.26);
   --mesh-d: rgb(255 0 128 / 0.18);
   --mesh-e: rgb(249 203 40 / 0.12);
+  --header-height: 88px;
 }
 
 @theme inline {
@@ -89,20 +93,20 @@
   --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --text-display: clamp(2.35rem, 6vw, 3.5rem);
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.055em;
-  --text-display--font-weight: 600;
-  --text-heading-lg: clamp(1.75rem, 3.5vw, 2.25rem);
+  --text-display: 3.25rem;
+  --text-display--line-height: 1.19;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
+  --text-heading-lg: 2.25rem;
   --text-heading-lg--line-height: 1.1;
-  --text-heading-lg--letter-spacing: -0.045em;
+  --text-heading-lg--letter-spacing: -0.025em;
   --text-heading-lg--font-weight: 600;
-  --text-heading-md: 1.25rem;
+  --text-heading-md: 1.3125rem;
   --text-heading-md--line-height: 1.3;
-  --text-heading-md--letter-spacing: -0.025em;
-  --text-heading-md--font-weight: 600;
-  --text-body-lg: 1.0625rem;
-  --text-body-lg--line-height: 1.65;
+  --text-heading-md--letter-spacing: -0.02em;
+  --text-heading-md--font-weight: 700;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.56;
   --text-body-md: 0.9375rem;
   --text-body-md--line-height: 1.6;
   --text-body-sm: 0.8125rem;
@@ -114,13 +118,18 @@
   --text-eyebrow--letter-spacing: 0.08em;
   --text-eyebrow--font-weight: 500;
 
+  --text-mobile-h1: 2.625rem;
+  --text-mobile-h1--line-height: 1.19;
+  --text-mobile-h1--letter-spacing: -0.03em;
+  --text-mobile-h1--font-weight: 700;
+
   --spacing-gutter: 1.5rem;
   --spacing-section: clamp(3.5rem, 7vw, 6.5rem);
-  --container-site: 80rem;
+  --container-site: 78rem;
 
   --shadow-whisper: var(--shadow-1);
-  --shadow-float: var(--shadow-2);
-  --radius-card: 0.75rem;
+  --shadow-float: var(--shadow-float);
+  --radius-card: 1rem;
 }
 
 @layer base {
@@ -142,7 +151,7 @@
 
   body {
     min-height: 100vh;
-    background: var(--canvas);
+    background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas-end) 100%);
     color: var(--ink);
     font-family: var(--font-body);
   }
@@ -282,13 +291,6 @@
     font-size: var(--text-caption);
   }
 
-  .hairline-card {
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-1);
-  }
-
   .prose-copy p + p {
     margin-top: 1rem;
   }
@@ -333,6 +335,22 @@
     width: 6rem;
     border-radius: 9999px;
     background: linear-gradient(90deg, #007cf0, #00dfd8 24%, #7928ca 52%, #ff0080 76%, #f9cb28);
+  }
+
+  .pricing-badge {
+    @apply inline-flex items-center rounded-full px-2 py-0.5 font-medium text-caption transition-opacity hover:opacity-75;
+  }
+
+  .pricing-free {
+    @apply bg-success-soft text-success;
+  }
+
+  .pricing-freemium {
+    @apply bg-warning-soft text-warning;
+  }
+
+  .pricing-paid {
+    @apply bg-violet-soft text-violet;
   }
 }
 

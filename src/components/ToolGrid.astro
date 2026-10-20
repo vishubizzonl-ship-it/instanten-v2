@@ -12,7 +12,19 @@ const { tools, visibleStart = 0, visibleEnd = tools.length } = Astro.props;
 ---
 <section aria-labelledby="tools-heading" id="tools">
   <h2 id="tools-heading" class="sr-only">Tools</h2>
-  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" data-directory-grid>
+  <div
+    class="grid gap-6"
+    data-directory-grid
+    style="
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, minmax(0, 400px));
+      }
+    "
+  >
     {tools.map((tool, index) => (
       <ToolCard
         slug={tool.slug}
@@ -25,6 +37,7 @@ const { tools, visibleStart = 0, visibleEnd = tools.length } = Astro.props;
         tags={tool.tags}
         maker={tool.maker}
         addedDate={tool.addedDate}
+        updatedDate={tool.updatedDate}
         featured={tool.featured}
         hidden={index < visibleStart || index >= visibleEnd}
         searchText={buildSearchText(tool)}

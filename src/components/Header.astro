@@ -1,81 +1,66 @@
 ---
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
-
-const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
-
-const navLinks = [
-  { href: '/tools/', label: 'Tools' },
-  { href: '/categories/', label: 'Categories' },
-  { href: '/pricing/', label: 'Pricing' },
-  { href: '/makers/', label: 'Makers' },
-] as const;
-
-function isActive(href: string): boolean {
-  const clean = href.replace(/\/+$/, '') || '/';
-  if (clean === '/') return path === '/';
-  return path === clean || path.startsWith(`${clean}/`) || (clean === '/tools' && path.startsWith('/tools'));
-}
 ---
-<header
-  class="sticky top-0 z-50 w-full border-b border-border-hairline bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70"
->
+<header class="sticky top-0 z-50 w-full border-b border-border-hairline bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70">
   <div class="site-container flex h-[88px] items-center justify-between gap-4">
-    <Logo />
+    <a href="/" class="flex-shrink-0" aria-label="instanten home">
+      <Logo size="md" />
+    </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            'rounded-full px-3 py-1.5 text-body-sm font-medium transition-colors',
-            isActive(link.href)
-              ? 'bg-hairline-soft text-ink'
-              : 'text-body hover:bg-hairline-soft hover:text-ink',
-          ]}
-          aria-current={isActive(link.href) ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      ))}
-    </nav>
-
-    <div class="flex items-center gap-1.5 sm:gap-2">
-      <a
-        href="/search/"
+    <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions">
+      <button
+        type="button"
         data-search-open
-        class="inline-flex min-h-10 items-center gap-2 rounded-md border border-border-hairline bg-surface px-2.5 text-body-sm font-medium text-body transition-colors hover:border-faint hover:text-ink sm:px-3"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         aria-haspopup="dialog"
         aria-controls="search-panel"
         aria-expanded="false"
-        title="Search tools"
+        aria-label="Search tools"
+        title="Search tools (⌘K)"
       >
-        <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="9" cy="9" r="6.2"></circle>
           <path d="m13.6 13.6 3.2 3.2"></path>
         </svg>
-        <span class="hidden sm:inline">Search</span>
-        <kbd class="ml-1 hidden rounded border border-border-hairline bg-canvas px-1.5 py-0.5 font-mono text-[10px] leading-none text-muted lg:inline">⌘K</kbd>
-      </a>
+      </button>
 
       <ThemeToggle />
 
       <a
         href="/submit/"
-        class="btn btn-primary btn-sm hidden lg:inline-flex"
+        class="inline-flex h-10 min-w-[165px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap"
+        aria-label="Submit a tool"
       >
-        Submit a tool
+        Submit a Tool
       </a>
+    </div>
+
+    <div class="flex items-center gap-2 lg:hidden" aria-label="Mobile header actions">
+      <button
+        type="button"
+        data-search-open
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
+        aria-haspopup="dialog"
+        aria-controls="search-panel"
+        aria-expanded="false"
+        aria-label="Search tools"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.2"></circle>
+          <path d="m13.6 13.6 3.2 3.2"></path>
+        </svg>
+      </button>
 
       <button
         type="button"
         data-menu-open
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink md:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
         aria-label="Open menu"
         aria-controls="mobile-drawer"
         aria-expanded="false"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16"></path>
         </svg>
       </button>

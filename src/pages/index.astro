@@ -32,6 +32,7 @@ const toolData: ToolData[] = paginatedTools.map((tool) => ({
   tags: tool.data.tags,
   maker: tool.data.maker,
   addedDate: tool.data.addedDate,
+  updatedDate: tool.data.updatedDate,
   featured: tool.data.featured,
 }));
 
@@ -48,18 +49,7 @@ const pageDescription = 'A curated directory of genuinely useful SaaS tools. Bro
 <Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/">
   <Hero toolCount={allTools.length} categoryCount={allCategories.length} />
 
-  <section class="site-container py-6 lg:py-8" aria-label="Browse categories">
-    <h2 class="sr-only">Categories</h2>
-    <div class="flex flex-wrap gap-2">
-      {allCategories.map(cat => (
-        <a href={`/category/${cat.toLowerCase()}/`} class="px-3.5 py-1.5 rounded-full border border-border-hairline bg-canvas text-body-sm font-medium text-ink hover:border-ink transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
-          {cat}
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="site-container py-6 lg:py-10" aria-label="Tool directory">
+  <section class="site-container pt-[64px] pb-[64px]" aria-label="Tool directory">
     <ToolGrid tools={toolData} />
 
     {sortedTools.length === 0 && (
