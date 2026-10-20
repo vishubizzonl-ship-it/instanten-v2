@@ -49,7 +49,7 @@ const pageDescription = 'A curated directory of genuinely useful SaaS tools. Bro
 <Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/">
   <Hero toolCount={allTools.length} categoryCount={allCategories.length} />
 
-  <section class="site-container pt-[64px] pb-[64px]" aria-label="Tool directory">
+  <section class="site-container pb-[64px]" aria-label="Tool directory">
     <ToolGrid tools={toolData} />
 
     {sortedTools.length === 0 && (
