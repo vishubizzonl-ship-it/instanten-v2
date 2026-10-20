@@ -1,0 +1,35 @@
+---
+interface Props {
+  href?: string;
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { href = '/', size = 'md', class: className = '' } = Astro.props;
+const markSize = size === 'sm' ? 24 : 28;
+const textSize = size === 'sm' ? 'text-base' : 'text-lg';
+---
+<a
+  href={href}
+  class:list={[
+    'inline-flex items-center gap-2 font-display font-semibold tracking-[-0.03em] text-ink',
+    textSize,
+    className,
+  ]}
+  aria-label="instanten home"
+>
+  <svg
+    width={markSize}
+    height={markSize}
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    class="shrink-0"
+  >
+    <rect width="28" height="28" rx="7" fill="currentColor" />
+    <path d="M9 9.5h2.4v9H9zM9 6.5h2.4v1.6H9z" fill="var(--canvas)" />
+    <path d="M14.6 12.1h2.3V18a1.4 1.4 0 0 0 1.5 1.5h.6v1.9h-1.1c-2.2 0-3.3-1.2-3.3-3.4z" fill="var(--canvas)" />
+  </svg>
+  <span>instanten</span>
+</a>

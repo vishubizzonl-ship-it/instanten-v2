@@ -1,0 +1,18 @@
+{
+  "slug": "css-grid-generator",
+  "name": "CSS Grid Generator",
+  "category": "Design",
+  "description": "Visually build CSS Grid layouts. Drag to create tracks, set gaps, and generate production-ready code.",
+  "longDescription": "CSS Grid Generator makes complex grid layouts intuitive. Visually define rows and columns by dragging in the canvas. Set gap, alignment, and track sizing (fr, px, %, auto, minmax). See real-time preview with placeholder content. Copy clean CSS with fallbacks. Supports nested grids and named areas.",
+  "pricing": "Free",
+  "pricingDetails": "Free and open source. No account needed.",
+  "image": "/thumbnails/css-grid-generator.svg",
+  "url": "https://cssgrid-generator.netlify.app/",
+  "tags": ["design", "css", "layout", "frontend", "grid"],
+  "maker": "Sarah Drasner",
+  "addedDate": "2024-06-15",
+  "updatedDate": "2024-11-10",
+  "features": ["Visual drag-and-drop grid builder", "Track sizing (fr, px, %, auto, minmax)", "Gap and alignment controls", "Named grid areas", "Real-time preview", "Clean CSS output with fallbacks"],
+  "useCases": ["Dashboard layouts", "Article layouts", "Photo galleries", "Form layouts", "Responsive page structures"],
+  "featured": true
+}

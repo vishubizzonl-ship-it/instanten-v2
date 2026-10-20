@@ -1,0 +1,18 @@
+{
+  "slug": "base64-encoder",
+  "name": "Base64 Encoder/Decoder",
+  "category": "Developer",
+  "description": "Encode and decode Base64 strings instantly. Handle text, files, and images with UTF-8 support.",
+  "longDescription": "Base64 Encoder/Decoder provides instant encoding and decoding of Base64 data. Paste text or upload files to encode. Decode Base64 strings back to text or download as files. Supports UTF-8 for international characters. Handles images, documents, and binary data. All processing happens locally in your browser.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free with no file size limits. No uploads to server.",
+  "image": "/thumbnails/base64-encoder.svg",
+  "url": "https://www.base64.guru/",
+  "tags": ["developer", "encoding", "base64", "data-conversion"],
+  "maker": "Base64 Guru",
+  "addedDate": "2024-05-01",
+  "updatedDate": "2024-11-30",
+  "features": ["Text encode/decode", "File upload support", "UTF-8 support", "Image to Base64", "Base64 to file download", "Local-only processing"],
+  "useCases": ["Embedding images in CSS/HTML", "API token encoding", "Email attachment encoding", "Data URI generation", "Binary data transport"],
+  "featured": false
+}

@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const allTools = await getCollection('tools');
+const allMakers = [...new Set(allTools.map(t => t.data.maker).filter((m): m is string => Boolean(m)))].sort();
+const makerCounts = allMakers.map(maker => ({
+  name: maker,
+  count: allTools.filter(t => t.data.maker === maker).length,
+  slug: maker.toLowerCase().replace(/\s+/g, '-'),
+}));
+
+const pageTitle = 'Makers — instanten';
+const pageDescription = 'Browse tools by maker. Discover all tools from your favorite companies and creators.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Makers' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/makers/">
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Makers</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">
+        Explore tools by their creators. Find all tools from companies and developers you trust.
+      </p>
+    </header>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+      {makerCounts.map(maker => (
+        <a
+          href={`/maker/${maker.slug}/`}
+          class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+        >
+          <h2 class="font-display font-semibold text-xl text-ink mb-2">{maker.name}</h2>
+          <p class="font-body text-body-md text-muted mb-4">{maker.count} {maker.count === 1 ? 'tool' : 'tools'}</p>
+          <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent-start">
+            View tools
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h6M10 7l3-3-3-3" />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+  .text-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .text-body-md {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  @media (max-width: 640px) {
+    .text-display { font-size: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none !important; }
+  }
+</style>

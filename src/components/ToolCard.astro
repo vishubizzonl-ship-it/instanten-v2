@@ -1,0 +1,135 @@
+---
+import { pricingSlug } from '../utils/filters';
+
+interface Props {
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  pricing: 'Free' | 'Freemium' | 'Paid';
+  image: string;
+  url: string;
+  tags?: string[];
+  maker?: string;
+  addedDate?: string;
+  featured?: boolean;
+  hidden?: boolean;
+  searchText?: string;
+}
+
+const {
+  slug,
+  name,
+  category,
+  description,
+  pricing,
+  image,
+  url,
+  tags = [],
+  maker,
+  addedDate,
+  featured = false,
+  hidden = false,
+  searchText = '',
+} = Astro.props;
+
+const pricingClasses = {
+  Free: 'bg-success-soft text-success',
+  Freemium: 'bg-warning-soft text-warning',
+  Paid: 'bg-violet-soft text-violet',
+} as const satisfies Record<'Free' | 'Freemium' | 'Paid', string>;
+---
+<article
+  data-tool-card
+  data-slug={slug}
+  data-name={name}
+  data-category={category}
+  data-pricing={pricing}
+  data-tags={tags.join(',')}
+  data-maker={maker || ''}
+  data-added={addedDate || ''}
+  data-featured={featured ? 'true' : 'false'}
+  data-search={searchText}
+  hidden={hidden}
+  class="group flex flex-col overflow-hidden rounded-xl border border-border-hairline bg-surface shadow-whisper transition-colors hover:border-faint"
+>
+  <a
+    href={`/tools/${slug}/`}
+    class="relative block aspect-[16/9] overflow-hidden border-b border-border-hairline bg-surface-soft"
+    aria-label={`View details for ${name}`}
+  >
+    <img
+      src={image}
+      alt={`${name} preview`}
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="360"
+    />
+    {featured && (
+      <span class="absolute left-3 top-3 rounded-full border border-white/20 bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm">
+        Featured
+      </span>
+    )}
+  </a>
+
+  <div class="flex flex-1 flex-col p-5">
+    <div class="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-caption">
+      <a
+        href={`/category/${category.toLowerCase()}/`}
+        class="font-medium uppercase tracking-wide text-muted transition-colors hover:text-ink"
+      >
+        {category}
+      </a>
+      <span class="text-faint" aria-hidden="true">/</span>
+      <a
+        href={`/pricing/${pricingSlug(pricing)}/`}
+        class={`rounded-full px-2 py-0.5 font-medium transition-opacity hover:opacity-75 ${pricingClasses[pricing]}`}
+      >
+        {pricing}
+      </a>
+    </div>
+
+    <h2 class="font-display text-heading-md text-ink">
+      <a href={`/tools/${slug}/`} class="transition-colors hover:text-accent-deep">{name}</a>
+    </h2>
+
+    <p class="mt-2 line-clamp-3 flex-1 text-body-sm leading-relaxed text-body">{description}</p>
+
+    {tags.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-1.5" aria-label={`Tags for ${name}`}>
+        {tags.slice(0, 3).map((tag) => (
+          <a
+            href={`/tag/${tag.toLowerCase()}/`}
+            class="rounded-full border border-border-hairline bg-canvas px-2 py-0.5 text-caption text-muted transition-colors hover:border-faint hover:text-ink"
+          >
+            {tag}
+          </a>
+        ))}
+        {tags.length > 3 && <span class="px-1 py-0.5 text-caption text-faint">+{tags.length - 3}</span>}
+      </div>
+    )}
+
+    <div class="mt-5 flex items-center justify-between gap-3 border-t border-border-hairline pt-4">
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-body-sm font-medium text-ink transition-colors hover:text-accent-deep"
+        aria-label={`Visit ${name} official website (opens in a new tab)`}
+      >
+        Visit tool
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 13h6M13 13V7M13 13 6.5 6.5"></path>
+        </svg>
+      </a>
+      <a
+        href={`/tools/${slug}/`}
+        class="text-caption font-medium text-muted transition-colors hover:text-ink"
+      >
+        Details
+      </a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "slug": "online-ruler",
+  "name": "Online Ruler",
+  "category": "Utility",
+  "description": "Measure anything on your screen with pixel-perfect accuracy. A lightweight browser-based ruler for designers and developers.",
+  "longDescription": "Online Ruler provides instant, accurate measurements directly in your browser. No downloads, no sign-ups. Just open, measure, and get results. Supports inches, centimeters, and pixels.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free with no limitations. No account required.",
+  "image": "/thumbnails/ruler.svg",
+  "url": "https://www.online-ruler.com/",
+  "tags": ["utility", "design", "measurement"],
+  "maker": "Ginifab",
+  "addedDate": "2024-01-15",
+  "updatedDate": "2024-11-20",
+  "features": ["Pixel-perfect measurements", "Multiple units (px, in, cm)", "No installation required", "Works offline after first load", "Responsive design"],
+  "useCases": ["UI/UX design measurement", "Frontend development", "Print design verification", "Quick screen measurements"],
+  "featured": true
+}

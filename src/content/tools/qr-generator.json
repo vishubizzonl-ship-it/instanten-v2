@@ -1,0 +1,18 @@
+{
+  "slug": "qr-generator",
+  "name": "QR Generator",
+  "category": "Marketing",
+  "description": "Create custom QR codes instantly. Generate codes for URLs, text, WiFi, contacts, and more with design options.",
+  "longDescription": "QR Generator lets you create professional QR codes in seconds. Customize colors, add logos, choose from multiple data types (URLs, vCard, WiFi, plain text, SMS, email). High-resolution PNG and SVG exports. Track scans with built-in analytics on paid plans.",
+  "pricing": "Free",
+  "pricingDetails": "Free tier: unlimited static QR codes. Pro: $7.50/month for dynamic codes, analytics, bulk generation, API access.",
+  "image": "/thumbnails/qr.svg",
+  "url": "https://www.qr-code-generator.com/",
+  "tags": ["marketing", "qr-codes", "branding", "analytics"],
+  "maker": "QR Code Generator",
+  "addedDate": "2024-03-05",
+  "updatedDate": "2024-11-15",
+  "features": ["Multiple data types (URL, vCard, WiFi, SMS, Email)", "Custom colors and logos", "High-res PNG/SVG export", "Dynamic QR codes (Pro)", "Scan analytics (Pro)", "Bulk generation (Pro)"],
+  "useCases": ["Marketing campaigns", "Business cards", "Event check-ins", "WiFi sharing", "Contactless menus"],
+  "featured": false
+}

@@ -1,0 +1,52 @@
+---
+interface Props {
+  toolCount: number;
+  categoryCount: number;
+}
+
+const { toolCount, categoryCount } = Astro.props;
+---
+<section class="hero-mesh border-b border-border-hairline" aria-labelledby="hero-title">
+  <div class="site-container flex flex-col items-center py-20 text-center lg:py-28">
+    <p class="eyebrow mb-5">Curated SaaS directory</p>
+    <div class="hero-rule mb-7" aria-hidden="true"></div>
+
+    <h1 id="hero-title" class="max-w-3xl font-display text-display text-ink">
+  Useful tools.
+  <br class="hidden sm:block" />
+  <span class="bg-gradient-to-r from-[#9895FF] to-[#514DCC] bg-clip-text text-transparent">Ready in an instant.</span>
+    </h1>
+
+    <p class="mt-6 max-w-xl text-body-lg leading-relaxed text-body">
+      A sharp, human-curated directory of tools that actually work. Browse by category,
+      compare pricing, and go straight to the official site.
+    </p>
+
+    <div class="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
+      <a href="/tools/" class="btn btn-primary">
+        Browse all tools
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 10h12M11 5l5 5-5 5"></path>
+        </svg>
+      </a>
+      <a
+        href="/search/"
+        data-search-open
+        class="btn btn-secondary"
+        aria-haspopup="dialog"
+        aria-controls="search-panel"
+        aria-expanded="false"
+      >
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.2"></circle>
+          <path d="m13.6 13.6 3.2 3.2"></path>
+        </svg>
+        Search tools
+      </a>
+    </div>
+
+    <p class="mt-7 font-mono text-caption text-muted">
+      {toolCount} tools · {categoryCount} categories · checked links
+    </p>
+  </div>
+</section>

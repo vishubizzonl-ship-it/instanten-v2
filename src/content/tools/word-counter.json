@@ -1,0 +1,18 @@
+{
+  "slug": "word-counter",
+  "name": "Word Counter",
+  "category": "Writing",
+  "description": "Count words, characters, sentences, and paragraphs instantly. Real-time stats with reading time estimates.",
+  "longDescription": "Word Counter provides real-time text statistics as you type. Counts words, characters (with and without spaces), sentences, paragraphs, and unique words. Estimates reading and speaking time. Keyword density analysis for SEO. Clean, distraction-free interface. Works offline after first load.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free with all features. No ads, no tracking, no account needed.",
+  "image": "/thumbnails/word-counter.svg",
+  "url": "https://wordcounter.net/",
+  "tags": ["writing", "seo", "productivity", "text-analysis"],
+  "maker": "WordCounter.net",
+  "addedDate": "2024-02-28",
+  "updatedDate": "2024-11-05",
+  "features": ["Real-time counting", "Words, chars, sentences, paragraphs", "Reading/speaking time estimates", "Keyword density analysis", "Works offline", "No ads or tracking"],
+  "useCases": ["Blog post optimization", "Essay/assignment length checking", "SEO content planning", "Social media character limits", "Translation pricing estimates"],
+  "featured": false
+}

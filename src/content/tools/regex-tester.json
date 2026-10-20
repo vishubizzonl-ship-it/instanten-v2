@@ -1,0 +1,18 @@
+{
+  "slug": "regex-tester",
+  "name": "Regex Tester",
+  "category": "Developer",
+  "description": "Test and debug regular expressions with real-time matching, explanation, and cheat sheet.",
+  "longDescription": "Regex Tester helps developers write and debug regular expressions with confidence. Enter a pattern and test string to see matches highlighted in real-time. Get step-by-step explanation of each regex token. Built-in cheat sheet for quick reference. Supports JavaScript, Python, PCRE, and Go regex flavors.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free. All processing happens in your browser.",
+  "image": "/thumbnails/regex-tester.svg",
+  "url": "https://regexr.com/",
+  "tags": ["developer", "regex", "debugging", "validation"],
+  "maker": "gskinner",
+  "addedDate": "2024-04-10",
+  "updatedDate": "2024-11-25",
+  "features": ["Real-time match highlighting", "Step-by-step regex explanation", "Multi-flavor support (JS, Python, PCRE, Go)", "Cheat sheet reference", "Match groups detail", "Client-side only"],
+  "useCases": ["Form validation patterns", "Log parsing", "Data extraction", "URL routing", "Input sanitization"],
+  "featured": false
+}

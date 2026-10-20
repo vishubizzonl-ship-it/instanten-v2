@@ -1,0 +1,18 @@
+{
+  "slug": "json-formatter",
+  "name": "JSON Formatter",
+  "category": "Developer",
+  "description": "Format, validate, and beautify JSON data. Syntax highlighting, error detection, and tree view for easy debugging.",
+  "longDescription": "JSON Formatter is a developer essential for working with JSON data. Paste raw JSON to instantly format with proper indentation and syntax highlighting. Validates syntax and highlights errors with line numbers. Collapsible tree view for navigating large objects. Minify option for production payloads. No data leaves your browser.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free. No limits, no account required. All processing happens client-side.",
+  "image": "/thumbnails/json.svg",
+  "url": "https://jsonformatter.curiousconcept.com/",
+  "tags": ["developer", "json", "debugging", "validation"],
+  "maker": "Curious Concept",
+  "addedDate": "2024-01-20",
+  "updatedDate": "2024-10-10",
+  "features": ["Syntax highlighting", "Error detection with line numbers", "Collapsible tree view", "Minify/beautify toggle", "Client-side processing", "No data upload"],
+  "useCases": ["API response debugging", "Config file formatting", "JSON validation", "Learning JSON structure"],
+  "featured": true
+}

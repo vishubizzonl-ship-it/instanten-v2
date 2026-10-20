@@ -1,0 +1,178 @@
+---
+const categories = [
+  { slug: 'developer', label: 'Developer' },
+  { slug: 'design', label: 'Design' },
+  { slug: 'marketing', label: 'Marketing' },
+  { slug: 'writing', label: 'Writing' },
+  { slug: 'productivity', label: 'Productivity' },
+  { slug: 'utility', label: 'Utility' },
+] as const;
+---
+<div
+  id="search-panel"
+  hidden
+  class="fixed inset-0 z-[80] overflow-y-auto p-4 sm:p-6"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="search-panel-title"
+>
+  <div data-search-backdrop class="fixed inset-0 bg-black/45 backdrop-blur-[2px]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto mt-10 w-full max-w-2xl sm:mt-24">
+    <div class="overflow-hidden rounded-xl border border-border-hairline bg-surface shadow-float">
+      <div class="flex items-center justify-between border-b border-border-hairline px-5 py-3.5">
+        <div class="flex items-center gap-2">
+          <span class="eyebrow">Search</span>
+          <span class="text-caption text-faint" aria-hidden="true">/</span>
+          <h2 id="search-panel-title" class="font-display text-body-md font-medium text-ink">Find a tool</h2>
+        </div>
+        <button
+          type="button"
+          data-search-close
+          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink"
+          aria-label="Close search"
+        >
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 5 10 10M15 5 5 15"></path>
+          </svg>
+        </button>
+      </div>
+
+      <form action="/search/" method="get" data-search-form>
+        <label for="search-input" class="sr-only">Search tools</label>
+        <div class="flex items-center gap-3 border-b border-border-hairline px-5 py-4">
+          <svg class="shrink-0 text-muted" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="9" r="6.2"></circle>
+            <path d="m13.6 13.6 3.2 3.2"></path>
+          </svg>
+          <input
+            type="search"
+            id="search-input"
+            name="q"
+            placeholder="Search by name, category, tag, or maker…"
+            class="w-full border-0 bg-transparent p-0 font-body text-body-lg text-ink outline-none placeholder:text-faint focus:ring-0"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit" class="btn btn-primary btn-sm shrink-0">Search</button>
+        </div>
+      </form>
+
+      <div class="px-5 py-4">
+        <div class="mb-3 flex items-center justify-between gap-3">
+          <p class="eyebrow">Browse a category</p>
+          <a href="/tools/" class="text-caption font-medium text-muted transition-colors hover:text-ink">All tools</a>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <a
+              href={`/search/?category=${category.label}`}
+              class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink"
+            >
+              {category.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-4 text-center text-caption text-white/80">
+      Press <kbd class="rounded border border-white/25 bg-white/10 px-1.5 py-0.5 font-mono text-[10px]">Enter</kbd> to search
+      · <kbd class="rounded border border-white/25 bg-white/10 px-1.5 py-0.5 font-mono text-[10px]">Esc</kbd> to close
+      · <kbd class="rounded border border-white/25 bg-white/10 px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd> to open
+    </p>
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('search-panel');
+  const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-search-open]'));
+  const closeButton = panel?.querySelector<HTMLElement>('[data-search-close]');
+  const backdrop = panel?.querySelector<HTMLElement>('[data-search-backdrop]');
+  const input = panel?.querySelector<HTMLInputElement>('#search-input');
+  let lastFocused: HTMLElement | null = null;
+
+  function isOpen(): boolean {
+    return Boolean(panel && !panel.hidden);
+  }
+
+  function open(event?: Event): void {
+    if (!panel) return;
+    event?.preventDefault();
+    if (isOpen()) {
+      input?.focus();
+      return;
+    }
+    const drawer = document.getElementById('mobile-drawer');
+    if (drawer && !drawer.hidden) {
+      drawer.querySelector<HTMLElement>('[data-menu-close]')?.click();
+    }
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    panel.hidden = false;
+    document.body.style.overflow = 'hidden';
+    triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
+    window.setTimeout(() => input?.focus(), 40);
+  }
+
+  function close(): void {
+    if (!panel || !isOpen()) return;
+    panel.hidden = true;
+    document.body.style.overflow = '';
+    triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+    lastFocused?.focus();
+  }
+
+  triggers.forEach((trigger) => trigger.addEventListener('click', open));
+  closeButton?.addEventListener('click', close);
+  backdrop?.addEventListener('click', close);
+
+  document.addEventListener('keydown', (event) => {
+    const target = event.target as HTMLElement | null;
+    const isEditable =
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      Boolean(target?.isContentEditable);
+
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      isOpen() ? close() : open();
+      return;
+    }
+
+    if (event.key === '/' && !isEditable && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      event.preventDefault();
+      open();
+      return;
+    }
+
+    if (event.key === 'Escape' && isOpen()) {
+      close();
+      return;
+    }
+
+    if (event.key === 'Tab' && isOpen() && panel) {
+      const focusables = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => !element.hasAttribute('hidden'));
+
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  document.querySelector<HTMLElement>('[data-search-form]')?.addEventListener('submit', () => {
+    document.body.style.overflow = '';
+  });
+</script>

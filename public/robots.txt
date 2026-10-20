@@ -1,0 +1,17 @@
+# Robots.txt for instanten.com
+# Generated automatically
+
+User-agent: *
+Allow: /
+
+# Disallow admin/private paths (none exist, but good practice)
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /node_modules/
+Disallow: /.git/
+
+# Sitemap
+Sitemap: https://instanten.com/sitemap-index.xml
+
+# Crawl-delay (optional, be nice to servers)
+Crawl-delay: 10

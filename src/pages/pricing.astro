@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const allTools = await getCollection('tools');
+const pricings = ['Free', 'Freemium', 'Paid'] as const;
+const pricingCounts = pricings.map(pricing => ({
+  name: pricing,
+  count: allTools.filter(t => t.data.pricing === pricing).length,
+  slug: pricing.toLowerCase(),
+}));
+
+const pageTitle = 'Pricing — instanten';
+const pageDescription = 'Browse tools by pricing model. Find free, freemium, and paid SaaS tools for your budget.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Pricing' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/pricing/">
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Pricing</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">
+        Find tools that fit your budget. Filter by free, freemium, or paid pricing models.
+      </p>
+    </header>
+    <div class="grid gap-5 sm:grid-cols-3 max-w-4xl mx-auto">
+      {pricingCounts.map(pricing => {
+        const colorClass = {
+          Free: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+          Freemium: 'bg-amber-100 text-amber-700 border-amber-200',
+          Paid: 'bg-violet-100 text-violet-700 border-violet-200',
+        }[pricing.name];
+        return (
+          <a
+            href={`/pricing/${pricing.slug}/`}
+            class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+          >
+            <span class:list={['inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium mb-4', colorClass]}>
+              {pricing.name}
+            </span>
+            <h2 class="font-display font-semibold text-xl text-ink mb-2">{pricing.name} Tools</h2>
+            <p class="font-body text-body-md text-muted mb-4">{pricing.count} {pricing.count === 1 ? 'tool' : 'tools'}</p>
+            <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent-start">
+              Browse
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7h6M10 7l3-3-3-3" />
+              </svg>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+  .text-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .text-body-md {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  @media (max-width: 640px) {
+    .text-display { font-size: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none !important; }
+  }
+</style>

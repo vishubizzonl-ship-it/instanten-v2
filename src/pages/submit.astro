@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const pageTitle = 'Submit a Tool — instanten';
+const pageDescription = 'Submit a useful SaaS tool to be considered for inclusion in the instanten directory.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Submit a Tool' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/submit/">
+  <Breadcrumbs items={breadcrumbs} />
+  <article class="px-gutter py-section max-w-2xl mx-auto">
+    <header class="mb-12 text-center">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Submit a Tool</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">
+        Know a great tool that should be in our directory? Let us know.
+      </p>
+    </header>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Submission Guidelines</h2>
+      <ul class="space-y-4" role="list">
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 mt-1" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">Must be a SaaS or web-based tool</h3>
+            <p class="font-body text-body-md text-muted">Desktop apps, mobile apps, and libraries are out of scope.</p>
+          </div>
+        </li>
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 mt-1" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">Must have a working website</h3>
+            <p class="font-body text-body-md text-muted">Landing pages without a functional product don't qualify.</p>
+          </div>
+        </li>
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 mt-1" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">No affiliate or referral links</h3>
+            <p class="font-body text-body-md text-muted">Direct links to official websites only.</p>
+          </div>
+        </li>
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 mt-1" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">One submission per tool</h3>
+            <p class="font-body text-body-md text-muted">Duplicate submissions will be merged.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Submit via Email</h2>
+      <p class="font-body text-body-md text-muted mb-6">
+        Send the following details to <a href="mailto:submit@instanten.com" class="text-accent-end hover:underline">submit@instanten.com</a>:
+      </p>
+      <div class="bg-muted/30 rounded-lg p-6 font-mono text-sm">
+        <pre class="font-body text-body-md text-ink"><code>Tool Name:
+Official URL:
+Category: (Utility / Developer / Marketing / Design / Writing / Productivity)
+Pricing: (Free / Freemium / Paid)
+Short Description (1-2 sentences):
+Long Description (optional):
+Key Features (bullet points):
+Use Cases (bullet points):
+Tags (comma-separated):
+Maker/Company Name:
+Your Name/Contact (optional):</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Submit via GitHub</h2>
+      <p class="font-body text-body-md text-muted mb-4">
+        Open a pull request adding a JSON file to <code class="bg-muted/50 px-1.5 py-0.5 rounded font-mono text-sm">src/content/tools/</code> 
+        following the existing format.
+      </p>
+      <a
+        href="https://github.com/instanten/instanten-v2/tree/main/src/content/tools"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white font-body font-medium text-base hover:bg-ink/90 transition-colors"
+      >
+        View Tools Directory on GitHub
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 13.5h11M12 6.5l4 4-4 4" />
+        </svg>
+      </a>
+    </section>
+
+    <section class="pt-8 border-t border-border-hairline">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">What Happens Next</h2>
+      <ol class="space-y-4" role="list">
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-start/10 text-accent-end flex items-center justify-center font-display font-semibold text-base">1</span>
+          <div>
+            <p class="font-display font-semibold text-base text-ink">Review</p>
+            <p class="font-body text-body-md text-muted">We verify the tool works, categorize it, and check pricing accuracy.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-start/10 text-accent-end flex items-center justify-center font-display font-semibold text-base">2</span>
+          <div>
+            <p class="font-display font-semibold text-base text-ink">Add to Directory</p>
+            <p class="font-body text-body-md text-muted">Approved tools are added with original thumbnails and proper metadata.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-start/10 text-accent-end flex items-center justify-center font-display font-semibold text-base">3</span>
+          <div>
+            <p class="font-display font-semibold text-base text-ink">Publish</p>
+            <p class="font-body text-body-md text-muted">Changes go live on the next deploy. You'll see it on the site!</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </article>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

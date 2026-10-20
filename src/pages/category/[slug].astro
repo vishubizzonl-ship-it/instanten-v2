@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolGrid from '../../components/ToolGrid.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../utils/filters';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  const categories = [...new Set(tools.map(t => t.data.category.toLowerCase()))];
+  return categories.map(cat => ({
+    params: { slug: cat },
+  }));
+}
+
+const { slug } = Astro.params;
+const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ');
+
+const allTools = await getCollection('tools');
+
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+filters.category = categoryName;
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData = paginatedTools.map(tool => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  featured: tool.data.featured,
+}));
+
+
+
+const baseUrl = `/category/${slug}/`;
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.pricing) queryParams.pricing = filters.pricing;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+
+const pageTitle = `${categoryName} Tools — instanten`;
+const pageDescription = `Browse ${sortedTools.length} ${categoryName.toLowerCase()} tools. Discover the best ${categoryName.toLowerCase()} software for your needs.`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${categoryName} Tools`,
+  description: pageDescription,
+  numberOfItems: sortedTools.length,
+  itemListElement: paginatedTools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: (currentPage - 1) * PER_PAGE + index + 1,
+    item: {
+      '@type': 'SoftwareApplication',
+      name: tool.data.name,
+      description: tool.data.description,
+      url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+      applicationCategory: tool.data.category,
+      offers: {
+        '@type': 'Offer',
+        price: tool.data.pricing === 'Free' ? '0' : undefined,
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+  })),
+};
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Categories', href: '/categories' },
+  { label: categoryName, href: `/category/${slug}/` },
+];
+---
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/category/${slug}/`}>
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">Category</span>
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">{categoryName}</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        {sortedTools.length} {sortedTools.length === 1 ? 'tool' : 'tools'} in this category
+      </p>
+    </header>
+  </section>
+  <FilterBar
+    currentCategory={filters.category}
+    currentPricing={filters.pricing}
+    currentTags={filters.tags}
+    currentSort={filters.sort}
+    hasFilters={Boolean(filters.q || filters.pricing || filters.tags?.length)}
+    baseUrl={baseUrl}
+  />
+  <ToolGrid tools={toolData} />
+  {totalPages > 1 && (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      baseUrl={baseUrl}
+      queryParams={queryParams}
+    />
+  )}
+</Layout>

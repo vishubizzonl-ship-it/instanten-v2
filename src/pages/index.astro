@@ -1,16 +1,115 @@
 ---
----
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../utils/filters';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+const allTools = await getCollection('tools');
+
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const allCategories = [...new Set(allTools.map(t => t.data.category))].sort();
+
+const pageTitle = 'instanten — Useful SaaS Tools, Ready in an Instant';
+const pageDescription = 'A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites.';
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/">
+  <section class="site-container pt-14 pb-10 lg:pt-20 lg:pb-14" aria-label="Hero">
+    <div class="max-w-4xl">
+      <h1 class="font-display font-semibold text-display tracking-[-0.055em] text-ink leading-[1.02]">
+        Unlocking the Power of <span class="text-accent">AI</span> and Empowering the Future
+      </h1>
+      <p class="mt-6 text-body-lg text-muted max-w-2xl leading-relaxed">
+        Welcome to your ultimate source for fresh tech perspectives! A sharp, curated directory of genuinely useful SaaS tools that actually work. No fluff. No dead links. Just direct links to official sites.
+      </p>
+    </div>
+  </section>
+
+  <section class="site-container py-6 lg:py-8" aria-label="Browse categories">
+    <h2 class="sr-only">Categories</h2>
+    <div class="flex flex-wrap gap-2">
+      {allCategories.map(cat => (
+        <a href={`/category/${cat.toLowerCase()}/`} class="px-3.5 py-1.5 rounded-full border border-border-hairline bg-canvas text-body-sm font-medium text-ink hover:border-ink transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2">
+          {cat}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <main class="site-container py-6 lg:py-10" id="main-content" tabindex="-1">
+    <div class="grid gap-gutter grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {paginatedTools.map((tool) => (
+        <article class="group overflow-hidden rounded-xl border border-border-hairline bg-surface shadow-whisper transition-colors hover:border-faint" data-tool-card data-slug={tool.data.slug}>
+          <a href={`/tools/${tool.data.slug}/`} class="block relative aspect-[16/9] overflow-hidden bg-surface-soft" aria-label={`${tool.data.name} preview`}>
+            <img src={tool.data.image} alt={`${tool.data.name} preview`} class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" decoding="async" width="640" height="360"/>
+            <div class="absolute top-3 left-3 flex items-center gap-2">
+              <a href={`/category/${tool.data.category.toLowerCase()}/`} class="rounded-full border border-white/20 bg-ink/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-canvas backdrop-blur-sm hover:bg-ink transition-colors">
+                {tool.data.category}
+              </a>
+              <a href={`/pricing/${tool.data.pricing.toLowerCase()}/`} class={`rounded-full px-2 py-0.5 font-medium text-xs transition-opacity hover:opacity-75 ${tool.data.pricing === 'Free' ? 'bg-success-soft text-success border border-success/20' : tool.data.pricing === 'Freemium' ? 'bg-warning-soft text-warning border border-warning/20' : 'bg-violet-soft text-violet border border-violet/20'}`}>
+                {tool.data.pricing}
+              </a>
+            </div>
+          </a>
+
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex items-center gap-2 text-caption mb-2">
+              <span class="font-medium text-muted">{tool.data.maker || 'Unknown'}</span>
+              <span class="text-faint" aria-hidden="true">/</span>
+              <time datetime={tool.data.addedDate} class="text-muted">{tool.data.addedDate ? new Date(tool.data.addedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown'}</time>
+            </div>
+
+            <h2 class="font-display font-semibold text-heading-md text-ink mb-2.5 leading-[1.15] tracking-[-0.025em]">
+              <a href={`/tools/${tool.data.slug}/`} class="transition-colors hover:text-accent-deep">{tool.data.name}</a>
+            </h2>
+
+            <p class="text-body-sm leading-relaxed text-body line-clamp-3">{tool.data.description}</p>
+
+            {tool.data.tags && tool.data.tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-1.5" aria-label={`Tags for ${tool.data.name}`}>
+                {tool.data.tags.slice(0, 3).map(tag => (
+                  <a href={`/tag/${tag.toLowerCase()}/`} class="rounded-full border border-border-hairline bg-canvas px-2 py-0.5 text-caption text-muted transition-colors hover:border-faint hover:text-ink">{tag}</a>
+                ))}
+                {tool.data.tags.length > 3 && <span class="px-1 py-0.5 text-caption text-faint">+{tool.data.tags.length - 3}</span>}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {sortedTools.length === 0 && (
+      <div class="text-center py-16">
+        <p class="text-body-lg text-muted">No tools match your filters. <a href="/" class="text-ink underline underline-offset-4 hover:text-accent-deep">Clear filters</a> to see all.</p>
+      </div>
+    )}
+  </main>
+
+  {totalPages > 1 && (
+    <nav class="site-container pb-16 pt-4" aria-label="Pagination">
+      <div class="flex items-center justify-center gap-2">
+        {currentPage > 1 && (
+          <a href={`/?page=${currentPage - 1}${filters.category ? `&category=${filters.category}` : ''}${filters.pricing ? `&pricing=${filters.pricing}` : ''}${filters.tags?.length ? `&tags=${filters.tags.join(',')}` : ''}${filters.sort && filters.sort !== 'featured' ? `&sort=${filters.sort}` : ''}`} class="px-4 py-2 rounded-md border border-border-hairline bg-canvas text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5l-5 5 5 5"/></svg>
+          </a>
+        )}
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <a href={`/?page=${page}${filters.category ? `&category=${filters.category}` : ''}${filters.pricing ? `&pricing=${filters.pricing}` : ''}${filters.tags?.length ? `&tags=${filters.tags.join(',')}` : ''}${filters.sort && filters.sort !== 'featured' ? `&sort=${filters.sort}` : ''}`} class={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2 ${page === currentPage ? 'bg-ink text-canvas' : 'border border-border-hairline bg-canvas text-ink hover:bg-muted/10'}`} aria-label={`Page ${page}`} aria-current={page === currentPage ? 'page' : undefined}>{page}</a>
+        ))}
+        {currentPage < totalPages && (
+          <a href={`/?page=${currentPage + 1}${filters.category ? `&category=${filters.category}` : ''}${filters.pricing ? `&pricing=${filters.pricing}` : ''}${filters.tags?.length ? `&tags=${filters.tags.join(',')}` : ''}${filters.sort && filters.sort !== 'featured' ? `&sort=${filters.sort}` : ''}`} class="px-4 py-2 rounded-md border border-border-hairline bg-canvas text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5l5 5-5 5"/></svg>
+          </a>
+        )}
+      </div>
+    </nav>
+  )}
+</Layout>

@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const allTools = await getCollection('tools');
+const allTags = [...new Set(allTools.flatMap(t => t.data.tags || []))].sort();
+const tagCounts = allTags.map(tag => ({
+  name: tag,
+  count: allTools.filter(t => (t.data.tags || []).includes(tag)).length,
+  slug: tag.toLowerCase(),
+}));
+
+const pageTitle = 'Tags — instanten';
+const pageDescription = 'Browse tools by tag. Discover related tools and alternatives across categories.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tags' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/tags/">
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Tags</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">
+        Explore tools by topic. Tags help you find related tools across different categories.
+      </p>
+    </header>
+    <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+      {tagCounts.map(tag => (
+        <a
+          href={`/tag/${tag.slug}/`}
+          class="group px-4 py-2 rounded-full border border-border-hairline bg-surface text-body-sm font-medium text-muted hover:border-ink/30 hover:text-ink hover:bg-hairline-soft transition-colors"
+        >
+          {tag.name}
+          <span class="ml-1.5 px-2 py-0.5 rounded-full bg-hairline-soft text-caption font-mono text-faint group-hover:bg-ink/10 group-hover:text-muted transition-colors">
+            {tag.count}
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+  .text-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  @media (max-width: 640px) {
+    .text-display { font-size: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none !important; }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+---
+<button
+  type="button"
+  data-scroll-top
+  class="invisible fixed bottom-5 right-5 z-40 inline-flex h-11 w-11 translate-y-2 items-center justify-center rounded-full border border-border-hairline bg-surface text-ink opacity-0 shadow-float transition-all duration-200 hover:bg-hairline-soft focus-visible:visible focus-visible:translate-y-0 focus-visible:opacity-100"
+  aria-label="Back to top"
+  title="Back to top"
+  aria-hidden="true"
+  tabindex="-1"
+>
+  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10 15V5M5.5 9.5 10 5l4.5 4.5"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLElement>('[data-scroll-top]');
+  let ticking = false;
+
+  function update(): void {
+    const visible = window.scrollY > 420;
+    if (!button) return;
+    button.classList.toggle('invisible', !visible);
+    button.classList.toggle('opacity-0', !visible);
+    button.classList.toggle('opacity-100', visible);
+    button.classList.toggle('translate-y-2', !visible);
+    button.classList.toggle('translate-y-0', visible);
+    button.setAttribute('aria-hidden', String(!visible));
+    button.tabIndex = visible ? 0 : -1;
+    ticking = false;
+  }
+
+  function onScroll(): void {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  button?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const skipTarget = document.getElementById('main-content');
+    skipTarget?.focus({ preventScroll: true });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+</script>

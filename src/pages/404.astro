@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const allTools = await getCollection('tools');
+const featuredTools = allTools.filter(t => t.data.featured).slice(0, 3);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: '404' },
+];
+
+const pageTitle = '404 — Page Not Found | instanten';
+const pageDescription = 'Page not found. Return to the homepage to discover useful SaaS tools.';
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/404/">
+  <Breadcrumbs items={breadcrumbs} />
+  <div class="min-h-[70vh] flex items-center justify-center px-gutter">
+    <div class="text-center max-w-md">
+      <h1 class="font-display font-semibold text-9xl text-muted/20 mb-4" aria-hidden="true">404</h1>
+      <h2 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Page Not Found</h2>
+      <p class="font-body text-body-lg text-muted mb-8 leading-relaxed">
+        Sorry, we couldn't find the page you're looking for. It might have been moved or doesn't exist.
+      </p>
+
+      <div class="space-y-4 mb-10">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-full bg-ink text-white font-body font-medium text-body-md hover:bg-ink/90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+        >
+          Back to Homepage
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 4.5H5M8 9.5l4 4-4 4" />
+          </svg>
+        </a>
+
+        <a
+          href="/search"
+          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-full border border-border-hairline bg-white text-ink font-body font-medium text-body-md hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+        >
+          Search Tools
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="9" r="7"></circle>
+            <line x1="14" y1="14" x2="17" y2="17"></line>
+          </svg>
+        </a>
+      </div>
+
+      {featuredTools.length > 0 && (
+        <section class="mb-10">
+          <h3 class="font-display font-semibold text-body-lg text-ink mb-4">Popular Tools</h3>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredTools.map(tool => (
+              <a
+                href={`/tools/${tool.data.slug}/`}
+                class="block p-4 rounded-lg border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+              >
+                <h4 class="font-display font-semibold text-base text-ink mb-1">{tool.data.name}</h4>
+                <p class="font-body text-sm text-muted line-clamp-2">{tool.data.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <p class="font-body text-caption text-muted">
+        Still can't find it? <a href="mailto:hello@instanten.com" class="text-accent-end hover:underline">Contact us</a>
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  .text-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .text-body-md {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 36px;
+    }
+    .text-9xl {
+      font-size: 6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

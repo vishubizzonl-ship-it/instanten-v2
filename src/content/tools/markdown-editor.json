@@ -1,0 +1,18 @@
+{
+  "slug": "markdown-editor",
+  "name": "Markdown Editor",
+  "category": "Writing",
+  "description": "Write and preview Markdown with live rendering, syntax highlighting, and export options.",
+  "longDescription": "Markdown Editor provides a distraction-free writing environment with live preview. Supports GitHub-flavored Markdown including tables, task lists, footnotes, and math. Syntax highlighting in the editor. Export to HTML, PDF, or raw Markdown. Word count and reading time built-in. Works offline after first load.",
+  "pricing": "Free",
+  "pricingDetails": "Core editor free. Pro: $2/month for cloud sync, themes, advanced exports.",
+  "image": "/thumbnails/markdown-editor.svg",
+  "url": "https://stackedit.io/",
+  "tags": ["writing", "markdown", "editor", "documentation", "blogging"],
+  "maker": "StackEdit",
+  "addedDate": "2024-07-01",
+  "updatedDate": "2024-12-01",
+  "features": ["Live preview", "GitHub-flavored Markdown", "Syntax highlighting", "Tables, task lists, math", "Export: HTML, PDF, Markdown", "Word count & reading time", "Offline support", "Cloud sync (Pro)"],
+  "useCases": ["Technical documentation", "Blog post drafting", "README writing", "Note taking", "API documentation"],
+  "featured": false
+}

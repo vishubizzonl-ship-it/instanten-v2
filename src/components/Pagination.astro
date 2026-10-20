@@ -1,0 +1,76 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  queryParams?: Record<string, string>;
+}
+
+const { currentPage, totalPages, baseUrl, queryParams = {} } = Astro.props;
+
+const showFirst = currentPage > 3;
+const showLast = currentPage < totalPages - 2;
+const startPage = Math.max(1, currentPage - 2);
+const endPage = Math.min(totalPages, currentPage + 2);
+
+const buildUrl = (page: number) => {
+  const params = new URLSearchParams(queryParams);
+  if (page > 1) params.set('page', String(page));
+  else params.delete('page');
+  const qs = params.toString();
+  return `${baseUrl}${qs ? `?${qs}` : ''}`;
+};
+---
+<nav class="pagination flex items-center justify-center gap-2 px-gutter py-6" aria-label="Pagination" role="navigation" data-base-url={baseUrl}>
+  {currentPage > 1 && (
+    <a href={buildUrl(currentPage - 1)} class="px-4 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label="Previous page">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5l-5 5 5 5"/></svg>
+      <span class="sr-only">Previous</span>
+    </a>
+  )}
+
+  {showFirst && (
+    <a href={buildUrl(1)} class="px-4 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label="Page 1">1</a>
+  )}
+
+  {showFirst && currentPage > 4 && (
+    <span class="px-3 py-2 text-muted" aria-hidden="true">…</span>
+  )}
+
+  {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map(page => (
+    <a
+      href={buildUrl(page)}
+      class={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2 ${page === currentPage
+        ? 'bg-ink text-white'
+        : 'border border-border-hairline bg-white text-ink hover:bg-muted/10'
+      }`}
+      aria-label={`Page ${page}`}
+      aria-current={page === currentPage ? 'page' : undefined}
+    >
+      {page}
+    </a>
+  ))}
+
+  {showLast && currentPage < totalPages - 3 && (
+    <span class="px-3 py-2 text-muted" aria-hidden="true">…</span>
+  )}
+
+  {showLast && (
+    <a href={buildUrl(totalPages)} class="px-4 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label={`Page ${totalPages}`}>{totalPages}</a>
+  )}
+
+  {currentPage < totalPages && (
+    <a href={buildUrl(currentPage + 1)} class="px-4 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm font-medium hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2" aria-label="Next page">
+      <span class="sr-only">Next</span>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5l5 5-5 5"/></svg>
+    </a>
+  )}
+</nav>
+
+<style is:global>
+  @media (prefers-reduced-motion: reduce) {
+    .pagination a {
+      transition: none !important;
+    }
+  }
+</style>

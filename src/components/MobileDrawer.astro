@@ -1,0 +1,172 @@
+---
+import Logo from './Logo.astro';
+
+const navLinks = [
+  { href: '/tools/', label: 'All tools' },
+  { href: '/categories/', label: 'Categories' },
+  { href: '/pricing/', label: 'Pricing' },
+  { href: '/tags/', label: 'Tags' },
+  { href: '/makers/', label: 'Makers' },
+  { href: '/about/', label: 'About' },
+  { href: '/submit/', label: 'Submit a tool' },
+] as const;
+---
+<div id="mobile-drawer" hidden class="fixed inset-0 z-[75] md:hidden" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div data-menu-backdrop class="absolute inset-0 bg-black/45 backdrop-blur-[2px]" aria-hidden="true"></div>
+
+  <aside
+    data-drawer-panel
+    class="absolute inset-y-0 right-0 flex w-[min(92vw,22rem)] translate-x-full flex-col border-l border-border-hairline bg-surface shadow-float transition-transform duration-200 ease-out"
+  >
+    <div class="flex h-16 items-center justify-between border-b border-border-hairline px-5">
+      <Logo size="sm" />
+      <button
+        type="button"
+        data-menu-close
+        class="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink"
+        aria-label="Close menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m5 5 10 10M15 5 5 15"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto px-3 py-4">
+      <h2 id="drawer-title" class="sr-only">Site menu</h2>
+      <nav aria-label="Mobile navigation">
+        <ul class="space-y-0.5" role="list">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                data-menu-link
+                class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="mt-5 border-t border-border-hairline pt-5">
+        <a
+          href="/search/"
+          data-search-open
+          class="flex min-h-11 items-center gap-2 rounded-md border border-border-hairline bg-canvas px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:border-faint hover:text-ink"
+          aria-haspopup="dialog"
+          aria-controls="search-panel"
+          aria-expanded="false"
+        >
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="9" r="6.2"></circle>
+            <path d="m13.6 13.6 3.2 3.2"></path>
+          </svg>
+          Search tools
+          <kbd class="ml-auto rounded border border-border-hairline bg-surface px-1.5 py-0.5 font-mono text-[10px] leading-none text-muted">⌘K</kbd>
+        </a>
+      </div>
+
+      <div class="mt-6 rounded-lg border border-border-hairline bg-canvas p-4">
+        <p class="eyebrow mb-2">Know a useful tool?</p>
+        <p class="mb-3 text-body-sm text-muted">Help keep the directory sharp and useful for everyone.</p>
+        <a href="/submit/" data-menu-link class="btn btn-primary w-full">Submit a tool</a>
+      </div>
+    </div>
+
+    <div class="border-t border-border-hairline px-5 py-4">
+      <div class="flex items-center gap-4 text-caption text-muted">
+        <a href="/privacy/" data-menu-link class="transition-colors hover:text-ink">Privacy</a>
+        <a href="/terms/" data-menu-link class="transition-colors hover:text-ink">Terms</a>
+        <a href="mailto:hello@instanten.com" class="ml-auto transition-colors hover:text-ink">Email</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  const drawer = document.getElementById('mobile-drawer');
+  const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-menu-open]'));
+  const panel = drawer?.querySelector<HTMLElement>('[data-drawer-panel]');
+  const closeButton = drawer?.querySelector<HTMLElement>('[data-menu-close]');
+  const backdrop = drawer?.querySelector<HTMLElement>('[data-menu-backdrop]');
+  const closeLinks = Array.from(drawer?.querySelectorAll<HTMLElement>('[data-menu-link]') ?? []);
+  let lastFocused: HTMLElement | null = null;
+
+  function isOpen(): boolean {
+    return Boolean(drawer && !drawer.hidden);
+  }
+
+  function open(event?: Event): void {
+    if (!drawer) return;
+    event?.preventDefault();
+    if (isOpen()) return;
+
+    const searchPanel = document.getElementById('search-panel');
+    if (searchPanel && !searchPanel.hidden) {
+      searchPanel.querySelector<HTMLElement>('[data-search-close]')?.click();
+    }
+
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    drawer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
+    window.requestAnimationFrame(() => panel?.classList.remove('translate-x-full'));
+    window.setTimeout(() => closeButton?.focus(), 180);
+  }
+
+  function close(): void {
+    if (!drawer || !isOpen()) return;
+    panel?.classList.add('translate-x-full');
+    window.setTimeout(() => {
+      if (drawer) drawer.hidden = true;
+      document.body.style.overflow = '';
+      triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+      lastFocused?.focus();
+    }, 160);
+  }
+
+  triggers.forEach((trigger) => trigger.addEventListener('click', open));
+  closeButton?.addEventListener('click', close);
+  backdrop?.addEventListener('click', close);
+  closeLinks.forEach((link) => link.addEventListener('click', close));
+
+  document.addEventListener('keydown', (event) => {
+    if (!isOpen()) return;
+
+    if (event.key === 'Escape') {
+      close();
+      return;
+    }
+
+    if (event.key === 'Tab' && drawer) {
+      const focusables = Array.from(
+        drawer.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => !element.hasAttribute('hidden'));
+
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+    if (event.matches && isOpen()) {
+      if (drawer) drawer.hidden = true;
+      panel?.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+      triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+    }
+  });
+</script>

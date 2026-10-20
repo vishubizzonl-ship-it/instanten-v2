@@ -1,0 +1,34 @@
+---
+import ToolCard from './ToolCard.astro';
+import { buildSearchText, type ToolData } from '../utils/filters';
+
+interface Props {
+  tools: ToolData[];
+  visibleStart?: number;
+  visibleEnd?: number;
+}
+
+const { tools, visibleStart = 0, visibleEnd = tools.length } = Astro.props;
+---
+<section aria-labelledby="tools-heading" id="tools">
+  <h2 id="tools-heading" class="sr-only">Tools</h2>
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" data-directory-grid>
+    {tools.map((tool, index) => (
+      <ToolCard
+        slug={tool.slug}
+        name={tool.name}
+        category={tool.category}
+        description={tool.description}
+        pricing={tool.pricing}
+        image={tool.image}
+        url={tool.url}
+        tags={tool.tags}
+        maker={tool.maker}
+        addedDate={tool.addedDate}
+        featured={tool.featured}
+        hidden={index < visibleStart || index >= visibleEnd}
+        searchText={buildSearchText(tool)}
+      />
+    ))}
+  </div>
+</section>

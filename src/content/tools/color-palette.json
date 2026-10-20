@@ -1,0 +1,18 @@
+{
+  "slug": "color-palette",
+  "name": "Color Palette",
+  "category": "Design",
+  "description": "Generate harmonious color palettes from a single color. Export formats for design tools and code.",
+  "longDescription": "Color Palette helps designers create beautiful, accessible color schemes. Input a base color to generate complementary, analogous, triadic, and monochromatic palettes. Checks WCAG contrast ratios for accessibility. Export as CSS variables, Tailwind config, Figma JSON, Adobe ASE, and more. Save and share palettes with teams.",
+  "pricing": "Paid",
+  "pricingDetails": "Pro: $3/month for unlimited palettes, advanced exports, team sharing, accessibility checks. Free trial available.",
+  "image": "/thumbnails/color-palette.svg",
+  "url": "https://coolors.co/",
+  "tags": ["design", "colors", "accessibility", "design-systems"],
+  "maker": "Coolors",
+  "addedDate": "2024-03-15",
+  "updatedDate": "2024-12-10",
+  "features": ["Multiple harmony rules", "WCAG contrast checking", "Export: CSS, Tailwind, Figma, Adobe ASE", "Palette sharing and collaboration", "Color blindness simulation", "Gradient generation"],
+  "useCases": ["Brand identity design", "UI design systems", "Accessibility compliance", "Marketing material colors", "Gradient backgrounds"],
+  "featured": true
+}

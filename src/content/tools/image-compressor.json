@@ -1,0 +1,18 @@
+{
+  "slug": "image-compressor",
+  "name": "Image Compressor",
+  "category": "Developer",
+  "description": "Compress images without losing quality. Reduce file sizes for faster loading websites and optimized storage.",
+  "longDescription": "Image Compressor uses advanced compression algorithms to reduce image file sizes by up to 80% while maintaining visual quality. Supports JPEG, PNG, WebP, and AVIF formats. Batch processing available for multiple files. Perfect for web developers optimizing assets for production.",
+  "pricing": "Freemium",
+  "pricingDetails": "Free tier: 20 images/month, 5MB max per file. Pro: $5/month for unlimited images, 50MB max, priority processing.",
+  "image": "/thumbnails/compressor.svg",
+  "url": "https://www.tinypng.com/",
+  "tags": ["developer", "optimization", "images", "web-performance"],
+  "maker": "Voormedia",
+  "addedDate": "2024-02-10",
+  "updatedDate": "2024-12-01",
+  "features": ["Smart lossy compression", "JPEG, PNG, WebP, AVIF support", "Batch processing (Pro)", "API access (Pro)", "Preserves transparency"],
+  "useCases": ["Website image optimization", "Email attachment size reduction", "App asset optimization", "CDN bandwidth savings"],
+  "featured": true
+}

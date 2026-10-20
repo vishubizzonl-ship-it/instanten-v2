@@ -1,0 +1,33 @@
+---
+interface Props {
+  items: Array<{ label: string; href?: string }>;
+}
+
+const { items } = Astro.props;
+---
+<nav class="breadcrumbs px-gutter py-4" aria-label="Breadcrumb" role="navigation">
+  <ol class="flex flex-wrap items-center gap-2 text-sm" role="list">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-2" aria-current={i === items.length - 1 && !item.href ? 'page' : undefined}>
+        {i > 0 && (
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted" aria-hidden="true">
+            <path d="M5 11l4-4-4-4" />
+          </svg>
+        )}
+        {item.href ? (
+          <a href={item.href} class="font-body text-muted hover:text-ink transition-colors">{item.label}</a>
+        ) : (
+          <span class="font-body text-ink font-medium">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style is:global>
+  @media (prefers-reduced-motion: reduce) {
+    .breadcrumbs a {
+      transition: none !important;
+    }
+  }
+</style>

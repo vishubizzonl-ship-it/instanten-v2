@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ToolGrid from '../components/ToolGrid.astro';
+import FilterBar from '../components/FilterBar.astro';
+import Pagination from '../components/Pagination.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../utils/filters';
+
+const allTools = await getCollection('tools');
+
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData = paginatedTools.map((tool): {
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  pricing: 'Free' | 'Freemium' | 'Paid';
+  image: string;
+  url: string;
+  tags?: string[];
+  featured?: boolean;
+} => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  featured: tool.data.featured,
+}));
+
+
+
+const baseUrl = '/search';
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.category) queryParams.category = filters.category;
+if (filters.pricing) queryParams.pricing = filters.pricing;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+
+const queryDisplay = filters.q ? `"${filters.q}"` : '';
+const pageTitle = `Search${queryDisplay ? ` Results for ${queryDisplay}` : ''} — instanten`;
+const pageDescription = filters.q
+  ? `Found ${sortedTools.length} tools matching "${filters.q}".`
+  : 'Search for tools by name, description, or tags.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SearchResultsPage',
+  name: 'Search Results',
+  description: pageDescription,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: sortedTools.length,
+    itemListElement: paginatedTools.map((tool, index: number) => ({
+      '@type': 'ListItem',
+      position: (currentPage - 1) * PER_PAGE + index + 1,
+      item: {
+        '@type': 'SoftwareApplication',
+        name: tool.data.name,
+        description: tool.data.description,
+        url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+        applicationCategory: tool.data.category,
+        offers: {
+          '@type': 'Offer',
+          price: tool.data.pricing === 'Free' ? '0' : undefined,
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+        },
+      },
+    })),
+  },
+};
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Search', href: '/search' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/search${filters.q ? `?q=${encodeURIComponent(filters.q)}` : ''}`}>
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">Search Results</span>
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">
+        {filters.q ? (
+          <>
+            Results for <span class="bg-gradient-to-r from-accent-start to-accent-end bg-clip-text text-transparent">"{filters.q}"</span>
+          </>
+        ) : (
+          'Search Tools'
+        )}
+      </h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        {sortedTools.length === 0
+          ? 'No tools found matching your criteria.'
+          : `Found ${sortedTools.length} ${sortedTools.length === 1 ? 'tool' : 'tools'}.`}
+      </p>
+    </header>
+  </section>
+
+  {sortedTools.length === 0 ? (
+    <section class="px-gutter pb-section">
+      <div class="max-w-md mx-auto text-center py-16">
+        <svg class="mx-auto mb-6 text-muted/50" width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="40" cy="40" r="30"></circle>
+          <line x1="55" y1="55" x2="70" y2="70"></line>
+          <path d="M40 30l-3 3M40 30l3 3M40 50l-3-3M40 50l3-3" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <h2 class="font-display font-semibold text-xl text-ink mb-3">No results found</h2>
+        <p class="font-body text-body-md text-muted mb-6">
+          {filters.q
+            ? `No tools match "${filters.q}". Try different keywords or browse categories.`
+            : 'No tools match the selected filters.'}
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/search" class="px-6 py-3 rounded-full border border-border-hairline bg-white text-ink text-base font-medium hover:bg-muted/10 transition-colors">Clear Search</a>
+          <a href="/" class="px-6 py-3 rounded-full bg-ink text-white text-base font-medium hover:bg-ink/90 transition-colors">Browse All Tools</a>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <>
+      <FilterBar
+        currentCategory={filters.category}
+        currentPricing={filters.pricing}
+        currentTags={filters.tags}
+        currentSort={filters.sort}
+        hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
+        baseUrl={baseUrl}
+      />
+      <ToolGrid tools={toolData} />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          baseUrl={baseUrl}
+          queryParams={queryParams}
+        />
+      )}
+    </>
+  )}
+</Layout>

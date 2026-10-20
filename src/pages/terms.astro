@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const pageTitle = 'Terms of Service — instanten';
+const pageDescription = 'instanten terms of service. By using this directory, you agree to these terms.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Terms' },
+];
+const currentYear = new Date().getFullYear();
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/terms/">
+  <Breadcrumbs items={breadcrumbs} />
+  <article class="px-gutter py-section max-w-3xl mx-auto">
+    <header class="mb-12">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Terms of Service</h1>
+      <p class="font-body text-body-md text-muted">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </header>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Acceptance of Terms</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        By accessing and using <strong>instanten.com</strong> (the "Site"), you agree to be bound by these Terms of Service 
+        ("Terms"). If you do not agree, please do not use the Site.
+      </p>
+      <p class="font-body text-body-md text-muted leading-relaxed">
+        We reserve the right to modify these Terms at any time. Changes are effective immediately upon posting. 
+        Continued use constitutes acceptance.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Purpose of the Site</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        instanten is a curated directory of SaaS tools. We provide:
+      </p>
+      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
+        <li>Tool listings with categories, pricing, and descriptions</li>
+        <li>Direct links to official tool websites</li>
+        <li>Search, filtering, and sorting functionality</li>
+        <li>Tool detail pages with features, use cases, and related tools</li>
+      </ul>
+      <p class="font-body text-body-md text-muted leading-relaxed mt-4">
+        We are <strong>not</strong> a marketplace, reseller, or affiliate of the listed tools. 
+        We do not process payments, handle subscriptions, or provide the tools ourselves.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Accuracy of Information</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        We strive to keep tool information accurate and up to date. However:
+      </p>
+      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
+        <li>Pricing, features, and availability may change without notice</li>
+        <li>Tool websites may change URLs or shut down</li>
+        <li>We do not guarantee the accuracy, completeness, or timeliness of any information</li>
+      </ul>
+      <p class="font-body text-body-md text-muted leading-relaxed mt-4">
+        Always verify details on the official tool website before making decisions.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">External Links</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        The Site contains links to third-party websites (the "Tools"). These links are provided for convenience only.
+      </p>
+      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
+        <li>We do not control, endorse, or assume responsibility for any Tool's content, privacy, or practices</li>
+        <li>Your use of Tools is at your own risk and subject to their terms</li>
+        <li>We are not liable for any damage or loss from using Tools</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">User Conduct</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        You agree not to:
+      </p>
+      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
+        <li>Scrape, crawl, or extract data from the Site programmatically</li>
+        <li>Attempt to disrupt, damage, or gain unauthorized access to the Site</li>
+        <li>Use the Site for any unlawful purpose</li>
+        <li>Submit false, misleading, or fraudulent tool submissions</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Intellectual Property</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        All content on instanten (design, code, copy, original thumbnails) is owned by instanten or licensed. 
+        Tool names, logos, and descriptions belong to their respective owners.
+      </p>
+      <p class="font-body text-body-md text-muted leading-relaxed">
+        You may not reproduce, distribute, or create derivative works of our content without permission. 
+        Fair use for personal, non-commercial reference is permitted.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Disclaimers</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        THE SITE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, 
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A 
+        PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+      </p>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        WE DO NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF 
+        HARMFUL COMPONENTS, OR THAT TOOLS LISTED WILL MEET YOUR REQUIREMENTS.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Limitation of Liability</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        TO THE MAXIMUM EXTENT PERMITTED BY LAW, INSTANTEN SHALL NOT BE LIABLE FOR ANY 
+        INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING 
+        LOSS OF PROFITS, DATA, OR USE, ARISING FROM YOUR USE OF THE SITE.
+      </p>
+      <p class="font-body text-body-md text-muted leading-relaxed">
+        OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID TO USE THE SITE (ZERO).
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Indemnification</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed">
+        You agree to indemnify and hold instanten harmless from any claims, damages, or expenses 
+        (including legal fees) arising from your violation of these Terms or misuse of the Site.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Governing Law</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed">
+        These Terms are governed by the laws of the jurisdiction where instanten operates, 
+        without regard to conflict of law principles.
+      </p>
+    </section>
+
+    <section class="pt-8 border-t border-border-hairline">
+      <h2 class="font-display font-semibold text-xl text-ink mb-4">Contact</h2>
+      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
+        Questions about these Terms? Email <a href="mailto:hello@instanten.com" class="text-accent-end hover:underline">hello@instanten.com</a>.
+      </p>
+      <p class="font-body text-caption text-muted">
+        © {currentYear} instanten. All rights reserved.
+      </p>
+    </section>
+  </article>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import '../styles/app.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SearchPanel from '../components/SearchPanel.astro';
+import MobileDrawer from '../components/MobileDrawer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+
+const {
+  title = 'instanten — Useful SaaS tools, ready in an instant',
+  description = 'A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.',
+  canonicalURL,
+  ogImage = '/og-default.svg',
+  ogType = 'website',
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+
+const siteURL = Astro.site?.origin ?? 'https://instanten.com';
+const finalCanonicalURL = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
+const finalOgImage = new URL(ogImage, siteURL).href;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'instanten',
+  url: `${siteURL}/`,
+  description,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteURL}/search/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const schemas = [
+  websiteSchema,
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+].filter(Boolean);
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={finalCanonicalURL} />
+    <meta name="description" content={description} />
+    <meta name="author" content="instanten" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+
+    <meta property="og:site_name" content="instanten" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={finalCanonicalURL} />
+    <meta property="og:image" content={finalOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="instanten — useful SaaS tools, ready in an instant" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={finalOgImage} />
+    <meta name="twitter:image:alt" content="instanten — useful SaaS tools, ready in an instant" />
+
+    <title>{title}</title>
+
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark =
+            stored === 'dark' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (_) {}
+      })();
+    </script>
+
+    {schemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body class="min-h-screen bg-canvas font-body text-ink antialiased">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Header />
+    <SearchPanel />
+    <MobileDrawer />
+    <main class="w-full flex-1" id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <ScrollToTop />
+  </body>
+</html>

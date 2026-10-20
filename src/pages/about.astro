@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const pageTitle = 'About — instanten';
+const pageDescription = 'Learn about instanten, the curated directory of useful SaaS tools. Our mission, team, and values.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/about/">
+  <Breadcrumbs items={breadcrumbs} />
+  <article class="px-gutter py-section max-w-3xl mx-auto">
+    <header class="mb-12 text-center">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">About instanten</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        A curated directory of developer, design, and productivity tools. No fluff, just working links.
+      </p>
+    </header>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Our Mission</h2>
+      <div class="prose prose-ink max-w-none" style="--tw-prose-body: #29294B; --tw-prose-headings: #29294B; --tw-prose-links: #514DCC;">
+        <p class="font-body text-body-md text-muted leading-relaxed">
+          Finding the right tool shouldn't be a research project. We built instanten to solve a simple problem: 
+          when you need a tool, you need it now — not after scrolling through pages of SEO spam, 
+          broken links, and paywalled "reviews."
+        </p>
+        <p class="font-body text-body-md text-muted leading-relaxed mt-4">
+          Every tool in our directory is verified, categorized, and linked directly to the official website. 
+          No affiliate redirects, no interstitial pages, no tracking pixels. Just the tool you need, 
+          ready in an instant.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">How We Curate</h2>
+      <ul class="space-y-4" role="list">
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-start flex-shrink-0 mt-1" aria-hidden="true">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">Verified Working Links</h3>
+            <p class="font-body text-body-md text-muted">Every tool URL is tested and points directly to the official website.</p>
+          </div>
+        </li>
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-start flex-shrink-0 mt-1" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">Honest Pricing</h3>
+            <p class="font-body text-body-md text-muted">Clear Free, Freemium, and Paid labels. No hidden costs or bait-and-switch.</p>
+          </div>
+        </li>
+        <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-start flex-shrink-0 mt-1" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <div>
+            <h3 class="font-display font-semibold text-base text-ink mb-1">Community Focused</h3>
+            <p class="font-body text-body-md text-muted">Built for developers, designers, and builders. Submit tools you love.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Design Philosophy</h2>
+      <div class="prose prose-ink max-w-none" style="--tw-prose-body: #29294B; --tw-prose-headings: #29294B; --tw-prose-links: #514DCC;">
+        <p class="font-body text-body-md text-muted leading-relaxed">
+          instanten follows a Vercel-inspired design system: near-white canvas, hairline borders, 
+          a single hero gradient, and minimal depth. We believe the interface should get out of your way 
+          so you can find what you need.
+        </p>
+        <p class="font-body text-body-md text-muted leading-relaxed mt-4">
+          The site is built with Astro for maximum performance — static HTML, zero JavaScript by default, 
+          optimized images, and instant page loads. No frameworks, no bloat, no tracking.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Tech Stack</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted text-sm">Astro 6</span>
+        <span class="px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted text-sm">TypeScript</span>
+        <span class="px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted text-sm">Tailwind CSS 4</span>
+        <span class="px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted text-sm">Content Collections</span>
+        <span class="px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted text-sm">Vanilla JS</span>
+      </div>
+    </section>
+
+    <section class="pt-8 border-t border-border-hairline">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Get in Touch</h2>
+      <div class="space-y-3">
+        <a href="mailto:hello@instanten.com" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-ink/50 transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-start" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <div>
+            <p class="font-body text-caption text-muted">Email</p>
+            <p class="font-body text-body-md text-ink">hello@instanten.com</p>
+          </div>
+        </a>
+        <a href="https://github.com/instanten" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-ink/50 transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-start" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1a5.07 5.07 0 0 0-1 4.38 5.44 5.44 0 0 0-1.37 3.65C0 11.14 3.3 12.33 6.44 12.68A3.37 3.37 0 0 0 5.52 15.3V19"></path>
+          </svg>
+          <div>
+            <p class="font-body text-caption text-muted">GitHub</p>
+            <p class="font-body text-body-md text-ink">github.com/instanten</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

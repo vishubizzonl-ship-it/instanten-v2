@@ -1,0 +1,18 @@
+{
+  "slug": "meta-tag-generator",
+  "name": "Meta Tag Generator",
+  "category": "Marketing",
+  "description": "Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and more. Copy-paste ready.",
+  "longDescription": "Meta Tag Generator creates complete meta tag sets for any webpage. Fill in your content details and get optimized tags for SEO (title, description, keywords), Open Graph (Facebook, LinkedIn), Twitter Cards, and additional tags like canonical, viewport, robots. Preview how your links will appear on social platforms. Export as HTML or JSON.",
+  "pricing": "Free",
+  "pricingDetails": "Free to use. No account required.",
+  "image": "/thumbnails/meta-tag-generator.svg",
+  "url": "https://metatags.io/",
+  "tags": ["marketing", "seo", "open-graph", "twitter-cards", "html"],
+  "maker": "MetaTags.io",
+  "addedDate": "2024-04-20",
+  "updatedDate": "2024-12-05",
+  "features": ["SEO meta tags", "Open Graph tags", "Twitter Card tags", "Social preview", "HTML/JSON export", "Canonical URL support"],
+  "useCases": ["Website SEO optimization", "Social sharing optimization", "Blog post meta tags", "Landing page setup", "Client project handoff"],
+  "featured": false
+}

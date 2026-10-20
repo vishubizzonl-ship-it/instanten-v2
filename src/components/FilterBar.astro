@@ -1,0 +1,140 @@
+---
+interface Props {
+  currentCategory?: string;
+  currentPricing?: string;
+  currentTags?: string[];
+  currentSort?: 'featured' | 'newest' | 'name';
+  hasFilters: boolean;
+  baseUrl: string;
+}
+
+const {
+  currentCategory,
+  currentPricing,
+  currentTags = [],
+  currentSort = 'featured',
+  hasFilters,
+  baseUrl,
+} = Astro.props;
+
+const sortOptions = [
+  { value: 'featured', label: 'Featured' },
+  { value: 'newest', label: 'Newest' },
+  { value: 'name', label: 'Name (A-Z)' },
+] as const;
+---
+<div class="sticky top-[88px] z-30 bg-white/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar">
+  <div class="max-w-[1296px] mx-auto px-gutter py-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3" role="group" aria-label="Filters">
+        {currentCategory && (
+          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-start/10 text-accent-end text-sm font-medium">
+            Category: {currentCategory}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-accent-start/20" data-filter="category" aria-label="Remove category filter">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
+            </button>
+          </span>
+        )}
+
+        {currentPricing && (
+          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full {pricingColors[currentPricing]} text-sm font-medium">
+            Pricing: {currentPricing}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-black/10" data-filter="pricing" aria-label="Remove pricing filter">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
+            </button>
+          </span>
+        )}
+
+        {currentTags.map(tag => (
+          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/50 border border-border-hairline text-muted text-sm font-medium">
+            Tag: {tag}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-muted/70" data-filter="tag" data-value={tag} aria-label={`Remove tag filter: ${tag}`}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
+            </button>
+          </span>
+        ))}
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+        <label for="sort-select" class="sr-only">Sort by</label>
+        <select
+          id="sort-select"
+          class="px-3 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-accent-start focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20stroke%3D%22%2329294B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%207l3%203%203-3%22%2F%3E%3C%2Fsvg%3E')] bg-[right_0.75rem_center] bg-no-repeat pr-8"
+          aria-label="Sort tools"
+        >
+          {sortOptions.map(opt => (
+            <option value={opt.value} selected={opt.value === currentSort}>{opt.label}</option>
+          ))}
+        </select>
+
+        {hasFilters && (
+          <a
+            href={baseUrl}
+            class="px-4 py-2 rounded-md border border-border-hairline bg-white text-muted text-sm font-medium hover:text-ink hover:border-ink/50 hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+          >
+            Clear All
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const filterBar = document.getElementById('filter-bar');
+  const sortSelect = document.getElementById('sort-select');
+  const baseUrl = filterBar?.dataset.baseUrl || '/';
+
+  function buildUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const category = filterBar?.dataset.category || '';
+    const pricing = filterBar?.dataset.pricing || '';
+    const tags = filterBar?.dataset.tags?.split(',').filter(Boolean) || [];
+
+    if (category) params.set('category', category);
+    else params.delete('category');
+
+    if (pricing) params.set('pricing', pricing);
+    else params.delete('pricing');
+
+    if (tags.length) params.set('tags', tags.join(','));
+    else params.delete('tags');
+
+    const sort = sortSelect?.value || 'featured';
+    if (sort !== 'featured') params.set('sort', sort);
+    else params.delete('sort');
+
+    return `${baseUrl}?${params.toString()}`;
+  }
+
+  sortSelect?.addEventListener('change', () => {
+    window.location.href = buildUrl();
+  });
+
+  filterBar?.querySelectorAll('.filter-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      const value = btn.dataset.value;
+
+      const params = new URLSearchParams(window.location.search);
+
+      if (filter === 'category') params.delete('category');
+      else if (filter === 'pricing') params.delete('pricing');
+      else if (filter === 'tag' && value) {
+        const tags = (params.get('tags') || '').split(',').filter(t => t !== value);
+        if (tags.length) params.set('tags', tags.join(','));
+        else params.delete('tags');
+      }
+
+      window.location.href = `${baseUrl}?${params.toString()}`;
+    });
+  });
+</script>
+
+<style is:global>
+  @media (prefers-reduced-motion: reduce) {
+    #filter-bar * {
+      transition: none !important;
+    }
+  }
+</style>
