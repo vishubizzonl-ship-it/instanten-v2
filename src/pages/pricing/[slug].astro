@@ -89,11 +89,11 @@ const breadcrumbs = [
 ---
 <Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/pricing/${slug}/`}>
   <Breadcrumbs items={breadcrumbs} />
-  <section class="px-gutter py-section">
+  <section class="site-container py-section">
     <header class="max-w-3xl mx-auto text-center mb-12">
       <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">Pricing</span>
-      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">{pricingName}</h1>
-      <p class="font-body text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{pricingName}</h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
         {sortedTools.length} {sortedTools.length === 1 ? 'tool' : 'tools'} with this pricing model
       </p>
     </header>

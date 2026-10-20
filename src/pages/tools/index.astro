@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolGrid from '../../components/ToolGrid.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages, type ToolData } from '../../utils/filters';
+
+const allTools = await getCollection('tools');
+
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData: ToolData[] = paginatedTools.map((tool) => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  maker: tool.data.maker,
+  addedDate: tool.data.addedDate,
+  featured: tool.data.featured,
+}));
+
+const baseUrl = '/tools/';
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.category) queryParams.category = filters.category;
+if (filters.pricing) queryParams.pricing = filters.pricing;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+
+const pageTitle = 'All Tools — instanten';
+const pageDescription = `Browse all ${allTools.length} curated SaaS tools. Filter by category, pricing, and tags.`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'All SaaS Tools',
+  description: pageDescription,
+  numberOfItems: allTools.length,
+  itemListElement: paginatedTools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: (currentPage - 1) * PER_PAGE + index + 1,
+    item: {
+      '@type': 'SoftwareApplication',
+      name: tool.data.name,
+      description: tool.data.description,
+      url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+      applicationCategory: tool.data.category,
+      offers: {
+        '@type': 'Offer',
+        price: tool.data.pricing === 'Free' ? '0' : undefined,
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+  })),
+};
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'All Tools' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL="https://instanten.com/tools/">
+  <Breadcrumbs items={breadcrumbs} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">All Tools</h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Browse our full directory of {allTools.length} curated SaaS tools. Filter, sort, and find exactly what you need.
+      </p>
+    </header>
+  </section>
+  <FilterBar
+    currentCategory={filters.category}
+    currentPricing={filters.pricing}
+    currentTags={filters.tags}
+    currentSort={filters.sort}
+    hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
+    baseUrl={baseUrl}
+  />
+  <section class="site-container py-6">
+    <ToolGrid tools={toolData} />
+  </section>
+  {totalPages > 1 && (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      baseUrl={baseUrl}
+      queryParams={queryParams}
+    />
+  )}
+</Layout>

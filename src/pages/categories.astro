@@ -20,10 +20,10 @@ const breadcrumbs = [
 ---
 <Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/categories/">
   <Breadcrumbs items={breadcrumbs} />
-  <section class="px-gutter py-section">
+  <section class="site-container py-section">
     <header class="max-w-3xl mx-auto text-center mb-16">
-      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Categories</h1>
-      <p class="font-body text-body-lg text-muted leading-relaxed">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">Categories</h1>
+      <p class="text-body-lg text-muted leading-relaxed">
         Browse tools organized by category. Each category contains curated tools for specific use cases.
       </p>
     </header>
@@ -31,11 +31,11 @@ const breadcrumbs = [
       {categoryCounts.map(cat => (
         <a
           href={`/category/${cat.slug}/`}
-          class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+          class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-faint hover:shadow-whisper transition-colors text-left"
         >
           <h2 class="font-display font-semibold text-xl text-ink mb-2">{cat.name}</h2>
-          <p class="font-body text-body-md text-muted mb-4">{cat.count} {cat.count === 1 ? 'tool' : 'tools'}</p>
-          <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent-start">
+          <p class="text-body-md text-muted mb-4">{cat.count} {cat.count === 1 ? 'tool' : 'tools'}</p>
+          <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent">
             View tools
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 7h6M10 7l3-3-3-3" />
@@ -46,24 +46,3 @@ const breadcrumbs = [
     </div>
   </section>
 </Layout>
-
-<style is:global>
-  .text-display {
-    font-size: 48px;
-    line-height: 1.1;
-  }
-  .text-body-lg {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  .text-body-md {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  @media (max-width: 640px) {
-    .text-display { font-size: 36px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    a { transition: none !important; }
-  }
-</style>

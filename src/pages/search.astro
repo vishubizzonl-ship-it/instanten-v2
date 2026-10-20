@@ -93,10 +93,10 @@ const breadcrumbs = [
 ---
 <Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/search${filters.q ? `?q=${encodeURIComponent(filters.q)}` : ''}`}>
   <Breadcrumbs items={breadcrumbs} />
-  <section class="px-gutter py-section">
+  <section class="site-container py-section">
     <header class="max-w-3xl mx-auto text-center mb-12">
       <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">Search Results</span>
-      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">
         {filters.q ? (
           <>
             Results for <span class="bg-gradient-to-r from-accent-start to-accent-end bg-clip-text text-transparent">"{filters.q}"</span>
@@ -105,7 +105,7 @@ const breadcrumbs = [
           'Search Tools'
         )}
       </h1>
-      <p class="font-body text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
         {sortedTools.length === 0
           ? 'No tools found matching your criteria.'
           : `Found ${sortedTools.length} ${sortedTools.length === 1 ? 'tool' : 'tools'}.`}
@@ -114,7 +114,7 @@ const breadcrumbs = [
   </section>
 
   {sortedTools.length === 0 ? (
-    <section class="px-gutter pb-section">
+    <section class="site-container pb-section">
       <div class="max-w-md mx-auto text-center py-16">
         <svg class="mx-auto mb-6 text-muted/50" width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="40" cy="40" r="30"></circle>
@@ -122,14 +122,14 @@ const breadcrumbs = [
           <path d="M40 30l-3 3M40 30l3 3M40 50l-3-3M40 50l3-3" stroke="currentColor" stroke-width="1.5"/>
         </svg>
         <h2 class="font-display font-semibold text-xl text-ink mb-3">No results found</h2>
-        <p class="font-body text-body-md text-muted mb-6">
+        <p class="text-body-md text-muted mb-6">
           {filters.q
             ? `No tools match "${filters.q}". Try different keywords or browse categories.`
             : 'No tools match the selected filters.'}
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a href="/search" class="px-6 py-3 rounded-full border border-border-hairline bg-white text-ink text-base font-medium hover:bg-muted/10 transition-colors">Clear Search</a>
-          <a href="/" class="px-6 py-3 rounded-full bg-ink text-white text-base font-medium hover:bg-ink/90 transition-colors">Browse All Tools</a>
+          <a href="/search" class="btn btn-secondary">Clear Search</a>
+          <a href="/" class="btn btn-primary">Browse All Tools</a>
         </div>
       </div>
     </section>

@@ -23,7 +23,7 @@ function isActive(href: string): boolean {
   <div class="site-container flex h-[88px] items-center justify-between gap-4">
     <Logo />
 
-    <nav class="hidden items-center gap-1 md:hidden lg:hidden" aria-label="Main navigation">
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
       {navLinks.map((link) => (
         <a
           href={link.href}

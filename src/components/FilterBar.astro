@@ -23,7 +23,7 @@ const sortOptions = [
   { value: 'name', label: 'Name (A-Z)' },
 ] as const;
 ---
-<div class="sticky top-[88px] z-30 bg-white/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar">
+<div class="sticky top-[88px] z-30 bg-surface/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar">
   <div class="max-w-[1296px] mx-auto px-gutter py-4">
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
       <div class="flex flex-wrap items-center gap-3" role="group" aria-label="Filters">
@@ -59,7 +59,7 @@ const sortOptions = [
         <label for="sort-select" class="sr-only">Sort by</label>
         <select
           id="sort-select"
-          class="px-3 py-2 rounded-md border border-border-hairline bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-accent-start focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20stroke%3D%22%2329294B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%207l3%203%203-3%22%2F%3E%3C%2Fsvg%3E')] bg-[right_0.75rem_center] bg-no-repeat pr-8"
+          class="px-3 py-2 rounded-md border border-border-hairline bg-surface text-ink text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%207l3%203%203-3%22%2F%3E%3C%2Fsvg%3E')] bg-[right_0.75rem_center] bg-no-repeat pr-8"
           aria-label="Sort tools"
         >
           {sortOptions.map(opt => (
@@ -70,7 +70,7 @@ const sortOptions = [
         {hasFilters && (
           <a
             href={baseUrl}
-            class="px-4 py-2 rounded-md border border-border-hairline bg-white text-muted text-sm font-medium hover:text-ink hover:border-ink/50 hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+            class="px-4 py-2 rounded-md border border-border-hairline bg-surface text-muted text-sm font-medium hover:text-ink hover:border-ink/50 hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
           >
             Clear All
           </a>
