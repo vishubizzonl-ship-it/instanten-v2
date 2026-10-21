@@ -1,9 +1,12 @@
 ---
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import GitHubIcon from './icons/GitHub.astro';
 import TwitterIcon from './icons/Twitter.astro';
+import YouTubeIcon from './icons/YouTube.astro';
+import InstagramIcon from './icons/Instagram.astro';
+import TelegramIcon from './icons/Telegram.astro';
 import LinkedInIcon from './icons/LinkedIn.astro';
+import GitHubIcon from './icons/GitHub.astro';
 import EmailIcon from './icons/Email.astro';
 
 const navLinks = [
@@ -24,107 +27,127 @@ const categories = [
 ] as const;
 
 const socialLinks = [
-  { href: 'https://github.com/vishubizzonl-ship-it/instanten-v2', label: 'GitHub', icon: GitHubIcon },
-  { href: 'https://twitter.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
-  { href: 'https://linkedin.com/company/instanten', label: 'LinkedIn', icon: LinkedInIcon },
+  { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon },
+  { href: 'https://x.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
+  { href: 'https://www.instagram.com/instanten/', label: 'Instagram', icon: InstagramIcon },
+  { href: 'https://t.me/instanten', label: 'Telegram', icon: TelegramIcon },
+  { href: 'https://www.linkedin.com/company/instanten/', label: 'LinkedIn', icon: LinkedInIcon },
+  { href: 'https://github.com/instanten', label: 'GitHub', icon: GitHubIcon },
   { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
 ] as const;
 ---
-<div id="mobile-drawer" class="cs-offcanvas fixed inset-y-0 left-0 z-[75] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-  <div class="cs-offcanvas__header grid grid-cols-[1fr_40px] items-center border-b border-border-hairline px-6 py-4 min-h-[88px]">
-    <div class="cs-logo flex">
-      <Logo size="md" />
+<div id="mobile-drawer" class="cs-offcanvas fixed inset-y-0 left-0 z-[100] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="cs-offcanvas__header grid grid-cols-[1fr_40px] items-center min-h-[88px]" style="padding: 0 16px 0 24px;">
+    <div class="cs-logo flex" style="height: 18px;">
+      <Logo />
     </div>
     <nav class="cs-offcanvas__nav flex items-center justify-center w-10 h-10" aria-label="Close menu">
       <button
         type="button"
         data-menu-close
-        class="cs-offcanvas__toggle inline-flex items-center justify-center text-muted transition-colors hover:text-ink"
+        class="cs-offcanvas__close inline-flex items-center justify-center text-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         aria-label="Close menu"
+        style="width: 40px; height: 40px; transform: none !important; rotate: 0deg !important; animation: none !important;"
       >
-        <svg class="cs-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="cs-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: none !important; rotate: 0deg !important; animation: none !important;">
           <path d="M18 6 6 18M6 6l12 12"></path>
         </svg>
       </button>
     </nav>
   </div>
 
-  <aside class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto">
-    <div class="cs-offcanvas__inner flex flex-col h-full p-6">
-      <h2 id="drawer-title" class="sr-only">Site menu</h2>
+  <aside class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto" style="flex: 1 1 auto; display: flex; flex-direction: column; padding: 24px 24px 20px 24px;">
+    <h2 id="drawer-title" class="sr-only">Site menu</h2>
 
-      <div class="cs-offcanvas__button mb-6">
-        <a href="/submit/" data-menu-link class="btn btn-primary w-full inline-flex items-center justify-center">
-          Submit a Tool
-        </a>
-      </div>
+    <div class="cs-offcanvas__button" style="margin-bottom: 24px;">
+      <a href="/submit/" data-menu-link class="btn btn-primary w-full inline-flex items-center justify-center" style="padding: 10px 18px; border-radius: 8px;">
+        Submit a Tool
+      </a>
+    </div>
 
-      <nav aria-label="Mobile navigation" class="mb-6">
-        <ul class="space-y-1" role="list">
-          {navLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                data-menu-link
-                class="flex min-h-11 items-center rounded-md px-3 py-2.5 text-body-md font-medium text-body transition-colors hover:bg-hairline-soft hover:text-ink"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <nav aria-label="Mobile navigation" style="margin-bottom: 24px;">
+      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">ARCHIVES</h3>
+      <ul class="cs-offcanvas__list" role="list" style="list-style: none; padding: 0; margin: 0;">
+        {navLinks.map((link, index) => (
+          <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === navLinks.length - 1}>
+            <a
+              href={link.href}
+              data-menu-link
+              class="cs-offcanvas__link flex min-h-11 items-center rounded-md px-3 py-2.5 text-body transition-colors hover:text-muted"
+              style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
 
-      <div class="mb-6">
-        <h3 class="eyebrow mb-3">Browse by category</h3>
-        <ul class="space-y-1.5" role="list">
-          {categories.map((cat) => (
-            <li>
-              <a
-                href={`/category/${cat.slug}/`}
-                data-menu-link
-                class="flex min-h-10 items-center rounded-md px-3 py-2 text-body-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink"
-              >
-                {cat.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div style="margin-bottom: 24px;">
+      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">CATEGORIES</h3>
+      <ul class="cs-offcanvas__list" role="list" style="list-style: none; padding: 0; margin: 0;">
+        {categories.map((cat, index) => (
+          <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === categories.length - 1}>
+            <a
+              href={`/category/${cat.slug}/`}
+              data-menu-link
+              class="cs-offcanvas__link flex min-h-10 items-center rounded-md px-3 py-2 text-body transition-colors hover:text-muted"
+              style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"
+            >
+              {cat.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </aside>
 
-  <div class="cs-offcanvas__bottombar flex items-center justify-between border-t border-border-hairline pt-4 px-6">
-    <div class="flex items-center gap-2" role="list" aria-label="Social links">
+  <div class="cs-offcanvas__bottombar" role="list" aria-label="Social links and theme">
+    <div class="cs-offcanvas__bottombar-inner">
       {socialLinks.map((social) => (
         <a
           href={social.href}
           data-menu-link
-          class="cs-social__link inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
+          class="cs-social__link inline-flex items-center justify-center rounded-full"
           aria-label={social.label}
           target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
           rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
         >
-          <social.icon />
+          <social.icon size={24} style="fill: currentColor;" />
         </a>
       ))}
-    </div>
-    <div class="cs-offcanvas__scheme-toggle">
-      <ThemeToggle />
+      <div class="cs-offcanvas__scheme-toggle flex-shrink-0">
+        <ThemeToggle />
+      </div>
     </div>
   </div>
 </div>
 
-<div id="site-overlay" class="cs-site-overlay fixed inset-0 bg-black/45 z-[74] lg:hidden opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true"></div>
+<div id="site-overlay" class="cs-site-overlay fixed inset-0 z-[99] lg:hidden opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" style="background: rgba(0, 0, 0, 0.3);"></div>
 
 <script>
   const drawer = document.getElementById('mobile-drawer');
   const overlay = document.getElementById('site-overlay');
   const closeButton = drawer?.querySelector<HTMLElement>('[data-menu-close]');
+  const menuToggle = document.querySelector<HTMLElement>('.cs-menu-toggle');
   let lastFocused: HTMLElement | null = null;
 
   function isOpen(): boolean {
     return document.body.classList.contains('cs-offcanvas-active');
+  }
+
+  function animateHamburger(open: boolean): void {
+    if (!menuToggle) return;
+    const icon = menuToggle.querySelector<SVGElement>('.cs-hamburger-icon');
+    if (!icon) return;
+
+    if (open) {
+      icon.style.transform = 'rotate(90deg)';
+      icon.innerHTML = '<path d="M18 6 6 18M6 6l12 12"></path>';
+    } else {
+      icon.style.transform = 'rotate(0deg)';
+      icon.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"></path>';
+    }
   }
 
   function open(event?: Event): void {
@@ -140,6 +163,7 @@ const socialLinks = [
     document.body.classList.add('cs-offcanvas-active');
     document.body.style.overflow = 'hidden';
     document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
+    animateHamburger(true);
     window.setTimeout(() => closeButton?.focus(), 180);
   }
 
@@ -148,6 +172,7 @@ const socialLinks = [
     document.body.classList.remove('cs-offcanvas-active');
     document.body.style.overflow = '';
     document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+    animateHamburger(false);
     lastFocused?.focus();
   }
 
@@ -198,34 +223,63 @@ const socialLinks = [
       document.body.classList.remove('cs-offcanvas-active');
       document.body.style.overflow = '';
       document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+      animateHamburger(false);
     }
   });
 
-  const toggleIcon = drawer?.querySelector<HTMLElement>('.cs-offcanvas__toggle .cs-icon');
+  // STRICT NO-SPIN RULE: Force disable any rotation/transform on close button
   const closeBtn = drawer?.querySelector<HTMLElement>('[data-menu-close]');
-  if (toggleIcon && closeBtn) {
-    closeBtn.addEventListener('mouseenter', () => {
-      toggleIcon.style.transform = 'rotate(180deg)';
+  const closeIcon = closeBtn?.querySelector<SVGElement>('.cs-icon');
+  if (closeBtn && closeIcon) {
+    const lockNoSpin = () => {
+      closeBtn.style.transform = 'none';
+      closeBtn.style.rotate = '0deg';
+      closeBtn.style.animation = 'none';
+      closeIcon.style.transform = 'none';
+      closeIcon.style.rotate = '0deg';
+      closeIcon.style.animation = 'none';
+    };
+    // Lock on all possible states
+    ['mouseenter', 'mouseleave', 'mousedown', 'mouseup', 'focus', 'blur', 'click'].forEach(evt => {
+      closeBtn.addEventListener(evt, lockNoSpin);
     });
-    closeBtn.addEventListener('mouseleave', () => {
-      toggleIcon.style.transform = 'rotate(0deg)';
-    });
+    // Initial lock
+    lockNoSpin();
   }
 </script>
 
 <style>
   .cs-offcanvas {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100dvh;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
     --cs-offcanvas-width: 100%;
     transform: translateX(-100%);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 100%;
-    height: 100vh;
-    background: var(--surface);
+    max-width: 100%;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 576px) {
     .cs-offcanvas {
-      --cs-offcanvas-width: 33.5rem;
+      --cs-offcanvas-width: 432px;
+      width: 432px;
+      max-width: 432px;
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (min-width: 1248px) {
+    .cs-offcanvas {
+      --cs-offcanvas-width: 432px;
+      width: 432px;
+      max-width: 432px;
       transform: translateX(-100%);
     }
   }
@@ -239,7 +293,191 @@ const socialLinks = [
     pointer-events: auto;
   }
 
-  .cs-offcanvas__toggle .cs-icon {
-    transition: transform 0.25s ease;
+  .cs-offcanvas__header {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    align-items: center;
+    min-height: 88px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .cs-offcanvas__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .cs-offcanvas__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--muted);
+    transition: color 0.2s ease !important;
+    transform: none !important;
+    rotate: 0deg !important;
+    animation: none !important;
+  }
+
+  .cs-offcanvas__close:hover,
+  .cs-offcanvas__close:active,
+  .cs-offcanvas__close:focus,
+  .cs-offcanvas__close:focus-visible {
+    color: var(--ink) !important;
+    background: transparent !important;
+    transform: none !important;
+    rotate: 0deg !important;
+    animation: none !important;
+  }
+
+  .cs-offcanvas__close .cs-icon {
+    transform: none !important;
+    rotate: 0deg !important;
+    animation: none !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .cs-offcanvas__close:hover .cs-icon,
+  .cs-offcanvas__close:active .cs-icon,
+  .cs-offcanvas__close:focus .cs-icon {
+    transform: none !important;
+    rotate: 0deg !important;
+    animation: none !important;
+  }
+
+  .cs-hamburger-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cs-menu-toggle[aria-expanded="true"] .cs-hamburger-icon {
+    transform: rotate(90deg);
+  }
+
+  .cs-offcanvas__sidebar {
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cs-offcanvas__inner {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .cs-offcanvas__button {
+    margin-bottom: 24px;
+  }
+
+  .cs-offcanvas__section-title {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 16px 0;
+  }
+
+  .cs-offcanvas__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cs-offcanvas__list li {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    padding-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .cs-offcanvas__list li:last-child {
+    padding-bottom: 0;
+  }
+
+  .cs-offcanvas__link {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.25s ease;
+  }
+
+  .cs-offcanvas__link:hover {
+    color: var(--muted);
+  }
+
+  .cs-offcanvas__bottombar {
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    border-top: 1px solid var(--hairline);
+    background: var(--surface);
+    padding: 12px 16px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .cs-offcanvas__bottombar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  @media (min-width: 1248px) {
+    .cs-offcanvas__header {
+      padding: 2.5rem;
+    }
+
+    .cs-offcanvas__inner {
+      padding: 2.5rem;
+    }
+
+    .cs-offcanvas__bottombar {
+      margin-left: -2.5rem;
+      margin-right: -2.5rem;
+      padding: 2.5rem 2.5rem 0 2.5rem;
+    }
+  }
+
+  .cs-social__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--ink);
+    transition: opacity 0.25s ease, background-color 0.25s ease;
+  }
+
+  .cs-social__link:hover {
+    opacity: 0.7;
+    background-color: var(--hairline-soft);
+  }
+
+  .cs-social__link svg {
+    width: 24px !important;
+    height: 24px !important;
+    transition: fill 0.25s ease;
+  }
+
+  .cs-social__link svg path {
+    fill: currentColor;
   }
 </style>
