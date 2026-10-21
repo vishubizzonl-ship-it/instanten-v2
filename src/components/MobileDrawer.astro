@@ -26,7 +26,7 @@ const categories = [
 ] as const;
 
 const socialLinks = [
-  { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon },
+  { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon, hidden: true },
   { href: 'https://x.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
   { href: 'https://www.instagram.com/instanten/', label: 'Instagram', icon: InstagramIcon },
   { href: 'https://t.me/instanten', label: 'Telegram', icon: TelegramIcon },
@@ -111,6 +111,7 @@ const socialLinks = [
           aria-label={social.label}
           target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
           rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          style={social.hidden ? 'opacity: 0; pointer-events: none; width: 40px; height: 40px;' : ''}
         >
           <social.icon size={24} style="fill: currentColor;" />
         </a>
