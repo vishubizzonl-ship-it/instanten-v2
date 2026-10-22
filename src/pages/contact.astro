@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const pageTitle = 'Contact — instanten';
+const pageDescription = 'Get in touch with instanten. Have a question, feedback, or want to submit a tool?';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact' },
+];
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/contact/">
+  <Breadcrumbs items={breadcrumbs} />
+  <article class="site-container py-section max-w-3xl mx-auto">
+    <header class="mb-12 text-center">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">Contact Us</h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Have a question or feedback? Fill out the form below or email us directly.
+      </p>
+    </header>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Get in Touch</h2>
+      <div class="space-y-3">
+        <a href="mailto:hello@instanten.com" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-faint transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <div>
+            <p class="text-caption text-muted">Email</p>
+            <p class="text-body-md text-ink">hello@instanten.com</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/instanten" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-faint transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1a5.07 5.07 0 0 0-1 4.38 5.44 5.44 0 0 0-1.37 3.65C0 11.14 3.3 12.33 6.44 12.68A3.37 3.37 0 0 0 5.52 15.3V19"></path>
+          </svg>
+          <div>
+            <p class="text-caption text-muted">GitHub</p>
+            <p class="text-body-md text-ink">github.com/instanten</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">Submit a Tool</h2>
+      <div class="prose-copy">
+        <p class="text-body-md text-muted leading-relaxed">
+          Want to add a tool to our directory? Submit it and our team will review it for inclusion.
+        </p>
+      </div>
+    </section>
+  </article>
+</Layout>

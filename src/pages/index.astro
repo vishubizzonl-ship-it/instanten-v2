@@ -50,12 +50,10 @@ const canonicalURL = currentPage === 1
   : `https://instanten.com/page/${currentPage}/`;
 ---
 <Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
-  <div class="utility-strip border-b border-border-hairline bg-surface/50 backdrop-blur-sm">
-    <div class="site-container flex items-center justify-center gap-2 flex-wrap lg:flex-nowrap">
-      <a href="/blog" class="text-xs font-medium transition-colors hover:text-accent-deep">Blog</a>
-      <a href="/about" class="text-xs font-medium transition-colors hover:text-accent-deep">About</a>
-      <a href="/contact" class="text-xs font-medium transition-colors hover:text-accent-deep">Contact</a>
-    </div>
+  <div class="utility-strip flex items-center justify-center gap-4 mb-8">
+    <a href="/blog" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">Blog</a>
+    <a href="/about" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">About</a>
+    <a href="/contact" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">Contact</a>
   </div>
 
   <EditorialHero />
