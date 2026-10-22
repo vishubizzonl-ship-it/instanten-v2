@@ -1,41 +1,27 @@
 ---
 import Logo from './Logo.astro';
-import GitHubIcon from './icons/GitHub.astro';
-import TwitterIcon from './icons/Twitter.astro';
-import LinkedInIcon from './icons/LinkedIn.astro';
-import EmailIcon from './icons/Email.astro';
 
 const currentYear = new Date().getFullYear();
-
-const socialLinks = [
-  { href: 'https://github.com/vishubizzonl-ship-it/instanten-v2', label: 'GitHub', icon: GitHubIcon },
-  { href: 'https://twitter.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
-  { href: 'https://linkedin.com/company/instanten', label: 'LinkedIn', icon: LinkedInIcon },
-  { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
-] as const;
 ---
 <footer class="border-t border-border-hairline bg-canvas" role="contentinfo">
   <div class="site-container py-12">
-    <div class="flex flex-col items-center text-center gap-3 max-w-[410px] mx-auto">
-      <Logo size="md" />
-      <p class="text-[14px] leading-[22px] text-muted">
+    <div class="flex flex-col items-center text-center gap-3 max-w-[460px] mx-auto">
+      <Logo class="h-8 w-auto" />
+      <p class="text-[14px] leading-[22px] text-body">
         A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
       </p>
-      <div class="mt-2 flex items-center justify-center gap-2" role="list" aria-label="Social links">
-        {socialLinks.map((social) => (
-          <a
-            href={social.href}
-            class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
-            aria-label={social.label}
-            target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
-            rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-          >
-            <social.icon />
-          </a>
-        ))}
+      <div class="mt-2 flex flex-wrap items-center justify-center gap-2 text-body role="list" aria-label="Main links">
+        <a href="/blog" class="inline-flex h-8 w-auto items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-accent-deep">Blog</a>
+        <a href="/about" class="inline-flex h-8 w-auto items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-accent-deep">About</a>
+        <a href="/contact" class="inline-flex h-8 w-auto items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-accent-deep">Contact</a>
+        <a href="/privacy" class="inline-flex h-8 w-auto items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-accent-deep">Privacy Policy</a>
+        <a href="/terms" class="inline-flex h-8 w-auto items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-accent-deep">Terms</a>
       </div>
-      <p class="mt-4 text-[12px] leading-normal text-faint">
+      <p class="mt-4 text-[12px] leading-normal text-body">
         © {currentYear} instanten. All rights reserved.
+      </p>
+      <p class="text-[11px] leading-none opacity-80">
+        Kuch links affiliate links hain. Purchase par hume commission mil sakta hai.
       </p>
     </div>
   </div>

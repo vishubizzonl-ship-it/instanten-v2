@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import ToolGrid from '../components/ToolGrid.astro';
-import Pagination from '../components/Pagination.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+import ToolsPagination from '../components/ToolsPagination.astro';
 import { getCollection } from 'astro:content';
-import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages, uniqueCategories, type ToolData } from '../utils/filters';
+import { parseFilters, filterTools, sortTools, paginateTools, type ToolData } from '../utils/filters';
 
 const allTools = await getCollection('tools');
 
@@ -15,11 +14,9 @@ const filteredTools = filterTools(allTools, filters);
 const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
 
 const PER_PAGE = 10;
-const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const totalPages = Math.ceil(sortedTools.length / PER_PAGE);
 const currentPage = filters.page || 1;
 const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
-
-const allCategories = uniqueCategories(allTools);
 
 const toolData: ToolData[] = paginatedTools.map((tool) => ({
   slug: tool.data.slug,
@@ -43,24 +40,58 @@ if (filters.pricing) queryParams.pricing = filters.pricing;
 if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
 if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
 
-const pageTitle = 'instanten — Useful SaaS Tools, Ready in an Instant';
+const pageTitle = currentPage === 1
+  ? 'instanten — Useful SaaS Tools, Ready in an Instant'
+  : `instanten — Page ${currentPage} of ${totalPages} — Useful SaaS Tools, Ready in an Instant`;
 const pageDescription = 'A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites.';
+
+const canonicalURL = currentPage === 1
+  ? 'https://instanten.com/'
+  : `https://instanten.com/page/${currentPage}/`;
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/">
-  <Hero toolCount={allTools.length} categoryCount={allCategories.length} />
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+  <div class="utility-strip border-b border-border-hairline bg-surface/50 backdrop-blur-sm">
+    <div class="site-container flex items-center justify-center gap-2 flex-wrap lg:flex-nowrap">
+      <a href="/blog" class="text-xs font-medium transition-colors hover:text-accent-deep">Blog</a>
+      <a href="/about" class="text-xs font-medium transition-colors hover:text-accent-deep">About</a>
+      <a href="/contact" class="text-xs font-medium transition-colors hover:text-accent-deep">Contact</a>
+    </div>
+  </div>
 
-  <section class="site-container pb-[64px]" aria-label="Tool directory">
-    <ToolGrid tools={toolData} />
+  <EditorialHero />
 
-    {sortedTools.length === 0 && (
-      <div class="text-center py-16">
-        <p class="text-body-lg text-muted">No tools match your filters. <a href="/" class="text-ink underline underline-offset-4 hover:text-accent-deep">Clear filters</a> to see all.</p>
-      </div>
-    )}
+  <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label="Tool directory">
+    <div class="blog-grid" role="list" aria-label="Featured tools">
+      {toolData.map((tool) => (
+        <article class="blog-card">
+          <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
+            <img
+              src={tool.image}
+              alt={`${tool.name} preview`}
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="225"
+            />
+            <span class="blog-card__category-pill" style="position: absolute; top: 15px; left: 15px; background: var(--ink); color: var(--canvas); padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
+              {tool.category}
+            </span>
+          </a>
+
+          <div class="blog-card__body">
+            <h2 class="blog-card__title">
+              <a href={`/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+            </h2>
+
+            <p class="blog-card__excerpt">{tool.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   </section>
 
   {totalPages > 1 && (
-    <Pagination
+    <ToolsPagination
       currentPage={currentPage}
       totalPages={totalPages}
       baseUrl={baseUrl}
