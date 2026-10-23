@@ -1,14 +1,23 @@
 {
   "slug": "unlocking-power-ai-future",
   "title": "Unlocking the Power of AI: How Machine Learning is Reshaping Our World",
-  "excerpt": "From healthcare diagnostics to creative arts, artificial intelligence is transforming every industry. Discover the breakthrough technologies driving this revolution and what they mean for developers and businesses alike.",
+  "excerpt": "From healthcare diagnostics to creative arts, artificial intelligence is transforming every industry. Discover the breakthrough technologies driving this revolution and what they mean for developers and businesses alike. A practical guide for U.S. developers, students, and creators using free Instanten tools at $0 cost.",
   "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop",
   "thumbnailAlt": "AI neural network visualization with glowing connections",
   "categories": [
-    { "name": "AI", "slug": "ai" },
-    { "name": "MACHINE LEARNING", "slug": "machine-learning" }
+    {
+      "name": "AI",
+      "slug": "ai"
+    },
+    {
+      "name": "MACHINE LEARNING",
+      "slug": "machine-learning"
+    }
   ],
-  "author": { "name": "CompileFuture", "slug": "compilefuture" },
-  "publishedAt": "2024-01-15",
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-10-23",
   "readingTime": 8
 }

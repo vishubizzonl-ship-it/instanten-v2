@@ -1,14 +1,23 @@
 {
   "slug": "macos-developer-setup-2024",
   "title": "The Ultimate macOS Developer Setup for 2024",
-  "excerpt": "From terminal configuration to window management, package managers to IDE setup — everything you need to turn a fresh Mac into a productivity powerhouse. Includes dotfiles and automation scripts.",
+  "excerpt": "From terminal configuration to window management, package managers to IDE setup — everything you need to turn a fresh Mac into a productivity powerhouse. Includes dotfiles and automation scripts. A practical guide for U.S. developers, students, and creators using free Instanten tools at $0 cost.",
   "thumbnail": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=450&fit=crop",
   "thumbnailAlt": "Clean macOS desktop with terminal and code editor",
   "categories": [
-    { "name": "MACOS", "slug": "macos" },
-    { "name": "PRODUCTIVITY", "slug": "productivity" }
+    {
+      "name": "MACOS",
+      "slug": "macos"
+    },
+    {
+      "name": "PRODUCTIVITY",
+      "slug": "productivity"
+    }
   ],
-  "author": { "name": "CompileFuture", "slug": "compilefuture" },
-  "publishedAt": "2023-12-28",
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-10-23",
   "readingTime": 11
 }

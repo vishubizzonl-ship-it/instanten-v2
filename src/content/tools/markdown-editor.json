@@ -2,17 +2,29 @@
   "slug": "markdown-editor",
   "name": "Markdown Editor",
   "category": "Writing",
-  "description": "Write and preview Markdown with live rendering, syntax highlighting, and export options.",
-  "longDescription": "Markdown Editor provides a distraction-free writing environment with live preview. Supports GitHub-flavored Markdown including tables, task lists, footnotes, and math. Syntax highlighting in the editor. Export to HTML, PDF, or raw Markdown. Word count and reading time built-in. Works offline after first load.",
+  "description": "Write and preview Markdown with live rendering, syntax highlighting, and CommonMark-compliant export options for U.S. writers, students, and developers.",
+  "longDescription": "Markdown Editor provides a distraction-free writing environment with live preview. Supports CommonMark specification-compliant Markdown (https://spec.commonmark.org/) including tables, task lists, footnotes, and math. Syntax highlighting in the editor. Export to HTML, PDF, or raw Markdown. Word count and reading time built in. Works instantly in any modern browser — Windows, macOS, Linux, Android, iOS — with zero sign-up and $0 cost.",
   "pricing": "Free",
-  "pricingDetails": "Core editor free. Pro: $2/month for cloud sync, themes, advanced exports.",
+  "pricingDetails": "Core editor completely free — $0 cost versus $2/month single-purpose markdown subscriptions. No account required. All processing happens in your browser.",
   "image": "/thumbnails/markdown-editor.svg",
   "url": "https://stackedit.io/",
-  "tags": ["writing", "markdown", "editor", "documentation", "blogging"],
+  "tags": ["writing", "markdown", "editor", "documentation", "blogging", "instant tool", "instant online"],
   "maker": "StackEdit",
   "addedDate": "2024-07-01",
   "updatedDate": "2024-12-01",
-  "features": ["Live preview", "GitHub-flavored Markdown", "Syntax highlighting", "Tables, task lists, math", "Export: HTML, PDF, Markdown", "Word count & reading time", "Offline support", "Cloud sync (Pro)"],
-  "useCases": ["Technical documentation", "Blog post drafting", "README writing", "Note taking", "API documentation"],
+  "features": [
+    "Live preview with CommonMark-compliant Markdown output",
+    "Syntax highlighting for code blocks and inline formatting",
+    "Tables, task lists, footnotes, and math support",
+    "Export to HTML, PDF, or raw Markdown",
+    "Word count and reading time for U.S. content creators",
+    "Offline-capable after first load — zero sign-up required"
+  ],
+  "useCases": [
+    "U.S. technical documentation and README writing",
+    "Blog post drafting with CommonMark-compliant output",
+    "API documentation for American developers and students",
+    "Note taking and academic writing without subscription costs"
+  ],
   "featured": false
 }

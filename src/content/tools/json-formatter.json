@@ -2,17 +2,29 @@
   "slug": "json-formatter",
   "name": "JSON Formatter",
   "category": "Developer",
-  "description": "Format, validate, and beautify JSON data. Syntax highlighting, error detection, and tree view for easy debugging.",
-  "longDescription": "JSON Formatter is a developer essential for working with JSON data. Paste raw JSON to instantly format with proper indentation and syntax highlighting. Validates syntax and highlights errors with line numbers. Collapsible tree view for navigating large objects. Minify option for production payloads. No data leaves your browser.",
+  "description": "Format, validate, and beautify JSON data with syntax highlighting, error detection, and tree view — all validated against IETF RFC 8259 for U.S. developers and students.",
+  "longDescription": "JSON Formatter is a developer essential for working with JSON data. Paste raw JSON to instantly format with proper indentation and syntax highlighting. Validates syntax against IETF RFC 8259 (https://datatracker.ietf.org/doc/html/rfc8259) and highlights errors with line numbers. Collapsible tree view for navigating large objects. Minify option for production payloads. No data leaves your browser — all processing happens client-side, ensuring privacy for U.S. developers, students, and enterprise users.",
   "pricing": "Free",
-  "pricingDetails": "Completely free. No limits, no account required. All processing happens client-side.",
+  "pricingDetails": "Completely free — $0 cost versus $12–$29/month developer tool subscriptions. No limits, no account required. All processing happens client-side.",
   "image": "/thumbnails/json.svg",
   "url": "https://jsonformatter.curiousconcept.com/",
-  "tags": ["developer", "json", "debugging", "validation"],
+  "tags": ["developer", "json", "debugging", "validation", "instant tool", "instant help"],
   "maker": "Curious Concept",
   "addedDate": "2024-01-20",
   "updatedDate": "2024-10-10",
-  "features": ["Syntax highlighting", "Error detection with line numbers", "Collapsible tree view", "Minify/beautify toggle", "Client-side processing", "No data upload"],
-  "useCases": ["API response debugging", "Config file formatting", "JSON validation", "Learning JSON structure"],
+  "features": [
+    "Syntax highlighting with line-number error detection",
+    "IETF RFC 8259 JSON validation for standard-compliant output",
+    "Collapsible tree view for navigating large U.S. API payloads",
+    "Minify/beautify toggle for production and development workflows",
+    "Client-side processing — no data upload, full privacy",
+    "Works instantly in modern browsers on Windows, macOS, Linux, Android, iOS"
+  ],
+  "useCases": [
+    "U.S. API response debugging and config file formatting",
+    "JSON validation for compliance with IETF RFC 8259",
+    "Teaching JSON structure to students and new developers",
+    "Enterprise data inspection without uploading sensitive payloads"
+  ],
   "featured": true
 }

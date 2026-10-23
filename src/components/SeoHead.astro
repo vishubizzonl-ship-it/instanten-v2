@@ -1,4 +1,7 @@
 ---
+import { getLangFromUrl, getHreflangAlternates, stripLangFromPath, type LangCode } from '../i18n/utils';
+import { ogLocales, defaultLang } from '../i18n/ui';
+
 export interface FaqItem {
   question: string;
   answer: string;
@@ -26,6 +29,7 @@ export interface Props {
   faqs?: FaqItem[];
   breadcrumbs?: BreadcrumbItem[];
   extraSchemas?: object[];
+  lang?: string;
 }
 
 const SITE_NAME = 'Instanten';
@@ -57,13 +61,22 @@ const {
   faqs = [],
   breadcrumbs = [],
   extraSchemas = [],
+  lang,
 } = Astro.props;
 
+const langCode: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
+const ogLocale = ogLocales[langCode] || 'en_US';
+
 const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+// Self-canonical must use the current language path exactly, never redirect to root for non-default
 const canonicalUrl = `${BASE_URL}${cleanPath}`;
 const absoluteOgImage = ogImage.startsWith('http')
   ? ogImage
   : `${BASE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+
+const hreflangAlternates = getHreflangAlternates(cleanPath, BASE_URL);
+
+const inLangCode = langCode === 'en' ? 'en-US' : langCode;
 
 const jsonLdGraph: Record<string, any>[] = [
   {
@@ -75,7 +88,12 @@ const jsonLdGraph: Record<string, any>[] = [
     url: BASE_URL,
     description:
       'Free instant online platform featuring fast Instanten tools, instant convert utilities, and practical instant help guides.',
-    inLanguage: 'en',
+    inLanguage: inLangCode,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
     publisher: { '@id': `${BASE_URL}/#organization` },
   },
   {
@@ -87,6 +105,21 @@ const jsonLdGraph: Record<string, any>[] = [
     logo: `${BASE_URL}/favicon.svg`,
     description:
       'Instanten provides free browser-based instant tools, instant convert helpers, and step-by-step guides for everyday productivity.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}/#webpage`,
+    url: canonicalUrl,
+    name: title,
+    description,
+    inLanguage: inLangCode,
+    isPartOf: { '@id': `${BASE_URL}/#website` },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
   },
 ];
 
@@ -101,6 +134,7 @@ if (includeAppSchema) {
     operatingSystem: 'Any',
     browserRequirements: 'Requires a modern browser with JavaScript enabled',
     isAccessibleForFree: true,
+    inLanguage: inLangCode,
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -128,6 +162,12 @@ if (ogType === 'article') {
     author: { '@type': 'Organization', name: SITE_NAME, url: BASE_URL },
     publisher: { '@id': `${BASE_URL}/#organization` },
     mainEntityOfPage: canonicalUrl,
+    inLanguage: inLangCode,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
     image: absoluteOgImage,
     keywords: tags.join(', '),
   });
@@ -161,6 +201,8 @@ if (faqs.length > 0) {
 if (extraSchemas && extraSchemas.length > 0) {
   jsonLdGraph.push(...extraSchemas);
 }
+
+const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c !== langCode);
 ---
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -169,9 +211,15 @@ if (extraSchemas && extraSchemas.length > 0) {
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={SITE_NAME} />
+
+<!-- Self-referencing canonical (current language URL exactly) -->
 <link rel="canonical" href={canonicalUrl} />
-<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
-<link rel="alternate" hreflang="en" href={canonicalUrl} />
+
+<!-- 11 reciprocal hreflang alternate links -->
+{hreflangAlternates.map((alt) => (
+  <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+))}
+
 <meta
   name="robots"
   content={noindex
@@ -182,7 +230,10 @@ if (extraSchemas && extraSchemas.length > 0) {
 <!-- Open Graph Meta Tags -->
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={SITE_NAME} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={ogLocale} />
+{alternateLocales.map((code) => (
+  <meta property="og:locale:alternate" content={ogLocales[code]} />
+))}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />

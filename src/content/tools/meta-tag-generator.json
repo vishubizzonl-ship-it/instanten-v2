@@ -2,17 +2,29 @@
   "slug": "meta-tag-generator",
   "name": "Meta Tag Generator",
   "category": "Marketing",
-  "description": "Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and more. Copy-paste ready.",
-  "longDescription": "Meta Tag Generator creates complete meta tag sets for any webpage. Fill in your content details and get optimized tags for SEO (title, description, keywords), Open Graph (Facebook, LinkedIn), Twitter Cards, and additional tags like canonical, viewport, robots. Preview how your links will appear on social platforms. Export as HTML or JSON.",
+  "description": "Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and Google Search Central-compliant snippets — copy-paste ready for U.S. websites.",
+  "longDescription": "Meta Tag Generator creates complete meta tag sets for any webpage. Fill in your content details and get optimized tags for SEO (title, description, keywords), Open Graph (Facebook, LinkedIn), Twitter Cards, and additional tags like canonical, viewport, robots. All recommendations follow Google Search Central snippet and meta tag guidelines (https://developers.google.com/search/docs) and the Open Graph Protocol for accurate U.S. search and social previews. Preview how your links will appear on social platforms. Export as HTML or JSON.",
   "pricing": "Free",
-  "pricingDetails": "Free to use. No account required.",
+  "pricingDetails": "Completely free — $0 cost versus $12–$29/month SEO tool subscriptions. No account required.",
   "image": "/thumbnails/meta-tag-generator.svg",
   "url": "https://metatags.io/",
-  "tags": ["marketing", "seo", "open-graph", "twitter-cards", "html"],
+  "tags": ["marketing", "seo", "open-graph", "twitter-cards", "html", "instant tool", "instant help"],
   "maker": "MetaTags.io",
   "addedDate": "2024-04-20",
   "updatedDate": "2024-12-05",
-  "features": ["SEO meta tags", "Open Graph tags", "Twitter Card tags", "Social preview", "HTML/JSON export", "Canonical URL support"],
-  "useCases": ["Website SEO optimization", "Social sharing optimization", "Blog post meta tags", "Landing page setup", "Client project handoff"],
+  "features": [
+    "SEO meta tags following Google Search Central snippet guidelines",
+    "Open Graph tags for accurate U.S. social media previews",
+    "Twitter Card tags with image, title, and description support",
+    "Social preview simulation for Facebook, LinkedIn, and X",
+    "Canonical URL, viewport, and robots tag support",
+    "HTML and JSON export for immediate deployment"
+  ],
+  "useCases": [
+    "U.S. website SEO optimization with standard-compliant meta tags",
+    "Social sharing optimization for American audiences",
+    "Blog post meta tags and landing page setup",
+    "Client project handoff with verified Google Search Central tags"
+  ],
   "featured": false
 }

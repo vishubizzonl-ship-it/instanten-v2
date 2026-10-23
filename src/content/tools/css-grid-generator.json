@@ -2,17 +2,29 @@
   "slug": "css-grid-generator",
   "name": "CSS Grid Generator",
   "category": "Design",
-  "description": "Visually build CSS Grid layouts. Drag to create tracks, set gaps, and generate production-ready code.",
-  "longDescription": "CSS Grid Generator makes complex grid layouts intuitive. Visually define rows and columns by dragging in the canvas. Set gap, alignment, and track sizing (fr, px, %, auto, minmax). See real-time preview with placeholder content. Copy clean CSS with fallbacks. Supports nested grids and named areas.",
+  "description": "Visually build responsive CSS Grid layouts using W3C CSS Grid Layout specifications with clean, production-ready output for U.S. frontend developers.",
+  "longDescription": "CSS Grid Generator makes complex grid layouts intuitive for developers, students, and designers across the United States. Visually define rows and columns by dragging in the canvas. Set gap, alignment, and track sizing (fr, px, %, auto, minmax). Output follows W3C CSS Grid Layout Module Level 2 specifications for clean, production-ready code. See real-time preview with placeholder content. Copy clean CSS with fallbacks. Supports nested grids and named areas.",
   "pricing": "Free",
-  "pricingDetails": "Free and open source. No account needed.",
+  "pricingDetails": "Completely free and open source — $0 cost versus $12–$29/month paid layout builders. No account needed.",
   "image": "/thumbnails/css-grid-generator.svg",
   "url": "https://cssgrid-generator.netlify.app/",
-  "tags": ["design", "css", "layout", "frontend", "grid"],
+  "tags": ["design", "css", "layout", "frontend", "grid", "instant tool", "instant online"],
   "maker": "Sarah Drasner",
   "addedDate": "2024-06-15",
   "updatedDate": "2024-11-10",
-  "features": ["Visual drag-and-drop grid builder", "Track sizing (fr, px, %, auto, minmax)", "Gap and alignment controls", "Named grid areas", "Real-time preview", "Clean CSS output with fallbacks"],
-  "useCases": ["Dashboard layouts", "Article layouts", "Photo galleries", "Form layouts", "Responsive page structures"],
+  "features": [
+    "Visual drag-and-drop grid builder following W3C CSS Grid Layout specs",
+    "Track sizing (fr, px, %, auto, minmax) with clean code output",
+    "Gap, alignment, and named grid area controls",
+    "Real-time preview for responsive U.S. web layouts",
+    "Nested grids and production-ready CSS with fallbacks",
+    "Works instantly in Chrome, Safari, Firefox, Edge, and Brave"
+  ],
+  "useCases": [
+    "U.S. dashboard and article layouts built with standard CSS Grid",
+    "Photo galleries and responsive page structures for American audiences",
+    "Form layouts and design systems following W3C Grid specifications",
+    "Frontend teaching and rapid prototyping for students and developers"
+  ],
   "featured": true
 }

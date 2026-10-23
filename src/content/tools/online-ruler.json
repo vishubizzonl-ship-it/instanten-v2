@@ -2,17 +2,29 @@
   "slug": "online-ruler",
   "name": "Online Ruler",
   "category": "Utility",
-  "description": "Measure anything on your screen with pixel-perfect accuracy. A lightweight browser-based ruler for designers and developers.",
-  "longDescription": "Online Ruler provides instant, accurate measurements directly in your browser. No downloads, no sign-ups. Just open, measure, and get results. Supports inches, centimeters, and pixels.",
+  "description": "Measure anything on your screen with pixel-perfect accuracy. A lightweight browser-based ruler for U.S. designers and developers using standard NIST-defined units.",
+  "longDescription": "Online Ruler provides instant, accurate measurements directly in your browser. No downloads, no sign-ups. Just open, measure, and get results. Primary U.S. measurement options include inches (in) with 1/16\", 1/8\", 1/4\", and 1/2\" fractions, paired cleanly with millimeters (mm), centimeters (cm), and pixels (px). Calibration references the standard U.S. credit/debit card and driver's license (ISO/IEC 7810 ID-1: 3.370 × 2.125 inches / 85.60 × 53.98 mm) and the NIST exact definition (1 international inch = 25.4 millimeters exactly; https://www.nist.gov/pml/owm/metric-si/si-units-length).",
   "pricing": "Free",
-  "pricingDetails": "Completely free with no limitations. No account required.",
+  "pricingDetails": "Completely free with no limitations. No account required. $0 versus $12–$29/month single-purpose SaaS measurement tools.",
   "image": "/thumbnails/ruler.svg",
   "url": "https://www.online-ruler.com/",
-  "tags": ["utility", "design", "measurement"],
+  "tags": ["utility", "design", "measurement", "instanten tool", "instant online"],
   "maker": "Ginifab",
   "addedDate": "2024-01-15",
   "updatedDate": "2024-11-20",
-  "features": ["Pixel-perfect measurements", "Multiple units (px, in, cm)", "No installation required", "Works offline after first load", "Responsive design"],
-  "useCases": ["UI/UX design measurement", "Frontend development", "Print design verification", "Quick screen measurements"],
+  "features": [
+    "Inches (in) with 1/16\", 1/8\", 1/4\", and 1/2\" fraction marks — primary U.S. option",
+    "Centimeters (cm), millimeters (mm), and pixels (px) for clean metric pairing",
+    "Calibration using standard U.S. bank/ID card (ISO/IEC 7810 ID-1: 3.370 × 2.125 in / 85.60 × 53.98 mm)",
+    "NIST exact definition reference (1 international inch = 25.4 mm exactly)",
+    "No installation required; runs instantly in Chrome, Safari, Firefox, Edge, and Brave",
+    "Works across Windows, macOS, Linux, Android, and iOS with responsive layout"
+  ],
+  "useCases": [
+    "U.S. UI/UX design measurement (U.S. Letter 8.5 × 11 in assets, screen mockups)",
+    "Frontend development with inch and pixel measurements",
+    "Print design verification for U.S. standard paper sizes",
+    "Quick screen measurements on mobile 5G and broadband connections"
+  ],
   "featured": true
 }

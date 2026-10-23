@@ -8,6 +8,7 @@ import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
+import { getLangFromUrl, type LangCode } from '../i18n/utils';
 
 interface Props {
   title?: string;
@@ -25,6 +26,7 @@ interface Props {
   modifiedTime?: string;
   section?: string;
   tags?: string[];
+  lang?: string;
 }
 
 const {
@@ -43,11 +45,14 @@ const {
   modifiedTime,
   section,
   tags = [],
+  lang,
 } = Astro.props;
+
+const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
 
 ---
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={detectedLang} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <script is:inline src="/theme-bridge.js"></script>
@@ -56,6 +61,7 @@ const {
       description={description}
       keywords={keywords}
       canonicalPath={Astro.url.pathname}
+      lang={detectedLang}
       ogType={ogType}
       ogImage={ogImage || '/og-instanten.svg'}
       ogImageAlt={title}

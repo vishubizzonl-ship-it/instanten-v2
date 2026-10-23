@@ -2,17 +2,29 @@
   "slug": "color-palette",
   "name": "Color Palette",
   "category": "Design",
-  "description": "Generate harmonious color palettes from a single color. Export formats for design tools and code.",
-  "longDescription": "Color Palette helps designers create beautiful, accessible color schemes. Input a base color to generate complementary, analogous, triadic, and monochromatic palettes. Checks WCAG contrast ratios for accessibility. Export as CSS variables, Tailwind config, Figma JSON, Adobe ASE, and more. Save and share palettes with teams.",
-  "pricing": "Paid",
-  "pricingDetails": "Pro: $3/month for unlimited palettes, advanced exports, team sharing, accessibility checks. Free trial available.",
+  "description": "Generate harmonious U.S.-accessible color palettes from a single color with W3C WCAG 2.2 Level AA contrast verification (4.5:1 normal text, 3:1 large text) for ADA Title III and Section 508 compliance.",
+  "longDescription": "Color Palette helps designers create beautiful, accessible color schemes for U.S. audiences. Input a base color to generate complementary, analogous, triadic, and monochromatic palettes. Contrast guidance uses W3C WCAG 2.2 Level AA ratios — 4.5:1 for normal text and 3:1 for large text — applied across U.S. ADA Title III and Section 508 accessible web design. Export as CSS variables, Tailwind config, Figma JSON, Adobe ASE, and more. Save and share palettes with teams.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free — $0 cost versus $3/month single-purpose palette subscriptions. No account required. No usage cap.",
   "image": "/thumbnails/color-palette.svg",
   "url": "https://coolors.co/",
-  "tags": ["design", "colors", "accessibility", "design-systems"],
+  "tags": ["design", "colors", "accessibility", "design-systems", "instant tool", "instant help"],
   "maker": "Coolors",
   "addedDate": "2024-03-15",
   "updatedDate": "2024-12-10",
-  "features": ["Multiple harmony rules", "WCAG contrast checking", "Export: CSS, Tailwind, Figma, Adobe ASE", "Palette sharing and collaboration", "Color blindness simulation", "Gradient generation"],
-  "useCases": ["Brand identity design", "UI design systems", "Accessibility compliance", "Marketing material colors", "Gradient backgrounds"],
+  "features": [
+    "Multiple harmony rules (complementary, analogous, triadic, monochromatic)",
+    "W3C WCAG 2.2 Level AA contrast checking (4.5:1 normal text, 3:1 large text)",
+    "U.S. ADA Title III and Section 508 accessible design compliance reference",
+    "Export: CSS variables, Tailwind config, Figma JSON, Adobe ASE",
+    "Palette sharing and collaboration",
+    "Color blindness simulation and gradient generation"
+  ],
+  "useCases": [
+    "U.S. brand identity design with accessible color systems",
+    "UI design systems meeting ADA and Section 508 requirements",
+    "Accessibility compliance verification for U.S. public and private websites",
+    "Marketing material colors and gradient backgrounds"
+  ],
   "featured": true
 }

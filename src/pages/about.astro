@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED, KEY_FEATURES } from '../config/siteInfo';
 
 const pageTitle = `About — ${SITE_NAME}`;
-const pageDescription = `Learn about ${SITE_NAME}, the curated directory of genuinely useful SaaS tools, guides, and free online utilities.`;
+const pageDescription = `Instanten is an independent browser-based software project providing free instant tools, instant convert utilities, and instant help guides for U.S. developers, designers, students, and everyday users. No fake identity, no hidden subscriptions.`;
 const canonicalURL = `${SITE_URL}/about/`;
 ---
 
@@ -15,22 +15,42 @@ const canonicalURL = `${SITE_URL}/about/`;
       </div>
 
       <h1 class="ror-h1">About {SITE_NAME}</h1>
-      <p class="ror-updated">Last updated: {LAST_UPDATED}</p>
+      <p class="ror-updated">Last reviewed: {LAST_UPDATED}</p>
 
       <section class="ror-section ror-section--about">
         <h2 class="ror-h2">What is {SITE_NAME}?</h2>
         <p class="ror-p">
-          <a href={SITE_URL} class="ror-link">{SITE_DOMAIN}</a> is a curated directory of genuinely useful SaaS tools, free online utilities, and practical guides for developers, designers, writers, and builders. We verify every link, categorize each tool honestly, and link directly to the official site — no affiliate redirects, no interstitial pages, no tracking pixels.
+          <strong>Instanten</strong> is an independent browser-based software project built and maintained online for developers, designers, students, and everyday users across the United States and worldwide. It provides a clean, fast collection of free <strong>instant tools</strong>, practical <strong>instant help</strong> guides, and verified resources — all at $0 with zero sign-up, zero accounts, and zero hidden subscriptions.
         </p>
         <p class="ror-p">
-          Whether you need a quick <a href="/tools/" class="ror-link">Online Ruler</a>, <a href="/tools/" class="ror-link">Image Compressor</a>, <a href="/tools/" class="ror-link">JSON Formatter</a>, or a step-by-step guide on CSS Container Queries or TypeScript patterns, everything is accessible instantly. The site works on desktop, laptop, tablet, and phone — no app to install, no account to create, no paywall to bypass.
+          Unlike cluttered directories or single-purpose SaaS tools that charge $12–$29/month, Instanten keeps everything accessible instantly. Whether you need an <a href="/tools/online-ruler/" class="ror-link">Online Ruler</a> calibrated with standard U.S. measurements (inches with 1/16" precision, standard U.S. bank card 3.370 × 2.125 in, and NIST exact definitions), an <a href="/tools/image-compressor/" class="ror-link">Image Compressor</a> using client-side Canvas/WebP for U.S. Shopify, Etsy, and Amazon listings, a <a href="/tools/color-palette/" class="ror-link">Color Palette</a> with W3C WCAG 2.2 Level AA contrast verification (4.5:1 normal text, 3:1 large text) for ADA Title III and Section 508 compliance, or a <a href="/tools/json-formatter/" class="ror-link">JSON Formatter</a> validated against IETF RFC 8259, every tool runs directly in your browser.
+        </p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">Honest, Transparent Identity</h2>
+        <p class="ror-p">
+          Instanten makes no false corporate claims. There is no fake U.S. street address, no fake office in any U.S. city or state, no fabricated LLC or Inc. registration, no fake author photo, and no fabricated reviews or ratings. We are a real, working software project with real contact channels: this <a href="/contact" class="ror-link">contact form</a>, our verified project email (<a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a>), and our public social and code links connected to this site. Our identity is exactly what it says: an independent browser-based platform maintained for real users.
+        </p>
+        <p class="ror-p">
+          Every technical claim is backed by a verifiable public standard. Unit conversions reference <a href="https://www.nist.gov/pml/owm/metric-si/si-units-length" target="_blank" rel="noopener noreferrer" class="ror-link">NIST exact definitions</a> (1 international inch = 25.4 millimeters exactly). Accessibility guidance follows <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" class="ror-link">W3C WCAG 2.2 Level AA</a> (4.5:1 normal text, 3:1 large text). Data formatting complies with <a href="https://datatracker.ietf.org/doc/html/rfc8259" target="_blank" rel="noopener noreferrer" class="ror-link">IETF RFC 8259</a> for JSON and <a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank" rel="noopener noreferrer" class="ror-link">IETF RFC 4648</a> for Base64. Markdown output follows the <a href="https://spec.commonmark.org/" target="_blank" rel="noopener noreferrer" class="ror-link">CommonMark Spec</a>. CSS Grid output aligns with <a href="https://www.w3.org/TR/css-grid-2/" target="_blank" rel="noopener noreferrer" class="ror-link">W3C CSS Grid Layout</a>. Meta tag recommendations follow <a href="https://developers.google.com/search/docs" target="_blank" rel="noopener noreferrer" class="ror-link">Google Search Central</a> guidelines and the Open Graph Protocol.
+        </p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">How We Verify Tools</h2>
+        <p class="ror-p">
+          Each tool and guide is tested against the official specification or standard it claims to follow. We review outputs manually, compare results against reference implementations, and document limitations transparently. For example, our <strong>Online Ruler</strong> calibration uses both the standard U.S. credit/debit card (ISO/IEC 7810 ID-1) and the NIST exact inch definition. Our <strong>Color Palette</strong> contrast checks apply the exact W3C WCAG 2.2 Level AA ratios. Our <strong>JSON Formatter</strong> validates syntax using rules derived from IETF RFC 8259. We never claim a tool does something it does not.
+        </p>
+        <p class="ror-p">
+          Because Instanten is an independent software project — not a registered U.S. corporation with a physical office — we do not claim certified traceability for physical measurement instruments. The Online Ruler is a browser utility for quick visual estimation, not a substitute for a certified NIST-traceable physical ruler or engineering-grade measurement device. Similarly, none of the tools provide medical, legal, financial, or structural engineering advice. They are productivity utilities for everyday digital tasks.
         </p>
       </section>
 
       <section class="ror-section ror-section--about">
         <h2 class="ror-h2">Our Mission</h2>
         <p class="ror-p">
-          We built {SITE_NAME} because finding a reliable tool shouldn't feel like a research project. The web is full of cluttered directories, slow pages, broken links, and hidden ads. Our mission is to replace that noise with a fast, accurate, clean, and free experience. Every feature on this site exists to serve one goal: get you to the right resource in the shortest time possible.
+          We built Instanten because finding a reliable tool shouldn't feel like a research project. The web is full of cluttered directories, slow pages, broken links, hidden ads, and subscription walls. Our mission is to replace that noise with a fast, accurate, clean, free, and trustworthy experience. Every feature exists to serve one goal: get U.S. users — developers, students, designers, and everyday creators — to the right resource in the shortest time possible, with zero sign-up and $0 cost.
         </p>
       </section>
 
@@ -44,16 +64,25 @@ const canonicalURL = `${SITE_URL}/about/`;
       </section>
 
       <section class="ror-section ror-section--about">
-        <h2 class="ror-h2">Privacy First</h2>
+        <h2 class="ror-h2">Privacy First — Real U.S. Compliance</h2>
         <p class="ror-p">
-          {SITE_NAME} is privacy-first. We don't require accounts, logins, or personal information. Theme preferences and tool settings are stored only in your browser's local storage and never sent to our servers. For full details, read our <a href="/privacy-policy" class="ror-link">Privacy Policy</a>.
+          Instanten does not sell or share your personal information for cross-context behavioral advertising. We comply with California CCPA/CPRA (Cal. Civ. Code § 1798.140) and applicable U.S. state privacy laws, including Virginia VCDPA, Colorado CPA, Connecticut CTDPA, Texas, and Oregon. Theme preferences and tool settings stay in your browser's localStorage and are never transmitted to any server.
+        </p>
+        <p class="ror-p">
+          Children's privacy is protected under the U.S. Children's Online Privacy Protection Act (COPPA, 15 U.S.C. §§ 6501–6506). Instanten is not directed at children under 13 and does not knowingly collect personal information from them.
+        </p>
+        <p class="ror-p">
+          Intellectual property and DMCA copyright notices are handled through the <a href="/contact" class="ror-link">contact form</a> (17 U.S.C. § 512). If you believe content on this site infringes your copyright, submit a clear notice through our verified contact channel.
+        </p>
+        <p class="ror-p">
+          Read our full <a href="/privacy-policy" class="ror-link">Privacy Policy</a> and <a href="/terms" class="ror-link">Terms of Service</a> for complete details.
         </p>
       </section>
 
       <section class="ror-section">
         <h2 class="ror-h2">Contact</h2>
         <p class="ror-p">
-          Have a question, found a bug, or want to suggest a feature? We'd love to hear from you. <a href="/contact" class="ror-link">Contact us here</a>.
+          Have a question, found a bug, want to suggest a feature, or need a standards accuracy review? We'd love to hear from you. Reach us through the <a href="/contact" class="ror-link">contact form</a> or our verified project email at <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a>. There is no fake office address or fake U.S. phone number — just real working channels for real users.
         </p>
       </section>
     </div>

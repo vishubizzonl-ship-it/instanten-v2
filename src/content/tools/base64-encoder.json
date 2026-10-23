@@ -2,17 +2,29 @@
   "slug": "base64-encoder",
   "name": "Base64 Encoder/Decoder",
   "category": "Developer",
-  "description": "Encode and decode Base64 strings instantly. Handle text, files, and images with UTF-8 support.",
-  "longDescription": "Base64 Encoder/Decoder provides instant encoding and decoding of Base64 data. Paste text or upload files to encode. Decode Base64 strings back to text or download as files. Supports UTF-8 for international characters. Handles images, documents, and binary data. All processing happens locally in your browser.",
+  "description": "Encode and decode Base64 strings instantly using IETF RFC 4648 for U.S. developers — handle text, files, and images with UTF-8 support, all locally in your browser.",
+  "longDescription": "Base64 Encoder/Decoder provides instant encoding and decoding of Base64 data. All operations follow IETF RFC 4648 (https://datatracker.ietf.org/doc/html/rfc4648) for standard-compliant output. Paste text or upload files to encode. Decode Base64 strings back to text or download as files. Supports UTF-8 for international characters. Handles images, documents, and binary data. All processing happens locally in your browser — no upload to any server, ensuring full privacy for U.S. users and enterprise workflows.",
   "pricing": "Free",
-  "pricingDetails": "Completely free with no file size limits. No uploads to server.",
+  "pricingDetails": "Completely free — $0 cost versus $12–$29/month encoding tool subscriptions. No file size limits. No uploads to any server.",
   "image": "/thumbnails/base64-encoder.svg",
   "url": "https://www.base64.guru/",
-  "tags": ["developer", "encoding", "base64", "data-conversion"],
+  "tags": ["developer", "encoding", "base64", "data-conversion", "instant tool", "instant online"],
   "maker": "Base64 Guru",
   "addedDate": "2024-05-01",
   "updatedDate": "2024-11-30",
-  "features": ["Text encode/decode", "File upload support", "UTF-8 support", "Image to Base64", "Base64 to file download", "Local-only processing"],
-  "useCases": ["Embedding images in CSS/HTML", "API token encoding", "Email attachment encoding", "Data URI generation", "Binary data transport"],
+  "features": [
+    "Text encode/decode following IETF RFC 4648 specifications",
+    "File upload support with local-only processing for privacy",
+    "UTF-8 support for international and U.S. English text",
+    "Image to Base64 and Base64 to file download",
+    "Zero server uploads — all encoding runs in your browser",
+    "Instant results on Windows, macOS, Linux, Android, and iOS"
+  ],
+  "useCases": [
+    "U.S. developer embedding images in CSS/HTML using standard Base64",
+    "API token encoding and email attachment encoding with RFC 4648 compliance",
+    "Data URI generation for web applications",
+    "Binary data transport without leaving your device"
+  ],
   "featured": false
 }

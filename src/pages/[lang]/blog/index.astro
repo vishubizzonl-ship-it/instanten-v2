@@ -1,0 +1,47 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+};
+---
+
+<Layout
+  title={`${t('nav.blog') || 'Blog'} — Instanten`}
+  description="Instanten blog — guides, tutorials, and smart workflows with free instant online tools."
+  keywords="instanten blog, instant tools, instant online, instant convert, free tools"
+  canonicalURL={`https://instanten.com/${lang}/blog/`}
+  lang={lang}
+>
+  <main class="site-container py-16">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">{t('nav.blog') || 'Blog'}</h1>
+    <p class="text-muted mb-10">Guides, tutorials, and smart workflows for free instant online tools.</p>
+
+    <ul class="space-y-6">
+      {sortedPosts.map((post) => (
+        <li class="border-b border-border-hairline pb-6">
+          <a href={translatePath(`/blog/${post.data.slug}/`)} class="group block">
+            <time class="text-sm text-faint" datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+            <h2 class="text-xl font-semibold mt-2 group-hover:text-accent-deep transition-colors">{post.data.title}</h2>
+            <p class="text-muted mt-2">{post.data.excerpt}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

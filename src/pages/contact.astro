@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { SITE_NAME, SITE_URL } from '../config/siteInfo';
 
 const pageTitle = `Contact — ${SITE_NAME}`;
-const pageDescription = `Reach out to the ${SITE_NAME} team. Questions, bugs, feature requests, and feedback are all welcome.`;
+const pageDescription = `Reach out to the ${SITE_NAME} team. Submit bug reports, feature requests, standards feedback, privacy or CCPA inquiries, and other questions through our verified contact form. No fake office or phone number — real channels for real users.`;
 const canonicalURL = `${SITE_URL}/contact/`;
 ---
 
@@ -14,8 +14,10 @@ const canonicalURL = `${SITE_URL}/contact/`;
         <a href="/" class="ror-back-link">&larr; Back to {SITE_NAME}</a>
       </div>
 
-      <h1 class="ror-h1">Contact Us</h1>
-      <p class="ror-lead">We're a small team and we read every message. Whether you've found a bug, have a feature request, or just want to say hello — reach out using the form below.</p>
+      <h1 class="ror-h1">Contact {SITE_NAME}</h1>
+      <p class="ror-lead">
+        Instanten is an independent browser-based software project — not a registered U.S. corporation with a physical office. We read every message through real, verified channels: this form and our project email at <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a>. We respond as quickly as possible, typically within one to three business days for standard inquiries.
+      </p>
 
       <form id="contact-form" class="ror-form" novalidate>
         <div class="ror-field">
@@ -29,29 +31,41 @@ const canonicalURL = `${SITE_URL}/contact/`;
         </div>
 
         <div class="ror-field">
-          <label for="cf-subject" class="ror-label">Subject</label>
-          <select id="cf-subject" name="subject" class="ror-select">
-            <option value="">Select a topic…</option>
+          <label for="cf-subject" class="ror-label">Topic</label>
+          <select id="cf-subject" name="subject" class="ror-select" required>
+            <option value="" disabled selected>Select a topic…</option>
             <option value="bug">Bug report</option>
             <option value="feature">Feature or tool request</option>
-            <option value="content">Article / guide feedback</option>
-            <option value="privacy">Privacy question</option>
+            <option value="standards">Standards / accuracy feedback</option>
+            <option value="privacy">Privacy / CCPA / DMCA inquiry</option>
             <option value="other">Other</option>
           </select>
         </div>
 
         <div class="ror-field">
           <label for="cf-message" class="ror-label">Message</label>
-          <textarea id="cf-message" name="message" rows="5" placeholder="Describe your issue or question…" required class="ror-textarea"></textarea>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Describe your issue, request, or question…" required class="ror-textarea"></textarea>
         </div>
 
         <div>
           <button type="submit" class="ror-submit-btn">Send message</button>
         </div>
 
-        <div id="cf-success" class="ror-alert-success">Thanks for reaching out! We'll get back to you soon.</div>
+        <div id="cf-success" class="ror-alert-success">Thanks for reaching out! We'll respond as soon as possible — typically within one to three business days.</div>
         <div id="cf-error" class="ror-alert-error">Please fill in all required fields before submitting.</div>
       </form>
+
+      <section class="ror-section ror-section--contact-details" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #ebebeb;">
+        <h2 class="ror-h2" style="font-size: 18px; margin-bottom: 12px;">Verified Contact Channels</h2>
+        <ul class="ror-ul" style="margin-top: 0;">
+          <li><strong>Website form</strong> — this page (<a href="/contact" class="ror-link">/contact</a>)</li>
+          <li><strong>Email</strong> — <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a> (verified project email)</li>
+          <li><strong>Social / Code</strong> — links available through the site header and footer</li>
+        </ul>
+        <p class="ror-p" style="margin-top: 16px; font-size: 14px; color: #888;">
+          Note: There is no physical mailing address, no U.S. office location, and no phone number for Instanten. We operate as an independent online software project. For privacy, CCPA, CPRA, or DMCA inquiries, please select "Privacy / CCPA / DMCA inquiry" above so we can route your message correctly.
+        </p>
+      </section>
     </div>
   </main>
 
@@ -67,10 +81,11 @@ const canonicalURL = `${SITE_URL}/contact/`;
         e.preventDefault();
         const name = document.getElementById('cf-name').value.trim();
         const email = document.getElementById('cf-email').value.trim();
+        const subject = document.getElementById('cf-subject').value.trim();
         const message = document.getElementById('cf-message').value.trim();
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!name || !email || !message || !emailRegex.test(email)) {
+        if (!name || !email || !subject || !message || !emailRegex.test(email)) {
           success.style.display = 'none';
           error.style.display = 'block';
           return;

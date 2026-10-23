@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+---
+
+<Layout
+  title="Terms & Conditions — Instanten"
+  description="Instanten terms and conditions: free browser-based utilities, zero sign-up, real public standards. No fake corporate claims. Independent project."
+  keywords="terms, conditions, free online tools, instant convert, independent software, $0 cost"
+  canonicalURL={`https://instanten.com/${lang}/terms/`}
+  lang={lang}
+>
+  <main class="site-container py-16 max-w-3xl mx-auto">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Terms & Conditions</h1>
+    <div class="prose prose-base text-body leading-[1.75] space-y-6">
+      <p>Instanten provides free instant online tools and instant convert utilities at $0 cost with zero sign-up. All outputs follow real public engineering standards: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark, W3C CSS Grid Layout.</p>
+      <p>There are no hidden subscriptions, no paid upsells disguised as free features, and no fake corporate claims. This is an independent software project.</p>
+      <p>We do not make fabricated claims about office locations, LLC registrations, or fabricated reviews. Every standard reference is verifiable.</p>
+    </div>
+  </main>
+</Layout>

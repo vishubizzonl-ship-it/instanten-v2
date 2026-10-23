@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import LanguagePicker from './LanguagePicker.astro';
 ---
 <header class="w-full bg-canvas">
   <div data-mobile-bar class="site-container flex h-[64px] items-center gap-4 lg:hidden">
@@ -18,7 +19,7 @@ import ThemeToggle from './ThemeToggle.astro';
         </svg>
       </button>
     </div>
-    <Logo class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start min-w-0 max-w-[200px] text-ink font-display font-bold text-xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis" />
+    <Logo class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start min-w-0 text-ink font-display font-bold text-xl tracking-tight whitespace-nowrap" />
     <div class="flex items-center justify-end min-w-0 flex-1">
       <button
         type="button"
@@ -34,6 +35,9 @@ import ThemeToggle from './ThemeToggle.astro';
           <path d="m13.6 13.6 3.2 3.2"></path>
         </svg>
       </button>
+      <div class="inline-flex items-center" aria-label="Language picker mobile">
+        <LanguagePicker />
+      </div>
     </div>
   </div>
 
@@ -56,6 +60,9 @@ import ThemeToggle from './ThemeToggle.astro';
         </svg>
       </button>
       <ThemeToggle showLeftDivider={true} />
+      <div class="hidden lg:inline-flex" aria-label="Language picker">
+        <LanguagePicker />
+      </div>
       <a
         href="/submit/"
         class="inline-flex h-10 min-w-[140px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap"

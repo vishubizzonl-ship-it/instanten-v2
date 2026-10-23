@@ -1,14 +1,23 @@
 {
   "slug": "typescript-advanced-patterns",
   "title": "Advanced TypeScript Patterns for Building Type-Safe APIs",
-  "excerpt": "Go beyond basic types with conditional types, template literals, and mapped types. Build APIs that catch errors at compile time and provide incredible autocomplete experience for consumers.",
+  "excerpt": "Go beyond basic types with conditional types, template literals, and mapped types. Build APIs that catch errors at compile time and provide incredible autocomplete experience for consumers. A practical guide for U.S. developers, students, and creators using free Instanten tools at $0 cost.",
   "thumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=450&fit=crop",
   "thumbnailAlt": "TypeScript code on screen with type annotations highlighted",
   "categories": [
-    { "name": "TYPESCRIPT", "slug": "typescript" },
-    { "name": "API DESIGN", "slug": "api-design" }
+    {
+      "name": "TYPESCRIPT",
+      "slug": "typescript"
+    },
+    {
+      "name": "API DESIGN",
+      "slug": "api-design"
+    }
   ],
-  "author": { "name": "CompileFuture", "slug": "compilefuture" },
-  "publishedAt": "2024-01-02",
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-10-23",
   "readingTime": 15
 }

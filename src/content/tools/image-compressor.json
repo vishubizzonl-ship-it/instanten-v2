@@ -2,17 +2,29 @@
   "slug": "image-compressor",
   "name": "Image Compressor",
   "category": "Developer",
-  "description": "Compress images without losing quality. Reduce file sizes for faster loading websites and optimized storage.",
-  "longDescription": "Image Compressor uses advanced compression algorithms to reduce image file sizes by up to 80% while maintaining visual quality. Supports JPEG, PNG, WebP, and AVIF formats. Batch processing available for multiple files. Perfect for web developers optimizing assets for production.",
-  "pricing": "Freemium",
-  "pricingDetails": "Free tier: 20 images/month, 5MB max per file. Pro: $5/month for unlimited images, 50MB max, priority processing.",
+  "description": "Compress images without losing quality for faster U.S. e-commerce listings, blog assets, and web performance. Client-side Canvas/WebP compression so images never leave your device.",
+  "longDescription": "Image Compressor reduces file sizes for faster loading websites and optimized storage without sending files to remote servers. Client-side Canvas and WebP compression ensures your product images, blog assets, and design files never leave your device — a critical privacy and performance advantage for U.S. Shopify, Etsy, and Amazon U.S. listings targeting Google Core Web Vitals LCP targets under 2.5 seconds. Supports JPEG, PNG, WebP, and AVIF formats.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free — $0 cost versus $5/month single-purpose compression subscriptions. No account required. No upload limit.",
   "image": "/thumbnails/compressor.svg",
   "url": "https://www.tinypng.com/",
-  "tags": ["developer", "optimization", "images", "web-performance"],
+  "tags": ["developer", "optimization", "images", "web-performance", "instant tool", "instant convert"],
   "maker": "Voormedia",
   "addedDate": "2024-02-10",
   "updatedDate": "2024-12-01",
-  "features": ["Smart lossy compression", "JPEG, PNG, WebP, AVIF support", "Batch processing (Pro)", "API access (Pro)", "Preserves transparency"],
-  "useCases": ["Website image optimization", "Email attachment size reduction", "App asset optimization", "CDN bandwidth savings"],
+  "features": [
+    "Smart lossy compression with visual quality preservation",
+    "JPEG, PNG, WebP, AVIF format support for modern U.S. browsers",
+    "Client-side Canvas/WebP compression — images never leave your device",
+    "Optimized for U.S. e-commerce (Shopify, Etsy, Amazon U.S.) and web performance",
+    "Supports Google Core Web Vitals LCP targets under 2.5 seconds",
+    "Batch-ready workflow for multiple assets"
+  ],
+  "useCases": [
+    "U.S. website image optimization for fast broadband and mobile 5G",
+    "Shopify, Etsy, and Amazon U.S. product image compression",
+    "Blog and content asset optimization before publishing",
+    "CDN bandwidth savings and faster page loads across the United States"
+  ],
   "featured": true
 }

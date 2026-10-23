@@ -1,14 +1,23 @@
 {
   "slug": "essential-git-workflows-developers",
   "title": "Essential Git Workflows Every Developer Should Master in 2024",
-  "excerpt": "Level up your version control game with these battle-tested Git workflows. From feature branching to trunk-based development, learn when and how to apply each approach for maximum team productivity.",
+  "excerpt": "Level up your version control game with these battle-tested Git workflows. From feature branching to trunk-based development, learn when and how to apply each approach for maximum team productivity. A practical guide for U.S. developers, students, and creators using free Instanten tools at $0 cost.",
   "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=450&fit=crop",
   "thumbnailAlt": "Git branching visualization with colorful branches merging",
   "categories": [
-    { "name": "GIT", "slug": "git" },
-    { "name": "DEVOPS", "slug": "devops" }
+    {
+      "name": "GIT",
+      "slug": "git"
+    },
+    {
+      "name": "DEVOPS",
+      "slug": "devops"
+    }
   ],
-  "author": { "name": "CompileFuture", "slug": "compilefuture" },
-  "publishedAt": "2024-01-10",
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-10-23",
   "readingTime": 12
 }

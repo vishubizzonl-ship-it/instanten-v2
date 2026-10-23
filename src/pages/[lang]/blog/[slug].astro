@@ -1,0 +1,49 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const paths: { params: { lang: LangCode; slug: string }; props: { post: any } }[] = [];
+  for (const lang of nonDefaultLangs) {
+    for (const post of posts) {
+      paths.push({ params: { lang, slug: post.data.slug }, props: { post } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: LangCode; slug: string };
+const { post } = Astro.props as { post: any };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+};
+---
+
+<Layout
+  title={`${post.data.title} — Instanten`}
+  description={post.data.excerpt}
+  keywords="instanten blog, instant tools, instant online, instant convert"
+  canonicalURL={`https://instanten.com/${lang}/blog/${post.data.slug}/`}
+  ogType="article"
+  ogImage={post.data.thumbnail || '/og-instanten.svg'}
+  publishedTime={post.data.publishedAt}
+  modifiedTime={post.data.publishedAt}
+  lang={lang}
+>
+  <main class="site-container py-16 max-w-3xl mx-auto">
+    <a href={translatePath('/blog/')} class="text-sm text-muted hover:text-ink mb-6 inline-block">&larr; {t('nav.allPosts') || 'All posts'}</a>
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">{post.data.title}</h1>
+    <p class="text-faint mb-8"><time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time></p>
+    <article class="prose prose-base text-body leading-[1.75] space-y-6">
+      <p><strong>{post.data.excerpt}</strong></p>
+      <p>This guide explores practical applications of free instant online tools, instant convert utilities, and verified public engineering standards including NIST, W3C WCAG 2.2, IETF RFC 8259, and IETF RFC 4648.</p>
+    </article>
+  </main>
+</Layout>

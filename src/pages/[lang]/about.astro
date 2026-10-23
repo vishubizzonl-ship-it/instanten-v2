@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { seoAbout } from '../../i18n/seoContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const seo = seoAbout[lang];
+---
+
+<Layout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonicalURL={`https://instanten.com/${lang}/about/`}
+  lang={lang}
+>
+  <main class="site-container py-16">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">{seo.h1}</h1>
+    <p class="text-lg text-muted leading-relaxed max-w-2xl">{seo.subtitle}</p>
+
+    <div class="mt-10 max-w-2xl space-y-6 text-[15.5px] leading-[1.75] text-body">
+      <p>
+        {t('nav.about') ? 'Instanten is an independent browser-based software project. ' + t('nav.about') + ' — ' : ''}
+        We build fast, transparent utilities with zero sign-up, zero subscriptions, and zero hidden limits. Every feature is available at $0 cost.
+      </p>
+      <p>
+        There is <strong>no fake physical street address</strong>, no fabricated LLC registration, no fake office photo, and no fabricated reviews. This is a real independent software project built by real developers who reference real public engineering standards — NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark, and W3C CSS Grid Layout.
+      </p>
+      <p>
+        All processing happens in your browser when possible. Theme preferences stay in your device's localStorage and are never transmitted to any server. We comply with California CCPA/CPRA, Virginia VCDPA, Colorado CPA, Connecticut CTDPA, and applicable U.S. state privacy laws.
+      </p>
+    </div>
+  </main>
+</Layout>

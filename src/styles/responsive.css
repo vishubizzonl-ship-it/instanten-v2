@@ -90,17 +90,6 @@ main table {
     display: none !important;
   }
 
-  header [data-mobile-bar] [data-site-logo],
-  header [data-mobile-bar] .site-brand-logo,
-  header [data-mobile-bar] > a {
-    justify-self: center !important;
-    text-align: center !important;
-    max-width: min(200px, 58vw) !important;
-    white-space: nowrap !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   header [data-mobile-bar] button {
     width: 40px !important;
     height: 40px !important;
@@ -122,6 +111,29 @@ main table {
     justify-content: space-between !important;
     height: 80px !important;
   }
+}
+
+html body [data-site-logo],
+html body [data-site-logo] *,
+html body .site-brand-logo,
+html body .site-brand-logo *,
+html body header [data-mobile-bar] > a,
+html body .cf-drawer-brand-link {
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+html body header [data-mobile-bar] [data-site-logo],
+html body header [data-mobile-bar] .site-brand-logo,
+html body header [data-mobile-bar] > a {
+  justify-self: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: none !important;
+  padding-left: 6px !important;
+  padding-right: 8px !important;
+  overflow: visible !important;
 }
 
 /* ========================================================================== */

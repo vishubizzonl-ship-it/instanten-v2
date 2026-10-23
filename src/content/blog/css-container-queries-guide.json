@@ -1,14 +1,23 @@
 {
   "slug": "css-container-queries-guide",
   "title": "CSS Container Queries: The Complete Guide to Responsive Components",
-  "excerpt": "Move beyond media queries. Container queries let components adapt to their parent container, not the viewport. Learn the syntax, use cases, and browser support for this game-changing CSS feature.",
+  "excerpt": "Move beyond media queries. Container queries let components adapt to their parent container, not the viewport. Learn the syntax, use cases, and browser support for this game-changing CSS feature. A practical guide for U.S. developers, students, and creators using free Instanten tools at $0 cost.",
   "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=450&fit=crop",
   "thumbnailAlt": "CSS code showing container query syntax with responsive layout",
   "categories": [
-    { "name": "CSS", "slug": "css" },
-    { "name": "FRONTEND", "slug": "frontend" }
+    {
+      "name": "CSS",
+      "slug": "css"
+    },
+    {
+      "name": "FRONTEND",
+      "slug": "frontend"
+    }
   ],
-  "author": { "name": "CompileFuture", "slug": "compilefuture" },
-  "publishedAt": "2023-12-22",
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-10-23",
   "readingTime": 9
 }

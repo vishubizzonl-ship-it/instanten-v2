@@ -6,8 +6,30 @@ import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://instanten.com',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          de: 'de',
+          ja: 'ja',
+          fr: 'fr',
+          es: 'es',
+          ko: 'ko',
+          nl: 'nl',
+          sv: 'sv',
+          it: 'it',
+          pt: 'pt',
+        },
+      },
       filter: (page) =>
         !page.endsWith('.xml') &&
         !page.endsWith('/404/') &&

@@ -1,16 +1,21 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
 interface Props {
   variant?: 'hero' | 'footer';
 }
 
 const { variant = 'hero' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const links = [
-  { label: 'Blog', href: '/blog' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'Terms', href: '/terms' },
+  { key: 'nav.blog' as const, path: '/blog' },
+  { key: 'nav.about' as const, path: '/about' },
+  { key: 'nav.contact' as const, path: '/contact' },
+  { key: 'nav.privacy' as const, path: '/privacy-policy' },
+  { key: 'nav.terms' as const, path: '/terms' },
 ];
 ---
 
@@ -21,8 +26,8 @@ const links = [
   >
     {links.map((item, idx) => (
       <>
-        <a href={item.href} class="cf-inline-quick-link">
-          {item.label}
+        <a href={translatePath(item.path)} class="cf-inline-quick-link">
+          {t(item.key)}
         </a>
         {idx < links.length - 1 && (
           <span class="cf-inline-quick-dot" aria-hidden="true"></span>
