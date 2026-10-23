@@ -1,172 +1,99 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED, CONTACT_EMAIL } from '../config/siteInfo';
 
-const pageTitle = 'Terms of Service — instanten';
-const pageDescription = 'instanten terms of service. By using this directory, you agree to these terms.';
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Terms' },
-];
-const currentYear = new Date().getFullYear();
+const pageTitle = `Terms & Conditions — ${SITE_NAME}`;
+const pageDescription = `Terms and Conditions for ${SITE_DOMAIN}. Read before using the Service.`;
+const canonicalURL = `${SITE_URL}/terms/`;
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/terms/">
-  <Breadcrumbs items={breadcrumbs} />
-  <article class="px-gutter py-section max-w-3xl mx-auto">
-    <header class="mb-12">
-      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">Terms of Service</h1>
-      <p class="font-body text-body-md text-muted">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-    </header>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Acceptance of Terms</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        By accessing and using <strong>instanten.com</strong> (the "Site"), you agree to be bound by these Terms of Service 
-        ("Terms"). If you do not agree, please do not use the Site.
-      </p>
-      <p class="font-body text-body-md text-muted leading-relaxed">
-        We reserve the right to modify these Terms at any time. Changes are effective immediately upon posting. 
-        Continued use constitutes acceptance.
-      </p>
-    </section>
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+  <main class="ror-main">
+    <div class="ror-container">
+      <div class="ror-back-row">
+        <a href="/" class="ror-back-link">&larr; Back to {SITE_NAME}</a>
+      </div>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Purpose of the Site</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        instanten is a curated directory of SaaS tools. We provide:
-      </p>
-      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
-        <li>Tool listings with categories, pricing, and descriptions</li>
-        <li>Direct links to official tool websites</li>
-        <li>Search, filtering, and sorting functionality</li>
-        <li>Tool detail pages with features, use cases, and related tools</li>
-      </ul>
-      <p class="font-body text-body-md text-muted leading-relaxed mt-4">
-        We are <strong>not</strong> a marketplace, reseller, or affiliate of the listed tools. 
-        We do not process payments, handle subscriptions, or provide the tools ourselves.
-      </p>
-    </section>
+      <h1 class="ror-h1">Terms &amp; Conditions</h1>
+      <p class="ror-updated">Last updated: {LAST_UPDATED}</p>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Accuracy of Information</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        We strive to keep tool information accurate and up to date. However:
+      <p class="ror-intro-copy">
+        Please read these Terms and Conditions ("Terms") carefully before using <a href={SITE_URL} class="ror-link">{SITE_DOMAIN}</a> ("the Service"). By accessing or using the Service, you agree to be bound by these Terms.
       </p>
-      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
-        <li>Pricing, features, and availability may change without notice</li>
-        <li>Tool websites may change URLs or shut down</li>
-        <li>We do not guarantee the accuracy, completeness, or timeliness of any information</li>
-      </ul>
-      <p class="font-body text-body-md text-muted leading-relaxed mt-4">
-        Always verify details on the official tool website before making decisions.
-      </p>
-    </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">External Links</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        The Site contains links to third-party websites (the "Tools"). These links are provided for convenience only.
-      </p>
-      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
-        <li>We do not control, endorse, or assume responsibility for any Tool's content, privacy, or practices</li>
-        <li>Your use of Tools is at your own risk and subject to their terms</li>
-        <li>We are not liable for any damage or loss from using Tools</li>
-      </ul>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">1. Use of the Service</h2>
+        <p class="ror-p">
+          {SITE_NAME} is a free directory and utility site. You may access and use the Service at no cost and without creating an account. The Service includes curated tool listings, free online utilities (Online Ruler, Image Compressor, JSON Formatter, and others), and practical guides.
+        </p>
+        <p class="ror-p">You agree not to:</p>
+        <ul class="ror-ul">
+          <li>Use the Service for any unlawful purpose or to violate any applicable law.</li>
+          <li>Attempt to interfere with, damage, or gain unauthorized access to the Service or its infrastructure.</li>
+          <li>Scrape, crawl, or extract content programmatically without explicit permission.</li>
+        </ul>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">User Conduct</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        You agree not to:
-      </p>
-      <ul class="space-y-2 list-disc list-inside font-body text-body-md text-muted" role="list">
-        <li>Scrape, crawl, or extract data from the Site programmatically</li>
-        <li>Attempt to disrupt, damage, or gain unauthorized access to the Site</li>
-        <li>Use the Site for any unlawful purpose</li>
-        <li>Submit false, misleading, or fraudulent tool submissions</li>
-      </ul>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">2. Accuracy &amp; Usage Disclaimer</h2>
+        <p class="ror-p">
+          The tools, calculators, utilities, and guides provided on {SITE_DOMAIN} are for informational and practical purposes only. Outputs and recommendations may vary based on input quality, browser environment, and other external factors.
+        </p>
+        <ul class="ror-ul">
+          <li>Results from online tools depend on the accuracy of your inputs.</li>
+          <li>Guides reflect best practices at the time of publication and may not cover every scenario.</li>
+          <li>We make no warranties regarding the completeness, accuracy, or suitability of any tool output or article content.</li>
+          <li><strong class="ror-strong">Important:</strong> For critical business, legal, medical, or engineering decisions, always verify results independently and consult qualified professionals.</li>
+        </ul>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Intellectual Property</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        All content on instanten (design, code, copy, original thumbnails) is owned by instanten or licensed. 
-        Tool names, logos, and descriptions belong to their respective owners.
-      </p>
-      <p class="font-body text-body-md text-muted leading-relaxed">
-        You may not reproduce, distribute, or create derivative works of our content without permission. 
-        Fair use for personal, non-commercial reference is permitted.
-      </p>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">3. Intellectual Property</h2>
+        <p class="ror-p">
+          All original content on {SITE_DOMAIN} — including design, code, copy, guides, and original thumbnails — is owned by {SITE_NAME} or licensed under appropriate terms. Tool names, logos, descriptions, and external links belong to their respective owners.
+        </p>
+        <p class="ror-p">
+          You may not reproduce, distribute, create derivative works from, or commercially exploit our original content without written permission. Fair use for personal, non-commercial reference is permitted.
+        </p>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Disclaimers</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        THE SITE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, 
-        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A 
-        PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
-      </p>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        WE DO NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF 
-        HARMFUL COMPONENTS, OR THAT TOOLS LISTED WILL MEET YOUR REQUIREMENTS.
-      </p>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">4. Disclaimer of Warranties</h2>
+        <p class="ror-p">
+          THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. We do not warrant that the Service will be uninterrupted, error-free, or free of harmful components.
+        </p>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Limitation of Liability</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        TO THE MAXIMUM EXTENT PERMITTED BY LAW, INSTANTEN SHALL NOT BE LIABLE FOR ANY 
-        INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING 
-        LOSS OF PROFITS, DATA, OR USE, ARISING FROM YOUR USE OF THE SITE.
-      </p>
-      <p class="font-body text-body-md text-muted leading-relaxed">
-        OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID TO USE THE SITE (ZERO).
-      </p>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">5. Limitation of Liability</h2>
+        <p class="ror-p">
+          TO THE MAXIMUM EXTENT PERMITTED BY LAW, {SITE_NAME} SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE, INCLUDING LOSS OF DATA, PROFITS, OR USE.
+        </p>
+        <p class="ror-p">
+          Our total liability for any claim related to the Service shall not exceed the amount you paid to use the Service (zero), since the Service is provided free of charge.
+        </p>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Indemnification</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed">
-        You agree to indemnify and hold instanten harmless from any claims, damages, or expenses 
-        (including legal fees) arising from your violation of these Terms or misuse of the Site.
-      </p>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">6. Third-Party Links</h2>
+        <p class="ror-p">
+          The Service contains links to third-party tool websites ("Tools"). These links are provided for convenience only. We do not control, endorse, or assume responsibility for any Tool's content, privacy practices, or operations. Your use of Tools is at your own risk and subject to their terms.
+        </p>
+      </section>
 
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Governing Law</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed">
-        These Terms are governed by the laws of the jurisdiction where instanten operates, 
-        without regard to conflict of law principles.
-      </p>
-    </section>
+      <section class="ror-section">
+        <h2 class="ror-h2">7. Changes to These Terms</h2>
+        <p class="ror-p">
+          We reserve the right to modify these Terms at any time. Changes are effective immediately upon posting to this page. Continued use of the Service after changes constitutes acceptance of the revised Terms.
+        </p>
+      </section>
 
-    <section class="pt-8 border-t border-border-hairline">
-      <h2 class="font-display font-semibold text-xl text-ink mb-4">Contact</h2>
-      <p class="font-body text-body-md text-muted leading-relaxed mb-4">
-        Questions about these Terms? Email <a href="mailto:hello@instanten.com" class="text-accent-end hover:underline">hello@instanten.com</a>.
-      </p>
-      <p class="font-body text-caption text-muted">
-        © {currentYear} instanten. All rights reserved.
-      </p>
-    </section>
-  </article>
+      <section class="ror-section">
+        <h2 class="ror-h2">8. Contact</h2>
+        <p class="ror-p">
+          Questions about these Terms? <a href="/contact" class="ror-link">Contact us here</a> or email <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>.
+        </p>
+      </section>
+    </div>
+  </main>
 </Layout>
-
-<style is:global>
-  .text-display {
-    font-size: 48px;
-    line-height: 1.1;
-  }
-
-  @media (max-width: 640px) {
-    .text-display {
-      font-size: 36px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    a {
-      transition: none !important;
-    }
-  }
-</style>

@@ -100,7 +100,7 @@ const categories = [
     }
     const drawer = document.getElementById('mobile-drawer');
     if (drawer && !drawer.hidden) {
-      drawer.querySelector<HTMLElement>('[data-menu-close]')?.click();
+      drawer.querySelector<HTMLElement>('[data-drawer-close]')?.click();
     }
     lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     panel.hidden = false;

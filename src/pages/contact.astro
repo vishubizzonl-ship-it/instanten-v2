@@ -1,57 +1,85 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE_NAME, SITE_URL } from '../config/siteInfo';
 
-const pageTitle = 'Contact — instanten';
-const pageDescription = 'Get in touch with instanten. Have a question, feedback, or want to submit a tool?';
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Contact' },
-];
+const pageTitle = `Contact — ${SITE_NAME}`;
+const pageDescription = `Reach out to the ${SITE_NAME} team. Questions, bugs, feature requests, and feedback are all welcome.`;
+const canonicalURL = `${SITE_URL}/contact/`;
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/contact/">
-  <Breadcrumbs items={breadcrumbs} />
-  <article class="site-container py-section max-w-3xl mx-auto">
-    <header class="mb-12 text-center">
-      <h1 class="font-display font-semibold text-display text-ink mb-4">Contact Us</h1>
-      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        Have a question or feedback? Fill out the form below or email us directly.
-      </p>
-    </header>
 
-    <section class="mb-12">
-      <h2 class="font-display font-semibold text-xl text-ink mb-6">Get in Touch</h2>
-      <div class="space-y-3">
-        <a href="mailto:hello@instanten.com" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-faint transition-colors">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          <div>
-            <p class="text-caption text-muted">Email</p>
-            <p class="text-body-md text-ink">hello@instanten.com</p>
-          </div>
-        </a>
-
-        <a href="https://github.com/instanten" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-lg border border-border-hairline bg-surface hover:border-faint transition-colors">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1a5.07 5.07 0 0 0-1 4.38 5.44 5.44 0 0 0-1.37 3.65C0 11.14 3.3 12.33 6.44 12.68A3.37 3.37 0 0 0 5.52 15.3V19"></path>
-          </svg>
-          <div>
-            <p class="text-caption text-muted">GitHub</p>
-            <p class="text-body-md text-ink">github.com/instanten</p>
-          </div>
-        </a>
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+  <main class="ror-main">
+    <div class="ror-container">
+      <div class="ror-back-row">
+        <a href="/" class="ror-back-link">&larr; Back to {SITE_NAME}</a>
       </div>
-    </section>
 
-    <section class="mb-12">
-      <h2 class="font-display font-semibold text-xl text-ink mb-6">Submit a Tool</h2>
-      <div class="prose-copy">
-        <p class="text-body-md text-muted leading-relaxed">
-          Want to add a tool to our directory? Submit it and our team will review it for inclusion.
-        </p>
-      </div>
-    </section>
-  </article>
+      <h1 class="ror-h1">Contact Us</h1>
+      <p class="ror-lead">We're a small team and we read every message. Whether you've found a bug, have a feature request, or just want to say hello — reach out using the form below.</p>
+
+      <form id="contact-form" class="ror-form" novalidate>
+        <div class="ror-field">
+          <label for="cf-name" class="ror-label">Name</label>
+          <input id="cf-name" name="name" type="text" placeholder="Your name" autocomplete="name" required class="ror-input" />
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-email" class="ror-label">Email</label>
+          <input id="cf-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required class="ror-input" />
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-subject" class="ror-label">Subject</label>
+          <select id="cf-subject" name="subject" class="ror-select">
+            <option value="">Select a topic…</option>
+            <option value="bug">Bug report</option>
+            <option value="feature">Feature or tool request</option>
+            <option value="content">Article / guide feedback</option>
+            <option value="privacy">Privacy question</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-message" class="ror-label">Message</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Describe your issue or question…" required class="ror-textarea"></textarea>
+        </div>
+
+        <div>
+          <button type="submit" class="ror-submit-btn">Send message</button>
+        </div>
+
+        <div id="cf-success" class="ror-alert-success">Thanks for reaching out! We'll get back to you soon.</div>
+        <div id="cf-error" class="ror-alert-error">Please fill in all required fields before submitting.</div>
+      </form>
+    </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('cf-success');
+      const error = document.getElementById('cf-error');
+
+      if (!form || !success || !error) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('cf-name').value.trim();
+        const email = document.getElementById('cf-email').value.trim();
+        const message = document.getElementById('cf-message').value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name || !email || !message || !emailRegex.test(email)) {
+          success.style.display = 'none';
+          error.style.display = 'block';
+          return;
+        }
+
+        error.style.display = 'none';
+        success.style.display = 'block';
+        form.reset();
+      });
+    })();
+  </script>
 </Layout>

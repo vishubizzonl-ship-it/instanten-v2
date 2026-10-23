@@ -8,7 +8,6 @@ interface Props {
   description: string;
   pricing: 'Free' | 'Freemium' | 'Paid';
   image: string;
-  url: string;
   tags?: string[];
   maker?: string;
   addedDate?: string;
@@ -25,7 +24,6 @@ const {
   description,
   pricing,
   image,
-  url,
   tags = [],
   maker,
   addedDate,
@@ -98,10 +96,10 @@ const formattedDate = displayDate ? formatDate(displayDate) : '';
       {formattedDate && <time datetime={displayDate!} class="font-medium">{formattedDate}</time>}
     </div>
 
-    <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[25px] text-ink">
+    <h2 class="mt-[10px] font-display font-bold text-[21px] leading-[1.2] tracking-[-0.04em] text-ink">
       <a href={`/tools/${slug}/`} class="transition-colors hover:text-accent-deep">{name}</a>
     </h2>
 
-    <p class="mt-1.5 line-clamp-3 text-[16px] leading-[25px] text-body">{description}</p>
+    <p class="mt-1.5 line-clamp-3 text-[16px] leading-[1.55] font-normal text-muted">{description}</p>
   </div>
 </article>

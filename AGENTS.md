@@ -8,6 +8,11 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Rules
+
+- Do exactly what the user asks. Nothing more, nothing less.
+- No proactive changes, suggestions, or extra work unless explicitly requested.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

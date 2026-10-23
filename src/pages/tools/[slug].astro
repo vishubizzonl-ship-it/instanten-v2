@@ -84,8 +84,10 @@ const breadcrumbs = [
 ];
 ---
 <Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={canonicalURL}>
-  <Breadcrumbs items={breadcrumbs} />
-  <article class="site-container py-section max-w-4xl mx-auto">
+  <div class="site-container">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+  <article class="site-container py-section max-w-4xl">
     <header class="mb-10">
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <a href={`/category/${category.toLowerCase()}/`} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{category}</a>

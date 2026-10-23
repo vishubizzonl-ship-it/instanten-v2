@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+const pageTitle = `Instanten Blog — Instant Tools, Instant Convert & Instant Online Guides`;
+const pageDescription = 'Practical tutorials, instant convert tips, and step-by-step instant help guides to save hours with free Instanten tools online.';
+const canonicalURL = `${SITE_URL}/blog/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  ogImage="/og-instanten.svg"
+  keywords="instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert"
+  breadcrumbs={[{ name: 'Home', item: '/' }, { name: 'Blog', item: '/blog' }]}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <div class="ror-back-row">
+        <a href="/" class="ror-back-link">&larr; Back to {SITE_NAME}</a>
+      </div>
+
+      <h1 class="ror-h1">Blog</h1>
+      <p class="ror-lead">Guides, practical tutorials, and smart workflows for developers, designers, writers, and builders using free <strong>Instanten tool</strong> collections, <strong>instant online</strong> utilities, and quick <strong>instant convert</strong> helpers — with <strong>instant help</strong> when you need it most.</p>
+
+      <ul class="ror-blog-list">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.data.slug}/`} class="ror-blog-card">
+              <time class="ror-blog-date" datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+              <h2 class="ror-blog-title">{post.data.title}</h2>
+              <p class="ror-blog-desc">{post.data.excerpt}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</Layout>

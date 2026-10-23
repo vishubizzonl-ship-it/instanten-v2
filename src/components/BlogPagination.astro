@@ -1,0 +1,198 @@
+---
+interface Props {
+  currentPage?: number;
+  totalPages?: number;
+  lastPage?: number;
+  basePath?: string;
+  baseUrl?: string;
+  page?: {
+    currentPage: number;
+    lastPage: number;
+    url?: { prev?: string; next?: string };
+  };
+}
+
+const props = Astro.props;
+
+const current = Number(props.page?.currentPage ?? props.currentPage ?? 1);
+const total = Number(props.page?.lastPage ?? props.totalPages ?? props.lastPage ?? 1);
+const rawBase = (props.basePath ?? props.baseUrl ?? '').replace(/\/+$/, '');
+
+function buildPageUrl(pageNum: number): string {
+  if (pageNum <= 1) {
+    return rawBase === '' ? '/' : `${rawBase}/`;
+  }
+  return `${rawBase}/page/${pageNum}/`;
+}
+
+function getPageItems(curr: number, max: number): (number | 'dots')[] {
+  if (max <= 5) {
+    return Array.from({ length: max }, (_, i) => i + 1);
+  }
+  const pages: (number | 'dots')[] = [1];
+  if (curr > 3) pages.push('dots');
+  for (let p = Math.max(2, curr - 1); p <= Math.min(max - 1, curr + 1); p++) {
+    pages.push(p);
+  }
+  if (curr < max - 2) pages.push('dots');
+  pages.push(max);
+  return pages;
+}
+
+const pageItems = getPageItems(current, total);
+const prevHref = current > 1 ? (props.page?.url?.prev ?? buildPageUrl(current - 1)) : null;
+const nextHref = current < total ? (props.page?.url?.next ?? buildPageUrl(current + 1)) : null;
+---
+
+{total > 1 && (
+  <nav class="cf-pagination" aria-label="Pagination">
+    <div class="cf-pagination__links">
+      {prevHref && (
+        <a class="cf-pagination__item cf-pagination__arrow" href={prevHref} aria-label="Previous page">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </a>
+      )}
+
+      {pageItems.map((item) =>
+        item === 'dots' ? (
+          <span class="cf-pagination__item cf-pagination__dots" aria-hidden="true">
+            &hellip;
+          </span>
+        ) : item === current ? (
+          <span class="cf-pagination__item cf-pagination__current" aria-current="page">
+            {item}
+          </span>
+        ) : (
+          <a class="cf-pagination__item" href={buildPageUrl(item)}>
+            {item}
+          </a>
+        )
+      )}
+
+      {nextHref && (
+        <a class="cf-pagination__item cf-pagination__arrow" href={nextHref} aria-label="Next page">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;800&display=swap');
+
+  .cf-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 80px auto !important;
+    clear: both;
+  }
+
+  @media (max-width: 767px) {
+    .cf-pagination {
+      margin: 48px auto !important;
+    }
+  }
+
+  .cf-pagination__links {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0px !important;
+    padding: 0 !important;
+  }
+
+  .cf-pagination__item {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 8px 12px !important;
+    margin: 0 !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #29294B !important;
+    text-decoration: none !important;
+    user-select: none !important;
+    transition: color 0.25s ease !important;
+  }
+
+  a.cf-pagination__item {
+    cursor: pointer !important;
+  }
+
+  a.cf-pagination__item:hover {
+    color: #828282 !important;
+    background: transparent !important;
+  }
+
+  span.cf-pagination__item.cf-pagination__current {
+    background-color: #FFFFFF !important;
+    color: #29294B !important;
+    border-radius: 8px !important;
+    margin: 0 12px !important;
+    box-shadow:
+      0px 5px 20px 0px rgba(114, 114, 255, 0.22),
+      0px 1px 4px 0px rgba(114, 114, 255, 0.08) !important;
+    cursor: default !important;
+    pointer-events: none !important;
+  }
+
+  span.cf-pagination__dots {
+    cursor: default !important;
+    color: #828282 !important;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-pagination__item {
+    color: #FFFFFF !important;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) a.cf-pagination__item:hover {
+    color: #CDCDCD !important;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) span.cf-pagination__item.cf-pagination__current {
+    background-color: #222222 !important;
+    color: #FFFFFF !important;
+    outline: 1px solid #2E2E2E !important;
+    box-shadow: none !important;
+  }
+</style>

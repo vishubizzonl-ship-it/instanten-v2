@@ -1,10 +1,13 @@
 ---
 import '../styles/app.css';
+import '../styles/subpages.css';
+import '../styles/responsive.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
+import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
 
 interface Props {
   title?: string;
@@ -14,103 +17,216 @@ interface Props {
   ogType?: 'website' | 'article';
   jsonLd?: object | object[];
   noindex?: boolean;
+  keywords?: string;
+  includeAppSchema?: boolean;
+  faqs?: FaqItem[];
+  breadcrumbs?: BreadcrumbItem[];
+  publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  tags?: string[];
 }
 
 const {
-  title = 'instanten — Useful SaaS tools, ready in an instant',
-  description = 'A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.',
+  title = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
+  description = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.',
   canonicalURL,
-  ogImage = '/og-default.svg',
+  ogImage = '/og-instanten.svg',
   ogType = 'website',
   jsonLd,
   noindex = false,
+  keywords = 'instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert',
+  includeAppSchema = false,
+  faqs = [],
+  breadcrumbs = [],
+  publishedTime,
+  modifiedTime,
+  section,
+  tags = [],
 } = Astro.props;
 
-const siteURL = Astro.site?.origin ?? 'https://instanten.com';
-const finalCanonicalURL = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
-const finalOgImage = new URL(ogImage, siteURL).href;
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'instanten',
-  url: `${siteURL}/`,
-  description,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${siteURL}/search/?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
-};
-
-const schemas = [
-  websiteSchema,
-  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
-].filter(Boolean);
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="generator" content={Astro.generator} />
+    <script is:inline src="/theme-bridge.js"></script>
+    <SeoHead
+      title={title}
+      description={description}
+      keywords={keywords}
+      canonicalPath={Astro.url.pathname}
+      ogType={ogType}
+      ogImage={ogImage || '/og-instanten.svg'}
+      ogImageAlt={title}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      section={section}
+      tags={tags}
+      noindex={noindex}
+      includeAppSchema={includeAppSchema}
+      faqs={faqs}
+      breadcrumbs={breadcrumbs}
+      extraSchemas={jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []}
+    />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@900&family=Montserrat:ital,wght@1,900&display=swap"
       rel="stylesheet"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="canonical" href={finalCanonicalURL} />
-    <meta name="description" content={description} />
-    <meta name="author" content="instanten" />
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
-
-    <meta property="og:site_name" content="instanten" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:url" content={finalCanonicalURL} />
-    <meta property="og:image" content={finalOgImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="instanten — useful SaaS tools, ready in an instant" />
-    <meta property="og:locale" content="en_US" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={finalOgImage} />
-    <meta name="twitter:image:alt" content="instanten — useful SaaS tools, ready in an instant" />
-
-    <title>{title}</title>
 
     <script is:inline>
       (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          var dark =
-            stored === 'dark' ||
-            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          document.documentElement.classList.toggle('dark', dark);
-          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
-        } catch (_) {}
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+
+        const applyTheme = (mode) => {
+          const isDark = mode === 'dark';
+          document.documentElement.classList.toggle('dark', isDark);
+          document.documentElement.setAttribute('data-theme', mode);
+          document.documentElement.setAttribute('data-scheme', mode);
+          if (document.body) {
+            document.body.classList.toggle('dark', isDark);
+            document.body.setAttribute('data-theme', mode);
+            document.body.setAttribute('data-scheme', mode);
+          }
+        };
+
+        applyTheme(theme);
+        document.addEventListener('DOMContentLoaded', () => applyTheme(localStorage.getItem('theme') || theme));
+        document.addEventListener('astro:after-swap', () => applyTheme(localStorage.getItem('theme') || 'light'));
       })();
     </script>
 
-    {schemas.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    ))}
+    <style is:global>
+      /* LIGHT MODE DEFAULT — Har Jagah Logo Pure Black (#000000) */
+      [data-site-logo],
+      [data-site-logo] *,
+      .site-brand-logo,
+      .site-brand-logo * {
+        color: #000000 !important;
+        transition: color 0.2s ease, filter 0.2s ease, fill 0.2s ease !important;
+      }
+
+      [data-site-logo] svg,
+      [data-site-logo] svg [fill]:not([fill="none"]),
+      .site-brand-logo svg,
+      .site-brand-logo svg [fill]:not([fill="none"]) {
+        fill: #000000 !important;
+      }
+
+      [data-site-logo] img:not(.logo-dark),
+      .site-brand-logo img:not(.logo-dark) {
+        filter: brightness(0) !important;
+        transition: filter 0.2s ease !important;
+      }
+
+      /* DARK MODE STATE — Har Jagah Logo 100% Pure Crisp White (#FFFFFF) */
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo],
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo] *,
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo,
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo * {
+        color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+      }
+
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo] svg,
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo] svg [fill]:not([fill="none"]),
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo svg,
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo svg [fill]:not([fill="none"]) {
+        fill: #FFFFFF !important;
+      }
+
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo] svg [stroke]:not([stroke="none"]),
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo svg [stroke]:not([stroke="none"]) {
+        stroke: #FFFFFF !important;
+      }
+
+      /* Black PNG / WebP / SVG <img> file ko har jagah 100% Pure Crisp White (#FFFFFF) banata hai */
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) [data-site-logo] img:not(.logo-dark),
+      :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .site-brand-logo img:not(.logo-dark) {
+        filter: brightness(0) invert(1) !important;
+      }
+    </style>
+
+    <script is:inline>
+      (function () {
+        function syncAllSiteLogos() {
+          var html = document.documentElement;
+          var body = document.body;
+          var isDark =
+            html.classList.contains('dark') ||
+            (body && body.classList.contains('dark')) ||
+            html.getAttribute('data-theme') === 'dark' ||
+            html.getAttribute('data-scheme') === 'dark' ||
+            (body && body.getAttribute('data-theme') === 'dark') ||
+            (body && body.getAttribute('data-scheme') === 'dark');
+
+          var targetColor = isDark ? '#FFFFFF' : '#000000';
+          var selector = [
+            '[data-site-logo]',
+            '.site-brand-logo',
+            'header a[href="/"]',
+            'footer a[href="/"]',
+            '[class*="drawer"] a[href="/"]',
+            '[class*="offcanvas"] a[href="/"]',
+            '[class*="logo"]'
+          ].join(', ');
+
+          document.querySelectorAll(selector).forEach(function (rootEl) {
+            var allNodes = [rootEl].concat(Array.from(rootEl.querySelectorAll('*')));
+            allNodes.forEach(function (node) {
+              var tag = node.tagName ? node.tagName.toUpperCase() : '';
+              if (tag === 'IMG') {
+                if (!node.classList.contains('logo-dark') && !node.classList.contains('logo-light')) {
+                  node.style.setProperty('filter', isDark ? 'brightness(0) invert(1)' : 'brightness(0)', 'important');
+                }
+              } else if (tag === 'SVG' || node.ownerSVGElement) {
+                node.style.setProperty('color', targetColor, 'important');
+                if (node.getAttribute('fill') !== 'none') {
+                  node.style.setProperty('fill', targetColor, 'important');
+                }
+              } else {
+                node.style.setProperty('color', targetColor, 'important');
+                node.style.setProperty('-webkit-text-fill-color', targetColor, 'important');
+              }
+            });
+          });
+        }
+
+        syncAllSiteLogos();
+        document.addEventListener('DOMContentLoaded', syncAllSiteLogos);
+        document.addEventListener('astro:after-swap', syncAllSiteLogos);
+        document.addEventListener('astro:page-load', syncAllSiteLogos);
+
+        var obs = new MutationObserver(syncAllSiteLogos);
+        obs.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class', 'data-theme', 'data-scheme']
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+          if (document.body) {
+            obs.observe(document.body, {
+              attributes: true,
+              attributeFilter: ['class', 'data-theme', 'data-scheme']
+            });
+          }
+        });
+      })();
+    </script>
+
   </head>
   <body class="min-h-screen bg-canvas font-body text-ink antialiased">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <Header />
-    <SearchPanel />
     <MobileDrawer />
+    <SearchPanel />
     <main class="w-full flex-1" id="main-content" tabindex="-1">
       <slot />
     </main>

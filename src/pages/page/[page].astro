@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ToolGrid from '../../components/ToolGrid.astro';
-import FilterBar from '../../components/FilterBar.astro';
-import Pagination from '../../components/Pagination.astro';
+import EditorialHero from '../../components/EditorialHero.astro';
+import BlogPagination from '../../components/BlogPagination.astro';
 import { getCollection } from 'astro:content';
-import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../utils/filters';
+import { parseFilters, filterTools, sortTools, paginateTools } from '../../utils/filters';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -27,10 +26,10 @@ const filteredTools = filterTools(allTools, filters);
 const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
 
 const PER_PAGE = 10;
-const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const totalPages = Math.ceil(sortedTools.length / PER_PAGE);
 const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
 
-const toolData = paginatedTools.map(tool => ({
+const toolData = paginatedTools.map((tool) => ({
   slug: tool.data.slug,
   name: tool.data.name,
   category: tool.data.category,
@@ -39,14 +38,14 @@ const toolData = paginatedTools.map(tool => ({
   image: tool.data.image,
   url: tool.data.url,
   tags: tool.data.tags,
+  maker: tool.data.maker,
+  addedDate: tool.data.addedDate,
+  updatedDate: tool.data.updatedDate,
   featured: tool.data.featured,
 }));
 
-
-
 const baseUrl = '/';
 const queryParams: Record<string, string> = {};
-if (filters.q) queryParams.q = filters.q;
 if (filters.category) queryParams.category = filters.category;
 if (filters.pricing) queryParams.pricing = filters.pricing;
 if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
@@ -81,21 +80,37 @@ const jsonLd = {
 };
 ---
 <Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/page/${currentPage}/`}>
-  <FilterBar
-    currentCategory={filters.category}
-    currentPricing={filters.pricing}
-    currentTags={filters.tags}
-    currentSort={filters.sort}
-    hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
-    baseUrl={baseUrl}
-  />
-  <ToolGrid tools={toolData} />
-  {totalPages > 1 && (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      baseUrl={baseUrl}
-      queryParams={queryParams}
-    />
-  )}
+  <EditorialHero />
+
+  <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label="Tool directory">
+    <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
+      {toolData.map((tool) => (
+        <article class="blog-card">
+          <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
+            <img
+              src={tool.image}
+              alt={`${tool.name} preview`}
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="225"
+            />
+            <span class="blog-card__category-pill" style="position: absolute; top: 15px; left: 15px; background: var(--ink); color: var(--canvas); padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
+              {tool.category}
+            </span>
+          </a>
+
+          <div class="blog-card__body">
+            <h2 class="blog-card__title">
+              <a href={`/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+            </h2>
+
+            <p class="blog-card__excerpt">{tool.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <BlogPagination currentPage={currentPage} totalPages={totalPages} basePath="" />
 </Layout>

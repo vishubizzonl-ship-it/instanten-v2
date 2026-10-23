@@ -1,73 +1,222 @@
 ---
+interface Props {
+  showLeftDivider?: boolean;
+  class?: string;
+}
+
+const { showLeftDivider = false, class: className = '' } = Astro.props;
 ---
-<button
-  type="button"
-  data-theme-toggle
-  class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
-  aria-label="Switch to dark theme"
-  aria-pressed="false"
-  title="Toggle theme (Ctrl+Shift+L)"
->
-  <svg data-theme-icon="light" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="10" cy="10" r="3.7"></circle>
-    <path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.4 4.4l1.5 1.5M14.1 14.1l1.5 1.5M4.4 15.6l1.5-1.5M14.1 5.9l1.5-1.5"></path>
-  </svg>
-  <svg data-theme-icon="dark" class="hidden" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M17.4 12.5A7.4 7.4 0 0 1 7.5 2.6 7.4 7.4 0 1 0 17.4 12.5Z"></path>
-  </svg>
-</button>
+
+<div class:list={['cf-scheme-wrap', { 'has-divider': showLeftDivider }, className]}>
+  <button
+    type="button"
+    class="cf-scheme-toggle"
+    aria-label="Dark mode toggle button"
+    data-cf-theme-toggle
+  >
+    <span class="cf-scheme-toggle__icons">
+      <!-- Left 28x28 Circle: Solid Sun + 8 Crisp Rays (16x16) -->
+      <span class="cf-scheme-toggle__box cf-light-box" data-mode="light">
+        <svg
+          class="cf-scheme-toggle__icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4.6" fill="currentColor" />
+          <line x1="12" y1="2.2" x2="12" y2="4.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="12" y1="19.6" x2="12" y2="21.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="2.2" y1="12" x2="4.4" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="19.6" y1="12" x2="21.8" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="5.07" y1="5.07" x2="6.63" y2="6.63" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="17.37" y1="17.37" x2="18.93" y2="18.93" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="18.93" y1="5.07" x2="17.37" y2="6.63" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="6.63" y1="17.37" x2="5.07" y2="18.93" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+      </span>
+
+      <!-- Right 28x28 Circle: Solid Filled Crescent Moon (15x15) -->
+      <span class="cf-scheme-toggle__box cf-dark-box" data-mode="dark">
+        <svg
+          class="cf-scheme-toggle__icon"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </span>
+    </span>
+  </button>
+</div>
+
+<style is:global>
+  .cf-scheme-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* Optional 1.5px x 18px Vertical Divider Line on Left (Between Search Icon & Toggle in Desktop Header) */
+  .cf-scheme-wrap.has-divider::before {
+    content: "";
+    display: block;
+    width: 1.5px;
+    height: 18px;
+    background-color: #E1E1E8;
+    margin-right: 14px;
+    flex-shrink: 0;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-scheme-wrap.has-divider::before {
+    background-color: #2E2E2E;
+  }
+
+  /* Exact 72px x 36px Pill Container from compilefuture.com */
+  .cf-scheme-toggle {
+    box-sizing: border-box !important;
+    position: relative;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 72px !important;
+    height: 36px !important;
+    padding: 4px !important;
+    margin: 0 !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 30px !important;
+    background-color: #F2F2F6 !important;
+    color: #29294B !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.25s ease, color 0.25s ease !important;
+  }
+
+  .cf-scheme-toggle__icons {
+    position: relative;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 64px !important;
+    height: 28px !important;
+  }
+
+  /* Exact 28px x 28px Inner Circle Boxes */
+  .cf-scheme-toggle__box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    background-color: transparent;
+    transition: background-color 0.25s ease !important;
+  }
+
+  .cf-scheme-toggle__icon {
+    display: block !important;
+    flex-shrink: 0 !important;
+    transition: opacity 0.25s ease !important;
+  }
+
+  .cf-scheme-toggle__box:hover .cf-scheme-toggle__icon {
+    opacity: 0.7;
+  }
+
+  /* LIGHT MODE STATE: Left Sun Circle is Pure Crisp White (#FFFFFF), Right Moon is Transparent */
+  .cf-scheme-toggle .cf-light-box {
+    background-color: #FFFFFF !important;
+  }
+  .cf-scheme-toggle .cf-dark-box {
+    background-color: transparent !important;
+  }
+
+  /* DARK MODE STATE: Pill Track #3D3D3D, Icons #FFFFFF, Right Moon Circle #222222, Left Sun Transparent */
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-scheme-toggle {
+    background-color: #3D3D3D !important;
+    color: #FFFFFF !important;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-scheme-toggle .cf-light-box {
+    background-color: transparent !important;
+  }
+
+  :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-scheme-toggle .cf-dark-box {
+    background-color: #222222 !important;
+  }
+
+  /* Smooth Flicker-Free Instant Theme Transition Guard (Exact compilefuture.com rule) */
+  html.cf-theme-switching *,
+  html.cf-theme-switching *::before,
+  html.cf-theme-switching *::after {
+    transition: none !important;
+  }
+  html.cf-theme-switching .cf-scheme-toggle,
+  html.cf-theme-switching .cf-scheme-toggle__box {
+    transition: background-color 0.25s ease !important;
+  }
+</style>
 
 <script>
-  const toggle = document.querySelector<HTMLElement>('[data-theme-toggle]');
-  const lightIcon = toggle?.querySelector<HTMLElement>('[data-theme-icon="light"]');
-  const darkIcon = toggle?.querySelector<HTMLElement>('[data-theme-icon="dark"]');
-  const root = document.documentElement;
+  function bindCompileFutureThemeToggles() {
+    document.querySelectorAll('[data-cf-theme-toggle]').forEach((btn) => {
+      if (btn.hasAttribute('data-cf-bound')) return;
+      btn.setAttribute('data-cf-bound', 'true');
 
-  function syncThemeUI(): void {
-    const isDark = root.classList.contains('dark');
-    if (toggle) {
-      toggle.setAttribute('aria-pressed', String(isDark));
-      toggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
-    }
-    lightIcon?.classList.toggle('hidden', isDark);
-    darkIcon?.classList.toggle('hidden', !isDark);
-    root.style.colorScheme = isDark ? 'dark' : 'light';
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const clickedModeBox = target.closest('[data-mode]') as HTMLElement | null;
+        const currentlyDark =
+          document.documentElement.classList.contains('dark') ||
+          document.documentElement.getAttribute('data-scheme') === 'dark' ||
+          document.documentElement.getAttribute('data-theme') === 'dark';
+
+        let nextMode: 'light' | 'dark';
+        if (clickedModeBox?.dataset.mode === 'light' && currentlyDark) {
+          nextMode = 'light';
+        } else if (clickedModeBox?.dataset.mode === 'dark' && !currentlyDark) {
+          nextMode = 'dark';
+        } else {
+          nextMode = currentlyDark ? 'light' : 'dark';
+        }
+
+        document.documentElement.classList.add('cf-theme-switching');
+        const isDark = nextMode === 'dark';
+
+        const themeApi = (window as typeof window & {
+          InstantenTheme?: { set?: (mode: string) => string };
+        }).InstantenTheme;
+
+        if (themeApi && typeof themeApi.set === 'function') {
+          themeApi.set(nextMode);
+        } else {
+          document.documentElement.classList.toggle('dark', isDark);
+          document.documentElement.setAttribute('data-theme', nextMode);
+          document.documentElement.setAttribute('data-scheme', nextMode);
+          document.body.classList.toggle('dark', isDark);
+          document.body.setAttribute('data-theme', nextMode);
+          document.body.setAttribute('data-scheme', nextMode);
+          localStorage.setItem('theme', nextMode);
+        }
+
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            document.documentElement.classList.remove('cf-theme-switching');
+          }, 50);
+        });
+      });
+    });
   }
 
-  function setTheme(theme: 'light' | 'dark'): void {
-    root.classList.toggle('dark', theme === 'dark');
-    try {
-      localStorage.setItem('theme', theme);
-    } catch (_) {}
-    syncThemeUI();
-  }
-
-  syncThemeUI();
-
-  toggle?.addEventListener('click', () => {
-    setTheme(root.classList.contains('dark') ? 'light' : 'dark');
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'l') {
-      event.preventDefault();
-      toggle?.click();
-    }
-  });
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-    try {
-      if (!localStorage.getItem('theme')) {
-        root.classList.toggle('dark', event.matches);
-        syncThemeUI();
-      }
-    } catch (_) {}
-  });
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'theme') {
-      root.classList.toggle('dark', event.newValue === 'dark');
-      syncThemeUI();
-    }
-  });
+  bindCompileFutureThemeToggles();
+  document.addEventListener('astro:page-load', bindCompileFutureThemeToggles);
 </script>

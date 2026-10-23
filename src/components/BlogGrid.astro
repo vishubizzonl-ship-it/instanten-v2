@@ -1,0 +1,46 @@
+---
+import BlogCard from './BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  thumbnail?: string | undefined;
+  thumbnailAlt?: string | undefined;
+  categories?: Array<{ name: string; slug: string }> | undefined;
+  author?: { name: string; slug: string } | undefined;
+  publishedAt: string;
+}
+
+interface Props {
+  posts?: BlogPost[];
+}
+
+const { posts: postsProp } = Astro.props;
+
+let posts: BlogPost[];
+
+if (postsProp) {
+  posts = postsProp;
+} else {
+  const allBlogPosts = await getCollection('blog');
+  posts = allBlogPosts
+    .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+    .map((post) => ({
+      slug: post.data.slug,
+      title: post.data.title,
+      excerpt: post.data.excerpt,
+      thumbnail: post.data.thumbnail,
+      thumbnailAlt: post.data.thumbnailAlt,
+      categories: post.data.categories,
+      author: post.data.author,
+      publishedAt: post.data.publishedAt,
+    }));
+}
+---
+<div class="blog-grid" data-cards-grid role="list" aria-label="Latest blog posts">
+  {posts.map((post) => (
+    <BlogCard {...post} />
+  ))}
+</div>

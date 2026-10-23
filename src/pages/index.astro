@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EditorialHero from '../components/EditorialHero.astro';
-import ToolsPagination from '../components/ToolsPagination.astro';
-import { getCollection } from 'astro:content';
-import { parseFilters, filterTools, sortTools, paginateTools, type ToolData } from '../utils/filters';
+import BlogPagination from '../components/BlogPagination.astro';
+import HomeSeoSection, { homeFaqs } from '../components/HomeSeoSection.astro';
+import { getAllTools } from '../utils/standaloneTools';
+import { parseFilters, filterTools, sortTools, paginateTools, toolHref, type ToolData } from '../utils/filters';
 
-const allTools = await getCollection('tools');
+const allTools = await getAllTools();
 
 const searchParams = new URLSearchParams(Astro.url.search);
 const filters = parseFilters(searchParams);
@@ -33,7 +34,6 @@ const toolData: ToolData[] = paginatedTools.map((tool) => ({
   featured: tool.data.featured,
 }));
 
-const baseUrl = '/';
 const queryParams: Record<string, string> = {};
 if (filters.category) queryParams.category = filters.category;
 if (filters.pricing) queryParams.pricing = filters.pricing;
@@ -41,25 +41,28 @@ if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
 if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
 
 const pageTitle = currentPage === 1
-  ? 'instanten — Useful SaaS Tools, Ready in an Instant'
-  : `instanten — Page ${currentPage} of ${totalPages} — Useful SaaS Tools, Ready in an Instant`;
-const pageDescription = 'A curated directory of genuinely useful SaaS tools. Browse by category, compare pricing, and go straight to official sites.';
+  ? 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help'
+  : `Instanten — Page ${currentPage} of ${totalPages} — Free Instant Tools, Instant Convert & Instant Help`;
+const pageDescription = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.';
 
 const canonicalURL = currentPage === 1
   ? 'https://instanten.com/'
   : `https://instanten.com/page/${currentPage}/`;
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
-  <div class="utility-strip flex items-center justify-center gap-4 mb-8">
-    <a href="/blog" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">Blog</a>
-    <a href="/about" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">About</a>
-    <a href="/contact" class="text-[var(--ink)] text-xs font-medium uppercase tracking-wider hover:text-[var(--accent)] transition-colors">Contact</a>
-  </div>
-
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  ogImage="/og-instanten.svg"
+  keywords="instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert"
+  includeAppSchema={true}
+  faqs={homeFaqs}
+  breadcrumbs={currentPage === 1 ? [{ name: 'Home', item: '/' }] : [{ name: 'Home', item: '/' }, { name: 'Page ' + currentPage, item: '/page/' + currentPage }]}
+>
   <EditorialHero />
 
   <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label="Tool directory">
-    <div class="blog-grid" role="list" aria-label="Featured tools">
+    <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
       {toolData.map((tool) => (
         <article class="blog-card">
           <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
@@ -88,12 +91,7 @@ const canonicalURL = currentPage === 1
     </div>
   </section>
 
-  {totalPages > 1 && (
-    <ToolsPagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      baseUrl={baseUrl}
-      queryParams={queryParams}
-    />
-  )}
+  <BlogPagination currentPage={currentPage} totalPages={totalPages} basePath="" />
+
+  <HomeSeoSection />
 </Layout>

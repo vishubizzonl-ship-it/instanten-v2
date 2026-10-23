@@ -2,70 +2,67 @@
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
 ---
-<header class="sticky top-0 z-50 w-full bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70">
-  <div class="site-container grid h-[88px] grid-cols-[1fr_auto_1fr] items-center gap-4">
-    <div class="flex items-center justify-start">
+<header class="w-full bg-canvas">
+  <div data-mobile-bar class="site-container flex h-[64px] items-center gap-4 lg:hidden">
+    <div class="flex items-center justify-start min-w-0 flex-1">
       <button
         type="button"
         data-menu-open
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink lg:hidden"
+        class="cs-menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink hover:bg-hairline-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         aria-label="Open menu"
         aria-controls="mobile-drawer"
         aria-expanded="false"
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        <svg class="cs-hamburger-icon h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
+    <Logo class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start min-w-0 max-w-[200px] text-ink font-display font-bold text-xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis" />
+    <div class="flex items-center justify-end min-w-0 flex-1">
+      <button
+        type="button"
+        data-search-open
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
+        aria-haspopup="dialog"
+        aria-controls="search-panel"
+        aria-expanded="false"
+        aria-label="Search tools"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.2"></circle>
+          <path d="m13.6 13.6 3.2 3.2"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 
-    <Logo size="md" class="justify-self-center flex-shrink-0" />
-
-    <div class="flex items-center justify-end">
-      <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions">
-        <button
-          type="button"
-          data-search-open
-          class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-          aria-haspopup="dialog"
-          aria-controls="search-panel"
-          aria-expanded="false"
-          aria-label="Search tools"
-          title="Search tools (⌘K)"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="9" cy="9" r="6.2"></circle>
-            <path d="m13.6 13.6 3.2 3.2"></path>
-          </svg>
-        </button>
-
-        <ThemeToggle />
-
-        <a
-          href="/submit/"
-          class="inline-flex h-10 min-w-[165px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap"
-          aria-label="Submit a tool"
-        >
-          Submit a Tool
-        </a>
-      </div>
-
-      <div class="flex items-center gap-2 lg:hidden" aria-label="Mobile header actions">
-        <button
-          type="button"
-          data-search-open
-          class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
-          aria-haspopup="dialog"
-          aria-controls="search-panel"
-          aria-expanded="false"
-          aria-label="Search tools"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="9" cy="9" r="6.2"></circle>
-            <path d="m13.6 13.6 3.2 3.2"></path>
-          </svg>
-        </button>
-      </div>
+  <div data-desktop-bar class="site-container hidden h-[80px] items-center gap-4 lg:flex">
+    <Logo class="flex-none" />
+    <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions">
+      <button
+        type="button"
+        data-search-open
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+        aria-haspopup="dialog"
+        aria-controls="search-panel"
+        aria-expanded="false"
+        aria-label="Search tools"
+        title="Search tools (⌘K)"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.2"></circle>
+          <path d="m13.6 13.6 3.2 3.2"></path>
+        </svg>
+      </button>
+      <ThemeToggle showLeftDivider={true} />
+      <a
+        href="/submit/"
+        class="inline-flex h-10 min-w-[140px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap"
+        aria-label="Submit a tool"
+      >
+        Submit a Tool
+      </a>
     </div>
   </div>
 </header>

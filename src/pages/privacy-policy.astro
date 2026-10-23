@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED, CONTACT_EMAIL } from '../config/siteInfo';
+
+const pageTitle = `Privacy Policy — ${SITE_NAME}`;
+const pageDescription = `Privacy Policy for ${SITE_DOMAIN}. We respect your privacy and collect minimal data.`;
+const canonicalURL = `${SITE_URL}/privacy-policy/`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+  <main class="ror-main">
+    <div class="ror-container">
+      <div class="ror-back-row">
+        <a href="/" class="ror-back-link">&larr; Back to {SITE_NAME}</a>
+      </div>
+
+      <h1 class="ror-h1">Privacy Policy</h1>
+      <p class="ror-updated">Last updated: {LAST_UPDATED}</p>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">Overview</h2>
+        <p class="ror-p">
+          <strong class="ror-strong">{SITE_NAME}</strong> (<a href={SITE_URL} class="ror-link">{SITE_DOMAIN}</a>) is a static website that serves as a curated directory of genuinely useful SaaS tools, free online utilities, and practical guides. We are committed to protecting your privacy. This policy explains what data we collect, how we use it, and your rights.
+        </p>
+        <p class="ror-p">
+          In short: <strong class="ror-strong">We collect no personal data by default.</strong> No tracking, no analytics cookies, no user accounts.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">1. Information We Collect</h2>
+        <p class="ror-p">
+          <strong class="ror-strong">Personal information is not required.</strong> You do not need to create an account, provide a name, or submit any personal details to use {SITE_DOMAIN}.
+        </p>
+        <p class="ror-p">
+          We may store non-personal preferences — such as your Light/Dark theme selection — in your browser's <code class="ror-code">localStorage</code>. This data never leaves your device.
+        </p>
+        <ul class="ror-ul">
+          <li>Theme preference (light/dark) stored locally</li>
+          <li>Standard server access logs (IP, timestamp, URL, user agent, referrer, response status)</li>
+          <li>Voluntarily provided information via our contact form (name, email, message)</li>
+          <li>No cookies used for tracking, analytics, or advertising</li>
+        </ul>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">2. Cookies</h2>
+        <p class="ror-p">
+          {SITE_DOMAIN} uses <strong class="ror-strong">no cookies</strong> for tracking, analytics, or advertising. We use <code class="ror-code">localStorage</code> for one purpose only: theme preference (light/dark mode). This setting is stored locally in your browser and is never transmitted to our servers.
+        </p>
+        <p class="ror-p">
+          You can clear this data at any time through your browser settings by clearing site data for <code class="ror-code">{SITE_DOMAIN}</code>.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">3. Third-Party Services</h2>
+        <p class="ror-p">
+          We use Google Fonts for typography. You can review Google's privacy practices here: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="ror-link">https://policies.google.com/privacy</a>.
+        </p>
+        <p class="ror-p">
+          Our site links directly to official tool websites. When you visit an external tool, you leave {SITE_DOMAIN} and are subject to that site's own privacy practices. We do not control those practices and recommend reviewing their policies before using their services.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">4. Data Retention</h2>
+        <p class="ror-p">
+          We retain no personal user profiles. Contact messages are kept only as long as needed to respond. Theme preferences live entirely in your browser and are deleted when you clear site data.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">5. Children's Privacy</h2>
+        <p class="ror-p">
+          {SITE_NAME} is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has provided personal information through our contact form, please <a href="/contact" class="ror-link">contact us</a> and we will delete it promptly.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">6. Your Rights</h2>
+        <p class="ror-p">
+          Since we collect minimal personal data by design, there is very little to access, rectify, or delete. If you emailed us, you can request deletion of your messages by emailing <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>.
+        </p>
+        <p class="ror-p">
+          If you are in the EEA and have questions about GDPR rights, please <a href="/contact" class="ror-link">contact us here</a>.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">7. Changes to This Policy</h2>
+        <p class="ror-p">
+          Updates will be posted on this page with a revised "Last updated" date. Continued use of the site after changes constitutes acceptance of the revised policy.
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">8. Contact</h2>
+        <p class="ror-p">
+          Questions about this Privacy Policy? <a href="/contact" class="ror-link">Contact us here</a> or email <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>

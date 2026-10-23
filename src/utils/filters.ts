@@ -1,3 +1,5 @@
+import { fuzzyMatches } from './fuzzy';
+
 export const PER_PAGE = 10;
 export const PRICINGS = ['Free', 'Freemium', 'Paid'] as const;
 
@@ -14,6 +16,8 @@ export interface ToolData {
   pricingDetails?: string;
   image: string;
   url: string;
+  href?: string;
+  isStandalone?: boolean;
   tags?: string[];
   maker?: string;
   addedDate?: string;
@@ -47,6 +51,10 @@ export function slugify(value: string): string {
 
 export function pricingSlug(pricing: string): string {
   return pricing.toLowerCase();
+}
+
+export function toolHref(tool: Pick<ToolData, 'slug' | 'href'>): string {
+  return tool.href || `/tools/${tool.slug}/`;
 }
 
 export function formatDate(value?: string): string {
@@ -140,8 +148,8 @@ export function filterTools<T extends ToolEntryLike>(tools: T[], filters: ToolFi
 
     if (filters.q) {
       const haystack = buildSearchText(data);
-      const terms = filters.q.toLowerCase().split(/\s+/).filter(Boolean);
-      if (!terms.every((term) => haystack.includes(term))) return false;
+      const matched = fuzzyMatches(filters.q, { name: data.name, text: haystack });
+      if (!matched) return false;
     }
 
     if (filters.category && slugify(data.category) !== slugify(filters.category)) {
@@ -233,6 +241,8 @@ export function toCardData(tool: ToolEntryLike): ToolData {
     pricingDetails: tool.data.pricingDetails,
     image: tool.data.image,
     url: tool.data.url,
+    href: tool.data.href,
+    isStandalone: tool.data.isStandalone,
     tags: tool.data.tags,
     maker: tool.data.maker,
     addedDate: tool.data.addedDate,

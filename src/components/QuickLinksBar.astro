@@ -1,0 +1,133 @@
+---
+interface Props {
+  variant?: 'hero' | 'footer';
+}
+
+const { variant = 'hero' } = Astro.props;
+
+const links = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms', href: '/terms' },
+];
+---
+
+<div class={`cf-quick-links-outer cf-quick-links-outer--${variant}`}>
+  <nav
+    class="cf-inline-quick-links"
+    aria-label={variant === 'hero' ? 'Top Quick Links' : 'Footer Quick Links'}
+  >
+    {links.map((item, idx) => (
+      <>
+        <a href={item.href} class="cf-inline-quick-link">
+          {item.label}
+        </a>
+        {idx < links.length - 1 && (
+          <span class="cf-inline-quick-dot" aria-hidden="true"></span>
+        )}
+      </>
+    ))}
+  </nav>
+</div>
+
+<style is:global>
+  html body .cf-quick-links-outer {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+    overflow: visible !important;
+  }
+
+  html body .cf-quick-links-outer--hero {
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+  }
+
+  html body .cf-quick-links-outer--footer {
+    margin-top: 18px !important;
+    margin-bottom: 18px !important;
+  }
+
+  html body nav.cf-inline-quick-links {
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 13px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    list-style: none !important;
+  }
+
+  html body nav.cf-inline-quick-links a.cf-inline-quick-link {
+    display: inline-block !important;
+    font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0 !important;
+    color: #767676 !important;
+    text-decoration: none !important;
+    padding: 4px 0 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  @media (max-width: 479px) {
+    html body nav.cf-inline-quick-links {
+      gap: 6px !important;
+    }
+
+    html body nav.cf-inline-quick-links a.cf-inline-quick-link {
+      font-size: 11.5px !important;
+      letter-spacing: -0.01em !important;
+    }
+  }
+
+  html body nav.cf-inline-quick-links a.cf-inline-quick-link:hover {
+    color: #29294B !important;
+  }
+
+  html body nav.cf-inline-quick-links span.cf-inline-quick-dot {
+    display: inline-block !important;
+    width: 2.5px !important;
+    height: 2.5px !important;
+    border-radius: 50% !important;
+    background-color: #C8C8D4 !important;
+    flex-shrink: 0 !important;
+  }
+
+  :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) html body nav.cf-inline-quick-links a.cf-inline-quick-link {
+    color: #7A7A7A !important;
+  }
+
+  :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) html body nav.cf-inline-quick-links a.cf-inline-quick-link:hover {
+    color: #FFFFFF !important;
+  }
+
+  :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) html body nav.cf-inline-quick-links span.cf-inline-quick-dot {
+    background-color: #3D3D3D !important;
+  }
+</style>

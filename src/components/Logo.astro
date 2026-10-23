@@ -1,43 +1,60 @@
 ---
-interface Props {
-  href?: string;
-  size?: 'sm' | 'md';
-  class?: string;
-}
-
-const { href = '/', size = 'md', class: className = '' } = Astro.props;
-const markSize = size === 'sm' ? 26 : 30;
-const textSize = size === 'sm' ? 'text-base' : 'text-lg';
+const { href = '/' } = Astro.props;
 ---
 <a
   href={href}
-  class:list={[
-    'inline-flex items-center gap-2.5 font-display font-semibold tracking-[-0.035em] text-ink',
-    textSize,
-    className,
-  ]}
+  class="cs-logo inline-flex items-center site-brand-logo"
+  data-site-logo="true"
   aria-label="instanten home"
 >
-  <svg
-    width={markSize}
-    height={markSize}
-    viewBox="0 0 28 28"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    class="shrink-0"
-  >
-    <rect width="28" height="28" rx="8" fill="currentColor" />
-    <rect x="11.75" y="12.9" width="4.5" height="9.3" rx="2.25" fill="var(--canvas)" />
-    <rect
-      x="11.5"
-      y="5.85"
-      width="5"
-      height="5"
-      rx="1.1"
-      transform="rotate(45 14 8.35)"
-      fill="var(--canvas)"
-    />
-  </svg>
-  <span>instanten</span>
+  <span class="cs-logo-text">
+    instanten
+  </span>
 </a>
+<style>
+  .cs-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .cs-logo-text {
+    font-family: "Montserrat", "Arial Black", sans-serif !important;
+    font-weight: 900 !important;
+    font-variation-settings: 'wght' 1000;
+    font-style: italic !important;
+    font-size: 23px !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    -webkit-text-stroke: 0.7px currentColor !important;
+    paint-order: stroke fill !important;
+    display: inline-flex;
+    align-items: center;
+    max-width: 280px !important;
+    height: 18px !important;
+    overflow: visible !important;
+  }
+
+  .dark .cs-logo-text {
+    color: #FFFFFF !important;
+    -webkit-text-stroke: 0.7px currentColor !important;
+  }
+
+  .cs-logo:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (min-width: 992px) {
+    .cs-logo-text {
+      font-size: 23px !important;
+      max-width: 340px !important;
+      height: 21px !important;
+    }
+  }
+</style>

@@ -13,6 +13,11 @@ const navLinks = [
   { href: '/categories/', label: 'Categories' },
   { href: '/pricing/', label: 'Pricing' },
   { href: '/makers/', label: 'Makers' },
+  { href: '/about/', label: 'About' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/privacy-policy/', label: 'Privacy Policy' },
+  { href: '/terms/', label: 'Terms' },
 ] as const;
 
 const categories = [
@@ -34,27 +39,25 @@ const socialLinks = [
   { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
 ] as const;
 ---
-<div id="mobile-drawer" class="cs-offcanvas fixed inset-y-0 left-0 z-[100] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-  <div class="cs-offcanvas__header grid grid-cols-[1fr_40px] items-center min-h-[88px]" style="padding: 0 16px 0 24px;">
-    <div class="cs-logo flex" style="height: 18px;">
+<div id="mobile-drawer" data-drawer-panel class="cs-offcanvas fixed inset-y-0 left-0 z-[100] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="cf-drawer-topbar">
+    <div class="cf-drawer-brand-link" data-site-logo="true">
       <Logo />
     </div>
-    <nav class="cs-offcanvas__nav flex items-center justify-center w-10 h-10" aria-label="Close menu">
-      <button
-        type="button"
-        data-menu-close
-        class="cs-offcanvas__close inline-flex items-center justify-center text-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-        aria-label="Close menu"
-        style="width: 40px; height: 40px; transform: none !important; rotate: 0deg !important; animation: none !important;"
-      >
-        <svg class="cs-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: none !important; rotate: 0deg !important; animation: none !important;">
-          <path d="M18 6 6 18M6 6l12 12"></path>
-        </svg>
-      </button>
-    </nav>
+    <button
+      type="button"
+      class="cf-drawer-close-btn"
+      data-drawer-close
+      aria-label="Close navigation menu"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
   </div>
 
-  <aside class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto" style="flex: 1 1 auto; display: flex; flex-direction: column; padding: 24px 24px 20px 24px;">
+  <aside data-drawer-body class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto" style="flex: 1 1 auto; display: flex; flex-direction: column; padding: 24px 24px 20px 24px;">
     <h2 id="drawer-title" class="sr-only">Site menu</h2>
 
     <div class="cs-offcanvas__button" style="margin-bottom: 24px;">
@@ -100,7 +103,7 @@ const socialLinks = [
     </div>
   </aside>
 
-  <div class="cs-offcanvas__bottombar" role="list" aria-label="Social links and theme">
+  <div data-drawer-footer class="cs-offcanvas__bottombar" role="list" aria-label="Social links and theme">
     <div class="cs-offcanvas__bottombar-inner">
       {socialLinks.map((social) => (
         <a
@@ -110,43 +113,33 @@ const socialLinks = [
           aria-label={social.label}
           target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
           rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-          style={social.hidden ? 'opacity: 0; pointer-events: none; width: 40px; height: 40px;' : ''}
+          style={('hidden' in social && social.hidden) ? 'opacity: 0; pointer-events: none; width: 40px; height: 40px;' : ''}
         >
           <social.icon size={24} style="fill: currentColor;" />
         </a>
       ))}
       <div class="cs-offcanvas__scheme-toggle flex-shrink-0">
-        <ThemeToggle />
+        <ThemeToggle showLeftDivider={false} />
       </div>
     </div>
   </div>
 </div>
 
-<div id="site-overlay" class="cs-site-overlay fixed inset-0 z-[99] lg:hidden opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" style="background: rgba(0, 0, 0, 0.3);"></div>
+<div id="site-overlay" data-drawer-backdrop class="cs-site-overlay fixed inset-0 z-[99] lg:hidden opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" style="background: rgba(0, 0, 0, 0.3);"></div>
 
 <script>
   const drawer = document.getElementById('mobile-drawer');
   const overlay = document.getElementById('site-overlay');
-  const closeButton = drawer?.querySelector<HTMLElement>('[data-menu-close]');
-  const menuToggle = document.querySelector<HTMLElement>('.cs-menu-toggle');
+  const closeButton = drawer?.querySelector<HTMLElement>('[data-drawer-close]');
   let lastFocused: HTMLElement | null = null;
+
+  // Ensure Drawer & Backdrop are direct children of document.body so no ancestor
+  // stacking context (sticky/backdrop-filter header) can trap them below the Top Bar.
+  if (overlay && overlay.parentElement !== document.body) document.body.appendChild(overlay);
+  if (drawer && drawer.parentElement !== document.body) document.body.appendChild(drawer);
 
   function isOpen(): boolean {
     return document.body.classList.contains('cs-offcanvas-active');
-  }
-
-  function animateHamburger(open: boolean): void {
-    if (!menuToggle) return;
-    const icon = menuToggle.querySelector<SVGElement>('.cs-hamburger-icon');
-    if (!icon) return;
-
-    if (open) {
-      icon.style.transform = 'rotate(90deg)';
-      icon.innerHTML = '<path d="M18 6 6 18M6 6l12 12"></path>';
-    } else {
-      icon.style.transform = 'rotate(0deg)';
-      icon.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"></path>';
-    }
   }
 
   function open(event?: Event): void {
@@ -160,25 +153,23 @@ const socialLinks = [
 
     lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.classList.add('cs-offcanvas-active');
-    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
-    animateHamburger(true);
     window.setTimeout(() => closeButton?.focus(), 180);
   }
 
   function close(): void {
     if (!isOpen()) return;
     document.body.classList.remove('cs-offcanvas-active');
-    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
-    animateHamburger(false);
     lastFocused?.focus();
   }
 
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     const openTrigger = target.closest('[data-menu-open]');
-    const closeTrigger = target.closest('[data-menu-close]');
+    const closeTrigger = target.closest('[data-drawer-close]');
     const link = target.closest('[data-menu-link]');
 
     if (openTrigger) {
@@ -220,15 +211,14 @@ const socialLinks = [
   window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
     if (event.matches && isOpen()) {
       document.body.classList.remove('cs-offcanvas-active');
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
-      animateHamburger(false);
     }
   });
 
   // STRICT NO-SPIN RULE: Force disable any rotation/transform on close button
-  const closeBtn = drawer?.querySelector<HTMLElement>('[data-menu-close]');
-  const closeIcon = closeBtn?.querySelector<SVGElement>('.cs-icon');
+  const closeBtn = drawer?.querySelector<HTMLElement>('[data-drawer-close]');
+  const closeIcon = closeBtn?.querySelector<SVGElement>('svg');
   if (closeBtn && closeIcon) {
     const lockNoSpin = () => {
       closeBtn.style.transform = 'none';
@@ -345,14 +335,6 @@ const socialLinks = [
     transform: none !important;
     rotate: 0deg !important;
     animation: none !important;
-  }
-
-  .cs-hamburger-icon {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .cs-menu-toggle[aria-expanded="true"] .cs-hamburger-icon {
-    transform: rotate(90deg);
   }
 
   .cs-offcanvas__sidebar {

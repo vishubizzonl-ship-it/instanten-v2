@@ -1,26 +1,47 @@
 ---
 import Logo from './Logo.astro';
+import QuickLinksBar from './QuickLinksBar.astro';
+import TwitterIcon from './icons/Twitter.astro';
+import YouTubeIcon from './icons/YouTube.astro';
+import InstagramIcon from './icons/Instagram.astro';
+import TelegramIcon from './icons/Telegram.astro';
+import GitHubIcon from './icons/GitHub.astro';
+import EmailIcon from './icons/Email.astro';
 
 const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon },
+  { href: 'https://x.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
+  { href: 'https://www.instagram.com/instanten/', label: 'Instagram', icon: InstagramIcon },
+  { href: 'https://t.me/instanten', label: 'Telegram', icon: TelegramIcon },
+  { href: 'https://github.com/instanten', label: 'GitHub', icon: GitHubIcon },
+  { href: 'mailto:hello@instanten.com', label: 'Email', icon: EmailIcon },
+] as const;
 ---
 <footer class="border-t border-border-hairline bg-canvas" role="contentinfo">
-  <div class="site-container">
-    <div class="flex flex-col items-center text-center gap-4 md:flex-row md:items-center md:gap-8 max-w-[460px] mx-auto">
-      <Logo class="h-8 w-auto" />
-
-      <div class="flex flex-col md:flex-row items-center gap-2 text-[12px] leading-normal">
-        <a href="/blog" class="text-[var(--ink)] hover:text-[var(--accent)] transition-colors">Blog</a>
-        <a href="/about" class="text-[var(--ink)] hover:text-[var(--accent)] transition-colors">About</a>
-        <a href="/contact" class="text-[var(--ink)] hover:text-[var(--accent)] transition-colors">Contact</a>
-        <a href="/privacy" class="text-[var(--ink)] hover:text-[var(--accent)] transition-colors">Privacy Policy</a>
-        <a href="/terms" class="text-[var(--ink)] hover:text-[var(--accent)] transition-colors">Terms</a>
-      </div>
-
-      <p class="mt-2 text-[12px] leading-normal text-faint antialiased">
-        © {currentYear} instanten. All rights reserved.
+  <div class="site-container py-12">
+    <div data-footer-inner class="flex flex-col items-center text-center gap-3 max-w-[410px] mx-auto">
+      <Logo />
+      <p class="text-[14px] leading-[22px] text-muted">
+        A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
       </p>
-      <p class="mt-1 text-[11px] leading-normal text-faint antialiased">
-        Kuch links affiliate links hain. Purchase par hume commission mil sakta hai.
+      <div class="mt-2 flex items-center justify-center gap-2" role="list" aria-label="Social links">
+        {socialLinks.map((social) => (
+          <a
+            href={social.href}
+            class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
+            aria-label={social.label}
+            target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
+            rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            <social.icon size={20} style="fill: currentColor;" />
+          </a>
+        ))}
+      </div>
+      <QuickLinksBar variant="footer" />
+      <p class="mt-4 text-[12px] leading-normal text-faint">
+        &copy; {currentYear} instanten. All rights reserved.
       </p>
     </div>
   </div>

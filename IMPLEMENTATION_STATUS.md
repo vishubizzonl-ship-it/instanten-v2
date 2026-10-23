@@ -49,7 +49,7 @@
 ## Tests / Verification
 
 - `npm run check`: **PASS** (0 errors, 0 warnings)
-- `npm run build`: **PASS** (87 static pages generated)
+- `npm run build`: **PASS** (100 static pages generated)
 - `npm test`: **PASS** (13 tests passing)
 - Build errors: **None**
 
@@ -60,6 +60,13 @@
 - `src/components/icons/Twitter.astro` — X (Twitter) social icon
 - `src/components/icons/LinkedIn.astro` — LinkedIn social icon
 - `src/components/icons/Email.astro` — Email social icon
+- `src/components/BlogCard.astro` — Blog card component
+- `src/components/BlogGrid.astro` — Blog grid component
+- `src/components/BlogPagination.astro` — Blog pagination component
+- `src/pages/blog/` — Blog section with index, [slug], and page routes
+- `src/pages/blog/index.astro` — Blog homepage
+- `src/pages/blog/[slug].astro` — Blog post detail page
+- `src/pages/blog/page/[page].astro` — Blog pagination page
 
 ### Modified Components
 - `src/components/Header.astro` — Rebuilt to match reference (88px, precise control sizing/order)
@@ -72,6 +79,9 @@
 - `src/components/MobileDrawer.astro` — Full-height with tool-relevant sections, category links, social links, theme toggle
 - `src/components/ScrollToTop.astro` — 48×48px bottom-right control
 - `src/components/Logo.astro` — Updated sizing
+- `src/components/BlogCard.astro` — Blog card with metadata and type-safe props
+- `src/components/BlogGrid.astro` — Blog grid with type-safe post mapping
+- `src/components/BlogPagination.astro` — Blog pagination with accessible controls
 - `src/pages/index.astro` — Updated structure with correct spacing
 
 ### Modified Styles
@@ -103,7 +113,7 @@
 
 | Check | Status | Notes |
 |---|---|---|
-| Routes (87 pages) | PASS | All `/`, `/about/`, `/categories/`, `/pricing/`, `/tags/`, `/makers/`, `/search/`, `/submit/`, `/privacy/`, `/terms/`, `/404/`, `/tools/[slug]/`, `/category/[slug]/`, `/tag/[slug]/`, `/maker/[slug]/`, `/page/[page]/` return 200 |
+| Routes (100 pages) | PASS | All `/`, `/about/`, `/categories/`, `/pricing/`, `/tags/`, `/makers/`, `/search/`, `/submit/`, `/privacy/`, `/terms/`, `/404/`, `/tools/[slug]/`, `/category/[slug]/`, `/tag/[slug]/`, `/maker/[slug]/`, `/page/[page]/` return 200 |
 | Mobile drawer | PASS | Slide animation, focus trap, backdrop, close on link click / Escape |
 | Search panel | PASS | ⌘K open, `/` open, Esc close, Tab trap, form submits to `/search/` |
 | Theme toggle | PASS | Dark/light swap, localStorage persist, Ctrl+Shift+L, system pref respect |

@@ -1,0 +1,216 @@
+---
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  item: string;
+}
+
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  ogImageAlt?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  tags?: string[];
+  noindex?: boolean;
+  includeAppSchema?: boolean;
+  faqs?: FaqItem[];
+  breadcrumbs?: BreadcrumbItem[];
+  extraSchemas?: object[];
+}
+
+const SITE_NAME = 'Instanten';
+const BASE_URL = (Astro.site ? Astro.site.toString() : 'https://instanten.com').replace(/\/$/, '');
+
+const {
+  title = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
+  description = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.',
+  keywords = 'instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert',
+  canonicalPath = Astro.url.pathname,
+  ogType = 'website',
+  ogImage = '/og-instanten.svg',
+  ogImageAlt = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
+  publishedTime,
+  modifiedTime,
+  section = 'Instant Tools & Guides',
+  tags = [
+    'instanten',
+    'Instanten tool',
+    'Instanten tools',
+    'Instant help',
+    'Instant tool',
+    'Instant tools',
+    'Instant online',
+    'Instant convert',
+  ],
+  noindex = false,
+  includeAppSchema = false,
+  faqs = [],
+  breadcrumbs = [],
+  extraSchemas = [],
+} = Astro.props;
+
+const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+const canonicalUrl = `${BASE_URL}${cleanPath}`;
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${BASE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+
+const jsonLdGraph: Record<string, any>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${BASE_URL}/#website`,
+    name: SITE_NAME,
+    alternateName: ['Instanten Tools', 'Instanten Online'],
+    url: BASE_URL,
+    description:
+      'Free instant online platform featuring fast Instanten tools, instant convert utilities, and practical instant help guides.',
+    inLanguage: 'en',
+    publisher: { '@id': `${BASE_URL}/#organization` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${BASE_URL}/#organization`,
+    name: SITE_NAME,
+    url: BASE_URL,
+    logo: `${BASE_URL}/favicon.svg`,
+    description:
+      'Instanten provides free browser-based instant tools, instant convert helpers, and step-by-step guides for everyday productivity.',
+  },
+];
+
+if (includeAppSchema) {
+  jsonLdGraph.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: SITE_NAME,
+    alternateName: 'Instanten Online Tools',
+    url: BASE_URL,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires a modern browser with JavaScript enabled',
+    isAccessibleForFree: true,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    featureList: [
+      'Free browser-based Instanten tools with zero sign-up required',
+      'Fast instant convert workflows for formatting, units, and data',
+      'Instant online access on Android, iOS, Windows, macOS, and Linux',
+      'Practical instant help tutorials and worked examples on the Blog',
+      'Instant Light Mode and Dark Mode theme support',
+    ],
+    description,
+  });
+}
+
+if (ogType === 'article') {
+  jsonLdGraph.push({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: publishedTime || new Date().toISOString(),
+    dateModified: modifiedTime || publishedTime || new Date().toISOString(),
+    author: { '@type': 'Organization', name: SITE_NAME, url: BASE_URL },
+    publisher: { '@id': `${BASE_URL}/#organization` },
+    mainEntityOfPage: canonicalUrl,
+    image: absoluteOgImage,
+    keywords: tags.join(', '),
+  });
+}
+
+if (breadcrumbs.length > 0) {
+  jsonLdGraph.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: crumb.name,
+      item: crumb.item.startsWith('http') ? crumb.item : `${BASE_URL}${crumb.item}`,
+    })),
+  });
+}
+
+if (faqs.length > 0) {
+  jsonLdGraph.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  });
+}
+
+if (extraSchemas && extraSchemas.length > 0) {
+  jsonLdGraph.push(...extraSchemas);
+}
+---
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={SITE_NAME} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+<link rel="alternate" hreflang="en" href={canonicalUrl} />
+<meta
+  name="robots"
+  content={noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+/>
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:secure_url" content={absoluteOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+
+{ogType === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{ogType === 'article' && (modifiedTime || publishedTime) && (
+  <meta property="article:modified_time" content={modifiedTime || publishedTime} />
+)}
+{ogType === 'article' && section && (
+  <meta property="article:section" content={section} />
+)}
+{ogType === 'article' && tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteOgImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
+
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)" />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />

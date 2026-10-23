@@ -1,0 +1,14 @@
+{
+  "slug": "free-developer-tools-2024",
+  "title": "15 Free Developer Tools That Will Transform Your Workflow",
+  "excerpt": "Stop paying for expensive subscriptions. These hand-picked free tools cover everything from API testing and database design to code profiling and deployment — all without spending a dime.",
+  "thumbnail": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=450&fit=crop",
+  "thumbnailAlt": "Developer workspace with multiple monitors showing code",
+  "categories": [
+    { "name": "TOOLS", "slug": "tools" },
+    { "name": "FREE RESOURCES", "slug": "free-resources" }
+  ],
+  "author": { "name": "CompileFuture", "slug": "compilefuture" },
+  "publishedAt": "2024-01-05",
+  "readingTime": 10
+}

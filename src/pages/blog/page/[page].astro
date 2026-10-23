@@ -1,0 +1,57 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogGrid from '../../../components/BlogGrid.astro';
+import BlogPagination from '../../../components/BlogPagination.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('blog');
+  const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+  const totalPosts = sortedPosts.length;
+
+  const POSTS_PER_PAGE = totalPosts > 10 ? 10 : Math.ceil(totalPosts / 2);
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+    props: { pageNum: i + 1, totalPages, POSTS_PER_PAGE, sortedPosts },
+  }));
+}
+
+const { pageNum, totalPages, POSTS_PER_PAGE, sortedPosts } = Astro.props;
+
+const pagePosts = sortedPosts
+  .slice((pageNum - 1) * POSTS_PER_PAGE, pageNum * POSTS_PER_PAGE)
+  .map((post) => ({
+    slug: post.data.slug,
+    title: post.data.title,
+    excerpt: post.data.excerpt,
+    thumbnail: post.data.thumbnail,
+    thumbnailAlt: post.data.thumbnailAlt,
+    categories: post.data.categories,
+    author: post.data.author,
+    publishedAt: post.data.publishedAt,
+  }));
+
+const pageTitle = pageNum === 1
+  ? 'Latest Articles — instanten'
+  : `Page ${pageNum} of ${totalPages} — Latest Articles — instanten`;
+
+const pageDescription = pageNum === 1
+  ? 'Browse our latest articles on development, design, and technology.'
+  : `Browse page ${pageNum} of ${totalPages} of our latest articles.`;
+
+const canonicalURL = pageNum === 1
+  ? 'https://instanten.com/blog/'
+  : `https://instanten.com/blog/page/${pageNum}/`;
+---
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+  <section class="site-container pb-[64px]" aria-label="Latest articles">
+    <BlogGrid posts={pagePosts} />
+    <BlogPagination
+      currentPage={pageNum}
+      totalPages={totalPages}
+      basePath="/blog"
+    />
+  </section>
+</Layout>

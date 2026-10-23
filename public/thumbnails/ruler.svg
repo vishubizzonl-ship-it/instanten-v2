@@ -3,5 +3,5 @@
   <rect x="40" y="140" width="560" height="24" rx="4" fill="#9895FF" />
   <rect x="40" y="180" width="420" height="16" rx="3" fill="#514DCC" opacity="0.4" />
   <circle cx="580" cy="152" r="6" fill="#29294B" />
-  <text x="320" y="220" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" font-weight="600" fill="#29294B" letter-spacing="-0.5">Online Ruler</text>
+  <text x="320" y="240" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" font-weight="600" fill="#29294B" letter-spacing="-0.5">Online Ruler</text>
 </svg>

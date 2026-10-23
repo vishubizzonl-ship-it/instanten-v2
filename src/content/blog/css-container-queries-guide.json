@@ -1,0 +1,14 @@
+{
+  "slug": "css-container-queries-guide",
+  "title": "CSS Container Queries: The Complete Guide to Responsive Components",
+  "excerpt": "Move beyond media queries. Container queries let components adapt to their parent container, not the viewport. Learn the syntax, use cases, and browser support for this game-changing CSS feature.",
+  "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=450&fit=crop",
+  "thumbnailAlt": "CSS code showing container query syntax with responsive layout",
+  "categories": [
+    { "name": "CSS", "slug": "css" },
+    { "name": "FRONTEND", "slug": "frontend" }
+  ],
+  "author": { "name": "CompileFuture", "slug": "compilefuture" },
+  "publishedAt": "2023-12-22",
+  "readingTime": 9
+}
