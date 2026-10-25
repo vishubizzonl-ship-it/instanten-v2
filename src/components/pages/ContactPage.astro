@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const pageTitle = lang === 'en' ? `Contact — ${SITE_NAME}` : `${t('contact.h1')} — ${SITE_NAME}`;
+const pageDescription = page.contact.description;
+const canonicalURL = lang === 'en' ? `${SITE_URL}/contact/` : `${SITE_URL}/${lang}/contact/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  keywords={`contact instanten, feedback, independent software, instant tools, $0 cost, ${lang}`}
+  lang={lang}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink />
+
+      <h1 class="ror-h1">{t('contact.h1')}</h1>
+      <p class="ror-lead">
+        {t('contact.leadBefore')} <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a>{t('contact.leadAfter')}
+      </p>
+
+      <form id="contact-form" class="ror-form" novalidate>
+        <div class="ror-field">
+          <label for="cf-name" class="ror-label">{t('contact.name')}</label>
+          <input id="cf-name" name="name" type="text" placeholder={t('contact.placeholderName')} autocomplete="name" required class="ror-input" />
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-email" class="ror-label">{t('contact.emailLabel')}</label>
+          <input id="cf-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required class="ror-input" />
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-subject" class="ror-label">{t('contact.topic')}</label>
+          <select id="cf-subject" name="subject" class="ror-select" required>
+            <option value="" disabled selected>{t('contact.selectTopic')}</option>
+            <option value="bug">{t('contact.bug')}</option>
+            <option value="feature">{t('contact.feature')}</option>
+            <option value="standards">{t('contact.standards')}</option>
+            <option value="privacy">{t('contact.privacyInquiry')}</option>
+            <option value="other">{t('contact.other')}</option>
+          </select>
+        </div>
+
+        <div class="ror-field">
+          <label for="cf-message" class="ror-label">{t('contact.messageLabel')}</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder={t('contact.placeholderMessage')} required class="ror-textarea"></textarea>
+        </div>
+
+        <div>
+          <button type="submit" class="ror-submit-btn">{t('contact.submit')}</button>
+        </div>
+
+        <div id="cf-success" class="ror-alert-success">{t('contact.success')}</div>
+        <div id="cf-error" class="ror-alert-error">{t('contact.error')}</div>
+      </form>
+
+      <section class="ror-section ror-section--contact-details" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #ebebeb;">
+        <h2 class="ror-h2" style="font-size: 18px; margin-bottom: 12px;">{t('contact.channelsHeading')}</h2>
+        <ul class="ror-ul" style="margin-top: 0;">
+          <li><strong>{t('contact.channelWebsite')}</strong> — <a href={translatePath('/contact/')} class="ror-link">{t('contact.channelThisPage')}</a></li>
+          <li><strong>{t('contact.channelEmail')}</strong> — <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a> ({t('contact.channelVerifiedEmail')})</li>
+          <li><strong>{t('contact.channelSocial')}</strong> — {t('contact.channelSocialText')}</li>
+        </ul>
+        <p class="ror-p" style="margin-top: 16px; font-size: 14px; color: #888;">
+          {t('contact.note')}
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('cf-success');
+      const error = document.getElementById('cf-error');
+
+      if (!form || !success || !error) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('cf-name').value.trim();
+        const email = document.getElementById('cf-email').value.trim();
+        const subject = document.getElementById('cf-subject').value.trim();
+        const message = document.getElementById('cf-message').value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name || !email || !subject || !message || !emailRegex.test(email)) {
+          success.style.display = 'none';
+          error.style.display = 'block';
+          return;
+        }
+
+        error.style.display = 'none';
+        success.style.display = 'block';
+        form.reset();
+      });
+    })();
+  </script>
+</Layout>

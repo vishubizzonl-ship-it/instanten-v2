@@ -1,220 +1,91 @@
 ---
-export const homeFaqs = [
-  {
-    question: 'What is Instanten and is it completely free to use?',
-    answer:
-      'Yes — Instanten is an independent, free browser-based software project built and maintained for developers, designers, students, and everyday users across the United States and worldwide. Every utility runs at $0 with zero sign-up, zero subscriptions, and zero hidden limits.',
-  },
-  {
-    question: 'How do I use an Instanten tool without creating an account?',
-    answer:
-      'Simply open any Instanten tool from the homepage or navigation bar, enter your input, and copy the result immediately — no login, email verification, or account creation is ever required.',
-  },
-  {
-    question: 'What types of workflows are included in Instanten tools?',
-    answer:
-      'Instanten tools cover everyday formatting, quick calculations, developer and creator utilities, and practical workflow helpers paired with clear step-by-step documentation based on public U.S. and international engineering standards.',
-  },
-  {
-    question: 'How does Instanten provide instant help for daily tasks?',
-    answer:
-      'Alongside one-click browser utilities, Instanten publishes concise troubleshooting steps, examples, and Blog guides so U.S. readers get immediate answers without digging through long forums or paying $12–$29/month for single-purpose SaaS subscriptions.',
-  },
-  {
-    question: 'Can I open every instant tool on mobile as well as desktop?',
-    answer:
-      'Yes. Every instant tool on Instanten uses a responsive layout built for Android phones, iPhones, iPads, Macs, and Windows PCs, including full Light and Dark Mode support.',
-  },
-  {
-    question: 'Why choose browser-based instant tools instead of downloading apps?',
-    answer:
-      'Browser-based instant tools start immediately, take zero device storage, require no permissions, stay updated automatically, and process data locally in your browser without sending files to remote servers.',
-  },
-  {
-    question: 'Does Instanten work as an instant online platform in any browser?',
-    answer:
-      'Yes — Instanten runs directly in Chrome, Safari, Firefox, Edge, and Brave as an instant online web application with fast static page delivery optimized for U.S. mobile 5G and broadband Core Web Vitals.',
-  },
-  {
-    question: 'How accurate and fast are instant convert workflows on Instanten?',
-    answer:
-      'Instant convert operations execute in milliseconds inside your browser using standard formulas — including NIST-defined unit conversions (1 international inch = 25.4 mm exactly) and IETF RFC-compliant data formatting — giving you reliable copy-paste output right away.',
-  },
-];
+import { getLangFromUrl, translatePathSafe } from '../i18n/utils';
+import { getHomeCopy } from '../i18n/homeContent';
+import type { LangCode } from '../i18n/ui';
+
+interface Props {
+  lang?: LangCode;
+}
+
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const copy = getHomeCopy(lang);
+
+export function getHomeFaqs(lang: LangCode) {
+  return getHomeCopy(lang).faqs;
+}
 ---
 
 <div class="ffa-seo-wrapper">
   <section class="ffa-band ffa-band--canvas">
     <div class="ffa-container-wide">
-      <h2 class="ffa-h2-lg">How Instanten works</h2>
+      <h2 class="ffa-h2-lg">{copy.howTitle}</h2>
       <div class="ffa-grid-3">
-        <div class="ffa-card">
-          <p class="ffa-step-num">01</p>
-          <h3 class="ffa-h3-card">Pick an Instanten tool</h3>
-          <p class="ffa-card-body">
-            Open any utility right from the homepage with zero account creation, zero extensions, and zero waiting. Every tool loads directly inside your browser on phone, tablet, or desktop — no app store, no installer, no $0 versus $12–$29/month subscription decision.
-          </p>
-        </div>
-        <div class="ffa-card">
-          <p class="ffa-step-num">02</p>
-          <h3 class="ffa-h3-card">Run or instant convert live</h3>
-          <p class="ffa-card-body">
-            Paste your text, values, or parameters and see clean output in milliseconds. Whether you need an instant convert step, quick formatting, or structured calculations, results update live as you work. Measurements default to U.S. Customary units (inches with 1/16" and 1/8" fractions) paired cleanly with metric (cm, mm, px) where helpful.
-          </p>
-        </div>
-        <div class="ffa-card">
-          <p class="ffa-step-num">03</p>
-          <h3 class="ffa-h3-card">Copy results &amp; get instant help</h3>
-          <p class="ffa-card-body">
-            Copy accurate results in one click or jump straight into a clear step-by-step guide whenever you need extra context, formulas, or troubleshooting tips. Every guide references authoritative U.S. and international standards — NIST, W3C WCAG 2.2, IETF RFCs — so you can trust the method, not just the number.
-          </p>
-        </div>
+        {copy.steps.map((step, index) => (
+          <div class="ffa-card">
+            <p class="ffa-step-num">{String(index + 1).padStart(2, '0')}</p>
+            <h3 class="ffa-h3-card">{step.title}</h3>
+            <p class="ffa-card-body">{step.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="ffa-band ffa-band--soft">
     <div class="ffa-container-wide">
-      <h2 class="ffa-h2-lg">Built to be trusted, not just fast</h2>
-      <p class="ffa-lead">
-        Most utility sites bury simple ten-second tasks behind pop-ups, heavy scripts, and login walls. Instanten keeps every workflow clean, transparent, and distraction-free — built by real developers and engineers who cite real public standards.
-      </p>
+      <h2 class="ffa-h2-lg">{copy.trustTitle}</h2>
+      <p class="ffa-lead">{copy.trustLead}</p>
       <div class="ffa-grid-2">
-        <div class="ffa-card">
-          <h3 class="ffa-h3-card">Zero sign-up instant help</h3>
-          <p class="ffa-card-body">
-            Every utility and guide opens ready to work. You never hand over an email address, start a trial, or create a password just to solve a quick daily task. That is the core promise of Instanten: $0 cost, zero accounts, full functionality.
-          </p>
-        </div>
-        <div class="ffa-card">
-          <h3 class="ffa-h3-card">Fast instant online delivery</h3>
-          <p class="ffa-card-body">
-            Pages are statically pre-rendered with minimal scripts, so each instant tool responds immediately even on U.S. mobile 5G and broadband connections. Fast delivery supports Core Web Vitals targets — LCP under 2.5 seconds, FID under 100 ms, CLS under 0.1 — so your experience stays smooth from coast to coast.
-          </p>
-        </div>
-        <div class="ffa-card">
-          <h3 class="ffa-h3-card">Verified instant convert accuracy</h3>
-          <p class="ffa-card-body">
-            From unit, format, and data transformations to developer and creator helpers, outputs follow standard rules in copy-ready format. Online Ruler calibration references the standard U.S. credit/debit card and driver's license size (ISO/IEC 7810 ID-1: 3.370 × 2.125 inches / 85.60 × 53.98 mm) and the NIST exact definition (1 international inch = 25.4 millimeters exactly). Color Palette contrast follows W3C WCAG 2.2 Level AA ratios (4.5:1 normal text, 3:1 large text) used across U.S. ADA Title III and Section 508 accessible web design.
-          </p>
-        </div>
-        <div class="ffa-card">
-          <h3 class="ffa-h3-card">Browser-first privacy</h3>
-          <p class="ffa-card-body">
-            Processing runs inside your browser session whenever possible, and theme settings stay in local storage on your own device. Instanten does not sell or share personal data for cross-context behavioral advertising, in full compliance with California CCPA/CPRA (Cal. Civ. Code § 1798.140) and applicable U.S. state privacy laws including Virginia VCDPA, Colorado CPA, Connecticut CTDPA, Texas, and Oregon.
-          </p>
-        </div>
+        {copy.trustCards.map((card) => (
+          <div class="ffa-card">
+            <h3 class="ffa-h3-card">{card.title}</h3>
+            <p class="ffa-card-body">{card.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="ffa-band ffa-band--soft ffa-band--border-top">
     <div class="ffa-container-prose">
-      <h2 class="ffa-h2-lg">Instanten, explained</h2>
-      <p class="ffa-lead">
-        How our instant tools work, what you can accomplish in seconds, and why fast browser utilities beat bulky downloads — all validated against real public engineering standards.
-      </p>
+      <h2 class="ffa-h2-lg">{copy.explainTitle}</h2>
+      <p class="ffa-lead">{copy.explainLead}</p>
 
-      <div class="ffa-prose-block">
-        <h3 class="ffa-h3-prose">What Instanten does</h3>
-        <p class="ffa-p">
-          Every day, students, developers, writers, designers, and teams across the United States run into dozens of small digital tasks — formatting data, running an <strong>instant convert</strong> check, cleaning text, calculating values, or looking up technical answers. Opening heavy desktop software for a thirty-second job wastes momentum, while random search results often lead to cluttered screens full of intrusive banners and broken buttons. Paying $12–$29/month for a single-purpose SaaS tool for that thirty-second job is overkill.
-        </p>
-        <p class="ffa-p">
-          <strong>Instanten</strong> solves that problem in one clean place. Built as a fast, modern hub of free <strong>instant tools</strong> and practical tutorials, <strong>Instanten</strong> brings everyday utilities and clear explanations together inside a lightweight <strong>instant online</strong> workspace — with no account, no usage cap, no subscription, and no paywall standing in front of your answer. Whether you need an <strong>Instanten tool</strong>, quick <strong>Instant help</strong>, or a reliable <strong>Instant convert</strong> workflow, every feature is available at $0.
-        </p>
-      </div>
-
-      <div class="ffa-prose-block">
-        <h3 class="ffa-h3-prose">Why an Instanten tool feels effortless</h3>
-        <p class="ffa-p">
-          Speed alone is only half the job; clarity matters just as much. Every <strong>Instanten tool</strong> puts input and output front and center with touch-friendly mobile controls, clean keyboard navigation on desktop, and instant Light and Dark Mode switching that remembers your preference across pages.
-        </p>
-        <p class="ffa-p">
-          Three engineering rules guide the entire <strong>Instanten tools</strong> library:
-        </p>
-        <ul class="ffa-dot-list">
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Instant startup with zero bloat</strong> — static HTML pages load almost immediately across Chrome, Safari, Firefox, and Edge. Every instant tool, every instant online page, and every instant help guide is pre-rendered for speed.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Copy-ready, standards-based output</strong> — whether you run an instant convert utility or a formatting helper, results paste cleanly into code, docs, or spreadsheets. JSON Formatter validates against IETF RFC 8259. Base64 Encoder follows IETF RFC 4648. Markdown Editor outputs CommonMark-compliant text. Meta Tag Generator follows Google Search Central snippet and Open Graph guidelines.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Practical context right beside the tool</strong> — our guides explain edge cases and best practices so you get genuine <strong>instant help</strong>, not just raw numbers. From measuring U.S. Letter (8.5 × 11 in) assets to checking WCAG 2.2 AA contrast ratios, every explanation is grounded in verifiable U.S. and international standards.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="ffa-prose-block">
-        <h3 class="ffa-h3-prose">Everyday tasks you can finish with Instanten tools</h3>
-        <ul class="ffa-dot-list">
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Fast formatting and instant convert tasks</strong> — transform units, structured text, code snippets, or document values without manual math mistakes. Check measurements in inches (with 1/16" precision) alongside millimeters, verify U.S. Letter (8.5 × 11 in) and standard U.S. bank card sizes (3.370 × 2.125 in), and format RFC-compliant JSON or Base64 payloads.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Developer and creator workflows</strong> — clean, inspect, validate, and prepare assets faster during coding sprints, publishing, or design handoffs. Use CSS Grid Generator with W3C CSS Grid Layout specs, test Markdown with CommonMark, and verify meta tags with Google Search Central recommendations.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Student and office instant help</strong> — verify calculations, check references, and follow step-by-step walkthroughs on any phone, Chromebook, or PC. Students can measure screen assets in inches and millimeters, verify accessibility contrast ratios, and format technical data — all at $0 instead of buying expensive single-purpose software.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Actionable AI and productivity guides</strong> — read our <a href="/blog" class="ffa-inline-link">Instanten Blog</a> for practical tutorials on modern tools, smart workflows, and browser-based efficiency. Every guide references real standards: NIST length conversions, W3C WCAG 2.2 accessibility, IETF RFC 8259 JSON, IETF RFC 4648 Base64, and CommonMark Markdown specification.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="ffa-prose-block">
-        <h3 class="ffa-h3-prose">Why instant online tools beat heavy installers</h3>
-        <p class="ffa-p">
-          Native desktop suites make sense for multi-gigabyte video rendering, not quick daily utilities. Running an <strong>instant online</strong> toolkit directly in your browser removes OS compatibility headaches, storage bloat, background updaters, and license prompts — the exact same <strong>instant tool</strong> works identically on Windows, macOS, Linux, Android, and iOS. Learn more about our philosophy on the <a href="/about" class="ffa-inline-link">About page</a>, where we explain how Instanten verifies tools against NIST, W3C, and IETF specifications without making any false corporate claims.
-        </p>
-      </div>
-
-      <div class="ffa-prose-block">
-        <h3 class="ffa-h3-prose">How to get the best results on Instanten</h3>
-        <ul class="ffa-dot-list">
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Bookmark the homepage for one-tap access.</strong> Pin Instanten to your browser bar or mobile home screen so every instant tool is always one tap away during busy work sessions — whether you are a developer in San Francisco, a student in Chicago, or a designer in Austin.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Use clean, plain input first.</strong> Paste unformatted values when running an instant convert check so hidden spaces or rich-text characters never interfere with your output. This is especially important for JSON Formatter and Base64 Encoder, where whitespace sensitivity can affect results.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Pair utilities with worked examples.</strong> Whenever a task involves unfamiliar rules or edge cases — such as measuring in inches (1/16" precision) or checking WCAG 2.2 AA contrast ratios — open our <a href="/blog" class="ffa-inline-link">Blog guides</a> for practical walkthroughs and ready-to-use examples based on real U.S. engineering and design practices.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Switch themes for long reading sessions.</strong> Toggle between crisp Light Mode and low-glare Dark Mode from the top header pill or slide-out menu at any time. Your preference is saved in browser localStorage and never transmitted to any server.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Share direct page links with teammates.</strong> Every guide and utility on Instanten uses a clean, permanent URL with full Open Graph preview cards for effortless sharing on Slack, WhatsApp, X, or email. All meta tags follow Google Search Central and Open Graph Protocol guidelines.</span>
-          </li>
-          <li>
-            <span class="ffa-dot"></span>
-            <span><strong>Suggest the next feature you need.</strong> Missing a specific instant convert helper or workflow guide? Visit our <a href="/contact" class="ffa-inline-link">Contact page</a> and tell us what would save you time next — whether it is a new measurement standard reference, an accessibility check, or a developer formatting utility.</span>
-          </li>
-        </ul>
-      </div>
+      {copy.blocks.map((block) => (
+        <div class="ffa-prose-block">
+          <h3 class="ffa-h3-prose">{block.title}</h3>
+          {block.paragraphs?.map((paragraph) => (
+            <p class="ffa-p">{paragraph}</p>
+          ))}
+          {block.bullets && (
+            <ul class="ffa-dot-list">
+              {block.bullets.map((bullet) => (
+                <li>
+                  <span class="ffa-dot"></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {block.links && (
+            <p class="ffa-p">
+              {block.links.map((link) => (
+                <a href={translatePathSafe(link.href, lang)} class="ffa-inline-link">
+                  {link.label}
+                </a>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
     </div>
   </section>
 
   <section class="ffa-band ffa-band--canvas" id="faq">
     <div class="ffa-container-wide">
-      <h2 class="ffa-h2-lg">Frequently asked questions</h2>
+      <h2 class="ffa-h2-lg">{copy.faqTitle}</h2>
       <div class="ffa-faq-list">
-        {homeFaqs.map((item) => (
+        {copy.faqs.map((item) => (
           <details class="ffa-faq-item">
             <summary class="ffa-faq-summary">
               <span>{item.question}</span>

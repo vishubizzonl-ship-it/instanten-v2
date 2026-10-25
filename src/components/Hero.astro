@@ -1,10 +1,14 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 interface Props {
   toolCount: number;
   categoryCount: number;
 }
 
 const { toolCount, categoryCount } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section aria-labelledby="hero-title">
   <div class="site-container flex flex-col items-center pt-8 pb-10 text-center md:pt-16 md:pb-16">
@@ -12,11 +16,11 @@ const { toolCount, categoryCount } = Astro.props;
       id="hero-title"
       class="max-w-[920px] font-display font-bold leading-[62px] tracking-[-0.03em] text-[52px] text-ink"
     >
-      Useful SaaS tools, ready in an instant.
+      {t('hero.title')}
     </h1>
 
     <p class="mt-10 max-w-[640px] text-[18px] leading-[28px] text-body">
-      A curated directory of genuinely useful SaaS tools for developers, designers, writers, and builders. No fluff. No dead links.
+      {t('hero.subtitle')}
     </p>
 
     <div class="mt-10 flex items-center justify-center gap-4 md:mt-16">

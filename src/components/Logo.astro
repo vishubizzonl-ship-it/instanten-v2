@@ -1,11 +1,14 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 const { href = '/' } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <a
   href={href}
   class="cs-logo inline-flex items-center site-brand-logo"
   data-site-logo="true"
-  aria-label="instanten home"
+  aria-label={t('aria.siteLogo')}
 >
   <span class="cs-logo-text">
     instanten
@@ -32,10 +35,11 @@ const { href = '/' } = Astro.props;
     color: #000000 !important;
     -webkit-text-stroke: 0.7px currentColor !important;
     paint-order: stroke fill !important;
-    display: inline-block !important;
-    padding: 2px 8px 2px 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0 4px !important;
     max-width: 280px !important;
-    height: 18px !important;
+    height: auto !important;
     overflow: visible !important;
   }
 

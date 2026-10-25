@@ -2,15 +2,20 @@
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import LanguagePicker from './LanguagePicker.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 <header class="w-full bg-canvas">
-  <div data-mobile-bar class="site-container flex h-[64px] items-center gap-4 lg:hidden">
-    <div class="flex items-center justify-start min-w-0 flex-1">
+  <div data-mobile-bar class="site-container relative flex h-[64px] items-center justify-between lg:hidden">
+    <div class="flex items-center justify-start z-10 shrink-0">
       <button
         type="button"
         data-menu-open
         class="cs-menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink hover:bg-hairline-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-        aria-label="Open menu"
+        aria-label={t('aria.openMenu')}
         aria-controls="mobile-drawer"
         aria-expanded="false"
       >
@@ -19,56 +24,38 @@ import LanguagePicker from './LanguagePicker.astro';
         </svg>
       </button>
     </div>
-    <Logo class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start min-w-0 text-ink font-display font-bold text-xl tracking-tight whitespace-nowrap" />
-    <div class="flex items-center justify-end min-w-0 flex-1">
-      <button
-        type="button"
-        data-search-open
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink"
-        aria-haspopup="dialog"
-        aria-controls="search-panel"
-        aria-expanded="false"
-        aria-label="Search tools"
-      >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="9" cy="9" r="6.2"></circle>
-          <path d="m13.6 13.6 3.2 3.2"></path>
-        </svg>
-      </button>
-      <div class="inline-flex items-center" aria-label="Language picker mobile">
-        <LanguagePicker />
+    <div class="header-logo-center absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="pointer-events-auto flex items-center justify-center">
+        <Logo href={translatePath('/')} class="flex items-center justify-center min-w-0 text-ink font-display font-bold text-xl tracking-tight whitespace-nowrap" />
+      </div>
+    </div>
+    <div class="flex items-center justify-end z-10 shrink-0">
+      <div class="inline-flex items-center" aria-label={t('aria.languagePicker')}>
+        <LanguagePicker placement="header" />
       </div>
     </div>
   </div>
 
-  <div data-desktop-bar class="site-container hidden h-[80px] items-center gap-4 lg:flex">
-    <Logo class="flex-none" />
-    <div class="hidden items-center gap-2 lg:flex" aria-label="Header actions">
-      <button
-        type="button"
-        data-search-open
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent text-body transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-        aria-haspopup="dialog"
-        aria-controls="search-panel"
-        aria-expanded="false"
-        aria-label="Search tools"
-        title="Search tools (⌘K)"
-      >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="9" cy="9" r="6.2"></circle>
-          <path d="m13.6 13.6 3.2 3.2"></path>
-        </svg>
-      </button>
+  <div data-desktop-bar class="site-container relative hidden h-[80px] items-center justify-between lg:flex">
+    <div class="desktop-left-placeholder flex items-center min-w-[200px] shrink-0">
+      <!-- Empty left anchor balances header for true centering of logo -->
+    </div>
+    <div class="header-logo-center absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="pointer-events-auto flex items-center justify-center">
+        <Logo href={translatePath('/')} class="flex-none" />
+      </div>
+    </div>
+    <div class="flex items-center gap-2 z-10 shrink-0" aria-label={t('aria.headerActions')}>
       <ThemeToggle showLeftDivider={true} />
-      <div class="hidden lg:inline-flex" aria-label="Language picker">
-        <LanguagePicker />
+      <div class="inline-flex" aria-label={t('aria.languagePicker')}>
+        <LanguagePicker placement="header" />
       </div>
       <a
-        href="/submit/"
+        href={translatePath('/submit/')}
         class="inline-flex h-10 min-w-[140px] items-center justify-center rounded-[8px] bg-ink text-canvas text-body-sm font-medium transition-opacity hover:opacity-86 whitespace-nowrap"
-        aria-label="Submit a tool"
+        aria-label={t('nav.submit')}
       >
-        Submit a Tool
+        {t('nav.submit')}
       </a>
     </div>
   </div>

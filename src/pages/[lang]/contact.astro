@@ -1,39 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import ContactPage from '../../components/pages/ContactPage.astro';
+import { nonDefaultLangs } from '../../i18n/ui';
 
 export function getStaticPaths() {
   return nonDefaultLangs.map((lang) => ({ params: { lang } }));
 }
-
-const { lang } = Astro.params as { lang: LangCode };
-const t = useTranslations(lang);
 ---
 
-<Layout
-  title={`${t('contact.title')}`}
-  description="Contact Instanten — independent software project questions, suggestions, and feedback. Zero fake addresses. Real public standards."
-  keywords="contact instanten, feedback, independent software, instant tools, $0 cost"
-  canonicalURL={`https://instanten.com/${lang}/contact/`}
-  lang={lang}
->
-  <main class="site-container py-16 max-w-xl mx-auto">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">{t('contact.heading')}</h1>
-    <p class="text-muted mb-10">{t('contact.messageLabel') ? 'Send us a message — ' + t('contact.messageLabel') : 'Send us a message — we read everything.'}</p>
-
-    <form class="space-y-5" onsubmit="event.preventDefault(); this.innerHTML='<p class=\'text-green-600 font-medium\'>Message sent. Thank you.</p>';">
-      <div>
-        <label for="email" class="block text-sm font-medium mb-1.5">{t('contact.emailLabel') || 'Email'}</label>
-        <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-border-hairline bg-canvas px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" required />
-      </div>
-      <div>
-        <label for="message" class="block text-sm font-medium mb-1.5">{t('contact.messageLabel') || 'Message'}</label>
-        <textarea id="message" rows="5" placeholder="What would you like to tell us?" class="w-full rounded-lg border border-border-hairline bg-canvas px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-y" required></textarea>
-      </div>
-      <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-ink text-canvas px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity">
-        {t('contact.submit') || 'Send message'}
-      </button>
-    </form>
-  </main>
-</Layout>
+<ContactPage />

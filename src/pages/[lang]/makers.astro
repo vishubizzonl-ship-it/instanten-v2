@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allTools = await getCollection('tools');
+const allMakers = [...new Set(allTools.map(t => t.data.maker).filter((m): m is string => Boolean(m)))].sort();
+const makerCounts = allMakers.map(maker => ({
+  name: maker,
+  count: allTools.filter(t => t.data.maker === maker).length,
+  slug: maker.toLowerCase().replace(/\s+/g, '-'),
+}));
+---
+
+<Layout
+  title={`${page.makers.title} — Instanten`}
+  description={page.makers.description}
+  canonicalURL={`https://instanten.com/${lang}/makers/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[{ label: t('nav.home'), href: translatePath('/') }, { label: page.makers.title }]} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{page.makers.title}</h1>
+      <p class="text-body-lg text-muted leading-relaxed">{page.makers.lead}</p>
+    </header>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+      {makerCounts.map(maker => (
+        <a
+          href={translatePath(`/maker/${maker.slug}/`)}
+          class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-faint hover:shadow-whisper transition-colors text-left"
+        >
+          <h2 class="font-display font-semibold text-xl text-ink mb-2">{maker.name}</h2>
+          <p class="text-body-md text-muted mb-4">{maker.count} {maker.count === 1 ? t('tools.toolCountOne') : t('tools.toolCountMany')}</p>
+          <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent">
+            {t('tools.allTools')}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h6M10 7l3-3-3-3" />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

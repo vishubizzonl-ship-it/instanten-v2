@@ -46,16 +46,45 @@
 | Interactions: logo/home, search open/close/submit, theme persistence, drawer open/close, category shortcuts, cards, archives, pagination, external links, 48×48px scroll-to-top | Complete | All components |
 | Responsive: tablet uses mobile header + 2-col grid, mobile 24px padding 1-col, 390px cards 342×192px thumbnails, hero 32px below header H1 42px/50px | Complete | CSS in `src/styles/app.css` |
 
+## Phase 4 — Full i18n Parity (10 Locales: en, de, ja, fr, es, ko, nl, sv, it, pt)
+
+| Item | Status | Evidence |
+|---|---|---|
+| About page parity | Complete | `src/components/pages/AboutPage.astro`, `src/i18n/aboutUi.ts` |
+| Contact page parity | Complete | `src/components/pages/ContactPage.astro`, `src/i18n/contactUi.ts` |
+| Privacy Policy parity (10 sections) | Complete | `src/components/pages/PrivacyPolicyPage.astro`, `src/i18n/privacyUi.ts` |
+| Terms & Conditions parity (9 sections) | Complete | `src/components/pages/TermsPage.astro`, `src/i18n/termsUi.ts` |
+| Blog index page parity | Complete | `src/components/pages/BlogIndexPage.astro`, `src/i18n/blogContent.ts` |
+| Blog post page parity (body + fallback + JSON-LD) | Complete | `src/components/pages/BlogPostPage.astro` |
+| Blog pagination localized routes | Complete | `src/pages/[lang]/blog/page/[page].astro` |
+| Tool detail page parity (all 10 sections) | Complete | `src/components/pages/ToolDetailPage.astro`, `src/i18n/toolContent.ts` |
+| Legacy privacy redirect routes | Complete | `src/pages/[lang]/privacy.astro` |
+| Home pagination SEO cleanup | Complete | `src/pages/[lang]/page/[page].astro` (no duplicate SEO section on sub-pages) |
+
 ## Tests / Verification
 
-- `npm run check`: **PASS** (0 errors, 0 warnings)
-- `npm run build`: **PASS** (100 static pages generated)
+- `npx astro check`: **PASS** (0 errors, 0 warnings)
+- `npm run build`: **PASS** (1041 static pages generated)
 - `npm test`: **PASS** (13 tests passing)
 - Build errors: **None**
 
 ## Files Created / Modified
 
 ### New Files
+- `src/components/BackLink.astro` — BackLink navigation component
+- `src/components/pages/AboutPage.astro` — Shared About page component
+- `src/components/pages/ContactPage.astro` — Shared Contact page component
+- `src/components/pages/PrivacyPolicyPage.astro` — Shared Privacy Policy page component
+- `src/components/pages/TermsPage.astro` — Shared Terms & Conditions page component
+- `src/components/pages/BlogIndexPage.astro` — Shared Blog Index page component
+- `src/components/pages/BlogPostPage.astro` — Shared Blog Post page component
+- `src/components/pages/ToolDetailPage.astro` — Shared Tool Detail page component
+- `src/i18n/aboutUi.ts` — Complete 10-locale About page translations
+- `src/i18n/contactUi.ts` — Complete 10-locale Contact page translations
+- `src/i18n/privacyUi.ts` — Complete 10-locale Privacy Policy (10 sections) translations
+- `src/i18n/termsUi.ts` — Complete 10-locale Terms & Conditions (9 sections) translations
+- `src/pages/[lang]/blog/page/[page].astro` — Localized blog pagination routes
+- `src/pages/[lang]/privacy.astro` — Localized legacy privacy redirect routes
 - `src/components/icons/GitHub.astro` — GitHub social icon
 - `src/components/icons/Twitter.astro` — X (Twitter) social icon
 - `src/components/icons/LinkedIn.astro` — LinkedIn social icon

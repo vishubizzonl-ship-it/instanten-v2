@@ -1,0 +1,274 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { pricingSlug } from '../../utils/filters';
+import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
+import { localizeTool, localizeToolCategory, localizePricing, getPricingNote } from '../../i18n/toolContent';
+
+interface Props {
+  tool: {
+    data: {
+      slug: string;
+      name: string;
+      category: string;
+      description: string;
+      longDescription?: string;
+      pricing: 'Free' | 'Freemium' | 'Paid';
+      pricingDetails?: string;
+      image: string;
+      url: string;
+      tags?: string[];
+      maker?: string;
+      addedDate?: string;
+      updatedDate?: string;
+      features?: string[];
+      useCases?: string[];
+      featured?: boolean;
+    };
+  };
+}
+
+const { tool } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const { category, pricing, pricingDetails, image, url, tags = [], maker, addedDate, updatedDate, features = [], useCases = [], featured = false } = tool.data;
+const localized = localizeTool(lang, tool.data);
+const categoryLabel = localizeToolCategory(lang, category);
+const pricingLabel = localizePricing(lang, pricing);
+const displayPricingDetails = pricingDetails || getPricingNote(lang, pricing);
+const categorySlug = category.toLowerCase();
+
+const pricingColors = {
+  Free: 'bg-success-soft text-success',
+  Freemium: 'bg-warning-soft text-warning',
+  Paid: 'bg-violet-soft text-violet',
+} as const satisfies Record<'Free' | 'Freemium' | 'Paid', string>;
+
+const allTools = await getCollection('tools');
+const otherTools = allTools.filter(t => t.data.slug !== tool.data.slug);
+const relatedTools = otherTools
+  .filter(t => t.data.category === category || (t.data.tags || []).some(tag => tags.includes(tag)))
+  .slice(0, 4);
+
+const pageTitle = `${localized.name} — ${SITE_NAME}`;
+const pageDescription = localized.description;
+const canonicalURL = lang === 'en'
+  ? `${SITE_URL}/tools/${tool.data.slug}/`
+  : `${SITE_URL}/${lang}/tools/${tool.data.slug}/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: localized.name,
+  description: localized.description,
+  url: canonicalURL,
+  applicationCategory: category,
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: pricing === 'Free' ? '0' : undefined,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    description: displayPricingDetails,
+  },
+  author: maker ? { '@type': 'Organization', name: maker } : undefined,
+  datePublished: addedDate,
+  dateModified: updatedDate,
+  featureList: features,
+  screenshot: new URL(image, SITE_URL).href,
+};
+
+const breadcrumbs = [
+  { label: t('nav.home'), href: '/' },
+  { label: t('tools.allTools'), href: '/tools/' },
+  { label: categoryLabel, href: `/category/${categorySlug}/` },
+  { label: localized.name },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  jsonLd={jsonLd}
+  canonicalURL={canonicalURL}
+  keywords={`${localized.name}, ${categoryLabel}, instant tool, instant online, instant convert, $0 cost, ${lang}`}
+  lang={lang}
+>
+  <div class="site-container">
+    <Breadcrumbs items={breadcrumbs.map(b => ({ ...b, href: b.href ? translatePath(b.href === '/' ? '/' : b.href) : undefined }))} />
+  </div>
+
+  <article class="site-container py-section max-w-4xl">
+    <header class="mb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <a href={translatePath(`/category/${categorySlug}/`)} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{categoryLabel}</a>
+        <a href={translatePath(`/pricing/${pricingSlug(pricing)}/`)} class={`text-caption font-medium px-2 py-0.5 rounded-full transition-opacity hover:opacity-75 ${pricingColors[pricing]}`}>{pricingLabel}</a>
+        {featured && <span class="text-caption font-medium px-2 py-0.5 rounded-full bg-accent/90 text-canvas">{t('tools.featured')}</span>}
+      </div>
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{localized.name}</h1>
+      <p class="text-body-lg text-muted leading-relaxed">{localized.description}</p>
+    </header>
+
+    <div class="aspect-video rounded-card overflow-hidden bg-surface-soft border border-border-hairline mb-10">
+      <img
+        src={image}
+        alt={`${localized.name} preview`}
+        class="w-full h-full object-cover"
+        width="640"
+        height="360"
+      />
+    </div>
+
+    {displayPricingDetails && (
+      <section class="mb-10 p-6 rounded-card bg-surface-soft border border-border-hairline">
+        <h2 class="font-display font-semibold text-body-lg text-ink mb-3 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          {t('tools.pricing')}
+        </h2>
+        <p class="text-body-md text-muted leading-relaxed">{displayPricingDetails}</p>
+      </section>
+    )}
+
+    {features.length > 0 && (
+      <section class="mb-10">
+        <h2 class="font-display font-semibold text-body-lg text-ink mb-4 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          {t('tools.features')}
+        </h2>
+        <ul class="grid gap-3 sm:grid-cols-2" role="list">
+          {features.map(feature => (
+            <li class="flex items-start gap-3 p-4 rounded-card bg-surface border border-border-hairline">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-0.5" aria-hidden="true">
+                <path d="M5 10l3 3 7-7"/>
+              </svg>
+              <span class="text-body-md text-ink">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {useCases.length > 0 && (
+      <section class="mb-10">
+        <h2 class="font-display font-semibold text-body-lg text-ink mb-4 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="10" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="10" width="7" height="7" rx="1"/>
+            <rect x="10" y="10" width="7" height="7" rx="1"/>
+          </svg>
+          {t('tools.useCases')}
+        </h2>
+        <ul class="flex flex-wrap gap-2" role="list">
+          {useCases.map(useCase => (
+            <li class="text-body-md px-3 py-1.5 rounded-full border border-border-hairline bg-surface text-muted">{useCase}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {tags.length > 0 && (
+      <section class="mb-10">
+        <h2 class="font-display font-semibold text-body-lg text-ink mb-3 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7.01"/>
+          </svg>
+          {t('tools.tags')}
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <a href={translatePath(`/tag/${tag.toLowerCase()}/`)} class="text-caption font-medium px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted hover:text-ink hover:border-faint transition-colors">{tag}</a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {relatedTools.length > 0 && (
+      <section class="mb-10">
+        <h2 class="font-display font-semibold text-body-lg text-ink mb-6 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          {t('tools.related')}
+        </h2>
+        <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {relatedTools.map(related => {
+            const relLocalized = localizeTool(lang, related.data);
+            const relCategory = localizeToolCategory(lang, related.data.category);
+            const relPricing = localizePricing(lang, related.data.pricing);
+            return (
+              <article class="bg-surface border border-border-hairline rounded-card overflow-hidden">
+                <a href={translatePath(`/tools/${related.data.slug}/`)} class="block aspect-[16/9] overflow-hidden bg-surface-soft">
+                  <img src={related.data.image} alt={`${relLocalized.name} preview`} class="w-full h-full object-cover" loading="lazy" width="320" height="180" />
+                </a>
+                <div class="p-4">
+                  <h3 class="font-display font-semibold text-base text-ink mb-2">
+                    <a href={translatePath(`/tools/${related.data.slug}/`)} class="hover:text-accent-deep transition-colors">{relLocalized.name}</a>
+                  </h3>
+                  <p class="text-body-sm text-muted line-clamp-2 mb-3">{relLocalized.description}</p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-caption text-muted font-medium uppercase tracking-wide">{relCategory}</span>
+                    <span class="text-caption text-muted" aria-hidden="true">·</span>
+                    <span class={`text-caption font-medium px-2 py-0.5 rounded-full ${pricingColors[related.data.pricing]}`}>{relPricing}</span>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    <div class="pt-8 border-t border-border-hairline">
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary inline-flex w-full sm:w-auto px-8 py-4 text-base"
+        aria-label={`${t('tools.visit')} ${localized.name}`}
+      >
+        {t('tools.visit')}
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 13h6M13 13V7M13 13 6.5 6.5" />
+        </svg>
+      </a>
+    </div>
+
+    {(maker || addedDate) && (
+      <footer class="mt-10 pt-6 border-t border-border-hairline">
+        <dl class="grid gap-4 sm:grid-cols-2 text-sm">
+          {maker && (
+            <div>
+              <dt class="text-caption text-muted uppercase tracking-wide mb-1">{t('tools.maker')}</dt>
+              <dd class="text-body-md text-ink"><a href={translatePath(`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`)} class="hover:text-accent-deep transition-colors">{maker}</a></dd>
+            </div>
+          )}
+          {addedDate && (
+            <div>
+              <dt class="text-caption text-muted uppercase tracking-wide mb-1">{t('tools.added')}</dt>
+              <dd class="text-body-md text-ink">{formatLocalizedDate(addedDate, lang)}</dd>
+            </div>
+          )}
+          {updatedDate && (
+            <div>
+              <dt class="text-caption text-muted uppercase tracking-wide mb-1">{t('tools.updated')}</dt>
+              <dd class="text-body-md text-ink">{formatLocalizedDate(updatedDate, lang)}</dd>
+            </div>
+          )}
+        </dl>
+      </footer>
+    )}
+  </article>
+</Layout>

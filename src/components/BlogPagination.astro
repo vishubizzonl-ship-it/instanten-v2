@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 interface Props {
   currentPage?: number;
   totalPages?: number;
@@ -13,6 +15,7 @@ interface Props {
 }
 
 const props = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 
 const current = Number(props.page?.currentPage ?? props.currentPage ?? 1);
 const total = Number(props.page?.lastPage ?? props.totalPages ?? props.lastPage ?? 1);
@@ -45,10 +48,10 @@ const nextHref = current < total ? (props.page?.url?.next ?? buildPageUrl(curren
 ---
 
 {total > 1 && (
-  <nav class="cf-pagination" aria-label="Pagination">
+  <nav class="cf-pagination" aria-label={t('aria.pagination')}>
     <div class="cf-pagination__links">
       {prevHref && (
-        <a class="cf-pagination__item cf-pagination__arrow" href={prevHref} aria-label="Previous page">
+        <a class="cf-pagination__item cf-pagination__arrow" href={prevHref} aria-label={t('aria.previousPage')}>
           <svg
             width="15"
             height="15"
@@ -82,7 +85,7 @@ const nextHref = current < total ? (props.page?.url?.next ?? buildPageUrl(curren
       )}
 
       {nextHref && (
-        <a class="cf-pagination__item cf-pagination__arrow" href={nextHref} aria-label="Next page">
+        <a class="cf-pagination__item cf-pagination__arrow" href={nextHref} aria-label={t('aria.nextPage')}>
           <svg
             width="15"
             height="15"

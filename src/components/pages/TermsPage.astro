@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED_ISO, CONTACT_EMAIL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const pageTitle = `${t('terms.h1')} — ${SITE_NAME}`;
+const pageDescription = page.terms.description;
+const canonicalURL = lang === 'en' ? `${SITE_URL}/terms/` : `${SITE_URL}/${lang}/terms/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  keywords={`terms, conditions, free online tools, instant convert, independent software, $0 cost, ${lang}`}
+  lang={lang}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink />
+
+      <h1 class="ror-h1">{t('terms.h1')}</h1>
+      <p class="ror-updated">{t('terms.lastUpdated')} {formatLocalizedDate(LAST_UPDATED_ISO, lang)}</p>
+
+      <p class="ror-intro-copy">
+        {t('terms.introP1')} <a href={translatePath('/')} class="ror-link">{SITE_DOMAIN}</a> {t('terms.introP2')}
+      </p>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec1Title')}</h2>
+        <p class="ror-p">
+          {SITE_NAME} {t('terms.sec1P1a')} <strong>{t('terms.sec1P1b')}</strong>{t('terms.sec1P1c')} <strong>{t('terms.sec1P1d')}</strong> {t('terms.sec1P1e')}
+        </p>
+        <p class="ror-p">{t('terms.sec1P2')}</p>
+        <ul class="ror-ul">
+          <li>{t('terms.sec1Li1')}</li>
+          <li>{t('terms.sec1Li2')}</li>
+          <li>{t('terms.sec1Li3')}</li>
+          <li>{t('terms.sec1Li4')}</li>
+        </ul>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec2Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec2P1a')} {SITE_DOMAIN} {t('terms.sec2P1b')} <strong>{t('terms.sec2P1c')}</strong> {t('terms.sec2P1d')}
+        </p>
+        <ul class="ror-ul">
+          <li>{t('terms.sec2Li1')}</li>
+          <li>{t('terms.sec2Li2')}</li>
+          <li>{t('terms.sec2Li3a')} <strong>{t('terms.sec2Li3b')}</strong> {t('terms.sec2Li3c')}</li>
+          <li>{t('terms.sec2Li4a')} <strong>{t('terms.sec2Li4b')}</strong> {t('terms.sec2Li4c')}</li>
+          <li>{t('terms.sec2Li5a')} <strong>{t('terms.sec2Li5b')}</strong> {t('terms.sec2Li5c')}</li>
+          <li>{t('terms.sec2Li6a')} <strong>{t('terms.sec2Li6b')}</strong> {t('terms.sec2Li6c')}</li>
+          <li>{t('terms.sec2Li7')}</li>
+        </ul>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec3Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec3P1a')} {SITE_DOMAIN} {t('terms.sec3P1b')} {SITE_NAME} {t('terms.sec3P1c')}
+        </p>
+        <p class="ror-p">
+          {t('terms.sec3P2')}
+        </p>
+        <p class="ror-p">
+          <strong>DMCA:</strong> {t('terms.sec3P3a')} <a href={translatePath('/contact/')} class="ror-link">{t('terms.sec3P3b')}</a> {t('terms.sec3P3c')} <strong>{t('terms.sec3P3d')}</strong>{t('terms.sec3P3e')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec4Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec4P1')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec5Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec5P1a')} {SITE_NAME} {t('terms.sec5P1b')}
+        </p>
+        <p class="ror-p">
+          {t('terms.sec5P2a')}<strong>{t('terms.sec5P2b')}</strong>{t('terms.sec5P2c')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec6Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec6P1')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec7Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec7P1a')} <a href={translatePath('/privacy-policy/')} class="ror-link">{t('terms.sec7P1b')}</a>{t('terms.sec7P1c')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec8Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec8P1')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('terms.sec9Title')}</h2>
+        <p class="ror-p">
+          {t('terms.sec9P1a')} <a href={translatePath('/contact/')} class="ror-link">{t('terms.sec3P3b')}</a> {t('terms.sec9P1b')} <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>{t('terms.sec9P1c')}
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>

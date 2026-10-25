@@ -1,27 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import PrivacyPolicyPage from '../../components/pages/PrivacyPolicyPage.astro';
+import { nonDefaultLangs } from '../../i18n/ui';
 
 export function getStaticPaths() {
   return nonDefaultLangs.map((lang) => ({ params: { lang } }));
 }
-
-const { lang } = Astro.params as { lang: LangCode };
 ---
 
-<Layout
-  title="Privacy Policy — Instanten"
-  description="Instanten privacy policy: CCPA/CPRA, GDPR, COPPA, APPI/LGPD clarity. No cross-context behavioral advertising. Browser-first design."
-  keywords="privacy policy, CCPA, GDPR, COPPA, instant tools, independent project, $0 cost"
-  canonicalURL={`https://instanten.com/${lang}/privacy-policy/`}
-  lang={lang}
->
-  <main class="site-container py-16 max-w-3xl mx-auto">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Privacy Policy</h1>
-    <div class="prose prose-base text-body leading-[1.75] space-y-6">
-      <p>Instanten is an independent browser-based software project. We do not sell or share personal data for cross-context behavioral advertising. We comply with California CCPA/CPRA (Cal. Civ. Code § 1798.140), Virginia VCDPA, Colorado CPA, Connecticut CTDPA, and applicable U.S. state privacy laws.</p>
-      <p>Theme preferences are stored in your device's localStorage and never transmitted to any server. No account is required. No email is collected unless you contact us directly.</p>
-      <p>We are COPPA-compliant for users under 13 (15 U.S.C. §§ 6501–6506). A DMCA copyright notice procedure is available via the Contact page (17 U.S.C. § 512).</p>
-    </div>
-  </main>
-</Layout>
+<PrivacyPolicyPage />

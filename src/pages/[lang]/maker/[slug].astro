@@ -1,0 +1,98 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ToolGrid from '../../../components/ToolGrid.astro';
+import FilterBar from '../../../components/FilterBar.astro';
+import Pagination from '../../../components/Pagination.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../../utils/filters';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { getPageCopy } from '../../../i18n/pageContent';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  const makers = [...new Set(tools.map(t => t.data.maker).filter(Boolean))];
+  const paths: { params: { lang: LangCode; slug: string } }[] = [];
+  for (const lang of nonDefaultLangs) {
+    for (const maker of makers) {
+      paths.push({ params: { lang, slug: maker!.toLowerCase().replace(/\s+/g, '-') } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: LangCode; slug: string };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allTools = await getCollection('tools');
+const makerTools = allTools.filter(t => t.data.maker?.toLowerCase().replace(/\s+/g, '-') === slug);
+const makerName = makerTools[0]?.data.maker || slug;
+
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+
+const filteredTools = filterTools(makerTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData = paginatedTools.map(tool => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  featured: tool.data.featured,
+}));
+
+const baseUrl = translatePath(`/maker/${slug}/`);
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.category) queryParams.category = filters.category;
+if (filters.pricing) queryParams.pricing = filters.pricing;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+---
+
+<Layout
+  title={`${makerName} — ${t('nav.tools')} — Instanten`}
+  description={`${makerName}: ${page.makers.lead}`}
+  canonicalURL={`https://instanten.com/${lang}/maker/${slug}/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[
+    { label: t('nav.home'), href: translatePath('/') },
+    { label: t('nav.makers'), href: translatePath('/makers/') },
+    { label: makerName, href: baseUrl },
+  ]} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">{t('nav.makers')}</span>
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{makerName}</h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        {sortedTools.length} {sortedTools.length === 1 ? t('tools.toolCountOne') : t('tools.toolCountMany')}
+      </p>
+    </header>
+  </section>
+  <FilterBar
+    currentCategory={filters.category}
+    currentPricing={filters.pricing}
+    currentTags={filters.tags}
+    currentSort={filters.sort}
+    hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
+    baseUrl={baseUrl}
+  />
+  <ToolGrid tools={toolData} />
+  {totalPages > 1 && (
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} queryParams={queryParams} />
+  )}
+</Layout>

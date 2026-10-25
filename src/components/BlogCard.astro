@@ -1,4 +1,7 @@
 ---
+import { getLangFromUrl, useTranslations, translatePathSafe, formatLocalizedDate } from '../i18n/utils';
+import { localizePost, localizeBlogCategory } from '../i18n/blogContent';
+
 interface Props {
   slug: string;
   title: string;
@@ -21,17 +24,14 @@ const {
   publishedAt,
 } = Astro.props;
 
-const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
-};
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const localized = localizePost(lang, { slug, title, excerpt });
+const postHref = translatePathSafe(`/blog/${slug}/`, lang);
+const formattedDate = formatLocalizedDate(publishedAt, lang);
 ---
 <article class="blog-card">
-  <a href={`/blog/${slug}/`} class="blog-card__thumbnail" aria-label={`Read ${title}`}>
+  <a href={postHref} class="blog-card__thumbnail" aria-label={`${t('aria.readPost')} ${localized.title}`}>
     <img
       src={thumbnail}
       alt={thumbnailAlt}
@@ -43,22 +43,22 @@ const formatDate = (dateStr: string) => {
     <div class="blog-card__category-pills">
       {categories?.map((cat) => (
         <a
-          href={`/blog/category/${cat.slug}/`}
+          href={translatePathSafe(`/blog/category/${cat.slug}/`, lang)}
           class="blog-card__category-pill"
-          aria-label={`View all posts in ${cat.name}`}
+          aria-label={`${t('aria.viewPostsIn')} ${localizeBlogCategory(lang, cat.name)}`}
         >
-          {cat.name}
+          {localizeBlogCategory(lang, cat.name)}
         </a>
       ))}
     </div>
   </a>
 
-  <button class="blog-card__search-btn" data-search-open aria-label="Search articles">
+  <button class="blog-card__search-btn" data-search-open aria-label={t('nav.search')}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />
     </svg>
-    <span>Search</span>
+    <span>{t('nav.search')}</span>
   </button>
 
   <div class="blog-card__body">
@@ -67,14 +67,14 @@ const formatDate = (dateStr: string) => {
         {author?.name}
       </a>
       <time datetime={publishedAt} class="blog-card__date">
-        on {formatDate(publishedAt)}
+        {t('blog.on')} {formattedDate}
       </time>
     </div>
 
     <h2 class="blog-card__title">
-      <a href={`/blog/${slug}/`}>{title}</a>
+      <a href={postHref}>{localized.title}</a>
     </h2>
 
-    <div class="blog-card__excerpt">{excerpt}</div>
+    <div class="blog-card__excerpt">{localized.excerpt}</div>
   </div>
 </article>

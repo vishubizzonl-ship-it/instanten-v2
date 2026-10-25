@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { SITE_NAME, LAST_UPDATED_ISO } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate, type UiKey } from '../../i18n/utils';
+import { seoAbout } from '../../i18n/seoContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const seo = seoAbout[lang];
+
+const pageTitle = lang === 'en' ? `About — ${SITE_NAME}` : seo.title;
+const pageDescription =
+  lang === 'en'
+    ? 'Instanten is an independent browser-based software project providing free instant tools, instant convert utilities, and instant help guides for U.S. developers, designers, students, and everyday users. No fake identity, no hidden subscriptions.'
+    : seo.description;
+
+const wordSpace = lang === 'ja' ? '' : ' ';
+const sep = (fragment: string): string => {
+  if (!wordSpace) return '';
+  const trimmed = fragment.trimStart();
+  if (!trimmed) return wordSpace;
+  if (/^[.,;:!?)…\]\-–—]/u.test(trimmed)) return '';
+  if (lang === 'ko' && /^[는은을를의에와과로만]/u.test(trimmed)) return '';
+  return wordSpace;
+};
+
+const key = (name: string) => t(`about.${name}` as UiKey);
+const featureKeys = [
+  'feature1',
+  'feature2',
+  'feature3',
+  'feature4',
+  'feature5',
+  'feature6',
+  'feature7',
+  'feature8',
+  'feature9',
+] as const;
+---
+
+<Layout title={pageTitle} description={pageDescription} keywords={lang === 'en' ? undefined : seo.keywords} lang={lang}>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink />
+
+      <h1 class="ror-h1">{t('about.heading')}</h1>
+      <p class="ror-updated">{t('about.lastReviewed')} {formatLocalizedDate(LAST_UPDATED_ISO, lang)}</p>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('whatTitle')}</h2>
+        <p class="ror-p">
+          <strong>{SITE_NAME}</strong>{sep(key('whatP1a'))}{key('whatP1a')}{(lang === 'fr' ? '' : sep(key('instantTools')))}<strong>{key('instantTools')}</strong>{sep(key('whatP1b'))}{key('whatP1b')}{sep(key('instantHelp'))}<strong>{key('instantHelp')}</strong>{sep(key('whatP1c'))}{key('whatP1c')}
+        </p>
+        <p class="ror-p">
+          {key('whatP2a')}{sep(key('ruler'))}<a href={translatePath('/tools/online-ruler/')} class="ror-link">{key('ruler')}</a>{sep(key('whatP2b'))}{key('whatP2b')}{sep(key('compressor'))}<a href={translatePath('/tools/image-compressor/')} class="ror-link">{key('compressor')}</a>{sep(key('whatP2c'))}{key('whatP2c')}{sep(key('palette'))}<a href={translatePath('/tools/color-palette/')} class="ror-link">{key('palette')}</a>{sep(key('whatP2d'))}{key('whatP2d')}{sep(key('json'))}<a href={translatePath('/tools/json-formatter/')} class="ror-link">{key('json')}</a>{sep(key('whatP2e'))}{key('whatP2e')}
+        </p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('honestTitle')}</h2>
+        <p class="ror-p">
+          {key('honestP1a')}{sep(key('contactForm'))}<a href={translatePath('/contact/')} class="ror-link">{key('contactForm')}</a>{sep(key('honestP1b'))}{key('honestP1b')}<a href="mailto:hello@instanten.com" class="ror-link">{key('helloEmail')}</a>{sep(key('honestP1c'))}{key('honestP1c')}
+        </p>
+        <p class="ror-p">
+          {key('honestP2a')}{sep(key('nistLink'))}<a href="https://www.nist.gov/pml/owm/metric-si/si-units-length" target="_blank" rel="noopener noreferrer" class="ror-link">{key('nistLink')}</a>{sep(key('honestP2b'))}{key('honestP2b')}{sep(key('wcagLink'))}<a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('wcagLink')}</a>{sep(key('honestP2c'))}{key('honestP2c')}{sep(key('rfc8259Link'))}<a href="https://datatracker.ietf.org/doc/html/rfc8259" target="_blank" rel="noopener noreferrer" class="ror-link">{key('rfc8259Link')}</a>{sep(key('honestP2d'))}{key('honestP2d')}{sep(key('rfc4648Link'))}<a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank" rel="noopener noreferrer" class="ror-link">{key('rfc4648Link')}</a>{sep(key('honestP2e'))}{key('honestP2e')}{sep(key('commonmarkLink'))}<a href="https://spec.commonmark.org/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('commonmarkLink')}</a>{sep(key('honestP2f'))}{key('honestP2f')}{sep(key('cssgridLink'))}<a href="https://www.w3.org/TR/css-grid-2/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('cssgridLink')}</a>{sep(key('honestP2g'))}{key('honestP2g')}{sep(key('googleLink'))}<a href="https://developers.google.com/search/docs" target="_blank" rel="noopener noreferrer" class="ror-link">{key('googleLink')}</a>{sep(key('honestP2h'))}{key('honestP2h')}
+        </p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('verifyTitle')}</h2>
+        <p class="ror-p">
+          {key('verifyP1a')}{sep(key('ruler'))}<strong>{key('ruler')}</strong>{sep(key('verifyP1b'))}{key('verifyP1b')}{sep(key('palette'))}<strong>{key('palette')}</strong>{sep(key('verifyP1c'))}{key('verifyP1c')}{sep(key('json'))}<strong>{key('json')}</strong>{sep(key('verifyP1d'))}{key('verifyP1d')}
+        </p>
+        <p class="ror-p">
+          {key('verifyP2a')}{sep(key('ruler'))}<strong>{key('ruler')}</strong>{sep(key('verifyP2b'))}{key('verifyP2b')}
+        </p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('missionTitle')}</h2>
+        <p class="ror-p">{key('missionP1')}</p>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('featuresTitle')}</h2>
+        <ul class="ror-ul">
+          {featureKeys.map((feature) => (
+            <li><strong class="ror-strong">{key(feature)}</strong></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="ror-section ror-section--about">
+        <h2 class="ror-h2">{key('privacyTitle')}</h2>
+        <p class="ror-p">{key('privacyP1')}</p>
+        <p class="ror-p">{key('privacyP2')}</p>
+        <p class="ror-p">
+          {key('privacyP3a')}{sep(key('contactForm'))}<a href={translatePath('/contact/')} class="ror-link">{key('contactForm')}</a>{sep(key('privacyP3b'))}{key('privacyP3b')}
+        </p>
+        <p class="ror-p">
+          {key('privacyP4a')}{sep(key('privacyPolicy'))}<a href={translatePath('/privacy-policy/')} class="ror-link">{key('privacyPolicy')}</a>{sep(key('privacyP4b'))}{key('privacyP4b')}{sep(key('termsOfService'))}<a href={translatePath('/terms/')} class="ror-link">{key('termsOfService')}</a>{sep(key('privacyP4c'))}{key('privacyP4c')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{key('contactTitle')}</h2>
+        <p class="ror-p">
+          {key('contactP1a')}{sep(key('contactForm'))}<a href={translatePath('/contact/')} class="ror-link">{key('contactForm')}</a>{sep(key('contactP1b'))}{key('contactP1b')}<a href="mailto:hello@instanten.com" class="ror-link">{key('helloEmail')}</a>{sep(key('contactP1c'))}{key('contactP1c')}
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>

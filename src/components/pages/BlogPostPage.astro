@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { SITE_NAME, SITE_DOMAIN, SITE_URL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
+import { localizePost, localizeBlogCategory } from '../../i18n/blogContent';
+import { getBlogArticle } from '../../i18n/blogArticles';
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+if (!post) {
+  return Astro.redirect('/blog/');
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const localized = localizePost(lang, post.data);
+const article = getBlogArticle(post.data.slug, lang);
+
+const pageTitle = `${localized.title} — ${SITE_NAME}`;
+const pageDescription = localized.excerpt;
+const canonicalURL = lang === 'en'
+  ? `${SITE_URL}/blog/${post.data.slug}/`
+  : `${SITE_URL}/${lang}/blog/${post.data.slug}/`;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: localized.title,
+  description: localized.excerpt,
+  url: canonicalURL,
+  datePublished: post.data.publishedAt,
+  dateModified: post.data.publishedAt,
+  author: {
+    '@type': 'Person',
+    name: post.data.author?.name || SITE_NAME,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
+};
+
+const postTags = post.data.categories ? post.data.categories.map((c: any) => c.slug) : ['blog', 'guide', 'instanten'];
+const sectionLabel = post.data.categories
+  ? post.data.categories.map((c: any) => localizeBlogCategory(lang, c.name)).join(', ')
+  : t('nav.blog');
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  ogType="article"
+  ogImage={post.data.thumbnail || '/og-instanten.svg'}
+  keywords={`instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert, ${lang}`}
+  publishedTime={post.data.publishedAt}
+  modifiedTime={post.data.publishedAt}
+  section={sectionLabel}
+  tags={postTags}
+  noindex={false}
+  breadcrumbs={[
+    { name: t('nav.home') || 'Home', item: translatePath('/') },
+    { name: t('nav.blog') || 'Blog', item: translatePath('/blog/') },
+    { name: localized.title, item: translatePath(`/blog/${post.data.slug}/`) }
+  ]}
+  jsonLd={blogPostingSchema}
+  lang={lang}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink href="/blog/" label={t('nav.allPosts')} />
+
+      <h1 class="ror-h1">{localized.title}</h1>
+      <p class="ror-updated"><time datetime={post.data.publishedAt}>{formatLocalizedDate(post.data.publishedAt, lang)}</time></p>
+
+      <article class="ror-prose">
+        {article ? (
+          <>
+            <p class="ror-updated" style="margin-top: -24px; margin-bottom: 28px;">
+              <em>{article.byline}</em>
+            </p>
+            {article.sections.map((section) => (
+              <div class="ror-article-section" style="margin-bottom: 28px;">
+                {section.heading && <h2>{section.heading}</h2>}
+                {section.subheading && <h3>{section.subheading}</h3>}
+                {section.paragraphs?.map((p) => (
+                  <p set:html={p} />
+                ))}
+                {section.bullets && section.bullets.length > 0 && (
+                  <ul>
+                    {section.bullets.map((b) => (
+                      <li set:html={b} />
+                    ))}
+                  </ul>
+                )}
+                {section.code && (
+                  <pre><code>{section.code}</code></pre>
+                )}
+                {section.quote && (
+                  <blockquote>
+                    <p>{section.quote}</p>
+                  </blockquote>
+                )}
+              </div>
+            ))}
+
+            {article.keyTakeaways && article.keyTakeaways.length > 0 && (
+              <div class="ror-article-takeaways" style="margin-top: 36px; margin-bottom: 32px;">
+                <h2>{article.takeawaysTitle || t('nav.blog')}</h2>
+                <ul>
+                  {article.keyTakeaways.map((item) => (
+                    <li set:html={item} />
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {article.callToAction && (
+              <div class="ror-article-cta" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--ror-hairline);">
+                <h2>{article.callToAction.heading}</h2>
+                <p>
+                  {article.callToAction.text}{' '}
+                  <a href={translatePath('/contact/')} class="ror-link">
+                    {article.callToAction.contactLabel}
+                  </a>.
+                </p>
+              </div>
+            )}
+          </>
+        ) : post.body ? (
+          <Fragment set:html={post.body} />
+        ) : (
+          <>
+            <p><strong>{localized.excerpt}</strong></p>
+            <p>In this guide, we explore the core concepts and practical applications that make {localized.title.toLowerCase()} an essential skill for modern development. Whether you are just getting started or refining your workflow, the techniques covered here will help you work faster and with greater confidence.</p>
+
+            <h2>Why This Matters</h2>
+            <p>The tools and patterns discussed in this article address real-world challenges that developers, designers, and builders face every day. By focusing on practical, step-by-step guidance rather than abstract theory, we aim to give you something you can apply immediately.</p>
+
+            <h3>Key Takeaways</h3>
+            <ul>
+              <li>Understand the fundamental principles behind {post.data.categories ? post.data.categories.map((c: any) => c.name.toLowerCase()).join(', ') : 'instant online tools'}.</li>
+              <li>Apply best practices to improve accuracy, speed, and collaboration.</li>
+              <li>Integrate these workflows with the free utilities available on {SITE_DOMAIN}.</li>
+            </ul>
+
+            <blockquote>
+              <p>"The best way to learn is by doing — and the best way to do is with the right tools at hand."</p>
+            </blockquote>
+
+            <h2>Getting Started</h2>
+            <p>If you haven't already, take a moment to explore the related categories and try out the free online tools linked throughout this site. They are designed to work instantly in your browser without any installation or sign-up.</p>
+
+            <p>Have feedback on this guide? We'd love to hear from you. <a href={translatePath('/contact/')} class="ror-link">Reach out here</a>.</p>
+          </>
+        )}
+      </article>
+    </div>
+  </main>
+</Layout>

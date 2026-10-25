@@ -1,0 +1,97 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ToolGrid from '../../../components/ToolGrid.astro';
+import FilterBar from '../../../components/FilterBar.astro';
+import Pagination from '../../../components/Pagination.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../../utils/filters';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { localizePricing } from '../../../i18n/toolContent';
+import { getPageCopy } from '../../../i18n/pageContent';
+
+export async function getStaticPaths() {
+  const pricings = ['free', 'freemium', 'paid'];
+  const paths: { params: { lang: LangCode; slug: string } }[] = [];
+  for (const lang of nonDefaultLangs) {
+    for (const slug of pricings) {
+      paths.push({ params: { lang, slug } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: LangCode; slug: string };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+const pricingName = slug.charAt(0).toUpperCase() + slug.slice(1);
+const pricingLabel = localizePricing(lang, pricingName);
+
+const allTools = await getCollection('tools');
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+filters.pricing = pricingName;
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData = paginatedTools.map(tool => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  featured: tool.data.featured,
+}));
+
+const baseUrl = translatePath(`/pricing/${slug}/`);
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.category) queryParams.category = filters.category;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+---
+
+<Layout
+  title={`${pricingLabel} — ${t('nav.tools')} — Instanten`}
+  description={`${pricingLabel} — ${page.pricing.lead}`}
+  canonicalURL={`https://instanten.com/${lang}/pricing/${slug}/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[
+    { label: t('nav.home'), href: translatePath('/') },
+    { label: t('nav.pricing'), href: translatePath('/pricing/') },
+    { label: pricingLabel, href: baseUrl },
+  ]} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">{t('nav.pricing')}</span>
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{pricingLabel}</h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        {sortedTools.length} {sortedTools.length === 1 ? t('tools.toolCountOne') : t('tools.toolCountMany')}
+      </p>
+    </header>
+  </section>
+  <FilterBar
+    currentCategory={filters.category}
+    currentPricing={filters.pricing}
+    currentTags={filters.tags}
+    currentSort={filters.sort}
+    hasFilters={Boolean(filters.q || filters.category || filters.tags?.length)}
+    baseUrl={baseUrl}
+  />
+  <ToolGrid tools={toolData} />
+  {totalPages > 1 && (
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} queryParams={queryParams} />
+  )}
+</Layout>

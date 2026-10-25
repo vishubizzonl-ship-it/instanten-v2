@@ -1,0 +1,18 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '/', label } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const localizedHref = href === '/' ? getRelativeLocaleUrl(lang) : getRelativeLocaleUrl(lang, href);
+---
+
+<div class="ror-back-row">
+  <a href={localizedHref} class="ror-back-link">&larr; {label ?? t('nav.backToSite')}</a>
+</div>

@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolGrid from '../../components/ToolGrid.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../utils/filters';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allTools = await getCollection('tools');
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
+const currentPage = filters.page || 1;
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData = paginatedTools.map(tool => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  featured: tool.data.featured,
+}));
+
+const baseUrl = translatePath('/search');
+const queryParams: Record<string, string> = {};
+if (filters.q) queryParams.q = filters.q;
+if (filters.category) queryParams.category = filters.category;
+if (filters.pricing) queryParams.pricing = filters.pricing;
+if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
+if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
+
+const pageTitle = filters.q
+  ? `${t('search.results')}: ${filters.q} — Instanten`
+  : `${t('search.results')} — Instanten`;
+const pageDescription = filters.q ? `${page.search.description} ${filters.q}` : page.search.description;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={`https://instanten.com/${lang}/search${filters.q ? `?q=${encodeURIComponent(filters.q)}` : ''}`}
+  lang={lang}
+>
+  <Breadcrumbs items={[
+    { label: t('nav.home'), href: translatePath('/') },
+    { label: t('search.results'), href: baseUrl },
+  ]} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <span class="text-caption text-muted font-medium uppercase tracking-wide mb-2 block">{t('search.results')}</span>
+      <h1 class="font-display font-semibold text-display text-ink mb-4">
+        {filters.q ? (
+          <>
+            {t('search.resultsFor')} <span class="bg-gradient-to-r from-accent-start to-accent-end bg-clip-text text-transparent">"{filters.q}"</span>
+          </>
+        ) : (
+          page.search.lead
+        )}
+      </h1>
+      <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        {sortedTools.length === 0
+          ? t('search.noResultsText')
+          : sortedTools.length === 1
+            ? t('search.foundOne')
+            : t('search.foundMany').replace('{count}', String(sortedTools.length))}
+      </p>
+    </header>
+  </section>
+
+  {sortedTools.length === 0 ? (
+    <section class="site-container pb-section">
+      <div class="max-w-md mx-auto text-center py-16">
+        <svg class="mx-auto mb-6 text-muted/50" width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="40" cy="40" r="30"></circle>
+          <line x1="55" y1="55" x2="70" y2="70"></line>
+          <path d="M40 30l-3 3M40 30l3 3M40 50l-3-3M40 50l3-3" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <h2 class="font-display font-semibold text-xl text-ink mb-3">{t('search.noResults')}</h2>
+        <p class="text-body-md text-muted mb-6">{page.search.noResults}</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href={baseUrl} class="btn btn-secondary">{t('search.clear')}</a>
+          <a href={translatePath('/')} class="btn btn-primary">{t('search.browseAll')}</a>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <>
+      <FilterBar
+        currentCategory={filters.category}
+        currentPricing={filters.pricing}
+        currentTags={filters.tags}
+        currentSort={filters.sort}
+        hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
+        baseUrl={baseUrl}
+      />
+      <ToolGrid tools={toolData} />
+      {totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} queryParams={queryParams} />
+      )}
+    </>
+  )}
+</Layout>

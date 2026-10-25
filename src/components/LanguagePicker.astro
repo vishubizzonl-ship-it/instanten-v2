@@ -1,47 +1,53 @@
 ---
-import { languages, defaultLang, showDefaultLang, type LangCode } from '../i18n/ui';
-import { stripLangFromPath, useTranslatedPath } from '../i18n/utils';
+import { languages, defaultLang, type LangCode } from '../i18n/ui';
+import { getLangFromUrl, stripLangFromPath, translatePathSafe, useTranslations } from '../i18n/utils';
 
+interface Props {
+  placement?: 'header' | 'footer';
+}
+
+const { placement = 'header' } = Astro.props;
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 const currentPath = Astro.url.pathname;
 const cleanPath = stripLangFromPath(currentPath);
-const translate = useTranslatedPath(defaultLang);
+const normalizedCurrent = currentPath.replace(/\/+$/, '') || '/';
 
 const allCodes = Object.keys(languages) as LangCode[];
 ---
-
-<div class="language-picker-wrapper relative">
+<div class:list={['language-picker-wrapper relative', `language-picker-wrapper--${placement}`]}>
   <button
     type="button"
-    id="language-picker-btn"
     aria-haspopup="true"
     aria-expanded="false"
-    aria-label="Select language"
+    aria-label={t('language.select')}
     class="language-picker-btn inline-flex items-center gap-1.5 rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-[13px] font-medium text-ink transition-colors hover:bg-surface hover:border-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
   >
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-shrink-0">
       <circle cx="12" cy="12" r="10" />
       <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
-    <span class="whitespace-nowrap">{Astro.url.pathname.startsWith('/de/') ? 'Deutsch' : Astro.url.pathname.startsWith('/ja/') ? '日本語' : Astro.url.pathname.startsWith('/fr/') ? 'Français' : Astro.url.pathname.startsWith('/es/') ? 'Español' : Astro.url.pathname.startsWith('/ko/') ? '한국어' : Astro.url.pathname.startsWith('/nl/') ? 'Nederlands' : Astro.url.pathname.startsWith('/sv/') ? 'Svenska' : Astro.url.pathname.startsWith('/it/') ? 'Italiano' : Astro.url.pathname.startsWith('/pt/') ? 'Português' : 'English'}</span>
+    <span class="whitespace-nowrap">{languages[currentLang]}</span>
     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-shrink-0">
       <path d="M6 9l6 6 6-6" />
     </svg>
   </button>
 
   <div
-    id="language-picker-menu"
     role="menu"
-    aria-label="Language options"
+    aria-label={t('language.options')}
     class="language-picker-menu absolute right-0 top-full z-50 mt-2 hidden min-w-[180px] rounded-xl border border-border-hairline bg-canvas shadow-xl overflow-hidden"
   >
     {allCodes.map((code) => {
-      const href = translate(cleanPath, code);
-      const isActive = Astro.url.pathname === href || (code === defaultLang && Astro.url.pathname === cleanPath);
+      const href = translatePathSafe(cleanPath, code);
+      const normalizedHref = href.replace(/\/+$/, '') || '/';
+      const isActive = normalizedCurrent === normalizedHref;
       const label = languages[code];
       return (
         <a
           href={href}
           role="menuitem"
+          data-lang={code}
           class={`language-picker-item block px-4 py-2.5 text-[13px] transition-colors ${isActive ? 'font-semibold text-ink bg-soft' : 'text-body hover:bg-soft hover:text-ink'}`}
           aria-current={isActive ? 'true' : undefined}
         >
@@ -59,33 +65,97 @@ const allCodes = Object.keys(languages) as LangCode[];
 
 <script is:inline>
   (function() {
-    const btn = document.getElementById('language-picker-btn');
-    const menu = document.getElementById('language-picker-menu');
-    if (!btn || !menu) return;
+    function closeAllMenus() {
+      document.querySelectorAll('.language-picker-wrapper').forEach(function(wrapper) {
+        var btn = wrapper.querySelector('.language-picker-btn');
+        var menu = wrapper.querySelector('.language-picker-menu');
+        if (btn && menu) {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.classList.add('hidden');
+        }
+      });
+    }
 
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      menu.classList.toggle('hidden', expanded);
+    function bindPicker(wrapper) {
+      if (wrapper.dataset.pickerBound === 'true') return;
+      wrapper.dataset.pickerBound = 'true';
+
+      var btn = wrapper.querySelector('.language-picker-btn');
+      var menu = wrapper.querySelector('.language-picker-menu');
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        closeAllMenus();
+        btn.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('hidden', expanded);
+      });
+    }
+
+    function initPickers() {
+      document.querySelectorAll('.language-picker-wrapper').forEach(bindPicker);
+    }
+
+    if (!window.__languagePickerDocumentBound) {
+      window.__languagePickerDocumentBound = true;
+
+      document.addEventListener('click', function(e) {
+        if (!(e.target instanceof Element) || !e.target.closest('.language-picker-wrapper')) {
+          closeAllMenus();
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var openBtn = document.querySelector('.language-picker-btn[aria-expanded="true"]');
+          closeAllMenus();
+          if (openBtn) openBtn.focus();
+        }
+      });
+    }
+
+    document.querySelectorAll('.language-picker-menu').forEach(function(menu) {
+      if (menu.dataset.pickerMenuBound === 'true') return;
+      menu.dataset.pickerMenuBound = 'true';
+      menu.addEventListener('click', function(e) {
+        var target = e.target instanceof Element ? e.target.closest('a[data-lang]') : null;
+        if (target && target.getAttribute('data-lang')) {
+          try {
+            localStorage.setItem('language', target.getAttribute('data-lang'));
+          } catch (err) {
+            // ignore storage errors
+          }
+        }
+      });
     });
 
-    document.addEventListener('click', function() {
-      btn.setAttribute('aria-expanded', 'false');
-      menu.classList.add('hidden');
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        btn.setAttribute('aria-expanded', 'false');
-        menu.classList.add('hidden');
-        btn.focus();
-      }
-    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPickers);
+    } else {
+      initPickers();
+    }
+    document.addEventListener('astro:page-load', initPickers);
   })();
 </script>
 
 <style is:global>
+  .language-picker-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 32px !important;
+    padding: 6px 14px !important;
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+  }
   .language-picker-wrapper .language-picker-menu:not(.hidden) {
     display: block;
     animation: pickerFade 0.15s ease;
@@ -93,6 +163,12 @@ const allCodes = Object.keys(languages) as LangCode[];
   @keyframes pickerFade {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  .language-picker-wrapper--footer .language-picker-menu {
+    top: auto !important;
+    bottom: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
   }
   :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .language-picker-btn {
     background-color: #141414;
@@ -106,5 +182,13 @@ const allCodes = Object.keys(languages) as LangCode[];
   :is(html.dark, body.dark, [data-theme="dark"], [data-scheme="dark"]) .language-picker-item:hover {
     background-color: #222222;
     color: #ffffff;
+  }
+  @media (max-width: 640px) {
+    .language-picker-menu {
+      min-width: 170px !important;
+      max-width: 220px !important;
+      max-height: 70dvh !important;
+      overflow-y: auto !important;
+    }
   }
 </style>

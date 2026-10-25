@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED_ISO, CONTACT_EMAIL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const pageTitle = `${t('privacy.h1')} — ${SITE_NAME}`;
+const pageDescription = page.privacy.description;
+const canonicalURL = lang === 'en' ? `${SITE_URL}/privacy-policy/` : `${SITE_URL}/${lang}/privacy-policy/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  keywords={`privacy policy, CCPA, GDPR, COPPA, instant tools, independent project, $0 cost, ${lang}`}
+  lang={lang}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink />
+
+      <h1 class="ror-h1">{t('privacy.h1')}</h1>
+      <p class="ror-updated">{t('privacy.lastUpdated')} {formatLocalizedDate(LAST_UPDATED_ISO, lang)}</p>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.secOverviewTitle')}</h2>
+        <p class="ror-p">
+          <strong class="ror-strong">{SITE_NAME}</strong> (<a href={SITE_URL} class="ror-link">{SITE_DOMAIN}</a>) {t('privacy.overviewP1a')}
+        </p>
+        <p class="ror-p">
+          {t('privacy.overviewP2a')} <strong class="ror-strong">{t('privacy.overviewP2b')}</strong> {t('privacy.overviewP2c')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec1Title')}</h2>
+        <p class="ror-p">
+          <strong class="ror-strong">{t('privacy.sec1P1a')}</strong> {t('privacy.sec1P1b')} {SITE_DOMAIN}.
+        </p>
+        <p class="ror-p">
+          {t('privacy.sec1P2a')} <code class="ror-code">localStorage</code>. {t('privacy.sec1P2b')}
+        </p>
+        <ul class="ror-ul">
+          <li>{t('privacy.sec1Li1')}</li>
+          <li>{t('privacy.sec1Li2')}</li>
+          <li>{t('privacy.sec1Li3a')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec1Li3c')}</li>
+          <li>{t('privacy.sec1Li4')}</li>
+        </ul>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec2Title')}</h2>
+        <p class="ror-p">
+          {SITE_DOMAIN} {t('privacy.sec2P1a')} <strong class="ror-strong">{t('privacy.sec2P1b')}</strong> {t('privacy.sec2P1c')} <code class="ror-code">localStorage</code> {t('privacy.sec2P1d')} <code class="ror-code">{SITE_DOMAIN}</code> {t('privacy.sec2P1e')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec3Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec3P1a')} <strong class="ror-strong">{t('privacy.sec3P1b')}</strong> {t('privacy.sec3P1c')}
+        </p>
+        <p class="ror-p">
+          {t('privacy.sec3P2')}
+        </p>
+        <p class="ror-p">
+          {t('privacy.sec3P3a')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec3P3b')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec4Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec4P1a')} <strong>{t('privacy.sec4P1b')}</strong>{t('privacy.sec4P1c')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec4P1d')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec5Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec5P1a')} <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="ror-link">https://policies.google.com/privacy</a>.
+        </p>
+        <p class="ror-p">
+          {t('privacy.sec5P2a')} {SITE_DOMAIN} {t('privacy.sec5P2b')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec6Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec6P1')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec7Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec7P1a')} {SITE_DOMAIN} {t('privacy.sec7P1b')} {SITE_NAME} {t('privacy.sec7P1c')}
+        </p>
+        <p class="ror-p">
+          {t('privacy.sec7P2a')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec7P2b')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec8Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec8P1a')} <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a> {t('privacy.sec8P1b')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec9Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec9P1')}
+        </p>
+      </section>
+
+      <section class="ror-section">
+        <h2 class="ror-h2">{t('privacy.sec10Title')}</h2>
+        <p class="ror-p">
+          {t('privacy.sec10P1a')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec10P1b')} <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>{t('privacy.sec10P1c')}
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>

@@ -1,5 +1,9 @@
 ---
 import QuickLinksBar from './QuickLinksBar.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section class="editorial-hero" data-hero-section aria-labelledby="editorial-hero-title">
   <div class="site-container">
@@ -8,11 +12,11 @@ import QuickLinksBar from './QuickLinksBar.astro';
       id="editorial-hero-title"
       class="editorial-hero__title"
     >
-      Unlocking Fast <span class="editorial-hero__title-gradient">Instant Online</span> Work with Instanten
+      {t('editorial.titleBefore')}<span class="editorial-hero__title-gradient">{t('editorial.titleAccent')}</span>{t('editorial.titleAfter')}
     </h1>
 
     <p class="editorial-hero__subtitle">
-      Welcome to Instanten, your ultimate hub for free instant tools! Explore fast instant convert utilities, reliable instant help, and smart instant online workflows every day.
+      {t('editorial.subtitle')}
     </p>
   </div>
 </section>

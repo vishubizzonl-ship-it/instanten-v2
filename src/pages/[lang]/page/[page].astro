@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import EditorialHero from '../../../components/EditorialHero.astro';
+import BlogPagination from '../../../components/BlogPagination.astro';
+import { getCollection } from 'astro:content';
+import { parseFilters, filterTools, sortTools, paginateTools, type ToolData } from '../../../utils/filters';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { seoHome } from '../../../i18n/seoContent';
+import { localizeTool, localizeToolCategory } from '../../../i18n/toolContent';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  const totalPages = Math.ceil(tools.length / 10);
+  const paths: { params: { lang: LangCode; page: string } }[] = [];
+  for (const lang of nonDefaultLangs) {
+    for (const page of Array.from({ length: totalPages }, (_, i) => String(i + 1))) {
+      paths.push({ params: { lang, page } });
+    }
+  }
+  return paths;
+}
+
+const { lang, page: pageParam } = Astro.params as { lang: LangCode; page: string };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const seo = seoHome[lang];
+const currentPage = parseInt(pageParam, 10) || 1;
+
+const allTools = await getCollection('tools');
+const searchParams = new URLSearchParams(Astro.url.search);
+const filters = parseFilters(searchParams);
+filters.page = currentPage;
+
+const filteredTools = filterTools(allTools, filters);
+const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
+
+const PER_PAGE = 10;
+const totalPages = Math.ceil(sortedTools.length / PER_PAGE);
+const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
+
+const toolData: ToolData[] = paginatedTools.map((tool) => ({
+  slug: tool.data.slug,
+  name: tool.data.name,
+  category: tool.data.category,
+  description: tool.data.description,
+  pricing: tool.data.pricing,
+  image: tool.data.image,
+  url: tool.data.url,
+  tags: tool.data.tags,
+  maker: tool.data.maker,
+  addedDate: tool.data.addedDate,
+  updatedDate: tool.data.updatedDate,
+  featured: tool.data.featured,
+}));
+
+const pageTitle = `${seo.title} — ${t('aria.page')} ${currentPage}`;
+const pageDescription = `${seo.description} — ${t('aria.page')} ${currentPage}/${totalPages}`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={`https://instanten.com/${lang}/page/${currentPage}/`}
+  ogImage="/og-instanten.svg"
+  keywords={seo.keywords}
+  includeAppSchema={true}
+  breadcrumbs={[
+    { name: t('nav.home'), item: translatePath('/') },
+    { name: `${t('aria.page')} ${currentPage}`, item: `/${lang}/page/${currentPage}` },
+  ]}
+  lang={lang}
+>
+  <EditorialHero />
+
+  <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label={t('aria.toolDirectory')}>
+    <div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.featuredTools')}>
+      {toolData.map((tool) => {
+        const localized = localizeTool(lang, tool);
+        const href = translatePath(`/tools/${tool.slug}/`);
+        return (
+          <article class="blog-card">
+            <a href={href} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>
+              <img
+                src={tool.image}
+                alt={localized.name}
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="225"
+              />
+              <span class="blog-card__category-pill" style="position: absolute; top: 15px; left: 15px; background: var(--ink); color: var(--canvas); padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
+                {localizeToolCategory(lang, tool.category)}
+              </span>
+            </a>
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href={href} class="transition-colors hover:text-accent-deep">{localized.name}</a>
+              </h2>
+              <p class="blog-card__excerpt">{localized.description}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <BlogPagination currentPage={currentPage} totalPages={totalPages} basePath={translatePath('')} />
+</Layout>

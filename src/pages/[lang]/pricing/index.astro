@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { localizePricing } from '../../../i18n/toolContent';
+import { getPageCopy } from '../../../i18n/pageContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allTools = await getCollection('tools');
+const pricings = ['Free', 'Freemium', 'Paid'] as const;
+const pricingCounts = pricings.map(pricing => ({
+  name: pricing,
+  label: localizePricing(lang, pricing),
+  count: allTools.filter(t => t.data.pricing === pricing).length,
+  slug: pricing.toLowerCase(),
+}));
+---
+
+<Layout
+  title={`${page.pricing.title} — Instanten`}
+  description={page.pricing.description}
+  canonicalURL={`https://instanten.com/${lang}/pricing/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[{ label: t('nav.home'), href: translatePath('/') }, { label: page.pricing.title }]} />
+  <section class="px-gutter py-section">
+    <header class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">{page.pricing.title}</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">{page.pricing.lead}</p>
+    </header>
+    <div class="grid gap-5 sm:grid-cols-3 max-w-4xl mx-auto">
+      {pricingCounts.map(pricing => {
+        const colorClass = {
+          Free: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+          Freemium: 'bg-amber-100 text-amber-700 border-amber-200',
+          Paid: 'bg-violet-100 text-violet-700 border-violet-200',
+        }[pricing.name];
+        return (
+          <a
+            href={translatePath(`/pricing/${pricing.slug}/`)}
+            class="group p-6 rounded-xl border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+          >
+            <span class:list={['inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium mb-4', colorClass]}>
+              {pricing.label}
+            </span>
+            <h2 class="font-display font-semibold text-xl text-ink mb-2">{pricing.label}</h2>
+            <p class="font-body text-body-md text-muted mb-4">{pricing.count} {pricing.count === 1 ? t('tools.toolCountOne') : t('tools.toolCountMany')}</p>
+            <span class="inline-flex items-center gap-1.5 text-caption font-medium text-accent-start">
+              {t('tools.allTools')}
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7h6M10 7l3-3-3-3" />
+              </svg>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

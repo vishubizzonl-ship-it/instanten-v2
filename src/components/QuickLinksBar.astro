@@ -22,7 +22,7 @@ const links = [
 <div class={`cf-quick-links-outer cf-quick-links-outer--${variant}`}>
   <nav
     class="cf-inline-quick-links"
-    aria-label={variant === 'hero' ? 'Top Quick Links' : 'Footer Quick Links'}
+    aria-label={variant === 'hero' ? t('aria.topLinks') : t('aria.footerLinks')}
   >
     {links.map((item, idx) => (
       <>

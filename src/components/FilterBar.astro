@@ -1,4 +1,10 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { localizeToolCategory, localizePricing } from '../i18n/toolContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 interface Props {
   currentCategory?: string;
   currentPricing?: string;
@@ -17,29 +23,38 @@ const {
   baseUrl,
 } = Astro.props;
 
+const pricingColors: Record<string, string> = {
+  Free: 'bg-success-soft text-success',
+  Freemium: 'bg-warning-soft text-warning',
+  Paid: 'bg-violet-soft text-violet',
+};
+
+const categoryLabel = currentCategory ? localizeToolCategory(lang, currentCategory) : '';
+const pricingLabel = currentPricing ? localizePricing(lang, currentPricing) : '';
+
 const sortOptions = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'name', label: 'Name (A-Z)' },
+  { value: 'featured', label: t('filter.sort.featured') },
+  { value: 'newest', label: t('filter.sort.newest') },
+  { value: 'name', label: t('filter.sort.name') },
 ] as const;
 ---
-<div class="sticky top-[88px] z-30 bg-surface/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar">
+<div class="sticky top-[88px] z-30 bg-surface/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar" data-base-url={baseUrl} data-category={currentCategory} data-pricing={currentPricing} data-tags={currentTags.join(",")}>
   <div class="max-w-[1296px] mx-auto px-gutter py-4">
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <div class="flex flex-wrap items-center gap-3" role="group" aria-label="Filters">
+      <div class="flex flex-wrap items-center gap-3" role="group" aria-label={t('aria.filters')}>
         {currentCategory && (
           <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-start/10 text-accent-end text-sm font-medium">
-            Category: {currentCategory}
-            <button type="button" class="filter-remove p-0.5 rounded hover:bg-accent-start/20" data-filter="category" aria-label="Remove category filter">
+            {t('filter.category')}: {categoryLabel}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-accent-start/20" data-filter="category" aria-label={t('aria.removeCategory')}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
             </button>
           </span>
         )}
 
         {currentPricing && (
-          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full {pricingColors[currentPricing]} text-sm font-medium">
-            Pricing: {currentPricing}
-            <button type="button" class="filter-remove p-0.5 rounded hover:bg-black/10" data-filter="pricing" aria-label="Remove pricing filter">
+          <span class:list={["filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium", pricingColors[currentPricing]]}>
+            {t('filter.pricing')}: {pricingLabel}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-black/10" data-filter="pricing" aria-label={t('aria.removePricing')}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
             </button>
           </span>
@@ -47,8 +62,8 @@ const sortOptions = [
 
         {currentTags.map(tag => (
           <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/50 border border-border-hairline text-muted text-sm font-medium">
-            Tag: {tag}
-            <button type="button" class="filter-remove p-0.5 rounded hover:bg-muted/70" data-filter="tag" data-value={tag} aria-label={`Remove tag filter: ${tag}`}>
+            {t('filter.tag')}: {tag}
+            <button type="button" class="filter-remove p-0.5 rounded hover:bg-muted/70" data-filter="tag" data-value={tag} aria-label={`${t('aria.removeTag')}: ${tag}`}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
             </button>
           </span>
@@ -56,11 +71,11 @@ const sortOptions = [
       </div>
 
       <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-        <label for="sort-select" class="sr-only">Sort by</label>
+        <label for="sort-select" class="sr-only">{t('aria.sortBy')}</label>
         <select
           id="sort-select"
           class="px-3 py-2 rounded-md border border-border-hairline bg-surface text-ink text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%207l3%203%203-3%22%2F%3E%3C%2Fsvg%3E')] bg-[right_0.75rem_center] bg-no-repeat pr-8"
-          aria-label="Sort tools"
+          aria-label={t('aria.sortTools')}
         >
           {sortOptions.map(opt => (
             <option value={opt.value} selected={opt.value === currentSort}>{opt.label}</option>
@@ -72,7 +87,7 @@ const sortOptions = [
             href={baseUrl}
             class="px-4 py-2 rounded-md border border-border-hairline bg-surface text-muted text-sm font-medium hover:text-ink hover:border-ink/50 hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
           >
-            Clear All
+            {t('filter.clear')}
           </a>
         )}
       </div>

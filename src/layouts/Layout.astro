@@ -8,7 +8,8 @@ import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
-import { getLangFromUrl, type LangCode } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { LangCode } from '../i18n/ui';
 
 interface Props {
   title?: string;
@@ -49,6 +50,7 @@ const {
 } = Astro.props;
 
 const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
+const t = useTranslations(detectedLang);
 
 ---
 <!doctype html>
@@ -229,7 +231,7 @@ const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.
 
   </head>
   <body class="min-h-screen bg-canvas font-body text-ink antialiased">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">{t('skip.link')}</a>
     <Header />
     <MobileDrawer />
     <SearchPanel />

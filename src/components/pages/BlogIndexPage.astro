@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackLink from '../BackLink.astro';
+import { getCollection } from 'astro:content';
+import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
+import { localizePost } from '../../i18n/blogContent';
+import { getPageCopy } from '../../i18n/pageContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const pageTitle = lang === 'en'
+  ? `Instanten Blog — Instant Tools, Instant Convert & Instant Online Guides`
+  : `${t('nav.blog')} — ${SITE_NAME}`;
+const pageDescription = lang === 'en'
+  ? 'Practical tutorials, instant convert tips, and step-by-step instant help guides to save hours with free Instanten tools online.'
+  : page.blog.description;
+const canonicalURL = lang === 'en' ? `${SITE_URL}/blog/` : `${SITE_URL}/${lang}/blog/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  ogImage="/og-instanten.svg"
+  keywords={`instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert, ${lang}`}
+  breadcrumbs={[{ name: t('nav.home') || 'Home', item: translatePath('/') }, { name: t('nav.blog') || 'Blog', item: translatePath('/blog/') }]}
+  lang={lang}
+>
+  <main class="ror-main">
+    <div class="ror-container">
+      <BackLink />
+
+      <h1 class="ror-h1">{t('nav.blog')}</h1>
+      {lang === 'en' ? (
+        <p class="ror-lead">Guides, practical tutorials, and smart workflows for developers, designers, writers, and builders using free <strong>Instanten tool</strong> collections, <strong>instant online</strong> utilities, and quick <strong>instant convert</strong> helpers — with <strong>instant help</strong> when you need it most.</p>
+      ) : (
+        <p class="ror-lead">{page.blog.lead}</p>
+      )}
+
+      <ul class="ror-blog-list">
+        {sortedPosts.map((post) => {
+          const localized = localizePost(lang, post.data);
+          return (
+            <li>
+              <a href={translatePath(`/blog/${post.data.slug}/`)} class="ror-blog-card">
+                <time class="ror-blog-date" datetime={post.data.publishedAt}>{formatLocalizedDate(post.data.publishedAt, lang)}</time>
+                <h2 class="ror-blog-title">{localized.title}</h2>
+                <p class="ror-blog-desc">{localized.excerpt}</p>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+import { submitCopy } from '../../i18n/submitContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+const copy = submitCopy[lang];
+---
+
+<Layout
+  title={`${page.submit.title} — Instanten`}
+  description={page.submit.description}
+  canonicalURL={`https://instanten.com/${lang}/submit/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[{ label: t('nav.home'), href: translatePath('/') }, { label: page.submit.title }]} />
+  <article class="px-gutter py-section max-w-2xl mx-auto">
+    <header class="mb-12 text-center">
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">{page.submit.title}</h1>
+      <p class="font-body text-body-lg text-muted leading-relaxed">{page.submit.lead}</p>
+    </header>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">{copy.guidelinesTitle}</h2>
+      <ul class="space-y-4" role="list">
+        {copy.rules.map(rule => (
+          <li class="flex gap-4 p-4 rounded-lg border border-border-hairline bg-surface">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 mt-1" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <div>
+              <h3 class="font-display font-semibold text-base text-ink mb-1">{rule.title}</h3>
+              <p class="font-body text-body-md text-muted">{rule.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">{copy.emailTitle}</h2>
+      <p class="font-body text-body-md text-muted mb-6">
+        {copy.emailLead} <a href="mailto:submit@instanten.com" class="text-accent-end hover:underline">submit@instanten.com</a>:
+      </p>
+      <div class="bg-muted/30 rounded-lg p-6 font-mono text-sm">
+        <pre class="font-body text-body-md text-ink"><code>{copy.fields.join('\n')}</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">{copy.githubTitle}</h2>
+      <p class="font-body text-body-md text-muted mb-4">
+        {copy.githubLead} <code class="bg-muted/50 px-1.5 py-0.5 rounded font-mono text-sm">src/content/tools/</code>.
+      </p>
+      <a
+        href="https://github.com/instanten/instanten-v2/tree/main/src/content/tools"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white font-body font-medium text-base hover:bg-ink/90 transition-colors"
+      >
+        {copy.githubButton}
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 13.5h11M12 6.5l4 4-4 4" />
+        </svg>
+      </a>
+    </section>
+
+    <section class="pt-8 border-t border-border-hairline">
+      <h2 class="font-display font-semibold text-xl text-ink mb-6">{copy.nextTitle}</h2>
+      <ol class="space-y-4" role="list">
+        {copy.steps.map((step, i) => (
+          <li class="flex gap-4">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-start/10 text-accent-end flex items-center justify-center font-display font-semibold text-base">{i + 1}</span>
+            <div>
+              <p class="font-display font-semibold text-base text-ink">{step.title}</p>
+              <p class="font-body text-body-md text-muted">{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </article>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

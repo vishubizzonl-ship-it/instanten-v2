@@ -1,7 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BlogPostPage from '../../components/pages/BlogPostPage.astro';
 import { getCollection } from 'astro:content';
-import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED } from '../../config/siteInfo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -12,99 +11,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-if (!post) {
-  return Astro.redirect('/blog/');
-}
-
-const { data } = post;
-const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
-};
-
-const pageTitle = `${data.title} — ${SITE_NAME}`;
-const pageDescription = data.excerpt;
-const canonicalURL = `${SITE_URL}/blog/${data.slug}/`;
-
-const blogPostingSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: data.title,
-  description: data.excerpt,
-  url: canonicalURL,
-  datePublished: data.publishedAt,
-  dateModified: data.publishedAt,
-  author: {
-    '@type': 'Person',
-    name: data.author?.name || SITE_NAME,
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
-  },
-};
-
-const postTags = data.categories ? data.categories.map(c => c.slug) : ['blog', 'guide', 'instanten'];
 ---
 
-<Layout
-  title={pageTitle}
-  description={pageDescription}
-  canonicalURL={canonicalURL}
-  ogType="article"
-  ogImage={data.thumbnail || '/og-instanten.svg'}
-  keywords="instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert"
-  publishedTime={data.publishedAt}
-  modifiedTime={data.publishedAt}
-  section={data.categories ? data.categories.map(c => c.name).join(', ') : 'Blog'}
-  tags={postTags}
-  noindex={false}
-  breadcrumbs={[{ name: 'Home', item: '/' }, { name: 'Blog', item: '/blog' }, { name: data.title, item: `/blog/${data.slug}` }]}
-  jsonLd={blogPostingSchema}
->
-  <main class="ror-main">
-    <div class="ror-container">
-      <div class="ror-back-row">
-        <a href="/blog" class="ror-back-link">&larr; All posts</a>
-      </div>
-
-      <h1 class="ror-h1">{data.title}</h1>
-      <p class="ror-updated"><time datetime={data.publishedAt}>{formatDate(data.publishedAt)}</time></p>
-
-      <article class="ror-prose">
-        {post.body ? (
-          <Fragment set:html={post.body} />
-        ) : (
-          <>
-            <p><strong>{data.excerpt}</strong></p>
-            <p>In this guide, we explore the core concepts and practical applications that make {data.title.toLowerCase()} an essential skill for modern development. Whether you are just getting started or refining your workflow, the techniques covered here will help you work faster and with greater confidence.</p>
-
-            <h2>Why This Matters</h2>
-            <p>The tools and patterns discussed in this article address real-world challenges that developers, designers, and builders face every day. By focusing on practical, step-by-step guidance rather than abstract theory, we aim to give you something you can apply immediately.</p>
-
-            <h3>Key Takeaways</h3>
-            <ul>
-              <li>Understand the fundamental principles behind {data.categories ? data.categories.map((c: any) => c.name.toLowerCase()).join(', ') : 'instant online tools'}.</li>
-              <li>Apply best practices to improve accuracy, speed, and collaboration.</li>
-              <li>Integrate these workflows with the free utilities available on {SITE_DOMAIN}.</li>
-            </ul>
-
-            <blockquote>
-              <p>"The best way to learn is by doing — and the best way to do is with the right tools at hand."</p>
-            </blockquote>
-
-            <h2>Getting Started</h2>
-            <p>If you haven't already, take a moment to explore the related categories and try out the free online tools linked throughout this site. They are designed to work instantly in your browser without any installation or sign-up.</p>
-
-            <p>Have feedback on this guide? We'd love to hear from you. <a href="/contact" class="ror-link">Reach out here</a>.</p>
-          </>
-        )}
-      </article>
-    </div>
-  </main>
-</Layout>
+<BlogPostPage post={post} />

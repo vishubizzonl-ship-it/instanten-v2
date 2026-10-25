@@ -1,6 +1,7 @@
 ---
 import ToolCard from './ToolCard.astro';
 import { buildSearchText, type ToolData } from '../utils/filters';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   tools: ToolData[];
@@ -9,9 +10,10 @@ interface Props {
 }
 
 const { tools, visibleStart = 0, visibleEnd = tools.length } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <section aria-labelledby="tools-heading" id="tools">
-  <h2 id="tools-heading" class="sr-only">Tools</h2>
+  <h2 id="tools-heading" class="sr-only">{t('tools.allTools')}</h2>
   <div
     class="grid gap-6"
     data-directory-grid

@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import EditorialHero from '../components/EditorialHero.astro';
 import BlogPagination from '../components/BlogPagination.astro';
-import HomeSeoSection, { homeFaqs } from '../components/HomeSeoSection.astro';
+import HomeSeoSection, { getHomeFaqs } from '../components/HomeSeoSection.astro';
+import { defaultLang } from '../i18n/ui';
 import { getAllTools } from '../utils/standaloneTools';
 import { parseFilters, filterTools, sortTools, paginateTools, toolHref, type ToolData } from '../utils/filters';
 
@@ -56,7 +57,7 @@ const canonicalURL = currentPage === 1
   ogImage="/og-instanten.svg"
   keywords="instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert"
   includeAppSchema={true}
-  faqs={homeFaqs}
+  faqs={getHomeFaqs(defaultLang)}
   breadcrumbs={currentPage === 1 ? [{ name: 'Home', item: '/' }] : [{ name: 'Home', item: '/' }, { name: 'Page ' + currentPage, item: '/page/' + currentPage }]}
 >
   <EditorialHero />

@@ -1,4 +1,10 @@
 ---
+import { getLangFromUrl, useTranslations, translatePathSafe } from '../i18n/utils';
+import { localizeToolCategory } from '../i18n/toolContent';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const categories = [
   { slug: 'developer', label: 'Developer' },
   { slug: 'design', label: 'Design' },
@@ -27,13 +33,13 @@ const categories = [
   >
     <div class="flex items-center justify-between border-b border-border-hairline px-6 py-4">
       <h2 id="search-panel-title" class="font-display font-semibold text-heading-md text-ink">
-        What are You Looking For?
+        {t('search.panel.title')}
       </h2>
       <button
         type="button"
         data-search-close
         class="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-hairline-soft hover:text-ink"
-        aria-label="Close search"
+        aria-label={t('search.panel.close')}
       >
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m5 5 10 10M15 5 5 15"></path>
@@ -41,15 +47,15 @@ const categories = [
       </button>
     </div>
 
-    <form action="/search/" method="get" data-search-form class="p-6">
-      <label for="search-input" class="sr-only">Search tools</label>
+    <form action={translatePathSafe('/search/', lang)} method="get" data-search-form class="p-6">
+      <label for="search-input" class="sr-only">{t('nav.search')}</label>
       <div class="flex flex-col sm:flex-row items-stretch gap-3">
         <div class="relative flex-1">
           <input
             type="search"
             id="search-input"
             name="q"
-            placeholder="Start Typing"
+            placeholder={t('search.placeholder')}
             class="w-full h-11 pl-4 pr-4 rounded-lg border border-border-hairline bg-surface text-body-lg text-ink placeholder:text-faint outline-none transition-colors focus:border-ink focus:ring-2 focus:ring-accent-soft"
             style="font-size: 16px"
             autocomplete="off"
@@ -58,20 +64,20 @@ const categories = [
           />
         </div>
         <button type="submit" class="btn btn-primary shrink-0 w-full sm:w-auto px-6 h-11">
-          Search
+          {t('search.panel.submit')}
         </button>
       </div>
     </form>
 
     <div class="border-t border-border-hairline p-6">
-      <p class="eyebrow mb-3">Browse categories</p>
+      <p class="eyebrow mb-3">{t('search.panel.browse')}</p>
       <div class="flex flex-wrap gap-2">
         {categories.map((category) => (
           <a
-            href={`/search/?category=${category.label}`}
+            href={`${translatePathSafe('/search/', lang)}?category=${encodeURIComponent(category.label)}`}
             class="rounded-full border border-border-hairline bg-canvas px-3 py-1.5 text-caption font-medium text-body transition-colors hover:border-faint hover:text-ink"
           >
-            {category.label}
+            {localizeToolCategory(lang, category.label)}
           </a>
         ))}
       </div>

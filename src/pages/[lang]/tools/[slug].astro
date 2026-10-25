@@ -1,10 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ToolDetailPage from '../../../components/pages/ToolDetailPage.astro';
 import { getCollection } from 'astro:content';
-import { pricingSlug } from '../../../utils/filters';
 import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -17,92 +14,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { lang, slug } = Astro.params as { lang: LangCode; slug: string };
 const { tool } = Astro.props as { tool: any };
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
-
-const { name, category, description, pricing, pricingDetails, image, url, tags = [], maker, addedDate, updatedDate, features = [], useCases = [], featured = false } = tool.data;
-
-const pricingColors = {
-  Free: 'bg-success-soft text-success',
-  Freemium: 'bg-warning-soft text-warning',
-  Paid: 'bg-violet-soft text-violet',
-} as const;
-
-const allTools = await getCollection('tools');
-const otherTools = allTools.filter(t => t.data.slug !== tool.data.slug);
-const relatedTools = otherTools
-  .filter(t => t.data.category === category || (t.data.tags || []).some((tag: string) => tags.includes(tag)))
-  .slice(0, 4);
-
-const pageTitle = `${name} — Instanten`;
-const canonicalURL = `https://instanten.com/${lang}/tools/${tool.data.slug}/`;
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Tools', href: '/tools/' },
-  { label: category, href: translatePath(`/category/${category.toLowerCase()}/`) },
-  { label: name },
-];
 ---
 
-<Layout
-  title={pageTitle}
-  description={description}
-  keywords={`${name}, ${category}, instant tool, instant online, instant convert, $0 cost`}
-  canonicalURL={canonicalURL}
-  lang={lang}
->
-  <div class="site-container">
-    <Breadcrumbs items={breadcrumbs.map(b => ({ ...b, href: b.href ? translatePath(b.href === '/' ? '/' : b.href) : undefined }))} />
-  </div>
-  <article class="site-container py-section max-w-4xl">
-    <header class="mb-10">
-      <div class="flex flex-wrap items-center gap-2 mb-4">
-        <a href={translatePath(`/category/${category.toLowerCase()}/`)} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{category}</a>
-        <a href={translatePath(`/pricing/${pricingSlug(pricing)}/`)} class={`text-caption font-medium px-2 py-0.5 rounded-full transition-opacity hover:opacity-75 ${pricingColors[pricing as 'Free' | 'Freemium' | 'Paid']}`}>{pricing}</a>
-        {featured && <span class="text-caption font-medium px-2 py-0.5 rounded-full bg-accent/90 text-canvas">Featured</span>}
-      </div>
-      <h1 class="font-display font-semibold text-display text-ink mb-4">{name}</h1>
-      <p class="text-body-lg text-muted leading-relaxed">{description}</p>
-    </header>
-
-    <div class="aspect-video rounded-card overflow-hidden bg-surface-soft border border-border-hairline mb-10">
-      <img
-        src={image}
-        alt={`${name} preview`}
-        class="w-full h-full object-cover"
-        width="640"
-        height="360"
-      />
-    </div>
-
-    {pricingDetails && (
-      <section class="mb-10 p-6 rounded-card bg-surface-soft border border-border-hairline">
-        <h2 class="font-display font-semibold text-body-lg text-ink mb-3">Pricing</h2>
-        <p class="text-body-md text-muted leading-relaxed">{pricingDetails}</p>
-      </section>
-    )}
-
-    <section class="mb-10">
-      <h2 class="font-display font-semibold text-body-lg text-ink mb-4">How to use</h2>
-      <div class="space-y-4 text-body-md text-body leading-relaxed">
-        <p>Open this instant online tool, enter your input, and get accurate results in milliseconds. Every output follows verified public standards including NIST measurements, W3C WCAG 2.2 contrast ratios, IETF RFC 8259 JSON formatting, and CommonMark Markdown specification.</p>
-        <p>This is a free browser-based utility with zero sign-up. Processing runs inside your browser session whenever possible.</p>
-      </div>
-    </section>
-
-    <div class="pt-8 border-t border-border-hairline">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary inline-flex w-full sm:w-auto px-8 py-4 text-base"
-        aria-label={`Visit ${name}`}
-      >
-        Visit Tool
-      </a>
-    </div>
-  </article>
-</Layout>
+<ToolDetailPage tool={tool} />

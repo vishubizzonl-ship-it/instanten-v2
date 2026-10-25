@@ -2,12 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import EditorialHero from '../../components/EditorialHero.astro';
 import BlogPagination from '../../components/BlogPagination.astro';
-import HomeSeoSection, { homeFaqs } from '../../components/HomeSeoSection.astro';
+import HomeSeoSection, { getHomeFaqs } from '../../components/HomeSeoSection.astro';
 import { getAllTools } from '../../utils/standaloneTools';
 import { parseFilters, filterTools, sortTools, paginateTools, toolHref, type ToolData } from '../../utils/filters';
 import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { seoHome } from '../../i18n/seoContent';
+import { localizeTool, localizeToolCategory } from '../../i18n/toolContent';
 
 export function getStaticPaths() {
   return nonDefaultLangs.map((lang) => ({ params: { lang } }));
@@ -43,7 +44,7 @@ const toolData: ToolData[] = paginatedTools.map((tool) => ({
   featured: tool.data.featured,
 }));
 
-const pageTitle = currentPage === 1 ? seo.title : `${seo.title} — Page ${currentPage}`;
+const pageTitle = currentPage === 1 ? seo.title : `${seo.title} — ${t('aria.page')} ${currentPage}`;
 const pageDescription = seo.description;
 const canonicalURL = currentPage === 1
   ? `https://instanten.com/${lang}/`
@@ -57,41 +58,45 @@ const canonicalURL = currentPage === 1
   ogImage="/og-instanten.svg"
   keywords={seo.keywords}
   includeAppSchema={true}
-  faqs={homeFaqs}
+  faqs={getHomeFaqs(lang)}
   breadcrumbs={currentPage === 1 ? [{ name: 'Home', item: '/' }] : [{ name: 'Home', item: '/' }, { name: 'Page ' + currentPage, item: '/page/' + currentPage }]}
   lang={lang}
 >
   <EditorialHero />
 
-  <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label="Tool directory">
-    <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
-      {toolData.map((tool) => (
+  <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label={t('aria.toolDirectory')}>
+    <div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.featuredTools')}>
+      {toolData.map((tool) => {
+        const localized = localizeTool(lang, tool);
+        const toolHref = translatePath(`/tools/${tool.slug}/`);
+        return (
         <article class="blog-card">
-          <a href={translatePath(`/tools/${tool.slug}/`)} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
+          <a href={toolHref} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>
             <img
               src={tool.image}
-              alt={`${tool.name} preview`}
+              alt={localized.name}
               loading="lazy"
               decoding="async"
               width="400"
               height="225"
             />
             <span class="blog-card__category-pill" style="position: absolute; top: 15px; left: 15px; background: var(--ink); color: var(--canvas); padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
-              {tool.category}
+              {localizeToolCategory(lang, tool.category)}
             </span>
           </a>
           <div class="blog-card__body">
             <h2 class="blog-card__title">
-              <a href={translatePath(`/tools/${tool.slug}/`)} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+              <a href={toolHref} class="transition-colors hover:text-accent-deep">{localized.name}</a>
             </h2>
-            <p class="blog-card__excerpt">{tool.description}</p>
+            <p class="blog-card__excerpt">{localized.description}</p>
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   </section>
 
   <BlogPagination currentPage={currentPage} totalPages={totalPages} basePath={translatePath('')} />
 
-  <HomeSeoSection />
+  <HomeSeoSection lang={lang} />
 </Layout>

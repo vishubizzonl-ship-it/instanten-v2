@@ -1,11 +1,14 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 interface Props {
   items: Array<{ label: string; href?: string }>;
 }
 
 const { items } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
-<nav class="breadcrumbs px-gutter py-4" aria-label="Breadcrumb" role="navigation">
+<nav class="breadcrumbs px-gutter py-4" aria-label={t('aria.breadcrumb')} role="navigation">
   <ol class="flex flex-wrap items-center gap-2 text-sm" role="list">
     {items.map((item, i) => (
       <li class="flex items-center gap-2" aria-current={i === items.length - 1 && !item.href ? 'page' : undefined}>

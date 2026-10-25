@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getPageCopy } from '../../i18n/pageContent';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: LangCode };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const page = getPageCopy(lang);
+
+const allTools = await getCollection('tools');
+const allTags = [...new Set(allTools.flatMap(t => t.data.tags || []))].sort();
+const tagCounts = allTags.map(tag => ({
+  name: tag,
+  count: allTools.filter(t => (t.data.tags || []).includes(tag)).length,
+  slug: tag.toLowerCase(),
+}));
+---
+
+<Layout
+  title={`${page.tags.title} — Instanten`}
+  description={page.tags.description}
+  canonicalURL={`https://instanten.com/${lang}/tags/`}
+  lang={lang}
+>
+  <Breadcrumbs items={[{ label: t('nav.home'), href: translatePath('/') }, { label: page.tags.title }]} />
+  <section class="site-container py-section">
+    <header class="max-w-3xl mx-auto text-center mb-12">
+      <h1 class="font-display font-semibold text-display text-ink mb-4">{page.tags.title}</h1>
+      <p class="text-body-lg text-muted leading-relaxed">{page.tags.lead}</p>
+    </header>
+    <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+      {tagCounts.map(tag => (
+        <a
+          href={translatePath(`/tag/${tag.slug}/`)}
+          class="group px-4 py-2 rounded-full border border-border-hairline bg-surface text-body-sm font-medium text-muted hover:border-faint hover:text-ink hover:bg-hairline-soft transition-colors"
+        >
+          {tag.name}
+          <span class="ml-1.5 px-2 py-0.5 rounded-full bg-hairline-soft text-caption font-mono text-faint group-hover:bg-ink/10 group-hover:text-muted transition-colors">
+            {tag.count}
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,84 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import BlogGrid from '../../../../components/BlogGrid.astro';
+import BlogPagination from '../../../../components/BlogPagination.astro';
+import { getCollection } from 'astro:content';
+import { nonDefaultLangs, type LangCode } from '../../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../../i18n/utils';
+import { localizePost } from '../../../../i18n/blogContent';
+import { getPageCopy } from '../../../../i18n/pageContent';
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('blog');
+  const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+  const totalPosts = sortedPosts.length;
+
+  const POSTS_PER_PAGE = totalPosts > 10 ? 10 : Math.ceil(totalPosts / 2);
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+  const paths: any[] = [];
+  for (const lang of nonDefaultLangs) {
+    for (let i = 0; i < totalPages; i++) {
+      paths.push({
+        params: { lang, page: String(i + 1) },
+        props: { pageNum: i + 1, totalPages, POSTS_PER_PAGE, sortedPosts, lang },
+      });
+    }
+  }
+  return paths;
+}
+
+const { pageNum, totalPages, POSTS_PER_PAGE, sortedPosts, lang } = Astro.props as {
+  pageNum: number;
+  totalPages: number;
+  POSTS_PER_PAGE: number;
+  sortedPosts: any[];
+  lang: LangCode;
+};
+
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const pageCopy = getPageCopy(lang);
+
+const pagePosts = sortedPosts
+  .slice((pageNum - 1) * POSTS_PER_PAGE, pageNum * POSTS_PER_PAGE)
+  .map((post) => {
+    const localized = localizePost(lang, post.data);
+    return {
+      slug: post.data.slug,
+      title: localized.title,
+      excerpt: localized.excerpt,
+      thumbnail: post.data.thumbnail,
+      thumbnailAlt: post.data.thumbnailAlt,
+      categories: post.data.categories,
+      author: post.data.author,
+      publishedAt: post.data.publishedAt,
+    };
+  });
+
+const pageTitle = pageNum === 1
+  ? `${t('nav.blog')} — Instanten`
+  : `${t('aria.page')} ${pageNum} / ${totalPages} — ${t('nav.blog')} — Instanten`;
+
+const pageDescription = pageCopy.blog.description;
+
+const canonicalURL = pageNum === 1
+  ? `https://instanten.com/${lang}/blog/`
+  : `https://instanten.com/${lang}/blog/page/${pageNum}/`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={canonicalURL}
+  lang={lang}
+>
+  <section class="site-container pb-[64px]" aria-label={t('aria.latestPosts')}>
+    <BlogGrid posts={pagePosts} />
+    <BlogPagination
+      currentPage={pageNum}
+      totalPages={totalPages}
+      basePath={translatePath('/blog')}
+    />
+  </section>
+</Layout>

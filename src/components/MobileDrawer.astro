@@ -7,30 +7,34 @@ import InstagramIcon from './icons/Instagram.astro';
 import TelegramIcon from './icons/Telegram.astro';
 import GitHubIcon from './icons/GitHub.astro';
 import EmailIcon from './icons/Email.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const navLinks = [
-  { href: '/tools/', label: 'All tools' },
-  { href: '/categories/', label: 'Categories' },
-  { href: '/pricing/', label: 'Pricing' },
-  { href: '/makers/', label: 'Makers' },
-  { href: '/about/', label: 'About' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/contact/', label: 'Contact' },
-  { href: '/privacy-policy/', label: 'Privacy Policy' },
-  { href: '/terms/', label: 'Terms' },
+  { href: '/tools/', label: t('tools.allTools') },
+  { href: '/categories/', label: t('nav.categories') },
+  { href: '/pricing/', label: t('nav.pricing') },
+  { href: '/makers/', label: t('nav.makers') },
+  { href: '/about/', label: t('nav.about') },
+  { href: '/blog/', label: t('nav.blog') },
+  { href: '/contact/', label: t('nav.contact') },
+  { href: '/privacy-policy/', label: t('nav.privacy') },
+  { href: '/terms/', label: t('nav.terms') },
 ] as const;
 
 const categories = [
-  { slug: 'utility', label: 'Utility' },
-  { slug: 'developer', label: 'Developer' },
-  { slug: 'design', label: 'Design' },
-  { slug: 'marketing', label: 'Marketing' },
-  { slug: 'writing', label: 'Writing' },
-  { slug: 'productivity', label: 'Productivity' },
+  { slug: 'utility', label: t('category.utility') },
+  { slug: 'developer', label: t('category.developer') },
+  { slug: 'design', label: t('category.design') },
+  { slug: 'marketing', label: t('category.marketing') },
+  { slug: 'writing', label: t('category.writing') },
+  { slug: 'productivity', label: t('category.productivity') },
 ] as const;
 
 const socialLinks = [
-  { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon, hidden: true },
   { href: 'https://x.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
   { href: 'https://www.instagram.com/instanten/', label: 'Instagram', icon: InstagramIcon },
   { href: 'https://t.me/instanten', label: 'Telegram', icon: TelegramIcon },
@@ -48,7 +52,7 @@ const socialLinks = [
       type="button"
       class="cf-drawer-close-btn"
       data-drawer-close
-      aria-label="Close navigation menu"
+      aria-label={t('aria.closeMenu')}
     >
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -58,21 +62,21 @@ const socialLinks = [
   </div>
 
   <aside data-drawer-body class="cs-offcanvas__sidebar flex-1 overflow-x-hidden overflow-y-auto" style="flex: 1 1 auto; display: flex; flex-direction: column; padding: 24px 24px 20px 24px;">
-    <h2 id="drawer-title" class="sr-only">Site menu</h2>
+    <h2 id="drawer-title" class="sr-only">{t('aria.siteMenu')}</h2>
 
     <div class="cs-offcanvas__button" style="margin-bottom: 24px;">
-      <a href="/submit/" data-menu-link class="btn btn-primary w-full inline-flex items-center justify-center" style="padding: 10px 18px; border-radius: 8px;">
-        Submit a Tool
+      <a href={translatePath('/submit/')} data-menu-link class="btn btn-primary w-full inline-flex items-center justify-center" style="padding: 10px 18px; border-radius: 8px;">
+        {t('nav.submit')}
       </a>
     </div>
 
-    <nav aria-label="Mobile navigation" style="margin-bottom: 24px;">
-      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">ARCHIVES</h3>
+    <nav aria-label={t('aria.mobileNav')} style="margin-bottom: 24px;">
+      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">{t('drawer.archives')}</h3>
       <ul class="cs-offcanvas__list" role="list" style="list-style: none; padding: 0; margin: 0;">
         {navLinks.map((link, index) => (
           <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === navLinks.length - 1}>
             <a
-              href={link.href}
+              href={translatePath(link.href)}
               data-menu-link
               class="cs-offcanvas__link flex min-h-11 items-center rounded-md px-3 py-2.5 text-body transition-colors hover:text-muted"
               style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"
@@ -85,12 +89,12 @@ const socialLinks = [
     </nav>
 
     <div style="margin-bottom: 24px;">
-      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">CATEGORIES</h3>
+      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">{t('drawer.categories')}</h3>
       <ul class="cs-offcanvas__list" role="list" style="list-style: none; padding: 0; margin: 0;">
         {categories.map((cat, index) => (
           <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === categories.length - 1}>
             <a
-              href={`/category/${cat.slug}/`}
+              href={translatePath(`/category/${cat.slug}/`)}
               data-menu-link
               class="cs-offcanvas__link flex min-h-10 items-center rounded-md px-3 py-2 text-body transition-colors hover:text-muted"
               style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"
@@ -103,7 +107,7 @@ const socialLinks = [
     </div>
   </aside>
 
-  <div data-drawer-footer class="cs-offcanvas__bottombar" role="list" aria-label="Social links and theme">
+  <div data-drawer-footer class="cs-offcanvas__bottombar" role="list" aria-label={t('aria.socialLinks')}>
     <div class="cs-offcanvas__bottombar-inner">
       {socialLinks.map((social) => (
         <a

@@ -2,6 +2,7 @@ export const SITE_NAME = 'Instanten';
 export const SITE_DOMAIN = 'instanten.com';
 export const SITE_URL = 'https://instanten.com';
 export const LAST_UPDATED = 'October 23, 2026';
+export const LAST_UPDATED_ISO = '2026-10-23';
 export const CONTACT_EMAIL = 'hello@instanten.com';
 
 export const KEY_FEATURES = [

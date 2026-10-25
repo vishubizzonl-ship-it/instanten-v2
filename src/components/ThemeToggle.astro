@@ -4,14 +4,17 @@ interface Props {
   class?: string;
 }
 
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 const { showLeftDivider = false, class: className = '' } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <div class:list={['cf-scheme-wrap', { 'has-divider': showLeftDivider }, className]}>
   <button
     type="button"
     class="cf-scheme-toggle"
-    aria-label="Dark mode toggle button"
+    aria-label={t('aria.themeToggle')}
     data-cf-theme-toggle
   >
     <span class="cf-scheme-toggle__icons">

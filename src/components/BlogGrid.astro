@@ -1,6 +1,7 @@
 ---
 import BlogCard from './BlogCard.astro';
 import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface BlogPost {
   slug: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const { posts: postsProp } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 
 let posts: BlogPost[];
 
@@ -39,7 +41,7 @@ if (postsProp) {
     }));
 }
 ---
-<div class="blog-grid" data-cards-grid role="list" aria-label="Latest blog posts">
+<div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.latestPosts')}>
   {posts.map((post) => (
     <BlogCard {...post} />
   ))}

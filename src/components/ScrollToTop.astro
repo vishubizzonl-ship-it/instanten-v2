@@ -1,11 +1,14 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <button
   type="button"
   data-scroll-top
   class="invisible fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 translate-y-2 items-center justify-center rounded-full border border-border-hairline bg-surface text-ink opacity-0 shadow-float transition-all duration-200 hover:bg-hairline-soft focus-visible:visible focus-visible:translate-y-0 focus-visible:opacity-100"
-  aria-label="Back to top"
-  title="Back to top"
+  aria-label={t('aria.backToTop')}
+  title={t('aria.backToTop')}
   aria-hidden="true"
   tabindex="-1"
 >
