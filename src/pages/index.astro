@@ -28,7 +28,6 @@ const toolData: ToolData[] = paginatedTools.map((tool) => ({
   pricing: tool.data.pricing,
   image: tool.data.image,
   url: tool.data.url,
-  href: tool.data.href,
   tags: tool.data.tags,
   maker: tool.data.maker,
   addedDate: tool.data.addedDate,
@@ -67,7 +66,7 @@ const canonicalURL = currentPage === 1
     <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
       {toolData.map((tool) => (
         <article class="blog-card">
-          <a href={tool.href ?? `/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`Open ${tool.name}`}>
+          <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
             <img
               src={tool.image}
               alt={`${tool.name} preview`}
@@ -83,7 +82,7 @@ const canonicalURL = currentPage === 1
 
           <div class="blog-card__body">
             <h2 class="blog-card__title">
-              <a href={tool.href ?? `/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+              <a href={`/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
             </h2>
 
             <p class="blog-card__excerpt">{tool.description}</p>
