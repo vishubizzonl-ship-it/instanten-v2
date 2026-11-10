@@ -38,6 +38,7 @@ const toolData = paginatedTools.map((tool): {
   pricing: tool.data.pricing,
   image: tool.data.image,
   url: tool.data.url,
+  href: tool.data.href,
   tags: tool.data.tags,
   featured: tool.data.featured,
 }));
@@ -73,7 +74,7 @@ const jsonLd = {
         '@type': 'SoftwareApplication',
         name: tool.data.name,
         description: tool.data.description,
-        url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+        url: new URL(tool.data.href ?? `/tools/${tool.data.slug}/`, 'https://instanten.com').href,
         applicationCategory: tool.data.category,
         offers: {
           '@type': 'Offer',

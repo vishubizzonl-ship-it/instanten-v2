@@ -1,0 +1,365 @@
+---
+const DICT: Record<string, string> = {
+  "compass.ui.active": "Active",
+  "compass.ui.blocked": "Blocked",
+  "compass.ui.calibrating": "Calibrating…",
+  "compass.ui.denied": "Denied",
+  "compass.ui.done": "Done",
+  "compass.ui.error": "Error",
+  "compass.ui.na": "N/A",
+  "compass.ui.title": "Compass",
+  "compass.ui.unsupported": "Not supported"  
+};
+const t = (key: string) => DICT[key] ?? key;
+---
+
+<div
+  class="w-full"
+  id="compass-island"
+  aria-label={t('compass.ui.title')}
+  data-active={t('compass.ui.active')}
+  data-denied={t('compass.ui.denied')}
+  data-blocked={t('compass.ui.blocked')}
+  data-error={t('compass.ui.error')}
+  data-unsupported={t('compass.ui.unsupported')}
+  data-na={t('compass.ui.na')}
+  data-calibrating={t('compass.ui.calibrating')}
+  data-done={t('compass.ui.done')}
+>
+  <div id="compass-card" class="border border-hairline rounded-md bg-canvas p-6 shadow-[0px_1px_1px_rgba(0,0,0,0.04)] relative">
+    <button type="button" id="compass-fullscreen-btn" aria-label="Fullscreen" class="absolute top-3 right-3 z-30 inline-flex items-center justify-center w-8 h-8 rounded-sm bg-canvas-elevated border border-hairline text-ink hover:bg-canvas transition-colors">
+      <svg class="icon-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      <svg class="icon-exit hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>
+    </button>
+    <div class="text-center mb-2">
+      <p class="font-sans text-xl font-semibold tracking-tight text-ink">{t('compass.ui.title')}</p>
+      <p id="compass-live" class="text-xs text-mute font-mono mt-1 min-h-[1rem]"></p>
+    </div>
+
+    <div class="text-center mb-4">
+      <p id="compass-angle" class="text-3xl font-semibold tracking-tight text-ink tabular-nums min-h-[2.25rem]">—</p>
+      <p id="compass-status" class="text-xs text-mute font-mono mt-2 min-h-[1rem]" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="relative flex items-center justify-center py-2 overflow-hidden" aria-label={t('compass.ui.title')}>
+      <div id="compass-plus" class="absolute top-1/2 left-1/2 pointer-events-none z-20" style="transform: translate(-50%, -50%);">
+        <div class="relative w-10 h-10">
+          <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-ink/80 -translate-x-1/2"></div>
+          <div class="absolute top-1/2 left-0 right-0 h-[2px] bg-ink/80 -translate-y-1/2"></div>
+        </div>
+      </div>
+      <div class="absolute top-1 left-1/2 -translate-x-1/2 z-20">
+        <div class="w-0 h-0 border-l-[7px] border-r-[7px] border-b-[14px] border-l-transparent border-r-transparent border-b-error"></div>
+      </div>
+      <div id="compass-dial" class="relative w-[320px] h-[320px] lg:w-80 lg:h-80 will-change-transform" style="transform: rotate(0deg); transition: none;">
+        <svg viewBox="0 0 200 200" class="w-full h-full" aria-label={t('compass.ui.title')}>
+          <defs>
+            <radialGradient id="dial-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--color-canvas)" />
+              <stop offset="100%" stop-color="var(--color-canvas-elevated)" />
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="95" fill="url(#dial-grad)" stroke="var(--color-hairline)" stroke-width="1" />
+          {Array.from({ length: 72 }, (_, i) => i * 5).map((deg) => {
+            const major = deg % 10 === 0;
+            const r1 = major ? 86 : 90;
+            const r2 = 94;
+            const rad = (deg * Math.PI) / 180;
+            const x1 = 100 + r1 * Math.sin(rad);
+            const y1 = 100 - r1 * Math.cos(rad);
+            const x2 = 100 + r2 * Math.sin(rad);
+            const y2 = 100 - r2 * Math.cos(rad);
+            return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--color-mute)" stroke-width={major ? 1.5 : 0.7} opacity={major ? 0.9 : 0.4} />;
+          })}
+          {Array.from({ length: 36 }, (_, i) => i * 10).map((deg) => {
+            const rad = (deg * Math.PI) / 180;
+            const r = 78;
+            const x = 100 + r * Math.sin(rad);
+            const y = 100 - r * Math.cos(rad);
+            return <text x={x} y={y} text-anchor="middle" dominant-baseline="middle" font-family="Geist Mono, monospace" font-size="7" font-weight="500" fill="var(--color-mute)">{deg}</text>;
+          })}
+          <circle cx="100" cy="100" r="3" fill="var(--color-ink)" />
+          <text x="100" y="45" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="var(--color-ink)" letter-spacing="2">N</text>
+          <text x="139" y="61" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" font-weight="500" fill="var(--color-mute)" letter-spacing="1">NE</text>
+          <text x="155" y="100" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="500" fill="var(--color-mute)" letter-spacing="1">E</text>
+          <text x="139" y="139" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" font-weight="500" fill="var(--color-mute)" letter-spacing="1">SE</text>
+          <text x="100" y="155" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="500" fill="var(--color-mute)" letter-spacing="1">S</text>
+          <text x="61" y="139" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" font-weight="500" fill="var(--color-mute)" letter-spacing="1">SW</text>
+          <text x="45" y="100" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" font-weight="500" fill="var(--color-mute)" letter-spacing="1">W</text>
+          <text x="61" y="61" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" font-weight="500" fill="var(--color-mute)" letter-spacing="1">NW</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const root = document.getElementById('compass-island');
+    const dial = document.getElementById('compass-dial');
+    const angleEl = document.getElementById('compass-angle');
+    const statusEl = document.getElementById('compass-status');
+    const liveEl = document.getElementById('compass-live');
+    const plus = document.getElementById('compass-plus');
+    if (!root || !dial) return;
+
+    const msg = {
+      denied: root.dataset.denied || 'Permission denied.',
+      blocked: root.dataset.blocked || 'Motion sensors blocked.',
+      error: root.dataset.error || 'Sensor error.',
+      unsupported: root.dataset.unsupported || 'Device orientation not supported.',
+      na: root.dataset.na || 'Heading unavailable.',
+      calibrating: root.dataset.calibrating || 'Calibrating compass…',
+      done: root.dataset.done || 'Compass ready.',
+      active: root.dataset.active || 'Active',
+    };
+
+    type E = DeviceOrientationEvent & {
+      webkitCompassHeading?: number | null;
+      alpha?: number | null;
+      beta?: number | null;
+      gamma?: number | null;
+      absolute?: boolean;
+    };
+
+    function normalize(deg: number) {
+      return ((deg % 360) + 360) % 360;
+    }
+
+    function getScreenAngle(): number {
+      try {
+        if (window.screen && window.screen.orientation && typeof window.screen.orientation.angle === 'number') {
+          return window.screen.orientation.angle;
+        }
+      } catch (e) {}
+      if (typeof window.orientation === 'number') {
+        return (window.orientation + 360) % 360;
+      }
+      return 0;
+    }
+
+    function disha(deg: number) {
+      const d = normalize(deg);
+      if (d >= 22.5 && d < 67.5) return 'NE';
+      if (d >= 67.5 && d < 112.5) return 'E';
+      if (d >= 112.5 && d < 157.5) return 'SE';
+      if (d >= 157.5 && d < 202.5) return 'S';
+      if (d >= 202.5 && d < 247.5) return 'SW';
+      if (d >= 247.5 && d < 292.5) return 'W';
+      if (d >= 292.5 && d < 337.5) return 'NW';
+      return 'N';
+    }
+
+    function setStatus(text: string) {
+      if (statusEl) statusEl.textContent = text;
+    }
+
+    function setLive(text: string) {
+      if (liveEl) liveEl.textContent = text;
+    }
+
+    // Absolute heading extraction: only magnetic-North-capable readings.
+    // iOS provides webkitCompassHeading; Android provides absolute events.
+    // Relative (non-absolute) alpha is never treated as a compass heading.
+    function isAbsoluteCandidate(event: E): boolean {
+      const wch = event.webkitCompassHeading;
+      if (typeof wch === 'number' && Number.isFinite(wch)) return true;
+      return event.type === 'deviceorientationabsolute' || event.absolute === true;
+    }
+
+    function getAbsoluteHeading(event: E): number | null {
+      const wch = event.webkitCompassHeading;
+      if (typeof wch === 'number' && Number.isFinite(wch)) {
+        return normalize(wch);
+      }
+      const isAbsolute =
+        event.type === 'deviceorientationabsolute' || event.absolute === true;
+      if (isAbsolute && typeof event.alpha === 'number' && Number.isFinite(event.alpha)) {
+        // alpha increases counter-clockwise, heading is clockwise from North.
+        // No screen-orientation offset is added here: deviceorientation is
+        // already in the device's physical frame; adding window.orientation
+        // would introduce spurious 90/180 degree offsets.
+        return normalize(360 - event.alpha);
+      }
+      return null;
+    }
+
+    // --- smoothing state ---
+    const recent: number[] = [];
+    const RECENT_MAX = 8;
+    let targetRotation = 0;
+    let currentRotation = 0;
+    let rafId: number | null = null;
+    let hasHeading = false;
+    let absoluteSeen = false;
+
+    let plusTargetX = 0, plusTargetY = 0, plusCurrentX = 0, plusCurrentY = 0, plusRaf: number | null = null;
+    function smoothPlus() {
+      plusCurrentX += (plusTargetX - plusCurrentX) * 0.15;
+      plusCurrentY += (plusTargetY - plusCurrentY) * 0.15;
+      if (plus) plus.style.transform = `translate(calc(-50% + ${plusCurrentX.toFixed(1)}px), calc(-50% + ${plusCurrentY.toFixed(1)}px))`;
+      if (Math.hypot(plusTargetX - plusCurrentX, plusTargetY - plusCurrentY) > 0.1) plusRaf = requestAnimationFrame(smoothPlus);
+      else plusRaf = null;
+    }
+
+    function circularAverage(values: number[]) {
+      let sx = 0, sy = 0;
+      for (const h of values) {
+        const r = (h * Math.PI) / 180;
+        sx += Math.sin(r);
+        sy += Math.cos(r);
+      }
+      return normalize((Math.atan2(sx, sy) * 180) / Math.PI);
+    }
+
+    function smoothLoop() {
+      // shortest angular path so 359 -> 0 rotates the short way
+      let delta = ((targetRotation - currentRotation + 540) % 360) - 180;
+      currentRotation += delta * 0.08;
+      currentRotation = normalize(currentRotation);
+      if (dial) dial.style.transform = 'rotate(' + currentRotation.toFixed(2) + 'deg)';
+      if (Math.abs(delta) > 0.05) rafId = requestAnimationFrame(smoothLoop);
+      else rafId = null;
+    }
+
+    function handleOrientation(event: E) {
+      const beta = typeof event.beta === 'number' ? event.beta : 0;
+      const gamma = typeof event.gamma === 'number' ? event.gamma : 0;
+
+      // plus/leveling: same simple mapping as Qibla (works reliably).
+      const scale = 2.5;
+      const maxR = 120;
+      let px = Math.max(-60, Math.min(60, gamma)) * scale;
+      let py = Math.max(-60, Math.min(60, beta)) * scale;
+      const dist = Math.hypot(px, py);
+      if (dist > maxR) { const s = maxR / dist; px *= s; py *= s; }
+      plusTargetX = px;
+      plusTargetY = py;
+      if (plusRaf === null) plusRaf = requestAnimationFrame(smoothPlus);
+
+      // Do not show "Level" text on compass; keep status empty/clear.
+      if (hasHeading) {
+        setStatus('');
+      }
+
+      // Heading guard: relative/non-absolute must not overwrite absolute heading.
+      const absolute = isAbsoluteCandidate(event);
+      if (absoluteSeen && !absolute) return;
+      if (absolute) absoluteSeen = true;
+
+      const heading = getAbsoluteHeading(event);
+
+      if (heading === null) {
+        if (typeof event.alpha === 'number') setStatus(msg.calibrating);
+        else setStatus(msg.na);
+        setLive('');
+        return;
+      }
+
+      recent.push(heading);
+      if (recent.length > RECENT_MAX) recent.shift();
+      const avgHeading = circularAverage(recent);
+
+      // Keep heading text, degree ring, cardinals and dial synchronized
+      // to the same heading value.
+      if (angleEl) angleEl.textContent = disha(avgHeading) + ' ' + Math.round(avgHeading) + '°';
+
+      targetRotation = normalize(-avgHeading);
+      if (!hasHeading) {
+        hasHeading = true;
+        setLive(msg.active);
+      }
+      if (rafId === null) rafId = requestAnimationFrame(smoothLoop);
+    }
+
+    function cleanup() {
+      window.removeEventListener('deviceorientation', handleOrientation as any);
+      window.removeEventListener('deviceorientationabsolute', handleOrientation as any, true);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (plusRaf !== null) cancelAnimationFrame(plusRaf);
+    }
+
+    function addListeners() {
+      // Listen to both; the absolute guard above prevents a relative event
+      // from overwriting an absolute one.
+      window.addEventListener('deviceorientation', handleOrientation as any);
+      if ('ondeviceorientationabsolute' in window) {
+        window.addEventListener('deviceorientationabsolute', handleOrientation as any, true);
+      }
+    }
+
+    async function enable() {
+      if (!window.isSecureContext) {
+        setStatus(msg.error + ' HTTPS required.');
+        setLive('');
+        return;
+      }
+      if (!window.DeviceOrientationEvent) {
+        setStatus(msg.unsupported);
+        setLive('');
+        return;
+      }
+      const doe: any = window.DeviceOrientationEvent;
+      if (typeof doe.requestPermission === 'function') {
+        try {
+          const res = await doe.requestPermission();
+          if (res !== 'granted') {
+            setStatus(msg.denied + ' ' + msg.blocked);
+            setLive('');
+            return;
+          }
+        } catch (e) {
+          setStatus(msg.blocked);
+          setLive('');
+          return;
+        }
+      }
+      setStatus(msg.calibrating);
+      addListeners();
+    }
+
+    // init
+    if (!window.isSecureContext) {
+      setStatus(msg.error + ' HTTPS required.');
+      setLive('');
+    } else if (!window.DeviceOrientationEvent) {
+      setStatus(msg.unsupported);
+      setLive('');
+    } else {
+      const doe: any = window.DeviceOrientationEvent;
+      if (typeof doe.requestPermission === 'function') {
+        setStatus('Tap screen to enable motion sensors.');
+        setLive('');
+        enable();
+      } else {
+        setStatus(msg.calibrating);
+        addListeners();
+      }
+    }
+
+    const fsBtn = document.getElementById('compass-fullscreen-btn');
+    function syncFsIcon() {
+      if (!fsBtn) return;
+      const entering = !document.fullscreenElement;
+      fsBtn.querySelector('.icon-enter')?.classList.toggle('hidden', !entering);
+      fsBtn.querySelector('.icon-exit')?.classList.toggle('hidden', entering);
+    }
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        const card = document.getElementById('compass-card');
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (card && card.requestFullscreen) card.requestFullscreen();
+      });
+      document.addEventListener('fullscreenchange', syncFsIcon);
+      syncFsIcon();
+    }
+
+    root.addEventListener('click', () => {
+      const doe: any = window.DeviceOrientationEvent;
+      if (doe && typeof doe.requestPermission === 'function') enable();
+    });
+
+    window.addEventListener('beforeunload', cleanup);
+    window.addEventListener('pagehide', cleanup);
+  })();
+</script>

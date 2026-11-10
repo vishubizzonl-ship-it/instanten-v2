@@ -1,0 +1,46 @@
+---
+import { toolBySlug } from '../../data/tools';
+
+interface Props {
+  tool: string;
+}
+const { tool } = Astro.props;
+const current = toolBySlug(tool);
+const here = Astro.url.pathname.replace(/\/$/, '/');
+const accent = current?.accent ?? '#0E0F0C';
+
+const items = current
+  ? [
+      { label: 'Tool', href: `/${current.slug}/` },
+      { label: 'Guides', href: `/${current.slug}/blog/` },
+      { label: 'About', href: `/${current.slug}/about/` },
+      { label: 'Contact', href: `/${current.slug}/contact/` },
+      { label: 'Privacy', href: `/${current.slug}/privacy/` },
+      { label: 'Terms', href: `/${current.slug}/terms/` },
+    ]
+  : [];
+---
+<div class="border-y border-border-hairline bg-surface-soft">
+  <div class="site-container flex items-center gap-2 overflow-x-auto py-2 text-body-sm">
+    <a
+      href="/"
+      class="shrink-0 rounded-full border border-border-hairline bg-canvas px-3 py-1 font-semibold text-ink"
+    >
+      ← All tools
+    </a>
+    {
+      items.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'shrink-0 rounded-full px-3 py-1 transition-colors',
+            here === item.href ? 'font-semibold text-ink' : 'text-body hover:text-ink',
+          ]}
+          style={here === item.href ? `background:${accent}1f` : ''}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </div>
+</div>

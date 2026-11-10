@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   const tools = await getCollection('tools');
   const paths: { params: { lang: LangCode; slug: string }; props: { tool: any } }[] = [];
   for (const lang of nonDefaultLangs) {
-    for (const tool of tools) {
+    for (const tool of tools.filter((t: any) => !t.data.href)) {
       paths.push({ params: { lang, slug: tool.data.slug }, props: { tool } });
     }
   }

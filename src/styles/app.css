@@ -72,6 +72,12 @@
   --color-canvas: var(--canvas);
   --color-canvas-end: var(--canvas-end);
   --color-surface: var(--surface);
+  /* aliases used by the ported sensor tools */
+  --color-canvas-elevated: var(--surface);
+  --color-hairline: var(--hairline);
+  --color-mute: var(--muted);
+  --color-brand: #9fe870;
+  --color-brand-pale: #e2f6d5;
   --color-surface-soft: var(--surface-soft);
   --color-ink: var(--ink);
   --color-body: var(--body);

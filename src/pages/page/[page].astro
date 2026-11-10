@@ -37,6 +37,7 @@ const toolData = paginatedTools.map((tool) => ({
   pricing: tool.data.pricing,
   image: tool.data.image,
   url: tool.data.url,
+  href: tool.data.href,
   tags: tool.data.tags,
   maker: tool.data.maker,
   addedDate: tool.data.addedDate,
@@ -67,7 +68,7 @@ const jsonLd = {
       '@type': 'SoftwareApplication',
       name: tool.data.name,
       description: tool.data.description,
-      url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+      url: new URL(tool.data.href ?? `/tools/${tool.data.slug}/`, 'https://instanten.com').href,
       applicationCategory: tool.data.category,
       offers: {
         '@type': 'Offer',
@@ -86,7 +87,7 @@ const jsonLd = {
     <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
       {toolData.map((tool) => (
         <article class="blog-card">
-          <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
+          <a href={tool.href ?? `/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
             <img
               src={tool.image}
               alt={`${tool.name} preview`}
@@ -102,7 +103,7 @@ const jsonLd = {
 
           <div class="blog-card__body">
             <h2 class="blog-card__title">
-              <a href={`/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+              <a href={tool.href ?? `/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
             </h2>
 
             <p class="blog-card__excerpt">{tool.description}</p>

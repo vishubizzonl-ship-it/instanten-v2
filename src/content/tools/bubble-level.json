@@ -1,0 +1,39 @@
+{
+  "slug": "bubble-level",
+  "name": "Bubble Level",
+  "category": "Utility",
+  "description": "Turn your phone into a spirit level. Check whether any surface is flat, plumb or at an exact angle, with a live degree readout.",
+  "longDescription": "A bubble level that lives in your browser. It reads the device accelerometer to show tilt in degrees, with horizontal, plumb and bull's-eye modes plus one-tap calibration on a surface you trust.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free. No ads, no account.",
+  "image": "/thumbnails/bubble-level.svg",
+  "url": "https://instanten.com/bubble-level/",
+  "href": "/bubble-level/",
+  "tags": [
+    "bubble level",
+    "spirit level",
+    "online level",
+    "phone level",
+    "digital level",
+    "level tool",
+    "angle measure",
+    "plumb level",
+    "is it level"
+  ],
+  "maker": "instanten",
+  "addedDate": "2026-11-08",
+  "updatedDate": "2026-11-08",
+  "featured": true,
+  "features": [
+    "Horizontal, plumb and bull's-eye modes",
+    "Live tilt angle in degrees",
+    "One-tap calibration for phone and case offset",
+    "Audio and haptic level feedback"
+  ],
+  "useCases": [
+    "Hanging a shelf or picture frame straight",
+    "Levelling a table, tripod or appliance",
+    "Checking a countertop before installation",
+    "Setting a small drainage slope"
+  ]
+}

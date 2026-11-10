@@ -1,0 +1,24 @@
+---
+import type { Faq } from '../../data/tools';
+
+interface Props {
+  faqs: Faq[];
+  title?: string;
+  accent?: string;
+}
+const { faqs, title = 'Frequently asked questions', accent = '#0E0F0C' } = Astro.props;
+---
+<section class="site-container max-w-[64rem] pb-14" aria-labelledby="faq-heading">
+  <h2 id="faq-heading" class="font-display text-heading-md text-ink">{title}</h2>
+  <div class="mt-5 divide-y divide-border-hairline border-y border-border-hairline">
+    {faqs.map((faq) => (
+      <details class="group py-4">
+        <summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-body-md font-semibold text-ink">
+          <span>{faq.q}</span>
+          <span class="mt-0.5 shrink-0 text-lg leading-none transition-transform group-open:rotate-45" style={`color:${accent}`} aria-hidden="true">+</span>
+        </summary>
+        <p class="mt-3 text-body-sm leading-relaxed text-body">{faq.a}</p>
+      </details>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import SiloProse from '../../../components/tool/SiloProse.astro';
+import { SITE, toolBySlug } from '../../../data/tools';
+import { siloContent } from '../../../data/silo-content';
+
+const tool = toolBySlug('bubble-level')!;
+const copy = siloContent['bubble-level'].privacy;
+const canonicalPath = '/bubble-level/privacy/';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: copy.title,
+    description: copy.description,
+    url: SITE.url + canonicalPath,
+    inLanguage: 'en',
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    about: { '@type': 'SoftwareApplication', name: tool.name, url: `${SITE.url}/bubble-level/` },
+  },
+];
+
+const siblings = [
+  { label: 'Guides', href: `/bubble-level/blog/` },
+  { label: 'About', href: '/bubble-level/about/' },
+  { label: 'Contact', href: '/bubble-level/contact/' },
+  { label: 'Privacy', href: '/bubble-level/privacy/' },
+  { label: 'Terms', href: '/bubble-level/terms/' },
+].filter((s) => s.href !== canonicalPath);
+---
+
+<ToolLayout
+  title={copy.title}
+  description={copy.description}
+  tool="bubble-level"
+  canonicalPath={canonicalPath}
+  crumbs={[{ label: 'Privacy' }]}
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="site-container max-w-[64rem] pt-8">
+      <h1 class="font-display text-[2.1rem] font-bold leading-[1.05] tracking-[-0.035em] text-ink sm:text-4xl">
+        {copy.h1}
+      </h1>
+    </header>
+
+    <SiloProse html={copy.body} />
+
+    <section class="site-container max-w-[64rem] pb-20">
+      <div class="rounded-2xl border border-border-hairline bg-surface-soft p-6">
+        <p class="text-body-sm font-semibold text-ink">More from {tool.name}</p>
+        <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-body-sm">
+          <li>
+            <a href="/bubble-level/" class="font-semibold underline decoration-border-hairline underline-offset-2 hover:text-ink" style={`color:${tool.accent}`}>
+              Open the tool
+            </a>
+          </li>
+          {siblings.map((s) => (
+            <li><a href={s.href} class="text-body hover:text-ink">{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </article>
+</ToolLayout>

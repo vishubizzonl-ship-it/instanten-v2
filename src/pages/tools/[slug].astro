@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
-  return tools.map(tool => ({
+  return tools.filter((tool: any) => !tool.data.href).map(tool => ({
     params: { slug: tool.data.slug },
     props: { tool },
   }));

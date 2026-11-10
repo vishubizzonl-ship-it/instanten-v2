@@ -1,0 +1,39 @@
+{
+  "slug": "speedometer",
+  "name": "Speedometer",
+  "category": "Utility",
+  "description": "Free GPS speedometer in your browser. Live speed, max and average speed, trip distance and altitude — no app needed.",
+  "longDescription": "A speedometer that needs no install. It reads device GPS and shows live speed in km/h or mph plus maximum speed, average speed, trip distance and altitude, with a visible GPS accuracy figure so you know when to trust the number.",
+  "pricing": "Free",
+  "pricingDetails": "Completely free. Your route is never recorded or uploaded.",
+  "image": "/thumbnails/speedometer.svg",
+  "url": "https://instanten.com/speedometer/",
+  "href": "/speedometer/",
+  "tags": [
+    "speedometer",
+    "gps speedometer",
+    "online speedometer",
+    "speed tracker",
+    "speed test",
+    "bike speedometer",
+    "cycling speed",
+    "mph kmh",
+    "trip speed"
+  ],
+  "maker": "instanten",
+  "addedDate": "2026-11-08",
+  "updatedDate": "2026-11-08",
+  "featured": true,
+  "features": [
+    "Live GPS speed in km/h or mph",
+    "Max, average speed and trip distance",
+    "Altitude and GPS accuracy readout",
+    "Optional wake-lock for long trips"
+  ],
+  "useCases": [
+    "Checking how far off a car dashboard is",
+    "Tracking cycling or running speed",
+    "Measuring speed on a boat or tractor",
+    "Verifying a speed limiter works"
+  ]
+}

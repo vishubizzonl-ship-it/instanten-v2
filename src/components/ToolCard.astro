@@ -9,6 +9,7 @@ interface Props {
   description: string;
   pricing: 'Free' | 'Freemium' | 'Paid';
   image: string;
+  href?: string;
   tags?: string[];
   maker?: string;
   addedDate?: string;
@@ -29,6 +30,7 @@ const {
   maker,
   addedDate,
   updatedDate,
+  href,
   featured = false,
   hidden = false,
   searchText = '',
@@ -48,7 +50,7 @@ const pricingClasses = {
 
 const displayDate = updatedDate || addedDate;
 const formattedDate = displayDate ? formatLocalizedDate(displayDate, lang) : '';
-const toolHref = translatePathSafe(`/tools/${slug}/`, lang);
+const toolHref = href ?? translatePathSafe(`/tools/${slug}/`, lang);
 const makerHref = maker
   ? translatePathSafe(`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`, lang)
   : '';

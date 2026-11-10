@@ -14,6 +14,7 @@ const tools = defineCollection({
     pricingDetails: z.string().optional(),
     image: z.string().min(1),
     url: z.url(),
+    href: z.string().optional(),
     tags: z.array(z.string()).optional(),
     maker: z.string().optional(),
     addedDate: z.string().optional(),
