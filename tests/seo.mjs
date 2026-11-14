@@ -124,6 +124,58 @@ export function run(pages, outDir) {
     check(ogImageCount === 1, `home par og:image ${ogImageCount} baar hai (1 hona chahiye)`);
   }
 
+  // --- 4b. Home FAQ: visible accordion + single FAQPage JSON-LD ----------
+  if (home) {
+    const faqBlocks = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((m) => m[1])
+      .filter((raw) => raw.includes('FAQPage'));
+    check(faqBlocks.length === 1, `home par FAQPage JSON-LD ${faqBlocks.length} baar hai (1 hona chahiye)`);
+
+    let faqData = null;
+    try {
+      const parsed = JSON.parse(faqBlocks[0] ?? '{}');
+      faqData = Array.isArray(parsed)
+        ? parsed.find((n) => n['@type'] === 'FAQPage') ?? null
+        : parsed;
+    } catch {
+      check(false, 'home ka FAQPage JSON-LD valid JSON nahi hai');
+    }
+
+    const visibleFaqs = (home.match(/class="ffa-faq-item"/g) || []).length;
+    check(visibleFaqs >= 13, `home par ${visibleFaqs} visible FAQ items (13+ chahiye)`);
+
+    const ldQuestions = faqData?.mainEntity ?? [];
+    check(ldQuestions.length >= 13, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (13+ chahiye)`);
+    check(
+      ldQuestions.length === visibleFaqs,
+      `home FAQ mismatch: visible ${visibleFaqs}, JSON-LD ${ldQuestions.length}`
+    );
+    for (const q of ldQuestions) {
+      check(
+        Boolean(q.name) && Boolean(q.acceptedAnswer?.text) && q.acceptedAnswer.text.length >= 80,
+        `home FAQ answer chhota/khali hai: ${String(q.name).slice(0, 50)}`
+      );
+    }
+
+    // 5 tools-hub questions jo search se aate hain
+    const expected = [
+      'Is it safe to paste personal data into free online tools?',
+      'Which tools are included in the Instanten online tools list?',
+      'Is there any daily limit on how many times I can use an instant tool?',
+      'Do Instanten online tools work offline?',
+      'How do I choose the right online tool for a task?',
+    ];
+    for (const q of expected) {
+      check(visibleFaqs && home.includes(q), `home FAQ visible nahi hai: ${q}`);
+      check(ldQuestions.some((item) => item.name === q), `home FAQ JSON-LD mein nahi hai: ${q}`);
+    }
+
+    // FAQ copy mein "Google" nahi
+    const faqSection = (home.match(/<section[^>]*id="faq"[\s\S]*?<\/section>/i) || [''])[0];
+    check(faqSection.length > 0, 'home FAQ section (id="faq") nahi mila');
+    check(!/google/i.test(stripTags(faqSection)), 'FAQ copy mein "Google" shabd hai');
+  }
+
   // --- 5. Naye blog posts: 800-1000 words + article OG tags --------------
   for (const slug of NEW_BLOG_SLUGS) {
     const url = `/blog/${slug}/`;

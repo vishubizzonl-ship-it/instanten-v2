@@ -176,6 +176,31 @@ export const home: HomeCopy = {
   faqTitle: 'Frequently asked questions',
   faqs: [
     {
+      question: 'Is it safe to paste personal data into free online tools?',
+      answer:
+        'With Instanten, yes. Every instant tool processes your input inside your own browser session, so pasted text, tokens and files are never uploaded to a server and are not stored after you close the tab. That is the main question to ask before using any free online tools service — if a site sends your input elsewhere, treat it as someone else\'s copy of your data.',
+    },
+    {
+      question: 'Which tools are included in the Instanten online tools list?',
+      answer:
+        'The online tools list covers twelve instant tools: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. Each one opens in a single tab from the same tools hub, with no install and no account.',
+    },
+    {
+      question: 'Is there any daily limit on how many times I can use an instant tool?',
+      answer:
+        'No. There is no usage counter, no daily cap, no queue and no paid tier waiting behind a limit. A free online tools hub should behave like a utility, so you can run the same instant tool as many times as a task needs, including in the middle of a working session.',
+    },
+    {
+      question: 'Do Instanten online tools work offline?',
+      answer:
+        'Once a tool page has loaded, the work itself continues without a connection, because the processing runs locally in the browser rather than on a server. Reloading the page, opening a new tool or returning the next day does need a connection, so keep the tab open on a train or in a basement if you know you will need it.',
+    },
+    {
+      question: 'How do I choose the right online tool for a task?',
+      answer:
+        'Start from the task, not the tool name. If the output must be readable or validated, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or editing text, the writing utilities cover it. The homepage search filters the whole multi tool website by keyword, so a one-word query is usually faster than scanning categories.',
+    },
+    {
       question: 'What is Instanten and is it completely free to use?',
       answer:
         'Yes — Instanten is an independent, free browser-based software project built and maintained for developers, designers, students, and everyday users worldwide. Every utility runs at $0 with zero sign-up, zero subscriptions, and zero hidden limits.',
