@@ -204,8 +204,16 @@ case "${1:-}" in
       sleep "$POLL"
       [ -d .git ] || continue
       R=$(GIT_TERMINAL_PROMPT=0 git ls-remote origin "refs/heads/$BRANCH" 2>/dev/null | cut -f1)
-      [ -z "$R" ] && continue                 # net nahi — chup-chaap dobara
-      [ "$R" = "$CUR" ] && continue           # kuch naya nahi
+      if [ -z "$R" ]; then
+        up || start_server >>$LOG 2>&1      # net nahi, par server band ho to chalu karo
+        continue
+      fi
+
+      if [ "$R" = "$CUR" ]; then
+        up || start_server >>$LOG 2>&1      # kuch naya nahi — sirf server zinda rakho
+        continue
+      fi
+
       GIT_TERMINAL_PROMPT=0 git fetch -q origin "$BRANCH" 2>/dev/null || continue
       git reset --hard -q FETCH_HEAD 2>/dev/null || continue
       CUR=$R
