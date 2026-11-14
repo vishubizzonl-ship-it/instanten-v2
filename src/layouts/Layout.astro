@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
+import { GA_MEASUREMENT_ID, analyticsEnabled } from '../config/analytics';
 import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { LangCode } from '../i18n/ui';
@@ -57,6 +58,50 @@ const {
 
 const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
 const t = useTranslations(detectedLang);
+
+/**
+ * GA4 content_group — ek hi shared measurement ID, lekin har tool apni report.
+ *
+ *   /tools/json-formatter/      → json-formatter
+ *   /de/tools/word-counter/     → word-counter   (locale prefix strip)
+ *   /tools/                     → tools-hub
+ *   /blog/…, /category/…, …     → blog
+ *   /                           → home
+ *   baaki sab                   → site
+ *
+ * Error pages (403/404/500/503) par analytics load hi nahi hota — unka
+ * traffic report ko ganda karta hai aur wo noindex hain.
+ */
+const LOCALE_PREFIXES = ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const cleanSegments =
+  pathSegments.length > 0 && LOCALE_PREFIXES.includes(pathSegments[0]) ? pathSegments.slice(1) : pathSegments;
+const cleanPath = `/${cleanSegments.join('/')}`;
+
+const gaContentGroup = (() => {
+  if (cleanSegments[0] === 'tools' && cleanSegments[1]) return cleanSegments[1];
+  if (cleanSegments[0] === 'tools') return 'tools-hub';
+  if (['blog', 'category', 'tag', 'tags', 'page'].includes(cleanSegments[0])) return 'blog';
+  if (cleanSegments[0] === 'about' || cleanSegments[0] === 'contact') return 'company';
+  if (cleanSegments[0] === 'privacy-policy' || cleanSegments[0] === 'terms') return 'legal';
+  return cleanSegments.length === 0 ? 'home' : 'site';
+})();
+
+// Error pages + build ke waqt ID na ho to tag bilkul nahi.
+const errorPage = /^\/(403|404|500|503)(\.html)?$/.test(cleanPath);
+const loadAnalytics = analyticsEnabled && !noindex && !errorPage;
+
+// GA4 bootstrap — values build ke waqt bake hoti hain (define:vars is:inline ke
+// saath inline nahi hota, isliye string khud banate hain).
+const gaInlineScript = `window.dataLayer = window.dataLayer || [];
+function gtag() { window.dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', ${JSON.stringify(GA_MEASUREMENT_ID)}, {
+  anonymize_ip: true,
+  allow_google_signals: false,
+  allow_ad_personalization_signals: false,
+  content_group: ${JSON.stringify(gaContentGroup)}
+});`;
 
 ---
 <!doctype html>
@@ -239,6 +284,20 @@ const t = useTranslations(detectedLang);
       })();
     </script>
 
+    {
+      /* GA4 — ek shared measurement ID, content_group se per-tool reporting.
+         allow_google_signals:false => advertising personalisation off. */
+      loadAnalytics && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script is:inline set:html={gaInlineScript} />
+        </>
+      )
+    }
   </head>
   <body class="min-h-screen bg-canvas font-body text-ink antialiased">
     <a href="#main-content" class="skip-link">{t('skip.link')}</a>
