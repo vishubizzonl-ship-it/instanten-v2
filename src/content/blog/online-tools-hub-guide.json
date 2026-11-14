@@ -1,0 +1,23 @@
+{
+  "slug": "online-tools-hub-guide",
+  "title": "Free Online Tools Hub: One Site Replaces Ten Bookmarks",
+  "excerpt": "A free online tools hub keeps every instant tool one click away. How the Instanten online tools list works, and how to finish instant work without installs.",
+  "thumbnail": "/og-online-tools-hub-guide.png",
+  "thumbnailAlt": "Illustration of a free online tools hub dashboard with instant tools arranged in one grid",
+  "categories": [
+    {
+      "name": "Productivity",
+      "slug": "productivity"
+    },
+    {
+      "name": "Utility",
+      "slug": "utility"
+    }
+  ],
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-11-05",
+  "readingTime": 6
+}

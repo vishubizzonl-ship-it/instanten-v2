@@ -9,10 +9,11 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolveOutDir, loadPages, ruleOf } from './lib.mjs';
 
-const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design'];
+const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design', 'seo'];
 const BASELINE = 'tests/baseline.json';
 const updateBaseline = process.argv.includes('--update-baseline');
-const outDir = resolveOutDir(process.argv.find((a) => !a.startsWith('-') && a !== process.argv[1]));
+// NOTE: argv[0]/argv[1] node & script hain, isliye sirf argv[2..] me se dir dhundo.
+const outDir = resolveOutDir(process.argv.slice(2).find((a) => !a.startsWith('-')));
 const pages = loadPages(outDir);
 
 const baseline = existsSync(BASELINE) ? JSON.parse(readFileSync(BASELINE, 'utf8')) : null;

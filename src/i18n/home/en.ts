@@ -98,6 +98,81 @@ export const home: HomeCopy = {
       links: [{ label: 'Contact page', href: '/contact/' }],
     },
   ],
+  // ---- English-only long-form SEO copy (target: 800–1200 words) ----------
+  seoLongformTitle: 'Instanten: the free online tools hub built for instant work',
+  seoLongformLead:
+    'Instanten is a free online tools website that keeps an instant tool for everyday jobs within one click — no install, no account, no usage cap. This page explains what the tools hub does, how the online tools list is organised, and why a multi tool website beats a folder full of single-purpose apps.',
+  seoLongform: [
+    {
+      title: 'What is Instanten?',
+      paragraphs: [
+        'Instanten is an independent web tools hub: a single website where twelve focused utilities live side by side and every one of them opens ready to work. The idea is simple. Most digital chores — formatting JSON, counting words, generating a password, compressing an image — take seconds, while finding, installing and paying for separate software for each takes far longer. Instanten removes that overhead and gives you the tool, the result and nothing else.',
+        'Every instant tool on the site is browser-based. That means there is nothing to download, nothing to license and nothing to update. You open the page, use the tool and copy the result; the tab can be closed afterwards. Because the pages are pre-rendered and ship with almost no client-side JavaScript, they load quickly even on a modest mobile connection and behave identically on Windows, macOS, Linux, Android and iOS.',
+        'The name says what it is meant to do. Instanten is where instant online work happens: short, focused tasks that should never turn into a project. A student formatting JSON, a developer decoding a Base64 string, a designer checking contrast, a writer trimming a draft — all finished in seconds here.',
+      ],
+    },
+    {
+      title: 'A free online tools hub, with no catch attached',
+      paragraphs: [
+        'Instanten is a genuinely free online tools hub. There is no trial countdown, no credit card screen, no watermark and no daily limit. You never create an account, and nothing you paste is uploaded — processing runs in your own browser session.',
+        'That matters: when you paste a client document or a token into an online tools free service, you are trusting it with the content. Here the input stays on your device, so these free online tools are safe for real work.',
+        'Free also means free of clutter. The free online tools hub layout puts the tool first: no interstitials, no fake download buttons, no autoplay video covering the form. That also makes an instant tool trustworthy enough to finish what you started.',
+      ],
+    },
+    {
+      title: 'One multi tool website instead of ten tabs and ten subscriptions',
+      paragraphs: [
+        'A multi tool website such as Instanten replaces a long row of browser bookmarks. Instead of remembering which site has the good JSON formatter, which one has a word counter that does not mangle emoji, and which password generator is safe to use, you keep one address. Navigation, keyboard behaviour and visual language stay the same across every utility, so switching tools never feels like learning a new product.',
+        'This is also why a multi tools website tends to win on price. Four or five single-purpose subscriptions quietly cost more than a streaming plan. The online tools list here covers the same ground — formatting, conversion, measurement, validation, generation — for nothing, with no mid-task upsell.',
+        'For teams it simplifies policy too: one web tools hub to review instead of five vendors and five privacy policies.',
+      ],
+    },
+    {
+      title: 'The online tools list, explained',
+      paragraphs: [
+        'The online tools list is short on purpose. Every entry earns its place by being a job people genuinely do every week, not by filling out a category grid.',
+      ],
+      bullets: [
+        'JSON Formatter — format, validate and minify JSON against RFC 8259, with line-numbered errors and a collapsible tree view.',
+        'Base64 Encoder and Decoder — encode or decode text, files and images with full UTF-8 support, following RFC 4648.',
+        'Word Counter — live counts for words, characters, sentences and reading time, with a keyword-density view for writers.',
+        'Password Generator — cryptographically random passwords with adjustable length, character sets and an entropy estimate.',
+        'QR Generator — create QR codes for links, text, Wi-Fi credentials and contact cards, then export them instantly.',
+        'Image Compressor — shrink JPEG, PNG and WebP files in the browser without uploading the originals.',
+        'Color Palette — build accessible palettes from one colour and check every pair against WCAG 2.2 Level AA contrast.',
+        'CSS Grid Generator — lay out responsive grids visually and copy production-ready CSS.',
+        'Markdown Editor — write with a live preview and export clean, CommonMark-compliant output.',
+        'Meta Tag Generator — assemble title, description, Open Graph and Twitter Card tags in one copy-paste block.',
+        'Online Ruler — measure real-world objects on screen using standard card-sized calibration.',
+        'Regex Tester — test patterns against sample text and read the match groups as you type.',
+      ],
+    },
+    {
+      title: 'Why a web tools hub keeps instant work instant',
+      paragraphs: [
+        'The quickest way to lose momentum on a small task is to open something heavy. A desktop suite asks for a licence, a restart or an update; a bloated web page asks you to dismiss three banners before the input field is visible. A lean web tools hub removes those interruptions, which is the entire promise of instant work: start, finish, move on.',
+        'Speed is measurable: static pages, no render-blocking scripts and no layout shift mean the tool is interactive almost immediately — and nothing is hidden behind a sign-in wall after you have done the work.',
+        'Every page is plain, readable HTML, so find-in-page, screen readers and keyboard navigation all work: a tool you understand in five seconds is genuinely faster.',
+      ],
+    },
+    {
+      title: 'How to get instant results from the tools hub',
+      paragraphs: [
+        'Start from the homepage grid or use the search box to filter by name, category or tag. Open the tool, paste or type your input, and the result appears as you work — most utilities update on every keystroke, so there is no submit button to hunt for. Copy the output with the copy button, or download the file when the tool produces one.',
+        'If a task needs context rather than a click, the blog guides explain the standards behind each utility: what valid JSON allows, how contrast ratios are calculated, and when Base64 inflates a payload.',
+        'Nothing is saved between visits, which keeps the site fast and private. If you want the tools hub one keystroke away, bookmark the homepage or add it to your home screen — on Android and iOS the site behaves like a lightweight app without the app-store update cycle. Popular starting points:',
+      ],
+      links: [
+        { label: 'JSON Formatter', href: '/tools/json-formatter/' },
+        { label: 'Word Counter', href: '/tools/word-counter/' },
+        { label: 'QR Generator', href: '/tools/qr-generator/' },
+        { label: 'Password Generator', href: '/tools/password-generator/' },
+        { label: 'Image Compressor', href: '/tools/image-compressor/' },
+        { label: 'Base64 Encoder', href: '/tools/base64-encoder/' },
+      ],
+    },
+  ],
+
   faqTitle: 'Frequently asked questions',
   faqs: [
     {

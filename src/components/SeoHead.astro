@@ -23,6 +23,8 @@ export interface Props {
   ogImageAlt?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  authorName?: string;
+  authorUrl?: string;
   section?: string;
   tags?: string[];
   noindex?: boolean;
@@ -38,24 +40,23 @@ const BASE_URL = (Astro.site ? Astro.site.toString() : 'https://instanten.com').
 
 const {
   title = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
-  description = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.',
-  keywords = 'instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert',
+  description = 'Instanten is a free online tools hub with 12 instant tools for instant work — no sign-up and nothing uploaded.',
+  keywords = 'instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, free online tools, web tools hub, free online tools hub, online tools list',
   canonicalPath = Astro.url.pathname,
   ogType = 'website',
-  ogImage = '/og-instanten.svg',
-  ogImageAlt = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
+  ogImage = '/og-instanten.png',
+  ogImageAlt = 'Instanten — free online tools hub for instant work',
   publishedTime,
   modifiedTime,
+  authorName,
+  authorUrl,
   section = 'Instant Tools & Guides',
   tags = [
     'instanten',
-    'Instanten tool',
-    'Instanten tools',
-    'Instant help',
-    'Instant tool',
-    'Instant tools',
-    'Instant online',
-    'Instant convert',
+    'instant tool',
+    'tools hub',
+    'instant work',
+    'online tools',
   ],
   noindex = false,
   includeAppSchema = false,
@@ -74,6 +75,14 @@ const canonicalUrl = `${BASE_URL}${cleanPath}`;
 const absoluteOgImage = ogImage.startsWith('http')
   ? ogImage
   : `${BASE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+
+// Social crawlers ignore SVG — publish real dimensions for the raster images we ship.
+const ogExt = absoluteOgImage.split('?')[0].split('.').pop()?.toLowerCase() ?? '';
+const ogImageType =
+  ogExt === 'png' ? 'image/png' : ogExt === 'jpg' || ogExt === 'jpeg' ? 'image/jpeg' : ogExt === 'webp' ? 'image/webp' : 'image/svg+xml';
+// Social crawlers ignore SVG. Only our own 1200x630 raster cards carry dimensions;
+// third-party thumbnails (Unsplash 800x450 etc.) must not claim to be 1200x630.
+const ogIsLocalCard = absoluteOgImage.startsWith(`${BASE_URL}/og-`) && /\/og-[a-z0-9-]+\.png$/i.test(absoluteOgImage);
 
 const hreflangAlternates = getHreflangAlternates(cleanPath, BASE_URL);
 
@@ -242,8 +251,9 @@ const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c 
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={absoluteOgImage} />
 <meta property="og:image:secure_url" content={absoluteOgImage} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+{ogIsLocalCard && <meta property="og:image:type" content={ogImageType} />}
+{ogIsLocalCard && <meta property="og:image:width" content="1200" />}
+{ogIsLocalCard && <meta property="og:image:height" content="630" />}
 <meta property="og:image:alt" content={ogImageAlt} />
 
 {ogType === 'article' && publishedTime && (
@@ -254,6 +264,12 @@ const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c 
 )}
 {ogType === 'article' && section && (
   <meta property="article:section" content={section} />
+)}
+{ogType === 'article' && authorName && (
+  <meta property="article:author" content={authorName} />
+)}
+{ogType === 'article' && authorUrl && (
+  <link rel="author" href={authorUrl} />
 )}
 {ogType === 'article' && tags.map((tag) => <meta property="article:tag" content={tag} />)}
 

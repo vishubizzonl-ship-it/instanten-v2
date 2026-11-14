@@ -1,11 +1,11 @@
 {
   "site-integrity": {
     "meta description missing/chhota": 154,
-    "title length N (N-N chahiye)": 13,
+    "title length N (N-N chahiye)": 12,
     "canonical galat": 60
   },
   "links": {
-    "broken link": 1740
+    "broken link": 1730
   },
   "i18n-silo": {
     "page missing": 9,
@@ -23,7 +23,9 @@
     "hreflang x-default nahi": 10,
     "apna hreflang nahi": 10,
     "canonical apne hreflang se match nahi": 10,
-    "title translate nahi hua": 14,
-    "English text leak \"…\"": 9
-  }
+    "English text leak \"…\"": 36,
+    "title translate nahi hua": 14
+  },
+  "design": {},
+  "seo": {}
 }

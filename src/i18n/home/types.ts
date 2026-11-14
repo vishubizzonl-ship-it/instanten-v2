@@ -21,4 +21,8 @@ export interface HomeCopy {
   blocks: HomeCopyBlock[];
   faqTitle: string;
   faqs: Array<{ question: string; answer: string }>;
+  /** English-only long-form SEO copy (800–1200 words). Other locales omit it. */
+  seoLongformTitle?: string;
+  seoLongformLead?: string;
+  seoLongform?: HomeCopyBlock[];
 }

@@ -81,6 +81,44 @@ export function getHomeFaqs(lang: LangCode) {
     </div>
   </section>
 
+  {/* English-only long-form SEO copy (800–1200 words). Rendered only when the
+      locale provides it, so localized home pages never show English text. */}
+  {copy.seoLongform && copy.seoLongform.length > 0 && (
+    <section class="ffa-band ffa-band--soft ffa-band--border-top" id="about-instanten" data-seo-longform>
+      <div class="ffa-container-wide">
+        <h2 class="ffa-h2-lg">{copy.seoLongformTitle}</h2>
+        {copy.seoLongformLead && <p class="ffa-lead">{copy.seoLongformLead}</p>}
+        <div class="ffa-prose">
+          {copy.seoLongform.map((block) => (
+            <div class="ffa-prose-block">
+              {block.title && <h3 class="ffa-h3-prose">{block.title}</h3>}
+              {block.paragraphs && block.paragraphs.map((p) => <p class="ffa-p">{p}</p>)}
+              {block.bullets && (
+                <ul class="ffa-dot-list">
+                  {block.bullets.map((bullet) => (
+                    <li>
+                      <span class="ffa-dot"></span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {block.links && (
+                <p class="ffa-p ffa-seo-links">
+                  {block.links.map((link) => (
+                    <a href={translatePathSafe(link.href, lang)} class="ffa-inline-link">
+                      {link.label}
+                    </a>
+                  ))}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="ffa-band ffa-band--canvas" id="faq">
     <div class="ffa-container-wide">
       <h2 class="ffa-h2-lg">{copy.faqTitle}</h2>
@@ -157,6 +195,10 @@ export function getHomeFaqs(lang: LangCode) {
   .ffa-dot-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15.5px; line-height: 1.7; color: #4d4d4d; }
   .ffa-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #a1a1a1; flex-shrink: 0; margin-top: 10px; }
   .ffa-inline-link { color: #0070f3; text-decoration: none; }
+  /* long-form SEO links: har link ke beech dot separator, mobile par wrap */
+  .ffa-seo-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 0; }
+  .ffa-seo-links .ffa-inline-link { font-weight: 500; }
+  .ffa-seo-links .ffa-inline-link + .ffa-inline-link::before { content: "·"; color: #a1a1a1; padding: 0 8px; }
   .ffa-inline-link:hover { text-decoration: underline; }
 
   /* FAQ Accordion */

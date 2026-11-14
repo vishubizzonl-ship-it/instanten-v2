@@ -1,0 +1,204 @@
+/**
+ * SEO lock: on-page SEO, keyword coverage, word counts aur OG/Twitter meta.
+ *
+ * Ye checks build hui HTML par chalte hain (wahi bytes jo browser/crawler dekhta hai).
+ * Rule: keyword duplicate spelling ek hi baar ginti hai, isliye list dedup hai.
+ */
+import { SITE, stripTags, createSuite } from './lib.mjs';
+
+/** User ki di hui keyword list (dedup). Main keyword alag rakha hai. */
+export const MAIN_KEYWORD = 'instanten';
+export const SUPPORT_KEYWORDS = [
+  'instant tool',
+  'tools hub',
+  'instant work',
+  'online tools',
+  'online tools hub',
+  'multi tool website',
+  'instant',
+  'free online tools website',
+  'online tools free',
+  'web tools hub',
+  'free online tools hub',
+  'online tools list',
+  'multi tools website',
+];
+
+/** Naye 3 blog slugs — 800-1000 words each. */
+export const NEW_BLOG_SLUGS = [
+  'online-tools-hub-guide',
+  'instant-tools-for-daily-work',
+  'web-tools-hub-vs-subscriptions',
+];
+
+const wordsOf = (html) => stripTags(html).split(' ').filter(Boolean);
+const metaOf = (html, prop) => {
+  const m = html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`, 'i'));
+  return m ? m[1] : null;
+};
+const countKeyword = (text, kw) =>
+  text.split(kw).length - 1;
+
+export function run(pages, outDir) {
+  const suite = createSuite('seo');
+  const { check } = suite;
+
+  const home = pages.get('/');
+  check(Boolean(home), 'home page build mein nahi mila');
+
+  if (home) {
+    // --- 1. Home par long-form SEO copy 800-1200 words -------------------
+    const block = home.match(/<section[^>]*data-seo-longform[^>]*>[\s\S]*?<\/section>/i);
+    check(Boolean(block), 'home par data-seo-longform section nahi mila');
+
+    const homeText = block ? stripTags(block[0]) : '';
+    const homeWords = homeText ? homeText.split(' ').filter(Boolean).length : 0;
+    check(
+      homeWords >= 800 && homeWords <= 1200,
+      `home long-form copy 800-1200 words honi chahiye, mili ${homeWords}`
+    );
+
+    // --- 2. Keyword coverage home par ------------------------------------
+    const lower = homeText.toLowerCase();
+    check(countKeyword(lower, MAIN_KEYWORD) >= 3, 'main keyword "instanten" home copy mein 3+ baar nahi hai');
+    for (const kw of SUPPORT_KEYWORDS) {
+      check(lower.includes(kw), `supporting keyword home copy mein nahi mila: "${kw}"`);
+    }
+
+    // --- 2b. Long-form copy se tools tak internal links -------------------
+    const longformHtml = block ? block[0] : '';
+    const toolLinks = (longformHtml.match(/href="\/tools\/[a-z0-9-]+\/"/g) || []).length;
+    check(toolLinks >= 5, `home long-form copy se tools tak ${toolLinks} internal links (5+ chahiye)`);
+
+    // --- 3. Title / description / keywords meta --------------------------
+    const title = (home.match(/<title>([^<]*)<\/title>/i) || [, ''])[1];
+    check(/instanten/i.test(title), 'home title mein "Instanten" nahi hai');
+    check(
+      /online tools hub|instant work/i.test(title),
+      'home title mein primary phrase (online tools hub / instant work) nahi hai'
+    );
+    check(title.length <= 70, `home title 70 chars se lamba hai (${title.length})`);
+
+    const desc = metaOf(home, 'description') || '';
+    check(desc.length >= 120 && desc.length <= 165, `home meta description 120-165 chars (mili ${desc.length})`);
+    check(/instanten/i.test(desc), 'home meta description mein "Instanten" nahi hai');
+
+    const kw = metaOf(home, 'keywords') || '';
+    for (const k of [MAIN_KEYWORD, ...SUPPORT_KEYWORDS]) {
+      check(kw.toLowerCase().includes(k), `home keywords meta mein nahi: "${k}"`);
+    }
+
+    // --- 4. OG + Twitter tags --------------------------------------------
+    const ogRequired = [
+      'og:type',
+      'og:site_name',
+      'og:locale',
+      'og:title',
+      'og:description',
+      'og:url',
+      'og:image',
+      'og:image:secure_url',
+      'og:image:alt',
+    ];
+    for (const prop of ogRequired) {
+      const val = metaOf(home, prop);
+      check(Boolean(val && val.trim()), `home par ${prop} missing hai`);
+    }
+    const ogImage = metaOf(home, 'og:image') || '';
+    check(ogImage.startsWith(SITE), `og:image absolute URL nahi hai: ${ogImage}`);
+    check(
+      !ogImage.toLowerCase().endsWith('.svg'),
+      `og:image SVG hai — social crawlers SVG render nahi karte: ${ogImage}`
+    );
+    check(ogImage.toLowerCase().endsWith('.png'), `og:image PNG hona chahiye: ${ogImage}`);
+    check(metaOf(home, 'og:image:width') === '1200', 'og:image:width 1200 nahi hai');
+    check(metaOf(home, 'og:image:height') === '630', 'og:image:height 630 nahi hai');
+    check(metaOf(home, 'og:image:type') === 'image/png', 'og:image:type image/png nahi hai');
+
+    check(metaOf(home, 'twitter:card') === 'summary_large_image', 'twitter:card summary_large_image nahi hai');
+    check((metaOf(home, 'twitter:image') || '').startsWith(SITE), 'twitter:image absolute nahi hai');
+    check(Boolean(metaOf(home, 'twitter:image:alt')), 'twitter:image:alt missing');
+
+    // og:image ek hi baar aaye (duplicate tags crawler confuse karte hain)
+    const ogImageCount = (home.match(/<meta property="og:image"/g) || []).length;
+    check(ogImageCount === 1, `home par og:image ${ogImageCount} baar hai (1 hona chahiye)`);
+  }
+
+  // --- 5. Naye blog posts: 800-1000 words + article OG tags --------------
+  for (const slug of NEW_BLOG_SLUGS) {
+    const url = `/blog/${slug}/`;
+    const html = pages.get(url);
+    check(Boolean(html), `blog page build mein nahi: ${url}`);
+    if (!html) continue;
+
+    const article = html.match(/<article[\s\S]*?<\/article>/i);
+    check(Boolean(article), `${slug}: <article> block nahi mila`);
+    const words = article ? wordsOf(article[0]).length : 0;
+    check(
+      words >= 800 && words <= 1000,
+      `${slug}: 800-1000 words chahiye, mile ${words}`
+    );
+
+    const text = article ? stripTags(article[0]).toLowerCase() : '';
+    check(text.includes(MAIN_KEYWORD), `${slug}: main keyword "instanten" article mein nahi hai`);
+    check(
+      SUPPORT_KEYWORDS.some((k) => text.includes(k)),
+      `${slug}: koi bhi supporting keyword article mein nahi mila`
+    );
+
+    check(metaOf(html, 'og:type') === 'article', `${slug}: og:type article nahi hai`);
+    const blogOg = metaOf(html, 'og:image') || '';
+    check(blogOg.startsWith(SITE), `${slug}: og:image absolute nahi (${blogOg})`);
+    check(!blogOg.toLowerCase().endsWith('.svg'), `${slug}: og:image SVG hai (${blogOg})`);
+    check(blogOg.includes(slug), `${slug}: per-page og:image nahi laga (${blogOg})`);
+    check(blogOg === metaOf(html, 'twitter:image'), `${slug}: twitter:image og:image se match nahi karta`);
+    check(Boolean(metaOf(html, 'og:image:alt')), `${slug}: og:image:alt missing`);
+    check(Boolean(metaOf(html, 'article:published_time')), `${slug}: article:published_time missing`);
+    check(Boolean(metaOf(html, 'article:author')), `${slug}: article:author missing`);
+    check(Boolean(metaOf(html, 'article:section')), `${slug}: article:section missing`);
+    check(metaOf(html, 'og:image:width') === '1200', `${slug}: og:image:width 1200 nahi`);
+    check(metaOf(html, 'og:image:height') === '630', `${slug}: og:image:height 630 nahi`);
+
+    const title = (html.match(/<title>([^<]*)<\/title>/i) || [, ''])[1];
+    check(title.length <= 75, `${slug}: title bahut lamba (${title.length})`);
+    const desc = metaOf(html, 'description') || '';
+    check(desc.length >= 110 && desc.length <= 210, `${slug}: meta description length ${desc.length}`);
+
+    // Locale versions bhi exist karein + canonical self-referencing ho
+    for (const lang of ['de', 'ja', 'pt']) {
+      check(pages.has(`/${lang}/blog/${slug}/`), `${slug}: /${lang}/ version nahi bana`);
+    }
+  }
+
+  // --- 7. Purane blogs ka OG image bhi SVG nahi hona chahiye ------------
+  for (const [url, html] of pages) {
+    if (!/^\/blog\/[^/]+\/$/.test(url)) continue;
+    const og = metaOf(html, 'og:image') || '';
+    check(!og.toLowerCase().endsWith('.svg'), `${url}: og:image abhi bhi SVG hai (${og})`);
+    // jhoothe dimensions: sirf apne /og-*.png card par 1200x630
+    if (!/\/og-[a-z0-9-]+\.png$/i.test(og)) {
+      check(
+        metaOf(html, 'og:image:width') === null,
+        `${url}: third-party image par galat og:image:width lagaya gaya hai (${og})`
+      );
+    }
+  }
+
+  // --- 8. Naye SEO copy mein "Google" shabd nahi -------------------------
+  // (purane pages par pehle se maujood hai — wo is task ka scope nahi.)
+  const newContent = [
+    ['/ (long-form SEO copy)', home && (home.match(/<section[^>]*data-seo-longform[^>]*>[\s\S]*?<\/section>/i) || [''])[0]],
+    ...NEW_BLOG_SLUGS.map((slug) => [
+      `/blog/${slug}/ (article)`,
+      pages.has(`/blog/${slug}/`)
+        ? (pages.get(`/blog/${slug}/`).match(/<article[\s\S]*?<\/article>/i) || [''])[0]
+        : '',
+    ]),
+  ];
+  for (const [url, html] of newContent) {
+    if (!html) continue;
+    check(!/google/i.test(stripTags(html)), `${url}: naye copy mein "Google" shabd hai`);
+  }
+
+  return suite;
+}

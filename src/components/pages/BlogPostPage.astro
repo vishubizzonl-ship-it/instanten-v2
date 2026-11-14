@@ -57,8 +57,15 @@ const sectionLabel = post.data.categories
   description={pageDescription}
   canonicalURL={canonicalURL}
   ogType="article"
-  ogImage={post.data.thumbnail || '/og-instanten.svg'}
-  keywords={`instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert, ${lang}`}
+  ogImage={
+    post.data.thumbnail && !post.data.thumbnail.toLowerCase().endsWith('.svg')
+      ? post.data.thumbnail
+      : '/og-instanten.png'
+  }
+  ogImageAlt={post.data.thumbnailAlt || localized.title}
+  authorName={post.data.author?.name || 'Instanten Editorial & Engineering Team'}
+  authorUrl="https://instanten.com/about/"
+  keywords={`instanten, instant tool, tools hub, instant work, online tools hub, free online tools website, online tools list, ${postTags.join(', ')}, ${lang}`}
   publishedTime={post.data.publishedAt}
   modifiedTime={post.data.publishedAt}
   section={sectionLabel}

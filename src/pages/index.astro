@@ -42,10 +42,17 @@ if (filters.pricing) queryParams.pricing = filters.pricing;
 if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
 if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
 
+// On-page SEO: main keyword "instanten" + supporting set
+// (instant tool, tools hub, instant work, online tools, online tools hub,
+//  multi tool website, instant, free online tools website, free online tools,
+//  web tools hub, free online tools hub, online tools list)
 const pageTitle = currentPage === 1
-  ? 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help'
-  : `Instanten — Page ${currentPage} of ${totalPages} — Free Instant Tools, Instant Convert & Instant Help`;
-const pageDescription = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.';
+  ? 'Instanten — Free Online Tools Hub for Instant Work & Instant Tools'
+  : `Instanten — Page ${currentPage} of ${totalPages} — Free Online Tools Hub for Instant Work`;
+const pageDescription =
+  'Instanten is a free online tools hub with 12 instant tools for instant work — formatter, word counter, QR and password tools. No sign-up, nothing uploaded.';
+const pageKeywords =
+  'instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, free online tools, online tools free, web tools hub, free online tools hub, online tools list';
 
 const canonicalURL = currentPage === 1
   ? 'https://instanten.com/'
@@ -55,8 +62,8 @@ const canonicalURL = currentPage === 1
   title={pageTitle}
   description={pageDescription}
   canonicalURL={canonicalURL}
-  ogImage="/og-instanten.svg"
-  keywords="instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert"
+  ogImage="/og-instanten.png"
+  keywords={pageKeywords}
   includeAppSchema={true}
   faqs={getHomeFaqs(defaultLang)}
   breadcrumbs={currentPage === 1 ? [{ name: 'Home', item: '/' }] : [{ name: 'Home', item: '/' }, { name: 'Page ' + currentPage, item: '/page/' + currentPage }]}

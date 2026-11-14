@@ -25,25 +25,31 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   publishedTime?: string;
   modifiedTime?: string;
+  authorName?: string;
+  authorUrl?: string;
+  ogImageAlt?: string;
   section?: string;
   tags?: string[];
   lang?: string;
 }
 
 const {
-  title = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
-  description = 'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up.',
+  title = 'Instanten — Free Online Tools Hub for Instant Work & Instant Tools',
+  description = 'Instanten is a free online tools hub with 12 instant tools for instant work — no sign-up and nothing uploaded.',
   canonicalURL,
-  ogImage = '/og-instanten.svg',
+  ogImage = '/og-instanten.png',
+  ogImageAlt,
   ogType = 'website',
   jsonLd,
   noindex = false,
-  keywords = 'instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert',
+  keywords = 'instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, free online tools, web tools hub, free online tools hub, online tools list',
   includeAppSchema = false,
   faqs = [],
   breadcrumbs = [],
   publishedTime,
   modifiedTime,
+  authorName,
+  authorUrl,
   section,
   tags = [],
   lang,
@@ -65,10 +71,12 @@ const t = useTranslations(detectedLang);
       canonicalPath={Astro.url.pathname}
       lang={detectedLang}
       ogType={ogType}
-      ogImage={ogImage || '/og-instanten.svg'}
-      ogImageAlt={title}
+      ogImage={ogImage || '/og-instanten.png'}
+      ogImageAlt={ogImageAlt || title}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
+      authorName={authorName}
+      authorUrl={authorUrl}
       section={section}
       tags={tags}
       noindex={noindex}

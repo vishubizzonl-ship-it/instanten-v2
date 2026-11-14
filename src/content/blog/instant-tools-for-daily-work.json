@@ -1,0 +1,23 @@
+{
+  "slug": "instant-tools-for-daily-work",
+  "title": "12 Instant Tools for Instant Work: A Daily Checklist",
+  "excerpt": "Twelve instant tools for the small digital jobs you repeat weekly — JSON, word counts, passwords, image compression — free and without an account.",
+  "thumbnail": "/og-instant-tools-for-daily-work.png",
+  "thumbnailAlt": "Checklist of twelve instant online tools for everyday digital work",
+  "categories": [
+    {
+      "name": "Productivity",
+      "slug": "productivity"
+    },
+    {
+      "name": "Utility",
+      "slug": "utility"
+    }
+  ],
+  "author": {
+    "name": "Instanten Editorial & Engineering Team",
+    "slug": "instanten-team"
+  },
+  "publishedAt": "2026-11-06",
+  "readingTime": 6
+}
