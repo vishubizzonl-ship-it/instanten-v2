@@ -22,6 +22,7 @@ import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
 import { localizeTool, localizeToolCategory, localizePricing, getPricingNote } from '../../i18n/toolContent';
 import { toolPath } from '../../utils/toolPaths';
+import { localizeToolLists } from '../../i18n/toolLists';
 
 interface Props {
   tool: {
@@ -51,11 +52,34 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const { category, pricing, pricingDetails, image, url, tags = [], maker, addedDate, updatedDate, features = [], useCases = [], featured = false } = tool.data;
+const {
+  category,
+  pricing,
+  pricingDetails,
+  image,
+  url,
+  tags = [],
+  maker,
+  addedDate,
+  updatedDate,
+  features: rawFeatures = [],
+  useCases: rawUseCases = [],
+  featured = false,
+} = tool.data;
+
+// Features/useCases English JSON se aate hain — localized pages par native copy.
+const localizedLists = localizeToolLists(lang, tool.data.slug, {
+  features: rawFeatures,
+  useCases: rawUseCases,
+});
+const features = localizedLists.features;
+const useCases = localizedLists.useCases;
 const localized = localizeTool(lang, tool.data);
 const categoryLabel = localizeToolCategory(lang, category);
 const pricingLabel = localizePricing(lang, pricing);
-const displayPricingDetails = pricingDetails || getPricingNote(lang, pricing);
+// Localized pages par English custom line ki jagah localized pricing note.
+const displayPricingDetails =
+  lang === 'en' ? pricingDetails || getPricingNote(lang, pricing) : getPricingNote(lang, pricing);
 const categorySlug = category.toLowerCase();
 
 const pricingColors = {
@@ -187,7 +211,7 @@ const breadcrumbs = [
           </svg>
           {t('tools.features')}
         </h2>
-        <ul class="grid gap-3 sm:grid-cols-2" role="list">
+        <ul class="grid gap-3 sm:grid-cols-2" role="list" data-tool-list="features">
           {features.map(feature => (
             <li class="flex items-start gap-3 p-4 rounded-card bg-surface border border-border-hairline">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-0.5" aria-hidden="true">
@@ -211,7 +235,7 @@ const breadcrumbs = [
           </svg>
           {t('tools.useCases')}
         </h2>
-        <ul class="flex flex-wrap gap-2" role="list">
+        <ul class="flex flex-wrap gap-2" role="list" data-tool-list="use-cases">
           {useCases.map(useCase => (
             <li class="text-body-md px-3 py-1.5 rounded-[6px] border border-border-hairline bg-surface text-muted">{useCase}</li>
           ))}

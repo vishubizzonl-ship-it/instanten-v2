@@ -227,6 +227,56 @@ export function run(pages) {
     }
   }
 
+  /* ---------- 6e. Tool lists (features/useCases) native language mein ------- */
+  const TOOL_SLUGS = [
+    'base64-encoder',
+    'color-palette',
+    'css-grid-generator',
+    'image-compressor',
+    'json-formatter',
+    'markdown-editor',
+    'meta-tag-generator',
+    'online-ruler',
+    'password-generator',
+    'qr-generator',
+    'regex-tester',
+    'word-counter',
+  ];
+  // Jo locales user ne maange: in par English bullets bilkul nahi.
+  const LIST_LOCALES = ['es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'];
+  /** data-tool-list wale <ul> se hi items nikaalo (breadcrumb/nav chhod do). */
+  const listItems = (html, kind) => {
+    const block = html.split(`data-tool-list="${kind}"`)[1];
+    if (!block) return [];
+    const ul = block.slice(0, block.indexOf('</ul>'));
+    return [...ul.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map((m) => stripTags(m[1]).trim());
+  };
+
+  for (const code of LIST_LOCALES) {
+    for (const slug of TOOL_SLUGS) {
+      const url = `/${code}/tools/${slug}/`;
+      const html = pages.get(url);
+      check(Boolean(html), `${url}: localized tool page missing`);
+      if (!html) continue;
+
+      const enHtml = pages.get(`/tools/${slug}/`) ?? '';
+      for (const kind of ['features', 'use-cases']) {
+        const enItems = listItems(enHtml, kind);
+        const items = listItems(html, kind);
+        check(enItems.length >= 4, `/${slug}/: English ${kind} list hi ${enItems.length} items`);
+        check(
+          items.length === enItems.length,
+          `${url}: ${kind} mein ${items.length} items (English mein ${enItems.length}) — translate adhoora`
+        );
+        const leaked = enItems.filter((item) => items.includes(item));
+        check(
+          leaked.length === 0,
+          `${url}: ${kind} ke ${leaked.length} items English mein hi hain — "${(leaked[0] ?? '').slice(0, 50)}"`
+        );
+      }
+    }
+  }
+
   /* ---------- 7. Sitemap mein har locale ke liye xhtml:link alternates ---------- */
   const sitemapPages = [...pages.keys()].length;
   check(sitemapPages > 800, `sirf ${sitemapPages} pages build mein hain`);
