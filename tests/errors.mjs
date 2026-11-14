@@ -65,9 +65,31 @@ export function run(pages, outDir) {
 
     // 404 par popular tools ke cards hone chahiye (exit route)
     if (code === '404') {
-      const toolLinks = links.filter((l) => /^\/tools\/[a-z0-9-]+\/$/.test(l));
+      const toolLinks = links.filter((l) => /^\/tools\/[a-z0-9-]+\/$/.test(l) || /^\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\/$/.test(l));
       check(toolLinks.length >= 3, `404 par sirf ${toolLinks.length} tool links (3+ chahiye)`);
     }
+
+    // --- 5b. chaar sensor tools direct links (root URLs) -------------------
+    for (const slug of ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla']) {
+      check(links.includes(`/${slug}/`), `${code}.html se /${slug}/ ka link nahi hai`);
+      check(!links.includes(`/tools/${slug}/`), `${code}.html purane /tools/${slug}/ par link karta hai`);
+    }
+    // search ka raasta bhi ho (404 par sabse zyada kaam aata hai)
+    check(links.includes('/search/'), `${code}.html se /search/ ka link nahi hai`);
+
+    // --- 5c. styling: Tailwind utilities + tokens only (Rule 7) -----------
+    const markup = html.slice(html.indexOf('<body'));
+    // Breadcrumbs/ScrollToTop ke chhote global blocks poori site par chalte hain.
+    // Error page ka apna hand-written CSS nahi hona chahiye — isliye inline
+    // style ka total size chhota rehna chahiye aur purani .error-code class gayab.
+    const inlineCss = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('');
+    check(inlineCss.length < 400, `${code}.html par ${inlineCss.length} chars ka apna CSS hai (Tailwind utilities chahiye)`);
+    check(!/\.error-code/.test(html), `${code}.html par purani .error-code class wapas aa gayi`);
+    check(!/\bbg-white\b/.test(markup), `${code}.html par bg-white hard-coded hai (bg-surface token chahiye)`);
+    check(!/#[0-9a-fA-F]{6}\b/.test(markup), `${code}.html par hard-coded hex rang hai (tokens chahiye)`);
+    // mobile: chhoti screen par heading/CTA stack, aur responsive classes maujood
+    check(/max-sm:|sm:/.test(markup), `${code}.html par responsive (sm:) classes nahi`);
+    check(/<meta name="viewport" content="[^"]*width=device-width/.test(html), `${code}.html viewport meta nahi`);
 
     // --- 6. title + description sane --------------------------------------
     const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
@@ -109,6 +131,15 @@ export function run(pages, outDir) {
       !/^\/(de|ja|fr|es|ko|nl|sv|it|pt)\/(403|404|500|503)(\.html|\/)$/.test(url),
       `localized error page bana hai: ${url}`
     );
+  }
+
+  // --- 12. ErrorPage component Tailwind-only (source level) --------------
+  if (existsSync('src/components/ErrorPage.astro')) {
+    // doc comment mein `<style>` shabd aa sakta hai — asli tag check karo
+    const source = readFileSync('src/components/ErrorPage.astro', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    check(!/<style[\s>]/.test(source), 'ErrorPage.astro mein <style> block hai (Rule 7)');
+    check(!/\bbg-white\b/.test(source), 'ErrorPage.astro par bg-white hard-coded hai');
+    check(source.includes('toolPath('), 'ErrorPage.astro tool links toolPath() se nahi banata');
   }
 
   return suite;
