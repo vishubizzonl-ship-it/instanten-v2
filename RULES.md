@@ -85,26 +85,6 @@ Har edit/kaam ke **baad lazmi** check karo ki jo bola gaya tha wo sach mein hua:
 
 ---
 
-## Standing orders (user ke permanent instructions)
-
-- **Domain:** `instanten.com`.
-- **Mobile:** user phone Chrome par verify karta hai → mobile breakpoint lock + test.
-- **Copy:** kabhi "Google" shabd nahi (GA ke technical URLs ke alawa).
-- **Analytics:** ek hi shared code; per-tool `content_group`; error pages par tag nahi.
-- **Routes:** `onlinecompass`, `onlinebubblelevel`, `onlinespeedometer`, `onlineqibla`;
-  no redirects; locale-prefixed URLs.
-- **Keywords:** duplicate spellings ek hi baar; **published blog rewrite nahi**;
-  FAQ JSON-LD **max 1 per page**.
-- **Error pages** 403/404/500/503 → `noindex, nofollow`, sitemap se bahar.
-- **Top-bar pills:** `onlinecompass`, `BubbleLevel`, `Speedometer`, `Qibla`;
-  logo = full `online<tool>`.
-- **Footer language button:** circle **nahi** — pill + language ka naam (header circle rehta hai).
-- **Undo** = sirf last edit.
-- **User manually inspect na kare** → har fix ke saath automated test.
-- **Server:** sirf `bash start.sh` (proot/container/cloud nahi). Complicated na karo.
-
----
-
 ## Kaam karne ka tareeka (har command par yahi)
 
 1. Rule 1–3.1 yaad rakho — **user ko dobara batane ki zarurat nahi**.

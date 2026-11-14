@@ -74,6 +74,10 @@ export function run() {
     for (const token of ['#29294B', '#696981', '#5955D1', '#E1E1E8', 'DM Sans']) {
       check(rules.toUpperCase().includes(token.toUpperCase()), `RULES.md mein compilefuture token ${token} missing`);
     }
+    // Standing orders user ne NAHI maange the — rule file mein wapas na aayein
+    check(!/^## Standing orders/m.test(rules), 'RULES.md mein standing orders wapas aa gaye (user ne nahi maange)');
+    check(!/^## Standing orders/m.test(readFileSync('AGENTS.md', 'utf8')), 'AGENTS.md mein standing orders wapas aa gaye (user ne nahi maange)');
+
     // AGENTS.md = auto-loaded file: usme bhi poore rules inline hone chahiye
     const agents = readFileSync('AGENTS.md', 'utf8');
     check(agents.includes('RULES.md'), 'AGENTS.md RULES.md ko point nahi karta');
