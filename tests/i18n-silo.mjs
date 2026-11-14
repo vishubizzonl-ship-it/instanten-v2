@@ -33,7 +33,7 @@ export function run(pages) {
 
   // --- 2. hreflang cluster complete --------------------------------------
   // Error pages are intentionally mono-lingual and noindex (see site-integrity).
-  const errorPages = new Set(['/404/', '/404.html']);
+  const errorPages = new Set(['/403.html', '/404/', '/404.html', '/500.html', '/503.html']);
   for (const [url, html] of pages) {
     if (errorPages.has(url)) continue;
     const langs = hreflangOf(html);

@@ -83,8 +83,9 @@ User-agent: *
 Content-Signal: search=yes,ai-train=no,use=reference
 Allow: /
 Disallow: /api/
-Disallow: /404
-Disallow: /500
+# Error pages (403/404/500/503) ko block NAHI karte: agar crawler unhe padh hi
+# nahi sakta to unka "noindex, nofollow" bhi nahi dikhega. Block karne se
+# URL index mein aa sakta hai — noindex zyada safe hai.
 
 Sitemap: ${new URL('sitemap.xml', sitemapURL.origin).href}
 Sitemap: ${new URL('sitemap-index.xml', sitemapURL.origin).href}

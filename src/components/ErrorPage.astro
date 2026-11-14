@@ -1,0 +1,176 @@
+---
+/**
+ * Shared error page (403 / 404 / 500 / 503).
+ *
+ * SEO rules baked in (instanten.com):
+ *  - always `noindex, nofollow` — error pages must never enter an index
+ *  - no hreflang cluster (an "alternate" pointing at an error is worse than none)
+ *  - self-referencing canonical to the error URL itself
+ *  - never listed in sitemap.xml (see astro.config.mjs filter + sitemapXml.ts)
+ *  - carries no indexable content: one h1, one short paragraph, recovery links
+ */
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  /** HTTP status shown big: 403, 404, 500, 503 */
+  code: 403 | 404 | 500 | 503;
+  heading: string;
+  message: string;
+  /** Optional "what you can do" bullets, kept to 3 for a calm page. */
+  tips?: string[];
+  /** Show three popular tools as an exit route (off by default). */
+  showPopularTools?: boolean;
+  /** Show a "try again" button (used by 500 and 503). */
+  retry?: boolean;
+}
+
+const { code, heading, message, tips = [], showPopularTools = false, retry = false } = Astro.props;
+
+const allTools = await getCollection('tools');
+const featuredTools = showPopularTools ? allTools.filter((t) => t.data.featured).slice(0, 3) : [];
+
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: String(code) }];
+
+// Search-result friendly, non-indexable descriptions.
+const titles: Record<number, string> = {
+  403: `403 — Access Denied | instanten`,
+  404: `404 — Page Not Found | instanten`,
+  500: `500 — Something Went Wrong | instanten`,
+  503: `503 — Temporarily Unavailable | instanten`,
+};
+const descriptions: Record<number, string> = {
+  403: 'Access to this page is denied. Return to the homepage or browse the free instant tools hub.',
+  404: 'Page not found. Return to the homepage to discover free instant tools and guides.',
+  500: 'Something went wrong on our side. Please reload the page or return to the homepage.',
+  503: 'The tool is temporarily unavailable for maintenance. Please try again in a moment.',
+};
+const pageTitle = titles[code];
+const pageDescription = descriptions[code];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={`https://instanten.com/${code}.html`}
+  noindex
+>
+  <Breadcrumbs items={breadcrumbs} />
+  <div class="min-h-[70vh] flex items-center justify-center px-gutter">
+    <div class="text-center max-w-md">
+      <p class="font-display font-semibold text-9xl text-muted/20 mb-4 error-code" aria-hidden="true">{code}</p>
+      <h1 class="font-display font-semibold text-display tracking-[-2.4px] text-ink mb-4">{heading}</h1>
+      <p class="font-body text-body-lg text-muted mb-8 leading-relaxed">{message}</p>
+
+      {
+        tips.length > 0 && (
+          <ul class="text-left mx-auto max-w-sm mb-10 space-y-2 font-body text-body-md text-muted" role="list">
+            {tips.map((tip) => (
+              <li class="flex items-start gap-2">
+                <span aria-hidden="true" class="text-accent-end mt-0.5">
+                  •
+                </span>
+                <span>{tip}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      <div class="space-y-4 mb-10">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-[8px] btn-primary font-body font-medium text-body-md transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+        >
+          Back to Homepage
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 4.5H5M8 9.5l4 4-4 4" />
+          </svg>
+        </a>
+
+        <a
+          href="/tools/"
+          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-[8px] border border-border-hairline bg-white text-ink font-body font-medium text-body-md hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+        >
+          Browse All Tools
+        </a>
+
+        {
+          retry && (
+            <button
+              type="button"
+              onclick="location.reload()"
+              class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-[8px] border border-border-hairline bg-white text-ink font-body font-medium text-body-md hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-start focus:ring-offset-2"
+            >
+              Try Again
+            </button>
+          )
+        }
+      </div>
+
+      {
+        featuredTools.length > 0 && (
+          <section class="mb-10">
+            <h2 class="font-display font-semibold text-body-lg text-ink mb-4">Popular Tools</h2>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredTools.map((tool) => (
+                <a
+                  href={`/tools/${tool.data.slug}/`}
+                  class="block p-4 rounded-lg border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
+                >
+                  <h3 class="font-display font-semibold text-base text-ink mb-1">{tool.data.name}</h3>
+                  <p class="font-body text-sm text-muted line-clamp-2">{tool.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <p class="font-body text-caption text-muted">
+        Still stuck? <a href="mailto:hello@instanten.com" class="text-accent-end hover:underline">Contact us</a>
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .text-display {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  .text-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .text-body-md {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .text-display {
+      font-size: 32px;
+      letter-spacing: -1px;
+    }
+    .error-code {
+      font-size: 5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none !important;
+    }
+  }
+</style>

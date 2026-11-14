@@ -14,6 +14,29 @@ export default defineConfig({
     },
   },
   integrations: [
+    {
+      name: 'error-pages',
+      // 404.astro / 500.astro Astro khud dist/404.html, dist/500.html par deta hai.
+      // 403/503 directory ke roop mein bante hain — unhe root par .html bana do,
+      // taaki koi bhi host (nginx, Netlify, Vercel, serve-static) unhe dhoondh le.
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const fs = await import('node:fs/promises');
+          const path = await import('node:path');
+          const root = dir.pathname;
+          for (const code of ['403', '503']) {
+            const from = path.join(root, code, 'index.html');
+            const to = path.join(root, `${code}.html`);
+            try {
+              await fs.rename(from, to);
+              await fs.rm(path.join(root, code), { recursive: true, force: true });
+            } catch {
+              // page generate nahi hua — build fail karne ki zarurat nahi
+            }
+          }
+        },
+      },
+    },
     sitemap({
       i18n: {
         defaultLocale: 'en',
@@ -30,12 +53,10 @@ export default defineConfig({
           pt: 'pt',
         },
       },
+      // Error pages (403/404/500/503) kabhi sitemap mein nahi — wo noindex hain.
       filter: (page) =>
         !page.endsWith('.xml') &&
-        !page.endsWith('/404/') &&
-        !page.endsWith('/404') &&
-        !page.endsWith('/500/') &&
-        !page.endsWith('/500'),
+        !/\/(403|404|500|503)(\/|\.html)?$/.test(page),
       serialize: (item) => {
         item.lastmod = new Date().toISOString();
         if (item.url === 'https://instanten.com/' || item.url === 'https://instanten.com') {

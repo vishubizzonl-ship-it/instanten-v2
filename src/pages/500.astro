@@ -1,0 +1,21 @@
+---
+import ErrorPage from '../components/ErrorPage.astro';
+
+/**
+ * 500 — Server Error. Astro isse dist/500.html par emit karta hai.
+ * Page plain static hai: koi script, koi external asset — server takleef
+ * mein bhi yeh page render ho sake.
+ */
+---
+
+<ErrorPage
+  code={500}
+  heading="Something Went Wrong"
+  message="An unexpected error stopped this page from loading. Nothing you pasted into a tool was saved or sent anywhere — processing happens in your browser."
+  tips={[
+    'Reload the page once; most errors like this clear immediately.',
+    'If it repeats on the same tool, try another tool — the hub is still up.',
+    'Still broken after a reload? Email us and we will look at it.',
+  ]}
+  retry
+/>

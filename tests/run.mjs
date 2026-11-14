@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolveOutDir, loadPages, ruleOf } from './lib.mjs';
 
-const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design', 'seo'];
+const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design', 'seo', 'errors'];
 const BASELINE = 'tests/baseline.json';
 const updateBaseline = process.argv.includes('--update-baseline');
 // NOTE: argv[0]/argv[1] node & script hain, isliye sirf argv[2..] me se dir dhundo.

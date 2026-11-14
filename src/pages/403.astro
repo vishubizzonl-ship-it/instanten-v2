@@ -1,0 +1,19 @@
+---
+import ErrorPage from '../components/ErrorPage.astro';
+
+/**
+ * 403 — Access Denied.
+ * Kuch hosts ise /403.html par serve karte hain (build hook root par copy karta hai).
+ */
+---
+
+<ErrorPage
+  code={403}
+  heading="Access Denied"
+  message="You don't have permission to open this page. If you followed a link from somewhere else, it may be private or restricted."
+  tips={[
+    'Return to the homepage and open the tool you need from there.',
+    'If this was a direct link from a colleague, ask them for a public address instead.',
+    'Nothing on instanten.com requires an account, so a 403 here is not a login problem.',
+  ]}
+/>

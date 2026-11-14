@@ -1,0 +1,20 @@
+---
+import ErrorPage from '../components/ErrorPage.astro';
+
+/**
+ * 503 — Temporarily Unavailable (maintenance / overload).
+ * Build ke baad root par 503.html ke roop mein copy hota hai.
+ */
+---
+
+<ErrorPage
+  code={503}
+  heading="Temporarily Unavailable"
+  message="The site is briefly offline for maintenance or handling a traffic spike. This is temporary — nothing has been lost and no data was stored."
+  tips={[
+    'Wait a minute, then reload the page.',
+    'Every tool runs in your browser, so any page already open keeps working.',
+    'No account or saved file is affected by this outage.',
+  ]}
+  retry
+/>
