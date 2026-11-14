@@ -74,9 +74,23 @@ export function run() {
     for (const token of ['#29294B', '#696981', '#5955D1', '#E1E1E8', 'DM Sans']) {
       check(rules.toUpperCase().includes(token.toUpperCase()), `RULES.md mein compilefuture token ${token} missing`);
     }
-    // AGENTS.md isi file ko point kare
+    // AGENTS.md = auto-loaded file: usme bhi poore rules inline hone chahiye
     const agents = readFileSync('AGENTS.md', 'utf8');
     check(agents.includes('RULES.md'), 'AGENTS.md RULES.md ko point nahi karta');
+    for (const [needle, label] of [
+      ['## Rule 1', 'Rule 1 heading'],
+      ['## Rule 2', 'Rule 2 heading'],
+      ['## Rule 3', 'Rule 3 heading'],
+      ['## Rule 3.1', 'Rule 3.1 heading'],
+      ['na kam, na zyada', 'ek-line rule'],
+      ['kya banaya → kaise check kiya → pass/fail + saboot', 'report format'],
+      ['Reading ka tareeka'.replace('Reading ka tareeka', 'Kaam karne ka tareeka'), 'har-command workflow'],
+    ]) {
+      check(agents.includes(needle), `AGENTS.md mein ${label} inline nahi hai (${needle})`);
+    }
+    for (const token of ['#29294B', '#696981', '#5955D1', '#E1E1E8', 'DM Sans']) {
+      check(agents.toUpperCase().includes(token.toUpperCase()), `AGENTS.md mein token ${token} missing`);
+    }
   }
 
   /* ---------- Rule 1: koi naya package nahi ---------- */
