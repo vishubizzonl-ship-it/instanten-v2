@@ -84,7 +84,15 @@ for c in "$HOME/node22/bin/node" "$PREFIX/bin/node" "$(command -v node)"; do
   [ -x "$c" ] || continue
   case "$("$c" -v 2>/dev/null)" in v2[2-9]*|v[3-9][0-9]*) NODE=$c; break;; esac
 done
-[ -n "$NODE" ] || { no "Node v22+ nahi mila. Chalaye: pkg install nodejs-lts"; exit 1; }
+if [ -z "$NODE" ]; then
+  no "Node v22+ nahi mila, ya node chal hi nahi raha:"
+  [ -x "${PREFIX:-/usr}/bin/node" ] && "$PREFIX/bin/node" -v 2>&1 | head -2 | sed 's/^/    /'
+  echo
+  echo "  Termux par ye ek line chalao (library mismatch bhi isse theek hota hai):"
+  echo "    echo \"deb https://packages-cf.termux.dev/apt/termux-main stable main\" > \$PREFIX/etc/apt/sources.list && pkg update -y && pkg install -y nodejs"
+  echo
+  exit 1
+fi
 export PATH="$(cd "$(dirname "$NODE")" && pwd):$PATH"
 NPM="$(command -v npm)"
 
