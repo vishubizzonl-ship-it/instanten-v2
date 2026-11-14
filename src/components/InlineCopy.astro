@@ -1,0 +1,29 @@
+---
+/**
+ * Prose renderer for the sensor tool pages.
+ *
+ * compassinstant ki copy **bold** markdown use karti hai (koi link nahi), isliye
+ * yahan sirf bold aur paragraph break handle hota hai. HTML escape hota hai —
+ * copy data hai, markup nahi.
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// **bold** → <strong>, baaki sab escaped
+const html = text
+  .split(/(\*\*[^*]+\*\*)/g)
+  .map((part) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? `<strong class="font-semibold text-ink">${escapeHtml(part.slice(2, -2))}</strong>`
+      : escapeHtml(part)
+  )
+  .join('');
+---
+
+<p class="mb-4 text-body-md leading-relaxed text-body" set:html={html} />

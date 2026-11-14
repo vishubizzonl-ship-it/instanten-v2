@@ -9,6 +9,7 @@ import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } fr
 import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
 import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
 import { getPageCopy } from '../../../i18n/pageContent';
+import { localizeTool } from '../../../i18n/toolContent';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -63,7 +64,10 @@ if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort
 
 <Layout
   title={`${tagName} — ${t('nav.tools')} — Instanten`}
-  description={`${tagName}: ${page.tags.lead}`}
+  description={`${tagName}: ${page.tags.lead} ${sortedTools
+    .slice(0, 5)
+    .map((tool) => localizeTool(lang, tool.data).name)
+    .join(', ')}.`}
   canonicalURL={`https://instanten.com/${lang}/tag/${slug}/`}
   lang={lang}
 >

@@ -1,0 +1,43 @@
+---
+/**
+ * onlinebubblelevel — localized page.
+ *
+ * Island BubbleIsland.astro se aata hai (compassinstant se port kiya hua, jaisa tha
+ * waisa chalta hua), page shell InstrumentToolPage.astro se. Copy localized hai.
+ */
+import InstrumentToolPage from '../../../components/pages/InstrumentToolPage.astro';
+import BubbleIsland from '../../../components/instruments/BubbleIsland.astro';
+import { getEntry } from 'astro:content';
+import { instrumentUi } from '../../../i18n/instruments/ui';
+import { getLangFromUrl } from '../../../i18n/utils';
+import { bubbleProse } from '../../../i18n/instruments/bubbleProse';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  return nonDefaultLangs.map((lang: LangCode) => ({ params: { lang } }));
+}
+
+const tool = await getEntry('tools', 'onlinebubblelevel');
+if (!tool) throw new Error('tool entry missing: onlinebubblelevel');
+
+const lang = getLangFromUrl(Astro.url);
+const u = instrumentUi[lang] ?? instrumentUi.en;
+const how = {
+  enable: u['page.bubble.how.enable'],
+  enableDesc: u['page.bubble.how.enable.desc'],
+  second: u['page.bubble.how.calibrate'],
+  secondDesc: u['page.bubble.how.calibrate.desc'],
+  third: u['page.bubble.how.offline'],
+  thirdDesc: u['page.bubble.how.offline.desc'],
+};
+---
+
+<InstrumentToolPage
+  slug="onlinebubblelevel"
+  tool={tool}
+  prose={bubbleProse}
+  faqLangs={['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it']}
+  how={how}
+>
+  <BubbleIsland />
+</InstrumentToolPage>

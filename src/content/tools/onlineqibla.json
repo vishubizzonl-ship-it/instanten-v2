@@ -1,0 +1,37 @@
+{
+  "slug": "onlineqibla",
+  "name": "Qibla Finder",
+  "category": "Utility",
+  "description": "A free online Qibla finder that calculates the bearing to the Kaaba from your location and points to it on a live compass dial in the browser.",
+  "longDescription": "Qibla Finder answers one question in one tap: which way is the Qibla from where you stand? Allow location access, hold the phone flat, and the page computes the great-circle bearing from your coordinates to the Kaaba and shows it on a rotating dial with the bearing in degrees. If the compass sensor is unavailable the bearing still appears, so a map or a landmark can be used instead; if location is blocked the page says so plainly rather than guessing silently. Coordinates are used for the calculation on the device and are never stored.",
+  "pricing": "Free",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Location is used for the bearing only.",
+  "image": "/thumbnails/onlineqibla.svg",
+  "url": "https://instanten.com/tools/onlineqibla/",
+  "tags": [
+    "utility",
+    "qibla",
+    "prayer",
+    "navigation",
+    "instanten tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
+  "addedDate": "2026-11-07",
+  "updatedDate": "2026-11-07",
+  "features": [
+    "Qibla bearing in degrees, computed from your coordinates to the Kaaba",
+    "Rotating compass dial with a marker that holds the Qibla direction",
+    "Clear status line for GPS, approximate location, blocked permission and missing compass",
+    "Bearing stays readable even when the orientation sensor is not available",
+    "Fullscreen dial for reading the direction at arm's length",
+    "No install, no account; coordinates are not stored or uploaded"
+  ],
+  "useCases": [
+    "Finding the prayer direction in a hotel room, an office or an airport",
+    "Checking the Qibla in an unfamiliar city before laying out a prayer space",
+    "Confirming a prayer mat's orientation in a new home",
+    "Teaching the bearing concept with a live dial instead of a static map"
+  ],
+  "featured": true
+}

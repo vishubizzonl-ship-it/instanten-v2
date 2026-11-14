@@ -2,8 +2,16 @@
 import ToolDetailPage from '../../components/pages/ToolDetailPage.astro';
 import { getCollection } from 'astro:content';
 
+
+/**
+ * Chaar sensor tools (compass, bubble level, speedometer, Qibla) ke apne page
+ * files hain — unke paas interactive island hai jo generic template se nahi
+ * chalta, isliye generic [slug] route unko skip karta hai (warna duplicate
+ * route banega).
+ */
 export async function getStaticPaths() {
-  const tools = await getCollection('tools');
+  const DEDICATED = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+  const tools = (await getCollection('tools')).filter((tool) => !DEDICATED.includes(tool.data.slug));
   return tools.map(tool => ({
     params: { slug: tool.data.slug },
     props: { tool },

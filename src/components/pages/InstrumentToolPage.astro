@@ -1,0 +1,198 @@
+---
+/**
+ * Sensor tool page shell (compass, bubble level, speedometer, Qibla).
+ *
+ * Chaaron tools ka page structure ek hi hai, sirf island aur copy alag hai:
+ *   1. breadcrumb + H1 (localized tool naam)
+ *   2. working island (data-tool-root ke saath, taaki test usko pakad sake)
+ *   3. "how it works" — 3 steps, compassinstant silo ki localized copy
+ *   4. long-form about copy (compassinstant ka prose, jaisa tha waisa hi)
+ *   5. guides list (titles + one-line descriptions — links Batch 2 mein, jab
+ *      in tools ke blog articles yahan aayenge)
+ *   6. FAQ + ek hi FAQPage JSON-LD (Layout ke faqs prop se)
+ *
+ * FAQ sirf un locales par dikhta hai jinke paas native copy hai: English FAQ
+ * text localized page par bhejna silo rule todta hai.
+ */
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ToolFaq from '../ToolFaq.astro';
+import InlineCopy from '../InlineCopy.astro';
+import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { localizeTool, localizeToolCategory } from '../../i18n/toolContent';
+import { instrumentUi } from '../../i18n/instruments/ui';
+import { instrumentSeo, fitTitle } from '../../i18n/instruments/seo';
+import type { LangCode } from '../../i18n/ui';
+
+export type ProseSection = { h: string; paras: string[]; list?: string[]; listAt?: number };
+export type Prose = {
+  aboutH?: string;
+  h2?: string;
+  intro: string[];
+  sections: ProseSection[];
+  guidesH?: string;
+  guides?: { href: string; title: string; desc: string }[];
+  faqH?: string;
+  faq?: { q: string; a: string }[];
+};
+
+interface Props {
+  slug: string;
+  tool: { data: { slug: string; name: string; description: string; category: string; tags?: string[]; features?: string[]; addedDate?: string; updatedDate?: string } };
+  prose: Record<string, Prose>;
+  /** Native copy wale locales — sirf yahan FAQ dikhta hai. */
+  faqLangs: string[];
+  how: { enable: string; enableDesc: string; second: string; secondDesc: string; third: string; thirdDesc: string };
+}
+
+const { slug, tool, prose, faqLangs, how } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const ui = instrumentUi[lang] ?? instrumentUi.en;
+
+const localized = localizeTool(lang, tool.data);
+const copy = prose[lang] ?? prose.en;
+const heading = copy.aboutH ?? copy.h2 ?? localized.name;
+
+const hasNativeFaq = faqLangs.includes(lang);
+const faqs = hasNativeFaq ? (copy.faq ?? []) : [];
+
+const canonicalURL =
+  lang === 'en' ? `${SITE_URL}/tools/${slug}/` : `${SITE_URL}/${lang}/tools/${slug}/`;
+const seo = instrumentSeo[slug]?.[lang] ?? instrumentSeo[slug]?.en;
+// Title 70 chars se chhota rehta hai (site-integrity rule), description 50+.
+const pageTitle = fitTitle(seo?.title ?? localized.name);
+const pageDescription = seo?.description ?? localized.description;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: localized.name,
+  description: pageDescription,
+  url: canonicalURL,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web',
+  inLanguage: lang,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+  featureList: tool.data.features ?? [],
+  datePublished: tool.data.addedDate,
+  dateModified: tool.data.updatedDate,
+};
+
+const categoryLabel = localizeToolCategory(lang, tool.data.category);
+// Do shakal chahiye: Breadcrumbs component {label, href} maangta hai aur
+// SeoHead ka JSON-LD {name, item} — dono ek hi source se banaye jaate hain.
+const crumbItems = [
+  { label: t('nav.home'), href: translatePath('/') },
+  { label: t('tools.allTools'), href: translatePath('/tools/') },
+  { label: localized.name },
+];
+const breadcrumbs = crumbItems.map((crumb) => ({
+  name: crumb.label,
+  item: crumb.href ? `${SITE_URL}${crumb.href}` : canonicalURL,
+}));
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={(tool.data.tags ?? []).join(', ')}
+  jsonLd={jsonLd}
+  faqs={faqs.map((item) => ({ question: item.q, answer: item.a }))}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  lang={lang as LangCode}
+>
+  <div class="site-container">
+    <Breadcrumbs items={crumbItems} />
+  </div>
+
+  <article class="site-container max-w-5xl">
+    <header class="pb-6 pt-6 lg:pb-8">
+      <p class="eyebrow mb-3">{categoryLabel}</p>
+      <h1 class="font-display text-heading-lg text-ink lg:text-display">{localized.name}</h1>
+      <p class="mt-4 max-w-2xl text-body-lg leading-relaxed text-body">{localized.description}</p>
+    </header>
+
+    <slot />
+
+    <section class="border-t border-border-hairline py-section" aria-label={localized.name}>
+      <div class="mx-auto max-w-[48rem]">
+        <h2 class="mb-8 font-display text-heading-md text-ink">
+          {ui['compass.how.title']}
+        </h2>
+        <div class="space-y-8">
+          <div class="border-l-2 border-border-hairline pl-6">
+            <h3 class="mb-2 font-display text-body-lg font-semibold text-ink">{how.enable}</h3>
+            <p class="text-body-sm leading-relaxed text-body">{how.enableDesc}</p>
+          </div>
+          <div class="border-l-2 border-border-hairline pl-6">
+            <h3 class="mb-2 font-display text-body-lg font-semibold text-ink">{how.second}</h3>
+            <p class="text-body-sm leading-relaxed text-body">{how.secondDesc}</p>
+          </div>
+          <div class="border-l-2 border-border-hairline pl-6">
+            <h3 class="mb-2 font-display text-body-lg font-semibold text-ink">{how.third}</h3>
+            <p class="text-body-sm leading-relaxed text-body">{how.thirdDesc}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-border-hairline py-section" aria-labelledby="about-tool">
+      <div class="mx-auto max-w-[48rem]">
+        <h2 id="about-tool" class="mb-4 font-display text-heading-md text-ink">{heading}</h2>
+        {copy.intro.map((paragraph) => <InlineCopy text={paragraph} />)}
+        {copy.sections.map((section) => (
+          <>
+            <h3 class="mb-3 mt-10 font-display text-body-lg font-semibold text-ink">{section.h}</h3>
+            {section.paras.map((paragraph, index) => (
+              <>
+                <InlineCopy text={paragraph} />
+                {section.list && index === (section.listAt ?? section.paras.length - 1) && (
+                  <ul class="mb-4 list-disc space-y-2 pl-6 text-body-md leading-relaxed text-body">
+                    {section.list.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </>
+            ))}
+          </>
+        ))}
+      </div>
+    </section>
+
+    {
+      copy.guides && copy.guides.length > 0 && (
+        <section class="border-t border-border-hairline py-section" aria-labelledby="tool-guides">
+          <div class="mx-auto max-w-[48rem]">
+            <h2 id="tool-guides" class="mb-6 font-display text-heading-md text-ink">
+              {copy.guidesH}
+            </h2>
+            <ul class="flex flex-col overflow-hidden rounded-card border border-border-hairline">
+              {copy.guides.map((guide) => (
+                <li class="border-b border-border-hairline px-4 py-4 last:border-b-0">
+                  <span class="block font-display text-body-md font-medium text-ink">{guide.title}</span>
+                  <span class="mt-1 block text-body-sm text-body">{guide.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      faqs.length > 0 && (
+        <section class="border-t border-border-hairline py-section" aria-label={copy.faqH || localized.name}>
+          <div class="mx-auto max-w-[48rem]">
+            <ToolFaq heading={copy.faqH || 'Frequently asked questions'} questions={faqs} />
+          </div>
+        </section>
+      )
+    }
+  </article>
+</Layout>

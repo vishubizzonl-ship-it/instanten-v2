@@ -1,0 +1,573 @@
+---
+import { getLangFromUrl } from '../../i18n/utils';
+import { instrumentUi } from '../../i18n/instruments/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const ui = instrumentUi[lang] ?? instrumentUi.en;
+---
+
+<section id="tool" data-tool-root="onlinespeedometer" class="py-2 lg:py-4 pt-2 lg:pt-4" aria-label={ui['page.speed.title']}>
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div id="speed-card" class="bg-surface border border-hairline rounded-md p-4 lg:p-6 shadow-[0px_1px_2px_rgba(0,0,0,0.03)] relative [&:fullscreen]:flex [&:fullscreen]:flex-col [&:fullscreen]:h-full [&:fullscreen]:overflow-hidden [&:fullscreen]:overscroll-contain [&:fullscreen>*]:flex-none">
+          <button type="button" id="speed-fullscreen-btn" aria-label={ui['speed.ui.fullscreen']} class="absolute top-3 right-3 z-30 inline-flex items-center justify-center w-8 h-8 rounded-sm bg-canvas border border-hairline text-ink hover:bg-surface transition-colors">
+            <svg class="icon-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <svg class="icon-exit hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>
+          </button>
+          <div id="speed-head" class="text-center mb-4">
+            <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['speed.ui.title']}</h2>
+            <p class="text-xs text-muted font-mono mt-1">{ui['speed.ui.gpsActive']}</p>
+            <div class="flex gap-2 justify-center mt-3">
+              <button onclick="startTrip()" id="start-btn" data-start={ui['speed.ui.start']} data-stop={ui['speed.ui.stop']} class="inline-flex rounded-sm bg-ink text-surface text-sm font-medium px-4 py-2 hover:bg-ink/90 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.start']}</button>
+              <button onclick="resetTrip()" class="inline-flex rounded-sm bg-ink text-surface text-sm font-medium px-4 py-2 hover:bg-ink/90 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.reset']}</button>
+              <button onclick="recordSpeed()" id="record-btn" class="inline-flex rounded-sm bg-surface border border-hairline text-ink text-sm font-medium px-4 py-2 hover:border-ink/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.record']}</button>
+            </div>
+          </div>
+
+          <div class="text-center py-4 mb-4">
+            <p class="text-5xl lg:text-6xl font-semibold tracking-tighter text-ink tabular-nums transition-transform duration-200 origin-center" id="speed-display">0</p>
+            <div class="flex items-center justify-center gap-3 mt-2">
+              <p class="text-sm text-muted font-mono" id="speed-unit">KM/H</p>
+              <div class="relative" id="unit-dropdown-wrapper">
+                <button onclick="toggleUnitMenu()" id="unit-btn" class="inline-flex items-center gap-1.5 rounded-sm bg-surface border border-hairline text-ink text-xs font-medium px-3 py-1.5 hover:border-ink/20 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none" aria-label={ui['speed.ui.changeUnit']} aria-expanded="false" aria-haspopup="true">
+                  <span id="unit-label">KM/H</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+                </button>
+                <div id="unit-menu" class="hidden absolute right-0 top-full mt-2 w-32 bg-surface border border-hairline rounded-md shadow-lg overflow-hidden z-50">
+                  <button onclick="selectUnit(0)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KM/H</button>
+                  <button onclick="selectUnit(1)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">MPH</button>
+                  <button onclick="selectUnit(2)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">M/S</button>
+                  <button onclick="selectUnit(3)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KN</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="speed-stats" class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.max']}</p>
+              <p id="max-speed" class="text-lg font-semibold tabular-nums text-ink">0.0</p>
+              <p class="text-[10px] text-faint" id="max-unit">KM/H</p>
+            </div>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.average']}</p>
+              <p id="avg-speed" class="text-lg font-semibold tabular-nums text-ink">0.0</p>
+              <p class="text-[10px] text-faint" id="avg-unit">KM/H</p>
+            </div>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.altitude']}</p>
+              <p id="altitude" class="text-lg font-semibold tabular-nums text-ink">—</p>
+              <p class="text-[10px] text-faint">m</p>
+            </div>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.duration']}</p>
+              <p id="duration" class="text-lg font-semibold tabular-nums text-ink">00:00</p>
+              <p class="text-[10px] text-faint">m:s</p>
+            </div>
+          </div>
+
+          <!-- Same records list, but inside the card: fullscreen only shows the
+               card, so this is where the list can appear while the speed readout
+               stays exactly where it already is. Hidden outside fullscreen. -->
+          <div id="records-in-card" class="hidden [:fullscreen_&]:flex [:fullscreen_&]:flex-col [:fullscreen_&]:shrink-0 [:fullscreen_&]:min-h-0 [:fullscreen_&]:overflow-hidden [:fullscreen_&]:border-t [:fullscreen_&]:border-hairline [:fullscreen_&]:pt-3">
+            <div class="flex items-center justify-between gap-3 mb-1">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.records.title']}</p>
+              <button type="button" onclick="clearRecords()" id="records-clear-card" class="text-[10px] text-muted hover:text-ink underline underline-offset-2 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none rounded-sm">{ui['speed.records.clear']}</button>
+            </div>
+            <p id="records-empty-card" class="text-xs text-muted leading-relaxed">{ui['speed.records.empty']}</p>
+            <ul id="records-list-card" class="hidden divide-y divide-hairline [:fullscreen_&]:flex-auto [:fullscreen_&]:min-h-0 [:fullscreen_&]:overflow-y-auto [:fullscreen_&]:overscroll-contain" data-remove-label={ui['speed.records.remove']}></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pb-8" aria-labelledby="speed-records-title">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div class="bg-surface border border-hairline rounded-md p-4 lg:p-6">
+          <div class="flex items-center justify-between gap-3 mb-3">
+            <h2 id="speed-records-title" class="font-display text-base font-semibold tracking-tight text-ink">{ui['speed.records.title']}</h2>
+            <button type="button" onclick="clearRecords()" id="records-clear" class="hidden text-xs text-muted hover:text-ink underline underline-offset-2 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none rounded-sm">{ui['speed.records.clear']}</button>
+          </div>
+          <p id="records-empty" class="text-sm text-muted leading-relaxed">{ui['speed.records.empty']}</p>
+          <ul id="records-list" class="hidden divide-y divide-hairline" aria-live="polite" data-remove-label={ui['speed.records.remove']}></ul>
+        </div>
+      </div>
+    </section>
+<script>
+  (function () {
+    const card = document.getElementById('speed-card');
+    const fsBtn = document.getElementById('speed-fullscreen-btn');
+    const headEl = document.getElementById('speed-head');
+    const statsEl = document.getElementById('speed-stats');
+    const panelEl = document.getElementById('records-in-card');
+
+    /**
+     * Puts the speedometer exactly in the middle of the fullscreen screen.
+     *
+     * Measured, not assumed: the height of the whole speedometer block (title,
+     * buttons, readout, stats) is taken from the real layout, the leftover space
+     * is split in half, and the same half is used twice — as a gap above the
+     * speedometer and as the height of the recorded list below it. Both numbers
+     * are fixed inline styles, so once measured nothing can move: adding records
+     * only fills the list, and the list scrolls inside its own height.
+     */
+    function centreFullscreen() {
+      if (!card) return;
+      const isFullscreen =
+        document.fullscreenElement === card || (document as any).webkitFullscreenElement === card;
+      // Always start from a clean slate so every measurement is honest.
+      if (headEl) headEl.style.marginTop = '';
+      if (panelEl) panelEl.style.height = '';
+      if (!isFullscreen || !headEl || !statsEl || !panelEl) return;
+
+      const cardTop = card.getBoundingClientRect().top;
+      const headTop = headEl.getBoundingClientRect().top - cardTop;
+      // The whole speedometer: from the top of the title to the bottom of the
+      // stat boxes (this already includes the title's own height).
+      const blockHeight = statsEl.getBoundingClientRect().bottom - cardTop - headTop;
+      const screenHeight = card.clientHeight;
+      const bottomPadding = 16;
+
+      // Equal space above and below the speedometer.
+      const gap = Math.max(0, (screenHeight - blockHeight) / 2);
+      const extraTop = Math.max(0, gap - headTop);
+      if (extraTop > 0) headEl.style.marginTop = extraTop + 'px';
+
+      // The list gets exactly the space that is left below the block, so it can
+      // never grow into the speedometer.
+      const blockTop = headTop + extraTop;
+      const available = Math.max(44, screenHeight - blockTop - blockHeight - bottomPadding);
+      panelEl.style.height = available + 'px';
+    }
+
+    function syncFsIcon() {
+      if (!fsBtn) return;
+      const entering = !document.fullscreenElement;
+      fsBtn.querySelector('.icon-enter')?.classList.toggle('hidden', !entering);
+      fsBtn.querySelector('.icon-exit')?.classList.toggle('hidden', entering);
+    }
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (card && card.requestFullscreen) card.requestFullscreen();
+      });
+      document.addEventListener('fullscreenchange', () => {
+        syncFsIcon();
+        renderRecords();
+        centreFullscreen();
+        // The layout settles a frame later on some phones.
+        requestAnimationFrame(centreFullscreen);
+        setTimeout(centreFullscreen, 120);
+      });
+      (document as any).addEventListener('webkitfullscreenchange', centreFullscreen);
+      window.addEventListener('resize', centreFullscreen);
+      window.addEventListener('orientationchange', centreFullscreen);
+      syncFsIcon();
+    }
+    let maxSp = 0;
+    let totalSp = 0;
+    let count = 0;
+    let startTime = 0;
+    let interval: number | null = null;
+    let currentSpeedKmh = 0;
+    let unitIndex = 0;
+    let running = false;
+
+    const units = [
+      { label: 'KM/H', factor: 1 },
+      { label: 'MPH', factor: 0.621371 },
+      { label: 'M/S', factor: 0.277778 },
+      { label: 'KN', factor: 0.539957 },
+    ];
+
+    const speedEl = document.getElementById('speed-display');
+    const maxEl = document.getElementById('max-speed');
+    const avgEl = document.getElementById('avg-speed');
+    const altEl = document.getElementById('altitude');
+    const durEl = document.getElementById('duration');
+    const startBtn = document.getElementById('start-btn');
+    const speedUnitEl = document.getElementById('speed-unit');
+    const maxUnitEl = document.getElementById('max-unit');
+    const avgUnitEl = document.getElementById('avg-unit');
+    const unitBtn = document.getElementById('unit-btn');
+    const unitLabel = document.getElementById('unit-label');
+    const unitMenu = document.getElementById('unit-menu');
+    const unitWrapper = document.getElementById('unit-dropdown-wrapper');
+    const recordsList = document.getElementById('records-list');
+    const recordsEmpty = document.getElementById('records-empty');
+    const recordsClear = document.getElementById('records-clear');
+    // The copy inside the card, which is what fullscreen can show.
+    const recordsListCard = document.getElementById('records-list-card');
+    const recordsEmptyCard = document.getElementById('records-empty-card');
+    const recordsClearCard = document.getElementById('records-clear-card');
+
+    function label() { return units[unitIndex].label; }
+    function factor() { return units[unitIndex].factor; }
+    function fmt(n: number) { return (n * factor()).toFixed(1); }
+
+    function renderUnits() {
+      const l = label();
+      if (speedUnitEl) speedUnitEl.textContent = l;
+      if (maxUnitEl) maxUnitEl.textContent = l;
+      if (avgUnitEl) avgUnitEl.textContent = l;
+      if (unitLabel) unitLabel.textContent = l;
+    }
+
+    function renderSpeeds() {
+      if (speedEl) speedEl.textContent = fmt(currentSpeedKmh);
+      if (maxEl) maxEl.textContent = fmt(maxSp);
+      if (avgEl && count > 0) avgEl.textContent = fmt(totalSp / count);
+    }
+
+    (window as any).toggleUnitMenu = function () {
+      if (!unitMenu || !unitBtn) return;
+      unitMenu.classList.toggle('hidden');
+      unitBtn.setAttribute('aria-expanded', String(!unitMenu.classList.contains('hidden')));
+    };
+
+    (window as any).selectUnit = function (i: number) {
+      unitIndex = i;
+      if (unitMenu) unitMenu.classList.add('hidden');
+      if (unitBtn) unitBtn.setAttribute('aria-expanded', 'false');
+      renderUnits();
+      renderSpeeds();
+      renderRecords();
+    };
+
+    document.addEventListener('click', function (e) {
+      if (unitWrapper && !unitWrapper.contains(e.target as Node)) {
+        if (unitMenu) unitMenu.classList.add('hidden');
+        if (unitBtn) unitBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        if (unitMenu) unitMenu.classList.add('hidden');
+        if (unitBtn) unitBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    function animateSpeed() {
+      if (!speedEl) return;
+      speedEl.classList.add('scale-110');
+      setTimeout(() => { if (speedEl) speedEl.classList.remove('scale-110'); }, 250);
+    }
+
+    (window as any).startTrip = function () {
+      if (running) {
+        running = false;
+        if (interval) clearInterval(interval);
+        interval = null;
+        if (startBtn) startBtn.textContent = startBtn.dataset.start || 'Start';
+        animateSpeed();
+        return;
+      }
+      running = true;
+      startTime = Date.now();
+      if (interval) clearInterval(interval);
+      interval = window.setInterval(() => {
+        if (durEl && startTime) {
+          const sec = Math.floor((Date.now() - startTime) / 1000);
+          const m = Math.floor(sec / 60);
+          const s = sec % 60;
+          durEl.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+      }, 1000);
+      if (startBtn) startBtn.textContent = startBtn.dataset.stop || 'Stop';
+      animateSpeed();
+    };
+
+    (window as any).resetTrip = function () {
+      running = false;
+      maxSp = 0;
+      totalSp = 0;
+      count = 0;
+      startTime = 0;
+      currentSpeedKmh = 0;
+      if (interval) clearInterval(interval);
+      interval = null;
+      if (startBtn) startBtn.textContent = startBtn.dataset.start || 'Start';
+      if (speedEl) speedEl.textContent = '0';
+      if (maxEl) maxEl.textContent = '0.0';
+      if (avgEl) avgEl.textContent = '0.0';
+      if (altEl) altEl.textContent = '—';
+      if (durEl) durEl.textContent = '00:00';
+      animateSpeed();
+    };
+
+    // --- recorded speeds -----------------------------------------------------
+    // "Record" saves whatever the big display shows right now, so a speed can be
+    // shown to someone later instead of being read off a screen that has moved
+    // on. The list lives in localStorage, so it survives a reload or a closed
+    // tab, and every entry can be removed one by one or all at once.
+    const REC_KEY = 'speedometer-records';
+    const REC_LIMIT = 100;
+
+    type Rec = { kmh: number; t: number };
+
+    function readRecords(): Rec[] {
+      try {
+        const raw = localStorage.getItem(REC_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed
+          .filter((r: any) => r && typeof r.kmh === 'number' && Number.isFinite(r.kmh) && typeof r.t === 'number')
+          .slice(0, REC_LIMIT);
+      } catch {
+        return [];
+      }
+    }
+
+    let records: Rec[] = readRecords();
+
+    function saveRecords() {
+      try {
+        localStorage.setItem(REC_KEY, JSON.stringify(records));
+      } catch {
+        // Private mode with storage disabled: the list still works for this visit.
+      }
+    }
+
+    function recordTime(t: number) {
+      try {
+        return new Date(t).toLocaleString(undefined, {
+          day: '2-digit',
+          month: 'short',
+          hour: '2-digit',
+          minute: '2-digit',
+        });
+      } catch {
+        return new Date(t).toLocaleTimeString();
+      }
+    }
+
+    function makeRow(rec: Rec, index: number, removeLabel: string) {
+      const li = document.createElemenui['li'];
+      li.className = 'flex items-center justify-between gap-3 py-2.5';
+
+      const left = document.createElemenui['div'];
+      left.className = 'flex items-baseline gap-1.5 min-w-0';
+
+      const value = document.createElemenui['span'];
+      value.className = 'text-lg font-semibold tabular-nums text-ink';
+      value.textContent = fmt(rec.kmh);
+
+      const unit = document.createElemenui['span'];
+      unit.className = 'text-[11px] text-muted font-mono';
+      unit.textContent = label();
+
+      left.append(value, unit);
+
+      const right = document.createElemenui['div'];
+      right.className = 'flex items-center gap-3 shrink-0';
+
+      const when = document.createElemenui['span'];
+      when.className = 'text-xs text-muted font-mono';
+      when.textContent = recordTime(rec.t);
+
+      const del = document.createElemenui['button'];
+      del.type = 'button';
+      del.className =
+        'text-muted hover:text-ink transition-colors leading-none px-1 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none rounded-sm';
+      del.setAttribute('aria-label', removeLabel);
+      del.textContent = '\u00d7';
+      del.addEventListener('click', () => removeRecord(index));
+
+      right.append(when, del);
+      li.append(left, right);
+      return li;
+    }
+
+    function paint(listEl: HTMLElement | null, emptyEl: HTMLElement | null) {
+      if (!listEl || !emptyEl) return;
+      const has = records.length > 0;
+      emptyEl.classList.toggle('hidden', has);
+      listEl.classList.toggle('hidden', !has);
+      listEl.textContent = '';
+      const removeLabel = listEl.dataset.removeLabel || 'Remove';
+      records.forEach((rec, i) => listEl.append(makeRow(rec, i, removeLabel)));
+    }
+
+    function renderRecords() {
+      // Both copies are painted together, so a recording appears in the page and
+      // in fullscreen at the same instant.
+      paint(recordsList, recordsEmpty);
+      paint(recordsListCard, recordsEmptyCard);
+      if (recordsClear) recordsClear.classList.toggle('hidden', records.length === 0);
+      if (recordsClearCard) recordsClearCard.classList.toggle('hidden', records.length === 0);
+    }
+
+    function removeRecord(index: number) {
+      records.splice(index, 1);
+      saveRecords();
+      renderRecords();
+    }
+
+    (window as any).recordSpeed = function () {
+      records.unshift({ kmh: currentSpeedKmh, t: Date.now() });
+      if (records.length > REC_LIMIT) records.length = REC_LIMIT;
+      saveRecords();
+      renderRecords();
+      animateSpeed();
+    };
+
+    (window as any).clearRecords = function () {
+      records = [];
+      saveRecords();
+      renderRecords();
+    };
+
+    // --- live speed ----------------------------------------------------------
+    // Three things used to make a parked device show a speed:
+    //   1. coords.speed is noisy on Android and often reports 0.1-0.5 m/s while
+    //      the phone sits on a table.
+    //   2. the distance fallback compared two fixes ~1 s apart, where GPS jitter
+    //      is bigger than the real movement.
+    //   3. an unusable fix kept the previous reading, so after stopping the
+    //      display froze at the last speed and never came back to zero.
+    // The rules below keep the readout on the device's actual speed: a dead band,
+    // a longer measuring window with a jitter floor, and a hold that expires.
+    // GPS noise on a parked phone reads up to ~0.5 m/s (1.8 km/h), so anything
+    // under 2 km/h is shown as zero. Walking is 4-5 km/h and is unaffected.
+    const SPEED_ZERO_KMH = 2;
+    const HOLD_MS = 3000; // how long a missing fix may keep the last reading
+    const MIN_SPAN_MS = 4000; // never derive speed from a shorter interval
+    const MAX_SPAN_MS = 15000; // or from a gap longer than this
+    const MAX_ACCURACY_M = 40; // worse than this and speed off the delta is junk
+
+    function haversineKm(a: GeolocationCoordinates, b: GeolocationCoordinates) {
+      const R = 6371;
+      const toRad = (d: number) => (d * Math.PI) / 180;
+      const dLat = toRad(b.latitude - a.latitude);
+      const dLon = toRad(b.longitude - a.longitude);
+      const s =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(toRad(a.latitude)) * Math.cos(toRad(b.latitude)) * Math.sin(dLon / 2) ** 2;
+      return 2 * R * Math.asin(Math.min(1, Math.sqrt(s)));
+    }
+
+    type Fix = { lat: number; lon: number; t: number; acc: number };
+    const fixes: Fix[] = [];
+    let lastGoodWall = 0;
+    let lastFixWall = 0;
+
+    const metres = (a: Fix, b: Fix) =>
+      haversineKm({ latitude: a.lat, longitude: a.lon } as GeolocationCoordinates, {
+        latitude: b.lat,
+        longitude: b.lon,
+      } as GeolocationCoordinates) * 1000;
+
+    /**
+     * Speed from the distance travelled over a window of at least MIN_SPAN_MS.
+     * A longer window is what makes this usable while standing still: over 4 s the
+     * jitter averages out instead of turning into a fake 12 km/h.
+     * Returns null when there is not enough history to say anything trustworthy.
+     */
+    function pushFix(pos: GeolocationPosition): Fix {
+      const fix: Fix = {
+        lat: pos.coords.latitude,
+        lon: pos.coords.longitude,
+        t: pos.timestamp || Date.now(),
+        acc: typeof pos.coords.accuracy === 'number' ? pos.coords.accuracy : 99,
+      };
+      fixes.push(fix);
+      while (fixes.length > 30) fixes.shift();
+      return fix;
+    }
+
+    function speedFromWindow(fix: Fix): number | null {
+      const acc = fix.acc;
+      if (acc > MAX_ACCURACY_M) return null;
+
+      // The newest fix that is at least MIN_SPAN old — i.e. the shortest usable
+      // window. Taking the oldest fix instead would compare against a position
+      // from half a minute ago and reject perfectly good readings.
+      let idx = -1;
+      for (let i = fixes.length - 2; i >= 0; i--) {
+        if (fix.t - fixes[i].t >= MIN_SPAN_MS) {
+          idx = i;
+          break;
+        }
+      }
+      if (idx < 0) return null;
+      const oldest = fixes[idx];
+      const span = (fix.t - oldest.t) / 1000;
+      if (span > MAX_SPAN_MS / 1000) return null;
+
+      const net = metres(oldest, fix);
+      // Positions wander by roughly their own accuracy. Anything shorter than
+      // this is the chip breathing, not the device moving.
+      const floor = Math.max(2.5, Math.min(oldest.acc, acc) * 0.4);
+      if (net < floor) return 0;
+
+      // Jitter goes back and forth, so the path travelled is far longer than the
+      // distance between the two ends. Real movement keeps them about equal.
+      let path = 0;
+      for (let i = idx + 1; i < fixes.length; i++) path += metres(fixes[i - 1], fixes[i]);
+      const kmh = (net / span) * 3.6;
+      if (kmh < 10 && path > net * 2.5) return 0;
+
+      return kmh > 300 ? null : kmh;
+    }
+
+    /** A reading is only allowed to change the display if it can be trusted. */
+    function applySpeed(measured: number | null) {
+      const wall = Date.now();
+      if (measured === null) {
+        // Hold the last reading briefly while a fix is missing, then let go.
+        // Without the timeout a parked device stayed frozen at its last speed.
+        if (lastGoodWall && wall - lastGoodWall > HOLD_MS && currentSpeedKmh !== 0) {
+          currentSpeedKmh = 0;
+          renderSpeeds();
+        }
+        return;
+      }
+      lastGoodWall = wall;
+      const next = measured <= SPEED_ZERO_KMH ? 0 : measured;
+      if (Math.abs(next - currentSpeedKmh) < 0.05 && next !== 0) return;
+      currentSpeedKmh = next;
+      if (running) {
+        maxSp = Math.max(maxSp, currentSpeedKmh);
+        totalSp += currentSpeedKmh;
+        count++;
+      }
+      renderSpeeds();
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (pos) => {
+          lastFixWall = Date.now();
+          const reported = pos.coords.speed;
+          const acc = typeof pos.coords.accuracy === 'number' ? pos.coords.accuracy : 99;
+          const usableReport =
+            typeof reported === 'number' && Number.isFinite(reported) && reported >= 0 && acc <= MAX_ACCURACY_M;
+          // Always record the fix, whichever source ends up driving the display:
+          // if the chip stops reporting coords.speed the window is already warm
+          // instead of leaving a four second hole.
+          const fix = pushFix(pos);
+          applySpeed(usableReport ? reported * 3.6 : speedFromWindow(fix));
+
+          const alt = pos.coords.altitude;
+          if (altEl) altEl.textContent = alt === null || alt === undefined ? '—' : Math.round(alt).toString();
+        },
+        () => {},
+        { enableHighAccuracy: true, maximumAge: 1000 },
+      );
+
+      // Fixes can stop arriving altogether when the device is idle. Without this
+      // watchdog the display would keep the last speed forever.
+      window.setInterval(() => {
+        if (!lastFixWall) return;
+        if (Date.now() - lastFixWall > HOLD_MS && currentSpeedKmh !== 0) {
+          currentSpeedKmh = 0;
+          renderSpeeds();
+        }
+      }, 1000);
+    }
+
+    renderUnits();
+    renderSpeeds();
+    renderRecords();
+  })();
+</script>

@@ -98,6 +98,15 @@
   --color-violet: var(--violet);
   --color-violet-soft: var(--violet-soft);
 
+  /* Aliases for the four sensor tools (compass, bubble level, speedometer,
+     Qibla) that were ported from the compassinstant silo. Same compilefuture
+     values — sirf naam, taaki ported markup ko dobara likhna na pade. */
+  --color-canvas-elevated: var(--surface);
+  --color-hairline: var(--hairline);
+  --color-mute: var(--muted);
+  --color-link: var(--accent);
+  --color-link-soft: var(--accent-soft);
+
   --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;

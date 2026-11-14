@@ -1,6 +1,6 @@
 {
   "site-integrity": {
-    "meta description missing/chhota": 139,
+    "meta description missing/chhota": 105,
     "title length N (N-N chahiye)": 12,
     "canonical galat": 60
   },
@@ -31,6 +31,7 @@
   "errors": {},
   "analytics": {},
   "tools-inpage": {},
+  "instruments": {},
   "rules": {},
   "i18n-hreflang": {}
 }

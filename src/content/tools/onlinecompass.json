@@ -1,0 +1,37 @@
+{
+  "slug": "onlinecompass",
+  "name": "Online Compass",
+  "category": "Utility",
+  "description": "A free online compass that reads your device magnetometer and shows the direction you are facing — degrees plus the N, NE, E, SE, S, SW, W, NW label — right in the browser.",
+  "longDescription": "Online Compass turns the phone or laptop you are already holding into a working magnetic compass. Allow motion sensors, lay the device flat, and the dial follows the direction you face while a large readout shows the angle in degrees and the matching cardinal point. Readings are smoothed so the needle settles instead of jumping, and the whole dial can go fullscreen for a bigger, easier read. Nothing is uploaded and nothing needs an account: the sensor stream is read on the device and the page works offline once it has loaded.",
+  "pricing": "Free",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Sensor readings never leave the device.",
+  "image": "/thumbnails/onlinecompass.svg",
+  "url": "https://instanten.com/tools/onlinecompass/",
+  "tags": [
+    "utility",
+    "navigation",
+    "compass",
+    "sensor",
+    "instanten tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
+  "addedDate": "2026-11-07",
+  "updatedDate": "2026-11-07",
+  "features": [
+    "Live dial driven by the device magnetometer, rotating with the direction you face",
+    "Degree readout with the matching cardinal point (N 0°, NE 45°, E 90° …)",
+    "Smoothed needle movement so the reading settles instead of flickering",
+    "Fullscreen mode for a large, arm's-length reading",
+    "Works offline once the page has loaded — no network needed for the sensor",
+    "No install, no account; sensor data stays on the device"
+  ],
+  "useCases": [
+    "Finding which way is north when setting up furniture or a treadmill",
+    "Checking the orientation of a room, a tent or a parked car",
+    "Reading a rough bearing while walking without a hardware compass",
+    "Teaching cardinal and intercardinal directions with a live dial"
+  ],
+  "featured": true
+}

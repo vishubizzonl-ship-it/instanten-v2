@@ -1,0 +1,37 @@
+{
+  "slug": "onlinebubblelevel",
+  "name": "Bubble Level",
+  "category": "Utility",
+  "description": "A free online bubble level and spirit level that checks how far any surface is from level, in degrees, using the tilt sensors your browser already exposes.",
+  "longDescription": "Bubble Level is a level checker that runs in the browser: put the phone or tablet flat on the surface you want to test and a dot moves inside a bullseye vial as the surface tilts, with X and Y angles in degrees underneath. A calibrate button records the current position as zero, which matters because a phone case, a camera bump or a slightly uneven table all shift the reading; reset brings the raw sensor values back. The vial can go fullscreen so it is readable from a distance, and nothing is uploaded — the tilt stream is read on the device.",
+  "pricing": "Free",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Tilt readings stay in the browser.",
+  "image": "/thumbnails/onlinebubblelevel.svg",
+  "url": "https://instanten.com/tools/onlinebubblelevel/",
+  "tags": [
+    "utility",
+    "level",
+    "sensor",
+    "measurement",
+    "instanten tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
+  "addedDate": "2026-11-07",
+  "updatedDate": "2026-11-07",
+  "features": [
+    "Bullseye vial with a moving dot that reacts to tilt as you watch",
+    "X and Y angles in degrees, updated every frame",
+    "Calibrate button records the current position as 0.0° (saved between visits)",
+    "Reset button returns to the raw sensor values",
+    "Fullscreen vial for reading a surface from a step back",
+    "No install, no account; nothing about the surface is uploaded"
+  ],
+  "useCases": [
+    "Checking whether a table, shelf or desk is level before loading it",
+    "Levelling a picture frame, a shelf bracket or a wall-mounted TV",
+    "Testing a washing machine, fridge or treadmill for a stable footing",
+    "Quick tilt check on a caravan, a tent shelf or a shop display"
+  ],
+  "featured": true
+}

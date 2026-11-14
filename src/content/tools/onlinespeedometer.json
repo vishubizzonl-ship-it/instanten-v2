@@ -1,0 +1,37 @@
+{
+  "slug": "onlinespeedometer",
+  "name": "Speedometer",
+  "category": "Utility",
+  "description": "A free online speedometer that reads GPS speed in the browser and keeps max speed, average speed, altitude and trip duration while you move.",
+  "longDescription": "Speedometer uses the browser geolocation sensor to show the speed you are travelling at, in km/h, mph, m/s or knots, and keeps the trip numbers around it: maximum speed, average speed, altitude and how long the trip has been running. Start a trip, watch the readout, tap record when something worth keeping happens, and reset when you begin again. Because the speed comes from satellite fixes rather than the wheel or the engine, it works the same in a car, on a bike, on a boat or on foot, and nothing leaves the device.",
+  "pricing": "Free",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Position fixes stay on the device.",
+  "image": "/thumbnails/onlinespeedometer.svg",
+  "url": "https://instanten.com/tools/onlinespeedometer/",
+  "tags": [
+    "utility",
+    "gps",
+    "speed",
+    "sensor",
+    "instanten tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
+  "addedDate": "2026-11-07",
+  "updatedDate": "2026-11-07",
+  "features": [
+    "Live GPS speed readout with a smooth animated number",
+    "Four units — km/h, mph, m/s and knots — switchable mid-trip",
+    "Maximum speed, average speed, altitude and trip duration kept side by side",
+    "Record button to save a speed with its timestamp, and clear to wipe the list",
+    "Fullscreen mode that keeps the readout centred and the records scrollable",
+    "No install, no account; coordinates are never uploaded"
+  ],
+  "useCases": [
+    "Checking bicycle, scooter or car speed against the dashboard",
+    "Measuring boat or ferry speed on a phone with no instruments",
+    "Logging peak speed on a run, a ride or a downhill stretch",
+    "Confirming a speed limit sign against the speed actually travelled"
+  ],
+  "featured": true
+}

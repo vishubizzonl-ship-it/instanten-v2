@@ -17,7 +17,10 @@ const filters = parseFilters(searchParams);
 const filteredTools = filterTools(allTools, filters);
 const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
 
-const PER_PAGE = 10;
+// Static build: `?page=2` par wahi page 1 serve hota hai, isliye pagination
+// se tools list se gayab ho jaate the (12 tools, 10 dikhte the). Ab poori list
+// ek page par aati hai — pagination tabhi dikhta hai jab 50 se zyada tools hon.
+const PER_PAGE = 50;
 const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
 const currentPage = filters.page || 1;
 const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);

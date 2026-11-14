@@ -1,4 +1,5 @@
 import type { LangCode } from './ui';
+import { instrumentToolCopy } from './instruments/toolCopy';
 
 export interface ToolCopy {
   name: string;
@@ -654,7 +655,9 @@ export function localizeTool(
   lang: LangCode,
   tool: { slug: string; name: string; description: string }
 ): ToolCopy {
-  const localized = toolCopy[lang]?.[tool.slug];
+  // Sensor tools (compass / bubble level / speedometer / Qibla) apna localized
+  // copy alag module mein rakhte hain — baaki 12 tools ka data wahi rehta hai.
+  const localized = toolCopy[lang]?.[tool.slug] ?? instrumentToolCopy[lang]?.[tool.slug];
   return {
     name: localized?.name || tool.name,
     description: localized?.description || tool.description,

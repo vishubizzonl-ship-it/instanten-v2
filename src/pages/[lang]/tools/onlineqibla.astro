@@ -1,0 +1,43 @@
+---
+/**
+ * onlineqibla — localized page.
+ *
+ * Island QiblaIsland.astro se aata hai (compassinstant se port kiya hua, jaisa tha
+ * waisa chalta hua), page shell InstrumentToolPage.astro se. Copy localized hai.
+ */
+import InstrumentToolPage from '../../../components/pages/InstrumentToolPage.astro';
+import QiblaIsland from '../../../components/instruments/QiblaIsland.astro';
+import { getEntry } from 'astro:content';
+import { instrumentUi } from '../../../i18n/instruments/ui';
+import { getLangFromUrl } from '../../../i18n/utils';
+import { qiblaProse } from '../../../i18n/instruments/qiblaProse';
+import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  return nonDefaultLangs.map((lang: LangCode) => ({ params: { lang } }));
+}
+
+const tool = await getEntry('tools', 'onlineqibla');
+if (!tool) throw new Error('tool entry missing: onlineqibla');
+
+const lang = getLangFromUrl(Astro.url);
+const u = instrumentUi[lang] ?? instrumentUi.en;
+const how = {
+  enable: u['page.qibla.how.enable'],
+  enableDesc: u['page.qibla.how.enable.desc'],
+  second: u['page.qibla.how.calibrate'],
+  secondDesc: u['page.qibla.how.calibrate.desc'],
+  third: u['page.qibla.how.offline'],
+  thirdDesc: u['page.qibla.how.offline.desc'],
+};
+---
+
+<InstrumentToolPage
+  slug="onlineqibla"
+  tool={tool}
+  prose={qiblaProse}
+  faqLangs={['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it']}
+  how={how}
+>
+  <QiblaIsland />
+</InstrumentToolPage>

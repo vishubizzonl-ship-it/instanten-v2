@@ -1,0 +1,38 @@
+---
+/**
+ * onlinecompass — English page.
+ *
+ * Island CompassIsland.astro se aata hai (compassinstant se port kiya hua, jaisa tha
+ * waisa chalta hua), page shell InstrumentToolPage.astro se. Copy localized hai.
+ */
+import InstrumentToolPage from '../../components/pages/InstrumentToolPage.astro';
+import CompassIsland from '../../components/instruments/CompassIsland.astro';
+import { getEntry } from 'astro:content';
+import { instrumentUi } from '../../i18n/instruments/ui';
+import { getLangFromUrl } from '../../i18n/utils';
+import { compassProse } from '../../i18n/instruments/compassProse';
+
+const tool = await getEntry('tools', 'onlinecompass');
+if (!tool) throw new Error('tool entry missing: onlinecompass');
+
+const lang = getLangFromUrl(Astro.url);
+const u = instrumentUi[lang] ?? instrumentUi.en;
+const how = {
+  enable: u['page.compass.how.enable'],
+  enableDesc: u['page.compass.how.enable.desc'],
+  second: u['page.compass.how.calibrate'],
+  secondDesc: u['page.compass.how.calibrate.desc'],
+  third: u['page.compass.how.offline'],
+  thirdDesc: u['page.compass.how.offline.desc'],
+};
+---
+
+<InstrumentToolPage
+  slug="onlinecompass"
+  tool={tool}
+  prose={compassProse}
+  faqLangs={['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it']}
+  how={how}
+>
+  <CompassIsland />
+</InstrumentToolPage>
