@@ -2,50 +2,199 @@
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
+
+/**
+ * Scroll-to-top button — copy of compilefuture.com's:
+ * fixed circle (48px) bottom-right, hidden until 200px of scroll, chevron-up in the
+ * middle and an accent ring that fills up as the page is scrolled.
+ * Ring maths: r = 22.5 -> circumference 2πr ≈ 141.37px (same as the reference theme).
+ */
+const RING = 'M24.5,2 a22.5,22.5 0 0,1 0,45 a22.5,22.5 0 0,1 0,-45';
 ---
 <button
   type="button"
   data-scroll-top
-  class="invisible fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 translate-y-2 items-center justify-center rounded-full border border-border-hairline bg-surface text-ink opacity-0 shadow-float transition-all duration-200 hover:bg-hairline-soft focus-visible:visible focus-visible:translate-y-0 focus-visible:opacity-100"
+  class="scroll-top"
   aria-label={t('aria.backToTop')}
   title={t('aria.backToTop')}
   aria-hidden="true"
   tabindex="-1"
 >
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M10 15V5M5.5 9.5 10 5l4.5 4.5"></path>
+  <svg
+    class="scroll-top__icon"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M18 15l-6-6-6 6"></path>
   </svg>
+
+  <span class="scroll-top__border" aria-hidden="true">
+    <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+      <path d={RING} stroke-width="2" fill="none"></path>
+    </svg>
+  </span>
+
+  <span class="scroll-top__progress" aria-hidden="true">
+    <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+      <path d={RING} stroke-width="2" fill="none"></path>
+    </svg>
+  </span>
 </button>
 
+<style is:global>
+  /* Values below are taken 1:1 from compilefuture.com's theme (cs-scroll-top). */
+  .scroll-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    box-shadow: 0 5px 20px rgba(41, 41, 75, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: 0.25s;
+    cursor: pointer;
+  }
+
+  .scroll-top.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* andar ka safed circle (45px, 2px andar) — ring ko baaki background se alag karta hai */
+  .scroll-top::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: -1;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--surface);
+    transition: 0.25s;
+  }
+
+  .scroll-top:hover {
+    color: var(--ink);
+  }
+
+  .scroll-top:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .scroll-top__border,
+  .scroll-top__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .scroll-top__border path {
+    stroke: var(--surface);
+  }
+
+  .scroll-top__progress path {
+    stroke: var(--accent);
+    stroke-dasharray: 141.37px;
+    stroke-dashoffset: 141.37px;
+    transition: stroke-dashoffset 0.5s linear;
+  }
+
+  .scroll-top__icon {
+    position: relative;
+    z-index: 1;
+    transition: 0.25s;
+  }
+
+  .scroll-top:hover .scroll-top__icon {
+    opacity: 0.8;
+  }
+
+  @media (min-width: 768px) {
+    .scroll-top {
+      bottom: 2rem;
+      right: 2rem;
+    }
+  }
+</style>
+
 <script>
-  const button = document.querySelector<HTMLElement>('[data-scroll-top]');
-  let ticking = false;
-
-  function update(): void {
-    const visible = window.scrollY > 420;
+  (function initScrollTop() {
+    const button = document.querySelector<HTMLElement>('[data-scroll-top]');
     if (!button) return;
-    button.classList.toggle('invisible', !visible);
-    button.classList.toggle('opacity-0', !visible);
-    button.classList.toggle('opacity-100', visible);
-    button.classList.toggle('translate-y-2', !visible);
-    button.classList.toggle('translate-y-0', visible);
-    button.setAttribute('aria-hidden', String(!visible));
-    button.tabIndex = visible ? 0 : -1;
-    ticking = false;
-  }
 
-  function onScroll(): void {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(update);
-  }
+    const path = button.querySelector<SVGPathElement>('.scroll-top__progress path');
+    const pathLength = path ? path.getTotalLength() : 141.37;
+    if (path) {
+      path.style.strokeDasharray = `${pathLength} ${pathLength}`;
+      path.style.strokeDashoffset = String(pathLength);
+    }
 
-  button?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const skipTarget = document.getElementById('main-content');
-    skipTarget?.focus({ preventScroll: true });
-  });
+    let ticking = false;
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  update();
+    function updateProgress(): void {
+      const scroll = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+        document.body.clientHeight,
+        document.documentElement.clientHeight
+      );
+      const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      const height = docHeight - windowHeight;
+      if (path) {
+        path.style.strokeDashoffset = String(height > 0 ? pathLength - (scroll * pathLength) / height : pathLength);
+      }
+    }
+
+    function update(): void {
+      updateProgress();
+      const scroll = window.scrollY || document.documentElement.scrollTop;
+      const active = scroll > 200;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-hidden', String(!active));
+      button.tabIndex = active ? 0 : -1;
+      ticking = false;
+    }
+
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
 </script>

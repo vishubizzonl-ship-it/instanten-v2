@@ -100,6 +100,35 @@ export function run(pages, outDir) {
   check(pickerSeg.includes('M12 2a14.5'), 'language button ka globe icon sahi nahi hai');
   check(pickerSeg.includes('M2 12h20'), 'language button ke globe ki horizontal line nahi hai');
 
+  // --- scroll-to-top button: compilefuture ka exact design ----------------
+  check(/\.scroll-top\{position:fixed;bottom:1rem;right:1rem;z-index:9/.test(css),
+    'scroll-top button fixed bottom-right nahi hai');
+  check(/\.scroll-top\{[^}]*width:48px;height:48px/.test(css), 'scroll-top 48px circle nahi hai');
+  check(/\.scroll-top\{[^}]*border-radius:50%/.test(css), 'scroll-top gol nahi hai');
+  check(/\.scroll-top\{[^}]*opacity:0;visibility:hidden/.test(css), 'scroll-top shuru mein chhupa nahi hai');
+  check(/\.scroll-top\.is-active\{opacity:1;visibility:visible/.test(css), 'scroll-top is-active state nahi hai');
+  check(/\.scroll-top__progress path\{stroke:var\(--accent\)/.test(css), 'progress ring accent color nahi hai');
+  check(/\.scroll-top__progress path\{[^}]*stroke-dasharray:141\.37px/.test(css), 'progress ring ki dasharray (141.37) nahi hai');
+  check(/@media\(min-width:768px\)\{\.scroll-top\{bottom:2rem;right:2rem\}/.test(css),
+    'desktop par scroll-top 2rem offset nahi hai');
+
+  for (const [url, html] of pages) {
+    if (html.includes('http-equiv="refresh"')) continue;
+    const btn = html.match(/<button[^>]*data-scroll-top[\s\S]{0,1400}?<\/button>/);
+    if (!check(!!btn, `scroll-to-top button page par nahi hai :: ${url}`)) continue;
+    check(btn[0].includes('class="scroll-top"'), `scroll-top class galat :: ${url}`);
+    check(btn[0].includes('scroll-top__progress'), `progress ring markup nahi :: ${url}`);
+    check(btn[0].includes('scroll-top__border'), `border ring markup nahi :: ${url}`);
+    check(btn[0].includes('M24.5,2 a22.5'), `ring path (r=22.5) nahi :: ${url}`);
+    check(btn[0].includes('M18 15l-6-6-6 6'), `chevron-up icon nahi :: ${url}`);
+    check(/aria-label="[^"]+"/.test(btn[0]), `scroll-top par aria-label nahi :: ${url}`);
+    // clicking must actually scroll to top, smoothly
+    check(html.includes('window.scrollTo({top:0,behavior:"smooth"})') ||
+          html.includes("window.scrollTo({ top: 0, behavior: 'smooth' })"),
+      `scroll-top click handler smooth scroll nahi karta :: ${url}`);
+    check(html.includes('strokeDashoffset'), `progress update ka script nahi :: ${url}`);
+  }
+
   // --- no pill CTAs left in HTML -----------------------------------------
   for (const [url, html] of pages) {
     const pills = [...html.matchAll(/<(a|button)\b[^>]*class="[^"]*rounded-full[^"]*"[^>]*>/g)].map((m) => m[0]);
