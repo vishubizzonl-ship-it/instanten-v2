@@ -2,9 +2,12 @@
 /**
  * Prose renderer for the sensor tool pages.
  *
- * compassinstant ki copy **bold** markdown use karti hai (koi link nahi), isliye
- * yahan sirf bold aur paragraph break handle hota hai. HTML escape hota hai —
- * copy data hai, markup nahi.
+ * compassinstant ki copy mein **bold** markdown bhi hai aur `<strong>`/`<em>`
+ * tags bhi (donon shakal source mein maujood hain). Pehle sirf markdown handle
+ * hota tha, isliye tags page par literal text ban ke dikh rahe the.
+ *
+ * Yahan sirf teen inline tags allowed hain — strong, b, em, i. Baaki sab escape
+ * hota hai, isliye copy se koi script/markup ghus nahi sakta.
  */
 interface Props {
   text: string;
@@ -13,16 +16,30 @@ interface Props {
 const { text } = Astro.props;
 
 const escapeHtml = (value: string) =>
-  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 
-// **bold** → <strong>, baaki sab escaped
+const ALLOWED = new Set(['strong', 'b', 'em', 'i']);
+
 const html = text
-  .split(/(\*\*[^*]+\*\*)/g)
-  .map((part) =>
-    part.startsWith('**') && part.endsWith('**')
-      ? `<strong class="font-semibold text-ink">${escapeHtml(part.slice(2, -2))}</strong>`
-      : escapeHtml(part)
-  )
+  // 1. **bold** → <strong>
+  .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  // 2. sab escape
+  .split(/(<[^>]+>)/g)
+  .map((part) => {
+    const tag = part.match(/^<(\/?)([a-z]+)>$/i);
+    if (tag && ALLOWED.has(tag[2].toLowerCase())) {
+      const name = tag[2].toLowerCase();
+      if (tag[1]) return `</${name}>`;
+      return name === 'em' || name === 'i'
+        ? `<em class="italic">`
+        : `<strong class="font-semibold text-ink">`;
+    }
+    return escapeHtml(part);
+  })
   .join('');
 ---
 

@@ -14,7 +14,7 @@
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { toolPath } from '../../utils/toolPaths';
 import { instrumentUi } from '../../i18n/instruments/ui';
-import { instrumentToolCopy } from '../../i18n/instruments/toolCopy';
+import { instrumentNavLabels } from '../../i18n/instruments/navLabels';
 import { languages, nonDefaultLangs, type LangCode } from '../../i18n/ui';
 
 const toolSlugs = [
@@ -33,7 +33,7 @@ const { slug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const ui = instrumentUi[lang] ?? instrumentUi.en;
-const copy = instrumentToolCopy[lang] ?? instrumentToolCopy.en;
+const navLabels = instrumentNavLabels[lang] ?? instrumentNavLabels.en;
 
 /** Prefix-free path, taaki language switch usi page ka doosra locale de. */
 const rawPath = Astro.url.pathname;
@@ -48,7 +48,8 @@ const hrefFor = (target: InstrumentSlug) => withLocale(toolPath(target), lang);
 
 const navItems = toolSlugs.map((target) => ({
   href: hrefFor(target),
-  label: copy[target]?.name ?? target,
+  // pills mein chhota naam (Compass / Bubble Level / …), card par poora
+  label: navLabels[target] ?? target,
   current: target === slug,
 }));
 
@@ -164,7 +165,7 @@ const langList = ['en', ...nonDefaultLangs] as LangCode[];
 
   <!-- Mobile: tool pills + company links, dono reachable -->
   <div class="md:hidden border-t border-hairline">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+    <div class="mx-auto max-w-7xl px-3 sm:px-6 py-2 flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
       {
         navItems.map((item) => (
           <a
@@ -172,7 +173,7 @@ const langList = ['en', ...nonDefaultLangs] as LangCode[];
             aria-current={item.current ? 'page' : undefined}
             data-nav-pill
             class:list={[
-              'whitespace-nowrap rounded-full px-2 py-1 text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none',
+              'whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] leading-5 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none',
               item.current ? 'text-ink font-medium bg-surface border border-hairline' : 'text-body hover:text-ink',
             ]}
           >
@@ -181,7 +182,7 @@ const langList = ['en', ...nonDefaultLangs] as LangCode[];
         ))
       }
     </div>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-3 sm:px-6 py-1.5 flex flex-wrap items-center justify-center gap-x-1 gap-y-1 border-t border-hairline">
       {
         companyItems.map((item) => (
           <a

@@ -81,7 +81,10 @@ export function run(pages) {
 
       // --- 3. prose copy page par hai -------------------------------------
       const text = stripTags(html);
-      check(text.length > 3000, `${slug}/${lang}: page par long-form copy nahi (${text.length} chars)`);
+      // CJK mein ek character ka wazan zyada hota hai — same copy kam chars leti
+      // hai, isliye wahan threshold kam.
+      const minCopy = ['ja', 'ko'].includes(lang) ? 2400 : 3000;
+      check(text.length > minCopy, `${slug}/${lang}: page par long-form copy nahi (${text.length}/${minCopy} chars)`);
 
       // --- 4. FAQ: visible + theek ek FAQPage JSON-LD ----------------------
       const faqExpected = spec.faqLangs.includes(lang);
@@ -223,6 +226,56 @@ export function run(pages) {
       // visible breadcrumb nahi (screenshot jaisa), schema mein hai
       check(!/<nav class="breadcrumbs/.test(article), `${slug}/${lang}: breadcrumb abhi bhi page par hai`);
     }
+  }
+
+  // --- 12d. prose mein HTML tags literal text ban ke nahi dikhte ----------
+  // compassinstant ki copy <strong>/<em> use karti hai; escape galat ho gaya to
+  // page par "&lt;strong&gt;" dikhta hai (screenshot bug).
+  for (const slug of SLUGS) {
+    for (const lang of LOCALES) {
+      const html = pages.get(localize(`/${slug}/`, lang)) ?? '';
+      const text = stripTags(html);
+      check(!/<\/?strong>|<\/?em>|&lt;strong|<strong>/.test(text), `${slug}/${lang}: prose mein literal <strong>/<em> dikh raha hai`);
+      check(!/&lt;\/?[a-z]+&gt;/.test(html), `${slug}/${lang}: escaped HTML entity page par hai`);
+    }
+  }
+  // aur jahan source mein <strong> hai wahan sach mein bold render ho
+  {
+    const html = pages.get('/onlinecompass/') ?? '';
+    check(/<strong class="font-semibold text-ink">/.test(html), 'compass prose mein <strong> render nahi hua');
+    check(/<em class="italic">/.test(html), 'compass prose mein <em> render nahi hua');
+  }
+
+  // --- 12e. nav pills ke chhote naam (Compass, Bubble Level, …) ----------
+  {
+    const html = pages.get('/onlinecompass/') ?? '';
+    const nav = html.slice(html.indexOf('<body'), html.indexOf('</nav>'));
+    check(/>\s*Compass\s*</.test(nav), 'pill par "Compass" nahi mila');
+    check(!/>\s*Online Compass\s*</.test(nav), 'pill par abhi bhi "Online Compass" hai');
+    check(/>\s*Bubble Level\s*</.test(nav), 'pill par "Bubble Level" nahi mila');
+    check(/>\s*Speedometer\s*</.test(nav), 'pill par "Speedometer" nahi mila');
+    check(/>\s*Qibla\s*</.test(nav), 'pill par "Qibla" nahi mila');
+    // logo par full wordmark hi rehta hai
+    check(/>\s*onlinecompass\s*</.test(nav), 'logo par full online<tool> wordmark nahi');
+    // localized pills
+    const de = pages.get('/de/onlinecompass/') ?? '';
+    const deNav = de.slice(de.indexOf('<body'), de.indexOf('</nav>'));
+    check(/>\s*Kompass\s*</.test(deNav), 'de pill "Kompass" nahi mila');
+    check(/>\s*Wasserwaage\s*</.test(deNav), 'de pill "Wasserwaage" nahi mila');
+  }
+
+  // --- 12f. mobile: gutter + single-line pills --------------------------
+  for (const slug of SLUGS) {
+    const html = pages.get(`/${slug}/`) ?? '';
+    const article = html.slice(html.indexOf('<article'));
+    // prose sections aur tool card dono par mobile horizontal padding
+    check(/class="px-3 pb-2 pt-3 sm:px-6 sm:pt-4 lg:px-8"/.test(article), `${slug}: tool card par mobile gutter nahi`);
+    // how-to-use + about + (guides) + (faq) — compass par sirf do hain
+    check((article.match(/px-4 sm:px-6/g) ?? []).length >= 2, `${slug}: prose sections par mobile gutter nahi`);
+    // pills mobile par ek row mein: chaaron pills ke liye nowrap + chhota text
+    const nav = html.slice(html.indexOf('<body'), html.indexOf('</nav>'));
+    const pills = nav.match(/whitespace-nowrap rounded-full px-2\.5 py-1 text-\[11px\]/g) ?? [];
+    check(pills.length === 4, `${slug}: mobile pills (${pills.length}/4) compact nahi hain`);
   }
 
   // --- 12c. baaki site ka header waise hi (instrument chrome sirf 4 pages par) ---
