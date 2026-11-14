@@ -140,9 +140,29 @@ start_server(){
     PORT=$PORT nohup "$NODE" serve-static.mjs >>$LOG 2>&1 &
     echo $! > $RUN/server.pid
     sleep 1
-    up && return 0
+    if up; then
+      dedupe_servers
+      return 0
+    fi
   done
   return 1
+}
+
+# Ek hi server chale — is folder ke extra serve-static process hata do.
+dedupe_servers(){
+  keep=$(cat $RUN/server.pid 2>/dev/null)
+  for d in /proc/[0-9]*; do
+    c=$( { tr '\0' ' ' < "$d/cmdline"; } 2>/dev/null ) || continue
+    case "$c" in
+      *serve-static.mjs*)
+        case "$c" in *bash*|*start.sh*) continue;; esac
+        w=$(readlink "$d/cwd" 2>/dev/null) || continue
+        [ "$w" = "$HERE" ] || continue
+        p=$(basename "$d")
+        [ "$p" = "$keep" ] || kill "$p" 2>/dev/null
+        ;;
+    esac
+  done
 }
 
 # ------------------------------------------------------------ rebuild
