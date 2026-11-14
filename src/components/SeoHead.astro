@@ -216,8 +216,8 @@ const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c 
 <!-- Self-referencing canonical (current language URL exactly) -->
 <link rel="canonical" href={canonicalUrl} />
 
-// Error pages (404/403/500/503) are noindex and deliberately carry no hreflang
-// cluster — an alternate that points at a "not found" is worse than none.
+{/* Error pages (404/403/500/503) are noindex and deliberately carry no hreflang
+    cluster — an alternate that points at a "not found" is worse than none. */}
 {!noindex &&
   hreflangAlternates.map((alt) => (
     <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />

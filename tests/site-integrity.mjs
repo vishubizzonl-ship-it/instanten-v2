@@ -10,6 +10,7 @@ import {
   canonicalOf,
   jsonLdOf,
   meta,
+  stripTags,
   titleOf,
 } from './lib.mjs';
 
@@ -56,6 +57,13 @@ export function run(pages, outDir) {
     }
     const robots = meta(html, 'robots');
     check(!robots || robots.includes('index'), `normal page noindex hai :: ${url}`);
+  }
+
+  // --- no source comments / TODOs leaking into rendered text --------------
+  for (const [url, html] of pages) {
+    const text = stripTags(html);
+    check(!/\/\/ (Error|TODO|FIXME|NOTE)\b/.test(text), `source comment page par chhap gaya :: ${url}`);
+    check(!/\b(TODO|FIXME|XXX)\b/.test(text), `TODO/FIXME rendered text mein :: ${url}`);
   }
 
   // --- error pages: noindex, nofollow, no hreflang, out of the silo --------
