@@ -47,9 +47,6 @@ const TOKEN_HEX = new Set([
   '#1c1c1c',
   '#222222',
   '#000000',
-  '#b42318',
-  '#fef3f2',
-  '#fda29b',
 ]);
 
 export function run() {
@@ -94,7 +91,7 @@ export function run() {
       check(allowed, `Rule 1: ${path} external package import karta hai — ${specifier}`);
     }
 
-    // Rule 2: sirf approved tokens ke rang
+    // Rule 2: sirf approved tokens ke rang (QR canvas ke white/black allowed)
     for (const hex of source.matchAll(/#[0-9a-fA-F]{6}\b/g)) {
       check(TOKEN_HEX.has(hex[0].toLowerCase()), `Rule 2: ${path} mein token ke bahar ka rang — ${hex[0]}`);
     }
@@ -122,6 +119,13 @@ export function run() {
       new RegExp(`${name}:\\s*${value}`, 'i').test(layout),
       `Rule 2: token ${name} compilefuture value (${value}) par nahi hai`
     );
+  }
+  for (const [name, value] of [
+    ['--danger', '#b42318'],
+    ['--danger-soft', '#fef3f2'],
+  ]) {
+    check(new RegExp(`${name}:\\s*${value}`, 'i').test(layout), `Rule 2: token ${name} app.css mein nahi`);
+    check(layout.includes(`--color-${name.slice(2)}: var(${name})`), `Rule 2: token ${name} Tailwind theme se juda nahi`);
   }
   check(/font-family:[^;]*DM Sans/i.test(layout) || /--font-display:[^;]*DM Sans/i.test(layout), 'Rule 2: DM Sans font token nahi mila');
 
