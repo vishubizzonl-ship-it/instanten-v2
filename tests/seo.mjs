@@ -24,6 +24,19 @@ export const SUPPORT_KEYWORDS = [
   'multi tools website',
 ];
 
+/** Blog page par exactly itne blogs hone chahiye (user requirement). */
+export const BLOG_PAGE_COUNT = 5;
+
+/** Jo blogs delete hue — ye wapas nahi aane chahiye. */
+export const DELETED_BLOG_SLUGS = [
+  'css-container-queries-guide',
+  'essential-git-workflows-developers',
+  'free-developer-tools-2024',
+  'macos-developer-setup-2024',
+  'typescript-advanced-patterns',
+  'unlocking-power-ai-future',
+];
+
 /** Naye 3 blog slugs — 800-1000 words each. */
 export const NEW_BLOG_SLUGS = [
   'online-tools-hub-guide',
@@ -256,6 +269,27 @@ export function run(pages, outDir) {
     ];
     const shared = hubNames.filter((q) => homeFaqNames.includes(q));
     check(shared.length === 0, `/tools/ aur home par same FAQ repeat: ${shared.slice(0, 2).join(' | ')}`);
+  }
+
+  // --- 4b. Blog page par exactly 5 blogs, deleted wale gayab --------------
+  const blogIndex = pages.get('/blog/');
+  check(Boolean(blogIndex), '/blog/ page build mein nahi');
+  if (blogIndex) {
+    const listed = [
+      ...new Set([...blogIndex.matchAll(/href="\/blog\/([a-z0-9-]+)\//g)].map((m) => m[1])),
+    ].filter((slug) => !['page', 'index.html'].includes(slug));
+    check(
+      listed.length === BLOG_PAGE_COUNT,
+      `/blog/ par ${BLOG_PAGE_COUNT} blogs hone chahiye, mile ${listed.length} (${listed.join(', ')})`
+    );
+  }
+
+  for (const slug of DELETED_BLOG_SLUGS) {
+    check(!pages.has(`/blog/${slug}/`), `deleted blog ka page abhi bhi build mein hai: ${slug}`);
+    check(
+      ![...pages.values()].some((html) => html.includes(`/blog/${slug}/`)),
+      `deleted blog ka link site par abhi bhi hai: ${slug}`
+    );
   }
 
   // --- 5. Naye blog posts: 800-1000 words + article OG tags --------------

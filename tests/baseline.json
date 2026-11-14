@@ -5,7 +5,7 @@
     "canonical galat": 60
   },
   "links": {
-    "broken link": 1730
+    "broken link": 1560
   },
   "i18n-silo": {
     "page missing": 9,
@@ -30,5 +30,6 @@
   "seo": {},
   "errors": {},
   "analytics": {},
-  "tools-inpage": {}
+  "tools-inpage": {},
+  "rules": {}
 }
