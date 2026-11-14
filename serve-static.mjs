@@ -16,7 +16,12 @@ const PORT = Number(process.env.PORT) || 4322;
  * checkouts that still have a plain dist/ keep working.
  */
 const BASE = new URL('.', import.meta.url).pathname;
-const ROOT =
+/**
+ * Resolved per request, not at boot: if the server happens to start before the
+ * first build lands, it must pick up the release the moment it exists instead
+ * of serving 404 until someone restarts it.
+ */
+const rootDir = () =>
   ['releases/current/', 'dist/'].map((dir) => BASE + dir).find((dir) => existsSync(dir)) ??
   BASE + 'dist/';
 
@@ -53,6 +58,7 @@ async function fileFor(target) {
 
 createServer(async (req, res) => {
   const url = decodeURIComponent((req.url || '/').split('?')[0]);
+  const ROOT = rootDir();
   let file = await fileFor(join(ROOT, normalize(url)));
   if (!file) file = await fileFor(join(ROOT, url.replace(/\/$/, '') + '.html'));
 
