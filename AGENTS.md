@@ -56,8 +56,21 @@ Us site ke tokens (asli CSS se liye gaye):
 
 - Do exactly what the user asks. Nothing more, nothing less.
 - No proactive changes, suggestions, or extra work unless explicitly requested.
-- Har change ke baad khud verify karo: "kya banaya → kaise check kiya → pass/fail".
 - Simple rasta pehle; ek hi command se chale — options ka dher nahi.
+
+### Rule 3.1 (permanent) — kaam hua ya nahi, zaroor check karo
+
+Jab bhi main website mein kuch edit karun ya koi kaam karun, **kaam khatam hone ke
+baad lazmi check karna hai** ki jo kaam bola gaya tha wo sach mein hua hai:
+
+1. **Jo maanga gaya, wahi hua?** — build/CSS/HTML mein uska proof dekho (grep,
+   rendered HTML, ya `tests/run.mjs`), "kar diya" bol ke aage mat badho.
+2. **Nahi hua to kaam pura karo** — adhoora chhodna mana hai.
+3. **Galat hua to sahi karo** — galat version revert/rewrite karo, phir dobara check.
+4. **Jahan ho sake, test likho** — taaki wahi galti dobara na ho sake
+   (`tests/*.mjs`, plain node).
+5. Report hamesha is format mein: **kya banaya → kaise check kiya → pass/fail**,
+   aur pass/fail ka saboot (line, command ka output, ya test ka naam).
 
 ## Documentation
 
