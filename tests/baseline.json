@@ -23,13 +23,14 @@
     "hreflang x-default nahi": 10,
     "apna hreflang nahi": 10,
     "canonical apne hreflang se match nahi": 10,
-    "English text leak \"…\"": 36,
-    "title translate nahi hua": 14
+    "title translate nahi hua": 14,
+    "English text leak \"…\"": 15
   },
   "design": {},
   "seo": {},
   "errors": {},
   "analytics": {},
   "tools-inpage": {},
-  "rules": {}
+  "rules": {},
+  "i18n-hreflang": {}
 }

@@ -136,14 +136,23 @@ export function getHreflangAlternates(pathname: string, baseUrl: string) {
   const baseRoute = stripLangFromPath(pathname.split(/[?#]/, 1)[0] || '/');
   const translate = useTranslatedPath(defaultLang);
 
+  // hreflang href hamesha canonical ke barabar ho — yaani trailing slash ke saath.
+  // Warna Google `/de/tools/x` aur `/de/tools/x/` ko do alag URL samajhta hai
+  // aur hreflang cluster toot jata hai.
+  const withTrailingSlash = (href: string) => {
+    if (href === '' || href === '/') return '/';
+    if (/\.[a-z0-9]+$/i.test(href)) return href; // file (sitemap.xml etc.)
+    return href.endsWith('/') ? href : `${href}/`;
+  };
+
   const items = (Object.keys(languages) as LangCode[]).map((code) => ({
     hreflang: code,
-    href: `${cleanBase}${translate(baseRoute, code)}`,
+    href: `${cleanBase}${withTrailingSlash(translate(baseRoute, code))}`,
   }));
 
   items.unshift({
     hreflang: 'x-default' as any,
-    href: `${cleanBase}${translate(baseRoute, defaultLang)}`,
+    href: `${cleanBase}${withTrailingSlash(translate(baseRoute, defaultLang))}`,
   });
 
   return items;
