@@ -4,6 +4,8 @@ import ToolGrid from '../../components/ToolGrid.astro';
 import FilterBar from '../../components/FilterBar.astro';
 import Pagination from '../../components/Pagination.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ToolFaq from '../../components/ToolFaq.astro';
+import { hubFaqs } from '../../i18n/toolFaqs/en';
 import { getCollection } from 'astro:content';
 import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages, type ToolData } from '../../utils/filters';
 
@@ -45,6 +47,11 @@ if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort
 const pageTitle = 'All Tools — instanten';
 const pageDescription = `Browse all ${allTools.length} curated SaaS tools. Filter by category, pricing, and tags.`;
 
+// FAQ sirf main hub page (page 1, bina filter) par — filtered/paginated
+// views par duplicate FAQPage nahi chahiye.
+const showFaq = currentPage === 1 && !filters.q && !filters.category && !filters.pricing && !filters.tags?.length;
+const faqs = showFaq ? hubFaqs : [];
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -75,7 +82,13 @@ const breadcrumbs = [
   { label: 'All Tools' },
 ];
 ---
-<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL="https://instanten.com/tools/">
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  jsonLd={jsonLd}
+  faqs={faqs.map((item) => ({ question: item.q, answer: item.a }))}
+  canonicalURL="https://instanten.com/tools/"
+>
   <Breadcrumbs items={breadcrumbs} />
   <section class="site-container py-section">
     <header class="max-w-3xl mx-auto text-center mb-12">
@@ -103,5 +116,10 @@ const breadcrumbs = [
       baseUrl={baseUrl}
       queryParams={queryParams}
     />
+  )}
+  {faqs.length > 0 && (
+    <div class="site-container">
+      <ToolFaq heading="Frequently asked questions about this tools hub" questions={faqs} />
+    </div>
   )}
 </Layout>

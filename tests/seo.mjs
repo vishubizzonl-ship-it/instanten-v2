@@ -176,6 +176,88 @@ export function run(pages, outDir) {
     check(!/google/i.test(stripTags(faqSection)), 'FAQ copy mein "Google" shabd hai');
   }
 
+  // --- 4c. Tool pages: per-tool FAQ + single FAQPage JSON-LD -------------
+  const TOOL_SLUGS = [
+    'json-formatter', 'base64-encoder', 'word-counter', 'password-generator',
+    'qr-generator', 'image-compressor', 'color-palette', 'css-grid-generator',
+    'markdown-editor', 'meta-tag-generator', 'online-ruler', 'regex-tester',
+  ];
+  const faqPageOf = (html) => {
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((m) => m[1])
+      .filter((raw) => raw.includes('FAQPage'));
+    if (!blocks.length) return { count: 0, questions: [] };
+    let parsed;
+    try {
+      parsed = JSON.parse(blocks[0]);
+    } catch {
+      return { count: blocks.length, questions: [], invalid: true };
+    }
+    const nodes = Array.isArray(parsed) ? parsed : (parsed['@graph'] ?? [parsed]);
+    const faq = nodes.find((n) => n && n['@type'] === 'FAQPage');
+    return { count: blocks.length, questions: faq?.mainEntity ?? [], invalid: !faq };
+  };
+
+  for (const slug of TOOL_SLUGS) {
+    const url = `/tools/${slug}/`;
+    const html = pages.get(url);
+    check(Boolean(html), `tool page build mein nahi: ${url}`);
+    if (!html) continue;
+
+    const { count, questions, invalid } = faqPageOf(html);
+    check(!invalid, `${slug}: FAQPage JSON-LD parse nahi hua`);
+    check(count === 1, `${slug}: FAQPage blocks ${count} (1 hona chahiye)`);
+    check(questions.length >= 5, `${slug}: FAQ JSON-LD mein ${questions.length} questions (5 chahiye)`);
+
+    const visible = (html.match(/<summary class="flex items-center justify-between/g) || []).length;
+    check(visible === questions.length, `${slug}: visible FAQ ${visible} vs JSON-LD ${questions.length}`);
+    check(/data-tool-faq/.test(html), `${slug}: FAQ section page par render nahi hui`);
+
+    const names = questions.map((q) => String(q.name));
+    const dupes = names.filter((q, i) => names.indexOf(q) !== i);
+    check(dupes.length === 0, `${slug}: duplicate FAQ questions`);
+    check(
+      questions.every((q) => q.acceptedAnswer?.text && q.acceptedAnswer.text.length >= 90),
+      `${slug}: koi FAQ answer chhota hai`
+    );
+    // FAQ copy tool-specific ho, generic boilerplate nahi
+    const tokens = slug.split('-').filter((w) => w.length >= 2);
+    const faqText = questions.map((q) => `${q.name} ${q.acceptedAnswer?.text ?? ''}`).join(' ').toLowerCase();
+    check(
+      tokens.some((word) => faqText.includes(word)),
+      `${slug}: FAQ copy mein tool ka zikr (${tokens.join('/')}) nahi hai`
+    );
+
+    // "Google" shabd FAQ copy mein nahi
+    const faqBlock = (html.match(/<section[^>]*data-tool-faq[\s\S]*?<\/section>/i) || [''])[0];
+    check(!/google/i.test(stripTags(faqBlock)), `${slug}: FAQ copy mein "Google" shabd hai`);
+
+    // localized tool pages: English FAQ leak nahi
+    const de = pages.get(`/de/tools/${slug}/`);
+    check(Boolean(de), `${slug}: /de/ version nahi bana`);
+    if (de) {
+      check(!/data-tool-faq/.test(de), `${slug}: /de/ par English FAQ leak ho raha hai`);
+      const deFaq = faqPageOf(de);
+      check(deFaq.count === 0, `${slug}: /de/ par FAQPage JSON-LD hai (English copy ke bina nahi hona chahiye)`);
+    }
+  }
+
+  // --- 4d. Tools hub listing page FAQ ------------------------------------
+  const toolsIndex = pages.get('/tools/');
+  check(Boolean(toolsIndex), '/tools/ build mein nahi hai');
+  if (toolsIndex) {
+    const { count, questions } = faqPageOf(toolsIndex);
+    check(count === 1, `/tools/: FAQPage blocks ${count} (1 hona chahiye)`);
+    check(questions.length >= 5, `/tools/: hub FAQ mein ${questions.length} questions (5 chahiye)`);
+    check(questions.every((q) => q.acceptedAnswer?.text?.length >= 90), '/tools/: koi hub answer chhota hai');
+    const hubNames = questions.map((q) => String(q.name));
+    const homeFaqNames = [
+      ...[...home.matchAll(/"name":"([^"]+)"[^}]*"acceptedAnswer"/g)].map((m) => m[1]),
+    ];
+    const shared = hubNames.filter((q) => homeFaqNames.includes(q));
+    check(shared.length === 0, `/tools/ aur home par same FAQ repeat: ${shared.slice(0, 2).join(' | ')}`);
+  }
+
   // --- 5. Naye blog posts: 800-1000 words + article OG tags --------------
   for (const slug of NEW_BLOG_SLUGS) {
     const url = `/blog/${slug}/`;

@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../Breadcrumbs.astro';
+import ToolFaq from '../ToolFaq.astro';
+import { toolFaqs } from '../../i18n/toolFaqs/en';
 import { getCollection } from 'astro:content';
 import { pricingSlug } from '../../utils/filters';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
@@ -82,6 +84,11 @@ const jsonLd = {
   screenshot: new URL(image, SITE_URL).href,
 };
 
+// FAQ: sirf English pages par. Copy English mein hai, aur localized page par
+// English accordion bhejna silo test pakadta hai — isliye en-only.
+const faqs = lang === 'en' ? (toolFaqs[tool.data.slug] ?? []) : [];
+const faqHeading = `Frequently asked questions about ${localized.name}`;
+
 const breadcrumbs = [
   { label: t('nav.home'), href: '/' },
   { label: t('tools.allTools'), href: '/tools/' },
@@ -94,6 +101,7 @@ const breadcrumbs = [
   title={pageTitle}
   description={pageDescription}
   jsonLd={jsonLd}
+  faqs={faqs.map((item) => ({ question: item.q, answer: item.a }))}
   canonicalURL={canonicalURL}
   keywords={`${localized.name}, ${categoryLabel}, instant tool, instant online, instant convert, $0 cost, ${lang}`}
   lang={lang}
@@ -192,6 +200,8 @@ const breadcrumbs = [
         </div>
       </section>
     )}
+
+    {faqs.length > 0 && <ToolFaq heading={faqHeading} questions={faqs} />}
 
     {relatedTools.length > 0 && (
       <section class="mb-10">
