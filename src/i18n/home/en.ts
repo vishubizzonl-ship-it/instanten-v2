@@ -176,69 +176,54 @@ export const home: HomeCopy = {
   faqTitle: 'Frequently asked questions',
   faqs: [
     {
-      question: 'Is it safe to paste personal data into free online tools?',
+      question: 'What is Instanten and how is it different from other free online tools websites?',
       answer:
-        'With Instanten, yes. Every instant tool processes your input inside your own browser session, so pasted text, tokens and files are never uploaded to a server and are not stored after you close the tab. That is the main question to ask before using any free online tools service — if a site sends your input elsewhere, treat it as someone else\'s copy of your data.',
+        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
     },
     {
-      question: 'Which tools are included in the Instanten online tools list?',
+      question: 'Which online tools are available on this tools hub right now?',
       answer:
-        'The online tools list covers twelve instant tools: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. Each one opens in a single tab from the same tools hub, with no install and no account.',
+        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
     },
     {
-      question: 'Is there any daily limit on how many times I can use an instant tool?',
+      question: 'Are these online tools really free, or is there a hidden limit?',
       answer:
-        'No. There is no usage counter, no daily cap, no queue and no paid tier waiting behind a limit. A free online tools hub should behave like a utility, so you can run the same instant tool as many times as a task needs, including in the middle of a working session.',
+        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
     },
     {
-      question: 'Do Instanten online tools work offline?',
+      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because the processing runs locally in the browser rather than on a server. Reloading the page, opening a new tool or returning the next day does need a connection, so keep the tab open on a train or in a basement if you know you will need it.',
+        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
     },
     {
-      question: 'How do I choose the right online tool for a task?',
+      question: 'Do these browser tools work on mobile phones and tablets?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or validated, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or editing text, the writing utilities cover it. The homepage search filters the whole multi tool website by keyword, so a one-word query is usually faster than scanning categories.',
+        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
     },
     {
-      question: 'What is Instanten and is it completely free to use?',
+      question: 'Do I need to install an app or create an account to use instant tools?',
       answer:
-        'Yes — Instanten is an independent, free browser-based software project built and maintained for developers, designers, students, and everyday users worldwide. Every utility runs at $0 with zero sign-up, zero subscriptions, and zero hidden limits.',
+        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
     },
     {
-      question: 'How do I use an Instanten tool without creating an account?',
+      question: 'Do the tools keep working when the internet connection drops?',
       answer:
-        'Simply open any Instanten tool from the homepage or navigation bar, enter your input, and copy the result immediately — no login, email verification, or account creation is ever required.',
+        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
     },
     {
-      question: 'What types of workflows are included in Instanten tools?',
+      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
       answer:
-        'Instanten tools cover everyday formatting, quick calculations, developer and creator utilities, and practical workflow helpers paired with clear step-by-step documentation based on public engineering standards.',
+        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
     },
     {
-      question: 'How does Instanten provide instant help for daily tasks?',
+      question: 'How do I pick the right tool for a task on a multi tool website?',
       answer:
-        'Alongside one-click browser utilities, Instanten publishes concise troubleshooting steps, examples, and blog guides so readers get immediate answers without digging through long forums or paying for single-purpose subscriptions.',
+        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
     },
     {
-      question: 'Can I open every instant tool on mobile as well as desktop?',
+      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
       answer:
-        'Yes. Every instant tool on Instanten uses a responsive layout built for Android phones, iPhones, iPads, Macs, and Windows PCs, including full Light and Dark Mode support.',
-    },
-    {
-      question: 'Why choose browser-based instant tools instead of downloading apps?',
-      answer:
-        'Browser-based instant tools start immediately, take zero device storage, require no permissions, stay updated automatically, and process data locally in your browser without sending files to remote servers.',
-    },
-    {
-      question: 'Does Instanten work as an instant online platform in any browser?',
-      answer:
-        'Yes — Instanten runs directly in Chrome, Safari, Firefox, Edge, and Brave as an instant online web application with fast static page delivery optimized for Core Web Vitals.',
-    },
-    {
-      question: 'How accurate and fast are instant convert workflows on Instanten?',
-      answer:
-        'Instant convert operations execute in milliseconds inside your browser using standard formulas — including NIST-defined unit conversions (1 international inch = 25.4 mm exactly) and IETF RFC-compliant data formatting.',
+        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
     },
   ],
 };

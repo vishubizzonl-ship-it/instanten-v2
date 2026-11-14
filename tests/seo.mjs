@@ -155,10 +155,10 @@ export function run(pages, outDir) {
     }
 
     const visibleFaqs = (home.match(/class="ffa-faq-item"/g) || []).length;
-    check(visibleFaqs >= 13, `home par ${visibleFaqs} visible FAQ items (13+ chahiye)`);
+    check(visibleFaqs === 10, `home par ${visibleFaqs} visible FAQ items (exactly 10 chahiye)`);
 
     const ldQuestions = faqData?.mainEntity ?? [];
-    check(ldQuestions.length >= 13, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (13+ chahiye)`);
+    check(ldQuestions.length === 10, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (exactly 10 chahiye)`);
     check(
       ldQuestions.length === visibleFaqs,
       `home FAQ mismatch: visible ${visibleFaqs}, JSON-LD ${ldQuestions.length}`
@@ -170,17 +170,50 @@ export function run(pages, outDir) {
       );
     }
 
-    // 5 tools-hub questions jo search se aate hain
+    // 10 tools-hub questions jo search se aate hain (purane FAQ delete ho chuke)
     const expected = [
-      'Is it safe to paste personal data into free online tools?',
-      'Which tools are included in the Instanten online tools list?',
-      'Is there any daily limit on how many times I can use an instant tool?',
-      'Do Instanten online tools work offline?',
-      'How do I choose the right online tool for a task?',
+      'What is Instanten and how is it different from other free online tools websites?',
+      'Which online tools are available on this tools hub right now?',
+      'Are these online tools really free, or is there a hidden limit?',
+      'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      'Do these browser tools work on mobile phones and tablets?',
+      'Do I need to install an app or create an account to use instant tools?',
+      'Do the tools keep working when the internet connection drops?',
+      'How accurate are the online ruler, speedometer and measurement style tools?',
+      'How do I pick the right tool for a task on a multi tool website?',
+      'Why use a web tools hub instead of five single-purpose subscriptions?',
     ];
+    check(expected.length === 10, 'expected FAQ list 10 honi chahiye');
     for (const q of expected) {
-      check(visibleFaqs && home.includes(q), `home FAQ visible nahi hai: ${q}`);
+      check(home.includes(q), `home FAQ visible nahi hai: ${q}`);
       check(ldQuestions.some((item) => item.name === q), `home FAQ JSON-LD mein nahi hai: ${q}`);
+    }
+
+    // har FAQ answer SEO ke liye kaafi detail ka ho (>= 200 chars) aur
+    // question hub-keyword wala ho
+    for (const item of ldQuestions) {
+      check(
+        item.acceptedAnswer.text.length >= 200,
+        `home FAQ answer bahut chhota (${item.acceptedAnswer.text.length} chars): ${item.name.slice(0, 50)}`
+      );
+    }
+
+    // purane 13 FAQ ke questions wapas na aayein
+    const oldFaqs = [
+      'Can I open every instant tool on mobile as well as desktop?',
+      'Does Instanten work as an instant online platform in any browser?',
+      'How accurate and fast are instant convert workflows on Instanten?',
+    ];
+    for (const q of oldFaqs) {
+      check(!home.includes(q), `purana FAQ wapas aa gaya: ${q}`);
+    }
+
+    // FAQPage JSON-LD ka shape: @context + @type + mainEntity + Question/Answer
+    check(faqData?.['@context'] === 'https://schema.org', 'home FAQPage mein @context schema.org nahi');
+    check(faqData?.['@type'] === 'FAQPage', 'home FAQPage ka @type galat');
+    for (const item of ldQuestions) {
+      check(item['@type'] === 'Question', 'FAQ mainEntity item ka @type Question nahi');
+      check(item.acceptedAnswer?.['@type'] === 'Answer', 'FAQ acceptedAnswer ka @type Answer nahi');
     }
 
     // FAQ copy mein "Google" nahi

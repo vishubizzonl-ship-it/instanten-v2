@@ -101,44 +101,54 @@ export const home: HomeCopy = {
   faqTitle: '자주 묻는 질문',
   faqs: [
     {
-      question: 'Instanten은 무엇이며 정말 무료인가요?',
+      question: 'What is Instanten and how is it different from other free online tools websites?',
       answer:
-        '예. Instanten은 전 세계 개발자, 디자이너, 학생, 일반 사용자를 위한 독립적인 무료 브라우저 소프트웨어 프로젝트입니다. 모든 도구가 0달러이며 가입, 구독, 숨은 제한이 없습니다.',
+        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
     },
     {
-      question: '계정 없이 도구를 사용할 수 있나요?',
+      question: 'Which online tools are available on this tools hub right now?',
       answer:
-        '홈페이지나 탐색에서 도구를 열고 입력한 뒤 결과를 복사하면 됩니다. 로그인, 이메일 인증, 계정 생성이 필요 없습니다.',
+        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
     },
     {
-      question: '어떤 워크플로가 포함되나요?',
+      question: 'Are these online tools really free, or is there a hidden limit?',
       answer:
-        '일상 서식 지정, 빠른 계산, 개발자·크리에이터 도구, 실용적인 워크플로 도우미를 공개 표준에 기반한 단계별 안내와 함께 제공합니다.',
+        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
     },
     {
-      question: '일상 작업에 대한 즉시 도움은 어떻게 제공되나요?',
+      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
       answer:
-        '원클릭 도구 외에도 간결한 문제 해결 단계, 예제, 블로그 가이드를 제공해 긴 포럼이나 단일 기능 구독 없이 답을 얻을 수 있습니다.',
+        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
     },
     {
-      question: '모바일에서도 모든 도구를 사용할 수 있나요?',
+      question: 'Do these browser tools work on mobile phones and tablets?',
       answer:
-        '예. Android, iPhone, iPad, Mac, Windows PC용 반응형 레이아웃과 라이트/다크 모드를 지원합니다.',
+        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
     },
     {
-      question: '앱 다운로드보다 브라우저 도구가 나은 이유는 무엇인가요?',
+      question: 'Do I need to install an app or create an account to use instant tools?',
       answer:
-        '브라우저 도구는 즉시 시작하고 저장 공간을 쓰지 않으며 권한이 필요 없고 자동으로 최신 상태를 유지하며 데이터를 브라우저에서 처리합니다.',
+        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
     },
     {
-      question: '모든 브라우저에서 작동하나요?',
+      question: 'Do the tools keep working when the internet connection drops?',
       answer:
-        '예. Chrome, Safari, Firefox, Edge, Brave에서 작동하는 빠른 정적 웹 앱이며 Core Web Vitals에 최적화되어 있습니다.',
+        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
     },
     {
-      question: '즉시 변환의 정확도와 속도는 어떤가요?',
+      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
       answer:
-        '브라우저 안에서 표준 공식을 사용해 밀리초 단위로 실행됩니다. NIST 단위 변환(1 국제 인치 = 정확히 25.4mm)과 IETF RFC 호환 서식을 포함합니다.',
+        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+    },
+    {
+      question: 'How do I pick the right tool for a task on a multi tool website?',
+      answer:
+        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+    },
+    {
+      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      answer:
+        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
     },
   ],
 };
