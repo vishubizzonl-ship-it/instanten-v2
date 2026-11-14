@@ -104,20 +104,28 @@ BOOT
 # Build hamesha dist.next me, phir swap. Isse purani site build ke dauraan
 # bhi chalti rehti hai (aadhi bani hui site kabhi nahi dikhti) aur Astro ka
 # stale .prerender chunk error bhi nahi aata.
+REL=releases
 build_site(){
-  rm -rf dist.next
+  mkdir -p "$REL"
+  OUT="$REL/$(date +%Y%m%d-%H%M%S)"
+  rm -rf "$OUT"
   if [ -f node_modules/astro/bin/astro.mjs ]; then
-    "$NODE" node_modules/astro/bin/astro.mjs build --outDir dist.next >>$LOG 2>&1
+    "$NODE" node_modules/astro/bin/astro.mjs build --outDir "$OUT" >>$LOG 2>&1
   else
-    OUT_DIR=dist.next "$NPM" run build >>$LOG 2>&1
+    OUT_DIR="$OUT" "$NPM" run build >>$LOG 2>&1
   fi
+  echo "$OUT" > $RUN/lastbuild
 }
 
+# dist ek symlink hai -> naye release par atomically switch.
+# Isliye deploy ke dauraan site kabhi 404 nahi deti.
 swap_dist(){
-  rm -rf dist.old
-  [ -d dist ] && mv dist dist.old
-  mv dist.next dist || { [ -d dist.old ] && mv dist.old dist; return 1; }
-  rm -rf dist.old
+  OUT=$(cat $RUN/lastbuild 2>/dev/null)
+  [ -n "$OUT" ] && [ -d "$OUT" ] || return 1
+  ln -sfnT "$OUT" dist.tmp || return 1
+  mv -Tf dist.tmp dist || return 1
+  # purane releases rakho, 3 se zyada hata do
+  ls -1dt "$REL"/* 2>/dev/null | tail -n +4 | xargs -r rm -rf
   return 0
 }
 
@@ -230,6 +238,12 @@ if ! build_site; then
   fi
 fi
 swap_dist || { no "dist swap fail"; exit 1; }
+
+# dist pehli baar asli folder ho sakta hai — symlink me badal do
+if [ -d dist ] && [ ! -L dist ]; then
+  mkdir -p "$REL"; FIRST="$REL/$(date +%Y%m%d-%H%M%S)"
+  mv dist "$FIRST"; ln -sfnT "$FIRST" dist
+fi
 
 # --------------------------------------------------------------- serve
 if ! start_server; then
