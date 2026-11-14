@@ -52,127 +52,127 @@ export const instrumentSeo: Record<string, Record<LangCode, { title: string; des
   },
   "onlinebubblelevel": {
     en: {
-      title: "Bubble Level \u2014 Free online bubble level to check any surface",
+      title: "Online Bubble Level \u2014 Free Spirit Level & Level Checker",
       description: "Free online bubble level to check any surface. Bubble level check online, spirit level online, level checker tool and water level tool online \u2014 no install.",
     },
     de: {
-      title: "Wasserwaage \u2014 Kostenlose Online-Wasserwaage f\u00fcr jede Fl\u00e4che",
+      title: "Online-Wasserwaage \u2014 Kostenlose Wasserwaage & Niveau-Check",
       description: "Kostenlose Online-Wasserwaage f\u00fcr jede Fl\u00e4che. Niveau in Grad messen, Wasserwaage online und Niveau-Check auf dem Handy \u2014 ohne Installation.",
     },
     ja: {
-      title: "\u6c34\u6e96\u5668",
+      title: "\u30aa\u30f3\u30e9\u30a4\u30f3\u6c34\u6e96\u5668 \u2014 \u7121\u6599\u306e\u6c34\u5e73\u5668\u30fb\u6c34\u5e73\u30c1\u30a7\u30c3\u30af\u30c4\u30fc\u30eb",
       description: "\u30aa\u30f3\u30e9\u30a4\u30f3\u6c34\u6e96\u5668\u306a\u3089\u3069\u3093\u306a\u9762\u3082\u3059\u3050\u306b\u6c34\u5e73\u30c1\u30a7\u30c3\u30af\u3002\u50be\u304d\u3092\u5ea6\u3067\u8868\u793a\u3059\u308b\u7121\u6599\u306e\u6c34\u5e73\u5668\u30fb\u6c34\u6e96\u5668\u30c4\u30fc\u30eb\u3067\u3001\u30b9\u30de\u30db\u3060\u3051\u3067\u4f7f\u3048\u307e\u3059\u3002\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u4e0d\u8981\u3002",
     },
     fr: {
-      title: "Niveau \u00e0 Bulle",
+      title: "Niveau \u00e0 Bulle en Ligne \u2014 Niveau et Contr\u00f4leur Gratuit",
       description: "Niveau \u00e0 bulle en ligne gratuit pour contr\u00f4ler toutes les surfaces. Contr\u00f4le de niveau en degr\u00e9s, niveau d\u2019eau en ligne et outil de niveau sur t\u00e9l\u00e9phone \u2014 sans installation.",
     },
     es: {
-      title: "Nivel de Burbuja",
+      title: "Nivel de Burbuja Online \u2014 Nivel Gratis y Comprobador de Nivel",
       description: "Nivel de burbuja online gratis para comprobar cualquier superficie. Comprueba el nivel en grados, nivel de agua online y herramienta de nivel en el m\u00f3vil \u2014 sin instalar nada.",
     },
     ko: {
-      title: "\uc218\uc900\uae30 \u2014 \uc628\ub77c\uc778 \uc218\ud3c9\uacc4\ub85c \uc5b4\ub5a4 \ud45c\uba74\uc774\ub4e0 \uc218\ud3c9 \ud655\uc778\ud558\uc138\uc694",
+      title: "\uc628\ub77c\uc778 \uc218\ud3c9\uacc4 \u2014 \ubb34\ub8cc \uc218\ud3c9\uae30\u00b7\uc218\ud3c9 \ud655\uc778 \ub3c4\uad6c",
       description: "\uc628\ub77c\uc778 \uc218\ud3c9\uacc4\ub85c \uc5b4\ub5a4 \ud45c\uba74\uc774\ub4e0 \uc218\ud3c9 \ud655\uc778\ud558\uc138\uc694. \uae30\uc6b8\uae30\ub97c \ub3c4 \ub2e8\uc704\ub85c \ubcf4\uc5ec \uc8fc\ub294 \ubb34\ub8cc \uc218\ud3c9\uae30\u00b7\uc218\uc900\uae30 \ub3c4\uad6c\ub85c, \ud734\ub300\ud3f0\ub9cc \uc788\uc73c\uba74 \ub429\ub2c8\ub2e4. \uc124\uce58 \ubd88\ud544\uc694.",
     },
     nl: {
-      title: "Waterpas",
+      title: "Online waterpas \u2014 gratis libel en niveauchecker",
       description: "Gratis online waterpas en libel: leg je telefoon op de te controleren ondergrond en lees de helling in graden af. Kalibreren, resetten en volledig scherm \u2014 geen installatie nodig.",
     },
     sv: {
-      title: "Vattenpass",
+      title: "Online vattenpass \u2014 gratis libell och niv\u00e5kontroll",
       description: "Gratis online vattenpass och libell: l\u00e4gg telefonen p\u00e5 ytan du vill kontrollera och l\u00e4s av lutningen i grader. Kalibrera, \u00e5terst\u00e4ll och k\u00f6r i fullsk\u00e4rm \u2014 ingen installation beh\u00f6vs.",
     },
     it: {
-      title: "Livella a Bolla",
+      title: "Livella a Bolla Online \u2014 Livella e Controllo di Livello Gratis",
       description: "Livella a bolla online gratis per controllare ogni superficie. Controllo del livello in gradi, livella ad acqua online e strumento livello sul telefono \u2014 senza installazione.",
     },
     pt: {
-      title: "N\u00edvel de Bolha",
+      title: "N\u00edvel de Bolha Online \u2014 N\u00edvel Gr\u00e1tis e Verificador de N\u00edvel",
       description: "N\u00edvel de bolha online gr\u00e1tis para verificar qualquer superf\u00edcie. Verifica\u00e7\u00e3o de n\u00edvel em graus, n\u00edvel de \u00e1gua online e ferramenta de n\u00edvel no celular \u2014 sem instalar.",
     },
   },
   "onlinespeedometer": {
     en: {
-      title: "Speedometer",
+      title: "Online Speedometer \u2014 Free GPS Speed Test in km/h & mph",
       description: "Free online speedometer: measure your live speed in km/h or mph with GPS, plus max speed, average speed, altitude and trip time. No install, no sign-up.",
     },
     de: {
-      title: "Tachometer",
+      title: "Online-Tachometer \u2014 Kostenloser GPS-Geschwindigkeitstest in km/h & mph",
       description: "Kostenloses Online-Tachometer: miss deine Live-Geschwindigkeit in km/h oder mph per GPS, dazu H\u00f6chstgeschwindigkeit, Durchschnitt, H\u00f6he und Fahrtzeit. Ohne Installation.",
     },
     ja: {
-      title: "\u30b9\u30d4\u30fc\u30c9\u30e1\u30fc\u30bf\u30fc",
+      title: "\u30aa\u30f3\u30e9\u30a4\u30f3\u30b9\u30d4\u30fc\u30c9\u30e1\u30fc\u30bf\u30fc \u2014 \u7121\u6599\u306eGPS\u901f\u5ea6\u8a08\uff08km/h\u30fbmph\uff09",
       description: "\u7121\u6599\u306e\u30aa\u30f3\u30e9\u30a4\u30f3\u30b9\u30d4\u30fc\u30c9\u30e1\u30fc\u30bf\u30fc\u3002GPS \u3067\u73fe\u5728\u306e\u901f\u5ea6\u3092 km/h \u307e\u305f\u306f mph \u3067\u8868\u793a\u3057\u3001\u6700\u9ad8\u901f\u5ea6\u30fb\u5e73\u5747\u901f\u5ea6\u30fb\u9ad8\u5ea6\u30fb\u8d70\u884c\u6642\u9593\u3082\u8a08\u6e2c\u3067\u304d\u307e\u3059\u3002\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u4e0d\u8981\u3001\u767b\u9332\u4e0d\u8981\u3002",
     },
     fr: {
-      title: "Tachym\u00e8tre",
+      title: "Tachym\u00e8tre en Ligne \u2014 Test de Vitesse GPS Gratuit en km/h et mph",
       description: "Tachym\u00e8tre en ligne gratuit : mesurez votre vitesse en direct en km/h ou mph gr\u00e2ce au GPS, avec vitesse maximale, moyenne, altitude et dur\u00e9e du trajet. Sans installation.",
     },
     es: {
-      title: "Veloc\u00edmetro",
+      title: "Veloc\u00edmetro Online \u2014 Test de Velocidad GPS Gratis en km/h y mph",
       description: "Veloc\u00edmetro online gratis: mide tu velocidad en vivo en km/h o mph con GPS, adem\u00e1s de velocidad m\u00e1xima, media, altitud y duraci\u00f3n del viaje. Sin instalar nada.",
     },
     ko: {
-      title: "\uc18d\ub3c4\uacc4 \u2014 \ubb34\ub8cc \uc628\ub77c\uc778 \uc18d\ub3c4\uacc4",
+      title: "\uc628\ub77c\uc778 \uc18d\ub3c4\uacc4 \u2014 \ubb34\ub8cc GPS \uc18d\ub3c4 \uce21\uc815 (km/h\u00b7mph)",
       description: "\ubb34\ub8cc \uc628\ub77c\uc778 \uc18d\ub3c4\uacc4. GPS\ub85c \ud604\uc7ac \uc18d\ub3c4\ub97c km/h \ub610\ub294 mph\ub85c \ubcf4\uc5ec \uc8fc\uace0 \ucd5c\uace0 \uc18d\ub3c4, \ud3c9\uade0 \uc18d\ub3c4, \uace0\ub3c4, \uc8fc\ud589 \uc2dc\uac04\uae4c\uc9c0 \uce21\uc815\ud569\ub2c8\ub2e4. \uc124\uce58 \ubd88\ud544\uc694, \ud68c\uc6d0\uac00\uc785 \ubd88\ud544\uc694.",
     },
     nl: {
-      title: "Snelheidsmeter",
+      title: "Online snelheidsmeter \u2014 gratis GPS-snelheid in km/h en mph",
       description: "Gratis online snelheidsmeter op basis van GPS: live snelheid in km/h of mph, plus topsnelheid, gemiddelde snelheid, hoogte en ritduur.",
     },
     sv: {
-      title: "Hastighetsm\u00e4tare",
+      title: "Online hastighetsm\u00e4tare \u2014 gratis GPS-hastighet i km/h och mph",
       description: "Gratis online hastighetsm\u00e4tare med GPS: livehastighet i km/h eller mph, plus topphastighet, medelhastighet, h\u00f6jd och restid.",
     },
     it: {
-      title: "Tachimetro",
+      title: "Tachimetro Online \u2014 Test di Velocit\u00e0 GPS Gratuito in km/h e mph",
       description: "Tachimetro online gratuito: misura la velocit\u00e0 in tempo reale in km/h o mph con il GPS, pi\u00f9 velocit\u00e0 massima, media, altitudine e durata del viaggio. Senza installare nulla.",
     },
     pt: {
-      title: "Veloc\u00edmetro",
+      title: "Veloc\u00edmetro Online \u2014 Teste de Velocidade GPS Gr\u00e1tis em km/h e mph",
       description: "Veloc\u00edmetro online gr\u00e1tis: me\u00e7a sua velocidade ao vivo em km/h ou mph com GPS, al\u00e9m de velocidade m\u00e1xima, m\u00e9dia, altitude e dura\u00e7\u00e3o do trajeto. Sem instalar nada.",
     },
   },
   "onlineqibla": {
     en: {
-      title: "Qibla Finder",
+      title: "Online Qibla \u2014 Free Qibla Direction Compass & Finder",
       description: "Free online Qibla finder: see the Qibla direction from your location on a live compass, with the bearing in degrees and a clear arrow.",
     },
     de: {
-      title: "Qibla-Finder",
+      title: "Qibla online \u2014 kostenloser Qibla-Kompass und Finder",
       description: "Kostenloser Online-Qibla-Finder: Sehen Sie die Qibla-Richtung von Ihrem Standort auf einem Live-Kompass, mit Azimut in Grad und einem klaren Pfeil.",
     },
     ja: {
-      title: "\u30ad\u30d6\u30e9\u30d5\u30a1\u30a4\u30f3\u30c0\u30fc",
+      title: "\u30aa\u30f3\u30e9\u30a4\u30f3\u30ad\u30d6\u30e9 \u2014 \u7121\u6599\u306e\u30ad\u30d6\u30e9\u65b9\u5411\u30b3\u30f3\u30d1\u30b9\u3068\u30d5\u30a1\u30a4\u30f3\u30c0\u30fc",
       description: "\u7121\u6599\u306e\u30aa\u30f3\u30e9\u30a4\u30f3\u30ad\u30d6\u30e9\u30d5\u30a1\u30a4\u30f3\u30c0\u30fc\u3002\u73fe\u5728\u5730\u304b\u3089\u306e\u30ad\u30d6\u30e9\u65b9\u5411\u3092\u30e9\u30a4\u30d6\u30b3\u30f3\u30d1\u30b9\u3067\u8868\u793a\u3057\u3001\u65b9\u4f4d\u3092\u5ea6\u6570\u3068\u77e2\u5370\u3067\u306f\u3063\u304d\u308a\u793a\u3057\u307e\u3059\u3002",
     },
     fr: {
-      title: "Chercheur de Qibla",
+      title: "Qibla en ligne \u2014 boussole et chercheur de direction gratuits",
       description: "Chercheur de Qibla en ligne gratuit : voyez la direction de la Qibla depuis votre position sur une boussole en direct, avec le rel\u00e8vement en degr\u00e9s et une fl\u00e8che claire.",
     },
     es: {
-      title: "Buscador de Qibla",
+      title: "Alquibla Online",
       description: "Buscador de alquibla online gratis: mira la direcci\u00f3n de la alquibla desde tu ubicaci\u00f3n en una br\u00fajula en vivo, con el rumbo en grados y una flecha clara.",
     },
     ko: {
-      title: "\ud0a4\ube14\ub77c \ud30c\uc778\ub354 \u2014 \ubb34\ub8cc \uc628\ub77c\uc778 \ud0a4\ube14\ub77c \ud30c\uc778\ub354",
+      title: "\uc628\ub77c\uc778 \ud0a4\ube14\ub77c \u2014 \ubb34\ub8cc \ud0a4\ube14\ub77c \ubc29\ud5a5 \ub098\uce68\ubc18\uacfc \ud30c\uc778\ub354",
       description: "\ubb34\ub8cc \uc628\ub77c\uc778 \ud0a4\ube14\ub77c \ud30c\uc778\ub354. \ub0b4 \uc704\uce58\uc5d0\uc11c \ubcf8 \ud0a4\ube14\ub77c \ubc29\ud5a5\uc744 \uc2e4\uc2dc\uac04 \ub098\uce68\ubc18\uc73c\ub85c \ubcf4\uace0, \ubc29\uc704\ub97c \uac01\ub3c4\uc640 \ud654\uc0b4\ud45c\ub85c \ud655\uc778\ud558\uc138\uc694.",
     },
     nl: {
-      title: "Qibla-zoeker",
+      title: "Qibla online \u2014 gratis qibla-zoeker en kompas",
       description: "Gratis online qibla-zoeker: bereken de qibla-richting vanaf jouw locatie en zie de peiling in graden op een live kompas.",
     },
     sv: {
-      title: "Qibla-hittare",
+      title: "Qibla online \u2014 gratis qibla-hittare och kompass",
       description: "Gratis online qibla-hittare: ber\u00e4kna qibla-riktningen fr\u00e5n din position och se b\u00e4ringen i grader p\u00e5 en livekompass.",
     },
     it: {
-      title: "Trovatore di Qibla",
+      title: "Qibla online",
       description: "Cercatore di Qibla online gratuito: vedi la direzione della Qibla dalla tua posizione su una bussola in tempo reale, con il rilevamento in gradi e una freccia chiara.",
     },
     pt: {
-      title: "Localizador de Qibla",
+      title: "Qibla Online \u2014 B\u00fassola e Localizador Gr\u00e1tis da Dire\u00e7\u00e3o da Qibla",
       description: "Localizador de Qibla online gr\u00e1tis: veja a dire\u00e7\u00e3o da Qibla da sua localiza\u00e7\u00e3o numa b\u00fassola ao vivo, com o rumo em graus e uma seta clara.",
     },
   },
@@ -187,15 +187,23 @@ const MAX_TITLE = 70;
  * baad cut karta hai, to chhota title hi behtar hai.
  */
 export function fitTitle(title: string): string {
+  // & ko &amp; likha jaata hai, isliye length escape ke baad naapo — warna
+  // title HTML mein 4 chars lamba ho jaata hai aur 70 ka limit toot jaata hai.
+  const len = (value: string) => value.replace(/&/g, '&amp;').length;
   const withBrand = `${title} — ${SITE_NAME}`;
-  if (withBrand.length <= MAX_TITLE) return withBrand;
-  if (title.length <= MAX_TITLE) return title;
+  if (len(withBrand) <= MAX_TITLE) return withBrand;
+  if (len(title) <= MAX_TITLE) return title;
   const parts = title.split(' — ');
   let out = parts[0];
   for (let i = 1; i < parts.length; i += 1) {
     const next = `${out} — ${parts[i]}`;
-    if (next.length > MAX_TITLE) break;
+    if (len(next) > MAX_TITLE) break;
     out = next;
   }
-  return out.length > MAX_TITLE ? `${out.slice(0, MAX_TITLE - 1).trimEnd()}…` : out;
+  while (len(out) > MAX_TITLE) {
+    const words = out.split(' ');
+    words.pop();
+    out = words.join(' ').replace(/[\s,;:&—-]+$/, '');
+  }
+  return out;
 }
