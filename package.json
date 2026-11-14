@@ -12,7 +12,9 @@
     "astro": "astro",
     "check": "astro check",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:site": "node tests/run.mjs",
+    "test:site:update": "node tests/run.mjs --update-baseline"
   },
   "dependencies": {
     "astro": "^6.4.8"
