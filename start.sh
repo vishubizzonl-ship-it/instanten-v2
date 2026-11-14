@@ -227,6 +227,14 @@ if [ ! -d node_modules/astro ]; then
   [ -d node_modules/astro ] || { no "Install fail. Jagah:"; df -h . | tail -1; no "Log: $LOG"; exit 1; }
 fi
 
+# dist pehli baar asli folder ho sakta hai — symlink me badal do, warna
+# atomic swap ka mv -Tf fail hota hai.
+if [ -d dist ] && [ ! -L dist ]; then
+  mkdir -p "$REL"; FIRST="$REL/$(date +%Y%m%d-%H%M%S)"
+  mv dist "$FIRST"; ln -sfnT "$FIRST" dist
+fi
+rm -f dist.tmp
+
 # --------------------------------------------------------------- build
 ok "Build ho raha hai…"
 if ! build_site; then
@@ -239,11 +247,6 @@ if ! build_site; then
 fi
 swap_dist || { no "dist swap fail"; exit 1; }
 
-# dist pehli baar asli folder ho sakta hai — symlink me badal do
-if [ -d dist ] && [ ! -L dist ]; then
-  mkdir -p "$REL"; FIRST="$REL/$(date +%Y%m%d-%H%M%S)"
-  mv dist "$FIRST"; ln -sfnT "$FIRST" dist
-fi
 
 # --------------------------------------------------------------- serve
 if ! start_server; then
