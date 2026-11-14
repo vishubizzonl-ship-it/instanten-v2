@@ -5,11 +5,19 @@
   "description": "Visually build responsive CSS Grid layouts using W3C CSS Grid Layout specifications with clean, production-ready output for U.S. frontend developers.",
   "longDescription": "CSS Grid Generator makes complex grid layouts intuitive for developers, students, and designers across the United States. Visually define rows and columns by dragging in the canvas. Set gap, alignment, and track sizing (fr, px, %, auto, minmax). Output follows W3C CSS Grid Layout Module Level 2 specifications for clean, production-ready code. See real-time preview with placeholder content. Copy clean CSS with fallbacks. Supports nested grids and named areas.",
   "pricing": "Free",
-  "pricingDetails": "Completely free and open source — $0 cost versus $12–$29/month paid layout builders. No account needed.",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Everything runs in your browser.",
   "image": "/thumbnails/css-grid-generator.svg",
-  "url": "https://cssgrid-generator.netlify.app/",
-  "tags": ["design", "css", "layout", "frontend", "grid", "instant tool", "instant online"],
-  "maker": "Sarah Drasner",
+  "url": "https://instanten.com/tools/css-grid-generator/",
+  "tags": [
+    "design",
+    "css",
+    "layout",
+    "frontend",
+    "grid",
+    "instant tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
   "addedDate": "2024-06-15",
   "updatedDate": "2024-11-10",
   "features": [

@@ -1,0 +1,91 @@
+---
+/** Online ruler — ISO/IEC 7810 ID-1 card calibration, cm + inch ticks. */
+---
+<div class="tool-shell" data-tool-root="online-ruler">
+  <div class="tool-head">
+    <h2 class="tool-title">Measure on screen</h2>
+    <p class="tool-hint">Card ko screen par rakh kar slider set karo — phir scale sahi ho jayega.</p>
+  </div>
+
+  <label class="tool-field">
+    Calibrate: card ki width <b data-ruler-label>324</b> px
+    <input type="range" class="tool-range" min="200" max="460" value="324" data-ruler-cal />
+  </label>
+
+  <div class="tool-row" style="margin-top:12px">
+    <button type="button" class="tool-btn" data-ruler-preset="cm">Show centimetres</button>
+    <button type="button" class="tool-btn" data-ruler-preset="inch">Show inches</button>
+  </div>
+
+  <div class="tool-ruler-wrap">
+    <svg data-ruler-svg width="760" height="120" role="img" aria-label="On-screen ruler"></svg>
+  </div>
+
+  <p class="tool-note" data-ruler-meta></p>
+  <div class="tool-drop" style="margin-top:12px">
+    Calibration card outline (ID-1: 85.60 × 53.98 mm) — screen par apna card iske upar rakho
+    <svg data-ruler-card width="324" height="204" viewBox="0 0 85.6 53.98" style="display:block;margin:12px auto 0;max-width:100%">
+      <rect x="0.5" y="0.5" width="84.6" height="52.98" rx="2.5" fill="none" stroke="#9a9ab0" stroke-width="0.5" stroke-dasharray="2 2"></rect>
+    </svg>
+  </div>
+</div>
+
+<script>
+  import { pixelsPerMm, mmToInches, CARD_MM } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="online-ruler"]');
+  if (root) {
+    const cal = root.querySelector('[data-ruler-cal]');
+    const label = root.querySelector('[data-ruler-label]');
+    const svg = root.querySelector('[data-ruler-svg]');
+    const card = root.querySelector('[data-ruler-card]');
+    const meta = root.querySelector('[data-ruler-meta]');
+    let unit = 'cm';
+
+    const draw = () => {
+      const cardPixels = Number(cal.value);
+      label.textContent = cardPixels;
+      const perMm = pixelsPerMm(cardPixels);
+      const pxPerUnit = unit === 'cm' ? perMm * 10 : perMm * 25.4;
+      const width = 760;
+      const height = 120;
+      const baseline = 92;
+      const maxUnits = Math.floor((width - 24) / pxPerUnit);
+      const parts = [];
+
+      parts.push(`<rect x="0" y="0" width="${width}" height="${height}" fill="#ffffff"></rect>`);
+      for (let i = 0; i <= maxUnits; i++) {
+        const x = 12 + i * pxPerUnit;
+        parts.push(`<line x1="${x}" y1="${baseline}" x2="${x}" y2="${baseline - 34}" stroke="#17171c" stroke-width="1.2"></line>`);
+        parts.push(`<text x="${x}" y="${baseline + 18}" font-size="12" fill="#17171c" text-anchor="middle">${i}</text>`);
+        if (i < maxUnits) {
+          for (let s = 1; s < 10; s++) {
+            const sx = x + (s * pxPerUnit) / 10;
+            const len = s === 5 ? 20 : 12;
+            parts.push(`<line x1="${sx}" y1="${baseline}" x2="${sx}" y2="${baseline - len}" stroke="#6b6b7b" stroke-width="0.8"></line>`);
+          }
+        }
+      }
+      parts.push(`<line x1="12" y1="${baseline}" x2="${12 + maxUnits * pxPerUnit}" y2="${baseline}" stroke="#17171c" stroke-width="1.4"></line>`);
+      parts.push(`<text x="12" y="22" font-size="12" fill="#6b6b7b">${unit === 'cm' ? 'centimetres' : 'inches'}</text>`);
+      svg.innerHTML = parts.join('');
+      svg.setAttribute('height', String(height));
+
+      card.setAttribute('width', String(cardPixels));
+      card.setAttribute('height', String(Math.round(cardPixels * (CARD_MM.h / CARD_MM.w))));
+
+      const inchWidth = Math.round(cardPixels / 25.4 * 10) / 10;
+      meta.textContent = `1 cm = ${(perMm * 10).toFixed(1)} px · 1 inch = ${(perMm * 25.4).toFixed(1)} px · card 85.6 mm = ${mmToInches(85.6)} in = ${inchWidth} in on screen`;
+    };
+
+    cal.addEventListener('input', draw);
+    root.querySelectorAll('[data-ruler-preset]').forEach((button) => {
+      button.addEventListener('click', () => {
+        unit = button.dataset.rulerPreset;
+        root.querySelectorAll('[data-ruler-preset]').forEach((other) => other.classList.toggle('tool-btn--primary', other === button));
+        draw();
+      });
+    });
+    draw();
+  }
+</script>

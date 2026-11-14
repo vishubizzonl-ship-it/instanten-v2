@@ -1,0 +1,80 @@
+---
+/** Regex tester — live matches, groups, flags. */
+---
+<div class="tool-shell" data-tool-root="regex-tester">
+  <div class="tool-head">
+    <h2 class="tool-title">Test a regular expression</h2>
+    <p class="tool-hint">JavaScript flavour — browser ka apna engine, kuch upload nahi.</p>
+  </div>
+
+  <div class="tool-grid-2">
+    <label class="tool-field">
+      Pattern
+      <input class="tool-input" data-re-pattern value="(\\w+)@(\\w+)\\.com" spellcheck="false" style="font-family:ui-monospace,monospace" />
+    </label>
+    <label class="tool-field">
+      Flags (g, i, m, s, u)
+      <input class="tool-input" data-re-flags value="g" spellcheck="false" style="font-family:ui-monospace,monospace" />
+    </label>
+  </div>
+
+  <label class="tool-field" style="margin-top:12px">
+    Sample text
+    <textarea class="tool-textarea" data-re-text style="min-height:140px">Write to asha@example.com or team@instanten.com</textarea>
+  </label>
+
+  <p class="tool-error" data-re-error hidden></p>
+  <p class="tool-note" data-re-meta></p>
+  <table class="tool-table" data-re-table hidden>
+    <thead>
+      <tr><th>#</th><th>Match</th><th>Index</th><th>Groups</th></tr>
+    </thead>
+    <tbody data-re-rows></tbody>
+  </table>
+</div>
+
+<script>
+  import { regexMatches } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="regex-tester"]');
+  if (root) {
+    const pattern = root.querySelector('[data-re-pattern]');
+    const flags = root.querySelector('[data-re-flags]');
+    const text = root.querySelector('[data-re-text]');
+    const err = root.querySelector('[data-re-error]');
+    const meta = root.querySelector('[data-re-meta]');
+    const table = root.querySelector('[data-re-table]');
+    const rows = root.querySelector('[data-re-rows]');
+
+    const run = () => {
+      const res = regexMatches(pattern.value, flags.value.replace(/[^gimsuy]/g, ''), text.value);
+      if (!res.ok) {
+        err.hidden = false;
+        err.textContent = res.error;
+        table.hidden = true;
+        meta.textContent = '';
+        return;
+      }
+      err.hidden = true;
+      meta.textContent = `${res.count} match${res.count === 1 ? '' : 'es'} found.`;
+      if (res.count === 0) {
+        table.hidden = true;
+        rows.innerHTML = '';
+        return;
+      }
+      table.hidden = false;
+      rows.innerHTML = res.matches
+        .slice(0, 200)
+        .map(
+          (m, i) =>
+            `<tr><td>${i + 1}</td><td><code>${m.match.replace(/</g, '&lt;')}</code></td><td>${m.index}</td><td>${
+              m.groups.length ? m.groups.map((g) => (g == null ? '—' : g.replace(/</g, '&lt;'))).join(' · ') : '—'
+            }</td></tr>`
+        )
+        .join('');
+    };
+
+    [pattern, flags, text].forEach((el) => el.addEventListener('input', run));
+    run();
+  }
+</script>

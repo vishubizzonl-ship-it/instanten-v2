@@ -1,0 +1,90 @@
+---
+/** CSS Grid generator — live preview + copy-paste CSS. */
+---
+<div class="tool-shell" data-tool-root="css-grid-generator">
+  <div class="tool-head">
+    <h2 class="tool-title">Build a CSS grid</h2>
+    <p class="tool-hint">Preview dekho, phir CSS copy karo — koi framework nahi.</p>
+  </div>
+
+  <div class="tool-grid-2">
+    <label class="tool-field">
+      Columns: <b data-grid-columns-label>3</b>
+      <input type="range" class="tool-range" min="1" max="6" value="3" data-grid-columns />
+    </label>
+    <label class="tool-field">
+      Rows: <b data-grid-rows-label>2</b>
+      <input type="range" class="tool-range" min="1" max="6" value="2" data-grid-rows />
+    </label>
+    <label class="tool-field">
+      Gap: <b data-grid-gap-label>16</b>px
+      <input type="range" class="tool-range" min="0" max="48" value="16" data-grid-gap />
+    </label>
+    <label class="tool-field">
+      Align items
+      <select class="tool-select" data-grid-align">
+        <option value="stretch">stretch</option>
+        <option value="start">start</option>
+        <option value="center">center</option>
+        <option value="end">end</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="tool-row" style="margin-top:14px">
+    <button type="button" class="tool-btn" data-grid-copy>Copy CSS</button>
+  </div>
+
+  <div class="tool-grid-preview" data-grid-preview aria-hidden="true"></div>
+  <pre class="tool-out" data-grid-css style="max-height:180px"></pre>
+</div>
+
+<script>
+  import { gridCss } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="css-grid-generator"]');
+  if (root) {
+    const columns = root.querySelector('[data-grid-columns]');
+    const rows = root.querySelector('[data-grid-rows]');
+    const gap = root.querySelector('[data-grid-gap]');
+    const align = root.querySelector('[data-grid-align]');
+    const preview = root.querySelector('[data-grid-preview]');
+    const cssBox = root.querySelector('[data-grid-css]');
+
+    const update = () => {
+      root.querySelector('[data-grid-columns-label]').textContent = columns.value;
+      root.querySelector('[data-grid-rows-label]').textContent = rows.value;
+      root.querySelector('[data-grid-gap-label]').textContent = gap.value;
+
+      const css = gridCss({
+        columns: Number(columns.value),
+        rows: Number(rows.value),
+        gap: Number(gap.value),
+        align: align.value,
+      });
+      cssBox.textContent = `.grid {\n${css
+        .split('\n')
+        .map((line) => `  ${line}`)
+        .join('\n')}\n}`;
+
+      const total = Number(columns.value) * Number(rows.value);
+      preview.style.gridTemplateColumns = `repeat(${Number(columns.value)}, 1fr)`;
+      preview.style.gap = `${Number(gap.value)}px`;
+      preview.style.alignItems = align.value;
+      preview.innerHTML = Array.from({ length: total }, (_, i) => `<div>${i + 1}</div>`).join('');
+    };
+
+    [columns, rows, gap, align].forEach((el) => el.addEventListener('input', update));
+    root.querySelector('[data-grid-copy]').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(cssBox.textContent ?? '');
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = 'Copy CSS'), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    });
+    update();
+  }
+</script>

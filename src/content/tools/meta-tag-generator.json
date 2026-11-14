@@ -5,11 +5,19 @@
   "description": "Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and Google Search Central-compliant snippets — copy-paste ready for U.S. websites.",
   "longDescription": "Meta Tag Generator creates complete meta tag sets for any webpage. Fill in your content details and get optimized tags for SEO (title, description, keywords), Open Graph (Facebook, LinkedIn), Twitter Cards, and additional tags like canonical, viewport, robots. All recommendations follow Google Search Central snippet and meta tag guidelines (https://developers.google.com/search/docs) and the Open Graph Protocol for accurate U.S. search and social previews. Preview how your links will appear on social platforms. Export as HTML or JSON.",
   "pricing": "Free",
-  "pricingDetails": "Completely free — $0 cost versus $12–$29/month SEO tool subscriptions. No account required.",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Everything runs in your browser.",
   "image": "/thumbnails/meta-tag-generator.svg",
-  "url": "https://metatags.io/",
-  "tags": ["marketing", "seo", "open-graph", "twitter-cards", "html", "instant tool", "instant help"],
-  "maker": "MetaTags.io",
+  "url": "https://instanten.com/tools/meta-tag-generator/",
+  "tags": [
+    "marketing",
+    "seo",
+    "open-graph",
+    "twitter-cards",
+    "html",
+    "instant tool",
+    "instant help"
+  ],
+  "maker": "Instanten",
   "addedDate": "2024-04-20",
   "updatedDate": "2024-12-05",
   "features": [

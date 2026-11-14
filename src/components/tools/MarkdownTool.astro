@@ -1,0 +1,78 @@
+---
+/** Markdown editor — live preview + export. */
+---
+<div class="tool-shell" data-tool-root="markdown-editor">
+  <div class="tool-head">
+    <h2 class="tool-title">Write Markdown with live preview</h2>
+    <p class="tool-hint">CommonMark subset: headings, lists, code, links, quotes.</p>
+  </div>
+
+  <div class="tool-grid-2">
+    <label class="tool-field">
+      Markdown
+      <textarea class="tool-textarea" data-md-input style="min-height:280px" placeholder="# Title&#10;&#10;**bold**, *italic*, `code`, [link](https://instanten.com)&#10;&#10;- one&#10;- two"></textarea>
+    </label>
+    <div class="tool-field">
+      Preview
+      <div class="tool-preview" data-md-preview aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="tool-row" style="margin-top:14px">
+    <button type="button" class="tool-btn tool-btn--primary" data-md-copy-md>Copy Markdown</button>
+    <button type="button" class="tool-btn" data-md-copy-html>Copy HTML</button>
+    <button type="button" class="tool-btn" data-md-download>Download .md</button>
+    <button type="button" class="tool-btn" data-md-sample>Sample</button>
+  </div>
+  <p class="tool-note" data-md-meta></p>
+</div>
+
+<script>
+  import { markdownToHtml } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="markdown-editor"]');
+  if (root) {
+    const input = root.querySelector('[data-md-input]');
+    const preview = root.querySelector('[data-md-preview]');
+    const meta = root.querySelector('[data-md-meta]');
+    let html = '';
+
+    const render = () => {
+      html = markdownToHtml(input.value);
+      preview.innerHTML = html;
+      const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
+      meta.textContent = `${words} words · ${input.value.length} characters · ${Math.max(1, Math.round(words / 225))} min read`;
+    };
+
+    const copy = async (event, text) => {
+      const button = event.currentTarget;
+      const label = button.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = label), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    };
+
+    input.addEventListener('input', render);
+    root.querySelector('[data-md-copy-md]').addEventListener('click', (event) => copy(event, input.value));
+    root.querySelector('[data-md-copy-html]').addEventListener('click', (event) => copy(event, html));
+    root.querySelector('[data-md-sample]').addEventListener('click', () => {
+      input.value =
+        '# Instanten tools\n\nA **fast** browser toolbox with *no sign-up*.\n\n- JSON formatter\n- Word counter\n- QR generator\n\n```js\nconst tools = 12;\n```\n\n> Everything runs locally.';
+      render();
+    });
+    root.querySelector('[data-md-download]').addEventListener('click', () => {
+      const blob = new Blob([input.value], { type: 'text/markdown' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'instanten-note.md';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+
+    render();
+  }
+</script>

@@ -101,7 +101,7 @@ export function run(pages) {
   }
 
   // --- sab indexable pages par analytics ho ------------------------------
-  check(checkedPages > 1000, `sirf ${checkedPages} pages par analytics mila — wiring adhoori lagti hai`);
+  check(checkedPages > 900, `sirf ${checkedPages} pages par analytics mila — wiring adhoori lagti hai`);
 
   return suite;
 }

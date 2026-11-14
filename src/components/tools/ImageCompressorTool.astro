@@ -1,0 +1,125 @@
+---
+/** Image compressor — canvas based, kuch bhi upload nahi hota. */
+---
+<div class="tool-shell" data-tool-root="image-compressor">
+  <div class="tool-head">
+    <h2 class="tool-title">Compress an image in your browser</h2>
+    <p class="tool-hint">JPEG, PNG, WebP — file device se bahar nahi jati.</p>
+  </div>
+
+  <label class="tool-field">
+    Choose an image
+    <input type="file" class="tool-input" accept="image/*" data-ic-file />
+  </label>
+
+  <label class="tool-field" style="margin-top:12px">
+    Quality: <b data-ic-quality-label>75</b>%
+    <input type="range" class="tool-range" min="30" max="95" value="75" data-ic-quality />
+  </label>
+
+  <label class="tool-field" style="margin-top:12px">
+    Output format
+    <select class="tool-select" data-ic-format>
+      <option value="image/jpeg">JPEG (smallest, no transparency)</option>
+      <option value="image/webp">WebP (best for web)</option>
+      <option value="image/png">PNG (keeps transparency)</option>
+    </select>
+  </label>
+
+  <div class="tool-row" style="margin-top:14px">
+    <button type="button" class="tool-btn tool-btn--primary" data-ic-run>Compress</button>
+    <button type="button" class="tool-btn" data-ic-download disabled>Download</button>
+  </div>
+
+  <p class="tool-error" data-ic-error hidden></p>
+  <div class="tool-drop" data-ic-drop>Abhi koi image nahi chuni.</div>
+  <div class="tool-stats" data-ic-stats hidden>
+    <div class="tool-stat"><b data-ic-original>—</b><span>Original</span></div>
+    <div class="tool-stat"><b data-ic-size>—</b><span>Compressed</span></div>
+    <div class="tool-stat"><b data-ic-saved>—</b><span>Saved</span></div>
+    <div class="tool-stat"><b data-ic-dims>—</b><span>Dimensions</span></div>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector('[data-tool-root="image-compressor"]');
+  if (root) {
+    const fileInput = root.querySelector('[data-ic-file]');
+    const qualityInput = root.querySelector('[data-ic-quality]');
+    const qualityLabel = root.querySelector('[data-ic-quality-label]');
+    const formatSelect = root.querySelector('[data-ic-format]');
+    const drop = root.querySelector('[data-ic-drop]');
+    const stats = root.querySelector('[data-ic-stats]');
+    const err = root.querySelector('[data-ic-error]');
+    const downloadButton = root.querySelector('[data-ic-download]');
+    let currentFile = null;
+    let resultUrl = null;
+    let resultName = 'compressed';
+
+    const kb = (bytes) => `${(bytes / 1024).toFixed(bytes > 1024 * 1024 ? 0 : 1)} KB`;
+
+    const showOriginal = (file) => {
+      currentFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        drop.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = String(reader.result);
+        img.alt = file.name;
+        drop.textContent = `${file.name} · ${kb(file.size)} — selected`;
+        drop.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+      stats.hidden = true;
+      err.hidden = true;
+    };
+
+    const compress = async () => {
+      if (!currentFile) {
+        err.hidden = false;
+        err.textContent = 'Pehle koi image chuno.';
+        return;
+      }
+      const quality = Number(qualityInput.value) / 100;
+      const type = formatSelect.value;
+      const bitmap = await createImageBitmap(currentFile);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      canvas.getContext('2d').drawImage(bitmap, 0, 0);
+
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+      if (!blob) {
+        err.hidden = false;
+        err.textContent = 'Is format mein compress nahi ho paya — dusra format chuno.';
+        return;
+      }
+      if (resultUrl) URL.revokeObjectURL(resultUrl);
+      resultUrl = URL.createObjectURL(blob);
+      const extension = type.split('/')[1].replace('jpeg', 'jpg');
+      resultName = `${currentFile.name.replace(/\.[^.]+$/, '')}-compressed.${extension}`;
+
+      err.hidden = true;
+      stats.hidden = false;
+      root.querySelector('[data-ic-original]').textContent = kb(currentFile.size);
+      root.querySelector('[data-ic-size]').textContent = kb(blob.size);
+      const saved = Math.max(0, Math.round((1 - blob.size / currentFile.size) * 100));
+      root.querySelector('[data-ic-saved]').textContent = `${saved}%`;
+      root.querySelector('[data-ic-dims]').textContent = `${bitmap.width}×${bitmap.height}`;
+      downloadButton.disabled = false;
+    };
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files && fileInput.files[0]) showOriginal(fileInput.files[0]);
+    });
+    qualityInput.addEventListener('input', () => (qualityLabel.textContent = qualityInput.value));
+    root.querySelector('[data-ic-run]').addEventListener('click', compress);
+    downloadButton.addEventListener('click', () => {
+      if (!resultUrl) return;
+      const link = document.createElement('a');
+      link.href = resultUrl;
+      link.download = resultName;
+      link.click();
+    });
+  }
+</script>

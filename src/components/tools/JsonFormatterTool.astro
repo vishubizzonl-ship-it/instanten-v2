@@ -1,0 +1,77 @@
+---
+/** JSON Formatter — browser mein hi format/validate/minify (RFC 8259). */
+---
+<div class="tool-shell" data-tool-root="json-formatter">
+  <div class="tool-head">
+    <h2 class="tool-title">Format, validate or minify JSON</h2>
+    <p class="tool-hint">Sab kuch aapke browser mein — kuch upload nahi hota.</p>
+  </div>
+  <label class="tool-field">
+    JSON input
+    <textarea class="tool-textarea" data-json-input spellcheck="false" placeholder='{"name":"instanten","tools":12}'></textarea>
+  </label>
+  <div class="tool-row" style="margin-top:12px">
+    <button type="button" class="tool-btn tool-btn--primary" data-json-format>Format</button>
+    <button type="button" class="tool-btn" data-json-minify>Minify</button>
+    <button type="button" class="tool-btn" data-json-copy>Copy output</button>
+    <button type="button" class="tool-btn" data-json-sample>Sample</button>
+    <button type="button" class="tool-btn" data-json-clear>Clear</button>
+  </div>
+  <p class="tool-error" data-json-error hidden></p>
+  <pre class="tool-out" data-json-out aria-live="polite"></pre>
+  <p class="tool-note" data-json-meta></p>
+</div>
+
+<script>
+  import { formatJson, minifyJson } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="json-formatter"]');
+  if (root) {
+    const input = root.querySelector('[data-json-input]');
+    const out = root.querySelector('[data-json-out]');
+    const err = root.querySelector('[data-json-error]');
+    const meta = root.querySelector('[data-json-meta]');
+
+    const show = (res) => {
+      if (res.ok) {
+        err.hidden = true;
+        out.textContent = res.output;
+        meta.textContent = `${res.output.split('\n').length} lines · ${res.output.length} characters`;
+      } else {
+        out.textContent = '';
+        meta.textContent = '';
+        err.hidden = false;
+        const where = res.error.line ? ` Line ${res.error.line}, column ${res.error.column}.` : '';
+        err.textContent = `Invalid JSON — ${res.error.message}.${where}`;
+      }
+    };
+
+    root.querySelector('[data-json-format]').addEventListener('click', () => show(formatJson(input.value, 2)));
+    root.querySelector('[data-json-minify]').addEventListener('click', () => show(minifyJson(input.value)));
+    root.querySelector('[data-json-sample]').addEventListener('click', () => {
+      input.value =
+        '{\n  "site": "instanten",\n  "free": true,\n  "tools": ["json", "qr", "ruler"],\n  "nested": { "ok": null }\n}';
+      show(formatJson(input.value, 2));
+    });
+    root.querySelector('[data-json-clear]').addEventListener('click', () => {
+      input.value = '';
+      out.textContent = '';
+      meta.textContent = '';
+      err.hidden = true;
+    });
+    root.querySelector('[data-json-copy]').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(out.textContent ?? '');
+        const label = button.textContent;
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = label), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    });
+    input.addEventListener('input', () => {
+      if (input.value.trim()) show(formatJson(input.value, 2));
+    });
+  }
+</script>

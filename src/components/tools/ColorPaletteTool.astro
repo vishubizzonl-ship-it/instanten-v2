@@ -1,0 +1,132 @@
+---
+/** Colour palette + WCAG 2.2 contrast checker. */
+---
+<div class="tool-shell" data-tool-root="color-palette">
+  <div class="tool-head">
+    <h2 class="tool-title">Build a palette and check contrast</h2>
+    <p class="tool-hint">WCAG 2.2 AA: 4.5:1 normal text, 3:1 large text.</p>
+  </div>
+
+  <div class="tool-grid-2">
+    <label class="tool-field">
+      Base colour
+      <input type="color" class="tool-input" data-cp-color value="#3366cc" style="height:44px; padding:4px" />
+    </label>
+    <label class="tool-field">
+      Hex value
+      <input class="tool-input" data-cp-hex value="#3366cc" spellcheck="false" />
+    </label>
+  </div>
+
+  <div class="tool-row" style="margin-top:14px">
+    <button type="button" class="tool-btn tool-btn--primary" data-cp-generate>Generate harmonies</button>
+    <button type="button" class="tool-btn" data-cp-copy>Copy CSS variables</button>
+  </div>
+
+  <p class="tool-error" data-cp-error hidden></p>
+  <div class="tool-swatches" data-cp-swatches></div>
+
+  <table class="tool-table" data-cp-table hidden>
+    <thead>
+      <tr><th>Pair</th><th>Ratio</th><th>Grade</th></tr>
+    </thead>
+    <tbody data-cp-rows></tbody>
+  </table>
+  <pre class="tool-out" data-cp-css hidden style="max-height:160px"></pre>
+</div>
+
+<script>
+  import { harmonies, contrastRatio, contrastGrade, hexToRgb } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="color-palette"]');
+  if (root) {
+    const colorInput = root.querySelector('[data-cp-color]');
+    const hexInput = root.querySelector('[data-cp-hex]');
+    const swatches = root.querySelector('[data-cp-swatches]');
+    const table = root.querySelector('[data-cp-table]');
+    const rows = root.querySelector('[data-cp-rows]');
+    const cssBox = root.querySelector('[data-cp-css]');
+    const err = root.querySelector('[data-cp-error]');
+    let current = null;
+
+    const render = (hex) => {
+      const set = harmonies(hex);
+      if (!set) {
+        err.hidden = false;
+        err.textContent = 'Valid hex colour do, jaise #3366cc.';
+        swatches.innerHTML = '';
+        table.hidden = true;
+        cssBox.hidden = true;
+        return;
+      }
+      err.hidden = true;
+      current = set;
+
+      swatches.innerHTML = Object.entries(set)
+        .flatMap(([name, colors]) =>
+          colors.map(
+            (color) =>
+              `<button type="button" class="tool-swatch" data-copy="${color}" title="Copy ${color}"><i style="background:${color}"></i><span>${color}</span><em style="font-style:normal;opacity:.6;font-size:10px">${name.slice(0, 6)}</em></button>`
+          )
+        )
+        .join('');
+
+      const unique = [...new Set([hex, ...Object.values(set).flat()])];
+      rows.innerHTML = unique
+        .map((color) => {
+          const white = contrastRatio(color, '#ffffff');
+          const black = contrastRatio(color, '#000000');
+          const best = white >= black ? { name: 'white text', ratio: white } : { name: 'black text', ratio: black };
+          const grade = contrastGrade(best.ratio);
+          const pass = best.ratio >= 4.5;
+          return `<tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${color};vertical-align:-2px;margin-right:6px"></span>${color}</td><td>${best.ratio}:1 with ${best.name}</td><td><span class="tool-badge tool-badge--${pass ? 'pass' : 'fail'}">${grade}</span></td></tr>`;
+        })
+        .join('');
+      table.hidden = false;
+
+      const vars = unique.map((color, index) => `  --color-${index + 1}: ${color};`).join('\n');
+      cssBox.textContent = `:root {\n${vars}\n}`;
+      cssBox.hidden = false;
+    };
+
+    const sync = (hex) => {
+      if (!hexToRgb(hex)) {
+        render(hex);
+        return;
+      }
+      colorInput.value = hex;
+      hexInput.value = hex;
+      render(hex);
+    };
+
+    colorInput.addEventListener('input', () => sync(colorInput.value));
+    hexInput.addEventListener('input', () => {
+      const value = hexInput.value.trim();
+      if (hexToRgb(value)) colorInput.value = value;
+      render(value);
+    });
+    root.querySelector('[data-cp-generate]').addEventListener('click', () => sync(colorInput.value));
+    root.querySelector('[data-cp-copy]').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(cssBox.textContent ?? '');
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = 'Copy CSS variables'), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    });
+    swatches.addEventListener('click', async (event) => {
+      const target = event.target.closest('[data-copy]');
+      if (!target) return;
+      try {
+        await navigator.clipboard.writeText(target.dataset.copy);
+        target.dataset.copied = '1';
+      } catch {
+        /* clipboard blocked — ignore */
+      }
+    });
+
+    render('#3366cc');
+  }
+</script>

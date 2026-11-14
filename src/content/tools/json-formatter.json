@@ -5,11 +5,18 @@
   "description": "Format, validate, and beautify JSON data with syntax highlighting, error detection, and tree view — all validated against IETF RFC 8259 for U.S. developers and students.",
   "longDescription": "JSON Formatter is a developer essential for working with JSON data. Paste raw JSON to instantly format with proper indentation and syntax highlighting. Validates syntax against IETF RFC 8259 (https://datatracker.ietf.org/doc/html/rfc8259) and highlights errors with line numbers. Collapsible tree view for navigating large objects. Minify option for production payloads. No data leaves your browser — all processing happens client-side, ensuring privacy for U.S. developers, students, and enterprise users.",
   "pricing": "Free",
-  "pricingDetails": "Completely free — $0 cost versus $12–$29/month developer tool subscriptions. No limits, no account required. All processing happens client-side.",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Everything runs in your browser.",
   "image": "/thumbnails/json.svg",
-  "url": "https://jsonformatter.curiousconcept.com/",
-  "tags": ["developer", "json", "debugging", "validation", "instant tool", "instant help"],
-  "maker": "Curious Concept",
+  "url": "https://instanten.com/tools/json-formatter/",
+  "tags": [
+    "developer",
+    "json",
+    "debugging",
+    "validation",
+    "instant tool",
+    "instant help"
+  ],
+  "maker": "Instanten",
   "addedDate": "2024-01-20",
   "updatedDate": "2024-10-10",
   "features": [

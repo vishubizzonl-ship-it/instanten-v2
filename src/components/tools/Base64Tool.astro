@@ -1,0 +1,85 @@
+---
+/** Base64 encoder / decoder — UTF-8 safe, RFC 4648. */
+---
+<div class="tool-shell" data-tool-root="base64-encoder">
+  <div class="tool-head">
+    <h2 class="tool-title">Encode or decode Base64</h2>
+    <p class="tool-hint">Emoji aur Indian languages bhi sahi round-trip hote hain.</p>
+  </div>
+  <div class="tool-row" style="margin-bottom:12px" role="group" aria-label="Mode">
+    <button type="button" class="tool-btn tool-btn--primary" data-b64-mode="encode" aria-pressed="true">Encode → Base64</button>
+    <button type="button" class="tool-btn" data-b64-mode="decode" aria-pressed="false">Decode ← Base64</button>
+  </div>
+  <label class="tool-field">
+    Input
+    <textarea class="tool-textarea" data-b64-input spellcheck="false" placeholder="Type text here…"></textarea>
+  </label>
+  <p class="tool-error" data-b64-error hidden></p>
+  <pre class="tool-out" data-b64-out aria-live="polite"></pre>
+  <div class="tool-row" style="margin-top:12px">
+    <button type="button" class="tool-btn" data-b64-copy>Copy output</button>
+    <button type="button" class="tool-btn" data-b64-clear>Clear</button>
+  </div>
+</div>
+
+<script>
+  import { encodeBase64, decodeBase64 } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="base64-encoder"]');
+  if (root) {
+    const input = root.querySelector('[data-b64-input]');
+    const out = root.querySelector('[data-b64-out]');
+    const err = root.querySelector('[data-b64-error]');
+    let mode = 'encode';
+
+    const run = () => {
+      if (!input.value) {
+        out.textContent = '';
+        err.hidden = true;
+        return;
+      }
+      if (mode === 'encode') {
+        err.hidden = true;
+        out.textContent = encodeBase64(input.value);
+        return;
+      }
+      const res = decodeBase64(input.value);
+      if (res.ok) {
+        err.hidden = true;
+        out.textContent = res.output;
+      } else {
+        out.textContent = '';
+        err.hidden = false;
+        err.textContent = res.error;
+      }
+    };
+
+    root.querySelectorAll('[data-b64-mode]').forEach((button) => {
+      button.addEventListener('click', () => {
+        mode = button.dataset.b64Mode;
+        root.querySelectorAll('[data-b64-mode]').forEach((other) => {
+          const active = other === button;
+          other.classList.toggle('tool-btn--primary', active);
+          other.setAttribute('aria-pressed', String(active));
+        });
+        run();
+      });
+    });
+    root.querySelector('[data-b64-clear]').addEventListener('click', () => {
+      input.value = '';
+      out.textContent = '';
+      err.hidden = true;
+    });
+    root.querySelector('[data-b64-copy]').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(out.textContent ?? '');
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = 'Copy output'), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    });
+    input.addEventListener('input', run);
+  }
+</script>

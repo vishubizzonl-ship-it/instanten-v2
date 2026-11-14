@@ -17,7 +17,8 @@
     "test:site:update": "node tests/run.mjs --update-baseline"
   },
   "dependencies": {
-    "astro": "^6.4.8"
+    "astro": "^6.4.8",
+    "qrcode-generator": "^2.0.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",

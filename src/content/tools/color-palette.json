@@ -5,11 +5,18 @@
   "description": "Generate harmonious U.S.-accessible color palettes from a single color with W3C WCAG 2.2 Level AA contrast verification (4.5:1 normal text, 3:1 large text) for ADA Title III and Section 508 compliance.",
   "longDescription": "Color Palette helps designers create beautiful, accessible color schemes for U.S. audiences. Input a base color to generate complementary, analogous, triadic, and monochromatic palettes. Contrast guidance uses W3C WCAG 2.2 Level AA ratios — 4.5:1 for normal text and 3:1 for large text — applied across U.S. ADA Title III and Section 508 accessible web design. Export as CSS variables, Tailwind config, Figma JSON, Adobe ASE, and more. Save and share palettes with teams.",
   "pricing": "Free",
-  "pricingDetails": "Completely free — $0 cost versus $3/month single-purpose palette subscriptions. No account required. No usage cap.",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Everything runs in your browser.",
   "image": "/thumbnails/color-palette.svg",
-  "url": "https://coolors.co/",
-  "tags": ["design", "colors", "accessibility", "design-systems", "instant tool", "instant help"],
-  "maker": "Coolors",
+  "url": "https://instanten.com/tools/color-palette/",
+  "tags": [
+    "design",
+    "colors",
+    "accessibility",
+    "design-systems",
+    "instant tool",
+    "instant help"
+  ],
+  "maker": "Instanten",
   "addedDate": "2024-03-15",
   "updatedDate": "2024-12-10",
   "features": [

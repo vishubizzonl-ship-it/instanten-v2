@@ -1,0 +1,85 @@
+---
+/** Meta tag generator — title/description/OG/Twitter block. */
+---
+<div class="tool-shell" data-tool-root="meta-tag-generator">
+  <div class="tool-head">
+    <h2 class="tool-title">Generate meta tags</h2>
+    <p class="tool-hint">Title 50–60 chars, description 120–160 chars — counters niche.</p>
+  </div>
+
+  <div class="tool-grid-2">
+    <label class="tool-field">
+      Page title (<span data-meta-title-count>0</span>/60)
+      <input class="tool-input" data-meta-title placeholder="Free Online Tools Hub for Instant Work" />
+    </label>
+    <label class="tool-field">
+      Site name
+      <input class="tool-input" data-meta-site value="Instanten" />
+    </label>
+    <label class="tool-field" style="grid-column:1/-1">
+      Description (<span data-meta-desc-count>0</span>/160)
+      <textarea class="tool-textarea" data-meta-desc style="min-height:90px" placeholder="Instanten is a free online tools hub with 12 instant tools for instant work."></textarea>
+    </label>
+    <label class="tool-field">
+      Canonical URL
+      <input class="tool-input" data-meta-url value="https://instanten.com/" inputmode="url" />
+    </label>
+    <label class="tool-field">
+      Social image URL (1200×630 PNG)
+      <input class="tool-input" data-meta-image value="https://instanten.com/og-instanten.png" inputmode="url" />
+    </label>
+  </div>
+
+  <div class="tool-row" style="margin-top:14px">
+    <button type="button" class="tool-btn" data-meta-copy>Copy tags</button>
+  </div>
+
+  <pre class="tool-out" data-meta-out style="max-height:280px"></pre>
+  <p class="tool-note" data-meta-hint></p>
+</div>
+
+<script>
+  import { metaTags } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="meta-tag-generator"]');
+  if (root) {
+    const title = root.querySelector('[data-meta-title]');
+    const site = root.querySelector('[data-meta-site]');
+    const desc = root.querySelector('[data-meta-desc]');
+    const url = root.querySelector('[data-meta-url]');
+    const image = root.querySelector('[data-meta-image]');
+    const out = root.querySelector('[data-meta-out]');
+    const hint = root.querySelector('[data-meta-hint]');
+
+    const update = () => {
+      root.querySelector('[data-meta-title-count]').textContent = title.value.length;
+      root.querySelector('[data-meta-desc-count]').textContent = desc.value.length;
+      out.textContent = metaTags({
+        title: title.value.trim(),
+        description: desc.value.trim(),
+        url: url.value.trim(),
+        image: image.value.trim(),
+        siteName: site.value.trim(),
+      });
+
+      const notes = [];
+      if (title.value.length > 60) notes.push('Title lamba hai — search result mein cut hoga.');
+      if (desc.value.length > 160) notes.push('Description lamba hai — 120–160 chars rakho.');
+      if (url.value && !url.value.startsWith('http')) notes.push('Canonical absolute URL hona chahiye (https:// se shuru).');
+      hint.textContent = notes.join(' ');
+    };
+
+    [title, site, desc, url, image].forEach((el) => el.addEventListener('input', update));
+    root.querySelector('[data-meta-copy]').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(out.textContent ?? '');
+        button.textContent = 'Copied ✓';
+        setTimeout(() => (button.textContent = 'Copy tags'), 1200);
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+    });
+    update();
+  }
+</script>

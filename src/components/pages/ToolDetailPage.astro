@@ -2,6 +2,19 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import ToolFaq from '../ToolFaq.astro';
+import JsonFormatterTool from '../tools/JsonFormatterTool.astro';
+import Base64Tool from '../tools/Base64Tool.astro';
+import WordCounterTool from '../tools/WordCounterTool.astro';
+import PasswordTool from '../tools/PasswordTool.astro';
+import QrGeneratorTool from '../tools/QrGeneratorTool.astro';
+import ImageCompressorTool from '../tools/ImageCompressorTool.astro';
+import ColorPaletteTool from '../tools/ColorPaletteTool.astro';
+import CssGridTool from '../tools/CssGridTool.astro';
+import MarkdownTool from '../tools/MarkdownTool.astro';
+import MetaTagTool from '../tools/MetaTagTool.astro';
+import RulerTool from '../tools/RulerTool.astro';
+import RegexTool from '../tools/RegexTool.astro';
+
 import { toolFaqs } from '../../i18n/toolFaqs/en';
 import { getCollection } from 'astro:content';
 import { pricingSlug } from '../../utils/filters';
@@ -55,6 +68,27 @@ const otherTools = allTools.filter(t => t.data.slug !== tool.data.slug);
 const relatedTools = otherTools
   .filter(t => t.data.category === category || (t.data.tags || []).some(tag => tags.includes(tag)))
   .slice(0, 4);
+
+/**
+ * In-page tool: har listing ka apna working tool isi page par chalta hai.
+ * External "visit website" model hata diya — instanten khud hub hai.
+ */
+const toolComponents = {
+  'json-formatter': JsonFormatterTool,
+  'base64-encoder': Base64Tool,
+  'word-counter': WordCounterTool,
+  'password-generator': PasswordTool,
+  'qr-generator': QrGeneratorTool,
+  'image-compressor': ImageCompressorTool,
+  'color-palette': ColorPaletteTool,
+  'css-grid-generator': CssGridTool,
+  'markdown-editor': MarkdownTool,
+  'meta-tag-generator': MetaTagTool,
+  'online-ruler': RulerTool,
+  'regex-tester': RegexTool,
+} as const;
+
+const ToolIsland = toolComponents[tool.data.slug as keyof typeof toolComponents];
 
 const pageTitle = `${localized.name} — ${SITE_NAME}`;
 const pageDescription = localized.description;
@@ -241,20 +275,18 @@ const breadcrumbs = [
       </section>
     )}
 
-    <div class="pt-8 border-t border-border-hairline">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary inline-flex w-full sm:w-auto px-8 py-4 text-base"
-        aria-label={`${t('tools.visit')} ${localized.name}`}
-      >
-        {t('tools.visit')}
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M7 13h6M13 13V7M13 13 6.5 6.5" />
-        </svg>
-      </a>
-    </div>
+    {/* Working tool — page ke andar hi, koi external website nahi */}
+    {ToolIsland && (
+      <section id="tool" class="pt-8 border-t border-border-hairline" aria-labelledby="tool-heading">
+        <h2 id="tool-heading" class="font-display font-semibold text-body-lg text-ink mb-4">
+          Use the {localized.name} right here
+        </h2>
+        <ToolIsland />
+        <p class="tool-note" style="margin-top:10px">
+          Sab processing aapke browser mein hoti hai — koi file, text ya image upload nahi hoti.
+        </p>
+      </section>
+    )}
 
     {(maker || addedDate) && (
       <footer class="mt-10 pt-6 border-t border-border-hairline">

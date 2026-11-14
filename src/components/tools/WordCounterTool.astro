@@ -1,0 +1,70 @@
+---
+/** Word counter — live words/chars/sentences + keyword density. */
+---
+<div class="tool-shell" data-tool-root="word-counter">
+  <div class="tool-head">
+    <h2 class="tool-title">Count words as you type</h2>
+    <p class="tool-hint">Reading time 225 wpm, speaking 150 wpm.</p>
+  </div>
+  <label class="tool-field">
+    Your text
+    <textarea class="tool-textarea" data-wc-input placeholder="Paste your draft here…" style="min-height:200px"></textarea>
+  </label>
+  <div class="tool-stats" aria-live="polite">
+    <div class="tool-stat"><b data-wc-words>0</b><span>Words</span></div>
+    <div class="tool-stat"><b data-wc-chars>0</b><span>Characters</span></div>
+    <div class="tool-stat"><b data-wc-charsns>0</b><span>No spaces</span></div>
+    <div class="tool-stat"><b data-wc-sentences>0</b><span>Sentences</span></div>
+    <div class="tool-stat"><b data-wc-paragraphs>0</b><span>Paragraphs</span></div>
+    <div class="tool-stat"><b data-wc-read>0</b><span>Min read</span></div>
+    <div class="tool-stat"><b data-wc-speak>0</b><span>Min speak</span></div>
+    <div class="tool-stat"><b data-wc-limit>0</b><span>% of 300 words</span></div>
+  </div>
+  <table class="tool-table" data-wc-table hidden>
+    <thead>
+      <tr><th>Keyword</th><th>Count</th><th>Density</th></tr>
+    </thead>
+    <tbody data-wc-keywords></tbody>
+  </table>
+</div>
+
+<script>
+  import { countText, keywordDensity } from '../../lib/tools/core.mjs';
+
+  const root = document.querySelector('[data-tool-root="word-counter"]');
+  if (root) {
+    const input = root.querySelector('[data-wc-input]');
+    const table = root.querySelector('[data-wc-table]');
+    const tbody = root.querySelector('[data-wc-keywords]');
+    const set = (key, value) => {
+      const el = root.querySelector(`[data-wc-${key}]`);
+      if (el) el.textContent = String(value);
+    };
+
+    const update = () => {
+      const stats = countText(input.value);
+      set('words', stats.words);
+      set('chars', stats.chars);
+      set('charsns', stats.charsNoSpaces);
+      set('sentences', stats.sentences);
+      set('paragraphs', stats.paragraphs);
+      set('read', stats.readingMinutes);
+      set('speak', stats.speakingMinutes);
+      set('limit', Math.min(999, Math.round((stats.words / 300) * 100)));
+
+      const keywords = keywordDensity(input.value, 6).filter((k) => k.count > 1);
+      if (keywords.length === 0) {
+        table.hidden = true;
+        tbody.innerHTML = '';
+        return;
+      }
+      table.hidden = false;
+      tbody.innerHTML = keywords
+        .map((k) => `<tr><td>${k.word}</td><td>${k.count}</td><td>${k.percent}%</td></tr>`)
+        .join('');
+    };
+
+    input.addEventListener('input', update);
+    update();
+  }
+</script>

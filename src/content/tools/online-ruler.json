@@ -5,11 +5,17 @@
   "description": "Measure anything on your screen with pixel-perfect accuracy. A lightweight browser-based ruler for U.S. designers and developers using standard NIST-defined units.",
   "longDescription": "Online Ruler provides instant, accurate measurements directly in your browser. No downloads, no sign-ups. Just open, measure, and get results. Primary U.S. measurement options include inches (in) with 1/16\", 1/8\", 1/4\", and 1/2\" fractions, paired cleanly with millimeters (mm), centimeters (cm), and pixels (px). Calibration references the standard U.S. credit/debit card and driver's license (ISO/IEC 7810 ID-1: 3.370 × 2.125 inches / 85.60 × 53.98 mm) and the NIST exact definition (1 international inch = 25.4 millimeters exactly; https://www.nist.gov/pml/owm/metric-si/si-units-length).",
   "pricing": "Free",
-  "pricingDetails": "Completely free with no limitations. No account required. $0 versus $12–$29/month single-purpose SaaS measurement tools.",
+  "pricingDetails": "Free — no sign-up, no usage limit, no paid tier. Everything runs in your browser.",
   "image": "/thumbnails/ruler.svg",
-  "url": "https://www.online-ruler.com/",
-  "tags": ["utility", "design", "measurement", "instanten tool", "instant online"],
-  "maker": "Ginifab",
+  "url": "https://instanten.com/tools/online-ruler/",
+  "tags": [
+    "utility",
+    "design",
+    "measurement",
+    "instanten tool",
+    "instant online"
+  ],
+  "maker": "Instanten",
   "addedDate": "2024-01-15",
   "updatedDate": "2024-11-20",
   "features": [

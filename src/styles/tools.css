@@ -1,0 +1,454 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   In-page tools — shared UI (instanten.com tools hub)
+   Har tool page par yehi classes use hoti hain, taaki 12 tools ek jaise lagein.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.tool-shell {
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: var(--radius-card, 1rem);
+  background: var(--surface, #fff);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.tool-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tool-title {
+  font-family: var(--font-display, inherit);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink, #17171c);
+  margin: 0;
+}
+
+.tool-hint {
+  font-size: 13px;
+  color: var(--muted, #6b6b7b);
+  margin: 0;
+}
+
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted, #6b6b7b);
+}
+
+.tool-grid-2 {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .tool-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tool-input,
+.tool-textarea,
+.tool-select {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink, #17171c);
+  background: #fff;
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+}
+
+.tool-textarea {
+  min-height: 160px;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.tool-input:focus-visible,
+.tool-textarea:focus-visible,
+.tool-select:focus-visible,
+.tool-btn:focus-visible {
+  outline: 2px solid var(--accent-start, #5b5bd6);
+  outline-offset: 2px;
+}
+
+.tool-btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  background: #fff;
+  color: var(--ink, #17171c);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tool-btn:hover {
+  background: #f5f5fa;
+}
+
+.tool-btn--primary {
+  background: var(--accent-deep, #2f2f7a);
+  border-color: var(--accent-deep, #2f2f7a);
+  color: #fff;
+}
+
+.tool-btn--primary:hover {
+  background: #26265f;
+}
+
+.tool-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tool-out {
+  margin-top: 14px;
+  min-height: 90px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  background: #fafafd;
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--ink, #17171c);
+  overflow-x: auto;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.tool-error {
+  margin-top: 12px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: #fff1f1;
+  border: 1px solid #f5c2c2;
+  color: #8a1f1f;
+}
+
+.tool-note {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--muted, #6b6b7b);
+}
+
+.tool-stats {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+@media (min-width: 640px) {
+  .tool-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.tool-stat {
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fafafd;
+}
+
+.tool-stat b {
+  display: block;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink, #17171c);
+}
+
+.tool-stat span {
+  font-size: 12px;
+  color: var(--muted, #6b6b7b);
+}
+
+.tool-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ink, #17171c);
+}
+
+.tool-range {
+  width: 100%;
+  accent-color: var(--accent-deep, #2f2f7a);
+}
+
+/* swatches */
+.tool-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tool-swatch {
+  width: 74px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  font-size: 11px;
+  text-align: center;
+  background: #fff;
+}
+
+.tool-swatch i {
+  display: block;
+  height: 46px;
+}
+
+.tool-swatch span {
+  display: block;
+  padding: 4px 2px;
+  font-family: ui-monospace, monospace;
+  color: var(--ink, #17171c);
+}
+
+.tool-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.tool-table th,
+.tool-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-hairline, #e6e6ec);
+}
+
+.tool-table th {
+  font-weight: 600;
+  color: var(--ink, #17171c);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tool-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.tool-badge--pass {
+  background: #e7f7ec;
+  color: #17703a;
+}
+
+.tool-badge--fail {
+  background: #fdeaea;
+  color: #8a1f1f;
+}
+
+/* grid preview */
+.tool-grid-preview {
+  display: grid;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px dashed var(--border-hairline, #d8d8e2);
+  border-radius: 10px;
+  background: #fbfbfe;
+}
+
+.tool-grid-preview div {
+  background: #e8e8f7;
+  border: 1px solid #c9c9e6;
+  border-radius: 6px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #3b3b6b;
+}
+
+/* markdown preview */
+.tool-preview {
+  margin-top: 14px;
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink, #17171c);
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.tool-preview h1,
+.tool-preview h2,
+.tool-preview h3 {
+  margin: 0.8em 0 0.4em;
+  font-family: var(--font-display, inherit);
+}
+
+.tool-preview h1 {
+  font-size: 26px;
+}
+
+.tool-preview h2 {
+  font-size: 21px;
+}
+
+.tool-preview h3 {
+  font-size: 18px;
+}
+
+.tool-preview p {
+  margin: 0.6em 0;
+}
+
+.tool-preview ul,
+.tool-preview ol {
+  padding-left: 22px;
+  margin: 0.6em 0;
+}
+
+.tool-preview pre {
+  background: #f4f4f9;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
+}
+
+.tool-preview code {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  background: #f4f4f9;
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+.tool-preview pre code {
+  background: none;
+  padding: 0;
+}
+
+.tool-preview blockquote {
+  border-left: 3px solid var(--border-hairline, #d8d8e2);
+  margin: 0.8em 0;
+  padding-left: 14px;
+  color: var(--muted, #6b6b7b);
+}
+
+/* ruler */
+.tool-ruler-wrap {
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.tool-ruler-wrap svg {
+  display: block;
+}
+
+/* qr */
+.tool-qr-out {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 14px;
+}
+
+.tool-qr-out canvas,
+.tool-qr-out img {
+  border: 1px solid var(--border-hairline, #e6e6ec);
+  border-radius: 8px;
+  background: #fff;
+  max-width: 100%;
+  height: auto;
+}
+
+/* image compressor */
+.tool-drop {
+  border: 1.5px dashed var(--border-hairline, #d8d8e2);
+  border-radius: 10px;
+  padding: 22px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted, #6b6b7b);
+  background: #fbfbfe;
+}
+
+.tool-drop img {
+  max-width: 100%;
+  max-height: 220px;
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 6px;
+}
+
+/* mobile — phone Chrome par horizontal scroll na aaye */
+@media (max-width: 640px) {
+  .tool-shell {
+    padding: 14px;
+  }
+  .tool-btn {
+    padding: 10px 14px;
+  }
+  .tool-stat b {
+    font-size: 19px;
+  }
+  .tool-row {
+    flex-wrap: wrap;
+  }
+  .tool-row > .tool-btn {
+    flex: 1 1 auto;
+  }
+  /* 16px se chhota font iOS/Android par auto-zoom karata hai */
+  .tool-input,
+  .tool-textarea,
+  .tool-select {
+    font-size: 16px;
+  }
+  .tool-out,
+  .tool-preview,
+  .tool-table {
+    max-width: 100%;
+  }
+  .tool-swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tool-ruler-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tool-grid-preview {
+    grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+  }
+}

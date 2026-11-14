@@ -44,8 +44,8 @@ if (filters.pricing) queryParams.pricing = filters.pricing;
 if (filters.tags?.length) queryParams.tags = filters.tags.join(',');
 if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
 
-const pageTitle = 'All Tools — instanten';
-const pageDescription = `Browse all ${allTools.length} curated SaaS tools. Filter by category, pricing, and tags.`;
+const pageTitle = 'All Free Instant Tools — instanten';
+const pageDescription = `All ${allTools.length} free instant tools on instanten — JSON formatter, word counter, QR generator and more. Each one runs in your browser with no sign-up.`;
 
 // FAQ sirf main hub page (page 1, bina filter) par — filtered/paginated
 // views par duplicate FAQPage nahi chahiye.
@@ -55,7 +55,7 @@ const faqs = showFaq ? hubFaqs : [];
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'All SaaS Tools',
+  name: 'All free instant tools',
   description: pageDescription,
   numberOfItems: allTools.length,
   itemListElement: paginatedTools.map((tool, index) => ({
@@ -94,7 +94,7 @@ const breadcrumbs = [
     <header class="max-w-3xl mx-auto text-center mb-12">
       <h1 class="font-display font-semibold text-display text-ink mb-4">All Tools</h1>
       <p class="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        Browse our full directory of {allTools.length} curated SaaS tools. Filter, sort, and find exactly what you need.
+        {allTools.length} free instant tools, all running right here in your browser. Filter, sort, and open the one you need — no sign-up, no install.
       </p>
     </header>
   </section>
