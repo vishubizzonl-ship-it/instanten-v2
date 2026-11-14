@@ -3,6 +3,7 @@ import '../styles/app.css';
 import '../styles/subpages.css';
 import '../styles/responsive.css';
 import Header from '../components/Header.astro';
+import InstrumentNav from '../components/instruments/InstrumentNav.astro';
 import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
@@ -32,6 +33,13 @@ interface Props {
   section?: string;
   tags?: string[];
   lang?: string;
+  /**
+   * 'site' (default) = instanten ka header.
+   * 'instrument' = chaar sensor tools ke pages par compassinstant wala header
+   * (logo online<tool>, language pill, dark toggle, tool pills) — wahi jo tool
+   * page ka screenshot dikhata hai. Footer dono par ek hi rehta hai.
+   */
+  chrome?: 'site' | 'instrument';
 }
 
 const {
@@ -54,7 +62,21 @@ const {
   section,
   tags = [],
   lang,
+  chrome = 'site',
 } = Astro.props;
+
+/**
+ * chrome="instrument" ke liye: is page ka tool slug (`/tools/onlineqibla/` →
+ * onlineqibla), taaki header ka logo, pills aur language switch usi tool ke
+ * rahen.
+ */
+const INSTRUMENT_SLUGS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'] as const;
+const pathAfterLocale = Astro.url.pathname
+  .split('/')
+  .filter(Boolean)
+  .filter((segment, index) => index > 0 || !['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'].includes(segment));
+const instrumentSlug =
+  (INSTRUMENT_SLUGS as readonly string[]).find((slug) => pathAfterLocale[1] === slug) ?? 'onlinecompass';
 
 const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
 const t = useTranslations(detectedLang);
@@ -301,9 +323,17 @@ gtag('config', ${JSON.stringify(GA_MEASUREMENT_ID)}, {
   </head>
   <body class="min-h-screen bg-canvas font-body text-ink antialiased">
     <a href="#main-content" class="skip-link">{t('skip.link')}</a>
-    <Header />
-    <MobileDrawer />
-    <SearchPanel />
+    {
+      chrome === 'instrument' ? (
+        <InstrumentNav slug={instrumentSlug} />
+      ) : (
+        <>
+          <Header />
+          <MobileDrawer />
+          <SearchPanel />
+        </>
+      )
+    }
     <main class="w-full flex-1" id="main-content" tabindex="-1">
       <slot />
     </main>

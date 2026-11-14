@@ -2,9 +2,10 @@
 /**
  * Sensor tool page shell (compass, bubble level, speedometer, Qibla).
  *
- * Chaaron tools ka page structure ek hi hai, sirf island aur copy alag hai:
- *   1. breadcrumb + H1 (localized tool naam)
- *   2. working island (data-tool-root ke saath, taaki test usko pakad sake)
+ * Chaaron tools ka page structure ek hi hai, sirf island aur copy alag hai.
+ * Layout order compassinstant ke tool page jaisa hai — tool card sabse upar,
+ * header bhi instrument chrome (logo online<tool>, language pill, tool pills):
+ *   1. working island (data-tool-root ke saath, taaki test usko pakad sake)
  *   3. "how it works" — 3 steps, compassinstant silo ki localized copy
  *   4. long-form about copy (compassinstant ka prose, jaisa tha waisa hi)
  *   5. guides list (titles + one-line descriptions — links Batch 2 mein, jab
@@ -15,12 +16,11 @@
  * text localized page par bhejna silo rule todta hai.
  */
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../Breadcrumbs.astro';
 import ToolFaq from '../ToolFaq.astro';
 import InlineCopy from '../InlineCopy.astro';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
-import { localizeTool, localizeToolCategory } from '../../i18n/toolContent';
+import { localizeTool } from '../../i18n/toolContent';
 import { instrumentUi } from '../../i18n/instruments/ui';
 import { instrumentSeo, fitTitle } from '../../i18n/instruments/seo';
 import type { LangCode } from '../../i18n/ui';
@@ -82,9 +82,8 @@ const jsonLd = {
   dateModified: tool.data.updatedDate,
 };
 
-const categoryLabel = localizeToolCategory(lang, tool.data.category);
-// Do shakal chahiye: Breadcrumbs component {label, href} maangta hai aur
-// SeoHead ka JSON-LD {name, item} — dono ek hi source se banaye jaate hain.
+// Visible breadcrumb nahi hai (compassinstant ke page jaisa), par schema ke
+// liye BreadcrumbList rehta hai — SEO uska haq hai.
 const crumbItems = [
   { label: t('nav.home'), href: translatePath('/') },
   { label: t('tools.allTools'), href: translatePath('/tools/') },
@@ -105,17 +104,12 @@ const breadcrumbs = crumbItems.map((crumb) => ({
   canonicalURL={canonicalURL}
   breadcrumbs={breadcrumbs}
   lang={lang as LangCode}
+  chrome="instrument"
 >
-  <div class="site-container">
-    <Breadcrumbs items={crumbItems} />
-  </div>
-
-  <article class="site-container max-w-5xl">
-    <header class="pb-6 pt-6 lg:pb-8">
-      <p class="eyebrow mb-3">{categoryLabel}</p>
-      <h1 class="font-display text-heading-lg text-ink lg:text-display">{localized.name}</h1>
-      <p class="mt-4 max-w-2xl text-body-lg leading-relaxed text-body">{localized.description}</p>
-    </header>
+  <article class="mx-auto max-w-5xl">
+    {/* Page ka ek hi h1 — screen par dikhta nahi (card ke andar ka title wahi
+        hai), par crawler aur screen reader ke liye maujood hai. */}
+    <h1 class="sr-only">{localized.name}</h1>
 
     <slot />
 

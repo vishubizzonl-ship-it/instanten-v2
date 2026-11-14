@@ -135,6 +135,9 @@ export function run(pages, outDir) {
     for (const pill of pills) {
       // language picker ka pill jaan-boojh kar hai (header + footer dono)
       if (pill.includes('language-picker-btn')) continue;
+      // Sensor tools ka apna header (compassinstant se): wahan nav items pill
+      // hain aur wo jaan-boojh kar hain — rule CTAs ke liye hai, nav ke liye nahi.
+      if (pill.includes('data-nav-pill')) continue;
       // circles (social icons, scroll-to-top) allowed: same width & height
       const equalBox = /w-(\d+)\s+h-\1\b/.test(pill) || /h-(\d+)\s+w-\1\b/.test(pill);
       check(equalBox, `pill-shaped CTA bacha hua hai :: ${url} :: ${pill.slice(0, 90)}`);

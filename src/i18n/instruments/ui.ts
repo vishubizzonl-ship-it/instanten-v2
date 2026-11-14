@@ -12,6 +12,10 @@
  */
 export const instrumentUi = {
   en: {
+    "nav.primary": "Primary navigation",
+    "nav.language": "Language",
+    "nav.theme": "Toggle theme",
+    "nav.home": "Home",
     "compass.ui.title": "Compass",
     "compass.ui.active": "Active",
     "compass.ui.denied": "Denied",
@@ -109,6 +113,10 @@ export const instrumentUi = {
     "compass.how.title": "How to use",
   },
   es: {
+    "nav.primary": "Navegaci\u00f3n principal",
+    "nav.language": "Idioma",
+    "nav.theme": "Cambiar tema",
+    "nav.home": "Inicio",
     "compass.ui.title": "Brújula",
     "compass.ui.active": "Activo",
     "compass.ui.denied": "Denegado",
@@ -206,6 +214,10 @@ export const instrumentUi = {
     "compass.how.title": "Cómo usar",
   },
   ja: {
+    "nav.primary": "\u30e1\u30a4\u30f3\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3",
+    "nav.language": "\u8a00\u8a9e",
+    "nav.theme": "\u30c6\u30fc\u30de\u3092\u5207\u308a\u66ff\u3048\u308b",
+    "nav.home": "\u30db\u30fc\u30e0",
     "compass.ui.title": "コンパス",
     "compass.ui.active": "アクティブ",
     "compass.ui.denied": "拒否されました",
@@ -303,6 +315,10 @@ export const instrumentUi = {
     "compass.how.title": "使い方",
   },
   fr: {
+    "nav.primary": "Navigation principale",
+    "nav.language": "Langue",
+    "nav.theme": "Changer de th\u00e8me",
+    "nav.home": "Accueil",
     "compass.ui.title": "Boussole",
     "compass.ui.active": "Actif",
     "compass.ui.denied": "Refusé",
@@ -400,6 +416,10 @@ export const instrumentUi = {
     "compass.how.title": "Comment utiliser",
   },
   de: {
+    "nav.primary": "Hauptnavigation",
+    "nav.language": "Sprache",
+    "nav.theme": "Design wechseln",
+    "nav.home": "Startseite",
     "compass.ui.title": "Kompass",
     "compass.ui.active": "Aktiv",
     "compass.ui.denied": "Abgelehnt",
@@ -497,6 +517,10 @@ export const instrumentUi = {
     "compass.how.title": "Verwendung",
   },
   pt: {
+    "nav.primary": "Navega\u00e7\u00e3o principal",
+    "nav.language": "Idioma",
+    "nav.theme": "Alternar tema",
+    "nav.home": "In\u00edcio",
     "compass.ui.title": "Bússola",
     "compass.ui.active": "Ativo",
     "compass.ui.denied": "Negado",
@@ -594,6 +618,10 @@ export const instrumentUi = {
     "compass.how.title": "Como usar",
   },
   ko: {
+    "nav.primary": "\uc8fc\uc694 \ub0b4\ube44\uac8c\uc774\uc158",
+    "nav.language": "\uc5b8\uc5b4",
+    "nav.theme": "\ud14c\ub9c8 \uc804\ud658",
+    "nav.home": "\ud648",
     "compass.ui.title": "나침반",
     "compass.ui.active": "활성",
     "compass.ui.denied": "거부됨",
@@ -691,6 +719,10 @@ export const instrumentUi = {
     "compass.how.title": "사용 방법",
   },
   it: {
+    "nav.primary": "Navigazione principale",
+    "nav.language": "Lingua",
+    "nav.theme": "Cambia tema",
+    "nav.home": "Home",
     "compass.ui.title": "Bussola",
     "compass.ui.active": "Attivo",
     "compass.ui.denied": "Negato",
@@ -788,6 +820,10 @@ export const instrumentUi = {
     "compass.how.title": "Come usare",
   },
   nl: {
+    "nav.primary": "Hoofdnavigatie",
+    "nav.language": "Taal",
+    "nav.theme": "Thema wisselen",
+    "nav.home": "Startpagina",
     "compass.ui.title": "Compass",
     "compass.ui.active": "Active",
     "compass.ui.denied": "Denied",
@@ -885,6 +921,10 @@ export const instrumentUi = {
     "compass.how.title": "How to use",
   },
   sv: {
+    "nav.primary": "Huvudnavigering",
+    "nav.language": "Spr\u00e5k",
+    "nav.theme": "Byt tema",
+    "nav.home": "Hem",
     "compass.ui.title": "Compass",
     "compass.ui.active": "Active",
     "compass.ui.denied": "Denied",

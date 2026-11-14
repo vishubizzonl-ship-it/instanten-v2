@@ -1,0 +1,244 @@
+---
+/**
+ * Instrument header — chaar sensor tools (compass, bubble level, speedometer,
+ * Qibla) ke pages par yahi nav chalta hai, compassinstant wala.
+ *
+ * Screenshot se match: logo = full `online<tool>` + tab icon, language pill
+ * (naam + chevron), dark toggle, phir mobile/desktop pills
+ * (Compass · Bubble Level · Speedometer · Qibla) aur uske neeche
+ * Blog · About · Privacy · Terms · Contact.
+ *
+ * Ye instanten ka header replace karta hai sirf inhi 4 pages par (Layout ka
+ * chrome="instrument"); baaki poori site ka header waise hi rehta hai.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { instrumentUi } from '../../i18n/instruments/ui';
+import { instrumentToolCopy } from '../../i18n/instruments/toolCopy';
+import { languages, nonDefaultLangs, type LangCode } from '../../i18n/ui';
+
+const toolSlugs = [
+  'onlinecompass',
+  'onlinebubblelevel',
+  'onlinespeedometer',
+  'onlineqibla',
+] as const;
+type InstrumentSlug = (typeof toolSlugs)[number];
+
+interface Props {
+  slug: InstrumentSlug;
+}
+
+const { slug } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const ui = instrumentUi[lang] ?? instrumentUi.en;
+const copy = instrumentToolCopy[lang] ?? instrumentToolCopy.en;
+
+/** Prefix-free path, taaki language switch usi page ka doosra locale de. */
+const rawPath = Astro.url.pathname;
+const segments = rawPath.split('/').filter(Boolean);
+const barePath = (segments[0] in languages ? '/' + segments.slice(1).join('/') : rawPath) || '/';
+/** path + locale → prefixed path (en prefix-free rehta hai). */
+const withLocale = (path: string, code: LangCode) =>
+  code === 'en' ? path : `/${code}${path}`;
+const localizedPath = (code: LangCode) => withLocale(barePath, code);
+
+const toolPath = (target: InstrumentSlug) => withLocale(`/tools/${target}/`, lang);
+
+const navItems = toolSlugs.map((target) => ({
+  href: toolPath(target),
+  label: copy[target]?.name ?? target,
+  current: target === slug,
+}));
+
+// instanten ke asli routes — compassinstant ke /<tool>/blog|about|… nahi.
+const companyItems = [
+  { href: withLocale('/blog/', lang), label: t('nav.blog') },
+  { href: withLocale('/about/', lang), label: t('nav.about') },
+  { href: withLocale('/privacy-policy/', lang), label: t('nav.privacy') },
+  { href: withLocale('/terms/', lang), label: t('nav.terms') },
+  { href: withLocale('/contact/', lang), label: t('nav.contact') },
+];
+
+const langList = ['en', ...nonDefaultLangs] as LangCode[];
+---
+
+<nav class="sticky top-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-hairline" aria-label={ui['nav.primary'] ?? slug}>
+  <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between gap-1.5 sm:gap-4 min-w-0">
+      <!-- Logo: icon + full online<tool> wordmark -->
+      <a
+        href={toolPath(slug)}
+        data-nav-pill
+        class="flex items-center gap-1.5 sm:gap-2.5 rounded-full px-1.5 sm:px-2 py-1.5 -ml-1.5 sm:-ml-2 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none transition-shadow min-w-0"
+        aria-label={`${slug} — ${t('nav.home')}`}
+      >
+        <span class="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 32 32" class="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="var(--ink)" />
+            <circle cx="16" cy="16" r="11" stroke="var(--canvas)" stroke-width="1.25" opacity="0.28" />
+            <path d="M16 7 L19 16 L16 13.5 L13 16 Z" fill="var(--canvas)" />
+            <path d="M16 25 L13 16 L16 18.5 L19 16 Z" fill="var(--canvas)" opacity="0.4" />
+            <circle cx="16" cy="16" r="1.7" fill="var(--canvas)" />
+          </svg>
+        </span>
+        <span class="font-display text-sm sm:text-base font-bold tracking-tight text-ink whitespace-nowrap truncate max-w-[9.5rem] sm:max-w-none">
+          {slug}
+        </span>
+      </a>
+
+      <!-- Desktop tool pills -->
+      <div class="hidden md:flex items-center gap-1">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              aria-current={item.current ? 'page' : undefined}
+              data-nav-pill
+              class:list={[
+                'rounded-full px-3 py-1.5 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none',
+                item.current
+                  ? 'text-ink font-medium bg-surface border border-hairline'
+                  : 'text-body hover:text-ink',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Right: language + theme -->
+      <div class="flex items-center gap-2 shrink-0">
+        <div class="relative" id="tool-lang-wrapper">
+          <button
+            type="button"
+            onclick="toggleToolLang()"
+            id="tool-lang-btn"
+            aria-label={ui['nav.language'] ?? 'Language'}
+            aria-expanded="false"
+            aria-haspopup="true"
+            data-nav-pill
+            class="inline-flex items-center gap-1.5 rounded-full bg-surface border border-hairline text-ink text-xs font-medium px-2 sm:px-3 py-2 hover:bg-canvas hover:border-ink/10 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none shadow-[0px_1px_1px_rgba(0,0,0,0.04)]"
+          >
+            <span id="tool-lang-label">{languages[lang]}</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 4 6 8 10 4" /></svg>
+          </button>
+          <div id="tool-lang-menu" class="hidden absolute right-0 top-full mt-2 w-44 bg-surface border border-hairline rounded-md shadow-lg overflow-hidden z-50">
+            {
+              langList.map((code) => (
+                <a
+                  href={localizedPath(code)}
+                  hreflang={code}
+                  lang={code}
+                  aria-current={code === lang ? 'true' : undefined}
+                  class:list={[
+                    'flex items-center justify-between gap-2 px-4 py-2.5 text-sm transition-colors',
+                    code === lang ? 'text-ink font-medium bg-canvas' : 'text-body hover:text-ink hover:bg-canvas',
+                  ]}
+                >
+                  <span>{languages[code]}</span>
+                  {code === lang && <span aria-hidden="true" class="text-xs">✓</span>}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onclick="toggleToolTheme()"
+          id="tool-theme-btn"
+          aria-label={ui['nav.theme'] ?? 'Theme'}
+          title={ui['nav.theme'] ?? 'Theme'}
+          class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-surface border border-hairline text-ink hover:bg-canvas hover:border-ink/10 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none shadow-[0px_1px_1px_rgba(0,0,0,0.04)]"
+        >
+          <span id="tool-theme-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile: tool pills + company links, dono reachable -->
+  <div class="md:hidden border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={item.current ? 'page' : undefined}
+            data-nav-pill
+            class:list={[
+              'whitespace-nowrap rounded-full px-2 py-1 text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none',
+              item.current ? 'text-ink font-medium bg-surface border border-hairline' : 'text-body hover:text-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-hairline">
+      {
+        companyItems.map((item) => (
+          <a
+            href={item.href}
+            data-nav-pill
+            class="whitespace-nowrap rounded-full px-2 py-1 text-[11px] text-body hover:text-ink transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<script>
+  function toggleToolLang() {
+    const menu = document.getElementById('tool-lang-menu');
+    const btn = document.getElementById('tool-lang-btn');
+    if (!menu || !btn) return;
+    menu.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(!menu.classList.contains('hidden')));
+  }
+  document.addEventListener('click', (event) => {
+    const wrapper = document.getElementById('tool-lang-wrapper');
+    if (wrapper && !wrapper.contains(event.target as Node)) {
+      document.getElementById('tool-lang-menu')?.classList.add('hidden');
+      document.getElementById('tool-lang-btn')?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      document.getElementById('tool-lang-menu')?.classList.add('hidden');
+      document.getElementById('tool-lang-btn')?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function paintToolThemeIcon() {
+    const dark = document.documentElement.classList.contains('dark');
+    const box = document.getElementById('tool-theme-icon');
+    if (!box) return;
+    box.innerHTML = dark
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+  function toggleToolTheme() {
+    const html = document.documentElement;
+    const dark = html.classList.contains('dark');
+    html.classList.toggle('dark', !dark);
+    // instanten ka theme system bhi isi key ko padhta hai
+    try {
+      localStorage.setItem('theme', dark ? 'light' : 'dark');
+    } catch {
+      /* private mode */
+    }
+    paintToolThemeIcon();
+  }
+  paintToolThemeIcon();
+  (window as any).toggleToolLang = toggleToolLang;
+  (window as any).toggleToolTheme = toggleToolTheme;
+</script>

@@ -127,7 +127,13 @@ export function run(pages) {
         const source = readFileSync(`${componentDir}/${file}`, 'utf8');
         check(!/<style[\s>]/.test(source), `${file}: <style> block hai (Tailwind utilities chahiye)`);
         check(!/\bclass="[^"]*\btool-[a-z]/.test(source), `${file}: purani .tool-* class wapas aa gayi`);
-        check(!/rounded-full/.test(source), `${file}: pill-shaped (rounded-full) control hai`);
+        // InstrumentNav ke nav pills jaan-boojh kar pill hain (compassinstant
+        // header jaisa). Baaki islands par pill-shaped control nahi hona chahiye.
+        const pills = source.split('\n').filter((line) => line.includes('rounded-full'));
+        check(
+          file === 'InstrumentNav.astro' || pills.length === 0,
+          `${file}: pill-shaped control hai (${pills.length})`
+        );
       }
     }
   }
@@ -170,6 +176,56 @@ export function run(pages) {
     const html = pages.get(`/tools/${slug}/`) ?? '';
     const group = html.match(/content_group:\s*"([^"]*)"/)?.[1];
     check(group === slug, `${slug}: content_group "${group ?? 'khaali'}" hai, "${slug}" chahiye`);
+  }
+
+  // --- 12b. tool page ka chrome: compassinstant wala header, tool card sabse upar ---
+  for (const slug of SLUGS) {
+    for (const lang of ['en', 'de', 'ja']) {
+      const url = localize(`/tools/${slug}/`, lang);
+      const html = pages.get(url) ?? '';
+      const body = html.slice(html.indexOf('<body'));
+      // header = instrument nav, instanten ka site header nahi
+      check(body.includes('data-nav-pill'), `${slug}/${lang}: instrument nav (pills) nahi mila`);
+      const navTop = body.slice(0, body.indexOf('</nav>'));
+      check(
+        new RegExp(`>\\s*${slug}\\s*<`).test(navTop),
+        `${slug}/${lang}: logo par full online<tool> wordmark nahi`
+      );
+      // chaar tool pills usi locale ke route par jaate hain
+      const navHtml = body.slice(0, body.indexOf('</nav>'));
+      for (const target of SLUGS) {
+        const href = lang === 'en' ? `/tools/${target}/` : `/${lang}/tools/${target}/`;
+        check(navHtml.includes(`href="${href}"`), `${slug}/${lang}: nav mein ${target} ka link nahi`);
+      }
+      // language dropdown + theme toggle
+      check(navHtml.includes('id="tool-lang-menu"'), `${slug}/${lang}: language dropdown nahi`);
+      check(navHtml.includes('id="tool-theme-btn"'), `${slug}/${lang}: theme toggle nahi`);
+      // company links usi locale par
+      const prefix = lang === 'en' ? '' : `/${lang}`;
+      for (const path of ['/blog/', '/about/', '/privacy-policy/', '/terms/', '/contact/']) {
+        check(navHtml.includes(`href="${prefix}${path}"`), `${slug}/${lang}: nav mein ${path} link nahi`);
+      }
+
+      // tool card sabse upar: article ke andar pehla section hi #tool ho
+      const article = html.slice(html.indexOf('<article'));
+      const firstSection = article.indexOf('<section');
+      const toolSection = article.indexOf('<section id="tool"');
+      check(
+        toolSection >= 0 && toolSection === firstSection,
+        `${slug}/${lang}: tool card page ke top par nahi hai`
+      );
+      // bada H1 hero hata diya — card se pehle 300 chars se zyada text nahi
+      const beforeTool = stripTags(article.slice(0, toolSection >= 0 ? toolSection : 0)).trim();
+      check(beforeTool.length < 60, `${slug}/${lang}: tool se pehle hero/heading block hai ("${beforeTool.slice(0, 40)}")`);
+      // visible breadcrumb nahi (screenshot jaisa), schema mein hai
+      check(!/<nav class="breadcrumbs/.test(article), `${slug}/${lang}: breadcrumb abhi bhi page par hai`);
+    }
+  }
+
+  // --- 12c. baaki site ka header waise hi (instrument chrome sirf 4 pages par) ---
+  for (const url of ['/', '/tools/', '/blog/', '/about/']) {
+    const html = pages.get(url) ?? '';
+    check(!html.includes('data-nav-pill'), `${url}: instrument nav site-wide leak ho gaya`);
   }
 
   // --- 13. mobile: island mobile breakpoint lock -----------------------
