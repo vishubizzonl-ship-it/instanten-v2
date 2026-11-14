@@ -117,15 +117,17 @@ build_site(){
   echo "$OUT" > $RUN/lastbuild
 }
 
-# dist ek symlink hai -> naye release par atomically switch.
-# Isliye deploy ke dauraan site kabhi 404 nahi deti.
+# releases/current ek symlink hai -> naye release par atomically switch.
+# (dist naam jaan-boojh kar nahi use kar rahe: Astro build ke waqt apna default
+# outDir "dist" khaali karta hai, aur agar dist live folder ka symlink ho to
+# wahi live site 10-15 second ke liye 404 deti hai.)
 swap_dist(){
   OUT=$(cat $RUN/lastbuild 2>/dev/null)
   [ -n "$OUT" ] && [ -d "$OUT" ] || return 1
-  ln -sfnT "$OUT" dist.tmp || return 1
-  mv -Tf dist.tmp dist || return 1
-  # purane releases rakho, 3 se zyada hata do
-  ls -1dt "$REL"/* 2>/dev/null | tail -n +4 | xargs -r rm -rf
+  ln -sfnT "$(basename "$OUT")" "$REL/current.tmp" || return 1
+  mv -Tf "$REL/current.tmp" "$REL/current" || return 1
+  # purane releases rakho, 3 se zyada hata do (current symlink ko chhod kar)
+  find "$REL" -maxdepth 1 -mindepth 1 -type d | sort -r | tail -n +4 | xargs -r rm -rf
   return 0
 }
 
@@ -227,13 +229,8 @@ if [ ! -d node_modules/astro ]; then
   [ -d node_modules/astro ] || { no "Install fail. Jagah:"; df -h . | tail -1; no "Log: $LOG"; exit 1; }
 fi
 
-# dist pehli baar asli folder ho sakta hai — symlink me badal do, warna
-# atomic swap ka mv -Tf fail hota hai.
-if [ -d dist ] && [ ! -L dist ]; then
-  mkdir -p "$REL"; FIRST="$REL/$(date +%Y%m%d-%H%M%S)"
-  mv dist "$FIRST"; ln -sfnT "$FIRST" dist
-fi
-rm -f dist.tmp
+mkdir -p "$REL"
+rm -f dist.tmp "$REL/current.tmp"
 
 # --------------------------------------------------------------- build
 ok "Build ho raha hai…"

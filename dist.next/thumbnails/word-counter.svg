@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="100%" height="100%" aria-label="Word Counter thumbnail">
+  <rect width="640" height="360" fill="#F0F2FF" />
+  <rect x="60" y="60" width="520" height="240" rx="8" fill="#FFFFFF" stroke="#E1E1E8" stroke-width="1"/>
+  <text x="100" y="110" font-family="DM Sans, sans-serif" font-size="16" fill="#29294B" letter-spacing="0.5">Discover useful SaaS tools,</text>
+  <text x="100" y="140" font-family="DM Sans, sans-serif" font-size="16" fill="#29294B" letter-spacing="0.5">ready in an instant.</text>
+  <text x="100" y="170" font-family="DM Sans, sans-serif" font-size="16" fill="#29294B" letter-spacing="0.5">A curated directory for</text>
+  <text x="100" y="200" font-family="DM Sans, sans-serif" font-size="16" fill="#29294B" letter-spacing="0.5">developers, designers, and</text>
+  <text x="100" y="230" font-family="DM Sans, sans-serif" font-size="16" fill="#29294B" letter-spacing="0.5">builders everywhere.</text>
+  <g transform="translate(100, 250)">
+    <rect width="100" height="60" rx="6" fill="#9895FF" opacity="0.15" stroke="#9895FF" stroke-width="1"/>
+    <text x="50" y="30" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="20" font-weight="600" fill="#514DCC" dominant-baseline="middle">247</text>
+    <text x="50" y="50" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#828282">Words</text>
+  </g>
+  <g transform="translate(220, 250)">
+    <rect width="100" height="60" rx="6" fill="#9895FF" opacity="0.15" stroke="#9895FF" stroke-width="1"/>
+    <text x="50" y="30" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="20" font-weight="600" fill="#514DCC" dominant-baseline="middle">1,542</text>
+    <text x="50" y="50" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#828282">Chars</text>
+  </g>
+  <g transform="translate(340, 250)">
+    <rect width="100" height="60" rx="6" fill="#9895FF" opacity="0.15" stroke="#9895FF" stroke-width="1"/>
+    <text x="50" y="30" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="20" font-weight="600" fill="#514DCC" dominant-baseline="middle">12</text>
+    <text x="50" y="50" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#828282">Sentences</text>
+  </g>
+  <g transform="translate(460, 250)">
+    <rect width="100" height="60" rx="6" fill="#9895FF" opacity="0.15" stroke="#9895FF" stroke-width="1"/>
+    <text x="50" y="30" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="20" font-weight="600" fill="#514DCC" dominant-baseline="middle">2 min</text>
+    <text x="50" y="50" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#828282">Read Time</text>
+  </g>
+  <text x="320" y="330" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" font-weight="600" fill="#29294B" letter-spacing="-0.5">Word Counter</text>
+</svg>

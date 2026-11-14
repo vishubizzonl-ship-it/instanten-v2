@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="100%" height="100%" aria-label="JSON Formatter thumbnail">
+  <rect width="640" height="360" fill="#F0F2FF" />
+  <rect x="60" y="60" width="520" height="240" rx="8" fill="#FFFFFF" stroke="#E1E1E8" stroke-width="1"/>
+  <text x="100" y="100" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#828282">Line</text>
+  <text x="100" y="130" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#9895FF">1</text>
+  <text x="140" y="130" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">{</text>
+  <text x="100" y="160" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#9895FF">2</text>
+  <text x="140" y="160" font-family="DM Sans, sans-serif" font-size="14" fill="#514DCC">  "name"</text>
+  <text x="260" y="160" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">:</text>
+  <text x="280" y="160" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">"JSON Formatter"</text>
+  <text x="100" y="190" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#9895FF">3</text>
+  <text x="140" y="190" font-family="DM Sans, sans-serif" font-size="14" fill="#514DCC">  "category"</text>
+  <text x="260" y="190" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">:</text>
+  <text x="280" y="190" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">"Developer"</text>
+  <text x="100" y="220" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#9895FF">4</text>
+  <text x="140" y="220" font-family="DM Sans, sans-serif" font-size="14" fill="#514DCC">  "pricing"</text>
+  <text x="260" y="220" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">:</text>
+  <text x="280" y="220" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">"Free"</text>
+  <text x="100" y="250" font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#9895FF">5</text>
+  <text x="140" y="250" font-family="DM Sans, sans-serif" font-size="14" fill="#29294B">}</text>
+  <rect x="400" y="120" width="120" height="40" rx="6" fill="#9895FF" opacity="0.2"/>
+  <text x="460" y="145" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="14" font-weight="600" fill="#514DCC">Format</text>
+  <text x="320" y="330" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" font-weight="600" fill="#29294B" letter-spacing="-0.5">JSON Formatter</text>
+</svg>

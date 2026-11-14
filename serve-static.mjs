@@ -6,10 +6,19 @@
  */
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 
 const PORT = Number(process.env.PORT) || 4322;
-const ROOT = new URL('./dist/', import.meta.url).pathname;
+/**
+ * start.sh builds each release into releases/<timestamp> and flips a symlink,
+ * so a deploy never leaves the site pointing at a half-built folder. Older
+ * checkouts that still have a plain dist/ keep working.
+ */
+const BASE = new URL('.', import.meta.url).pathname;
+const ROOT =
+  ['releases/current/', 'dist/'].map((dir) => BASE + dir).find((dir) => existsSync(dir)) ??
+  BASE + 'dist/';
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',

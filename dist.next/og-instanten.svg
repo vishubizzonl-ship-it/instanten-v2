@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" aria-label="Instanten — Free Instant Online Tools, Instant Convert & Instant Help">
+  <rect width="1200" height="630" fill="#171717"/>
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0070f3"/>
+      <stop offset="100%" stop-color="#3b9eff"/>
+    </linearGradient>
+  </defs>
+  <text x="600" y="260" text-anchor="middle" font-family="DM Sans, Inter, system-ui, sans-serif" font-weight="900" font-size="96" letter-spacing="-8" fill="#ffffff">
+    INSTANTEN
+  </text>
+  <text x="600" y="330" text-anchor="middle" font-family="Inter, DM Sans, system-ui, sans-serif" font-weight="500" font-size="26" letter-spacing="0.5" fill="#999999">
+    Free Instant Online Tools · Instant Convert · Instant Help
+  </text>
+  <rect x="400" y="400" width="400" height="48" rx="24" fill="url(#glow)" opacity="0.9"/>
+  <text x="600" y="432" text-anchor="middle" font-family="DM Sans, Inter, system-ui, sans-serif" font-weight="700" font-size="18" letter-spacing="0.5" fill="#ffffff">
+    No Sign-Up · Zero Bloat · Instant Results
+  </text>
+</svg>

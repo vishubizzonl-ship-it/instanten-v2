@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="100%" height="100%" aria-label="CSS Grid Generator thumbnail">
+  <rect width="640" height="360" fill="#F0F2FF" />
+  <rect x="80" y="80" width="480" height="200" rx="8" fill="#FFFFFF" stroke="#E1E1E8" stroke-width="1"/>
+  <rect x="100" y="100" width="140" height="160" rx="4" fill="#9895FF" opacity="0.3" stroke="#9895FF" stroke-width="1"/>
+  <rect x="260" y="100" width="140" height="160" rx="4" fill="#514DCC" opacity="0.3" stroke="#514DCC" stroke-width="1"/>
+  <rect x="420" y="100" width="140" height="160" rx="4" fill="#9895FF" opacity="0.3" stroke="#9895FF" stroke-width="1"/>
+  <rect x="100" y="280" width="140" height="20" rx="4" fill="#29294B" opacity="0.1"/>
+  <rect x="260" y="280" width="140" height="20" rx="4" fill="#29294B" opacity="0.1"/>
+  <rect x="420" y="280" width="140" height="20" rx="4" fill="#29294B" opacity="0.1"/>
+  <text x="320" y="330" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" font-weight="600" fill="#29294B" letter-spacing="-0.5">CSS Grid Generator</text>
+</svg>

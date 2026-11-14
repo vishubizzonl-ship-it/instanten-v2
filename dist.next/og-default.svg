@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FDFDFF"/>
+      <stop offset="100%" stop-color="#F8F7FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Accent line -->
+  <rect x="120" y="180" width="960" height="4" rx="2" fill="url(#accentGrad)"/>
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#9895FF"/>
+      <stop offset="100%" stop-color="#514DCC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Logo -->
+  <g transform="translate(600, 220)">
+    <rect x="-80" y="-80" width="160" height="160" rx="40" fill="url(#logoGrad)"/>
+    <path d="M-50 -20h100M-50 0h66M-50 20h83" stroke="white" stroke-width="12" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="logoGrad" x1="-80" y1="-80" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#9895FF"/>
+        <stop offset="100%" stop-color="#514DCC"/>
+      </linearGradient>
+    </defs>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="400" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="56" font-weight="600" fill="#29294B" letter-spacing="-2">instanten</text>
+
+  <!-- Tagline -->
+  <text x="600" y="480" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="28" fill="#828282">
+    Discover Useful SaaS Tools, Ready in an Instant
+  </text>
+
+  <!-- URL -->
+  <text x="600" y="560" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="20" fill="#828282">
+    instanten.com
+  </text>
+</svg>
