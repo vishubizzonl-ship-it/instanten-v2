@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolveOutDir, loadPages, ruleOf } from './lib.mjs';
 
-const SUITES = ['site-integrity', 'links', 'i18n-silo'];
+const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design'];
 const BASELINE = 'tests/baseline.json';
 const updateBaseline = process.argv.includes('--update-baseline');
 const outDir = resolveOutDir(process.argv.find((a) => !a.startsWith('-') && a !== process.argv[1]));

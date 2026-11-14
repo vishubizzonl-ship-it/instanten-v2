@@ -40,10 +40,10 @@ const tagCounts = allTags.map(tag => ({
       {tagCounts.map(tag => (
         <a
           href={translatePath(`/tag/${tag.slug}/`)}
-          class="group px-4 py-2 rounded-full border border-border-hairline bg-surface text-body-sm font-medium text-muted hover:border-faint hover:text-ink hover:bg-hairline-soft transition-colors"
+          class="group px-4 py-2 rounded-[8px] border border-border-hairline bg-surface text-body-sm font-medium text-muted hover:border-faint hover:text-ink hover:bg-hairline-soft transition-colors"
         >
           {tag.name}
-          <span class="ml-1.5 px-2 py-0.5 rounded-full bg-hairline-soft text-caption font-mono text-faint group-hover:bg-ink/10 group-hover:text-muted transition-colors">
+          <span class="ml-1.5 px-2 py-0.5 rounded-[6px] bg-hairline-soft text-caption font-mono text-faint group-hover:bg-ink/10 group-hover:text-muted transition-colors">
             {tag.count}
           </span>
         </a>

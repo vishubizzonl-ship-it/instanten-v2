@@ -43,7 +43,7 @@ const sortOptions = [
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
       <div class="flex flex-wrap items-center gap-3" role="group" aria-label={t('aria.filters')}>
         {currentCategory && (
-          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-start/10 text-accent-end text-sm font-medium">
+          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-[6px] bg-accent-start/10 text-accent-end text-sm font-medium">
             {t('filter.category')}: {categoryLabel}
             <button type="button" class="filter-remove p-0.5 rounded hover:bg-accent-start/20" data-filter="category" aria-label={t('aria.removeCategory')}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
@@ -52,7 +52,7 @@ const sortOptions = [
         )}
 
         {currentPricing && (
-          <span class:list={["filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium", pricingColors[currentPricing]]}>
+          <span class:list={["filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-[6px] text-sm font-medium", pricingColors[currentPricing]]}>
             {t('filter.pricing')}: {pricingLabel}
             <button type="button" class="filter-remove p-0.5 rounded hover:bg-black/10" data-filter="pricing" aria-label={t('aria.removePricing')}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>
@@ -61,7 +61,7 @@ const sortOptions = [
         )}
 
         {currentTags.map(tag => (
-          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/50 border border-border-hairline text-muted text-sm font-medium">
+          <span class="filter-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-[6px] bg-muted/50 border border-border-hairline text-muted text-sm font-medium">
             {t('filter.tag')}: {tag}
             <button type="button" class="filter-remove p-0.5 rounded hover:bg-muted/70" data-filter="tag" data-value={tag} aria-label={`${t('aria.removeTag')}: ${tag}`}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="10" y2="10"/><line x1="10" y1="4" x2="4" y2="10"/></svg>

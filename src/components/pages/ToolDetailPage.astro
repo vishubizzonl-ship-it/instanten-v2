@@ -106,7 +106,7 @@ const breadcrumbs = [
     <header class="mb-10">
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <a href={translatePath(`/category/${categorySlug}/`)} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{categoryLabel}</a>
-        <a href={translatePath(`/pricing/${pricingSlug(pricing)}/`)} class={`text-caption font-medium px-2 py-0.5 rounded-full transition-opacity hover:opacity-75 ${pricingColors[pricing]}`}>{pricingLabel}</a>
+        <a href={translatePath(`/pricing/${pricingSlug(pricing)}/`)} class={`text-caption font-medium px-2 py-0.5 rounded-[6px] transition-opacity hover:opacity-75 ${pricingColors[pricing]}`}>{pricingLabel}</a>
         {featured && <span class="text-caption font-medium px-2 py-0.5 rounded-full bg-accent/90 text-canvas">{t('tools.featured')}</span>}
       </div>
       <h1 class="font-display font-semibold text-display text-ink mb-4">{localized.name}</h1>
@@ -170,7 +170,7 @@ const breadcrumbs = [
         </h2>
         <ul class="flex flex-wrap gap-2" role="list">
           {useCases.map(useCase => (
-            <li class="text-body-md px-3 py-1.5 rounded-full border border-border-hairline bg-surface text-muted">{useCase}</li>
+            <li class="text-body-md px-3 py-1.5 rounded-[6px] border border-border-hairline bg-surface text-muted">{useCase}</li>
           ))}
         </ul>
       </section>
@@ -187,7 +187,7 @@ const breadcrumbs = [
         </h2>
         <div class="flex flex-wrap gap-2">
           {tags.map(tag => (
-            <a href={translatePath(`/tag/${tag.toLowerCase()}/`)} class="text-caption font-medium px-3 py-1 rounded-full border border-border-hairline bg-surface text-muted hover:text-ink hover:border-faint transition-colors">{tag}</a>
+            <a href={translatePath(`/tag/${tag.toLowerCase()}/`)} class="text-caption font-medium px-3 py-1 rounded-[6px] border border-border-hairline bg-surface text-muted hover:text-ink hover:border-faint transition-colors">{tag}</a>
           ))}
         </div>
       </section>
@@ -221,7 +221,7 @@ const breadcrumbs = [
                   <div class="flex items-center gap-2">
                     <span class="text-caption text-muted font-medium uppercase tracking-wide">{relCategory}</span>
                     <span class="text-caption text-muted" aria-hidden="true">·</span>
-                    <span class={`text-caption font-medium px-2 py-0.5 rounded-full ${pricingColors[related.data.pricing]}`}>{relPricing}</span>
+                    <span class={`text-caption font-medium px-2 py-0.5 rounded-[6px] ${pricingColors[related.data.pricing]}`}>{relPricing}</span>
                   </div>
                 </div>
               </article>
