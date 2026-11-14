@@ -4,6 +4,7 @@ import EditorialHero from '../components/EditorialHero.astro';
 import BlogPagination from '../components/BlogPagination.astro';
 import HomeSeoSection, { getHomeFaqs } from '../components/HomeSeoSection.astro';
 import { defaultLang } from '../i18n/ui';
+import { localizePricing } from '../i18n/toolContent';
 import { getAllTools } from '../utils/standaloneTools';
 import { parseFilters, filterTools, sortTools, paginateTools, toolHref, type ToolData } from '../utils/filters';
 
@@ -75,9 +76,8 @@ const canonicalURL = currentPage === 1
               width="400"
               height="225"
             />
-            <span class="blog-card__category-pill" style="position: absolute; top: 15px; left: 15px; background: var(--ink); color: var(--canvas); padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
-              {tool.category}
-            </span>
+            <span class="blog-card__category-pill">{tool.category}</span>
+            <span class="blog-card__meta-chip">{localizePricing(defaultLang, tool.pricing)}</span>
           </a>
 
           <div class="blog-card__body">
