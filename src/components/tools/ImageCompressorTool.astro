@@ -1,43 +1,43 @@
 ---
 /** Image compressor — canvas based, kuch bhi upload nahi hota. */
 ---
-<div class="tool-shell" data-tool-root="image-compressor">
-  <div class="tool-head">
-    <h2 class="tool-title">Compress an image in your browser</h2>
-    <p class="tool-hint">JPEG, PNG, WebP — file device se bahar nahi jati.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="image-compressor">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Compress an image in your browser</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">JPEG, PNG, WebP — file device se bahar nahi jati.</p>
   </div>
 
-  <label class="tool-field">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
     Choose an image
-    <input type="file" class="tool-input" accept="image/*" data-ic-file />
+    <input type="file" class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" accept="image/*" data-ic-file />
   </label>
 
-  <label class="tool-field" style="margin-top:12px">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body mt-3">
     Quality: <b data-ic-quality-label>75</b>%
-    <input type="range" class="tool-range" min="30" max="95" value="75" data-ic-quality />
+    <input type="range" class="w-full accent-accent" min="30" max="95" value="75" data-ic-quality />
   </label>
 
-  <label class="tool-field" style="margin-top:12px">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body mt-3">
     Output format
-    <select class="tool-select" data-ic-format>
+    <select class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-ic-format>
       <option value="image/jpeg">JPEG (smallest, no transparency)</option>
       <option value="image/webp">WebP (best for web)</option>
       <option value="image/png">PNG (keeps transparency)</option>
     </select>
   </label>
 
-  <div class="tool-row" style="margin-top:14px">
-    <button type="button" class="tool-btn tool-btn--primary" data-ic-run>Compress</button>
-    <button type="button" class="tool-btn" data-ic-download disabled>Download</button>
+  <div class="flex flex-wrap items-center gap-2.5 max-sm:[&>button]:flex-1 mt-3.5">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5 border-transparent bg-[linear-gradient(180deg,var(--accent-start),var(--accent-end))] text-white hover:text-white hover:opacity-95" data-ic-run>Compress</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-ic-download disabled>Download</button>
   </div>
 
-  <p class="tool-error" data-ic-error hidden></p>
-  <div class="tool-drop" data-ic-drop>Abhi koi image nahi chuni.</div>
-  <div class="tool-stats" data-ic-stats hidden>
-    <div class="tool-stat"><b data-ic-original>—</b><span>Original</span></div>
-    <div class="tool-stat"><b data-ic-size>—</b><span>Compressed</span></div>
-    <div class="tool-stat"><b data-ic-saved>—</b><span>Saved</span></div>
-    <div class="tool-stat"><b data-ic-dims>—</b><span>Dimensions</span></div>
+  <p class="mt-3 rounded-[10px] border border-[#fda29b] bg-[#fef3f2] px-3 py-2 text-[13px] text-[#b42318]" data-ic-error hidden></p>
+  <div class="mt-3 rounded-[10px] border border-dashed border-border-hairline bg-surface-soft px-3.5 py-4 text-[13px] text-muted [&_img]:mx-auto [&_img]:mt-3 [&_img]:block [&_img]:max-h-[220px] [&_img]:max-w-full [&_img]:rounded-md" data-ic-drop>Abhi koi image nahi chuni.</div>
+  <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4" data-ic-stats hidden>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-ic-original>—</b><span>Original</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-ic-size>—</b><span>Compressed</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-ic-saved>—</b><span>Saved</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-ic-dims>—</b><span>Dimensions</span></div>
   </div>
 </div>
 

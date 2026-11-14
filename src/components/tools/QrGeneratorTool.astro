@@ -1,15 +1,15 @@
 ---
 /** QR generator — URL / text / Wi-Fi / vCard, PNG + SVG download. */
 ---
-<div class="tool-shell" data-tool-root="qr-generator">
-  <div class="tool-head">
-    <h2 class="tool-title">Create a QR code</h2>
-    <p class="tool-hint">Code aapke browser mein banta hai — koi data upload nahi.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="qr-generator">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Create a QR code</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">Code aapke browser mein banta hai — koi data upload nahi.</p>
   </div>
 
-  <label class="tool-field">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
     What should the code contain?
-    <select class="tool-select" data-qr-type>
+    <select class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-type>
       <option value="url">Website link (URL)</option>
       <option value="text">Plain text</option>
       <option value="wifi">Wi-Fi network</option>
@@ -17,58 +17,58 @@
     </select>
   </label>
 
-  <div data-qr-fields="url" style="margin-top:12px">
-    <label class="tool-field">URL <input class="tool-input" data-qr-url value="https://instanten.com/" inputmode="url" /></label>
+  <div class="mt-3" data-qr-fields="url">
+    <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">URL <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-url value="https://instanten.com/" inputmode="url" /></label>
   </div>
 
-  <div data-qr-fields="text" hidden style="margin-top:12px">
-    <label class="tool-field">Text <textarea class="tool-textarea" data-qr-text placeholder="Any text…"></textarea></label>
+  <div class="mt-3" data-qr-fields="text" hidden>
+    <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Text <textarea class="w-full min-h-[120px] resize-y rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 font-mono text-[13px] leading-relaxed text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-text placeholder="Any text…"></textarea></label>
   </div>
 
-  <div data-qr-fields="wifi" hidden style="margin-top:12px">
-    <div class="tool-grid-2">
-      <label class="tool-field">Network name (SSID) <input class="tool-input" data-qr-ssid /></label>
-      <label class="tool-field">Password <input class="tool-input" data-qr-pass /></label>
-      <label class="tool-field">
+  <div class="mt-3" data-qr-fields="wifi" hidden>
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Network name (SSID) <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-ssid /></label>
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Password <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-pass /></label>
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
         Security
-        <select class="tool-select" data-qr-enc">
+        <select class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-enc>
           <option value="WPA">WPA / WPA2 / WPA3</option>
           <option value="WEP">WEP</option>
           <option value="nopass">Open (no password)</option>
         </select>
       </label>
-      <label class="tool-check" style="align-self:end"><input type="checkbox" data-qr-hidden /> Hidden network</label>
+      <label class="flex items-center gap-2 text-[13px] font-medium text-body self-end"><input type="checkbox" data-qr-hidden /> Hidden network</label>
     </div>
   </div>
 
-  <div data-qr-fields="vcard" hidden style="margin-top:12px">
-    <div class="tool-grid-2">
-      <label class="tool-field">Name <input class="tool-input" data-qr-vname /></label>
-      <label class="tool-field">Organisation <input class="tool-input" data-qr-vorg /></label>
-      <label class="tool-field">Phone <input class="tool-input" data-qr-vphone inputmode="tel" /></label>
-      <label class="tool-field">Email <input class="tool-input" data-qr-vemail inputmode="email" /></label>
+  <div class="mt-3" data-qr-fields="vcard" hidden>
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Name <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-vname /></label>
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Organisation <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-vorg /></label>
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Phone <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-vphone inputmode="tel" /></label>
+      <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">Email <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-qr-vemail inputmode="email" /></label>
     </div>
   </div>
 
-  <div class="tool-row" style="margin-top:14px">
-    <button type="button" class="tool-btn tool-btn--primary" data-qr-generate>Generate QR</button>
-    <button type="button" class="tool-btn" data-qr-png>Download PNG</button>
-    <button type="button" class="tool-btn" data-qr-svg>Download SVG</button>
+  <div class="flex flex-wrap items-center gap-2.5 max-sm:[&>button]:flex-1 mt-3.5">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5 border-transparent bg-[linear-gradient(180deg,var(--accent-start),var(--accent-end))] text-white hover:text-white hover:opacity-95" data-qr-generate>Generate QR</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-qr-png>Download PNG</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-qr-svg>Download SVG</button>
   </div>
 
-  <p class="tool-error" data-qr-error hidden></p>
-  <div class="tool-qr-out">
+  <p class="mt-3 rounded-[10px] border border-[#fda29b] bg-[#fef3f2] px-3 py-2 text-[13px] text-[#b42318]" data-qr-error hidden></p>
+  <div class="mt-4 grid grid-cols-1 items-start gap-4 sm:grid-cols-[256px_1fr] [&_canvas]:h-64 [&_canvas]:w-64 [&_canvas]:rounded-[10px] [&_canvas]:border [&_canvas]:border-border-hairline [&_canvas]:bg-white">
     <canvas data-qr-canvas width="256" height="256" aria-label="QR code"></canvas>
     <div>
-      <p class="tool-note" data-qr-meta></p>
-      <pre class="tool-out" data-qr-payload style="min-height:auto; max-height:120px"></pre>
+      <p class="mt-2 text-[12.5px] leading-relaxed text-muted" data-qr-meta></p>
+      <pre class="mt-3 block max-h-[240px] overflow-auto whitespace-pre-wrap break-words rounded-[10px] border border-border-hairline bg-surface-soft px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-ink min-h-0 max-h-28" data-qr-payload></pre>
     </div>
   </div>
 </div>
 
 <script>
-  import qrcode from 'qrcode-generator';
   import { wifiQrPayload, vcardPayload } from '../../lib/tools/core.mjs';
+  import { qrMatrix, qrSvg } from '../../lib/tools/qr.mjs';
 
   const root = document.querySelector('[data-tool-root="qr-generator"]');
   if (root) {
@@ -108,32 +108,32 @@
         err.textContent = 'Pehle content bharo, phir Generate dabao.';
         return;
       }
-      try {
-        const qr = qrcode(0, 'M');
-        qr.addData(payload);
-        qr.make();
-        err.hidden = true;
-        const count = qr.getModuleCount();
-        const size = 256;
-        const cell = size / count;
-        const ctx = canvas.getContext('2d');
-        canvas.width = size;
-        canvas.height = size;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, size, size);
-        ctx.fillStyle = '#17171c';
-        for (let row = 0; row < count; row++) {
-          for (let col = 0; col < count; col++) {
-            if (qr.isDark(row, col)) ctx.fillRect(Math.floor(col * cell), Math.floor(row * cell), Math.ceil(cell), Math.ceil(cell));
+      const result = qrMatrix(payload);
+      if (result.error) {
+        err.hidden = false;
+        err.textContent = result.error;
+        return;
+      }
+      err.hidden = true;
+      const { size: count, modules } = result;
+      const pixels = 256;
+      const cell = pixels / count;
+      const ctx = canvas.getContext('2d');
+      canvas.width = pixels;
+      canvas.height = pixels;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, pixels, pixels);
+      ctx.fillStyle = '#000000';
+      for (let row = 0; row < count; row++) {
+        for (let col = 0; col < count; col++) {
+          if (modules[row][col]) {
+            ctx.fillRect(Math.floor(col * cell), Math.floor(row * cell), Math.ceil(cell), Math.ceil(cell));
           }
         }
-        payloadBox.textContent = payload;
-        meta.textContent = `${count} × ${count} modules · error correction M · payload ${payload.length} characters`;
-        canvas.dataset.qrReady = '1';
-      } catch (error) {
-        err.hidden = false;
-        err.textContent = `QR banane mein dikkat: ${error.message}. Text thoda chhota karo.`;
       }
+      payloadBox.textContent = payload;
+      meta.textContent = `${count} × ${count} modules · version ${result.version} · error correction M · payload ${payload.length} characters`;
+      canvas.dataset.qrReady = '1';
     };
 
     const download = (href, filename) => {
@@ -156,11 +156,13 @@
     });
     root.querySelector('[data-qr-svg]').addEventListener('click', () => {
       if (!payload) return;
-      const qr = qrcode(0, 'M');
-      qr.addData(payload);
-      qr.make();
-      const svg = qr.createSvgTag({ scalable: true, margin: 2 });
-      const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${svg}`], { type: 'image/svg+xml' });
+      const result = qrSvg(payload, { margin: 2, scale: 8 });
+      if (result.error) {
+        err.hidden = false;
+        err.textContent = result.error;
+        return;
+      }
+      const blob = new Blob([result.svg], { type: 'image/svg+xml' });
       download(URL.createObjectURL(blob), 'instanten-qr.svg');
     });
 

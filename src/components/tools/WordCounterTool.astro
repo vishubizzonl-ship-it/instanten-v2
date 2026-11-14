@@ -1,26 +1,26 @@
 ---
 /** Word counter — live words/chars/sentences + keyword density. */
 ---
-<div class="tool-shell" data-tool-root="word-counter">
-  <div class="tool-head">
-    <h2 class="tool-title">Count words as you type</h2>
-    <p class="tool-hint">Reading time 225 wpm, speaking 150 wpm.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="word-counter">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Count words as you type</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">Reading time 225 wpm, speaking 150 wpm.</p>
   </div>
-  <label class="tool-field">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
     Your text
-    <textarea class="tool-textarea" data-wc-input placeholder="Paste your draft here…" style="min-height:200px"></textarea>
+    <textarea class="w-full min-h-[120px] resize-y rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 font-mono text-[13px] leading-relaxed text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base min-h-[200px]" data-wc-input placeholder="Paste your draft here…"></textarea>
   </label>
-  <div class="tool-stats" aria-live="polite">
-    <div class="tool-stat"><b data-wc-words>0</b><span>Words</span></div>
-    <div class="tool-stat"><b data-wc-chars>0</b><span>Characters</span></div>
-    <div class="tool-stat"><b data-wc-charsns>0</b><span>No spaces</span></div>
-    <div class="tool-stat"><b data-wc-sentences>0</b><span>Sentences</span></div>
-    <div class="tool-stat"><b data-wc-paragraphs>0</b><span>Paragraphs</span></div>
-    <div class="tool-stat"><b data-wc-read>0</b><span>Min read</span></div>
-    <div class="tool-stat"><b data-wc-speak>0</b><span>Min speak</span></div>
-    <div class="tool-stat"><b data-wc-limit>0</b><span>% of 300 words</span></div>
+  <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4" aria-live="polite">
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-words>0</b><span>Words</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-chars>0</b><span>Characters</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-charsns>0</b><span>No spaces</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-sentences>0</b><span>Sentences</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-paragraphs>0</b><span>Paragraphs</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-read>0</b><span>Min read</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-speak>0</b><span>Min speak</span></div>
+    <div class="flex flex-col gap-0.5 rounded-xl border border-border-hairline bg-surface-soft px-3 py-2.5 text-center"><b data-wc-limit>0</b><span>% of 300 words</span></div>
   </div>
-  <table class="tool-table" data-wc-table hidden>
+  <table class="mt-3 w-full border-collapse overflow-hidden rounded-[10px] text-[13px] [&_th]:border-b [&_th]:border-border-hairline [&_th]:bg-surface-soft [&_th]:px-2.5 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold [&_th]:text-ink [&_td]:border-b [&_td]:border-hairline-soft [&_td]:px-2.5 [&_td]:py-2 [&_td]:align-top [&_td]:text-body [&_code]:font-mono [&_code]:text-[12px]" data-wc-table hidden>
     <thead>
       <tr><th>Keyword</th><th>Count</th><th>Density</th></tr>
     </thead>

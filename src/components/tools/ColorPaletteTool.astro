@@ -1,38 +1,38 @@
 ---
 /** Colour palette + WCAG 2.2 contrast checker. */
 ---
-<div class="tool-shell" data-tool-root="color-palette">
-  <div class="tool-head">
-    <h2 class="tool-title">Build a palette and check contrast</h2>
-    <p class="tool-hint">WCAG 2.2 AA: 4.5:1 normal text, 3:1 large text.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="color-palette">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Build a palette and check contrast</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">WCAG 2.2 AA: 4.5:1 normal text, 3:1 large text.</p>
   </div>
 
-  <div class="tool-grid-2">
-    <label class="tool-field">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
       Base colour
-      <input type="color" class="tool-input" data-cp-color value="#3366cc" style="height:44px; padding:4px" />
+      <input type="color" class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base h-11 p-1" data-cp-color value="#514DCC" />
     </label>
-    <label class="tool-field">
+    <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
       Hex value
-      <input class="tool-input" data-cp-hex value="#3366cc" spellcheck="false" />
+      <input class="w-full rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 text-sm text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-cp-hex value="#514DCC" spellcheck="false" />
     </label>
   </div>
 
-  <div class="tool-row" style="margin-top:14px">
-    <button type="button" class="tool-btn tool-btn--primary" data-cp-generate>Generate harmonies</button>
-    <button type="button" class="tool-btn" data-cp-copy>Copy CSS variables</button>
+  <div class="flex flex-wrap items-center gap-2.5 max-sm:[&>button]:flex-1 mt-3.5">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5 border-transparent bg-[linear-gradient(180deg,var(--accent-start),var(--accent-end))] text-white hover:text-white hover:opacity-95" data-cp-generate>Generate harmonies</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-cp-copy>Copy CSS variables</button>
   </div>
 
-  <p class="tool-error" data-cp-error hidden></p>
-  <div class="tool-swatches" data-cp-swatches></div>
+  <p class="mt-3 rounded-[10px] border border-[#fda29b] bg-[#fef3f2] px-3 py-2 text-[13px] text-[#b42318]" data-cp-error hidden></p>
+  <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4" data-cp-swatches></div>
 
-  <table class="tool-table" data-cp-table hidden>
+  <table class="mt-3 w-full border-collapse overflow-hidden rounded-[10px] text-[13px] [&_th]:border-b [&_th]:border-border-hairline [&_th]:bg-surface-soft [&_th]:px-2.5 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold [&_th]:text-ink [&_td]:border-b [&_td]:border-hairline-soft [&_td]:px-2.5 [&_td]:py-2 [&_td]:align-top [&_td]:text-body [&_code]:font-mono [&_code]:text-[12px]" data-cp-table hidden>
     <thead>
       <tr><th>Pair</th><th>Ratio</th><th>Grade</th></tr>
     </thead>
     <tbody data-cp-rows></tbody>
   </table>
-  <pre class="tool-out" data-cp-css hidden style="max-height:160px"></pre>
+  <pre class="mt-3 block max-h-[240px] overflow-auto whitespace-pre-wrap break-words rounded-[10px] border border-border-hairline bg-surface-soft px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-ink max-h-40" data-cp-css hidden></pre>
 </div>
 
 <script>
@@ -53,7 +53,7 @@
       const set = harmonies(hex);
       if (!set) {
         err.hidden = false;
-        err.textContent = 'Valid hex colour do, jaise #3366cc.';
+        err.textContent = 'Valid hex colour do, jaise #514DCC.';
         swatches.innerHTML = '';
         table.hidden = true;
         cssBox.hidden = true;
@@ -66,7 +66,7 @@
         .flatMap(([name, colors]) =>
           colors.map(
             (color) =>
-              `<button type="button" class="tool-swatch" data-copy="${color}" title="Copy ${color}"><i style="background:${color}"></i><span>${color}</span><em style="font-style:normal;opacity:.6;font-size:10px">${name.slice(0, 6)}</em></button>`
+              `<button type="button" class="flex flex-col items-center gap-1 rounded-[10px] border border-border-hairline bg-surface p-1.5 text-[11px] text-body transition hover:border-accent [&_i]:block [&_i]:h-9 [&_i]:w-full [&_i]:rounded-md" data-copy="${color}" title="Copy ${color}"><i style="background:${color}"></i><span>${color}</span><em class="text-[10px] not-italic opacity-60">${name.slice(0, 6)}</em></button>`
           )
         )
         .join('');
@@ -79,7 +79,8 @@
           const best = white >= black ? { name: 'white text', ratio: white } : { name: 'black text', ratio: black };
           const grade = contrastGrade(best.ratio);
           const pass = best.ratio >= 4.5;
-          return `<tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${color};vertical-align:-2px;margin-right:6px"></span>${color}</td><td>${best.ratio}:1 with ${best.name}</td><td><span class="tool-badge tool-badge--${pass ? 'pass' : 'fail'}">${grade}</span></td></tr>`;
+          const badge = pass ? 'bg-success-soft text-success' : 'bg-[#fef3f2] text-[#b42318]';
+          return `<tr><td><span class="mr-1.5 inline-block size-3.5 -translate-y-px rounded-[3px]" style="background:${color}"></span>${color}</td><td>${best.ratio}:1 with ${best.name}</td><td><span class="inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${badge}">${grade}</span></td></tr>`;
         })
         .join('');
       table.hidden = false;
@@ -127,6 +128,6 @@
       }
     });
 
-    render('#3366cc');
+    render('#514DCC');
   }
 </script>

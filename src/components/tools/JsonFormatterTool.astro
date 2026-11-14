@@ -1,25 +1,25 @@
 ---
 /** JSON Formatter — browser mein hi format/validate/minify (RFC 8259). */
 ---
-<div class="tool-shell" data-tool-root="json-formatter">
-  <div class="tool-head">
-    <h2 class="tool-title">Format, validate or minify JSON</h2>
-    <p class="tool-hint">Sab kuch aapke browser mein — kuch upload nahi hota.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="json-formatter">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Format, validate or minify JSON</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">Sab kuch aapke browser mein — kuch upload nahi hota.</p>
   </div>
-  <label class="tool-field">
+  <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
     JSON input
-    <textarea class="tool-textarea" data-json-input spellcheck="false" placeholder='{"name":"instanten","tools":12}'></textarea>
+    <textarea class="w-full min-h-[120px] resize-y rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 font-mono text-[13px] leading-relaxed text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base" data-json-input spellcheck="false" placeholder='{"name":"instanten","tools":12}'></textarea>
   </label>
-  <div class="tool-row" style="margin-top:12px">
-    <button type="button" class="tool-btn tool-btn--primary" data-json-format>Format</button>
-    <button type="button" class="tool-btn" data-json-minify>Minify</button>
-    <button type="button" class="tool-btn" data-json-copy>Copy output</button>
-    <button type="button" class="tool-btn" data-json-sample>Sample</button>
-    <button type="button" class="tool-btn" data-json-clear>Clear</button>
+  <div class="flex flex-wrap items-center gap-2.5 max-sm:[&>button]:flex-1 mt-3">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5 border-transparent bg-[linear-gradient(180deg,var(--accent-start),var(--accent-end))] text-white hover:text-white hover:opacity-95" data-json-format>Format</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-json-minify>Minify</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-json-copy>Copy output</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-json-sample>Sample</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-json-clear>Clear</button>
   </div>
-  <p class="tool-error" data-json-error hidden></p>
-  <pre class="tool-out" data-json-out aria-live="polite"></pre>
-  <p class="tool-note" data-json-meta></p>
+  <p class="mt-3 rounded-[10px] border border-[#fda29b] bg-[#fef3f2] px-3 py-2 text-[13px] text-[#b42318]" data-json-error hidden></p>
+  <pre class="mt-3 block max-h-[240px] overflow-auto whitespace-pre-wrap break-words rounded-[10px] border border-border-hairline bg-surface-soft px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-ink" data-json-out aria-live="polite"></pre>
+  <p class="mt-2 text-[12.5px] leading-relaxed text-muted" data-json-meta></p>
 </div>
 
 <script>

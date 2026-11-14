@@ -26,6 +26,8 @@ import {
   wifiQrPayload,
   vcardPayload,
 } from '../src/lib/tools/core.mjs';
+import { qrMatrix, qrSvg, formatInfoBits, versionInfoBits } from '../src/lib/tools/qr.mjs';
+import { QR_GOLDEN } from './fixtures/qr-golden.mjs';
 
 const require = createRequire(import.meta.url);
 const nodeCrypto = require('node:crypto');
@@ -150,6 +152,74 @@ check('qr: wifi escapes semicolon', wifiQrPayload({ ssid: 'a;b' }).includes('a\\
 const vc = vcardPayload({ name: 'Asha', phone: '+91 90000', email: 'a@b.com' });
 check('qr: vcard begin/end', vc.startsWith('BEGIN:VCARD') && vc.endsWith('END:VCARD'));
 check('qr: vcard phone', vc.includes('TEL;TYPE=CELL:+91 90000'));
+
+
+/* ── QR encoder (apna, zero dependency) ───────────────────────────────── */
+// Format info ke spec constants (level M) — QR spec Table C.1
+const FORMAT_M = [0x5412, 0x5125, 0x5e7c, 0x5b4b, 0x45f9, 0x40ce, 0x4f97, 0x4aa0];
+FORMAT_M.forEach((expected, mask) => eq(`qr: format bits mask ${mask}`, formatInfoBits(mask), expected));
+// Version info ke spec constants — Table D.1
+eq('qr: version info v7', versionInfoBits(7), 0x07c94);
+eq('qr: version info v10', versionInfoBits(10), 0x0a4d3);
+eq('qr: version info v20', versionInfoBits(20), 0x149a6);
+
+// Structure: finder patterns, timing, dark module
+const structural = qrMatrix('https://instanten.com/');
+check('qr: matrix banti hai', !structural.error && structural.size === 25);
+const M = structural.modules;
+const isFinder = (row, col) => {
+  for (let dr = 0; dr < 7; dr++) {
+    for (let dc = 0; dc < 7; dc++) {
+      const ring = dr === 0 || dr === 6 || dc === 0 || dc === 6;
+      const core = dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4;
+      if (M[row + dr][col + dc] !== (ring || core)) return false;
+    }
+  }
+  return true;
+};
+check('qr: finder top-left', isFinder(0, 0));
+check('qr: finder top-right', isFinder(0, structural.size - 7));
+check('qr: finder bottom-left', isFinder(structural.size - 7, 0));
+check('qr: separator row 7 light', M[7].slice(0, 8).every((v) => v === false));
+let timingOk = true;
+for (let i = 8; i < structural.size - 8; i++) {
+  if (M[6][i] !== (i % 2 === 0)) timingOk = false;
+  if (M[i][6] !== (i % 2 === 0)) timingOk = false;
+}
+check('qr: timing patterns', timingOk);
+check('qr: dark module', M[structural.size - 8][8] === true);
+
+// Golden fixtures: bit-for-bit match with a mature implementation
+for (const fixture of QR_GOLDEN) {
+  const rowsOf = (matrix) => matrix.map((row) => row.map((v) => (v ? '1' : '0')).join(''));
+  const target = fixture.rows;
+  const matches = [0, 1, 2, 3, 4, 5, 6, 7].filter((mask) => {
+    const result = qrMatrix(fixture.payload, { mask });
+    return !result.error && result.size === fixture.modules && rowsOf(result.modules).join() === target.join();
+  });
+  eq(`qr golden: ${fixture.payload.slice(0, 18)} modules`, qrMatrix(fixture.payload).size, fixture.modules);
+  check(`qr golden: ${fixture.payload.slice(0, 18)} bit-for-bit match`, matches.length === 1);
+}
+
+// Length/version behaviour
+eq('qr: 1 byte → version 1', qrMatrix('a').version, 1);
+eq('qr: 20 bytes → version 2', qrMatrix('a'.repeat(20)).version, 2);
+eq('qr: 100 bytes → version 6', qrMatrix('a'.repeat(100)).version, 6);
+eq('qr: 250 bytes → version 11', qrMatrix('a'.repeat(250)).version, 11);
+check('qr: bahut lamba data error deta hai', Boolean(qrMatrix('a'.repeat(700)).error));
+check('qr: khali text error deta hai', Boolean(qrMatrix('').error));
+check('qr: unicode bytes count hote hain', qrMatrix('हिन्दी').size >= 21);
+
+// Mask: auto choice wahi honi chahiye jo minimum penalty de
+const autoChoice = qrMatrix('WIFI:T:WPA;S:home;P:secret;;');
+check('qr: auto mask 0-7 mein', autoChoice.mask >= 0 && autoChoice.mask <= 7);
+
+// SVG output
+const svg = qrSvg('https://instanten.com/');
+check('qr svg: svg tag', typeof svg.svg === 'string' && svg.svg.startsWith('<svg'));
+check('qr svg: path data', svg.svg.includes('<path d="M'));
+check('qr svg: white background', svg.svg.includes('fill="#FFFFFF"'));
+check('qr svg: error passthrough', Boolean(qrSvg('').error));
 
 console.log(`\ntools core test: ${pass} pass, ${fail} fail`);
 process.exit(fail === 0 ? 0 : 1);

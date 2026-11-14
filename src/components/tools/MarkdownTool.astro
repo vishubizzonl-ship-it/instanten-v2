@@ -1,30 +1,30 @@
 ---
 /** Markdown editor — live preview + export. */
 ---
-<div class="tool-shell" data-tool-root="markdown-editor">
-  <div class="tool-head">
-    <h2 class="tool-title">Write Markdown with live preview</h2>
-    <p class="tool-hint">CommonMark subset: headings, lists, code, links, quotes.</p>
+<div class="rounded-2xl border border-border-hairline bg-surface p-5 text-ink shadow-[0_1px_1px_rgb(0_0_0/0.04)] max-sm:p-3.5" data-tool-root="markdown-editor">
+  <div class="mb-4">
+    <h2 class="font-display text-lg font-semibold tracking-tight text-ink">Write Markdown with live preview</h2>
+    <p class="mt-1 text-[13px] leading-relaxed text-muted">CommonMark subset: headings, lists, code, links, quotes.</p>
   </div>
 
-  <div class="tool-grid-2">
-    <label class="tool-field">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <label class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
       Markdown
-      <textarea class="tool-textarea" data-md-input style="min-height:280px" placeholder="# Title&#10;&#10;**bold**, *italic*, `code`, [link](https://instanten.com)&#10;&#10;- one&#10;- two"></textarea>
+      <textarea class="w-full min-h-[120px] resize-y rounded-[10px] border border-border-hairline bg-canvas px-3 py-2 font-mono text-[13px] leading-relaxed text-ink outline-none transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 max-sm:text-base min-h-[280px]" data-md-input placeholder="# Title&#10;&#10;**bold**, *italic*, `code`, [link](https://instanten.com)&#10;&#10;- one&#10;- two"></textarea>
     </label>
-    <div class="tool-field">
+    <div class="flex flex-col gap-1.5 text-[13px] font-medium text-body">
       Preview
-      <div class="tool-preview" data-md-preview aria-live="polite"></div>
+      <div class="min-h-[280px] overflow-auto rounded-[10px] border border-border-hairline bg-surface px-3.5 py-3 text-[14px] leading-relaxed text-body [&_h1]:mb-2 [&_h1]:font-display [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:text-ink [&_h2]:mb-1.5 [&_h2]:font-display [&_h2]:text-base [&_h2]:font-semibold [&_h2]:text-ink [&_h3]:font-semibold [&_h3]:text-ink [&_p]:mb-2 [&_ul]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-0.5 [&_a]:text-accent [&_a]:underline [&_code]:rounded [&_code]:bg-surface-soft [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[12.5px] [&_pre]:mb-2 [&_pre]:overflow-auto [&_pre]:rounded-[10px] [&_pre]:bg-surface-soft [&_pre]:p-3 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_blockquote]:mb-2 [&_blockquote]:border-l-[3px] [&_blockquote]:border-border-hairline [&_blockquote]:pl-3 [&_blockquote]:text-muted [&_hr]:my-3 [&_hr]:border-border-hairline" data-md-preview aria-live="polite"></div>
     </div>
   </div>
 
-  <div class="tool-row" style="margin-top:14px">
-    <button type="button" class="tool-btn tool-btn--primary" data-md-copy-md>Copy Markdown</button>
-    <button type="button" class="tool-btn" data-md-copy-html>Copy HTML</button>
-    <button type="button" class="tool-btn" data-md-download>Download .md</button>
-    <button type="button" class="tool-btn" data-md-sample>Sample</button>
+  <div class="flex flex-wrap items-center gap-2.5 max-sm:[&>button]:flex-1 mt-3.5">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5 border-transparent bg-[linear-gradient(180deg,var(--accent-start),var(--accent-end))] text-white hover:text-white hover:opacity-95" data-md-copy-md>Copy Markdown</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-md-copy-html>Copy HTML</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-md-download>Download .md</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-[10px] border border-border-hairline bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-45 max-sm:px-3.5 max-sm:py-2.5" data-md-sample>Sample</button>
   </div>
-  <p class="tool-note" data-md-meta></p>
+  <p class="mt-2 text-[12.5px] leading-relaxed text-muted" data-md-meta></p>
 </div>
 
 <script>

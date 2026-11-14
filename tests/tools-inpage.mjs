@@ -144,20 +144,34 @@ export function run(pages) {
     check(!/\bPro\b/.test(stripTags(html)), `${url}: copy mein "Pro" paid-tier zikr hai`);
   }
 
-  // --- 8. mobile CSS lock (phone Chrome par overflow na ho) -------------
+  // --- 8. styling: sirf Tailwind v4 utilities (koi alag hand-written CSS nahi) ---
   try {
     const cssFile = readdirSync('dist/_astro').find((f) => f.startsWith('Layout.') && f.endsWith('.css'));
-    if (cssFile) {
-      const css = readFileSync(`dist/_astro/${cssFile}`, 'utf8');
-      check(css.includes('.tool-shell'), 'tools CSS build mein nahi aayi');
-      check(/@media\s*\(max-width:\s*640px\)/.test(css), 'tools CSS mein mobile breakpoint nahi hai');
-      check(/\.tool-row\{[^}]*flex-wrap:wrap/.test(css.replace(/\s+/g, '')) || /flex-wrap:wrap/.test(css), 'mobile: tool-row wrap nahi hota');
-      check(/font-size:16px/.test(css.replace(/\s+/g, '')), 'mobile: inputs 16px nahi (auto-zoom hoga)');
-    } else {
+    if (!cssFile) {
       check(false, 'Layout CSS bundle nahi mila');
+    } else {
+      const css = readFileSync(`dist/_astro/${cssFile}`, 'utf8');
+      const compact = css.replace(/\s+/g, '');
+
+      // tools ke pages ke markup mein purani .tool-* classes wapas na aayein
+      const page = pages.get('/tools/json-formatter/') ?? '';
+      check(!/class="[^"]*\btool-(shell|btn|input|textarea|table|swatch)\b/.test(page), '/tools/ markup mein purani .tool-* class wapas aa gayi');
+
+      // Tailwind utilities CSS mein sach mein hain
+      check(compact.includes('.rounded-2xl'), 'Tailwind utility (rounded-2xl) build CSS mein nahi hai');
+      check(compact.includes('border-border-hairline') || compact.includes('--color-border-hairline'), 'hairline token CSS mein nahi');
+      check(compact.includes('--accent:#514dcc') || compact.includes('var(--accent)'), 'accent token CSS mein nahi');
+
+      // mobile: max-sm variants + inputs 16px (auto-zoom band)
+      check(/max-sm:/.test(page), 'tool markup mein max-sm (mobile) variants nahi hain');
+      check(/\.max-sm\\:text-base/.test(css) || compact.includes('max-sm\\:text-base'), 'mobile par input font-size 16px nahi');
+      check(compact.includes('@media(max-width:40rem)') || compact.includes('@media(max-width:640px)'), 'mobile breakpoint CSS mein nahi');
+
+      // aapke design tokens (compilefuture) — grey/purple hard-code nahi
+      check(!/#17171c|#6b6b7b|#9a9ab0/i.test(page), 'tool markup mein token ke bahar ka rang hard-coded hai');
     }
   } catch (error) {
-    check(false, `mobile CSS check fail: ${error.message}`);
+    check(false, `styling check fail: ${error.message}`);
   }
 
   return suite;
