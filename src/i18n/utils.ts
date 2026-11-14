@@ -92,6 +92,11 @@ const localizedPrefixes = [
   '/submit',
   '/search',
   '/page',
+  // Sensor tools root par hain — /onlinecompass/, /de/onlinecompass/ …
+  '/onlinecompass',
+  '/onlinebubblelevel',
+  '/onlinespeedometer',
+  '/onlineqibla',
 ];
 
 export function isLocalizedPath(path: string): boolean {

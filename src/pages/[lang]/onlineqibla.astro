@@ -1,6 +1,6 @@
 ---
 /**
- * onlineqibla — English page.
+ * onlineqibla — localized page.
  *
  * Island QiblaIsland.astro se aata hai (compassinstant se port kiya hua, jaisa tha
  * waisa chalta hua), page shell InstrumentToolPage.astro se. Copy localized hai.
@@ -11,6 +11,11 @@ import { getEntry } from 'astro:content';
 import { instrumentUi } from '../../i18n/instruments/ui';
 import { getLangFromUrl } from '../../i18n/utils';
 import { qiblaProse } from '../../i18n/instruments/qiblaProse';
+import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  return nonDefaultLangs.map((lang: LangCode) => ({ params: { lang } }));
+}
 
 const tool = await getEntry('tools', 'onlineqibla');
 if (!tool) throw new Error('tool entry missing: onlineqibla');

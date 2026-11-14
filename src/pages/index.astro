@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { toolPath } from '../utils/toolPaths';
 import EditorialHero from '../components/EditorialHero.astro';
 import BlogPagination from '../components/BlogPagination.astro';
 import HomeSeoSection, { getHomeFaqs } from '../components/HomeSeoSection.astro';
@@ -74,7 +75,7 @@ const canonicalURL = currentPage === 1
     <div class="blog-grid" data-cards-grid role="list" aria-label="Featured tools">
       {toolData.map((tool) => (
         <article class="blog-card">
-          <a href={`/tools/${tool.slug}/`} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
+          <a href={toolPath(tool.slug)} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
             <img
               src={tool.image}
               alt={`${tool.name} preview`}
@@ -89,7 +90,7 @@ const canonicalURL = currentPage === 1
 
           <div class="blog-card__body">
             <h2 class="blog-card__title">
-              <a href={`/tools/${tool.slug}/`} class="transition-colors hover:text-accent-deep">{tool.name}</a>
+              <a href={toolPath(tool.slug)} class="transition-colors hover:text-accent-deep">{tool.name}</a>
             </h2>
 
             <p class="blog-card__excerpt">{tool.description}</p>

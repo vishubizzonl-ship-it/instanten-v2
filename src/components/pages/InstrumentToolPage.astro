@@ -16,6 +16,7 @@
  * text localized page par bhejna silo rule todta hai.
  */
 import Layout from '../../layouts/Layout.astro';
+import { toolPath } from '../../utils/toolPaths';
 import ToolFaq from '../ToolFaq.astro';
 import InlineCopy from '../InlineCopy.astro';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
@@ -60,8 +61,8 @@ const heading = copy.aboutH ?? copy.h2 ?? localized.name;
 const hasNativeFaq = faqLangs.includes(lang);
 const faqs = hasNativeFaq ? (copy.faq ?? []) : [];
 
-const canonicalURL =
-  lang === 'en' ? `${SITE_URL}/tools/${slug}/` : `${SITE_URL}/${lang}/tools/${slug}/`;
+// Sensor tools root par rehte hain: /<slug>/ aur /<lang>/<slug>/.
+const canonicalURL = `${SITE_URL}${lang === 'en' ? '' : `/${lang}`}${toolPath(slug)}`;
 const seo = instrumentSeo[slug]?.[lang] ?? instrumentSeo[slug]?.en;
 // Title 70 chars se chhota rehta hai (site-integrity rule), description 50+.
 const pageTitle = fitTitle(seo?.title ?? localized.name);

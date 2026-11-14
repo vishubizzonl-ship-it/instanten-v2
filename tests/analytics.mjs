@@ -69,8 +69,11 @@ export function run(pages) {
     // --- content_group ka sahi hona -------------------------------------
     const seg = url.split('/').filter(Boolean);
     const clean = ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'].includes(seg[0]) ? seg.slice(1) : seg;
+    const INSTRUMENTS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
     let expected;
-    if (clean[0] === 'tools' && clean[1]) expected = clean[1];
+    // sensor tools root par hain → apna per-tool group
+    if (INSTRUMENTS.includes(clean[0])) expected = clean[0];
+    else if (clean[0] === 'tools' && clean[1]) expected = clean[1];
     else if (clean[0] === 'tools') expected = 'tools-hub';
     else if (['blog', 'category', 'tag', 'tags', 'page'].includes(clean[0])) expected = 'blog';
     else if (['about', 'contact'].includes(clean[0])) expected = 'company';

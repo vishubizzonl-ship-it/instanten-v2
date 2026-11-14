@@ -1,4 +1,5 @@
 import { fuzzyMatches } from './fuzzy';
+import { toolPath } from './toolPaths';
 
 export const PER_PAGE = 10;
 export const PRICINGS = ['Free', 'Freemium', 'Paid'] as const;
@@ -54,7 +55,7 @@ export function pricingSlug(pricing: string): string {
 }
 
 export function toolHref(tool: Pick<ToolData, 'slug' | 'href'>): string {
-  return tool.href || `/tools/${tool.slug}/`;
+  return tool.href || toolPath(tool.slug);
 }
 
 export function formatDate(value?: string): string {

@@ -59,7 +59,7 @@ export function run(pages) {
 
   for (const [slug, spec] of Object.entries(INSTRUMENTS)) {
     for (const lang of LOCALES) {
-      const url = localize(`/tools/${slug}/`, lang);
+      const url = localize(`/${slug}/`, lang);
       const html = pages.get(url);
       check(Boolean(html), `page missing: ${url}`);
       if (!html) continue;
@@ -113,8 +113,8 @@ export function run(pages) {
     }
 
     // --- 7. English page ki copy localized pages se alag hai -------------
-    const en = pages.get(`/tools/${slug}/`) ?? '';
-    const de = pages.get(`/de/tools/${slug}/`) ?? '';
+    const en = pages.get(`/${slug}/`) ?? '';
+    const de = pages.get(`/de/${slug}/`) ?? '';
     const deText = stripTags(de);
     const enHeading = (stripTags(en).match(/[A-Z][^.]{20,90}\./) ?? [''])[0];
     check(!deText.includes(enHeading), `${slug}: German page par English paragraph aa gaya`);
@@ -142,12 +142,15 @@ export function run(pages) {
   const hub = pages.get('/tools/') ?? '';
   check(Boolean(hub), '/tools/ page nahi mila');
   for (const slug of SLUGS) {
-    check(hub.includes(`href="/tools/${slug}/"`), `/tools/ par ${slug} ka card nahi`);
+    check(hub.includes(`href="/${slug}/"`), `/tools/ par ${slug} ka card nahi`);
   }
   const toolJsonCount = existsSync('src/content/tools')
     ? readdirSync('src/content/tools').filter((f) => f.endsWith('.json')).length
     : 0;
-  const hubCards = new Set([...hub.matchAll(/href="\/tools\/([a-z0-9-]+)\/"/g)].map((m) => m[1]));
+  const hubCards = new Set([
+    ...[...hub.matchAll(/href="\/tools\/([a-z0-9-]+)\//g)].map((m) => m[1]),
+    ...[...hub.matchAll(/href="\/(online[a-z]+)\//g)].map((m) => m[1]),
+  ]);
   check(
     hubCards.size >= toolJsonCount,
     `/tools/ par ${hubCards.size} cards hain, ${toolJsonCount} tools kolekshan mein hain (list adhoori)`
@@ -156,13 +159,13 @@ export function run(pages) {
   // --- 10. localized card naam English se alag hai (7 locales) ----------
   for (const lang of LOCALES.filter((l) => !['en', 'nl', 'sv'].includes(l))) {
     const langHub = pages.get(`/${lang}/tools/`) ?? '';
-    const listed = SLUGS.filter((slug) => langHub.includes(`href="/${lang}/tools/${slug}/"`));
+    const listed = SLUGS.filter((slug) => langHub.includes(`href="/${lang}/${slug}/"`));
     check(listed.length === SLUGS.length, `/${lang}/tools/ par ${SLUGS.length - listed.length} sensor card gayab`);
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
-    const html = pages.get(`/tools/${slug}/`) ?? '';
+    const html = pages.get(`/${slug}/`) ?? '';
     // fonts preconnect CDN links hain, tool link nahi — unko chhod do
     const external = [...html.matchAll(/href="(https?:\/\/(?!instanten\.com)[^"]+)"/g)]
       .map((m) => m[1])
@@ -173,7 +176,7 @@ export function run(pages) {
 
   // --- 12. analytics content_group har tool par alag -------------------
   for (const slug of SLUGS) {
-    const html = pages.get(`/tools/${slug}/`) ?? '';
+    const html = pages.get(`/${slug}/`) ?? '';
     const group = html.match(/content_group:\s*"([^"]*)"/)?.[1];
     check(group === slug, `${slug}: content_group "${group ?? 'khaali'}" hai, "${slug}" chahiye`);
   }
@@ -181,7 +184,7 @@ export function run(pages) {
   // --- 12b. tool page ka chrome: compassinstant wala header, tool card sabse upar ---
   for (const slug of SLUGS) {
     for (const lang of ['en', 'de', 'ja']) {
-      const url = localize(`/tools/${slug}/`, lang);
+      const url = localize(`/${slug}/`, lang);
       const html = pages.get(url) ?? '';
       const body = html.slice(html.indexOf('<body'));
       // header = instrument nav, instanten ka site header nahi
@@ -194,7 +197,7 @@ export function run(pages) {
       // chaar tool pills usi locale ke route par jaate hain
       const navHtml = body.slice(0, body.indexOf('</nav>'));
       for (const target of SLUGS) {
-        const href = lang === 'en' ? `/tools/${target}/` : `/${lang}/tools/${target}/`;
+        const href = lang === 'en' ? `/${target}/` : `/${lang}/${target}/`;
         check(navHtml.includes(`href="${href}"`), `${slug}/${lang}: nav mein ${target} ka link nahi`);
       }
       // language dropdown + theme toggle
@@ -230,7 +233,7 @@ export function run(pages) {
 
   // --- 13. mobile: island mobile breakpoint lock -----------------------
   for (const slug of SLUGS) {
-    const html = pages.get(`/de/tools/${slug}/`) ?? '';
+    const html = pages.get(`/de/${slug}/`) ?? '';
     check(/max-sm:|sm:|lg:/.test(html), `${slug}: responsive breakpoint classes nahi`);
     const viewport = html.match(/<meta name="viewport" content="([^"]+)"/);
     check(Boolean(viewport) && viewport[1].includes('width=device-width'), `${slug}: viewport meta galat`);

@@ -4,6 +4,7 @@ import '../styles/subpages.css';
 import '../styles/responsive.css';
 import Header from '../components/Header.astro';
 import InstrumentNav from '../components/instruments/InstrumentNav.astro';
+import { isInstrument } from '../utils/toolPaths';
 import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
@@ -66,17 +67,14 @@ const {
 } = Astro.props;
 
 /**
- * chrome="instrument" ke liye: is page ka tool slug (`/tools/onlineqibla/` →
- * onlineqibla), taaki header ka logo, pills aur language switch usi tool ke
- * rahen.
+ * chrome="instrument" ke liye: is page ka tool slug (`/onlineqibla/` aur
+ * `/de/onlineqibla/` dono → onlineqibla), taaki header ka logo, pills aur
+ * language switch usi tool ke rahen. Sensor tools root par hain.
  */
-const INSTRUMENT_SLUGS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'] as const;
-const pathAfterLocale = Astro.url.pathname
-  .split('/')
-  .filter(Boolean)
-  .filter((segment, index) => index > 0 || !['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'].includes(segment));
-const instrumentSlug =
-  (INSTRUMENT_SLUGS as readonly string[]).find((slug) => pathAfterLocale[1] === slug) ?? 'onlinecompass';
+const LOCALE_SEGMENTS = ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
+const urlSegments = Astro.url.pathname.split('/').filter(Boolean);
+const pathAfterLocale = LOCALE_SEGMENTS.includes(urlSegments[0] ?? '') ? urlSegments.slice(1) : urlSegments;
+const instrumentSlug = isInstrument(pathAfterLocale[0] ?? '') ? pathAfterLocale[0] : 'onlinecompass';
 
 const detectedLang: LangCode = lang ? (lang as LangCode) : getLangFromUrl(Astro.url);
 const t = useTranslations(detectedLang);
@@ -101,6 +99,8 @@ const cleanSegments =
 const cleanPath = `/${cleanSegments.join('/')}`;
 
 const gaContentGroup = (() => {
+  // Sensor tools root par: /onlineqibla/ → onlineqibla (per-tool report)
+  if (isInstrument(cleanSegments[0] ?? '')) return cleanSegments[0];
   if (cleanSegments[0] === 'tools' && cleanSegments[1]) return cleanSegments[1];
   if (cleanSegments[0] === 'tools') return 'tools-hub';
   if (['blog', 'category', 'tag', 'tags', 'page'].includes(cleanSegments[0])) return 'blog';

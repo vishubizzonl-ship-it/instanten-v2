@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { toolPath } from '../../utils/toolPaths';
 import ToolGrid from '../../components/ToolGrid.astro';
 import FilterBar from '../../components/FilterBar.astro';
 import Pagination from '../../components/Pagination.astro';
@@ -69,7 +70,7 @@ const jsonLd = {
       '@type': 'SoftwareApplication',
       name: tool.data.name,
       description: tool.data.description,
-      url: new URL(`/tools/${tool.data.slug}/`, 'https://instanten.com').href,
+      url: `https://instanten.com${toolPath(tool.data.slug)}`,
       applicationCategory: tool.data.category,
       offers: {
         '@type': 'Offer',

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { toolPath } from '../../utils/toolPaths';
 import EditorialHero from '../../components/EditorialHero.astro';
 import BlogPagination from '../../components/BlogPagination.astro';
 import HomeSeoSection, { getHomeFaqs } from '../../components/HomeSeoSection.astro';
@@ -68,7 +69,7 @@ const canonicalURL = currentPage === 1
     <div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.featuredTools')}>
       {toolData.map((tool) => {
         const localized = localizeTool(lang, tool);
-        const toolHref = translatePath(`/tools/${tool.slug}/`);
+        const toolHref = translatePath(toolPath(tool.slug));
         return (
         <article class="blog-card">
           <a href={toolHref} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>

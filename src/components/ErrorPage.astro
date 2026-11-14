@@ -10,6 +10,7 @@
  *  - carries no indexable content: one h1, one short paragraph, recovery links
  */
 import Layout from '../layouts/Layout.astro';
+import { toolPath } from '../utils/toolPaths';
 import Breadcrumbs from './Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
@@ -116,7 +117,7 @@ const pageDescription = descriptions[code];
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {featuredTools.map((tool) => (
                 <a
-                  href={`/tools/${tool.data.slug}/`}
+                  href={toolPath(tool.data.slug)}
                   class="block p-4 rounded-lg border border-border-hairline bg-surface hover:border-ink/30 hover:shadow-sm transition-colors text-left"
                 >
                   <h3 class="font-display font-semibold text-base text-ink mb-1">{tool.data.name}</h3>

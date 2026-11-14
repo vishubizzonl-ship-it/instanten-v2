@@ -21,6 +21,7 @@ import { pricingSlug } from '../../utils/filters';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
 import { localizeTool, localizeToolCategory, localizePricing, getPricingNote } from '../../i18n/toolContent';
+import { toolPath } from '../../utils/toolPaths';
 
 interface Props {
   tool: {
@@ -254,12 +255,12 @@ const breadcrumbs = [
             const relPricing = localizePricing(lang, related.data.pricing);
             return (
               <article class="bg-surface border border-border-hairline rounded-card overflow-hidden">
-                <a href={translatePath(`/tools/${related.data.slug}/`)} class="block aspect-[16/9] overflow-hidden bg-surface-soft">
+                <a href={translatePath(toolPath(related.data.slug))} class="block aspect-[16/9] overflow-hidden bg-surface-soft">
                   <img src={related.data.image} alt={`${relLocalized.name} preview`} class="w-full h-full object-cover" loading="lazy" width="320" height="180" />
                 </a>
                 <div class="p-4">
                   <h3 class="font-display font-semibold text-base text-ink mb-2">
-                    <a href={translatePath(`/tools/${related.data.slug}/`)} class="hover:text-accent-deep transition-colors">{relLocalized.name}</a>
+                    <a href={translatePath(toolPath(related.data.slug))} class="hover:text-accent-deep transition-colors">{relLocalized.name}</a>
                   </h3>
                   <p class="text-body-sm text-muted line-clamp-2 mb-3">{relLocalized.description}</p>
                   <div class="flex items-center gap-2">

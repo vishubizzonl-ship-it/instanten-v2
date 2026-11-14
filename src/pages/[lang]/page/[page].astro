@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { toolPath } from '../../../utils/toolPaths';
 import EditorialHero from '../../../components/EditorialHero.astro';
 import BlogPagination from '../../../components/BlogPagination.astro';
 import { getCollection } from 'astro:content';
@@ -77,7 +78,7 @@ const pageDescription = `${seo.description} — ${t('aria.page')} ${currentPage}
     <div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.featuredTools')}>
       {toolData.map((tool) => {
         const localized = localizeTool(lang, tool);
-        const href = translatePath(`/tools/${tool.slug}/`);
+        const href = translatePath(toolPath(tool.slug));
         return (
           <article class="blog-card">
             <a href={href} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>

@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations, translatePathSafe, formatLocalizedDate } from '../i18n/utils';
+import { toolPath } from '../utils/toolPaths';
 import { localizeTool, localizeToolCategory, localizePricing } from '../i18n/toolContent';
 
 interface Props {
@@ -48,7 +49,7 @@ const pricingClasses = {
 
 const displayDate = updatedDate || addedDate;
 const formattedDate = displayDate ? formatLocalizedDate(displayDate, lang) : '';
-const toolHref = translatePathSafe(`/tools/${slug}/`, lang);
+const toolHref = translatePathSafe(toolPath(slug), lang);
 const makerHref = maker
   ? translatePathSafe(`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`, lang)
   : '';

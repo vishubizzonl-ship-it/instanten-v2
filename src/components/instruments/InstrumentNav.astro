@@ -12,6 +12,7 @@
  * chrome="instrument"); baaki poori site ka header waise hi rehta hai.
  */
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { toolPath } from '../../utils/toolPaths';
 import { instrumentUi } from '../../i18n/instruments/ui';
 import { instrumentToolCopy } from '../../i18n/instruments/toolCopy';
 import { languages, nonDefaultLangs, type LangCode } from '../../i18n/ui';
@@ -43,10 +44,10 @@ const withLocale = (path: string, code: LangCode) =>
   code === 'en' ? path : `/${code}${path}`;
 const localizedPath = (code: LangCode) => withLocale(barePath, code);
 
-const toolPath = (target: InstrumentSlug) => withLocale(`/tools/${target}/`, lang);
+const hrefFor = (target: InstrumentSlug) => withLocale(toolPath(target), lang);
 
 const navItems = toolSlugs.map((target) => ({
-  href: toolPath(target),
+  href: hrefFor(target),
   label: copy[target]?.name ?? target,
   current: target === slug,
 }));
