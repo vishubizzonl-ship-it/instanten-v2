@@ -10,7 +10,7 @@ export interface SeoPageContent {
 
 export const seoHome: Record<LangCode, SeoPageContent> = {
   en: {
-    title: 'Instanten — AUTO-PULL OK',
+    title: 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
     description:
       'Instanten offers free instant online tools, fast instant convert utilities, step-by-step guides, and instant help directly in your browser with zero sign-up. Verified with NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648.',
     keywords:
