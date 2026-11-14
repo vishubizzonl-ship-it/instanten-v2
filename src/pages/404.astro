@@ -14,7 +14,12 @@ const breadcrumbs = [
 const pageTitle = '404 — Page Not Found | instanten';
 const pageDescription = 'Page not found. Return to the homepage to discover useful SaaS tools.';
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL="https://instanten.com/404/">
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL="https://instanten.com/404/"
+  noindex
+>
   <Breadcrumbs items={breadcrumbs} />
   <div class="min-h-[70vh] flex items-center justify-center px-gutter">
     <div class="text-center max-w-md">

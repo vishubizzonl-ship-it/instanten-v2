@@ -25,8 +25,11 @@ export function loadPages(outDir) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) walk(full);
       else if (entry.name.endsWith('.html')) {
-        let url = '/' + relative(outDir, full).split('\\').join('/');
-        url = url === '/index.html' ? '/' : url.slice(0, -'index.html'.length);
+        const rel = '/' + relative(outDir, full).split('\\').join('/');
+        // "/x/y/index.html" -> "/x/y/", "/404.html" stays "/404.html"
+        const url = rel.endsWith('/index.html')
+          ? rel.slice(0, -'index.html'.length)
+          : rel;
         pages.set(url, readFileSync(full, 'utf8'));
       }
     }

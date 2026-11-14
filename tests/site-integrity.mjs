@@ -58,6 +58,16 @@ export function run(pages, outDir) {
     check(!robots || robots.includes('index'), `normal page noindex hai :: ${url}`);
   }
 
+  // --- error pages: noindex, nofollow, no hreflang, out of the silo --------
+  for (const url of ['/404.html']) {
+    const html = pages.get(url);
+    if (!check(!!html, `error page build mein nahi :: ${url}`)) continue;
+    const robots = meta(html, 'robots') || '';
+    check(robots.includes('noindex'), `error page indexable hai :: ${url}`);
+    check(robots.includes('nofollow'), `error page par nofollow nahi :: ${url}`);
+    check(!html.includes('rel="alternate" hreflang'), `error page par hreflang hai :: ${url}`);
+  }
+
   // --- JSON-LD valid ------------------------------------------------------
   // A block is one node, an array of nodes, or a @graph — flatten before checking.
   const nodes = (raw) => {
