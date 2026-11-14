@@ -73,8 +73,13 @@ export function run(pages, outDir) {
     check(!!btn, `footer language button nahi mila :: ${url}`);
     check(!!menu, `footer language menu nahi mila :: ${url}`);
     if (btn) {
-      check(btn[1].includes('rounded-full'), `footer language button gol nahi hai :: ${url}`);
+      check(btn[1].includes('rounded-full'), `footer language button rounded nahi hai :: ${url}`);
       check(/\bh-10\b/.test(btn[1]), `footer language button 40px height nahi hai :: ${url}`);
+      // footer = pill with the language name, NOT a circle-only glyph button
+      check(!/\bw-10\b/.test(btn[1]), `footer language button circle ban gaya (w-10) :: ${url}`);
+      const label = footer.slice(0, footer.indexOf('</button>')).replace(/<svg[\s\S]*?<\/svg>/g, '');
+      check(/[A-Za-z\u00C0-\u024F\u0400-\u04FF\u3040-\u30FF\u4E00-\u9FFF]{3,}/.test(label),
+        `footer language button par language ka naam nahi hai :: ${url}`);
     }
     if (menu) {
       check(
@@ -84,6 +89,16 @@ export function run(pages, outDir) {
       check(!/\bright-0\b/.test(menu[1]), `footer language menu right edge se khul raha hai :: ${url}`);
     }
   }
+
+  // --- language picker globe icon must be the real globe, not the broken path
+  const BROKEN_GLOBE = '15.3 15.3 0 0 1 4 10';
+  for (const [url, html] of pages) {
+    check(!html.includes(BROKEN_GLOBE), `language button ka globe icon toota hua path use kar raha hai :: ${url}`);
+  }
+  const footerHtml = pages.get('/') ?? '';
+  const pickerSeg = footerHtml.slice(footerHtml.indexOf('language-picker-wrapper--footer'));
+  check(pickerSeg.includes('M12 2a14.5'), 'language button ka globe icon sahi nahi hai');
+  check(pickerSeg.includes('M2 12h20'), 'language button ke globe ki horizontal line nahi hai');
 
   // --- no pill CTAs left in HTML -----------------------------------------
   for (const [url, html] of pages) {
