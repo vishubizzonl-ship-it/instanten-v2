@@ -10,6 +10,12 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## Rules
 
+> **⚠️ Sabse pehle [`RULES.md`](./RULES.md) padho — wahi authoritative rule file hai.**
+> Usme Rule 1 (sirf wahi 8 cheezein), Rule 2 (compilefuture.com design tokens),
+> Rule 3 (jo kaam bola hai wahi karo) aur Rule 3.1 (check + report format) ek jagah
+> combined hain, plus saare standing orders. Neeche wahi rules summary ke liye hain.
+> Automated lock: `tests/rules.mjs`.
+
 ### Rule 1 (permanent, highest priority) — sirf wahi 8 cheezein
 
 Is site ko inhi 8 se banaya gaya tha:
@@ -54,6 +60,7 @@ Us site ke tokens (asli CSS se liye gaye):
 
 ### Rule 3 — working style
 
+- **"Jo kaam bola gaya hai, wahi karo — na kam, na zyada."**
 - Do exactly what the user asks. Nothing more, nothing less.
 - No proactive changes, suggestions, or extra work unless explicitly requested.
 - Simple rasta pehle; ek hi command se chale — options ka dher nahi.

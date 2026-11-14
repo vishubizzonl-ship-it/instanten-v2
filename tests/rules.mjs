@@ -53,6 +53,32 @@ export function run() {
   const suite = createSuite('rules');
   const { check } = suite;
 
+  /* ---------- Rule file: RULES.md hi ek hi source of truth ---------- */
+  check(existsSync('RULES.md'), 'RULES.md gayab hai (combined rule file honi chahiye)');
+  if (existsSync('RULES.md')) {
+    const rules = readFileSync('RULES.md', 'utf8');
+    const required = [
+      ['Rule 1', 'Rule 1 (8 cheezein) ka heading'],
+      ['Rule 2', 'Rule 2 (design tokens) ka heading'],
+      ['Rule 3', 'Rule 3 (jo kaam bola hai wahi karo) ka heading'],
+      ['Rule 3.1', 'Rule 3.1 (check + report) ka heading'],
+      ['na kam, na zyada', 'user ki ek-line rule'],
+      ['kya banaya → kaise check kiya → pass/fail + saboot', 'report format'],
+      ['compilefuture.com', 'design source'],
+      ['Koi naya package / framework / tool nahi', 'no-new-package rule'],
+    ];
+    for (const [needle, label] of required) {
+      check(rules.includes(needle), `RULES.md mein ${label} missing hai (${needle})`);
+    }
+    // token table bhi wahi honi chahiye (Rule 2)
+    for (const token of ['#29294B', '#696981', '#5955D1', '#E1E1E8', 'DM Sans']) {
+      check(rules.toUpperCase().includes(token.toUpperCase()), `RULES.md mein compilefuture token ${token} missing`);
+    }
+    // AGENTS.md isi file ko point kare
+    const agents = readFileSync('AGENTS.md', 'utf8');
+    check(agents.includes('RULES.md'), 'AGENTS.md RULES.md ko point nahi karta');
+  }
+
   /* ---------- Rule 1: koi naya package nahi ---------- */
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   const deps = Object.keys(pkg.dependencies ?? {});
