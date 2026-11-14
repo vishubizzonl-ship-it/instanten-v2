@@ -12,27 +12,30 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ### Rule 1 (permanent, highest priority) — sirf wahi 8 cheezein
 
-Site inhi 8 se bani hai, koi naya package/library/method nahi:
+Is site ko inhi 8 se banaya gaya tha:
 
-| # | Cheez | Version |
+| # | Cheez | Kaam |
 |---|---|---|
-| 1 | astro | ^6.4.8 |
-| 2 | @astrojs/sitemap | ^3.7.4 |
-| 3 | tailwindcss | ^4.3.3 |
-| 4 | @tailwindcss/vite | ^4.3.3 |
-| 5 | typescript | ^6.0.3 |
-| 6 | @astrojs/check | ^0.9.12 |
-| 7 | puppeteer-core | ^25.16.0 |
-| 8 | node | 22.x |
+| 1 | **Git** | version control, GitHub push |
+| 2 | **Node.js v22.23.4** | build + server + tests |
+| 3 | **Astro v7 project** | site ka framework |
+| 4 | ~~Vercel DESIGN.md~~ → **Rule 2 dekho** | iski jagah compilefuture.com ka design |
+| 5 | **web-design-guidelines skill** | layout/typography/accessibility ke rules |
+| 6 | **tailwind-4-docs skill** | Tailwind v4 ka sahi tareeka |
+| 7 | **Tailwind CSS v4** | saara styling |
+| 8 | **Astro Docs MCP** (`https://mcp.docs.astro.build/mcp`) | Astro docs ka source of truth |
 
-Koi naya npm package install nahi, koi naya framework nahi, koi naya tool nahi.
-Tests bhi plain node se (koi test library nahi) — `tests/*.mjs`.
+Abhi **7 chuninda cheezein** use hoti hain: 1, 2, 3, 5, 6, 7, 8 — aur #4 ki jagah compilefuture.com ka design.
+
+Koi naya package/framework/tool nahi. Tests bhi plain node se (`tests/*.mjs`), server bhi zero-dependency (`serve-static.mjs`).
+
+> Note: repo mein abhi `astro ^6.4.8` laga hua hai (v7 nahi). Upgrade tabhi karunga jab tum bologe.
 
 ### Rule 2 — design ka source = compilefuture.com
 
-In 8 mein se "vercel design md" use nahi hua tha; uski jagah design
-**https://compilefuture.com/** se copy kiya gaya hai. Aage bhi design ka
-reference wahi rahega (na vercel/v0 ka design system).
+8 mein se #4 (Vercel DESIGN.md) ki jagah design **https://compilefuture.com/**
+se copy kiya gaya hai. Aage bhi design ka reference wahi rahega — Vercel/v0 ka
+design system nahi.
 
 Us site ke tokens (asli CSS se liye gaye):
 
