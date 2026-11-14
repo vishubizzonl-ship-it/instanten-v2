@@ -101,39 +101,62 @@ BOOT
 }
 
 # ------------------------------------------------------------ build
+# Build hamesha dist.next me, phir swap. Isse purani site build ke dauraan
+# bhi chalti rehti hai (aadhi bani hui site kabhi nahi dikhti) aur Astro ka
+# stale .prerender chunk error bhi nahi aata.
 build_site(){
-  if [ -x node_modules/astro/bin/astro.mjs ] || [ -f node_modules/astro/bin/astro.mjs ]; then
-    "$NODE" node_modules/astro/bin/astro.mjs build >>$LOG 2>&1
+  rm -rf dist.next
+  if [ -f node_modules/astro/bin/astro.mjs ]; then
+    "$NODE" node_modules/astro/bin/astro.mjs build --outDir dist.next >>$LOG 2>&1
   else
-    "$NPM" run build >>$LOG 2>&1
+    OUT_DIR=dist.next "$NPM" run build >>$LOG 2>&1
   fi
+}
+
+swap_dist(){
+  rm -rf dist.old
+  [ -d dist ] && mv dist dist.old
+  mv dist.next dist || { [ -d dist.old ] && mv dist.old dist; return 1; }
+  rm -rf dist.old
+  return 0
+}
+
+# Server chalu karo (port pehle khaali karo, phir 3 koshish).
+start_server(){
+  alive $RUN/server.pid && kill "$(cat $RUN/server.pid)" 2>/dev/null
+  kill_servers
+  wait_port_free || { no "Port $PORT khaali nahi hua"; return 1; }
+  for try in 1 2 3; do
+    PORT=$PORT nohup "$NODE" serve-static.mjs >>$LOG 2>&1 &
+    echo $! > $RUN/server.pid
+    sleep 1
+    up && return 0
+  done
+  return 1
 }
 
 # ------------------------------------------------------------ rebuild
 rebuild(){
   [ -d node_modules/astro ] || "$NPM" install --no-audit --no-fund >>$LOG 2>&1
-  if build_site; then
-    alive $RUN/server.pid && kill "$(cat $RUN/server.pid)" 2>/dev/null
-    kill_servers
-    if ! wait_port_free; then
-      no "Port $PORT kisi purane server ne pakda hua hai — band karo aur dobara chalao"
-      return 1
-    fi
-    for try in 1 2 3; do
-      PORT=$PORT nohup "$NODE" serve-static.mjs >>$LOG 2>&1 &
-      echo $! > $RUN/server.pid
-      up && break
-      sleep 1
-    done
-    if up; then
-      ok "Site update ho gayi  $(date '+%H:%M:%S')  ($(git rev-parse --short HEAD 2>/dev/null))"
-    else
-      warn "Server start nahi hua — log: $LOG"
-    fi
+
+  if ! build_site; then
+    rm -rf dist.next
+    warn "Build fail — purani site chalu hai  $(date '+%H:%M:%S')"
+    return 1
+  fi
+  swap_dist || { warn "dist swap fail — purani site chalu hai"; return 1; }
+
+  # Server chal raha hai to chalta rehne do: wo har request par dist se file
+  # padhta hai, isliye naya build turant dikhne lagta hai (koi downtime nahi).
+  if up; then
+    ok "Site update ho gayi  $(date '+%H:%M:%S')  ($(git rev-parse --short HEAD 2>/dev/null))"
     return 0
   fi
-  warn "Build fail — purani site chalu hai  $(date '+%H:%M:%S')"
-  return 1
+  if start_server; then
+    ok "Site update ho gayi (server dobara chalu)  $(date '+%H:%M:%S')"
+  else
+    warn "Server start nahi hua — log: $LOG"
+  fi
 }
 
 case "${1:-}" in
@@ -200,23 +223,18 @@ fi
 ok "Build ho raha hai…"
 if ! build_site; then
   warn "Build fail — log: $LOG"
-  [ -f dist/index.html ] || { tail -n 20 $LOG; exit 1; }
-  warn "Purana build serve kar raha hoon."
+  if [ -f dist/index.html ]; then
+    warn "Purana build serve kar raha hoon."
+  else
+    tail -n 20 $LOG; exit 1
+  fi
 fi
+swap_dist || { no "dist swap fail"; exit 1; }
 
 # --------------------------------------------------------------- serve
-alive $RUN/server.pid && kill "$(cat $RUN/server.pid)" 2>/dev/null
-kill_servers
-if ! wait_port_free; then
-  no "Port $PORT kisi purane server ne pakda hua hai. Chalaye: bash start.sh stop"
-  exit 1
+if ! start_server; then
+  tail -n 20 $LOG; no "Server start nahi hua"; exit 1
 fi
-for try in 1 2 3; do
-  PORT=$PORT nohup "$NODE" serve-static.mjs >>$LOG 2>&1 & echo $! >$RUN/server.pid
-  up && break
-  sleep 1
-done
-up || { tail -n 20 $LOG; no "Server start nahi hua"; exit 1; }
 
 command -v termux-wake-lock >/dev/null && termux-wake-lock 2>/dev/null
 rm -f $RUN/stop
