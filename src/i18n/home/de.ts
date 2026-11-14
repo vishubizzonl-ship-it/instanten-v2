@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: 'Häufig gestellte Fragen',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Was ist Instanten und wie unterscheidet es sich von anderen kostenlosen Online-Tool-Websites?',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instanten ist eine kostenlose Sammlung von Online-Tools, bei der jedes Werkzeug im eigenen Browser läuft statt auf einem Server. Genau diese eine Designentscheidung macht den Unterschied: Nichts, was Sie einfügen oder hochladen, verlässt Ihr Gerät, es gibt keine Anmeldepflicht, kein Tageslimit und keine Bezahlstufe, und jedes Werkzeug öffnet sich als statische Seite, die selbst mit langsamer Mobilverbindung in einer Sekunde nutzbar ist.',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: 'Welche Online-Tools gibt es in dieser Sammlung im Moment?',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        'Derzeit sind es zwölf Werkzeuge: JSON-Formatierer, Base64-Encoder und -Decoder, Wortzähler, Passwortgenerator, QR-Generator, Bildkompressor, Farbpalette, CSS-Grid-Generator, Markdown-Editor, Meta-Tag-Generator, Online-Lineal und Regex-Tester. Sie sind nach Entwicklung, Design, Schreiben und Hilfswerkzeugen gruppiert, sodass Sie direkt über das Raster der Startseite oder mit einem einzigen Suchwort zur richtigen Seite kommen.',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: 'Sind diese Online-Tools wirklich kostenlos oder gibt es eine versteckte Grenze?',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        'Sie sind kostenlos, und die Grenze ist exakt null: kein Testzeitraum-Countdown, keine Karteneingabe, kein Wasserzeichen, kein Exportlimit und keine Warteschlange. Eine kostenlose Tool-Sammlung sollte wie ein öffentliches Werkzeug funktionieren, deshalb liefert dasselbe Werkzeug auch beim zehnten Aufruf in einer Arbeitssitzung dasselbe Ergebnis. Es gibt später nichts zu abonnieren, weil es keine Premium-Stufe gibt.',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: 'Ist es sicher, Passwörter, Tokens oder Kundendokumente in ein Online-Tool einzufügen?',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'Bei Instanten ja, denn die Verarbeitung läuft in Ihrem Browser mit reinem JavaScript. Text oder Datei werden nicht an einen Server übertragen und nach dem Schließen des Tabs nirgends gespeichert. Das ist die erste Frage, die man bei jeder kostenlosen Tool-Website stellen sollte: Lädt eine Seite Ihre Eingabe auf ihr eigenes Backend, liegt der Inhalt faktisch als Kopie Ihrer Daten in fremder Hand.',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: 'Funktionieren diese Browser-Tools auch auf Smartphones und Tablets?',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        'Ja. Jede Seite nutzt ein responsives Layout mit einer einzigen Spalte auf kleinen Bildschirmen, Berührungsflächen von mindestens 44 Pixeln und Eingabefeldern, die so bemessen sind, dass das Telefon nicht unerwartet zoomt. Wortzählung, QR-Erzeugung, Passwortgenerator, Bildkompression und Online-Lineal verhalten sich auf Android Chrome, iPhone Safari, iPad, Windows und macOS gleich, im hellen wie im dunklen Modus.',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: 'Muss ich eine App installieren oder ein Konto anlegen?',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        'Keine Installation, kein Konto. Öffnen Sie die Sammlung, wählen Sie das Werkzeug und tippen Sie los, das Ergebnis erscheint sofort. Weil keine Anmeldung nötig ist, warten Sie auf keine Bestätigungsmail, merken sich kein Passwort und es entsteht kein Profil aus Ihrer Nutzung. Die Tool-Seite ist in sich abgeschlossen und lässt sich als Lesezeichen oder auf dem Startbildschirm des Telefons ablegen.',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: 'Arbeiten die Tools weiter, wenn die Internetverbindung abbricht?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        'Sobald eine Tool-Seite geladen ist, läuft die eigentliche Arbeit ohne Verbindung weiter, denn Formatieren, Zählen, Kodieren, Komprimieren und Messen passieren lokal im Browser statt auf einem entfernten Server. Nur das Neuladen der Seite, das Öffnen eines anderen Werkzeugs oder der Zugriff am nächsten Tag braucht eine Verbindung. Wer im Zug oder Flugzeug wieder damit arbeiten will, lässt den Tab einfach offen.',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: 'Wie genau sind Online-Lineal, Tacho und ähnliche Messwerkzeuge?',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        'Messwerkzeuge folgen veröffentlichten Standards statt Schätzungen: Das Online-Lineal kalibriert gegen die ID-1-Kartengröße von 85,60 auf 53,98 Millimetern, die weltweit für Bank- und Ausweiskarten gilt, und Einheitenumrechnungen nutzen exakte Definitionen wie 1 Zoll gleich 25,4 Millimeter. Die Genauigkeit hängt danach vom Kalibrierschritt und der Pixeldichte des Bildschirms ab, deshalb zeigt die Seite den aktuellen Pixel-pro-Millimeter-Wert immer sichtbar an.',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: 'Wie wähle ich auf einer Website mit vielen Werkzeugen das richtige für meine Aufgabe?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        'Denken Sie von der Aufgabe aus, nicht vom Werkzeugnamen. Muss das Ergebnis lesbar oder gültig sein, öffnen Sie Formatierer oder Prüfer; wird etwas gekürzt, verkleinert oder umgewandelt, schauen Sie unter Konvertierung; beim Schreiben, Zählen und Aufräumen von Text passen die Schreibwerkzeuge, bei Layout und Farbe die Designwerkzeuge. Eine Ein-Wort-Suche auf der Startseite ist meist schneller als das Durchblättern der Kategorien.',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: 'Warum eine Tool-Sammlung im Web statt fünf Einzel-Abos?',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        'Weil die Aufgabe klein ist und das Abo nicht. Vier oder fünf spezialisierte Abos kosten zusammengenommen oft mehr als ein Streaming-Dienst und bringen jeweils ein Konto, eine Datenschutzerklärung und einen Update-Zyklus mit. Eine einzige Sammlung behält eine Adresse, eine Bildsprache und ein Tastaturverhalten für alle Werkzeuge, sodass der Wechsel der Aufgabe nie bedeutet, ein neues Produkt zu lernen oder sich zu merken, auf welcher Seite der gute Formatierer lag.',
     },
   ],
 };

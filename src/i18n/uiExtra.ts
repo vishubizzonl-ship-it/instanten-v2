@@ -54,6 +54,9 @@ const en = {
   'tools.pricing': 'Pricing',
   'tools.features': 'Key Features',
   'tools.useCases': 'Use Cases',
+  'tools.useItHere': 'Use the {name} right here',
+  'tools.localProcessing':
+    'Processing happens in your browser — no file, text or image is uploaded anywhere.',
   'tools.tags': 'Tags',
   'tools.related': 'Related Tools',
   'tools.howToUse': 'How to use',
@@ -160,6 +163,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Alle Tools',
     'tools.features': 'Hauptfunktionen',
     'tools.useCases': 'Anwendungsfälle',
+    'tools.useItHere': '{name} direkt hier verwenden',
+    'tools.localProcessing':
+    'Die Verarbeitung findet in Ihrem Browser statt — keine Datei, kein Text und kein Bild wird irgendwohin hochgeladen.',
     'tools.tags': 'Tags',
     'tools.related': 'Ähnliche Tools',
     'tools.howToUse': 'So wird es verwendet',
@@ -262,6 +268,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'すべてのツール',
     'tools.features': '主な機能',
     'tools.useCases': '活用例',
+    'tools.useItHere': '{name}をこのページでそのまま使えます',
+    'tools.localProcessing':
+    '処理はすべてお使いのブラウザ内で行われ、ファイル・テキスト・画像がアップロードされることはありません。',
     'tools.tags': 'タグ',
     'tools.related': '関連ツール',
     'tools.howToUse': '使い方',
@@ -362,6 +371,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Tous les outils',
     'tools.features': 'Fonctionnalités clés',
     'tools.useCases': 'Cas d’usage',
+    'tools.useItHere': 'Utilisez {name} directement ici',
+    'tools.localProcessing':
+    'Le traitement se fait dans votre navigateur — aucun fichier, texte ou image n’est envoyé où que ce soit.',
     'tools.tags': 'Étiquettes',
     'tools.related': 'Outils similaires',
     'tools.howToUse': 'Comment utiliser',
@@ -464,6 +476,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Todas las herramientas',
     'tools.features': 'Funciones clave',
     'tools.useCases': 'Casos de uso',
+    'tools.useItHere': 'Usa {name} aquí mismo',
+    'tools.localProcessing':
+    'El procesamiento ocurre en tu navegador: no se envía ningún archivo, texto ni imagen a ningún sitio.',
     'tools.tags': 'Etiquetas',
     'tools.related': 'Herramientas relacionadas',
     'tools.howToUse': 'Cómo usar',
@@ -566,6 +581,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': '모든 도구',
     'tools.features': '주요 기능',
     'tools.useCases': '활용 사례',
+    'tools.useItHere': '여기에서 바로 {name} 사용하기',
+    'tools.localProcessing':
+    '처리는 브라우저 안에서 이루어지며 파일, 텍스트, 이미지가 어디에도 업로드되지 않습니다.',
     'tools.tags': '태그',
     'tools.related': '관련 도구',
     'tools.howToUse': '사용 방법',
@@ -666,6 +684,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Alle tools',
     'tools.features': 'Belangrijkste functies',
     'tools.useCases': 'Toepassingen',
+    'tools.useItHere': 'Gebruik {name} direct hier',
+    'tools.localProcessing':
+    'De verwerking gebeurt in je browser — er wordt geen bestand, tekst of afbeelding geüpload.',
     'tools.tags': 'Tags',
     'tools.related': 'Gerelateerde tools',
     'tools.howToUse': 'Hoe te gebruiken',
@@ -768,6 +789,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Alla verktyg',
     'tools.features': 'Huvudfunktioner',
     'tools.useCases': 'Användningsfall',
+    'tools.useItHere': 'Använd {name} direkt här',
+    'tools.localProcessing':
+    'Bearbetningen sker i din webbläsare – ingen fil, text eller bild laddas upp någonstans.',
     'tools.tags': 'Taggar',
     'tools.related': 'Relaterade verktyg',
     'tools.howToUse': 'Så använder du',
@@ -870,6 +894,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Tutti gli strumenti',
     'tools.features': 'Funzioni principali',
     'tools.useCases': 'Casi d’uso',
+    'tools.useItHere': 'Usa {name} direttamente qui',
+    'tools.localProcessing':
+    'L’elaborazione avviene nel tuo browser: nessun file, testo o immagine viene caricato da nessuna parte.',
     'tools.tags': 'Tag',
     'tools.related': 'Strumenti correlati',
     'tools.howToUse': 'Come usare',
@@ -972,6 +999,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.allTools': 'Todas as ferramentas',
     'tools.features': 'Principais recursos',
     'tools.useCases': 'Casos de uso',
+    'tools.useItHere': 'Use {name} aqui mesmo',
+    'tools.localProcessing':
+    'O processamento acontece no seu navegador — nenhum arquivo, texto ou imagem é enviado para lugar algum.',
     'tools.tags': 'Tags',
     'tools.related': 'Ferramentas relacionadas',
     'tools.howToUse': 'Como usar',

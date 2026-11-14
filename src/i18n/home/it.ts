@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: 'Domande frequenti',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Che cos’è Instanten e in cosa è diverso dagli altri siti di strumenti online gratuiti?',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instanten è una raccolta di strumenti online gratuiti in cui ogni utilità viene eseguita dentro il tuo browser invece che su un server. È proprio questa scelta di progetto a fare la differenza: nulla di ciò che incolli o carichi lascia il tuo dispositivo, non c’è alcun obbligo di registrazione, nessun limite giornaliero e nessun piano a pagamento, e ogni strumento si apre come pagina statica utilizzabile in un secondo anche con una connessione mobile lenta.',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: 'Quali strumenti online sono disponibili adesso su questo sito?',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        'Al momento sono dodici: formattatore JSON, codificatore e decodificatore Base64, contatore di parole, generatore di password, generatore di QR code, compressore di immagini, palette di colori, generatore di griglie CSS, editor Markdown, generatore di meta tag, righello online e tester di espressioni regolari. Sono raggruppati in sviluppo, design, scrittura e utilità, così arrivi alla pagina giusta dalla griglia della home o con una sola parola nella ricerca.',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: 'Questi strumenti sono davvero gratuiti o esiste un limite nascosto?',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        'Sono gratuiti e il limite è esattamente zero: nessun conto alla rovescia di prova, nessuna schermata della carta, nessuna filigrana, nessun tetto di esportazione e nessuna coda. Un sito di strumenti gratuiti dovrebbe comportarsi come un servizio pubblico, quindi lo stesso strumento usato dieci volte di fila in una sessione di lavoro dà ogni volta lo stesso risultato. Non ci sarà nulla da abbonare in seguito perché non esiste un livello premium.',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: 'È sicuro incollare password, token o documenti dei clienti in uno strumento online?',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'Su Instanten sì, perché l’elaborazione avviene nel tuo browser con semplice JavaScript: il testo o il file non viene mai trasmesso a un server e non viene salvato da nessuna parte dopo aver chiuso la scheda. È la prima domanda da porsi davanti a qualunque sito di strumenti gratuiti: se il sito carica ciò che scrivi sul proprio backend, quel contenuto diventa di fatto una copia dei tuoi dati presso qualcun altro.',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: 'Questi strumenti funzionano su smartphone e tablet?',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        'Sì. Ogni pagina usa un layout responsive con una sola colonna sugli schermi piccoli, aree di tocco di almeno 44 pixel e campi dimensionati in modo che il telefono non ingrandisca all’improvviso. Contatore di parole, generazione di QR code, generatore di password, compressione delle immagini e righello online si comportano allo stesso modo su Android Chrome, iPhone Safari, iPad, Windows e macOS, sia in modalità chiara sia in modalità scura.',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: 'Devo installare un’app o creare un account?',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        'Nessuna installazione e nessun account. Apri il sito, scegli lo strumento e inizia a scrivere: il risultato compare subito. Poiché non c’è un accesso, non devi attendere un’email di verifica, non devi ricordare una password e nessun profilo viene costruito dal tuo uso. La pagina dello strumento è autonoma e può essere salvata tra i segnalibri o aggiunta alla schermata iniziale del telefono.',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: 'Gli strumenti continuano a funzionare se cade la connessione?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        'Una volta caricata la pagina, il lavoro prosegue senza connessione, perché formattazione, conteggio, codifica, compressione e misurazione avvengono localmente nel browser e non su un server remoto. Ricaricare la pagina, aprire un altro strumento o tornare il giorno dopo richiede invece una connessione: se sai che ti servirà di nuovo in treno o in aereo, lascia la scheda aperta.',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: 'Quanto sono precisi il righello online, il tachimetro e gli strumenti di misura?',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        'Gli strumenti di misura seguono standard pubblicati invece di stime: il righello online si calibra sulla dimensione della carta ID-1 di 85,60 per 53,98 millimetri usata dalle carte bancarie e d’identità in tutto il mondo, e le conversioni di unità usano definizioni esatte come 1 pollice uguale a 25,4 millimetri. La precisione dipende poi dal passaggio di calibrazione e dalla densità dello schermo, per questo la pagina mostra sempre il valore attuale in pixel per millimetro.',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: 'Come scelgo lo strumento giusto su un sito che ne offre molti?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        'Parti dal compito, non dal nome dello strumento. Se il risultato deve essere leggibile o valido, apri il formattatore o il validatore; se qualcosa viene accorciato, ridimensionato o codificato, guarda nella conversione; se scrivi, conti o ripulisci testo vanno bene gli strumenti di scrittura; se controlli un layout o un colore, quelli di design. Una ricerca di una parola nella home è di solito più rapida che scorrere le categorie.',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: 'Perché usare un sito di strumenti invece di cinque abbonamenti dedicati?',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        'Perché il compito è piccolo e l’abbonamento no. Quattro o cinque abbonamenti specializzati costano in silenzio più di un piano di streaming e aggiungono ciascuno un account, un’informativa privacy e un ciclo di aggiornamenti. Un unico sito di strumenti mantiene un indirizzo, un linguaggio visivo e un comportamento da tastiera comuni a tutte le utilità, così cambiare compito non significa mai imparare un altro prodotto né ricordare dove fosse il buon formattatore.',
     },
   ],
 };

@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: '자주 묻는 질문',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Instanten이란 무엇이며 다른 무료 온라인 도구 사이트와 무엇이 다른가요?',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instanten은 모든 도구가 서버가 아니라 사용자의 브라우저 안에서 실행되는 무료 온라인 도구 허브입니다. 차이는 바로 이 설계 선택 하나에서 나옵니다. 붙여넣거나 업로드한 내용이 기기를 떠나지 않고, 회원 가입 장벽도 하루 사용 한도도 유료 요금제도 없으며, 각 도구는 느린 모바일 연결에서도 1초 안에 사용할 수 있는 정적 페이지로 열립니다.',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: '현재 이 도구 허브에서는 어떤 온라인 도구를 사용할 수 있나요?',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        '현재 12개의 도구가 있습니다. JSON 포매터, Base64 인코더와 디코더, 단어 수 세기, 비밀번호 생성기, QR 생성기, 이미지 압축, 색상 팔레트, CSS 그리드 생성기, 마크다운 편집기, 메타 태그 생성기, 온라인 자, 정규식 테스터입니다. 개발, 디자인, 글쓰기, 유틸리티로 묶여 있어 홈 화면 그리드에서 고르거나 검색창에 단어 하나만 입력해 원하는 페이지로 바로 이동할 수 있습니다.',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: '이 도구들은 정말 무료인가요, 숨은 제한이 있나요?',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        '무료이고 제한은 0입니다. 체험 기간 카운트다운도, 카드 등록 화면도, 워터마크도, 내보내기 한도도, 대기열도 없습니다. 무료 온라인 도구 허브는 공공 서비스처럼 동작해야 하므로 한 작업 세션에서 같은 도구를 열 번 연속 사용해도 결과는 매번 같습니다. 유료 등급이 없으니 나중에 구독하라는 요구도 없습니다.',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: '비밀번호, 토큰, 고객 문서를 온라인 도구에 붙여넣어도 안전한가요?',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'Instanten에서는 안전합니다. 처리가 순수 JavaScript로 브라우저 안에서 이루어지므로 텍스트나 파일이 서버로 전송되지 않고, 탭을 닫으면 어디에도 저장되지 않습니다. 어떤 무료 온라인 도구 사이트든 가장 먼저 물어야 할 질문이 이것입니다. 입력값을 자체 백엔드로 업로드하는 사이트에서는 그 내용이 사실상 다른 곳에 있는 내 데이터의 사본이 됩니다.',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: '이 브라우저 도구들은 휴대폰과 태블릿에서도 작동하나요?',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        '네. 모든 페이지가 작은 화면에서 한 열로 정리되는 반응형 레이아웃을 쓰고, 터치 영역은 최소 44픽셀이며, 입력 필드는 휴대폰이 갑자기 확대되지 않도록 크기가 맞춰져 있습니다. 단어 수 세기, QR 생성, 비밀번호 생성, 이미지 압축, 온라인 자 모두 Android Chrome, iPhone Safari, iPad, Windows, macOS에서 라이트 모드와 다크 모드 모두 동일하게 작동합니다.',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: '앱을 설치하거나 계정을 만들어야 하나요?',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        '설치도 계정도 필요 없습니다. 도구 허브를 열고 도구를 고른 뒤 입력을 시작하면 결과가 바로 나타납니다. 로그인이 없으니 인증 메일을 기다릴 일도, 기억할 비밀번호도, 사용 기록으로 만들어지는 프로필도 없습니다. 도구 페이지는 그 자체로 완결되어 있어 북마크하거나 휴대폰 홈 화면에 추가해 두면 됩니다.',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: '인터넷 연결이 끊겨도 도구가 계속 작동하나요?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        '도구 페이지가 한 번 로드되면 작업 자체는 연결 없이 계속됩니다. 서식 지정, 세기, 인코딩, 압축, 측정이 모두 원격 서버가 아니라 브라우저에서 로컬로 실행되기 때문입니다. 페이지를 새로 고치거나 다른 도구를 열거나 다음 날 다시 접속할 때는 연결이 필요하므로, 기차나 비행기에서 다시 쓸 예정이라면 탭을 열어 두세요.',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: '온라인 자, 속도계 같은 측정 도구는 얼마나 정확한가요?',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        '측정 도구는 추측이 아니라 공개된 표준을 따릅니다. 온라인 자는 전 세계 은행과 신분증이 쓰는 ID-1 카드 크기 85.60 x 53.98밀리미터에 맞춰 보정하고, 단위 변환은 1인치 = 25.4밀리미터 같은 정확한 정의를 사용합니다. 이후의 정확도는 보정 단계와 화면 밀도에 달려 있으므로 페이지는 현재의 밀리미터당 픽셀 값을 숨기지 않고 항상 표시합니다.',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: '여러 도구가 있는 사이트에서 작업에 맞는 도구를 어떻게 고르나요?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        '도구 이름이 아니라 작업에서 시작하세요. 결과가 읽기 쉬워야 하거나 유효해야 하면 포매터나 검사기를 열고, 무언가를 줄이거나 자르거나 인코딩한다면 변환 항목을 보세요. 글을 쓰거나 세거나 정리한다면 글쓰기 도구가 맞고, 레이아웃이나 색을 확인한다면 디자인 도구가 맞습니다. 홈의 한 단어 검색이 카테고리를 훑는 것보다 보통 더 빠릅니다.',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: '단일 목적 구독 다섯 개 대신 웹 도구 허브를 쓰는 이유는 무엇인가요?',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        '작업은 작은데 구독은 작지 않기 때문입니다. 집중형 구독 네댓 개는 스트리밍 요금제보다 조용히 더 비싸지고, 각각 계정과 개인정보 처리방침, 업데이트 주기를 관리해야 합니다. 하나의 웹 도구 허브는 하나의 주소, 하나의 시각 언어, 하나의 키보드 동작을 모든 도구에 유지하므로 작업을 바꿔도 새 제품을 배우거나 어느 사이트에 좋은 포매터가 있었는지 기억할 필요가 없습니다.',
     },
   ],
 };

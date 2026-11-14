@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: 'Veelgestelde vragen',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Wat is Instanten en hoe verschilt het van andere gratis online tools-websites?',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instanten is een gratis verzameling online tools waarbij elk hulpmiddel in je eigen browser draait in plaats van op een server. Die ene ontwerpkeuze maakt het verschil: niets van wat je plakt of uploadt verlaat je apparaat, er is geen verplichte aanmelding, geen daglimiet en geen betaald abonnement, en elke tool opent als een statische pagina die ook op een trage mobiele verbinding binnen een seconde bruikbaar is.',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: 'Welke online tools staan er nu op deze site?',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        'Er zijn nu twaalf hulpmiddelen: JSON-formatter, Base64-encoder en -decoder, woordenteller, wachtwoordgenerator, QR-generator, afbeeldingscompressor, kleurenpalet, CSS-gridgenerator, Markdown-editor, metatag-generator, online liniaal en regex-tester. Ze zijn gegroepeerd in ontwikkeling, ontwerp, schrijven en hulpmiddelen, zodat je via het overzicht op de startpagina of met één zoekwoord op de juiste pagina komt.',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: 'Zijn deze online tools echt gratis, of zit er een verborgen limiet aan?',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        'Ze zijn gratis en de limiet is precies nul: geen proefperiode met aftellen, geen betaalscherm, geen watermerk, geen exportlimiet en geen wachtrij. Een gratis verzameling tools hoort te werken als een openbaar hulpmiddel, dus dezelfde tool tien keer achter elkaar in één werksessie geeft tien keer hetzelfde resultaat. Er valt later niets te abonneren, want er is geen premium abonnement.',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: 'Is het veilig om wachtwoorden, tokens of klantdocumenten in een online tool te plakken?',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'Bij Instanten wel, want de verwerking gebeurt in je browser met gewone JavaScript: de tekst of het bestand wordt nooit naar een server gestuurd en na het sluiten van het tabblad nergens opgeslagen. Dit is de eerste vraag die je bij elke gratis tools-website moet stellen: als een site je invoer naar zijn eigen backend uploadt, ligt die inhoud feitelijk als kopie van jouw gegevens bij iemand anders.',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: 'Werken deze browsertools op telefoons en tablets?',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        'Ja. Elke pagina gebruikt een responsieve lay-out met één kolom op kleine schermen, aanraakvlakken van minstens 44 pixels en invoervelden die zo zijn ingesteld dat de telefoon niet onverwacht inzoomt. Woordenteller, QR-generator, wachtwoordgenerator, afbeeldingscompressie en online liniaal werken hetzelfde op Android Chrome, iPhone Safari, iPad, Windows en macOS, in lichte en donkere modus.',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: 'Moet ik een app installeren of een account aanmaken?',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        'Geen installatie en geen account. Open de site, kies de tool en begin te typen: het resultaat verschijnt meteen. Omdat er geen login is, hoef je niet op een bevestigingsmail te wachten, geen wachtwoord te onthouden en er wordt geen profiel van je gebruik opgebouwd. De toolpagina staat op zichzelf en is te bewaren als bladwijzer of toe te voegen aan je startscherm.',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: 'Blijven de tools werken als de internetverbinding wegvalt?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        'Zodra een toolpagina is geladen, gaat het werk zelf door zonder verbinding, want opmaken, tellen, coderen, comprimeren en meten gebeuren lokaal in de browser en niet op een externe server. De pagina herladen, een andere tool openen of de volgende dag terugkomen vraagt wel een verbinding, dus houd het tabblad open als je de tool in de trein of het vliegtuig opnieuw wilt gebruiken.',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: 'Hoe nauwkeurig zijn de online liniaal, de snelheidsmeter en andere meettools?',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        'Meettools volgen gepubliceerde normen in plaats van schattingen: de online liniaal kalibreert op de ID-1-kaartmaat van 85,60 bij 53,98 millimeter die wereldwijd voor bank- en identiteitskaarten wordt gebruikt, en eenheidsconversies gebruiken exacte definities zoals 1 inch is 25,4 millimeter. De nauwkeurigheid hangt daarna af van de kalibratiestap en de schermdichtheid, daarom toont de pagina altijd de actuele waarde in pixels per millimeter.',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: 'Hoe kies ik de juiste tool op een site met veel hulpmiddelen?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        'Begin bij de taak, niet bij de naam van de tool. Moet de uitvoer leesbaar of geldig zijn, open dan de formatter of validator; wordt iets ingekort, verkleind of gecodeerd, kijk dan bij conversie; bij schrijven, tellen of opschonen van tekst passen de schrijftools, bij controle van lay-out of kleur de ontwerptools. Eén zoekwoord op de startpagina is meestal sneller dan door categorieën lopen.',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: 'Waarom een verzameling webtools in plaats van vijf losse abonnementen?',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        'Omdat de taak klein is en het abonnement niet. Vier of vijf gerichte abonnementen kosten samen vaak meer dan een streamingdienst en leveren elk een account, een privacybeleid en een updatecyclus op. Eén verzameling webtools houdt één adres, één beeldtaal en één toetsenbordgedrag voor alle hulpmiddelen, zodat een andere taak nooit betekent dat je een nieuw product moet leren of moet onthouden waar die goede formatter ook alweer stond.',
     },
   ],
 };

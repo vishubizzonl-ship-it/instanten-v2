@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: 'よくある質問',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Instantenとは何ですか。他の無料オンラインツールサイトとどう違いますか？',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instantenは、すべてのツールがサーバー上ではなく自分のブラウザ内で動く無料オンラインツールハブです。違いはこの設計の一点から生まれます。貼り付けたりアップロードした内容が端末の外に出ず、会員登録の壁も1日の上限も有料プランもなく、各ツールは遅いモバイル回線でも1秒以内に使える静的ページとして開きます。',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: 'このツールハブでは現在どのオンラインツールが使えますか？',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        '現在12種類あります。JSONフォーマッター、Base64エンコーダーとデコーダー、文字数カウンター、パスワード生成、QRコード生成、画像圧縮、カラーパレット、CSSグリッド生成、Markdownエディター、メタタグ生成、オンライン定規、正規表現テスターです。開発・デザイン・文章・ユーティリティに分かれているので、ホーム画面のグリッドから選ぶか、検索欄に単語をひとつ入れるだけで目的のページに着きます。',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: 'これらのツールは本当に無料ですか。隠れた制限はありますか？',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        '無料で、制限はゼロです。体験期間のカウントダウンも、カード登録画面も、透かしも、書き出し回数の上限も、待ち行列もありません。無料オンラインツールハブは公共の道具のように動くべきなので、同じ作業セッションで同じツールを10回続けて使っても結果は毎回同じです。有料プランがないため、後から課金を求められることもありません。',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: 'パスワードやトークン、顧客資料をオンラインツールに貼り付けても安全ですか？',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'Instantenでは安全です。処理は素のJavaScriptでブラウザ内で行われるため、テキストやファイルがサーバーへ送信されることも、タブを閉じた後にどこかへ保存されることもありません。無料オンラインツールサイトを見るとき最初に確認すべき点がこれです。入力を自社バックエンドへアップロードするサイトでは、その内容は事実上どこか別の場所にある自分のデータの複製になります。',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: 'これらのブラウザツールはスマートフォンやタブレットでも動きますか？',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        'はい。どのページも小さい画面では1列に収まるレスポンシブ構成で、タップ領域は最低44ピクセル、入力欄はスマートフォンが勝手に拡大しない大きさにしています。文字数カウント、QR生成、パスワード生成、画像圧縮、オンライン定規は、Android Chrome、iPhone Safari、iPad、Windows、macOSのいずれでも、ライトモードとダークモードの両方で同じように動きます。',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: 'アプリのインストールやアカウント作成は必要ですか？',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        'インストールもアカウントも不要です。ツールハブを開き、ツールを選び、入力を始めれば結果がその場で出ます。ログインがないので、確認メールを待つことも、パスワードを覚えることも、利用履歴から作られるプロフィールもありません。ツールページは単体で完結しているので、ブックマークしたりスマートフォンのホーム画面に追加しておけます。',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: 'インターネット接続が切れてもツールは動きますか？',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        'ツールページを一度読み込めば、その作業自体は接続なしで続きます。整形、カウント、エンコード、圧縮、計測はすべて遠隔のサーバーではなくブラウザ内で処理されるからです。ページの再読み込みや別のツールを開くとき、翌日またアクセスするときには接続が必要なので、電車や飛行機でまた使う予定ならタブを開いたままにしてください。',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: 'オンライン定規やスピードメーターなど測定系ツールの精度はどれくらいですか？',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        '測定ツールは推測ではなく公開された規格に従います。オンライン定規は世界中の銀行カードや身分証に使われるID-1サイズ85.60×53.98ミリメートルに合わせて校正し、単位換算は1インチ＝25.4ミリメートルといった正確な定義を使います。その後の精度は校正の手順と画面の密度で決まるため、ページは現在の1ミリメートルあたりのピクセル数を隠さず常に表示します。',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: 'ツールがたくさんあるサイトで、作業に合うツールはどう選びますか？',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        'ツール名ではなく作業から始めてください。出力が読みやすく正しい形である必要があるならフォーマッターや検証ツール、何かを短く・小さく・変換するなら変換の項目を見ます。書く・数える・整えるなら文章ツール、レイアウトや色を確認するならデザインツールです。ホームで単語をひとつ検索するほうが、カテゴリを眺めるよりたいてい速く済みます。',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: '単機能のサブスクを5つ契約するより、ウェブツールハブを使う利点は何ですか？',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        '作業は小さいのに、サブスクは小さくないからです。単機能のサブスクを4〜5本そろえると動画配信サービスより静かに高くつき、それぞれにアカウントとプライバシーポリシー、更新の管理が付いてきます。ひとつのウェブツールハブなら住所も見た目もキーボード操作も共通なので、作業を変えるたびに新しい製品を覚えたり、良いフォーマッターがどのサイトだったか思い出したりする必要がありません。',
     },
   ],
 };

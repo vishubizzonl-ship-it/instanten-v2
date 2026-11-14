@@ -101,54 +101,54 @@ export const home: HomeCopy = {
   faqTitle: 'Vanliga frågor',
   faqs: [
     {
-      question: 'What is Instanten and how is it different from other free online tools websites?',
+      question: 'Vad är Instanten och hur skiljer det sig från andra gratis verktygssajter?',
       answer:
-        'Instanten is a free online tools hub where every utility runs inside your own browser instead of on a server. That single design choice is the difference: nothing you paste or upload leaves your device, there is no account wall, no daily cap and no paid tier, and each instant tool opens on a static page that is usable within a second even on a slow mobile connection.',
+        'Instanten är en gratis samling onlineverktyg där varje verktyg körs i din egen webbläsare i stället för på en server. Det enda designvalet är skillnaden: inget du klistrar in eller laddar upp lämnar din enhet, det finns ingen inloggningstvång, ingen daglig gräns och ingen betalnivå, och varje verktyg öppnas som en statisk sida som går att använda inom en sekund även på en långsam mobilanslutning.',
     },
     {
-      question: 'Which online tools are available on this tools hub right now?',
+      question: 'Vilka onlineverktyg finns på den här sajten just nu?',
       answer:
-        'The online tools list currently has twelve utilities: JSON Formatter, Base64 Encoder and Decoder, Word Counter, Password Generator, QR Generator, Image Compressor, Color Palette, CSS Grid Generator, Markdown Editor, Meta Tag Generator, Online Ruler and Regex Tester. They are grouped as developer, design, writing and utility tools, so a multi tool website visitor can reach the right page from the homepage grid or by typing a single keyword in the search box.',
+        'Just nu finns tolv verktyg: JSON-formaterare, Base64-kodare och -avkodare, ordräknare, lösenordsgenerator, QR-generator, bildkomprimerare, färgpalett, CSS-gridgenerator, Markdown-redigerare, metatagg-generator, onlinelinjal och regex-testare. De är grupperade som utveckling, design, skrivande och hjälpverktyg, så du når rätt sida från rutnätet på startsidan eller med ett enda sökord.',
     },
     {
-      question: 'Are these online tools really free, or is there a hidden limit?',
+      question: 'Är verktygen verkligen gratis, eller finns en dold gräns?',
       answer:
-        'They are free, and the limit is identical to zero: no trial countdown, no credit card screen, no watermark, no export cap and no queue. A free online tools hub should behave like a public utility, so you can run the same instant tool ten times in a row during one working session and the result will be identical each time. There is nothing to subscribe to later because there is no premium tier.',
+        'De är gratis och gränsen är exakt noll: ingen provperiod med nedräkning, ingen kortsida, ingen vattenstämpel, ingen exportgräns och ingen kö. En gratis verktygssajt ska bete sig som ett allmänt hjälpmedel, så samma verktyg tio gånger i rad under en arbetspass ger samma resultat varje gång. Det finns inget att prenumerera på senare, eftersom det inte finns någon premiumnivå.',
     },
     {
-      question: 'Is it safe to paste passwords, tokens or client documents into an online tool?',
+      question: 'Är det säkert att klistra in lösenord, tokens eller kunddokument i ett onlineverktyg?',
       answer:
-        'On Instanten it is safe, because the processing happens in your browser through plain JavaScript — the text or file is never transmitted to a server and is not stored anywhere after you close the tab. This is the first question worth asking about any free online tools website: if a site uploads your input to its own backend, the content is effectively a copy of your data on someone else seat of control.',
+        'På Instanten är det säkert, eftersom bearbetningen sker i din webbläsare med vanlig JavaScript: texten eller filen skickas aldrig till en server och sparas ingenstans när du stänger fliken. Det här är den första frågan man bör ställa till varje gratis verktygssajt: om sajten laddar upp din inmatning till sin egen server ligger innehållet i praktiken som en kopia av dina data hos någon annan.',
     },
     {
-      question: 'Do these browser tools work on mobile phones and tablets?',
+      question: 'Fungerar verktygen på mobiltelefoner och surfplattor?',
       answer:
-        'Yes. Every page uses a responsive layout with a single-column form on small screens, touch targets of at least 44 pixels, and input fields sized so the phone does not zoom unexpectedly. Word count, QR generation, password generation, image compression and the online ruler all work the same on Android Chrome, iPhone Safari, iPad, Windows and macOS, in both light and dark mode.',
+        'Ja. Varje sida använder en responsiv layout med en enda kolumn på små skärmar, tryckytor på minst 44 pixlar och inmatningsfält som är dimensionerade så att telefonen inte zoomar oväntat. Ordräknare, QR-generering, lösenordsgenerator, bildkomprimering och onlinelinjal fungerar likadant i Android Chrome, iPhone Safari, iPad, Windows och macOS, i både ljust och mörkt läge.',
     },
     {
-      question: 'Do I need to install an app or create an account to use instant tools?',
+      question: 'Måste jag installera en app eller skapa ett konto?',
       answer:
-        'No install and no account. Open the tools hub, pick the utility and start typing — the result appears as you work. Because nothing needs a login, there is no verification email to wait for, no password to remember and no profile being built from your usage; the tool page is self-contained and can be bookmarked or added to your phone home screen instead.',
+        'Ingen installation och inget konto. Öppna sajten, välj verktyget och börja skriva, resultatet visas direkt. Eftersom det inte finns någon inloggning behöver du inte vänta på ett bekräftelsemail, komma ihåg något lösenord och ingen profil byggs upp av din användning. Verktygssidan är självständig och kan bokmärkas eller läggas till på telefonens hemskärm.',
     },
     {
-      question: 'Do the tools keep working when the internet connection drops?',
+      question: 'Fortsätter verktygen att fungera om internetanslutningen bryts?',
       answer:
-        'Once a tool page has loaded, the work itself continues without a connection, because formatting, counting, encoding, compressing and measuring all run locally in the browser rather than on a remote server. Reloading the page, opening a different utility or coming back the next day does need a connection, so on a train or a flight keep the tab open if you know you will need the tool again.',
+        'När verktygssidan väl är laddad fortsätter själva arbetet utan anslutning, eftersom formatering, räkning, kodning, komprimering och mätning körs lokalt i webbläsaren och inte på en fjärrserver. Att ladda om sidan, öppna ett annat verktyg eller komma tillbaka dagen efter kräver däremot anslutning, så håll fliken öppen om du vet att du behöver verktyget på tåget eller flyget.',
     },
     {
-      question: 'How accurate are the online ruler, speedometer and measurement style tools?',
+      question: 'Hur exakta är onlinelinjalen, hastighetsmätaren och liknande mätverktyg?',
       answer:
-        'Measurement tools follow published standards rather than guesswork: the online ruler calibrates against the ID-1 card size of 85.60 by 53.98 millimetres used by bank and identity cards worldwide, and unit conversions use exact definitions such as 1 inch equals 25.4 millimetres. Accuracy then depends on the calibration step and on your screen density, so the page always shows the current pixels-per-millimetre value instead of hiding it.',
+        'Mätverktygen följer publicerade standarder i stället för gissningar: onlinelinjalen kalibreras mot ID-1-kortets storlek 85,60 gånger 53,98 millimeter som bank- och id-kort använder världen över, och enhetsomvandlingar använder exakta definitioner som 1 tum = 25,4 millimeter. Noggrannheten beror sedan på kalibreringen och skärmens densitet, därför visar sidan alltid det aktuella värdet i pixlar per millimeter.',
     },
     {
-      question: 'How do I pick the right tool for a task on a multi tool website?',
+      question: 'Hur väljer jag rätt verktyg på en sajt med många verktyg?',
       answer:
-        'Start from the task, not the tool name. If the output must be readable or valid, open the formatter or validator; if something is being shortened, resized or encoded, look under conversion; if you are writing, counting or cleaning up text, the writing utilities cover it; if you are checking a layout or a colour, the design tools cover it. A one-word search on the homepage is usually faster than scanning categories.',
+        'Utgå från uppgiften, inte från verktygets namn. Om resultatet måste vara läsbart eller giltigt öppnar du formateraren eller valideraren; om något kortas, skalas eller kodas tittar du under konvertering; skriver, räknar eller städar du text passar skrivverktygen, och kontrollerar du layout eller färg passar designverktygen. En sökning på ett ord på startsidan går oftast snabbare än att bläddra genom kategorier.',
     },
     {
-      question: 'Why use a web tools hub instead of five single-purpose subscriptions?',
+      question: 'Varför använda en verktygssajt i stället för fem separata abonnemang?',
       answer:
-        'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
+        'Därför att uppgiften är liten och abonnemanget inte är det. Fyra eller fem specialiserade abonnemang kostar sammanlagt ofta mer än en streamingtjänst och lägger till ett konto, en integritetspolicy och en uppdateringscykel var. En enda verktygssajt behåller en adress, ett visuellt språk och ett tangentbordsbeteende för alla verktyg, så att byta uppgift aldrig innebär att lära sig en ny produkt eller minnas var den bra formateraren låg.',
     },
   ],
 };

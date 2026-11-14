@@ -280,11 +280,11 @@ const breadcrumbs = [
     {ToolIsland && (
       <section id="tool" class="pt-8 border-t border-border-hairline" aria-labelledby="tool-heading">
         <h2 id="tool-heading" class="font-display font-semibold text-body-lg text-ink mb-4">
-          Use the {localized.name} right here
+          {t('tools.useItHere').replace('{name}', localized.name)}
         </h2>
         <ToolIsland />
         <p class="mt-2 text-[12.5px] leading-relaxed text-muted" style="margin-top:10px">
-          Sab processing aapke browser mein hoti hai — koi file, text ya image upload nahi hoti.
+          {t('tools.localProcessing')}
         </p>
       </section>
     )}
