@@ -62,10 +62,35 @@ export function run(pages, outDir) {
     check(!/padding:(?!0)/.test(rule), `mobile language button par padding circle tod raha hai :: ${rule.slice(0, 80)}`);
   }
 
+  // --- footer language button: gol pill, header ke barabar, menu center ----
+  for (const [url, html] of pages) {
+    if (!url.endsWith('/')) continue;                       // sirf page HTML
+    if (html.includes('http-equiv="refresh"')) continue;     // redirect stub, layout nahi
+    const footer = html.slice(html.indexOf('<footer'));
+    if (!footer) continue;
+    const btn = footer.match(/class="(language-picker-btn[^"]*)"/);
+    const menu = footer.match(/class="(language-picker-menu[^"]*)"/);
+    check(!!btn, `footer language button nahi mila :: ${url}`);
+    check(!!menu, `footer language menu nahi mila :: ${url}`);
+    if (btn) {
+      check(btn[1].includes('rounded-full'), `footer language button gol nahi hai :: ${url}`);
+      check(/\bh-10\b/.test(btn[1]), `footer language button 40px height nahi hai :: ${url}`);
+    }
+    if (menu) {
+      check(
+        menu[1].includes('left-1/2') && menu[1].includes('-translate-x-1/2'),
+        `footer language menu center se nahi khulta :: ${url}`
+      );
+      check(!/\bright-0\b/.test(menu[1]), `footer language menu right edge se khul raha hai :: ${url}`);
+    }
+  }
+
   // --- no pill CTAs left in HTML -----------------------------------------
   for (const [url, html] of pages) {
     const pills = [...html.matchAll(/<(a|button)\b[^>]*class="[^"]*rounded-full[^"]*"[^>]*>/g)].map((m) => m[0]);
     for (const pill of pills) {
+      // language picker ka pill jaan-boojh kar hai (header + footer dono)
+      if (pill.includes('language-picker-btn')) continue;
       // circles (social icons, scroll-to-top) allowed: same width & height
       const equalBox = /w-(\d+)\s+h-\1\b/.test(pill) || /h-(\d+)\s+w-\1\b/.test(pill);
       check(equalBox, `pill-shaped CTA bacha hua hai :: ${url} :: ${pill.slice(0, 90)}`);
