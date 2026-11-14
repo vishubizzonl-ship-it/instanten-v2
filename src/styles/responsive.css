@@ -100,18 +100,26 @@ main table {
     padding: 0 !important;
   }
 
-  /* Compact language button on mobile screens to give breathing room */
+  /* Language button mobile par bhi gol rahe (desktop jaisa) — sirf size chhota */
   header [data-mobile-bar] .language-picker-btn {
-    padding: 5px 8px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
     font-size: 12px !important;
-    gap: 4px !important;
+    gap: 0 !important;
+    border-radius: 9999px !important;
   }
 }
 
 @media (max-width: 380px) {
   header [data-mobile-bar] .language-picker-btn {
-    padding: 4px 6px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
     font-size: 11px !important;
+    border-radius: 9999px !important;
   }
 }
 

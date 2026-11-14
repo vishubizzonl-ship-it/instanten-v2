@@ -49,6 +49,19 @@ export function run(pages, outDir) {
   );
   check(/\.btn\{border-radius:var\(--radius-btn\)/.test(css), 'button radius 8px nahi hai');
 
+  // --- header language button must be a circle on EVERY breakpoint --------
+  for (const rule of [
+    'header [data-mobile-bar] .language-picker-btn{width:40px',
+    'header [data-mobile-bar] .language-picker-btn{width:36px',
+  ]) {
+    check(css.includes(rule), `mobile header language button circle nahi hai (${rule})`);
+  }
+  const mobilePicker = css.match(/header \[data-mobile-bar\] \.language-picker-btn\{([^}]*)\}/g) ?? [];
+  for (const rule of mobilePicker) {
+    check(rule.includes('border-radius:9999px'), `mobile language button par border-radius circle nahi :: ${rule.slice(0, 80)}`);
+    check(!/padding:(?!0)/.test(rule), `mobile language button par padding circle tod raha hai :: ${rule.slice(0, 80)}`);
+  }
+
   // --- no pill CTAs left in HTML -----------------------------------------
   for (const [url, html] of pages) {
     const pills = [...html.matchAll(/<(a|button)\b[^>]*class="[^"]*rounded-full[^"]*"[^>]*>/g)].map((m) => m[0]);
