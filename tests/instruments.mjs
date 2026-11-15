@@ -210,6 +210,24 @@ export function run(pages, outDir) {
     );
   }
 
+  // --- 10d. Fullscreen: tool screen ke beech mein rahe --------------------
+  {
+    const cards = { onlinecompass: 'compass-card', onlinebubblelevel: 'bubble-card', onlineqibla: 'qibla-card', onlinespeedometer: 'speed-card' };
+    for (const [slug, id] of Object.entries(cards)) {
+      const html = pages.get(`/${slug}/`) ?? '';
+      const tag = html.match(new RegExp(`<div[^>]*id="${id}"[^>]*>`))?.[0] ?? '';
+      check(Boolean(tag), `${slug}: ${id} nahi mila`);
+      // fullscreen mein flex column + dono axes par center + full size
+      for (const util of ['flex', 'flex-col', 'items-center', 'justify-center', 'w-full', 'h-full']) {
+        check(tag.includes(`[&:fullscreen]:${util}`), `${slug}: fullscreen par ${util} nahi (tool center nahi rahega)`);
+      }
+    }
+    // CSS mein variants compile hue?
+    const cssBundle = readFileSync(join(outDir, '_astro', readdirSync(join(outDir, '_astro')).find((f) => f.endsWith('.css'))), 'utf8');
+    check(/:fullscreen\{align-items:center\}/.test(cssBundle), 'fullscreen align-items:center rule compile nahi hua');
+    check(/:fullscreen\{justify-content:center\}/.test(cssBundle), 'fullscreen justify-content:center rule compile nahi hua');
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
