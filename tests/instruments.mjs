@@ -29,7 +29,7 @@ export const INSTRUMENTS = {
   },
   onlinespeedometer: {
     root: 'onlinespeedometer',
-    ids: ['speed-card', 'speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'start-btn', 'record-btn', 'unit-btn', 'unit-menu', 'records-list', 'speed-fullscreen-btn'],
+    ids: ['speed-card', 'speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'record-btn', 'unit-btn', 'unit-menu', 'records-list', 'speed-fullscreen-btn'],
     faqLangs: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'],
     guides: true,
   },
@@ -370,9 +370,18 @@ export function run(pages, outDir) {
     check(/data-instrument-stage="speedometer" class="mx-auto mb-1 flex h-\[184px\]/.test(src), 'board mb-1 + h-[184px] nahi hai');
     check(/flex items-center justify-center gap-3 mt-1"/.test(src), 'number->unit ka gap (mt-1) nahi hai');
     // ids/behaviour intact
-    for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'start-btn', 'record-btn']) {
+    for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'record-btn']) {
       check(src.includes(`id="${id}"`), `speedometer: ${id} gayab ho gaya`);
     }
+    // Start aur Reset buttons hataye gaye hain
+    check(!src.includes('id="start-btn"'), 'speedometer par Start button wapas aa gaya');
+    check(!src.includes('onclick="resetTrip()"'), 'speedometer par Reset button wapas aa gaya');
+    // ...par trip tracking khud chalti rahe (duration/max/average ke liye)
+    check(/\(window as any\)\.startTrip\(\);/.test(src), 'speedometer: trip auto-start nahi hai');
+    const build = pages.get('/onlinespeedometer/') ?? '';
+    check(!build.includes('id="start-btn"'), 'build: Start button abhi bhi hai');
+    check(!/onclick="resetTrip\(\)"/.test(build), 'build: Reset button abhi bhi hai');
+    check(build.includes('id="record-btn"'), 'build: Record button gayab');
     check(lineHeight['text-xl'] === 28, 'line-height table galat');
   }
 
