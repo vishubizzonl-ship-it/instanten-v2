@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { toolPath } from '../../utils/toolPaths';
 import EditorialHero from '../../components/EditorialHero.astro';
+import LibraryFilterBar from '../../components/LibraryFilterBar.astro';
 import BlogPagination from '../../components/BlogPagination.astro';
 import HomeSeoSection, { getHomeFaqs } from '../../components/HomeSeoSection.astro';
 import { getAllTools } from '../../utils/standaloneTools';
@@ -25,7 +26,8 @@ const searchParams = new URLSearchParams(Astro.url.search);
 const filters = parseFilters(searchParams);
 const filteredTools = filterTools(allTools, filters);
 const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
-const PER_PAGE = 10;
+// Grid ke upar filter section hai — poori list ek page par (jaise EN home).
+const PER_PAGE = 50;
 const totalPages = Math.ceil(sortedTools.length / PER_PAGE);
 const currentPage = filters.page || 1;
 const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
@@ -65,13 +67,38 @@ const canonicalURL = currentPage === 1
 >
   <EditorialHero />
 
+  <section class="site-container pb-6" aria-label={t('aria.toolDirectory')}>
+    <LibraryFilterBar
+      tools={toolData}
+      baseUrl={translatePath('/')}
+      currentCategory={filters.category}
+      currentPricing={filters.pricing}
+      currentTags={filters.tags}
+      currentSort={filters.sort}
+      query={filters.q}
+      showCardSize={false}
+    />
+  </section>
+
   <section class="site-container pb-[64px] flex-1 lg:mb-[80px] md:mb-[48px] mb-[48px] flex flex-col items-center" aria-label={t('aria.toolDirectory')}>
-    <div class="blog-grid" data-cards-grid role="list" aria-label={t('aria.featuredTools')}>
+    <div class="blog-grid" data-cards-grid data-lib-grid data-lib-fixed-grid role="list" aria-label={t('aria.featuredTools')}>
       {toolData.map((tool) => {
         const localized = localizeTool(lang, tool);
         const toolHref = translatePath(toolPath(tool.slug));
         return (
-        <article class="blog-card">
+        <article
+          class="blog-card"
+          data-tool-card
+          data-slug={tool.slug}
+          data-name={localized.name}
+          data-category={tool.category}
+          data-pricing={tool.pricing}
+          data-tags={(tool.tags ?? []).join(',')}
+          data-added={tool.addedDate ?? ''}
+          data-updated={tool.updatedDate ?? tool.addedDate ?? ''}
+          data-featured={tool.featured ? 'true' : 'false'}
+          data-search={[localized.name, tool.category, localized.description, ...(tool.tags ?? [])].join(' ')}
+        >
           <a href={toolHref} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>
             <img
               src={tool.image}

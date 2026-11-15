@@ -56,9 +56,10 @@ export async function run(pages, outDir) {
    * A. MARKUP
    * ==================================================================== */
 
-  const FILTER_PAGES = ['/tools/', '/search/'];
+  // Home page bhi: grid cards ke just upar wahi filter section.
+  const FILTER_PAGES = ['/', '/tools/', '/search/'];
   for (const locale of ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt']) {
-    FILTER_PAGES.push(`/${locale}/tools/`);
+    FILTER_PAGES.push(`/${locale}/tools/`, `/${locale}/`);
   }
 
   for (const url of FILTER_PAGES) {
@@ -121,7 +122,8 @@ export async function run(pages, outDir) {
     );
     check(/role="status"/.test(resultBar) && /aria-live="polite"/.test(resultBar), `${url}: live result count nahi hai`);
     // order: tabs -> search -> chip row -> Filters -> sort -> result bar -> grid
-    const order = ['data-lib-tabs', 'data-lib-search', 'data-lib-chips', 'data-lib-filters-open', 'data-lib-sort', 'data-lib-resultbar', 'data-directory-grid'];
+    const gridMarker = html.includes('data-directory-grid') ? 'data-directory-grid' : 'data-lib-grid';
+    const order = ['data-lib-tabs', 'data-lib-search', 'data-lib-chips', 'data-lib-filters-open', 'data-lib-sort', 'data-lib-resultbar', gridMarker];
     const positions = order.map((marker) => html.indexOf(marker));
     check(positions.every((pos) => pos !== -1), `${url}: filter section ka koi hissa missing hai`);
     check(
@@ -182,13 +184,32 @@ export async function run(pages, outDir) {
     }
 
     // card size + sort options
-    check(/data-lib-size="large"/.test(html) && /data-lib-size="small"/.test(html), `${url}: card size buttons nahi hain`);
+    // Card size sirf directory grid par — home ka blog-grid fixed layout hai.
+    const isHome = url === '/' || /^\/[a-z]{2}\/$/.test(url);
+    if (isHome) {
+      check(!/data-lib-size=/.test(html), `${url}: home ke fixed grid par card size buttons nahi hone chahiye`);
+    } else {
+      check(/data-lib-size="large"/.test(html) && /data-lib-size="small"/.test(html), `${url}: card size buttons nahi hain`);
+    }
     const sortOptions = [...html.matchAll(/<select[^>]*data-lib-sort[\s\S]*?<\/select>/g)][0]?.[0] ?? '';
     const optionValues = [...sortOptions.matchAll(/<option value="([^"]+)"/g)].map((m) => m[1]);
     check(
       ['featured', 'az', 'za', 'newest', 'oldest'].every((value) => optionValues.includes(value)),
       `${url}: sort options adhoore hain — ${optionValues.join(', ')}`
     );
+
+    // home grid: fixed layout marker + har card par filter ke data attributes
+    if (isHome) {
+      const gridTag = html.match(/<div[^>]*data-cards-grid[^>]*>/)?.[0] ?? '';
+      check(/data-lib-grid/.test(gridTag), `${url}: home grid par data-lib-grid nahi hai`);
+      check(/data-lib-fixed-grid/.test(gridTag), `${url}: home grid par data-lib-fixed-grid nahi hai`);
+      check(/blog-grid/.test(gridTag), `${url}: home grid par blog-grid layout nahi hai`);
+      const cards = [...html.matchAll(/<article[^>]*data-tool-card[^>]*>/g)].map((m) => m[0]);
+      check(cards.length >= 16, `${url}: home par sirf ${cards.length} filterable cards`);
+      for (const attr of ['data-name', 'data-category', 'data-pricing', 'data-tags', 'data-featured', 'data-search']) {
+        check(cards.every((card) => card.includes(attr)), `${url}: home cards par ${attr} nahi hai`);
+      }
+    }
 
     // filter poori list par chalta hai: page par hi saare cards hone chahiye
     // (static build par `?page=2` ka koi matlab nahi — wo page 1 hi deta hai).
@@ -198,7 +219,7 @@ export async function run(pages, outDir) {
 
     // chips grid ke just upar hain, grid ke andar nahi
     const filterIndex = html.indexOf('data-library-filter');
-    const gridIndex = html.indexOf('data-directory-grid');
+    const gridIndex = html.indexOf(gridMarker);
     check(
       filterIndex !== -1 && gridIndex !== -1 && filterIndex < gridIndex,
       `${url}: filter section grid ke upar nahi hai`

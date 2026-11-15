@@ -22,6 +22,8 @@ interface Props {
   currentTags?: string[];
   currentSort?: string;
   query?: string;
+  /** Home page ka grid fixed layout hai — wahan card-size buttons nahi. */
+  showCardSize?: boolean;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
   currentTags = [],
   currentSort = 'featured',
   query = '',
+  showCardSize = true,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -385,15 +388,21 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
           )
         }
 
-        <h3 class="mb-2 mt-5 text-[13px] leading-[1.35] text-muted">{t('lib.cardSize')}</h3>
-        <div class="flex flex-wrap gap-1.5">
-          <button type="button" class={chip} data-lib-size="large" aria-pressed="true">
-            {t('lib.large')}
-          </button>
-          <button type="button" class={chip} data-lib-size="small" aria-pressed="false">
-            {t('lib.small')}
-          </button>
-        </div>
+        {
+          showCardSize && (
+            <>
+              <h3 class="mb-2 mt-5 text-[13px] leading-[1.35] text-muted">{t('lib.cardSize')}</h3>
+              <div class="flex flex-wrap gap-1.5">
+                <button type="button" class={chip} data-lib-size="large" aria-pressed="true">
+                  {t('lib.large')}
+                </button>
+                <button type="button" class={chip} data-lib-size="small" aria-pressed="false">
+                  {t('lib.small')}
+                </button>
+              </div>
+            </>
+          )
+        }
 
         <div class="mt-5 flex items-center justify-between border-t border-border-hairline pt-3">
           <button type="button" class="text-[13px] text-muted transition-colors hover:text-ink" data-facet="clear">

@@ -204,7 +204,8 @@ const cardData = (el) => ({
 export function mountLibraryFilter(root) {
   if (!root) return null;
 
-  const grid = document.querySelector('[data-directory-grid]');
+  // Directory pages ka grid `data-directory-grid`, home ka blog-grid `data-lib-grid`.
+  const grid = document.querySelector('[data-directory-grid], [data-lib-grid]');
   if (!grid) return null;
 
   const cards = [...grid.querySelectorAll('[data-tool-card]')].map(cardData);
@@ -366,6 +367,15 @@ export function mountLibraryFilter(root) {
   const sizeButtons = [...root.querySelectorAll('[data-lib-size]')];
   const applySize = (size) => {
     cardSize = size;
+    // Home page ka grid apna fixed layout rakhta hai (blog-grid) — wahan
+    // column classes override nahi karte, sirf state yaad rehti hai.
+    if (grid.hasAttribute('data-lib-fixed-grid')) {
+      grid.dataset.cardSize = size;
+      for (const btn of sizeButtons) {
+        btn.setAttribute('aria-pressed', btn.dataset.libSize === size ? 'true' : 'false');
+      }
+      return;
+    }
     grid.classList.remove(...CARD_SIZE_CLASSES.small, ...CARD_SIZE_CLASSES.large);
     grid.classList.add(...CARD_SIZE_CLASSES[size]);
     grid.dataset.cardSize = size;
