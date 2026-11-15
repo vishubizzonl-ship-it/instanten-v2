@@ -136,13 +136,21 @@ export function buildSiloRobots(tool: SiloTool): APIRoute {
       .map((path) => `Allow: ${path}`)
       .join('\n');
 
+    // Per-tool error pages (403/404/500/503) noindex hain aur kisi sitemap mein
+    // nahi — crawl ki zarurat bhi nahi, isliye Disallow (crawl budget bachta hai).
+    // Dono shapes block karte hain: flat .html (jo build deta hai) aur /code/.
+    const errorLines = ['403', '404', '500', '503']
+      .map((code) => `Disallow: /${tool}/${code}.html\nDisallow: /${tool}/${code}/`)
+      .join('\n');
+
     const body = `# ${tool} silo robots.txt
 # Sirf is tool ka silo + uska apna sitemap.
 
 User-agent: *
 ${allowLines}
 
-# Error pages (403/404/500/503) ko block nahi karte — noindex safe hai.
+# Per-tool error pages — noindex hain, kisi sitemap mein nahi.
+${errorLines}
 
 Sitemap: ${baseUrl}/${tool}/sitemap.xml
 `;

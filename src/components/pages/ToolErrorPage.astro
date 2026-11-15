@@ -1,0 +1,119 @@
+---
+/**
+ * Per-tool error page (403 / 404 / 500 / 503) — compassinstant pattern.
+ *
+ * Har tool ke apne error pages:
+ *   /onlinecompass/404.html, /onlinebubblelevel/500.html …
+ *
+ * SEO rules (site ke root error pages jaisa hi, koi exception nahi):
+ *   · `noindex, nofollow` — ek hi robots meta
+ *   · koi hreflang cluster nahi (error ka "alternate" bekaar hai)
+ *   · self-referencing canonical usi error URL par
+ *   · kisi bhi sitemap mein kabhi nahi (dekho: astro.config filter +
+ *     src/utils/siloSitemap.ts + tests/tool-errors.mjs)
+ *   · sirf ek <h1>, chhota message, aur wapas jaane ke raaste
+ *
+ * Chrome: usi tool ka instrument nav — error par bhi user tool ke andar rahe.
+ */
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { instrumentToolCopy } from '../../i18n/instruments/toolCopy';
+import type { LangCode } from '../../i18n/ui';
+
+type Code = 403 | 404 | 500 | 503;
+
+interface Props {
+  slug: 'onlinecompass' | 'onlinebubblelevel' | 'onlinespeedometer' | 'onlineqibla';
+  code: Code;
+  heading: string;
+  message: string;
+  /** 2–3 calm next steps. */
+  tips?: string[];
+  /** 500/503 par "try again" button. */
+  retry?: boolean;
+}
+
+const { slug, code, heading, message, tips = [], retry = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url) as LangCode;
+const t = useTranslations(lang);
+const toolName = instrumentToolCopy.en[slug]?.name ?? slug;
+
+const titles: Record<Code, string> = {
+  403: `403 — Access denied — ${toolName}`,
+  404: `404 — Page not found — ${toolName}`,
+  500: `500 — Something went wrong — ${toolName}`,
+  503: `503 — Temporarily unavailable — ${toolName}`,
+};
+const descriptions: Record<Code, string> = {
+  403: `This ${toolName} page is not available to you. Go back to the ${toolName} tool and continue from there.`,
+  404: `This page is not part of the ${toolName} site. The link may be old or mistyped — the ${toolName} tool is one tap away.`,
+  500: `Something went wrong on the ${toolName} page. The tool still works — try again or start from the ${toolName} tool.`,
+  503: `The ${toolName} page is temporarily unavailable. Try again in a moment, or open the tool itself.`,
+};
+
+const canonicalURL = `${(Astro.site ?? new URL('https://instanten.com')).toString().replace(/\/$/, '')}/${slug}/${code}.html`;
+
+const siloLinks = [
+  { label: t('nav.blog'), href: `/${slug}/blog/` },
+  { label: t('nav.about'), href: `/${slug}/about/` },
+  { label: t('nav.contact'), href: `/${slug}/contact/` },
+  { label: t('nav.privacy'), href: `/${slug}/privacy/` },
+  { label: t('nav.terms'), href: `/${slug}/terms/` },
+];
+---
+
+<Layout
+  title={titles[code]}
+  description={descriptions[code]}
+  canonicalURL={canonicalURL}
+  noindex
+  lang={lang}
+  chrome="instrument"
+>
+  <main class="mx-auto max-w-[48rem] px-6 py-24 text-center lg:px-8">
+    <p class="mb-4 font-mono text-body-sm text-muted">{code}</p>
+    <h1 class="mb-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      {heading}
+    </h1>
+    <p class="mb-8 text-body-md leading-relaxed text-body">{message}</p>
+
+    {
+      tips.length > 0 && (
+        <ul class="mx-auto mb-8 max-w-[34rem] list-disc space-y-2 pl-6 text-left text-body-sm leading-relaxed text-body">
+          {tips.map((tip) => (
+            <li>{tip}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={`/${slug}/`}
+        class="inline-flex items-center rounded-sm bg-ink px-5 py-2 text-body-sm font-medium text-canvas transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+      >
+        Back to {toolName}
+      </a>
+      {
+        retry && (
+          <a
+            href={Astro.url.pathname}
+            class="inline-flex items-center rounded-sm border border-border-hairline px-5 py-2 text-body-sm font-medium text-ink transition-colors hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+          >
+            Try again
+          </a>
+        )
+      }
+    </div>
+
+    <nav
+      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-body-sm text-body"
+      aria-label={`${toolName} pages`}
+    >
+      {siloLinks.map((link) => (
+        <a href={link.href} class="transition-colors hover:text-ink">{link.label}</a>
+      ))}
+    </nav>
+  </main>
+</Layout>

@@ -1,0 +1,18 @@
+---
+/**
+ * onlineqibla — 503 (Temporarily unavailable).
+ * URL: /onlineqibla/503.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlineqibla"
+  code={503}
+  heading='Temporarily unavailable'
+  message='This page is temporarily unavailable. Try again in a moment, or open the Qibla finder — it does not need this page.'
+  tips={['Wait a minute and reload.', 'Open the Qibla finder directly to keep working.']}
+  retry
+/>

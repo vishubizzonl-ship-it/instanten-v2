@@ -1,0 +1,18 @@
+---
+/**
+ * onlinespeedometer — 500 (Something went wrong).
+ * URL: /onlinespeedometer/500.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlinespeedometer"
+  code={500}
+  heading='Something went wrong'
+  message='An unexpected error stopped this page. the speedometer itself still works — try again, or start from the tool page.'
+  tips={['Reload the page once; most errors clear immediately.', 'If it keeps failing, open the speedometer directly.']}
+  retry
+/>

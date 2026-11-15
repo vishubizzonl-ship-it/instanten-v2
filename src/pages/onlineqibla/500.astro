@@ -1,0 +1,18 @@
+---
+/**
+ * onlineqibla — 500 (Something went wrong).
+ * URL: /onlineqibla/500.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlineqibla"
+  code={500}
+  heading='Something went wrong'
+  message='An unexpected error stopped this page. the Qibla finder itself still works — try again, or start from the tool page.'
+  tips={['Reload the page once; most errors clear immediately.', 'If it keeps failing, open the Qibla finder directly.']}
+  retry
+/>

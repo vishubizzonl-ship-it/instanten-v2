@@ -1,0 +1,18 @@
+---
+/**
+ * onlinespeedometer — 503 (Temporarily unavailable).
+ * URL: /onlinespeedometer/503.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlinespeedometer"
+  code={503}
+  heading='Temporarily unavailable'
+  message='This page is temporarily unavailable. Try again in a moment, or open the speedometer — it does not need this page.'
+  tips={['Wait a minute and reload.', 'Open the speedometer directly to keep working.']}
+  retry
+/>

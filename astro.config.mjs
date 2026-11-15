@@ -24,15 +24,27 @@ export default defineConfig({
           const fs = await import('node:fs/promises');
           const path = await import('node:path');
           const root = dir.pathname;
-          for (const code of ['403', '503']) {
-            const from = path.join(root, code, 'index.html');
-            const to = path.join(root, `${code}.html`);
+          const flat = async (dir, code) => {
+            const from = path.join(dir, code, 'index.html');
+            const to = path.join(dir, `${code}.html`);
             try {
               await fs.rename(from, to);
-              await fs.rm(path.join(root, code), { recursive: true, force: true });
+              await fs.rm(path.join(dir, code), { recursive: true, force: true });
             } catch {
               // page generate nahi hua — build fail karne ki zarurat nahi
             }
+          };
+
+          for (const code of ['403', '503']) await flat(root, code);
+
+          /**
+           * Per-tool error pages (compassinstant pattern):
+           * dist/<tool>/403/index.html → dist/<tool>/403.html
+           * Har tool ke apne 403/404/500/503 — noindex hain aur kisi sitemap
+           * mein nahi, isliye flat .html shape host ke liye simplest hai.
+           */
+          for (const tool of ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla']) {
+            for (const code of ['403', '404', '500', '503']) await flat(path.join(root, tool), code);
           }
         },
       },

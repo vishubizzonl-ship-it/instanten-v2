@@ -1,0 +1,17 @@
+---
+/**
+ * onlinespeedometer — 403 (Access denied).
+ * URL: /onlinespeedometer/403.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlinespeedometer"
+  code={403}
+  heading='Access denied'
+  message='You do not have permission to open this page. Head back to the speedometer and continue from there.'
+  tips={['Check that you opened the right address — tool pages end with a slash.', 'Return to the speedometer, which is always available and free.']}
+/>

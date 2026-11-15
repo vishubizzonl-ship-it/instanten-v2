@@ -42,7 +42,15 @@ const barePath = (segments[0] in languages ? '/' + segments.slice(1).join('/') :
 /** path + locale → prefixed path (en prefix-free rehta hai). */
 const withLocale = (path: string, code: LangCode) =>
   code === 'en' ? path : `/${code}${path}`;
-const localizedPath = (code: LangCode) => withLocale(barePath, code);
+/**
+ * Error pages (`/onlinecompass/404.html`, `/onlinecompass/500/`) ka localized
+ * version nahi hota — error pages jaan-boojh kar sirf English hain (noindex).
+ * Isliye un par language switch us tool ke home par le jaata hai, warna
+ * `/de/onlinecompass/404/` jaisa broken link banta tha.
+ */
+const isErrorPath = /^\/[a-z]+\/(403|404|500|503)(\.html|\/?)$/.test(barePath);
+const localizedPath = (code: LangCode) =>
+  isErrorPath ? withLocale(toolPath(slug), code) : withLocale(barePath, code);
 
 const hrefFor = (target: InstrumentSlug) => withLocale(toolPath(target), lang);
 

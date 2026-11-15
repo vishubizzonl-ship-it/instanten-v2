@@ -1,0 +1,17 @@
+---
+/**
+ * onlinecompass — 404 (Page not found).
+ * URL: /onlinecompass/404.html  (build ke baad flat .html, dekho astro.config ka
+ * 'per-tool-error-pages' hook)
+ * noindex/nofollow, kisi sitemap mein nahi, aur usi tool ka chrome.
+ */
+import ToolErrorPage from '../../components/pages/ToolErrorPage.astro';
+---
+
+<ToolErrorPage
+  slug="onlinecompass"
+  code={404}
+  heading='Page not found'
+  message='This page is not part of the compass tool site. The link may be old, or the address may have a typo. The compass tool is one tap away.'
+  tips={['Compare the address with the links on the tool page.', 'Open the compass tool and start again from there.', 'Old links to removed pages can be recovered from the tool or its guides.']}
+/>

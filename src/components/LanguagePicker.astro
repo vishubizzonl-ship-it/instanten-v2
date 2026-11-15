@@ -11,6 +11,17 @@ const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const currentPath = Astro.url.pathname;
 const cleanPath = stripLangFromPath(currentPath);
+
+/**
+ * Error pages (`/onlinecompass/404.html` aadi) sirf English mein hain — unka
+ * localized version nahi hota (noindex pages ka alternate bekaar hai). Isliye
+ * un par language switch us tool ke home par le jaata hai, warna
+ * `/de/onlinecompass/404/` jaisa broken link ban jaata tha.
+ */
+const errorPageMatch = /^\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\/(403|404|500|503)(\.html|\/?)$/.exec(
+  cleanPath
+);
+const cleanPathForLinks = errorPageMatch ? `/${errorPageMatch[1]}/` : cleanPath;
 const normalizedCurrent = currentPath.replace(/\/+$/, '') || '/';
 
 const allCodes = Object.keys(languages) as LangCode[];
@@ -56,7 +67,7 @@ const isHeader = placement === 'header';
     ]}
   >
     {allCodes.map((code) => {
-      const href = translatePathSafe(cleanPath, code);
+      const href = translatePathSafe(cleanPathForLinks, code);
       const normalizedHref = href.replace(/\/+$/, '') || '/';
       const isActive = normalizedCurrent === normalizedHref;
       const label = languages[code];

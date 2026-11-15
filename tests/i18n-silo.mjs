@@ -33,9 +33,14 @@ export function run(pages) {
 
   // --- 2. hreflang cluster complete --------------------------------------
   // Error pages are intentionally mono-lingual and noindex (see site-integrity).
-  const errorPages = new Set(['/403.html', '/404/', '/404.html', '/500.html', '/503.html']);
+  /**
+   * Error pages — root (`/404.html`) aur per-tool (`/onlinecompass/404.html`).
+   * Ye jaan-boojh kar sirf English hain: inka hreflang cluster nahi hota aur
+   * noindex hote hain, isliye i18n-silo ke rules in par apply nahi hote.
+   */
+  const isErrorPage = (url) => /^(\/[a-z]+)?\/(403|404|500|503)(\.html|\/?)$/.test(url);
   for (const [url, html] of pages) {
-    if (errorPages.has(url)) continue;
+    if (isErrorPage(url)) continue;
     const langs = hreflangOf(html);
     check(langs.length >= 11, `hreflang adhoora (${langs.length}/11) :: ${url}`);
     const codes = new Set(langs.map((l) => l.lang));
@@ -61,7 +66,7 @@ export function run(pages) {
   // --- 3. no English leaking into localized pages ------------------------
   for (const [url, html] of pages) {
     const lang = localeOf(url);
-    if (lang === 'en' || errorPages.has(url)) continue;
+    if (lang === 'en' || isErrorPage(url)) continue;
     const text = stripTags(html);
     for (const marker of ENGLISH_MARKERS) {
       check(!text.includes(marker), `English text leak "${marker}" :: ${url}`);
