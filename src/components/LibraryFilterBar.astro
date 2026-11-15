@@ -116,10 +116,12 @@ const sortOptions = [
 // 12px/500 text, 6px gap, ink ki 7% fill (hover 12%), pressed = ink fill.
 // Segmented group (opendesignmd .tabs): ink/6% track, radius 12px, 3px padding,
 // 34px segments, 9px inner radius, 13px/500.
+// Mobile: grouped buttons wrap ho kar do rows mein aate hain (ek row mein
+// squeeze/scrool nahi). Desktop: ek hi row, overflow-x scroll (reference).
 const tabs =
-  'inline-flex max-w-full items-center gap-0.5 overflow-x-auto rounded-xl bg-ink/[0.06] p-[3px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden';
+  'flex w-full max-w-full flex-wrap items-center gap-0.5 overflow-x-auto rounded-xl bg-ink/[0.06] p-[3px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:inline-flex sm:w-auto sm:flex-nowrap';
 const tab =
-  'inline-flex h-[34px] shrink-0 items-center gap-1.5 rounded-[9px] px-3.5 text-[13px] font-medium leading-none text-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft aria-pressed:bg-ink aria-pressed:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas data-[empty=true]:opacity-40 max-sm:h-[30px] max-sm:flex-auto max-sm:justify-center max-sm:px-2 max-sm:text-xs';
+  'inline-flex h-[34px] shrink-0 items-center gap-1.5 rounded-[9px] px-3.5 text-[13px] font-medium leading-none text-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft aria-pressed:bg-ink aria-pressed:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas data-[empty=true]:opacity-40 max-sm:h-[32px] max-sm:min-w-0 max-sm:flex-auto max-sm:justify-center max-sm:px-2.5 max-sm:text-xs';
 
 // Chip row (opendesignmd .chip-row): gap 6px, no scrollbar, dono taraf fade.
 const chipRow =

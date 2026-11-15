@@ -99,6 +99,20 @@ export async function run(pages, outDir) {
     // segmented track: ink/6% + radius 12px + 3px padding (opendesignmd .tabs)
     check(/data-lib-tabs/.test(html) && html.includes('rounded-xl bg-ink/[0.06] p-[3px]'), `${url}: tabs track ki styling reference se nahi milti`);
 
+    // mobile: group wrap ho kar do rows mein aata hai (ek row mein squeeze nahi),
+    // desktop par ek hi row (reference)
+    const tabsTag = html.match(/<div[^>]*data-lib-tabs[^>]*>/)?.[0] ?? '';
+    check(/\bflex-wrap\b/.test(tabsTag), `${url}: mobile par tabs wrap nahi ho rahe (single row)`);
+    check(/sm:flex-nowrap/.test(tabsTag), `${url}: desktop par tabs wrap ho jaate hain (ek row chahiye)`);
+    check(/\bw-full\b/.test(tabsTag) && /sm:w-auto/.test(tabsTag), `${url}: tabs mobile par full width nahi / desktop par auto nahi`);
+    // segments mobile par shrink ho kar row bharte hain
+    check(
+      [...html.matchAll(/<button[^>]*class="[^"]*h-\[34px\][^"]*"[^>]*data-facet="category"[^>]*>/g)].every((m) =>
+        /max-sm:flex-auto/.test(m[0])
+      ),
+      `${url}: mobile par segments flex-auto nahi hain (row nahi bharega)`
+    );
+
     // search tabs ke BAAD aata hai (row 1 ka right side), pehle nahi
     check(
       html.indexOf('data-lib-tabs') < html.indexOf('data-lib-search'),
