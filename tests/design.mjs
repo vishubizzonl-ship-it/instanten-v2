@@ -129,6 +129,30 @@ export function run(pages, outDir) {
     check(html.includes('strokeDashoffset'), `progress update ka script nahi :: ${url}`);
   }
 
+  // --- footer quick links: text aur separator dots ek hi line par ---------
+  // Bug tha: `footer a { min-height: 44px }` ke saath links `inline-block` thay,
+  // isliye text 44px box ke top par baithta tha aur dots (flex se center) text
+  // ke neeche latakte dikhte thay.
+  {
+    const cssBundle = readFileSync(join(outDir, '_astro', readdirSync(join(outDir, '_astro')).find((f) => f.endsWith('.css'))), 'utf8');
+    check(
+      /a\.cf-inline-quick-link\{[^}]*display:inline-flex/.test(cssBundle),
+      'footer quick links inline-flex nahi hain (text 44px box ke top par, dots neeche)'
+    );
+    check(
+      /a\.cf-inline-quick-link\{[^}]*align-items:center/.test(cssBundle),
+      'footer quick links vertically center nahi hain'
+    );
+    check(
+      /span\.cf-inline-quick-dot\{[^}]*align-self:center/.test(cssBundle),
+      'quick links ke separator dots self-center nahi hain'
+    );
+    for (const url of ['/', '/blog/', '/about/']) {
+      const html = pages.get(url) ?? '';
+      check(/cf-inline-quick-dot/.test(html), `${url}: footer ke separator dots nahi mile`);
+    }
+  }
+
   // --- no pill CTAs left in HTML -----------------------------------------
   for (const [url, html] of pages) {
     const pills = [...html.matchAll(/<(a|button)\b[^>]*class="[^"]*rounded-full[^"]*"[^>]*>/g)].map((m) => m[0]);

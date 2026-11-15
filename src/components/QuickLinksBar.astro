@@ -86,8 +86,14 @@ const links = [
     list-style: none !important;
   }
 
+  /* Link 44px tap-height ka hai (mobile.css ka footer rule), isliye text ko
+     us box ke andar center karna zaruri hai — warna text top par baithta hai
+     aur separator dots (jo flex se center hote hain) text ke neeche latakte
+     dikhte hain. inline-flex + center se text aur dot ek hi line par aate hain. */
   html body nav.cf-inline-quick-links a.cf-inline-quick-link {
-    display: inline-block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-size: 13px !important;
     font-weight: 400 !important;
@@ -116,7 +122,9 @@ const links = [
   }
 
   html body nav.cf-inline-quick-links span.cf-inline-quick-dot {
-    display: inline-block !important;
+    display: block !important;
+    align-self: center !important;
+    margin-block: 0 !important;
     width: 2.5px !important;
     height: 2.5px !important;
     border-radius: 50% !important;
