@@ -75,6 +75,46 @@ export default defineConfig({
         return item;
       },
     }),
+    {
+      /**
+       * Per-tool silo sitemaps ko sitemap-index.xml mein register karta hai.
+       *
+       * @astrojs/sitemap index khud likhta hai (sirf sitemap-0), isliye build ke
+       * baad usme chaar tool sitemaps add ho jaate hain:
+       *   /onlinecompass/sitemap.xml, /onlinebubblelevel/sitemap.xml,
+       *   /onlinespeedometer/sitemap.xml, /onlineqibla/sitemap.xml
+       * Root robots.txt bhi inhe list karta hai — dono raaste se discover ho jaate hain.
+       */
+      name: 'per-tool-sitemaps',
+      hooks: {
+        'astro:build:done': async ({ dir, logger }) => {
+          const fs = await import('node:fs/promises');
+          const path = await import('node:path');
+          const root = dir.pathname;
+          const tools = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+          const indexFile = path.join(root, 'sitemap-index.xml');
+          try {
+            const xml = await fs.readFile(indexFile, 'utf8');
+            // integration index ko ek hi line par likhta hai — isliye naye
+            // entries bhi usi compact shape mein add hote hain.
+            const missing = tools.filter((tool) => !xml.includes(`/${tool}/sitemap.xml`));
+            if (missing.length) {
+              const entries = missing
+                .map(
+                  (tool) =>
+                    `<sitemap><loc>https://instanten.com/${tool}/sitemap.xml</loc><lastmod>${new Date().toISOString()}</lastmod></sitemap>`
+                )
+                .join('');
+              const next = xml.replace('</sitemapindex>', `${entries}</sitemapindex>`);
+              await fs.writeFile(indexFile, next, 'utf8');
+              logger.info(`sitemap-index: ${missing.length} per-tool sitemaps added`);
+            }
+          } catch {
+            // index na ho to build fail karne ki zarurat nahi
+          }
+        },
+      },
+    },
   ],
   vite: {
     css: {

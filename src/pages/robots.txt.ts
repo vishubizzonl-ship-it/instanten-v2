@@ -89,6 +89,10 @@ Disallow: /api/
 
 Sitemap: ${new URL('sitemap.xml', sitemapURL.origin).href}
 Sitemap: ${new URL('sitemap-index.xml', sitemapURL.origin).href}
+Sitemap: ${new URL('onlinecompass/sitemap.xml', sitemapURL.origin).href}
+Sitemap: ${new URL('onlinebubblelevel/sitemap.xml', sitemapURL.origin).href}
+Sitemap: ${new URL('onlinespeedometer/sitemap.xml', sitemapURL.origin).href}
+Sitemap: ${new URL('onlineqibla/sitemap.xml', sitemapURL.origin).href}
 `;
 
 export const GET: APIRoute = ({ site }) => {
