@@ -68,13 +68,8 @@ export function run(pages) {
     }
     const title = titleOf(html) || '';
     const desc = meta(html, 'description') || '';
-    // "Blog" hi es/fr/de/it/nl/pt ka apna shabd hai (sv: "Blogg"), isliye wo
-    // translate-shuda title hai — sirf wahan flag karo jahan wo English ho.
-    const blogIsLocal = ['es', 'fr', 'de', 'it', 'nl', 'pt', 'sv'].includes(lang);
-    const englishStart = new RegExp(
-      `^(${blogIsLocal ? 'About|Contact|Tools|Pricing' : 'About|Contact|Tools|Blog|Pricing'})\\b`
-    );
-    check(!englishStart.test(title.trim()), `title translate nahi hua :: ${url} -> "${title}"`);
+    check(!/^(About|Contact|Tools|Blog|Pricing)\b/.test(title.trim()),
+      `title translate nahi hua :: ${url} -> "${title}"`);
     for (const marker of ENGLISH_MARKERS) {
       check(!desc.includes(marker), `description mein English "${marker}" :: ${url}`);
     }

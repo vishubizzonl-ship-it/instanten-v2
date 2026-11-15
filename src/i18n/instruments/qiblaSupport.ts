@@ -107,7 +107,7 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
   toolDesc: "Buscador de alquibla online gratis: mira la dirección de la alquibla desde tu ubicación en una brújula en vivo, con el rumbo en grados y una flecha clara.",
   ogAlt: "Buscador de alquibla online — brújula que muestra el rumbo de la alquibla en grados desde tu ubicación",
   keywords: "alquibla online, dirección de la alquibla, brújula alquibla, qibla, encontrar la alquibla, dónde está la alquibla, rumbo de la alquibla, grados alquibla, buscador de alquibla, brújula qibla online, alquibla desde mi ubicación, dirección del rezo, alquibla en vivo",
-  aboutTitle: "Sobre la alquibla online — buscador de la dirección",
+  aboutTitle: "Sobre la alquibla online — buscador gratis de la dirección de la alquibla",
   aboutDesc: "Sobre el buscador de alquibla online: cómo se calcula la dirección de la alquibla desde tu ubicación, para quién es la brújula de alquibla gratis y qué precisión esperar.",
   about: {
     whatH: "¿Qué es onlinecompass?",
@@ -671,7 +671,7 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
   toolDesc: "Cercatore di Qibla online gratuito: vedi la direzione della Qibla dalla tua posizione su una bussola in tempo reale, con il rilevamento in gradi e una freccia chiara.",
   ogAlt: "Cercatore di Qibla online — bussola che mostra il rilevamento della Qibla in gradi dalla tua posizione",
   keywords: "qibla online, direzione della qibla, bussola qibla, qibla, trovare la qibla, dov'è la qibla, rilevamento qibla, gradi qibla, cercatore di qibla, bussola qibla online, qibla dalla mia posizione, direzione della preghiera, qibla in tempo reale",
-  aboutTitle: "Informazioni su Qibla online — direzione della Qibla",
+  aboutTitle: "Informazioni su Qibla online — cercatore gratuito della direzione della Qibla",
   aboutDesc: "Informazioni sul cercatore di Qibla online: come si calcola la direzione della Qibla dalla tua posizione, a chi serve la bussola Qibla gratuita e quale precisione aspettarsi.",
   about: {
     whatH: "Che cos'è onlinecompass?",

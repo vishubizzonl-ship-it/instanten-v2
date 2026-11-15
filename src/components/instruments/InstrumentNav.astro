@@ -53,17 +53,13 @@ const navItems = toolSlugs.map((target) => ({
   current: target === slug,
 }));
 
-/**
- * Tool ke apne silo pages — har tool ka apna Blog / About / Privacy / Terms /
- * Contact (compassinstant silo jaisa). Pehle ye site-wide pages par jaate thay,
- * isliye tool ke andar click karne par tool se bahar nikal jaate the.
- */
+// instanten ke asli routes — compassinstant ke /<tool>/blog|about|… nahi.
 const companyItems = [
-  { href: withLocale(`/${slug}/blog/`, lang), label: t('nav.blog') },
-  { href: withLocale(`/${slug}/about/`, lang), label: t('nav.about') },
-  { href: withLocale(`/${slug}/privacy/`, lang), label: t('nav.privacy') },
-  { href: withLocale(`/${slug}/terms/`, lang), label: t('nav.terms') },
-  { href: withLocale(`/${slug}/contact/`, lang), label: t('nav.contact') },
+  { href: withLocale('/blog/', lang), label: t('nav.blog') },
+  { href: withLocale('/about/', lang), label: t('nav.about') },
+  { href: withLocale('/privacy-policy/', lang), label: t('nav.privacy') },
+  { href: withLocale('/terms/', lang), label: t('nav.terms') },
+  { href: withLocale('/contact/', lang), label: t('nav.contact') },
 ];
 
 const langList = ['en', ...nonDefaultLangs] as LangCode[];
