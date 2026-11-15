@@ -1,5 +1,8 @@
 ---
 const canonicalURL = 'https://instanten.com/privacy-policy/';
+
+/** Ek hi theme bootstrap (public/theme-bridge.js) — inline. */
+import themeBootstrap from '../scripts/themeBootstrap.js?raw';
 ---
 <!doctype html>
 <html lang="en-US">
@@ -8,6 +11,16 @@ const canonicalURL = 'https://instanten.com/privacy-policy/';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Redirecting to Privacy Policy — instanten</title>
   <meta http-equiv="refresh" content="0;url=/privacy-policy/" />
+  {/* Theme: redirect stub bhi usi mode mein dikhe jo user ne chuna hai —
+      warna dark site par is page par safed flash aata hai. */}
+  <script is:inline set:html={themeBootstrap}></script>
+  <style is:inline>
+    html { background: #FDFDFF; color: #29294B; }
+    html.dark, html[data-theme='dark'] { background: #1C1C1C; color: #E0E0E0; }
+    body { background: inherit; color: inherit; font-family: system-ui, sans-serif; padding: 2rem; }
+    a { color: #514DCC; }
+    html.dark a, html[data-theme='dark'] a { color: #6B5BE8; }
+  </style>
   <link rel="canonical" href={canonicalURL} />
 </head>
 <body>

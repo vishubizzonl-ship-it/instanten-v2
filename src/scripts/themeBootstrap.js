@@ -42,6 +42,18 @@
       document.body.setAttribute('data-scheme', mode);
     }
 
+    // Mobile browser ka address bar / status bar bhi mode ke saath badle —
+    // warna dark site par upar safed patti reh jaati hai.
+    try {
+      var metas = document.querySelectorAll('meta[name="theme-color"]');
+      for (var m = 0; m < metas.length; m++) {
+        metas[m].setAttribute('content', isDark ? '#1C1C1C' : '#FDFDFF');
+        metas[m].removeAttribute('media');
+      }
+    } catch (e) {
+      /* meta na ho to bhi theme lagti rahe */
+    }
+
     document.dispatchEvent(new CustomEvent('instanten:themechange', { detail: { theme: mode } }));
   }
 
@@ -57,10 +69,17 @@
     return setTheme(current === 'dark' ? 'light' : 'dark');
   }
 
+  // API shape wahi jo src/scripts/theme.js deta hai — get() / set(mode) /
+  // toggle() / sync(), taaki dono toggles ek hi tarah call karein.
   window.InstantenTheme = {
+    key: 'theme',
     get: readSavedTheme,
-    set: setTheme,
-    toggle: toggleTheme,
+    set: function (mode) {
+      return setTheme(mode);
+    },
+    toggle: function () {
+      return toggleTheme();
+    },
     sync: function () {
       applyThemeToDOM(readSavedTheme());
     },

@@ -250,9 +250,14 @@ export function run(pages, outDir) {
     for (const url of sample) {
       const html = pages.get(url) ?? '';
       const head = html.slice(0, html.indexOf('</head>'));
-      check(head.includes("localStorage.getItem('theme')"), `${url}: head mein saved-theme script nahi`);
+      // Ek hi bootstrap (src/scripts/themeBootstrap.js) — key 'theme' KEYS list
+      // ke pehle element ke roop mein padhi jaati hai, aur theme load par hi
+      // apply hoti hai (applyThemeToDOM(initial)).
+      check(/localStorage\.getItem\(KEYS\[i\]\)|localStorage\.getItem\('theme'\)/.test(head),
+        `${url}: head mein saved-theme script nahi`);
       check(head.includes('prefers-color-scheme'), `${url}: system preference fallback nahi`);
-      check(/applyTheme\(theme\)/.test(head), `${url}: paint se pehle theme apply nahi hoti`);
+      check(/applyThemeToDOM\(initial\)|applyTheme\(theme\)/.test(head),
+        `${url}: paint se pehle theme apply nahi hoti`);
       check(/classList\.toggle\('dark'/.test(head), `${url}: dark class set nahi hoti`);
       check(/setAttribute\('data-theme'/.test(head), `${url}: data-theme set nahi hota`);
     }
@@ -276,10 +281,15 @@ export function run(pages, outDir) {
       check(themeSrc.includes(fn), `src/scripts/theme.js mein ${fn} nahi`);
     }
     check(themeSrc.includes("const THEME_KEY = 'theme'") || themeSrc.includes("THEME_KEY = 'theme'"), 'theme key "theme" nahi');
-    // dono jagah same key likhi jaaye
+    // dono jagah same key likhi jaaye. Layout ab duplicate script nahi rakhta —
+    // wo ek hi bootstrap (src/scripts/themeBootstrap.js) inline karta hai, aur
+    // ThemeToggle shared theme.js use karta hai.
     for (const rel of ['src/layouts/Layout.astro', 'src/components/ThemeToggle.astro']) {
       const src = readFileSync(rel, 'utf8');
-      check(src.includes("'theme'") || src.includes('theme.js'), `${rel}: theme key/API wire nahi hai`);
+      check(
+        src.includes("'theme'") || src.includes('theme.js') || src.includes('themeBootstrap.js'),
+        `${rel}: theme key/API wire nahi hai`
+      );
     }
   }
 
