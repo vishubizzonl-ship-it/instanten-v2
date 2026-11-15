@@ -23,7 +23,7 @@ export const INSTRUMENTS = {
   },
   onlinebubblelevel: {
     root: 'onlinebubblelevel',
-    ids: ['bubble-card', 'bubble-area', 'bubble-dot', 'bubble-x', 'bubble-y', 'bubble-status', 'bubble-message', 'bubble-calibrate-btn', 'bubble-reset-btn', 'bubble-fullscreen-btn'],
+    ids: ['bubble-card', 'bubble-area', 'bubble-dot', 'bubble-x', 'bubble-y', 'bubble-status', 'bubble-message', 'bubble-fullscreen-btn'],
     faqLangs: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'],
     guides: true,
   },
@@ -438,6 +438,26 @@ export function run(pages, outDir) {
     check(between.includes('</div>'), 'build: head block degree ke baad band nahi hota');
     // state line (upar) bani rahe — accessibility ke liye
     check(html.includes('id="qibla-status"'), 'build: qibla-status gayab');
+  }
+
+  // --- 10m. Bubble Level: Calibrate/Reset buttons nahi ----------------------
+  {
+    const src = readFileSync('src/components/instruments/BubbleIsland.astro', 'utf8');
+    for (const gone of ['bubble-calibrate-btn', 'bubble-reset-btn', 'calibrateBtn', 'resetBtn']) {
+      check(!src.includes(gone), `bubble: ${gone} bacha hua hai`);
+    }
+    // offset system (localStorage) intact — sirf UI controls gaye
+    check(src.includes("localStorage.setItem('bubble-offset'"), 'bubble: offset save logic chala gaya');
+    check(/offsetX/.test(src) && /offsetY/.test(src), 'bubble: offset variables gaye');
+    // core UI intact
+    for (const id of ['bubble-area', 'bubble-dot', 'bubble-x', 'bubble-y', 'bubble-status', 'bubble-fullscreen-btn']) {
+      check(src.includes(`id="${id}"`), `bubble: ${id} gayab ho gaya`);
+    }
+    // build
+    const html = pages.get('/onlinebubblelevel/') ?? '';
+    check(!html.includes('bubble-calibrate-btn'), 'build: calibrate button abhi bhi hai');
+    check(!html.includes('bubble-reset-btn'), 'build: reset button abhi bhi hai');
+    check(html.includes('id="bubble-area"'), 'build: bubble-area gayab');
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
