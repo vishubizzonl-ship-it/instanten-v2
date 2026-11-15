@@ -335,51 +335,6 @@ export function run(pages, outDir) {
     }
   }
 
-  // --- 10k. Speedometer card ki height qibla card ke barabar --------------
-  {
-    const qibla = readFileSync('src/components/instruments/QiblaIsland.astro', 'utf8');
-    const speed = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
-
-    // (a) structural facts jo height kam karte hain (mobile-safe: 2 cols, lg 4)
-    check(/id="speed-stats" class="grid grid-cols-2 gap-1\.5 lg:grid-cols-4"/.test(speed), 'speedometer stats compact 2x2/4-up grid par nahi');
-    check(!/id="speed-stats"[^>]*grid-cols-2 lg:grid-cols-4 gap-2/.test(speed), 'purana gap-2 wala stats grid bacha hai');
-    check(/id="speed-head" class="mb-2 text-center"/.test(speed), 'speedometer head compact nahi');
-    check(/items-baseline justify-center gap-x-2/.test(speed), 'title + status ek line par nahi');
-    check(/mt-2 flex flex-wrap justify-center gap-2/.test(speed), 'buttons compact row mein nahi');
-    // stats cells inline: label + value + unit ek hi line
-    check((speed.match(/flex items-baseline justify-between gap-1 rounded-sm border border-hairline bg-canvas/g) ?? []).length === 4, 'stats cells inline layout par nahi (4 chahiye)');
-    for (const id of ['max-speed', 'max-unit', 'avg-speed', 'avg-unit', 'altitude', 'duration']) {
-      check(speed.includes(`id="${id}"`), `stat element gaya: ${id}`);
-    }
-
-    // (b) height budget — Tailwind default metrics par based estimate
-    // (px): p-4 = 16, mb-3 = 12, mb-2 = 8, mt-2 = 8, text-xl = 28, text-xs = 16,
-    // text-3xl = 36, py-4 = 16, button (py-2 + text-sm) = 36, dial/board = 320,
-    // stat cell = px-1.5 py-1 (8) + one 18px line + 2px border = 28; row gap = 6
-    const qiblaCardHeight =
-      16 + // p-4 top
-      28 + 4 + 16 + // h2 + mt-1 status
-      8 + 36 + // mt-2 bearing
-      4 + 16 + // mt-1 location
-      16 + // mb-4
-      16 + 320 + 16 + // dial wrapper (py-4 + dial + py-4)
-      16; // p-4 bottom
-    const speedCardHeight =
-      16 + // p-4 top
-      28 + 8 + 36 + // head: title+status line, mt-2 buttons
-      12 + // board mb-3
-      320 + // board
-      6 + 2 * 28 + // stats: 2 rows + gap
-      16; // p-4 bottom
-    const delta = Math.abs(qiblaCardHeight - speedCardHeight);
-    check(delta <= 24, `card height farq zyada hai: qibla~${qiblaCardHeight}px, speed~${speedCardHeight}px (delta ${delta}px)`);
-    check(Math.abs(speedCardHeight - 490) <= 40, `speedometer card ~490-510px ke qareeb nahi: ${speedCardHeight}px`);
-
-    // (c) qibla card ko chheda nahi (size same)
-    check(qibla.includes('id="qibla-dial" data-instrument-stage="qibla" class="relative w-full max-w-[320px] aspect-square lg:w-80 lg:h-80'), 'qibla dial ka size badal gaya');
-    check(qibla.includes('class="text-center mb-4"'), 'qibla ka header block badal gaya');
-  }
-
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';

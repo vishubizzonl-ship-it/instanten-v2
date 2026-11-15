@@ -13,21 +13,17 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             <svg class="icon-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
             <svg class="icon-exit hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>
           </button>
-          <!-- Card ki height qibla card ke barabar rahe (~510px): title+status ek
-               line par, buttons compact, stats inline-label wale 2x2/4-up cells. -->
-          <div id="speed-head" class="mb-2 text-center">
-            <div class="flex flex-wrap items-baseline justify-center gap-x-2 gap-y-0.5">
-              <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['speed.ui.title']}</h2>
-              <p class="text-xs text-muted font-mono">{ui['speed.ui.gpsActive']}</p>
-            </div>
-            <div class="mt-2 flex flex-wrap justify-center gap-2">
+          <div id="speed-head" class="text-center mb-4">
+            <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['speed.ui.title']}</h2>
+            <p class="text-xs text-muted font-mono mt-1">{ui['speed.ui.gpsActive']}</p>
+            <div class="flex gap-2 justify-center mt-3">
               <button onclick="startTrip()" id="start-btn" data-start={ui['speed.ui.start']} data-stop={ui['speed.ui.stop']} class="inline-flex rounded-sm bg-ink text-surface text-sm font-medium px-4 py-2 hover:bg-ink/90 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.start']}</button>
               <button onclick="resetTrip()" class="inline-flex rounded-sm bg-ink text-surface text-sm font-medium px-4 py-2 hover:bg-ink/90 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.reset']}</button>
               <button onclick="recordSpeed()" id="record-btn" class="inline-flex rounded-sm bg-surface border border-hairline text-ink text-sm font-medium px-4 py-2 hover:border-ink/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none active:scale-95">{ui['speed.ui.record']}</button>
             </div>
           </div>
 
-          <div data-instrument-stage="speedometer" class="mx-auto mb-3 flex w-full max-w-[320px] aspect-square lg:w-80 lg:h-80 flex-col items-center justify-center text-center">
+          <div data-instrument-stage="speedometer" class="mx-auto mb-4 flex w-full max-w-[320px] aspect-square lg:w-80 lg:h-80 flex-col items-center justify-center text-center">
             <p class="text-5xl lg:text-6xl font-semibold tracking-tighter text-ink tabular-nums transition-transform duration-200 origin-center" id="speed-display">0</p>
             <div class="flex items-center justify-center gap-3 mt-2">
               <p class="text-sm text-muted font-mono" id="speed-unit">KM/H</p>
@@ -46,26 +42,26 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             </div>
           </div>
 
-          <div id="speed-stats" class="grid grid-cols-2 gap-1.5 lg:grid-cols-4">
-            <div class="flex items-baseline justify-between gap-1 rounded-sm border border-hairline bg-canvas px-1.5 py-1">
-              <span class="text-[9px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.max']}</span>
-              <span class="ml-auto text-sm font-semibold tabular-nums text-ink" id="max-speed">0.0</span>
-              <span class="text-[9px] text-faint" id="max-unit">KM/H</span>
+          <div id="speed-stats" class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.max']}</p>
+              <p id="max-speed" class="text-lg font-semibold tabular-nums text-ink">0.0</p>
+              <p class="text-[10px] text-faint" id="max-unit">KM/H</p>
             </div>
-            <div class="flex items-baseline justify-between gap-1 rounded-sm border border-hairline bg-canvas px-1.5 py-1">
-              <span class="text-[9px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.average']}</span>
-              <span class="ml-auto text-sm font-semibold tabular-nums text-ink" id="avg-speed">0.0</span>
-              <span class="text-[9px] text-faint" id="avg-unit">KM/H</span>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.average']}</p>
+              <p id="avg-speed" class="text-lg font-semibold tabular-nums text-ink">0.0</p>
+              <p class="text-[10px] text-faint" id="avg-unit">KM/H</p>
             </div>
-            <div class="flex items-baseline justify-between gap-1 rounded-sm border border-hairline bg-canvas px-1.5 py-1">
-              <span class="text-[9px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.altitude']}</span>
-              <span class="ml-auto text-sm font-semibold tabular-nums text-ink" id="altitude">—</span>
-              <span class="text-[9px] text-faint">m</span>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.altitude']}</p>
+              <p id="altitude" class="text-lg font-semibold tabular-nums text-ink">—</p>
+              <p class="text-[10px] text-faint">m</p>
             </div>
-            <div class="flex items-baseline justify-between gap-1 rounded-sm border border-hairline bg-canvas px-1.5 py-1">
-              <span class="text-[9px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.duration']}</span>
-              <span class="ml-auto text-sm font-semibold tabular-nums text-ink" id="duration">00:00</span>
-              <span class="text-[9px] text-faint">m:s</span>
+            <div class="p-2 rounded-sm bg-canvas border border-hairline">
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.ui.duration']}</p>
+              <p id="duration" class="text-lg font-semibold tabular-nums text-ink">00:00</p>
+              <p class="text-[10px] text-faint">m:s</p>
             </div>
           </div>
 
@@ -74,7 +70,7 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
                stays exactly where it already is. Hidden outside fullscreen. -->
           <div id="records-in-card" class="hidden [:fullscreen_&]:flex [:fullscreen_&]:flex-col [:fullscreen_&]:shrink-0 [:fullscreen_&]:min-h-0 [:fullscreen_&]:overflow-hidden [:fullscreen_&]:border-t [:fullscreen_&]:border-hairline [:fullscreen_&]:pt-3">
             <div class="flex items-center justify-between gap-3 mb-1">
-              <p class="text-[9px] text-muted font-mono uppercase tracking-wide">{ui['speed.records.title']}</p>
+              <p class="text-[10px] text-muted font-mono uppercase tracking-wide">{ui['speed.records.title']}</p>
               <button type="button" onclick="clearRecords()" id="records-clear-card" class="text-[10px] text-muted hover:text-ink underline underline-offset-2 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none rounded-sm">{ui['speed.records.clear']}</button>
             </div>
             <p id="records-empty-card" class="text-xs text-muted leading-relaxed">{ui['speed.records.empty']}</p>
