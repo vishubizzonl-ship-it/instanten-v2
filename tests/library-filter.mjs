@@ -76,12 +76,24 @@ export async function run(pages, outDir) {
     check(Boolean(tabsMatch), `${url}: segmented tabs group (data-lib-tabs) nahi hai`);
     check(/role="group"/.test(tabsMatch), `${url}: tabs par role="group" nahi hai`);
     const tabEls = [
-      ...html.matchAll(/<button[^>]*class="[^"]*h-\[34px\][^"]*"[^>]*data-facet="featured"[^>]*>/g),
+      ...html.matchAll(/<button[^>]*class="[^"]*h-\[34px\][^"]*"[^>]*data-facet="category"[^>]*>/g),
     ].map((m) => m[0]);
-    check(tabEls.length === 2, `${url}: segmented group mein ${tabEls.length} tabs (2 chahiye — All / Featured)`);
+    // Row 1 = segmented category group: "All" + har category (screenshot jaisa
+    // 4+ buttons ka group, site ke saare categories ke saath).
+    check(tabEls.length >= 6, `${url}: segmented group mein sirf ${tabEls.length} segments (All + categories chahiye)`);
     check(tabEls.some((t) => /data-value=""/.test(t)), `${url}: tabs mein "All" segment nahi hai`);
-    check(tabEls.some((t) => /data-value="1"/.test(t)), `${url}: tabs mein "Featured" segment nahi hai`);
     check(/aria-pressed="true"/.test(tabEls[0] ?? ''), `${url}: default tab pressed nahi hai`);
+    for (const tab of tabEls) check(/h-\[34px\]/.test(tab), `${url}: segment ki height reference se alag (34px)`);
+
+    // Row 2: Featured + popular tag chips (categories row 1 mein hain, duplicate nahi)
+    const chipRowHtml = html.match(/<div[^>]*data-lib-chips[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
+    const row2Facets = [...chipRowHtml.matchAll(/data-facet="(\w+)"/g)].map((m) => m[1]);
+    check(row2Facets.includes('featured'), `${url}: chip row mein Featured nahi hai`);
+    check(row2Facets.includes('tag'), `${url}: chip row mein tag chips nahi hain`);
+    check(!row2Facets.includes('category'), `${url}: chip row mein category chips duplicate ho rahe hain`);
+    check(row2Facets.length >= 8, `${url}: chip row mein sirf ${row2Facets.length} chips (8+ chahiye)`);
+    // boilerplate tags chip row mein na aayein
+    check(!/data-value="instant (tool|online|help|convert)"/.test(chipRowHtml), `${url}: boilerplate tag chip row mein aa gaya`);
     // segmented track: ink/6% + radius 12px + 3px padding (opendesignmd .tabs)
     check(/data-lib-tabs/.test(html) && html.includes('rounded-xl bg-ink/[0.06] p-[3px]'), `${url}: tabs track ki styling reference se nahi milti`);
 
@@ -397,11 +409,11 @@ export async function run(pages, outDir) {
   clickChip('tag', 'writing');
   check(visibleNames().join('|') === 'Word Counter', `featured + 2 tags galat: ${visibleNames()}`);
 
-  // scope tab "All" (value="") featured off karta hai
-  clickChip('featured', '');
-  check(!api.getFacets().featured, 'scope All tab ne featured off nahi kiya');
+  // featured chip toggle (row 2) dobara check — off/on
   clickChip('featured', '1');
-  check(api.getFacets().featured, 'scope Featured tab ne feature on nahi kiya');
+  check(!api.getFacets().featured, 'featured chip ne off nahi kiya');
+  clickChip('featured', '1');
+  check(api.getFacets().featured, 'featured chip ne dobara on nahi kiya');
 
   // clear
   clickChip('clear');

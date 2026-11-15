@@ -66,9 +66,25 @@ for (const tool of tools) {
     tagCounts.set(key, (tagCounts.get(key) ?? 0) + 1);
   }
 }
+// Chip label sentence case: "open-graph" → "Open graph" (value lowercase hi
+// rehta hai, filtering usi par hoti hai).
+const tagLabel = (value: string) => {
+  const spaced = value.replace(/-/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+};
+
 const tags = [...tagCounts.entries()]
-  .map(([value, count]) => ({ value, label: value, count }))
+  .map(([value, count]) => ({ value, label: tagLabel(value), count }))
   .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
+
+// Row 2 ke chips: site ke sabse popular tags. Boilerplate tags ("instant tool",
+// "instant online" …) aur category ke naam (wo row 1 mein hain) chip row se
+// hata diye jaate hain — warna "sab buttons" ki jagah shor dikhta hai.
+const BOILERPLATE_TAGS = new Set(['instant tool', 'instant online', 'instanten tool', 'instant help', 'instant convert']);
+const CATEGORY_TAGS = new Set(categoryNames.map((name) => name.toLowerCase()));
+const popularTags = tags
+  .filter((tag) => !BOILERPLATE_TAGS.has(tag.value) && !CATEGORY_TAGS.has(tag.value))
+  .slice(0, 8);
 
 const TAG_VISIBLE = 12;
 const featuredCount = countBy((tool) => Boolean(tool.featured));
@@ -124,34 +140,38 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
   -->
   <div class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:block">
     <div class="contents sm:flex sm:items-center sm:justify-between sm:gap-4">
-      <!-- Segmented group: scope (All / Featured) -->
+      <!-- Row 1: segmented category group (All + har category, scroll) -->
       <div
         class={`${tabs} col-span-3`}
         role="group"
-        aria-label={t('lib.scope')}
+        aria-label={t('filter.category')}
         data-lib-tabs
       >
         <button
           type="button"
           class={tab}
-          data-facet="featured"
+          data-facet="category"
           data-value=""
-          aria-pressed={!featuredActive ? 'true' : 'false'}
-          aria-current={!featuredActive ? 'true' : 'false'}
+          aria-pressed={!currentCategory ? 'true' : 'false'}
+          aria-current={!currentCategory ? 'true' : 'false'}
         >
           {t('lib.all')}
           <span class="opacity-60 tabular-nums font-normal" data-count>{total}</span>
         </button>
-        <button
-          type="button"
-          class={tab}
-          data-facet="featured"
-          data-value="1"
-          aria-pressed={featuredActive ? 'true' : 'false'}
-        >
-          {t('lib.featured')}
-          <span class="opacity-60 tabular-nums font-normal" data-count>{featuredCount}</span>
-        </button>
+        {
+          categories.map((category) => (
+            <button
+              type="button"
+              class={tab}
+              data-facet="category"
+              data-value={category.value}
+              aria-pressed={currentCategory === category.value ? 'true' : 'false'}
+            >
+              {category.label}
+              <span class="opacity-60 tabular-nums font-normal" data-count>{category.count}</span>
+            </button>
+          ))
+        }
       </div>
 
       <!-- Search -->
@@ -183,36 +203,35 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
     </div>
 
     <div class="contents sm:relative sm:mt-[14px] sm:flex sm:items-center sm:gap-2">
-      <!-- Category chip row -->
+      <!-- Row 2: Featured + site ke popular tags -->
       <div
         class={`${chipRow} max-sm:col-span-3 max-sm:row-start-3`}
         data-lib-chips
         role="group"
-        aria-label={t('filter.category')}
+        aria-label={t('lib.tags')}
       >
         <button
           type="button"
           class={chip}
-          data-facet="category"
-          data-value=""
-          aria-current={!currentCategory ? 'true' : 'false'}
-          aria-pressed={!currentCategory ? 'true' : 'false'}
+          data-facet="featured"
+          data-value="1"
+          aria-pressed={featuredActive ? 'true' : 'false'}
         >
-          {t('lib.all')}
-          <span class="opacity-60 tabular-nums font-normal" data-count>{total}</span>
+          {t('lib.featured')}
+          <span class="opacity-60 tabular-nums font-normal" data-count>{featuredCount}</span>
         </button>
 
         {
-          categories.map((category) => (
+          popularTags.map((tag) => (
             <button
               type="button"
               class={chip}
-              data-facet="category"
-              data-value={category.value}
-              aria-pressed={currentCategory === category.value ? 'true' : 'false'}
+              data-facet="tag"
+              data-value={tag.value}
+              aria-pressed={activeTags.includes(tag.value) ? 'true' : 'false'}
             >
-              {category.label}
-              <span class="opacity-60 tabular-nums font-normal" data-count>{category.count}</span>
+              {tag.label}
+              <span class="opacity-60 tabular-nums font-normal" data-count>{tag.count}</span>
             </button>
           ))
         }
