@@ -386,18 +386,32 @@ export function run(pages, outDir) {
     check(build.includes('id="record-btn"'), 'build: Record button gayab');
     check((build.match(/id="record-btn"/g) ?? []).length === 1, 'build: Record button duplicate hai');
 
-    // Record button: label rounded square ke beech + button coloured (ink fill)
-    const recSrc = src.match(/<button[^>]*id="record-btn"[^>]*>/)?.[0] ?? '';
-    check(/items-center/.test(recSrc), 'record-btn: text vertically center nahi (items-center)');
-    check(/justify-center/.test(recSrc), 'record-btn: text horizontally center nahi (justify-center)');
-    check(/text-center/.test(recSrc), 'record-btn: text-center nahi');
-    check(/leading-none/.test(recSrc), 'record-btn: leading-none nahi (text baseline par latak sakta hai)');
-    check(/min-w-\[/.test(recSrc), 'record-btn: fixed min-width nahi (label ke hisaab se square badalta hai)');
-    check(/bg-ink/.test(recSrc) && /text-surface/.test(recSrc), 'record-btn: coloured fill (bg-ink/text-surface) nahi');
-    check(!/bg-surface/.test(recSrc), 'record-btn: purana plain (bg-surface) style bacha hua hai');
-    const recBuild = (pages.get('/onlinespeedometer/') ?? '').match(/<button[^>]*id="record-btn"[^>]*>/)?.[0] ?? '';
-    check(/items-center/.test(recBuild) && /justify-center/.test(recBuild), 'build: record-btn center nahi');
-    check(/bg-ink/.test(recBuild), 'build: record-btn coloured nahi');
+    // Teeno buttons (Start, Reset, Record): label square ke beech + same size
+    const btnClass = {
+      start: (src.match(/<button[^>]*id="start-btn"[^>]*>/)?.[0] ?? '').match(/class="([^"]*)"/)?.[1] ?? '',
+      reset: (src.match(/<button[^>]*onclick="resetTrip\(\)"[^>]*>/)?.[0] ?? '').match(/class="([^"]*)"/)?.[1] ?? '',
+      record: (src.match(/<button[^>]*id="record-btn"[^>]*>/)?.[0] ?? '').match(/class="([^"]*)"/)?.[1] ?? '',
+    };
+    for (const [name, cls] of Object.entries(btnClass)) {
+      check(cls.length > 0, `${name} button ka class nahi mila`);
+      check(/items-center/.test(cls), `${name}-btn: text vertically center nahi (items-center)`);
+      check(/justify-center/.test(cls), `${name}-btn: text horizontally center nahi (justify-center)`);
+      check(/text-center/.test(cls), `${name}-btn: text-center nahi`);
+      check(/leading-none/.test(cls), `${name}-btn: leading-none nahi (text baseline par latak sakta hai)`);
+      check(/bg-ink/.test(cls) && /text-surface/.test(cls), `${name}-btn: coloured fill (bg-ink/text-surface) nahi`);
+      check(!/min-w-\[/.test(cls), `${name}-btn: min-width fix rakha hua hai (size content se alag ho jata hai)`);
+    }
+    // Record ka size Start ke barabar (same padding + font classes)
+    check(btnClass.record === btnClass.start, 'Record button ka size Start se alag hai (class same honi chahiye)');
+    check(btnClass.reset === btnClass.start, 'Reset button ka size Start se alag hai (class same honi chahiye)');
+
+    const html = pages.get('/onlinespeedometer/') ?? '';
+    for (const id of ['start-btn', 'record-btn']) {
+      const tag = html.match(new RegExp(`<button[^>]*id="${id}"[^>]*>`))?.[0] ?? '';
+      check(/items-center/.test(tag) && /justify-center/.test(tag), `build: ${id} center nahi`);
+      check(/bg-ink/.test(tag), `build: ${id} coloured nahi`);
+      check(!/min-w-\[/.test(tag), `build: ${id} par min-width bacha hua hai`);
+    }
     check(lineHeight['text-xl'] === 28, 'line-height table galat');
   }
 
