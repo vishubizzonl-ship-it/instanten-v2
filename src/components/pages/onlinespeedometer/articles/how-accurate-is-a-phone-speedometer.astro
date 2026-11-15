@@ -1,0 +1,154 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const keywords =
+  'online speedometer, free online speedometer, online speedometer free, online speedometer test, online speedometer mph, hardspeedometer test, speedometer online train, speedometer test online, speedometer digital, gps speedometer online, my speed km/h, speedometer online, live speed test, live speedometer, zspeed, gps speedometer';
+
+const title = 'How Accurate Is a Phone Speedometer? (And How to Check It)';
+const description =
+  'How accurate is a phone speedometer? Typical GPS error, how it compares with a car dashboard, and three tests you can run with an online speedometer.';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://instanten.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Online Speedometer', item: 'https://instanten.com/onlinespeedometer/' },
+    { '@type': 'ListItem', position: 3, name: 'Blog', item: 'https://instanten.com/onlinespeedometer/blog/' },
+    { '@type': 'ListItem', position: 4, name: 'How Accurate Is a Phone Speedometer? (And How to Check It)', item: 'https://instanten.com/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/' },
+  ],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  type="article"
+  ogImage="/og-image.png"
+  ogImageAlt={title}
+  breadcrumbLd={breadcrumbLd} chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlinespeedometer/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Speedometer Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">
+      How Accurate Is a Phone Speedometer? (And How to Check It)
+    </h1>
+    <p class="text-xs text-mute font-mono mb-8">November 7, 2026</p>
+
+    <p class="text-body text-base leading-relaxed mb-4"><strong>How accurate is a phone speedometer?</strong> In open sky, a modern phone reads within about <strong>1–2 km/h</strong> of your true speed — usually tighter than the dashboard in front of you. The catch is that GPS is a position sensor, not a speed sensor: everything depends on how clean the satellite fix is and how the browser averages it.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-4">This guide takes you from "my dash says 62 and my phone says 59" to a number you can actually trust. It covers what the phone is really measuring, three tests you can run yourself, the conditions that break a reading, and what to do about each. It uses the free <strong>online speedometer</strong> on this site, but the tests work with any <strong>GPS speedometer</strong> app or browser page. If you have ever typed “<em>my speed km/h</em>” into a search box and got a number you did not believe, the checks below are what you are missing.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      What the phone is actually measuring
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">Your phone reports a position roughly once a second. A <strong>speedometer digital</strong> readout compares each new position with the last, divides the distance covered by the time taken, and prints the result. That is why the number lags slightly when you accelerate hard: until the next fix arrives, the page only knows where you were.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead><tr class="bg-canvas-elevated"><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Condition</th><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Typical error</th><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">What it feels like</th></tr></thead>
+        <tbody><tr><td class="border border-hairline px-3 py-2">Open road, clear sky</td><td class="border border-hairline px-3 py-2">±1–2 km/h</td><td class="border border-hairline px-3 py-2">Steady, believable numbers</td></tr><tr><td class="border border-hairline px-3 py-2">Tree cover or tall buildings</td><td class="border border-hairline px-3 py-2">±3–5 km/h</td><td class="border border-hairline px-3 py-2">Small jumps, occasional flicker</td></tr><tr><td class="border border-hairline px-3 py-2">Tunnel, car park, indoors</td><td class="border border-hairline px-3 py-2">No reading</td><td class="border border-hairline px-3 py-2">Number freezes or holds a value</td></tr><tr><td class="border border-hairline px-3 py-2">Tight turns at low speed</td><td class="border border-hairline px-3 py-2">±3 km/h</td><td class="border border-hairline px-3 py-2">Speed dips briefly in corners</td></tr><tr><td class="border border-hairline px-3 py-2">Steady motorway cruising</td><td class="border border-hairline px-3 py-2">±1 km/h</td><td class="border border-hairline px-3 py-2">Very stable, excellent for comparison</td></tr></tbody>
+      </table>
+    </div>
+    <p class="text-body text-base leading-relaxed mb-4">Read that table as a confidence scale. A steady reading on a straight road is worth more than a flickering one under trees, and knowing which you are looking at is most of the skill.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 1: Compare against a known reference
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">Before you trust or doubt the tool, give it something to be measured against. Three references are cheap and available anywhere.
+    </p>
+
+    <h3 class="font-sans text-lg font-semibold text-ink mt-6 mb-2">Your car dashboard</h3>
+    <p class="text-body text-base leading-relaxed mb-4">The dash is not a laboratory instrument. Manufacturers deliberately read a few percent high, and a change of wheel or tyre size shifts it further. If your dash shows 100 km/h and the phone shows 96, the phone is very likely the honest one — an <strong>online speedometer test</strong> is often the cheapest way to prove that.
+    </p>
+
+    <h3 class="font-sans text-lg font-semibold text-ink mt-6 mb-2">Kilometre markers</h3>
+    <p class="text-body text-base leading-relaxed mb-4">On a highway with distance markers, hold a steady speed and time 5 km. Speed = distance ÷ time, so 5 km in 3 minutes is exactly 100 km/h. Do that once and you have a reference for the lifetime of the vehicle.
+    </p>
+
+    <h3 class="font-sans text-lg font-semibold text-ink mt-6 mb-2">A second phone</h3>
+    <p class="text-body text-base leading-relaxed mb-4">Two phones agreeing to within 1 km/h is a strong signal. If they differ by 5 km/h, one has a poor fix — check both against the distance markers before you decide which.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 2: Set up for a clean reading
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">Most "wrong" readings are actually bad setups. Five things matter, and four of them take seconds.
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+      <li><strong>Sky view.</strong> Dash mount or window ledge beats a lap, and a lap beats a pocket.</li>
+      <li><strong>Battery.</strong> Some phones throttle GPS when the battery is low; charge before a long test.</li>
+      <li><strong>Screen.</strong> Keep it awake — a locked screen can pause location updates in some browsers.</li>
+      <li><strong>Case.</strong> Metal cases and magnetic mounts can interfere with both GPS and compass sensors.</li>
+      <li><strong>Reset.</strong> Press Reset before a run so max and average belong to that trip only.</li>
+    </ul>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 3: Run a proper test
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">This is the routine worth repeating whenever you doubt the numbers. It takes ten minutes and settles the question.
+    </p>
+
+    <ol class="list-decimal pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+      <li>Find a straight, open stretch of road with distance markers.</li>
+      <li>Open the page, allow location, and press Start.</li>
+      <li>Accelerate gently to a steady 60 km/h on the dash and hold it for 2 km.</li>
+      <li>Note the <strong>live speedometer</strong> reading at the same moment, then note the average at the end.</li>
+      <li>Repeat at 80 and 100 km/h if the road allows, and write the three differences down.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">A consistent offset — say the phone always reads 4% lower — is a dashboard calibration issue in the dash, not a fault in the <strong>speedometer test online</strong>, not a phone problem. A random spread of ±5 km/h means the fix is poor, and the answer is a better sky view rather than a different tool.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Worked example: two numbers that never agree
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">You are on a motorway. The dash reads 120, the phone reads 114, and a friend in the back seat gets 115 on a different app. Who is right?
+    </p>
+
+    <ol class="list-decimal pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+      <li>Both phones agree within 1 km/h, so the GPS side is consistent.</li>
+      <li>The dash is 5–6 km/h higher, which is inside the typical optimism of a factory speedometer.</li>
+      <li>Check the tyre size on the car: a larger-than-standard tyre makes the dash read low, a smaller one makes it read high.</li>
+      <li>If you want certainty, time 5 km against markers: that is a true ground-speed measurement and it settles it.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">For legal limits, trust the lower number — that is the one that keeps you inside the limit. For curiosity, the phone is the more honest measure of real speed over the road, and a <strong>gps speedometer online</strong> page gives you that in one tab.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Troubleshooting
+    </h2>
+
+    <div class="overflow-x-auto mb-6">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead><tr class="bg-canvas-elevated"><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Problem</th><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Likely cause</th><th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Fix</th></tr></thead>
+        <tbody><tr><td class="border border-hairline px-3 py-2">Reading stuck at 0</td><td class="border border-hairline px-3 py-2">Location permission blocked</td><td class="border border-hairline px-3 py-2">Allow location in the browser prompt, then reload</td></tr><tr><td class="border border-hairline px-3 py-2">Speed freezes mid-trip</td><td class="border border-hairline px-3 py-2">Lost satellite fix</td><td class="border border-hairline px-3 py-2">Move to open sky; the number resumes when the fix returns</td></tr><tr><td class="border border-hairline px-3 py-2">Number jumps by 10+ km/h</td><td class="border border-hairline px-3 py-2">Urban canyon multipath error</td><td class="border border-hairline px-3 py-2">Wait for a straight, open stretch and compare again</td></tr><tr><td class="border border-hairline px-3 py-2">Average looks too high</td><td class="border border-hairline px-3 py-2">Reset not pressed before the trip</td><td class="border border-hairline px-3 py-2">Press Reset at the start of each run</td></tr><tr><td class="border border-hairline px-3 py-2">Phone much lower than dash</td><td class="border border-hairline px-3 py-2">Dashboard over-reads, often after a wheel change</td><td class="border border-hairline px-3 py-2">Verify against distance markers before blaming the tool</td></tr><tr><td class="border border-hairline px-3 py-2">Nothing works on a laptop</td><td class="border border-hairline px-3 py-2">Most laptops have no GPS</td><td class="border border-hairline px-3 py-2">Use a phone — this is a hardware limit</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      When a phone speedometer is not enough
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">A phone gives you ground speed, which is exactly what a driver wants. What it cannot give you is instant response during hard acceleration, or any reading at all in a tunnel. For a track session or a <strong>HardSpeedometer test</strong> where tenths matter, a GPS logger with a higher update rate or the vehicle's own sensors will beat any browser page.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-4">For everything else — checking a dash after a tyre change, a <strong>speedometer online train</strong> reading on a route with no display, a <strong>live speed test</strong> as a passenger, or an <strong>online speedometer mph</strong> figure for a car with a km/h dial — a calibrated phone in a browser tab is the fastest honest answer available. Open the <strong>online speedometer</strong>, allow location once, and you are measuring in seconds.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      The short version
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">A phone reads speed within 1–2 km/h in open sky and is usually more honest than a car dashboard, which reads high on purpose. Set up for a clean fix, reset before each run, and verify against distance markers rather than guessing. Run a <strong>speedometer test online</strong> on the same stretch before you believe any single number. An <strong>online speedometer free</strong> of charge is easy to find — an <strong>online speedometer test</strong> you have actually verified is worth far more, and it is the difference between a rumour with decimals and a tool. Apps such as <em>zspeed</em> follow the same GPS maths, so the tests here apply to them too.
+    </p>
+
+  </main>
+</Layout>

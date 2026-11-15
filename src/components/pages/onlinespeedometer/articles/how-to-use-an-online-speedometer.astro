@@ -1,0 +1,133 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+import { getToolBlog } from '../../../../i18n/blogs';
+
+const lang = getLangFromUrl(Astro.url);
+/** Blogs i18n jis bhasha ko support karta hai; baaki English par fall back. */
+const BLOG_LANGS = ['en','de','es','fr','it','ja','ko','pt'];
+const langAnytool = (BLOG_LANGS.includes(lang) ? lang : 'en') as any;
+const translatePath = useTranslatedPath(lang);
+
+// Same content that is rendered below the compass tool, read from one source.
+const blog = getToolBlog('onlinespeedometer', langAnytool);
+
+const keywords =
+  'online speedometer, free online speedometer, online speedometer free, online speedometer test, online speedometer mph, hardspeedometer test, speedometer online train, speedometer test online, speedometer digital, gps speedometer online, my speed km/h, speedometer online, live speed test, live speedometer, zspeed, gps speedometer';
+
+const title = blog?.title ?? 'How to Use an Online Speedometer (Step-by-Step)';
+const description =
+  'How to use an online speedometer step by step: allow location, press Start, pick km/h or mph, and read your live speed with max and average.';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://instanten.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Online Speedometer', item: 'https://instanten.com/onlinespeedometer/' },
+    { '@type': 'ListItem', position: 3, name: 'Blog', item: 'https://instanten.com/onlinespeedometer/blog/' },
+    { '@type': 'ListItem', position: 4, name: 'How to Use an Online Speedometer', item: 'https://instanten.com/onlinespeedometer/blog/how-to-use-an-online-speedometer/' },
+  ],
+};
+
+// The lead paragraph stays exactly the one shown below the tool on /compass/.
+const lead = blog?.intro?.[0] ?? description;
+
+const faqJsonLd =
+  blog && blog.faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: blog.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      }
+    : null;
+---
+
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  type="article"
+  ogImage="/og-image.png"
+  ogImageAlt={title}
+  breadcrumbLd={breadcrumbLd} chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlinespeedometer/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Speedometer Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-6">
+      {title}
+    </h1>
+    <p class="text-body text-base leading-relaxed mb-6">{lead}</p>
+    {blog?.intro && blog.intro.map((p, i) => (
+      i === 0 ? null : <p class="text-body text-base leading-relaxed mb-6">{p}</p>
+    ))}
+    {blog?.sections.map((section) => (
+      <div class="mt-10">
+        <h3 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-4">
+          {section.heading}
+        </h3>
+        {section.paragraphs.map((paragraph) => (
+          <p class="text-body text-base leading-relaxed mb-4">{paragraph}</p>
+        ))}
+        {section.list && (
+          <ul class="list-disc pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+            {section.list.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+        {section.table && (
+          <div class="overflow-x-auto mb-4">
+            <table class="w-full text-sm text-body border border-hairline">
+              <thead>
+                <tr class="bg-canvas-elevated">
+                  {section.table.headers.map((h) => (
+                    <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td class="border border-hairline px-3 py-2">{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    ))}
+    {blog && blog.faq.length > 0 && (
+      <div class="mt-12">
+        <h3 class="font-sans text-2xl font-semibold tracking-tight text-ink mb-6">FAQ</h3>
+        <div class="flex flex-col gap-0 border border-hairline rounded-md overflow-hidden">
+          {blog.faq.map((item) => (
+            <details class="border-b border-hairline last:border-b-0">
+              <summary class="font-sans text-base font-medium text-ink px-4 py-3 cursor-pointer list-none flex items-center justify-between gap-2">
+                {item.q}
+                <span aria-hidden="true" class="text-mute">▾</span>
+              </summary>
+              <p class="text-body text-base leading-relaxed px-4 pb-3">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    )}
+    {blog?.outro && (
+      <p class="text-body text-base leading-relaxed mt-10 italic">{blog.outro}</p>
+    )}
+  </main>
+</Layout>
+
+{faqJsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+)}

@@ -1,0 +1,84 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ContactForm from '../../ContactForm.astro';
+import BubbleLevelFaq from './BubbleLevelFaq.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { bubbleProse } from '../../../i18n/instruments/bubbleProse';
+import { bubbleSupport } from '../../../i18n/instruments/bubbleSupport';
+import { supportCopy } from '../../../i18n/supportCopy';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const copy = bubbleSupport[lang] ?? bubbleSupport.en;
+const page = bubbleProse[lang] ?? bubbleProse.en;
+const shared = supportCopy[lang] ?? supportCopy.en;
+const contact = copy.contact;
+
+const guideHowTo = '/onlinebubblelevel/blog/how-to-use-an-online-bubble-level/';
+const guideFurniture = '/onlinebubblelevel/blog/level-furniture-shelves-appliances/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://instanten.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Online Bubble Level', item: 'https://instanten.com/onlinebubblelevel/' },
+    { '@type': 'ListItem', position: 3, name: 'Contact', item: 'https://instanten.com/onlinebubblelevel/contact/' },
+  ],
+};
+---
+<Layout
+  title={contact.contactTitle}
+  description={contact.contactDesc}
+  keywords={copy.keywords}
+  ogImage="/og-bubble-level.png"
+  ogImageAlt={contact.contactTitle}
+  breadcrumbLd={breadcrumbLd} chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a href={translatePath('/onlinebubblelevel/')} class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← {copy.back}</a>
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">{t('page.contact.title')}</h1>
+    <p class="text-xs text-mute font-mono mb-8">{shared.updated}</p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      {contact.contactIntro}
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.howH}</h2>
+    {contact.how.map((paragraph) => (
+      <p class="text-body text-base leading-relaxed mb-4">{paragraph}</p>
+    ))}
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.fixesH}</h2>
+    <ul class="list-disc pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+      {contact.fixes.map((fix) => (
+        <li><strong>{fix.h}:</strong> {fix.p}</li>
+      ))}
+    </ul>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.tellH}</h2>
+    {contact.tell.map((paragraph) => (
+      <p class="text-body text-base leading-relaxed mb-4">{paragraph}</p>
+    ))}
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.emailH}</h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      {contact.emailPre}<a href="mailto:hello@instanten.com" class="text-link hover:underline">hello@instanten.com</a>{contact.emailPost}
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.sendH}</h2>
+    <ContactForm />
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-4">{contact.responseH}</h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      {contact.response[0]}
+    </p>
+    <p class="text-body text-base leading-relaxed mb-4">
+      {contact.response[1]}
+      <a href={guideHowTo} class="text-link hover:underline">{contact.guideA}</a>
+      {' '}{contact.guideMid}{' '}
+      <a href={guideFurniture} class="text-link hover:underline">{contact.guideB}</a>
+      {' '}{contact.guidePost}
+    </p>
+  <BubbleLevelFaq heading={page.faqH} questions={page.faq} />
+  </main>
+</Layout>

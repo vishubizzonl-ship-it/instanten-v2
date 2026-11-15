@@ -1,0 +1,26 @@
+---
+/**
+ * Localised blog articles: /<lang>/onlinecompass/blog/<slug>/
+ * (English URLs prefix-free: /onlinecompass/blog/<slug>/)
+ */
+import A0 from '../../../../components/pages/compass/articles/how-to-find-north-without-a-compass.astro';
+import A1 from '../../../../components/pages/compass/articles/how-to-read-a-compass-dial.astro';
+import A2 from '../../../../components/pages/compass/articles/how-to-use-an-online-compass.astro';
+
+export function getStaticPaths() {
+  const locales = ['es', 'ja', 'fr', 'de', 'pt', 'ko', 'it', 'nl', 'sv'];
+  const slugs = ['how-to-find-north-without-a-compass', 'how-to-read-a-compass-dial', 'how-to-use-an-online-compass'];
+  return locales.flatMap((lang) => slugs.map((article) => ({ params: { lang, article } })));
+}
+
+const articles: Record<string, any> = {
+  'how-to-find-north-without-a-compass': A0,
+  'how-to-read-a-compass-dial': A1,
+  'how-to-use-an-online-compass': A2,
+};
+
+const { article } = Astro.params as { article: string };
+const Article = articles[article];
+---
+
+<Article />

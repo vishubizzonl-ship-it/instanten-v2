@@ -253,7 +253,7 @@ const es: BubbleSiloCopy = {
   keywords: "nivel de burbuja online, nivel de burbuja, nivel de burbuja gratis, nivel de burbuja digital, comprobar nivel online, nivel online, nivel de agua online, herramienta de nivel, nivel de burbuja móvil",
   guideLabel: "guía de precisión",
   contact: {
-  contactTitle: "Contactar con el nivel de burbuja online — opiniones e informes de fallos",
+  contactTitle: "Contactar con el nivel de burbuja — opiniones y fallos",
   contactDesc: "Contacta con el equipo del nivel de burbuja online. Informa de un problema de calibración o precisión del nivel de burbuja gratis, sugiere una función o haz una pregunta sobre privacidad.",
   contactIntro: "Somos un equipo pequeño y leemos todos los mensajes. Si has encontrado un fallo, tienes una idea para una función o simplemente quieres saludar, escríbenos con el formulario de abajo.",
   howH: "Cómo funciona la comprobación",
@@ -330,8 +330,8 @@ const ja: BubbleSiloCopy = {
       "読み取りがおかしいと感じたら、信頼できる面で校正し、切ったり穴を開けたりする前に**水平チェック**をもう一度行ってください。よくある4つの原因は{accuracyGuide}で詳しく説明しています。",
     ],
   },
-  blogTitle: "オンライン水準器ブログ",
-  blogDesc: "オンライン水準器で水平と垂直を確認するためのガイドとコツ。",
+  blogTitle: "オンライン水準器ブログ — 使い方ガイド",
+  blogDesc: "オンライン水準器で水平と垂直を確認するためのガイドとコツ。家具の水平調整、傾きの測り方、精度のコツを解説します。",
   blogIntro: "オンライン水準器で水平と垂直を確認するためのガイドとコツ。",
   blogIntro2: "初めてなら使い方のガイドから、すでに信じられない数値が出たなら精度のガイドへ進んでください。実物の水準器を買うべきか迷っているなら、比較ガイドで精度・費用・スマートフォンで十分な場面を確認できます。",
   posts: [
@@ -782,8 +782,8 @@ const ko: BubbleSiloCopy = {
       "값이 이상해 보이면 믿을 수 있는 표면에서 보정하고, 자르거나 뚫기 전에 **수평 확인**을 한 번 더 하세요. 흔한 원인 네 가지는 {accuracyGuide}에서 자세히 설명합니다.",
     ],
   },
-  blogTitle: "온라인 수평계 블로그",
-  blogDesc: "온라인 수평계로 수평과 수직을 확인하는 방법과 팁.",
+  blogTitle: "온라인 수평계 블로그 — 사용법 가이드",
+  blogDesc: "온라인 수평계로 수평과 수직을 확인하는 방법과 팁. 가구 수평 맞추기, 기울기 측정, 정확도 요령을 정리했습니다.",
   blogIntro: "온라인 수평계로 수평과 수직을 확인하는 방법과 팁.",
   blogIntro2: "도구가 처음이라면 사용법 가이드부터, 이미 믿기 어려운 숫자가 나왔다면 정확도 가이드로 이동하세요. 실제 수평계를 살지 고민 중이라면 비교 가이드에서 정확도, 비용, 스마트폰으로 충분한 경우를 확인할 수 있습니다.",
   posts: [

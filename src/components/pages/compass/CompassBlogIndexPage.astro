@@ -1,0 +1,40 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { supportCopy } from '../../../i18n/supportCopy';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const copy = supportCopy[lang] ?? supportCopy.en;
+
+/** Dates are formatted per locale so no English month names appear on /ja/ pages. */
+const dates = ['2026-11-07', '2026-11-07', '2026-10-04'];
+const formatter = new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'long', day: 'numeric' });
+const posts = copy.blog.posts.map((post, i) => ({
+  ...post,
+  date: formatter.format(new Date(`${dates[i]}T12:00:00Z`)),
+  // Blog articles themselves are English-only, so they are never locale-prefixed.
+  href: `${post.href}`,
+}));
+---
+<Layout title={copy.blog.title} description={copy.blog.desc} chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a href={translatePath('/onlinecompass/')} class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← {copy.back}</a>
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">{t('page.blog.title')}</h1>
+    <p class="text-xs text-mute font-mono mb-4">{copy.updated}</p>
+    <p class="text-body text-base leading-relaxed mb-10">{copy.blog.intro}</p>
+
+    <ul class="space-y-8">
+      {posts.map((post) => (
+        <li class="border-b border-hairline pb-6">
+          <p class="text-xs text-mute font-mono mb-2">{post.date}</p>
+          <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-2">
+            <a href={post.href} class="hover:text-link transition-colors">{post.title}</a>
+          </h2>
+          <p class="text-body text-base leading-relaxed">{post.desc}</p>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

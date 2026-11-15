@@ -623,7 +623,7 @@ const it: SpeedSiloCopy = {
   toolDesc: "Tachimetro online gratuito: misura la velocità in tempo reale in km/h o mph con il GPS, più velocità massima, media, altitudine e durata del viaggio. Senza installare nulla.",
   ogAlt: "Tachimetro online — test di velocità GPS gratuito che mostra la velocità in tempo reale in km/h e mph nel browser",
   keywords: "tachimetro online, tachimetro gratis, tachimetro gps, misurare la velocità, velocità in tempo reale, test di velocità, tachimetro digitale, la mia velocità km/h, tachimetro telefono, tachimetro per treno, velocità adesso, tachimetro online gratuito",
-  aboutTitle: "Informazioni sul tachimetro online — strumento gratuito di velocità GPS",
+  aboutTitle: "Informazioni sul tachimetro online — velocità GPS",
   aboutDesc: "Informazioni sul tachimetro online: come un telefono misura la velocità con il GPS, a chi serve il tachimetro online gratuito e quanto è preciso un test di velocità in tempo reale.",
   about: {
     whatH: "Che cos’è onlinecompass?",

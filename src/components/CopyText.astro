@@ -1,0 +1,57 @@
+---
+/**
+ * Renders one localised paragraph, turning the two markup conventions used in
+ * src/i18n/supportCopy.ts into real markup:
+ *   **bold**     → <strong>
+ *   *italic*     → <em>
+ *   {contact}    → link to the contact page, labelled with `contactLabel`
+ *   {contactCta} → link to the contact page, labelled with `contactCta`
+ *   {email}      → mailto link to hello@instanten.com
+ *   {accuracyGuide} → link to the accuracy article, labelled with `guideLabel`
+ *   {tool}       → the phrase that names the sensor use, e.g. "as a bubble level"
+ * Everything else is HTML-escaped, so no translation can inject markup.
+ */
+interface Props {
+  text: string;
+  class?: string;
+  contactHref?: string;
+  contactLabel?: string;
+  contactCta?: string;
+  /** Optional link used by the {accuracyGuide} token. */
+  guideHref?: string;
+  guideLabel?: string;
+  /** Phrase substituted for the {tool} token, e.g. "as a compass". */
+  toolLabel?: string;
+}
+
+const {
+  text,
+  class: className = 'text-body text-base leading-relaxed mb-4',
+  contactHref = '',
+  contactLabel = '',
+  contactCta = '',
+  guideHref,
+  guideLabel,
+  toolLabel,
+} = Astro.props;
+
+const esc = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const link = (label: string) =>
+  `<a href="${contactHref}" class="text-link hover:underline">${esc(label)}</a>`;
+
+const mail = esc('hello@instanten.com');
+const html = esc(text)
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+  .replace(/\{contact\}/g, link(contactLabel))
+  .replace(/\{contactCta\}/g, link(contactCta))
+  .replace(/\{tool\}/g, esc(toolLabel ?? ''))
+  .replace(/\{email\}/g, `<a href="mailto:${mail}" class="text-link hover:underline">${mail}</a>`)
+  .replace(
+    /\{accuracyGuide\}/g,
+    guideHref ? `<a href="${guideHref}" class="text-link hover:underline">${esc(guideLabel ?? '')}</a>` : '',
+  );
+---
+
+<p class={className} set:html={html} />

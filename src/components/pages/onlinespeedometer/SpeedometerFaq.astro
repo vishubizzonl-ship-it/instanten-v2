@@ -1,0 +1,108 @@
+---
+/**
+ * Shared FAQ block for the speedometer silo.
+ *
+ * Renders one visible FAQ accordion and one FAQPage JSON-LD block, so a page
+ * never ends up with two FAQPage entities. Pages that already emit their own
+ * FAQPage schema (the tool page) hand their questions in through
+ * `extraQuestions`, which are merged into the single JSON-LD only.
+ */
+interface Props {
+  /** Questions already visible elsewhere on the page, merged into the JSON-LD only. */
+  extraQuestions?: { q: string; a: string }[];
+  /** Emit the FAQPage JSON-LD. Set false when another block already covers it. */
+  ld?: boolean;
+  heading?: string;
+  /** Localised questions; falls back to the English base list when omitted. */
+  questions?: { q: string; a: string }[];
+}
+
+const {
+  extraQuestions = [],
+  ld = true,
+  heading = 'Frequently asked questions',
+  questions,
+} = Astro.props;
+
+const englishQuestions: { q: string; a: string }[] = [
+  {
+    q: 'Online speedometer — how fast am I going right now?',
+    a: 'The large number on the page is your current speed in the unit you selected, usually km/h or mph. Allow location access, press Start, and the figure updates once a second from GPS. If the number sits at 0 while you are moving, the location permission was blocked or the phone has no satellite fix yet.',
+  },
+  {
+    q: 'How to check current speed with an online speedometer?',
+    a: 'Open the page outdoors, allow location access, press Start and begin moving. Keep the phone near a window, on a dash mount or in your hand, and read the number after a few seconds while the GPS settles. Press Reset between trips so the maximum and average speeds belong to that trip only.',
+  },
+  {
+    q: 'Is this online speedometer free and does it need an app?',
+    a: 'It is free and it runs entirely in the browser, so there is nothing to install and no account to create. Once the page has loaded it keeps working without mobile data, because the speed comes from the phone GPS receiver rather than from a server.',
+  },
+  {
+    q: 'How accurate is a phone speedometer compared with a car dashboard?',
+    a: 'In open sky a phone GPS reads within about 1–2 km/h, which is usually tighter than a car dashboard. Dashboards are deliberately optimistic by a few percent and drift further after a wheel or tyre change. When the two disagree on a steady stretch, the phone reading over the ground is normally the more honest one.',
+  },
+  {
+    q: 'Why does the speed stay at 0 or freeze?',
+    a: 'Almost always the GPS fix. Buildings, tunnels, multi-storey car parks, dense trees and metal roofs block satellites, and the reading holds its last value until the fix returns. Allow location first, move outdoors, keep the screen awake and reload the page if the number never starts moving.',
+  },
+  {
+    q: 'Can I see my speed in mph, km/h, m/s and knots?',
+    a: 'Yes. Use the unit button next to the readout to switch between km/h, mph, m/s and knots at any time. Changing the unit does not reset the trip, so the maximum and average figures convert with it.',
+  },
+  {
+    q: 'Can I use an online speedometer on a train, bus or as a passenger?',
+    a: 'Yes, that is one of the most common uses. As a passenger you have no dashboard, so a live speed test is the only readout available. Keep the phone near a window on a train, and expect dropouts in tunnels and deep cuttings.',
+  },
+];
+
+// Rendered visible: the localised list when one is supplied, else English.
+const baseQuestions: { q: string; a: string }[] = questions?.length ? questions : englishQuestions;
+const items = baseQuestions;
+
+// In the JSON-LD we also fold in questions that the page already shows
+// elsewhere (the tool blog FAQ), so the block stays a single complete FAQPage.
+const seen = new Set<string>();
+const ldQuestions = [...baseQuestions, ...extraQuestions].filter((item) => {
+  const key = item.q.trim().toLowerCase();
+  if (seen.has(key)) return false;
+  seen.add(key);
+  return true;
+});
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: ldQuestions.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<section class="py-16 lg:py-24 border-t border-hairline" aria-labelledby="speed-faq-title">
+  <div class="mx-auto max-w-[48rem] px-6 lg:px-8">
+    <h2
+      id="speed-faq-title"
+      class="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-ink mb-6"
+    >
+      {heading}
+    </h2>
+    <div class="flex flex-col gap-0 border border-hairline rounded-md overflow-hidden">
+      {
+        items.map((item) => (
+          <details class="border-b border-hairline last:border-b-0">
+            <summary class="font-sans text-base font-medium text-ink px-4 py-3 cursor-pointer list-none flex items-center justify-between gap-2">
+              {item.q}
+              <span aria-hidden="true" class="text-mute">
+                ▾
+              </span>
+            </summary>
+            <p class="text-body text-base leading-relaxed px-4 pb-3">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+{ld && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}

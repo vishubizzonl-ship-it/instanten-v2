@@ -1,0 +1,108 @@
+---
+/**
+ * Shared FAQ block for the bubble level silo.
+ *
+ * Renders one visible FAQ accordion and one FAQPage JSON-LD block, so a page
+ * never ends up with two FAQPage entities. Pages that already emit their own
+ * FAQPage schema (the tool page and the how-to guide) pass `faqLd={false}` to
+ * the other block and hand their questions in through `extraQuestions` instead.
+ */
+interface Props {
+  /** Questions already visible elsewhere on the page, merged into the JSON-LD only. */
+  extraQuestions?: { q: string; a: string }[];
+  /** Emit the FAQPage JSON-LD. Set false when another block already covers it. */
+  ld?: boolean;
+  heading?: string;
+  /** Localised questions; falls back to the English base list when omitted. */
+  questions?: { q: string; a: string }[];
+}
+
+const { extraQuestions = [], ld = true, heading = 'Frequently asked questions', questions } = Astro.props;
+
+const englishQuestions: { q: string; a: string }[] = [
+  {
+    q: 'How to read an online level bubble?',
+    a: 'Place the phone flat on the surface and let the bubble settle. The bubble drifting to the left or right shows which end is high: the bubble always floats to the highest point, so the side it moves towards is the high side. The number beside it is the tilt in degrees, and 0.0° means the surface is level.',
+  },
+  {
+    q: 'Is a phone bubble level as good as a spirit level?',
+    a: 'For quick checks, yes. A calibrated phone reads within about half a degree, which is enough for shelves, pictures, furniture and appliances. For long spans such as worktops, floors and walls, a long spirit level wins because it sees a slope a short phone body cannot.',
+  },
+  {
+    q: 'Does an online bubble level work on a laptop or desktop?',
+    a: 'The page loads anywhere, but a laptop or desktop has no accelerometer, so the bubble will not move. Use a phone or tablet for a real level check, and a desktop for reading the guides and comparing numbers.',
+  },
+  {
+    q: 'Is an online bubble level accurate enough for shelves and pictures?',
+    a: 'Yes. A calibrated phone reads within about half a degree, which is under 5 mm across a 60 cm shelf and well inside what the eye notices. For anything longer than a metre, or for worktops and walls, use a spirit level as well because a short phone body cannot see a slope spread over a long span.',
+  },
+  {
+    q: 'Why is my bubble level stuck at 0.0 degrees?',
+    a: 'Almost always the motion sensor permission. Browsers block device orientation until you allow it, and the tool then shows its resting state. Allow motion access in the prompt, reload the page, and if the reading still does not move, check that you are not on a desktop browser with no accelerometer.',
+  },
+  {
+    q: 'Do I need to install an app to use the free bubble level?',
+    a: 'No. This is a browser based bubble level online, so it runs from the link with nothing to download, nothing to update and no account. Once the page has loaded it keeps working offline, and calibration is stored on your own device rather than on a server.',
+  },
+  {
+    q: 'How do I check if a wall is plumb with my phone?',
+    a: 'Hold the phone flat against the wall with its back face touching the surface, not the screen edge, and read the vertical axis. Keep the case on only if it is flat. Press it against a door frame as a cross-check, and remember a 0.5° reading is normal for a phone held by hand.',
+  },
+  {
+    q: "What is the difference between a spirit level and a bull's-eye level?",
+    a: "A spirit level uses a long curved vial to show tilt along one axis, and a bull's-eye level uses a circular vial that shows tilt in every direction at once. This vertical level tool online shows both axes plus a bull's-eye view, so you can check a shelf and a table without changing tools.",
+  },
+];
+const baseQuestions: { q: string; a: string }[] = questions && questions.length ? questions : englishQuestions;
+
+
+// Rendered visible: the eight questions above.
+const items = baseQuestions;
+
+// In the JSON-LD we also fold in questions that the page already shows
+// elsewhere (the tool blog FAQ), so the block stays a single complete FAQPage.
+const seen = new Set<string>();
+const ldQuestions = [...baseQuestions, ...extraQuestions].filter((item) => {
+  const key = item.q.trim().toLowerCase();
+  if (seen.has(key)) return false;
+  seen.add(key);
+  return true;
+});
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: ldQuestions.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<section class="py-16 lg:py-24 border-t border-hairline" aria-labelledby="bubble-faq-title">
+  <div class="mx-auto max-w-[48rem] px-6 lg:px-8">
+    <h2
+      id="bubble-faq-title"
+      class="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-ink mb-6"
+    >
+      {heading}
+    </h2>
+    <div class="flex flex-col gap-0 border border-hairline rounded-md overflow-hidden">
+      {
+        items.map((item) => (
+          <details class="border-b border-hairline last:border-b-0">
+            <summary class="font-sans text-base font-medium text-ink px-4 py-3 cursor-pointer list-none flex items-center justify-between gap-2">
+              {item.q}
+              <span aria-hidden="true" class="text-mute">
+                ▾
+              </span>
+            </summary>
+            <p class="text-body text-base leading-relaxed px-4 pb-3">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+{ld && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
