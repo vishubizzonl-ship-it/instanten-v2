@@ -165,6 +165,16 @@ export function run(pages, outDir) {
     'blog/subpage ka reading column (ror-container) max-width ke bina hai'
   );
 
+  /* ---------- 7d. Text wrapping ---------------------------------------- */
+  check(
+    /text-wrap:\s*balance/.test(bundle),
+    'desktop par headings ke liye text-wrap: balance nahi hai'
+  );
+  check(
+    /text-wrap:\s*pretty/.test(bundle),
+    'desktop par paragraphs ke liye text-wrap: pretty nahi hai'
+  );
+
   /* ---------- 8b. Hover affordance ------------------------------------- */
   check(
     /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)/.test(bundle),

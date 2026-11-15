@@ -80,3 +80,18 @@
     will-change: transform;
   }
 }
+
+/* Text wrapping: headings ko balanced lines, paragraphs ko orphan-free ------- */
+@media (min-width: 1020px) {
+  main h1,
+  main h2,
+  [data-hero-section] h1,
+  .blog-card__title {
+    text-wrap: balance;
+  }
+
+  main p,
+  .ror-prose p {
+    text-wrap: pretty;
+  }
+}

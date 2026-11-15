@@ -122,6 +122,22 @@ body {
     min-height: 44px;
   }
 
+  /* Tool ke andar ke controls: 13px text + py-2.5 = ~38px, thumb ke liye
+   * chhota. Copy-chips (data-copy) aur swatches chhod do — wo apne aap bade
+   * hain aur grid mein fit hote hain. */
+  [data-tool-root] button:not([data-copy]):not([data-swatch]),
+  [data-tool-root] select,
+  [data-tool-root] input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']) {
+    min-height: 44px;
+  }
+
+  /* checkbox/radio labels: poora label tap target bane */
+  [data-tool-root] label:has(> input[type='checkbox']),
+  [data-tool-root] label:has(> input[type='radio']) {
+    min-height: 44px;
+    align-items: center;
+  }
+
   /* breadcrumb links tap-friendly, warna 18px line height par miss hote hain */
   .breadcrumbs a,
   .breadcrumbs span {
@@ -158,6 +174,12 @@ body {
 @supports (padding: max(0px)) {
   footer {
     padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  /* floating action buttons home-indicator ke upar */
+  .scroll-top,
+  [data-scroll-top] {
+    bottom: calc(20px + env(safe-area-inset-bottom)) !important;
   }
 }
 

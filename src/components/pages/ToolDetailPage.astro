@@ -165,7 +165,10 @@ const breadcrumbs = [
   keywords={`${localized.name}, ${categoryLabel}, instant tool, instant online, instant convert, $0 cost, ${lang}`}
   lang={lang}
 >
-  <div class="site-container">
+  <!-- Breadcrumbs ka apna px-gutter hai — isliye andar site-container na daalo
+       (gutter double ho jaata hai). Sirf itni width do jitni neeche ka article
+       hai, taaki desktop par breadcrumb content ke saath align rahe. -->
+  <div class="mx-auto w-full max-w-4xl">
     <Breadcrumbs items={breadcrumbs.map(b => ({ ...b, href: b.href ? translatePath(b.href === '/' ? '/' : b.href) : undefined }))} />
   </div>
 

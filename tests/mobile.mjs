@@ -237,6 +237,37 @@ export function run(pages, outDir) {
     '--header-h token mobile (64px) aur desktop (80px) dono ke liye nahi hai'
   );
 
+  /* ---------- 7c. Mobile par ek hi sticky bar --------------------------- */
+  // Header (64px) + filter bar (~110px) mil kar phone ki 27% screen kha jaate
+  // the. Mobile par filter bar normal flow mein rehta hai, sirf desktop par
+  // sticky hota hai.
+  let filterBars = 0;
+  for (const [url, html] of pages) {
+    // class aur id ka order build mein badal sakta hai — poora tag nikaalo
+    const tag = (html.match(/<div[^>]*\bid="filter-bar"[^>]*>/) ?? [''])[0];
+    if (!tag) continue;
+    filterBars++;
+    const cls = (tag.match(/\bclass="([^"]*)"/) ?? [, ''])[1];
+    check(
+      /(^|\s)static(\s|$)/.test(cls) && /lg:sticky/.test(cls),
+      `${url}: filter bar mobile par sticky hai (class="${cls.slice(0, 60)}") — header ke saath screen kha jaayega`
+    );
+  }
+  check(filterBars >= 20, `sirf ${filterBars} pages par filter bar mila`);
+
+  /* ---------- 7d. Breadcrumb aur content ka gutter same ------------------ */
+  // Breadcrumbs ka apna px-gutter hai. Agar use site-container ke andar daala
+  // jaye to gutter double ho jaata hai aur breadcrumb content se 24px andar
+  // chala jaata hai — mobile aur desktop dono par.
+  for (const [url, html] of pages) {
+    check(
+      !/<div[^>]*\bclass="[^"]*\bsite-container\b[^"]*"[^>]*>\s*(?:<div[^>]*>\s*)?<nav[^>]*\bclass="breadcrumbs/.test(
+        html
+      ),
+      `${url}: breadcrumbs site-container ke andar hai — gutter double ho gaya`
+    );
+  }
+
   /* ---------- 8. Tap targets ------------------------------------------- */
   check(
     /min-height:44px/.test(css(bundle)),
@@ -255,6 +286,20 @@ export function run(pages, outDir) {
   check(
     /\.cf-pager__item[^{]*\{[^}]*min-height:44px/.test(bundle),
     'pagination items 44px tap height ke nahi hain'
+  );
+
+  /* ---------- 10b. Tool controls ka tap target --------------------------- */
+  check(
+    /\[data-tool-root\] button[^{]*\{[^}]*min-height:\s*44px/.test(bundle),
+    'tool ke andar ke buttons 44px tap height ke nahi hain'
+  );
+  check(
+    /\[data-tool-root\] select/.test(bundle),
+    'tool ke selects 44px tap height ke nahi hain'
+  );
+  check(
+    /\[data-tool-root\] label:has\(>\s*input\[type=['"]?checkbox['"]?\]\)/.test(bundle),
+    'tool ke checkbox labels poora 44px tap target nahi banate'
   );
 
   /* ---------- 11. 320px pagination ------------------------------------- */
