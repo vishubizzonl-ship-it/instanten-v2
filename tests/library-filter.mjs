@@ -71,6 +71,26 @@ export async function run(pages, outDir) {
     check(/data-base-url="[^"]*"/.test(root), `${url}: filter section par base URL nahi hai`);
     check(/aria-label="[^"]+"/.test(root), `${url}: filter section par aria-label nahi hai`);
 
+    // Row 1: segmented group (All / Featured) — left, search right
+    const tabsMatch = html.match(/<div[^>]*data-lib-tabs[^>]*>/)?.[0] ?? '';
+    check(Boolean(tabsMatch), `${url}: segmented tabs group (data-lib-tabs) nahi hai`);
+    check(/role="group"/.test(tabsMatch), `${url}: tabs par role="group" nahi hai`);
+    const tabEls = [
+      ...html.matchAll(/<button[^>]*class="[^"]*h-\[34px\][^"]*"[^>]*data-facet="featured"[^>]*>/g),
+    ].map((m) => m[0]);
+    check(tabEls.length === 2, `${url}: segmented group mein ${tabEls.length} tabs (2 chahiye — All / Featured)`);
+    check(tabEls.some((t) => /data-value=""/.test(t)), `${url}: tabs mein "All" segment nahi hai`);
+    check(tabEls.some((t) => /data-value="1"/.test(t)), `${url}: tabs mein "Featured" segment nahi hai`);
+    check(/aria-pressed="true"/.test(tabEls[0] ?? ''), `${url}: default tab pressed nahi hai`);
+    // segmented track: ink/6% + radius 12px + 3px padding (opendesignmd .tabs)
+    check(/data-lib-tabs/.test(html) && html.includes('rounded-xl bg-ink/[0.06] p-[3px]'), `${url}: tabs track ki styling reference se nahi milti`);
+
+    // search tabs ke BAAD aata hai (row 1 ka right side), pehle nahi
+    check(
+      html.indexOf('data-lib-tabs') < html.indexOf('data-lib-search'),
+      `${url}: search tabs ke baad nahi hai (row 1 ka right side hona chahiye)`
+    );
+
     check(/data-lib-search/.test(html), `${url}: search field nahi hai`);
     check(/data-lib-chips/.test(html), `${url}: chip row nahi hai`);
     check(/data-lib-filters-open/.test(html), `${url}: Filters button nahi hai`);
@@ -79,6 +99,25 @@ export async function run(pages, outDir) {
     check(/data-lib-backdrop/.test(html), `${url}: mobile backdrop nahi hai`);
     check(/data-lib-close/.test(html), `${url}: close button nahi hai`);
     check(/data-lib-count/.test(html), `${url}: result count line nahi hai`);
+    // Result bar: count + "Clear all" (default hidden, koi filter nahi)
+    const resultBar = html.match(/<div[^>]*data-lib-resultbar[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
+    check(Boolean(resultBar), `${url}: result bar nahi hai`);
+    check(/data-lib-clear-all/.test(resultBar), `${url}: result bar mein "Clear all" nahi hai`);
+    check(
+      /<button[^>]*class="hidden[^"]*"[^>]*data-lib-clear-all/.test(resultBar),
+      `${url}: bina filter ke bhi "Clear all" dikh raha hai`
+    );
+    check(/role="status"/.test(resultBar) && /aria-live="polite"/.test(resultBar), `${url}: live result count nahi hai`);
+    // order: tabs -> search -> chip row -> Filters -> sort -> result bar -> grid
+    const order = ['data-lib-tabs', 'data-lib-search', 'data-lib-chips', 'data-lib-filters-open', 'data-lib-sort', 'data-lib-resultbar', 'data-directory-grid'];
+    const positions = order.map((marker) => html.indexOf(marker));
+    check(positions.every((pos) => pos !== -1), `${url}: filter section ka koi hissa missing hai`);
+    check(
+      positions.every((pos, index) => index === 0 || pos > positions[index - 1]),
+      `${url}: filter section ka order reference se alag hai (${order.join(' > ')})`
+    );
+    // mobile: grid order (row1 tabs, row2 search+Filters+sort, row3 chips)
+    check(/max-sm:row-start-2/.test(html) && /max-sm:row-start-3/.test(html), `${url}: mobile grid order classes nahi hain`);
     check(/data-lib-empty/.test(html), `${url}: empty state nahi hai`);
 
     // a11y: dialog + aria states
@@ -269,7 +308,7 @@ export async function run(pages, outDir) {
   const chips = new El('div', { 'data-lib-chips': '' });
   const chipSpecs = [
     ['category', '', 'All'],
-    ['featured', '', 'Featured'],
+    ['featured', '1', 'Featured'],
     ['category', 'Developer', 'Developer'],
     ['category', 'Design', 'Design'],
     ['pricing', 'Freemium', 'Freemium'],
@@ -284,6 +323,12 @@ export async function run(pages, outDir) {
     chips.appendChild(chip);
     return chip;
   });
+  // segmented scope: All (value="") — real markup mein bhi dono segments hote hain
+  const scopeAllChip = new El('button', { 'data-facet': 'featured', 'data-value': '', 'aria-pressed': 'true' });
+  scopeAllChip.appendChild(new El('span', { 'data-count': '' }));
+  chips.appendChild(scopeAllChip);
+  chipEls.push(scopeAllChip);
+
   const filtersBtn = new El('button', { 'data-lib-filters-open': '', 'aria-expanded': 'false' });
   const filtersCount = new El('span', { 'data-lib-filters-count': '', class: 'hidden' });
   const panel = new El('div', { 'data-lib-panel': '', class: 'hidden' });
@@ -296,9 +341,11 @@ export async function run(pages, outDir) {
   const sizeLarge = new El('button', { 'data-lib-size': 'large', 'aria-pressed': 'true' });
   const sizeSmall = new El('button', { 'data-lib-size': 'small', 'aria-pressed': 'false' });
   const countEl = new El('p', { 'data-lib-count': '', 'data-template': '{count} tools' });
+  const clearAll = new El('button', { 'data-lib-clear-all': '', class: 'hidden' });
+  const scopeAll = new El('button', { 'data-scope-all': '' });
   const emptyEl = new El('div', { 'data-lib-empty': '', class: 'hidden' });
 
-  for (const node of [searchInput, chips, filtersBtn, filtersCount, panel, backdrop, closeBtn, sortSelect, sizeLarge, sizeSmall, countEl, emptyEl]) {
+  for (const node of [searchInput, chips, filtersBtn, filtersCount, panel, backdrop, closeBtn, sortSelect, sizeLarge, sizeSmall, countEl, clearAll, emptyEl]) {
     root.appendChild(node);
   }
 
@@ -344,11 +391,17 @@ export async function run(pages, outDir) {
 
   // featured + tag combine
   clickChip('category', 'Developer'); // off
-  clickChip('featured');
+  clickChip('featured', '1');
   check(visibleNames().length === 2, `featured chip galat: ${visibleNames()}`);
   clickChip('tag', 'seo');
   clickChip('tag', 'writing');
   check(visibleNames().join('|') === 'Word Counter', `featured + 2 tags galat: ${visibleNames()}`);
+
+  // scope tab "All" (value="") featured off karta hai
+  clickChip('featured', '');
+  check(!api.getFacets().featured, 'scope All tab ne featured off nahi kiya');
+  clickChip('featured', '1');
+  check(api.getFacets().featured, 'scope Featured tab ne feature on nahi kiya');
 
   // clear
   clickChip('clear');
@@ -356,6 +409,24 @@ export async function run(pages, outDir) {
   check(visibleNames().length === 5, 'Clear ke baad sab cards nahi aaye');
   check(searchInput.value === '', 'Clear ne search input khali nahi kiya');
   check(replaced.at(-1) === '/tools/', `Clear ke baad URL saaf nahi hua: ${replaced.at(-1)}`);
+
+  // Clear all (result bar) — sirf filter laga ho tab dikhta hai
+  check(clearAll.classList.contains('hidden'), 'bina filter ke Clear all dikh raha hai');
+  clickChip('tag', 'seo');
+  check(!clearAll.classList.contains('hidden'), 'filter lagne par Clear all nahi aaya');
+  clearAll.dispatch('click', { target: clearAll });
+  check(api.getFacets().tags.length === 0, 'Clear all ne tags reset nahi kiye');
+  check(clearAll.classList.contains('hidden'), 'Clear all ke baad button chhupa nahi');
+  check(visibleNames().length === 5, 'Clear all ke baad saare cards nahi aaye');
+
+  // empty state ke andar ka Clear all bhi wahi kaam karta hai
+  searchInput.value = 'zzz';
+  searchInput.dispatch('input', { target: searchInput });
+  await new Promise((resolve) => setTimeout(resolve, 220));
+  const emptyClear = new El('button', {});
+  root.appendChild(emptyClear);
+  clickChip('clear');
+  check(emptyEl.classList.contains('hidden'), 'empty state clear ke baad band nahi hua');
 
   // sort
   const clickSort = (value) => {

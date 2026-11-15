@@ -244,8 +244,13 @@ export function mountLibraryFilter(root) {
         pressed = facets.tags.includes(value.toLowerCase());
         count = counts.tags[value.toLowerCase()] ?? 0;
       } else if (facet === 'featured') {
-        pressed = facets.featured;
-        count = counts.featured;
+        // Do segments: value "" = All, value "1" = Featured only
+        const wanted = value === '1';
+        pressed = wanted ? facets.featured : !facets.featured;
+        count = wanted ? counts.featured : counts.all;
+        if (!wanted) {
+          chip.setAttribute('aria-current', facets.featured ? 'false' : 'true');
+        }
       } else if (facet === 'clear') {
         pressed = false;
       }
@@ -291,6 +296,7 @@ export function mountLibraryFilter(root) {
     history.replaceState(null, '', `${baseUrl}${query}`);
     paintChips(computeCounts(cards, facets));
     paintGrid();
+    paintClearAll();
   };
 
   /* --- chips ------------------------------------------------------------ */
@@ -312,13 +318,27 @@ export function mountLibraryFilter(root) {
         tags: facets.tags.includes(tag) ? facets.tags.filter((item) => item !== tag) : [...facets.tags, tag],
       };
     } else if (facet === 'featured') {
-      facets = { ...facets, featured: !facets.featured };
+      facets = { ...facets, featured: value === '1' ? !facets.featured : false };
     } else if (facet === 'clear') {
       facets = normalizeFacets({ ...EMPTY_FACETS });
       if (searchInput) searchInput.value = '';
     }
     sync();
   });
+
+  /* --- clear all (result bar + empty state) ----------------------------- */
+  const clearAllButtons = [...root.querySelectorAll('[data-lib-clear-all], [data-lib-empty-clear]')];
+  const paintClearAll = () => {
+    const rowButton = root.querySelector('[data-lib-clear-all]');
+    if (rowButton) rowButton.classList.toggle('hidden', activeCount(facets) === 0);
+  };
+  for (const button of clearAllButtons) {
+    button.addEventListener('click', () => {
+      facets = normalizeFacets({ ...EMPTY_FACETS });
+      if (searchInput) searchInput.value = '';
+      sync();
+    });
+  }
 
   /* --- search ----------------------------------------------------------- */
   if (searchInput) {
@@ -390,6 +410,7 @@ export function mountLibraryFilter(root) {
   applySize(cardSize);
   paintChips(computeCounts(cards, facets));
   paintGrid();
+  paintClearAll();
 
   return { getFacets: () => facets, sync };
 }

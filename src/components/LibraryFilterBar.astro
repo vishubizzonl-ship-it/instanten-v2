@@ -73,9 +73,14 @@ const tags = [...tagCounts.entries()]
 const TAG_VISIBLE = 12;
 const featuredCount = countBy((tool) => Boolean(tool.featured));
 
+const featuredActive = Astro.url.searchParams.get('featured') === '1';
 const activeTags = currentTags.map((tag) => tag.toLowerCase());
 const activeFacets =
-  (currentCategory ? 1 : 0) + (currentPricing ? 1 : 0) + activeTags.length + (query ? 1 : 0);
+  (currentCategory ? 1 : 0) +
+  (currentPricing ? 1 : 0) +
+  activeTags.length +
+  (query ? 1 : 0) +
+  (featuredActive ? 1 : 0);
 
 const sortOptions = [
   { value: 'featured', label: t('filter.sort.featured') },
@@ -87,11 +92,21 @@ const sortOptions = [
 
 // Measurements opendesignmd.com ke filter chips se: 28px height, full radius,
 // 12px/500 text, 6px gap, ink ki 7% fill (hover 12%), pressed = ink fill.
+// Segmented group (opendesignmd .tabs): ink/6% track, radius 12px, 3px padding,
+// 34px segments, 9px inner radius, 13px/500.
+const tabs =
+  'inline-flex max-w-full items-center gap-0.5 overflow-x-auto rounded-xl bg-ink/[0.06] p-[3px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden';
+const tab =
+  'inline-flex h-[34px] shrink-0 items-center gap-1.5 rounded-[9px] px-3.5 text-[13px] font-medium leading-none text-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft aria-pressed:bg-ink aria-pressed:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas data-[empty=true]:opacity-40 max-sm:h-[30px] max-sm:flex-auto max-sm:justify-center max-sm:px-2 max-sm:text-xs';
+
+// Chip row (opendesignmd .chip-row): gap 6px, no scrollbar, dono taraf fade.
+const chipRow =
+  'flex w-full min-w-0 items-center gap-1.5 overflow-x-auto sm:w-auto sm:flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_0,#000_56px,#000_calc(100%-72px),transparent_100%)]';
+
 const chip =
   'lib-chip inline-flex h-7 shrink-0 items-center gap-1.5 rounded-full bg-ink/[0.07] px-3 text-xs font-medium leading-4 text-muted transition-colors hover:bg-ink/[0.12] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft aria-pressed:bg-ink aria-pressed:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas data-[empty=true]:opacity-40';
 const chipIcon = 'h-3.5 w-3.5 shrink-0';
 ---
-
 <section
   class="library-filter relative z-20 mb-6"
   id="library-filter"
@@ -99,10 +114,48 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
   data-base-url={baseUrl}
   aria-label={t('lib.filters')}
 >
-  <div class="site-container">
-    <!-- Row 1: search -->
-    <div class="flex flex-wrap items-center gap-2 sm:flex-nowrap">
-      <label class="relative w-full sm:w-[280px]">
+  <!--
+    Layout opendesignmd.com ke toolbar se same: ek hi grid jo desktop par
+    block ban jaata hai.
+      mobile : row1 = tabs (full width) | row2 = search + Filters + sort | row3 = chip row
+      desktop: row1 = tabs (left) + search (right) | row2 = chip row + Filters + sort
+    `contents` wrappers isi liye hain — mobile par grid ke direct children ban
+    jaate hain, desktop par flex row.
+  -->
+  <div class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:block">
+    <div class="contents sm:flex sm:items-center sm:justify-between sm:gap-4">
+      <!-- Segmented group: scope (All / Featured) -->
+      <div
+        class={`${tabs} col-span-3`}
+        role="group"
+        aria-label={t('lib.scope')}
+        data-lib-tabs
+      >
+        <button
+          type="button"
+          class={tab}
+          data-facet="featured"
+          data-value=""
+          aria-pressed={!featuredActive ? 'true' : 'false'}
+          aria-current={!featuredActive ? 'true' : 'false'}
+        >
+          {t('lib.all')}
+          <span class="opacity-60 tabular-nums font-normal" data-count>{total}</span>
+        </button>
+        <button
+          type="button"
+          class={tab}
+          data-facet="featured"
+          data-value="1"
+          aria-pressed={featuredActive ? 'true' : 'false'}
+        >
+          {t('lib.featured')}
+          <span class="opacity-60 tabular-nums font-normal" data-count>{featuredCount}</span>
+        </button>
+      </div>
+
+      <!-- Search -->
+      <label class="relative w-full max-sm:col-start-1 max-sm:row-start-2 sm:w-[280px] sm:shrink-0">
         <span class="sr-only">{t('lib.search')}</span>
         <svg
           class="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted"
@@ -124,15 +177,15 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
           aria-label={t('lib.search')}
           autocomplete="off"
           data-lib-search
-          class="h-9 w-full rounded-[10px] bg-ink/[0.06] pl-9 pr-3 text-sm text-ink transition-colors placeholder:text-muted focus:bg-ink/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft"
+          class="h-9 w-full rounded-[10px] bg-ink/[0.06] pl-9 pr-3 text-sm text-ink transition-colors placeholder:text-muted hover:bg-ink/[0.09] focus:bg-ink/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft [&::-webkit-search-cancel-button]:hidden"
         />
       </label>
     </div>
 
-    <!-- Row 2: chip row + Filters + sort -->
-    <div class="relative mt-2.5 flex items-center gap-2">
+    <div class="contents sm:relative sm:mt-[14px] sm:flex sm:items-center sm:gap-2">
+      <!-- Category chip row -->
       <div
-        class="library-chip-row flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_0,#000_calc(100%-56px),transparent_100%)]"
+        class={`${chipRow} max-sm:col-span-3 max-sm:row-start-3`}
         data-lib-chips
         role="group"
         aria-label={t('filter.category')}
@@ -147,16 +200,6 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
         >
           {t('lib.all')}
           <span class="opacity-60 tabular-nums font-normal" data-count>{total}</span>
-        </button>
-
-        <button
-          type="button"
-          class={chip}
-          data-facet="featured"
-          aria-pressed="false"
-        >
-          {t('lib.featured')}
-          <span class="opacity-60 tabular-nums font-normal" data-count>{featuredCount}</span>
         </button>
 
         {
@@ -175,16 +218,26 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
         }
       </div>
 
+      <!-- Filters -->
       <button
         type="button"
-        class={`${chip} ml-auto shrink-0 aria-expanded:bg-ink aria-expanded:text-canvas`}
+        class={`${chip} ml-auto max-sm:col-start-2 max-sm:row-start-2 max-sm:h-9 max-sm:px-3`}
         data-lib-filters-open
         aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="library-filters"
         title={t('lib.filters')}
       >
-        <svg class={chipIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg
+          class="h-3.5 w-3.5 shrink-0 sm:h-3 sm:w-3"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
           <path d="M3 5h18M6 12h12M10 19h4"></path>
         </svg>
         <span class="max-sm:sr-only">{t('lib.filters')}</span>
@@ -196,13 +249,10 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
         </span>
       </button>
 
-      <span class="relative shrink-0">
+      <!-- Sort -->
+      <span class="relative shrink-0 max-sm:col-start-3 max-sm:row-start-2">
         <label class="sr-only" for="library-sort">{t('aria.sortTools')}</label>
-        <select
-          id="library-sort"
-          class="chip h-7 appearance-none pr-7"
-          data-lib-sort
-        >
+        <select id="library-sort" class={`${chip} appearance-none pr-7 max-sm:h-9`} data-lib-sort>
           {
             sortOptions.map((option) => (
               <option value={option.value} selected={option.value === currentSort}>
@@ -245,7 +295,7 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
           <h2 class="font-display text-sm font-semibold text-ink">{t('lib.filters')}</h2>
           <button
             type="button"
-            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-ink/[0.07] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft"
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-ink/[0.09] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft"
             data-lib-close
             aria-label={t('lib.closeFilters')}
           >
@@ -263,18 +313,18 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
               <h3 class="mb-2 text-[13px] leading-[1.35] text-muted">{t('filter.pricing')}</h3>
               <div class="mb-5 flex flex-wrap gap-1.5">
                 {pricings.map((pricing) => (
-              <button
-                type="button"
-                class={chip}
-                data-facet="pricing"
-                data-value={pricing.value}
-                aria-pressed={currentPricing === pricing.value ? 'true' : 'false'}
-                data-empty={pricing.count === 0 ? 'true' : 'false'}
-              >
-                  {pricing.label}
-                  <span class="opacity-60 tabular-nums font-normal" data-count>{pricing.count}</span>
-                </button>
-              ))}
+                  <button
+                    type="button"
+                    class={chip}
+                    data-facet="pricing"
+                    data-value={pricing.value}
+                    aria-pressed={currentPricing === pricing.value ? 'true' : 'false'}
+                    data-empty={pricing.count === 0 ? 'true' : 'false'}
+                  >
+                    {pricing.label}
+                    <span class="opacity-60 tabular-nums font-normal" data-count>{pricing.count}</span>
+                  </button>
+                ))}
               </div>
             </>
           )
@@ -333,14 +383,28 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
         </div>
       </div>
     </div>
+  </div>
 
-    <p class="mt-3 text-[13px] tabular-nums text-muted" data-lib-count data-template={t('lib.results')}>
+  <!-- Result bar: "16 tools" + Clear all (sirf jab koi filter laga ho) -->
+  <div class="mt-3 flex items-center gap-2 text-[13px]" data-lib-resultbar>
+    <p class="tabular-nums text-muted" data-lib-count data-template={t('lib.results')} role="status" aria-live="polite">
       {t('lib.results').replace('{count}', String(total))}
     </p>
+    <button
+      type="button"
+      class={`${activeFacets ? '' : 'hidden '}text-accent underline-offset-2 transition-colors hover:underline`}
+      data-lib-clear-all
+    >
+      {t('lib.clearAll')}
+    </button>
+  </div>
 
-    <p class="mt-6 hidden rounded-xl border border-border-hairline bg-surface px-4 py-6 text-center text-sm text-muted" data-lib-empty>
-      {t('search.noResults')}
-    </p>
+  <div class="mt-6 hidden rounded-xl border border-border-hairline bg-surface px-4 py-12 text-center" data-lib-empty>
+    <p class="font-display text-base font-semibold text-ink">{t('search.noResults')}</p>
+    <p class="mt-1 text-sm text-muted">{t('lib.emptyHint')}</p>
+    <button type="button" class="btn btn-secondary mt-5" data-lib-empty-clear>
+      {t('lib.clearAll')}
+    </button>
   </div>
 </section>
 

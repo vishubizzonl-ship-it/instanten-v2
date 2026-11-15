@@ -110,16 +110,18 @@ const pageDescription = filters.q ? `${page.search.description} ${filters.q}` : 
     </section>
   ) : (
     <>
-      <LibraryFilterBar
-        tools={toolData}
-        baseUrl={baseUrl}
-        currentCategory={filters.category}
-        currentPricing={filters.pricing}
-        currentTags={filters.tags}
-        currentSort={filters.sort}
-        query={filters.q}
-      />
-      <ToolGrid tools={toolData} />
+      <section class="site-container pb-6">
+        <LibraryFilterBar
+          tools={toolData}
+          baseUrl={baseUrl}
+          currentCategory={filters.category}
+          currentPricing={filters.pricing}
+          currentTags={filters.tags}
+          currentSort={filters.sort}
+          query={filters.q}
+        />
+        <ToolGrid tools={toolData} />
+      </section>
       {totalPages > 1 && (
         <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} queryParams={queryParams} />
       )}

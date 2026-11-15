@@ -57,6 +57,9 @@ const en = {
   'tools.useItHere': 'Use the {name} right here',
   'tools.localProcessing':
     'Processing happens in your browser — no file, text or image is uploaded anywhere.',
+  'lib.scope': 'Scope',
+  'lib.clearAll': 'Clear all',
+  'lib.emptyHint': 'Try removing a filter or searching for something broader.',
   'lib.search': 'Search tools',
   'lib.all': 'All',
   'lib.featured': 'Featured',
@@ -178,6 +181,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': '{name} direkt hier verwenden',
     'tools.localProcessing':
     'Die Verarbeitung findet in Ihrem Browser statt — keine Datei, kein Text und kein Bild wird irgendwohin hochgeladen.',
+    'lib.scope': 'Umfang',
+    'lib.clearAll': 'Alle zurücksetzen',
+    'lib.emptyHint': 'Entferne einen Filter oder suche nach etwas Allgemeinerem.',
     'lib.search': 'Tools durchsuchen',
     'lib.all': 'Alle',
     'lib.featured': 'Empfohlen',
@@ -295,6 +301,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': '{name}をこのページでそのまま使えます',
     'tools.localProcessing':
     '処理はすべてお使いのブラウザ内で行われ、ファイル・テキスト・画像がアップロードされることはありません。',
+    'lib.scope': '範囲',
+    'lib.clearAll': 'すべて解除',
+    'lib.emptyHint': 'フィルターを外すか、もっと広い言葉で検索してください。',
     'lib.search': 'ツールを検索',
     'lib.all': 'すべて',
     'lib.featured': 'おすすめ',
@@ -410,6 +419,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Utilisez {name} directement ici',
     'tools.localProcessing':
     'Le traitement se fait dans votre navigateur — aucun fichier, texte ou image n’est envoyé où que ce soit.',
+    'lib.scope': 'Portée',
+    'lib.clearAll': 'Tout effacer',
+    'lib.emptyHint': 'Retirez un filtre ou cherchez plus largement.',
     'lib.search': 'Rechercher des outils',
     'lib.all': 'Tout',
     'lib.featured': 'En vedette',
@@ -527,6 +539,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Usa {name} aquí mismo',
     'tools.localProcessing':
     'El procesamiento ocurre en tu navegador: no se envía ningún archivo, texto ni imagen a ningún sitio.',
+    'lib.scope': 'Ámbito',
+    'lib.clearAll': 'Borrar todo',
+    'lib.emptyHint': 'Quita un filtro o busca algo más general.',
     'lib.search': 'Buscar herramientas',
     'lib.all': 'Todo',
     'lib.featured': 'Destacadas',
@@ -644,6 +659,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': '여기에서 바로 {name} 사용하기',
     'tools.localProcessing':
     '처리는 브라우저 안에서 이루어지며 파일, 텍스트, 이미지가 어디에도 업로드되지 않습니다.',
+    'lib.scope': '범위',
+    'lib.clearAll': '모두 지우기',
+    'lib.emptyHint': '필터를 해제하거나 더 넓은 검색어를 입력하세요.',
     'lib.search': '도구 검색',
     'lib.all': '전체',
     'lib.featured': '추천',
@@ -759,6 +777,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Gebruik {name} direct hier',
     'tools.localProcessing':
     'De verwerking gebeurt in je browser — er wordt geen bestand, tekst of afbeelding geüpload.',
+    'lib.scope': 'Bereik',
+    'lib.clearAll': 'Alles wissen',
+    'lib.emptyHint': 'Verwijder een filter of zoek breder.',
     'lib.search': 'Tools zoeken',
     'lib.all': 'Alles',
     'lib.featured': 'Uitgelicht',
@@ -876,6 +897,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Använd {name} direkt här',
     'tools.localProcessing':
     'Bearbetningen sker i din webbläsare – ingen fil, text eller bild laddas upp någonstans.',
+    'lib.scope': 'Omfång',
+    'lib.clearAll': 'Rensa alla',
+    'lib.emptyHint': 'Ta bort ett filter eller sök bredare.',
     'lib.search': 'Sök verktyg',
     'lib.all': 'Alla',
     'lib.featured': 'Utvalda',
@@ -993,6 +1017,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Usa {name} direttamente qui',
     'tools.localProcessing':
     'L’elaborazione avviene nel tuo browser: nessun file, testo o immagine viene caricato da nessuna parte.',
+    'lib.scope': 'Ambito',
+    'lib.clearAll': 'Cancella tutto',
+    'lib.emptyHint': 'Rimuovi un filtro o cerca qualcosa di più ampio.',
     'lib.search': 'Cerca strumenti',
     'lib.all': 'Tutti',
     'lib.featured': 'In evidenza',
@@ -1110,6 +1137,9 @@ export const uiExtra: Record<LangCode, Record<ExtraUiKey, string>> = {
     'tools.useItHere': 'Use {name} aqui mesmo',
     'tools.localProcessing':
     'O processamento acontece no seu navegador — nenhum arquivo, texto ou imagem é enviado para lugar algum.',
+    'lib.scope': 'Escopo',
+    'lib.clearAll': 'Limpar tudo',
+    'lib.emptyHint': 'Remova um filtro ou pesquise algo mais amplo.',
     'lib.search': 'Pesquisar ferramentas',
     'lib.all': 'Todas',
     'lib.featured': 'Em destaque',
