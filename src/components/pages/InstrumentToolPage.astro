@@ -193,7 +193,8 @@ const breadcrumbs = crumbItems.map((crumb) => ({
               href={blogIndexHref}
               class="mt-6 inline-flex items-center gap-1 text-body-md font-medium text-link hover:underline"
             >
-              {copy.guidesAll || toolGuides.allLabel} →
+              {/* copy mein arrow pehle se ho sakta hai — double na dikhe */}
+              {(copy.guidesAll || toolGuides.allLabel).replace(/\s*→\s*$/, '')} →
             </a>
           </div>
         </section>
