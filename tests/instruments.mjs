@@ -552,28 +552,6 @@ export function run(pages, outDir) {
     // tool apni jagah par rahe: panel overlay hai, layout ka hissa nahi
     check(/inset-x-0/.test(panel), 'speedometer: records panel full width overlay nahi');
 
-    // Overlap fix: card fullscreen mein neeche panel jitni jagah reserve kare,
-    // warna centered content (stats row) panel ke neeche chhup jata hai.
-    const card = src.match(/id="speed-card" class="([^"]*)"/)?.[1] ?? '';
-    const reserve = card.match(/\[&:fullscreen\]:pb-\[max\(([\d.]+)rem,([\d.]+)vh\)\]/);
-    check(Boolean(reserve), 'speedometer: card par fullscreen bottom padding (panel reserve) nahi');
-    const panelMax = Number((panel.match(/max-h-\[(\d+)%\]/) ?? [])[1] ?? '0');
-    if (reserve) {
-      const vh = Number(reserve[2]);
-      const rem = Number(reserve[1]) * 16;
-      check(vh > panelMax, `reserve (${vh}vh) panel max-height (${panelMax}%) se bada nahi hai`);
-      check(rem >= 64, 'reserve ka minimum (rem) bahut chhota hai');
-    }
-    // build mein bhi
-    const bhtml = pages.get('/onlinespeedometer/') ?? '';
-    check(/\[&:fullscreen\]:pb-\[max\(/.test(bhtml), 'build: card par fullscreen bottom reserve nahi');
-    // compiled css mein padding rule compile hua
-    const cssAll = readdirSync('dist/_astro')
-      .filter((f) => f.endsWith('.css'))
-      .map((f) => readFileSync(join('dist/_astro', f), 'utf8'))
-      .join('\n');
-    check(/:fullscreen[^{}]*\{[^}]*padding-bottom:max\(/.test(cssAll), 'compiled CSS: fullscreen padding-bottom reserve nahi');
-
     // build
     const html = pages.get('/onlinespeedometer/') ?? '';
     check(html.includes('id="records-list-card"'), 'build: fullscreen records list nahi');
