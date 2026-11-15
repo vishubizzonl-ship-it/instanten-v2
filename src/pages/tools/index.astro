@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { toolPath } from '../../utils/toolPaths';
 import ToolGrid from '../../components/ToolGrid.astro';
-import FilterBar from '../../components/FilterBar.astro';
+import LibraryFilterBar from '../../components/LibraryFilterBar.astro';
 import Pagination from '../../components/Pagination.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ToolFaq from '../../components/ToolFaq.astro';
@@ -102,15 +102,17 @@ const breadcrumbs = [
       </p>
     </header>
   </section>
-  <FilterBar
-    currentCategory={filters.category}
-    currentPricing={filters.pricing}
-    currentTags={filters.tags}
-    currentSort={filters.sort}
-    hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
-    baseUrl={baseUrl}
-  />
-  <section class="site-container py-6">
+  <section class="site-container pb-6">
+    <!-- Grid cards ke just upar: search + facet chips + Filters popover + sort -->
+    <LibraryFilterBar
+      tools={toolData}
+      baseUrl={baseUrl}
+      currentCategory={filters.category}
+      currentPricing={filters.pricing}
+      currentTags={filters.tags}
+      currentSort={filters.sort}
+      query={filters.q}
+    />
     <ToolGrid tools={toolData} />
   </section>
   {totalPages > 1 && (

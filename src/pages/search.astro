@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { toolPath } from '../utils/toolPaths';
 import ToolGrid from '../components/ToolGrid.astro';
-import FilterBar from '../components/FilterBar.astro';
+import LibraryFilterBar from '../components/LibraryFilterBar.astro';
 import Pagination from '../components/Pagination.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
@@ -16,7 +16,10 @@ const filters = parseFilters(searchParams);
 const filteredTools = filterTools(allTools, filters);
 const sortedTools = sortTools(filteredTools, filters.sort || 'featured');
 
-const PER_PAGE = 10;
+// Static build: `?page=2` par wahi page 1 serve hota hai — 10 se zyada tools
+// pagination ke peeche chhup jaate the. Poori list ek page par, filter sab
+// cards par chalta hai.
+const PER_PAGE = 50;
 const totalPages = getTotalPages(sortedTools.length, PER_PAGE);
 const currentPage = filters.page || 1;
 const paginatedTools = paginateTools(sortedTools, currentPage, PER_PAGE);
@@ -136,13 +139,14 @@ const breadcrumbs = [
     </section>
   ) : (
     <>
-      <FilterBar
+      <LibraryFilterBar
+        tools={toolData}
+        baseUrl={baseUrl}
         currentCategory={filters.category}
         currentPricing={filters.pricing}
         currentTags={filters.tags}
         currentSort={filters.sort}
-        hasFilters={Boolean(filters.q || filters.category || filters.pricing || filters.tags?.length)}
-        baseUrl={baseUrl}
+        query={filters.q}
       />
       <ToolGrid tools={toolData} />
       {totalPages > 1 && (

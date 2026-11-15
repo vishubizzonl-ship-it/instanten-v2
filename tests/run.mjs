@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolveOutDir, loadPages, ruleOf } from './lib.mjs';
 
-const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design', 'seo', 'errors', 'analytics', 'tools-inpage', 'instruments', 'rules', 'i18n-hreflang', 'mobile', 'desktop'];
+const SUITES = ['site-integrity', 'links', 'i18n-silo', 'design', 'seo', 'errors', 'analytics', 'tools-inpage', 'instruments', 'rules', 'i18n-hreflang', 'mobile', 'desktop', 'library-filter'];
 const BASELINE = 'tests/baseline.json';
 const updateBaseline = process.argv.includes('--update-baseline');
 // NOTE: argv[0]/argv[1] node & script hain, isliye sirf argv[2..] me se dir dhundo.
@@ -25,7 +25,7 @@ console.log(`\n  instanten test suite — ${pages.size} pages from ${outDir}\n`)
 
 for (const name of SUITES) {
   const { run } = await import(`./${name}.mjs`);
-  const suite = run(pages, outDir);
+  const suite = await run(pages, outDir);
 
   const counts = {};
   for (const fail of suite.fails) counts[ruleOf(fail)] = (counts[ruleOf(fail)] ?? 0) + 1;

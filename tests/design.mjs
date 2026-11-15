@@ -138,6 +138,9 @@ export function run(pages, outDir) {
       // Sensor tools ka apna header (compassinstant se): wahan nav items pill
       // hain aur wo jaan-boojh kar hain — rule CTAs ke liye hai, nav ke liye nahi.
       if (pill.includes('data-nav-pill')) continue;
+      // Library filter ke facet chips + sort select (opendesignmd.com jaisa
+      // filter section): filter controls hain, CTA nahi — pill hi rehte hain.
+      if (pill.includes('lib-chip') || pill.includes('data-lib-sort')) continue;
       // circles (social icons, scroll-to-top) allowed: same width & height
       const equalBox = /w-(\d+)\s+h-\1\b/.test(pill) || /h-(\d+)\s+w-\1\b/.test(pill);
       check(equalBox, `pill-shaped CTA bacha hua hai :: ${url} :: ${pill.slice(0, 90)}`);

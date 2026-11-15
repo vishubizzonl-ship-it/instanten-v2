@@ -1,0 +1,365 @@
+---
+/**
+ * Library filter — grid cards ke just upar wala poora filter section.
+ *
+ * Design reference: opendesignmd.com ka library filter (search field + chip
+ * row + Filters popover + sort select + card size). Measurements, spacing,
+ * radius, typography aur behaviour same rakhe gaye hain; rang compilefuture
+ * tokens se aate hain (Rule 2/7).
+ *
+ * Facets site ke hisaab se: category, pricing, tags, featured. Counts build par
+ * compute hote hain, aur click ke baad client-side dobara bante hain.
+ */
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { localizeToolCategory, localizePricing } from '../i18n/toolContent';
+import type { ToolData } from '../utils/filters';
+
+interface Props {
+  tools: ToolData[];
+  baseUrl: string;
+  currentCategory?: string;
+  currentPricing?: string;
+  currentTags?: string[];
+  currentSort?: string;
+  query?: string;
+}
+
+const {
+  tools,
+  baseUrl,
+  currentCategory = '',
+  currentPricing = '',
+  currentTags = [],
+  currentSort = 'featured',
+  query = '',
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const total = tools.length;
+
+// --- counts (build par, taaki pehla paint bhi sahi ho) ----------------------
+const countBy = (predicate: (tool: ToolData) => boolean) => tools.filter(predicate).length;
+
+const categoryNames = [...new Set(tools.map((tool) => tool.category).filter(Boolean))];
+const categories = categoryNames
+  .map((name) => ({
+    value: name,
+    label: localizeToolCategory(lang, name),
+    count: countBy((tool) => tool.category === name),
+  }))
+  .sort((a, b) => b.count - a.count);
+
+const pricings = [...new Set(tools.map((tool) => tool.pricing).filter(Boolean))]
+  .map((name) => ({
+    value: name,
+    label: localizePricing(lang, name),
+    count: countBy((tool) => tool.pricing === name),
+  }))
+  .sort((a, b) => b.count - a.count);
+
+const tagCounts = new Map<string, number>();
+for (const tool of tools) {
+  for (const tag of tool.tags ?? []) {
+    const key = tag.toLowerCase();
+    tagCounts.set(key, (tagCounts.get(key) ?? 0) + 1);
+  }
+}
+const tags = [...tagCounts.entries()]
+  .map(([value, count]) => ({ value, label: value, count }))
+  .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
+
+const TAG_VISIBLE = 12;
+const featuredCount = countBy((tool) => Boolean(tool.featured));
+
+const activeTags = currentTags.map((tag) => tag.toLowerCase());
+const activeFacets =
+  (currentCategory ? 1 : 0) + (currentPricing ? 1 : 0) + activeTags.length + (query ? 1 : 0);
+
+const sortOptions = [
+  { value: 'featured', label: t('filter.sort.featured') },
+  { value: 'az', label: 'A–Z' },
+  { value: 'za', label: 'Z–A' },
+  { value: 'newest', label: t('filter.sort.newest') },
+  { value: 'oldest', label: 'Oldest' },
+];
+
+// Measurements opendesignmd.com ke filter chips se: 28px height, full radius,
+// 12px/500 text, 6px gap, ink ki 7% fill (hover 12%), pressed = ink fill.
+const chip =
+  'lib-chip inline-flex h-7 shrink-0 items-center gap-1.5 rounded-full bg-ink/[0.07] px-3 text-xs font-medium leading-4 text-muted transition-colors hover:bg-ink/[0.12] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft aria-pressed:bg-ink aria-pressed:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas data-[empty=true]:opacity-40';
+const chipIcon = 'h-3.5 w-3.5 shrink-0';
+---
+
+<section
+  class="library-filter relative z-20 mb-6"
+  id="library-filter"
+  data-library-filter
+  data-base-url={baseUrl}
+  aria-label={t('lib.filters')}
+>
+  <div class="site-container">
+    <!-- Row 1: search -->
+    <div class="flex flex-wrap items-center gap-2 sm:flex-nowrap">
+      <label class="relative w-full sm:w-[280px]">
+        <span class="sr-only">{t('lib.search')}</span>
+        <svg
+          class="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input
+          type="search"
+          value={query}
+          placeholder={t('lib.search')}
+          aria-label={t('lib.search')}
+          autocomplete="off"
+          data-lib-search
+          class="h-9 w-full rounded-[10px] bg-ink/[0.06] pl-9 pr-3 text-sm text-ink transition-colors placeholder:text-muted focus:bg-ink/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft"
+        />
+      </label>
+    </div>
+
+    <!-- Row 2: chip row + Filters + sort -->
+    <div class="relative mt-2.5 flex items-center gap-2">
+      <div
+        class="library-chip-row flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_0,#000_calc(100%-56px),transparent_100%)]"
+        data-lib-chips
+        role="group"
+        aria-label={t('filter.category')}
+      >
+        <button
+          type="button"
+          class={chip}
+          data-facet="category"
+          data-value=""
+          aria-current={!currentCategory ? 'true' : 'false'}
+          aria-pressed={!currentCategory ? 'true' : 'false'}
+        >
+          {t('lib.all')}
+          <span class="opacity-60 tabular-nums font-normal" data-count>{total}</span>
+        </button>
+
+        <button
+          type="button"
+          class={chip}
+          data-facet="featured"
+          aria-pressed="false"
+        >
+          {t('lib.featured')}
+          <span class="opacity-60 tabular-nums font-normal" data-count>{featuredCount}</span>
+        </button>
+
+        {
+          categories.map((category) => (
+            <button
+              type="button"
+              class={chip}
+              data-facet="category"
+              data-value={category.value}
+              aria-pressed={currentCategory === category.value ? 'true' : 'false'}
+            >
+              {category.label}
+              <span class="opacity-60 tabular-nums font-normal" data-count>{category.count}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <button
+        type="button"
+        class={`${chip} ml-auto shrink-0 aria-expanded:bg-ink aria-expanded:text-canvas`}
+        data-lib-filters-open
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="library-filters"
+        title={t('lib.filters')}
+      >
+        <svg class={chipIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 5h18M6 12h12M10 19h4"></path>
+        </svg>
+        <span class="max-sm:sr-only">{t('lib.filters')}</span>
+        <span
+          class={`${activeFacets ? '' : 'hidden '}opacity-60 tabular-nums font-normal`}
+          data-lib-filters-count
+        >
+          {activeFacets}
+        </span>
+      </button>
+
+      <span class="relative shrink-0">
+        <label class="sr-only" for="library-sort">{t('aria.sortTools')}</label>
+        <select
+          id="library-sort"
+          class="chip h-7 appearance-none pr-7"
+          data-lib-sort
+        >
+          {
+            sortOptions.map((option) => (
+              <option value={option.value} selected={option.value === currentSort}>
+                {option.label}
+              </option>
+            ))
+          }
+        </select>
+        <svg
+          class="pointer-events-none absolute right-2.5 top-1/2 h-3 w-3 -translate-y-1/2 text-muted"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </span>
+
+      <!-- mobile backdrop -->
+      <div
+        class="fixed inset-0 z-30 hidden bg-ink/50 sm:bg-transparent"
+        data-lib-backdrop
+        aria-hidden="true"
+      >
+      </div>
+
+      <!-- Filters popover / bottom sheet -->
+      <div
+        id="library-filters"
+        role="dialog"
+        aria-label={t('lib.filters')}
+        class="fixed inset-x-2 bottom-2 z-40 hidden max-h-[75vh] overflow-y-auto rounded-2xl bg-surface p-4 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6),0_0_0_1px_rgba(41,41,75,0.06)] sm:absolute sm:inset-x-auto sm:bottom-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[23rem]"
+        data-lib-panel
+      >
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="font-display text-sm font-semibold text-ink">{t('lib.filters')}</h2>
+          <button
+            type="button"
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-ink/[0.07] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft"
+            data-lib-close
+            aria-label={t('lib.closeFilters')}
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+
+        {/* Pricing group sirf tab jab site par ek se zyada pricing ho — ek hi
+            option ("Free") ka chip row banane ka koi matlab nahi. */}
+        {
+          pricings.length > 1 && (
+            <>
+              <h3 class="mb-2 text-[13px] leading-[1.35] text-muted">{t('filter.pricing')}</h3>
+              <div class="mb-5 flex flex-wrap gap-1.5">
+                {pricings.map((pricing) => (
+              <button
+                type="button"
+                class={chip}
+                data-facet="pricing"
+                data-value={pricing.value}
+                aria-pressed={currentPricing === pricing.value ? 'true' : 'false'}
+                data-empty={pricing.count === 0 ? 'true' : 'false'}
+              >
+                  {pricing.label}
+                  <span class="opacity-60 tabular-nums font-normal" data-count>{pricing.count}</span>
+                </button>
+              ))}
+              </div>
+            </>
+          )
+        }
+
+        <h3 class="mb-2 text-[13px] leading-[1.35] text-muted">{t('lib.tags')}</h3>
+        <div class="flex flex-wrap gap-1.5" data-lib-tags>
+          {
+            tags.map((tag, index) => (
+              <button
+                type="button"
+                class={`${chip} ${index >= TAG_VISIBLE ? 'hidden' : ''}`}
+                data-facet="tag"
+                data-value={tag.value}
+                aria-pressed={activeTags.includes(tag.value) ? 'true' : 'false'}
+                data-more={index >= TAG_VISIBLE ? 'true' : 'false'}
+              >
+                {tag.label}
+                <span class="opacity-60 tabular-nums font-normal" data-count>{tag.count}</span>
+              </button>
+            ))
+          }
+        </div>
+        {
+          tags.length > TAG_VISIBLE && (
+            <button
+              type="button"
+              class="mt-2 text-[13px] text-muted underline-offset-2 transition-colors hover:text-ink hover:underline"
+              data-lib-tags-toggle
+              data-total={tags.length}
+              data-more-label={t('lib.showAllTags').replace('{count}', String(tags.length))}
+              data-less-label={t('lib.showLess')}
+            >
+              {t('lib.showAllTags').replace('{count}', String(tags.length))}
+            </button>
+          )
+        }
+
+        <h3 class="mb-2 mt-5 text-[13px] leading-[1.35] text-muted">{t('lib.cardSize')}</h3>
+        <div class="flex flex-wrap gap-1.5">
+          <button type="button" class={chip} data-lib-size="large" aria-pressed="true">
+            {t('lib.large')}
+          </button>
+          <button type="button" class={chip} data-lib-size="small" aria-pressed="false">
+            {t('lib.small')}
+          </button>
+        </div>
+
+        <div class="mt-5 flex items-center justify-between border-t border-border-hairline pt-3">
+          <button type="button" class="text-[13px] text-muted transition-colors hover:text-ink" data-facet="clear">
+            {t('filter.clear')}
+          </button>
+          <span class="text-[13px] tabular-nums text-muted" data-lib-panel-count>
+            {t('lib.results').replace('{count}', String(total))}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-3 text-[13px] tabular-nums text-muted" data-lib-count data-template={t('lib.results')}>
+      {t('lib.results').replace('{count}', String(total))}
+    </p>
+
+    <p class="mt-6 hidden rounded-xl border border-border-hairline bg-surface px-4 py-6 text-center text-sm text-muted" data-lib-empty>
+      {t('search.noResults')}
+    </p>
+  </div>
+</section>
+
+<script>
+  import { mountLibraryFilter } from '../scripts/library-filter.js';
+
+  const root = document.querySelector('[data-library-filter]');
+  if (root) {
+    const api = mountLibraryFilter(root);
+
+    // "Show all N tags" — sirf display toggle, filtering par asar nahi
+    const toggle = root.querySelector('[data-lib-tags-toggle]');
+    toggle?.addEventListener('click', () => {
+      const extra = root.querySelectorAll('[data-facet="tag"][data-more="true"]');
+      const open = toggle.dataset.open === 'true';
+      extra.forEach((chip) => chip.classList.toggle('hidden', open));
+      toggle.dataset.open = open ? 'false' : 'true';
+      toggle.textContent = open ? toggle.dataset.moreLabel : toggle.dataset.lessLabel;
+      api?.sync();
+    });
+  }
+</script>
