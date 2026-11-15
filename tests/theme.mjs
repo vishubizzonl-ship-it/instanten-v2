@@ -35,6 +35,9 @@ export function run(pages, outDir) {
       head.includes("localStorage.getItem('theme')") || head.includes('localStorage.getItem(KEYS'),
       `bootstrap saved key 'theme' nahi padhta :: ${url}`
     );
+    // entry-page mode lock: localStorage + cookie dono
+    check(head.includes('instanten_theme'), `cookie store nahi :: ${url}`);
+    check(/SameSite=Lax/.test(head), `cookie attributes nahi :: ${url}`);
     // light/dark dono branch mojood hon
     check(/theme-color/.test(head), `theme-color meta nahi :: ${url}`);
     check(/'dark'/.test(head) && /'light'/.test(head), `bootstrap mein light/dark branch nahi :: ${url}`);
@@ -85,6 +88,47 @@ export function run(pages, outDir) {
     );
   }
 
+  // --- 3b2. "Jis page se entry, wahi mode poore site par" ------------------
+  // User ki requirement ka seedha test: kisi bhi entry page/mode se site kholo,
+  // aur har doosra page usi mode mein khule — chahe woh page kaunsa bhi ho.
+  {
+    const code = (pages.get('/') ?? '').match(/<script>([\s\S]*?InstantenTheme[\s\S]*?)<\/script>/)?.[1] ?? '';
+    check(Boolean(code), 'entry-mode: bootstrap code nahi mila');
+
+    // (a) entry page dark tha (saved) -> har page dark
+    for (const url of ['/', '/onlinecompass/', '/de/onlineqibla/blog/', '/tools/json-formatter/', '/compassinstant/', '/blog/', '/404.html']) {
+      const html = pages.get(url) ?? '';
+      check(html.includes('InstantenTheme'), `entry-mode: ${url} par bootstrap nahi`);
+    }
+
+    // (b) localStorage khaali, par cookie mein mode — tab bhi wahi mode (storage
+    //     clear / private mode ka case)
+    for (const mode of ['dark', 'light']) {
+      const r = runBootstrap(code, null, { cookie: `instanten_theme=${mode}` });
+      check(r.dataTheme === mode, `cookie-only ${mode}: data-theme "${r.dataTheme}" hai`);
+      check(r.htmlClass.includes(mode), `cookie-only ${mode}: html class nahi mili`);
+      // aur cookie ka mode turant localStorage mein bhi lock ho jaaye
+      check(
+        r.storedAfterLoad === mode,
+        `cookie-only ${mode}: load par localStorage "${r.storedAfterLoad}" hai`
+      );
+    }
+
+    // (c) kuch bhi saved nahi -> system preference mode, aur wahi lock ho jaata hai
+    const sysDark = runBootstrap(code, null, { prefersDark: true });
+    check(sysDark.dataTheme === 'dark', `first-visit: system dark par "${sysDark.dataTheme}" mila`);
+    check(sysDark.storedAfterLoad === 'dark', 'first-visit: entry page ka mode save nahi hua');
+
+    const sysLight = runBootstrap(code, null, { prefersDark: false });
+    check(sysLight.dataTheme === 'light', `first-visit: system light par "${sysLight.dataTheme}" mila`);
+    check(sysLight.storedAfterLoad === 'light', 'first-visit(light): entry page ka mode save nahi hua');
+
+    // (d) toggle ke baad dono store — localStorage AUR cookie — update hon
+    const toggled = runBootstrap(code, 'dark', { cookie: 'instanten_theme=dark' });
+    check(toggled.storedAfterToggle === 'light', 'toggle ke baad localStorage nahi badla');
+    check(toggled.cookieAfterToggle === 'light', `toggle ke baad cookie "${toggled.cookieAfterToggle}" hai`);
+  }
+
   // --- 3c. body token-based background (hardcoded light nahi) --------------
   for (const [url, html] of pages) {
     if (isRedirectStub(html)) continue;
@@ -116,7 +160,7 @@ export function run(pages, outDir) {
  * Chhota DOM stub: bootstrap ko node:vm mein chala kar natija return karta hai.
  * Sirf wahi API di jaati hai jo bootstrap use karta hai.
  */
-function runBootstrap(code, savedTheme) {
+function runBootstrap(code, savedTheme, options = {}) {
   const htmlClasses = new Set();
   const attrs = {};
   const meta = {
@@ -129,7 +173,10 @@ function runBootstrap(code, savedTheme) {
       if (k === 'media') delete this.media;
     },
   };
-  const storage = { theme: savedTheme };
+  const storage = savedTheme ? { theme: savedTheme } : {};
+  const cookieJar = { value: options.cookie ?? '' };
+  const prefersDark = options.prefersDark === true;
+  const search = options.search ?? '';
 
   const documentElement = {
     classList: {
@@ -145,6 +192,14 @@ function runBootstrap(code, savedTheme) {
   };
 
   const document = {
+    get cookie() {
+      return cookieJar.value;
+    },
+    set cookie(v) {
+      // sirf instanten_theme=<mode> pattern ko yaad rakho
+      const m = /^instanten_theme=(dark|light)/.exec(v);
+      if (m) cookieJar.value = `instanten_theme=${m[1]}`;
+    },
     documentElement,
     body: null,
     addEventListener: () => {},
@@ -155,8 +210,8 @@ function runBootstrap(code, savedTheme) {
   const sandbox = {
     document,
     window: {
-      location: { search: '' },
-      matchMedia: () => ({ matches: false }),
+      location: { search },
+      matchMedia: () => ({ matches: prefersDark }),
       addEventListener: () => {},
       dispatchEvent: () => {},
     },
@@ -181,6 +236,8 @@ function runBootstrap(code, savedTheme) {
   const snapshot = { classes: [], dataTheme: null, colorScheme: null, themeColor: null };
   let afterToggle = null;
   let storedAfterToggle = null;
+  let storedAfterLoad = storage.theme ?? null;
+  let cookieAfterToggle = null;
   try {
     vm.runInNewContext(code, sandbox, { timeout: 2000 });
     applied = typeof sandbox.window.InstantenTheme?.get === 'function';
@@ -190,8 +247,10 @@ function runBootstrap(code, savedTheme) {
       snapshot.dataTheme = attrs['data-theme'] ?? null;
       snapshot.colorScheme = documentElement.style.colorScheme ?? null;
       snapshot.themeColor = meta.content;
+      storedAfterLoad = storage.theme ?? null;
       afterToggle = sandbox.window.InstantenTheme.toggle();
       storedAfterToggle = storage.theme;
+      cookieAfterToggle = (/instanten_theme=(dark|light)/.exec(cookieJar.value) ?? [])[1] ?? null;
     }
   } catch {
     applied = false;
@@ -199,6 +258,8 @@ function runBootstrap(code, savedTheme) {
 
   return {
     applied,
+    storedAfterLoad,
+    cookieAfterToggle,
     afterToggle,
     storedAfterToggle,
     classAfterToggle: [...htmlClasses],

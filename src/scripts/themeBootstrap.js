@@ -1,6 +1,39 @@
 (function () {
   var KEYS = ['instanten-theme', 'theme', 'site-theme', 'color-scheme'];
+  /** Cookie bhi rakhte hain: private mode / storage clear / partitioned storage
+   *  mein localStorage khaali ho jaata hai, par cookie reh jaati hai — isliye
+   *  jis page se site kholi gayi thi uska mode poore site par bana rehta hai. */
+  var COOKIE = 'instanten_theme';
+  var COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
+  function readCookieTheme() {
+    try {
+      var parts = (document.cookie || '').split('; ');
+      for (var i = 0; i < parts.length; i++) {
+        var eq = parts[i].indexOf('=');
+        if (eq < 0) continue;
+        if (parts[i].slice(0, eq) === COOKIE) {
+          var val = decodeURIComponent(parts[i].slice(eq + 1));
+          if (val === 'dark' || val === 'light') return val;
+        }
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function writeCookieTheme(mode) {
+    try {
+      document.cookie =
+        COOKIE + '=' + mode + '; path=/; max-age=' + COOKIE_MAX_AGE + '; SameSite=Lax';
+    } catch (e) {}
+  }
+
+  /**
+   * Site ka mode: pehle URL override, phir localStorage, phir cookie, aur agar
+   * kuch bhi saved nahi to system preference. Jo mode yahan resolve hota hai
+   * wahi turant save ho jaata hai — yaani jis page/mode se user site mein
+   * aaya, wahi mode poore site ka mode ban jaata hai.
+   */
   function readSavedTheme() {
     try {
       var params = new URLSearchParams(window.location.search);
@@ -14,6 +47,8 @@
         if (val === 'dark' || val === 'light') return val;
       }
     } catch (e) {}
+    var fromCookie = readCookieTheme();
+    if (fromCookie) return fromCookie;
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
@@ -25,6 +60,7 @@
         localStorage.setItem(KEYS[i], mode);
       }
     } catch (e) {}
+    writeCookieTheme(mode);
   }
 
   function applyThemeToDOM(mode) {
@@ -97,6 +133,14 @@
   });
   window.addEventListener('pageshow', function () {
     applyThemeToDOM(readSavedTheme());
+  });
+  // Tab wapas focus par bhi sync — doosre tab mein mode badla ho to yahan bhi
+  // wahi mode (storage event har browser mein reliably nahi aata).
+  window.addEventListener('focus', function () {
+    applyThemeToDOM(readSavedTheme());
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) applyThemeToDOM(readSavedTheme());
   });
   window.addEventListener('storage', function (e) {
     if (e.key && KEYS.indexOf(e.key) !== -1 && (e.newValue === 'dark' || e.newValue === 'light')) {
