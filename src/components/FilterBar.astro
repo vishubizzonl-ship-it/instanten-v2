@@ -38,8 +38,8 @@ const sortOptions = [
   { value: 'name', label: t('filter.sort.name') },
 ] as const;
 ---
-<div class="sticky top-[64px] lg:top-[88px] z-30 bg-surface/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar" data-base-url={baseUrl} data-category={currentCategory} data-pricing={currentPricing} data-tags={currentTags.join(",")}>
-  <div class="max-w-[1296px] mx-auto px-gutter py-4">
+<div class="sticky top-16 lg:top-20 z-30 bg-surface/80 backdrop-blur-sm border-b border-border-hairline" id="filter-bar" data-base-url={baseUrl} data-category={currentCategory} data-pricing={currentPricing} data-tags={currentTags.join(",")}>
+  <div class="site-container py-4">
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
       <div class="flex flex-wrap items-center gap-3" role="group" aria-label={t('aria.filters')}>
         {currentCategory && (
@@ -70,7 +70,7 @@ const sortOptions = [
         ))}
       </div>
 
-      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+      <div class="flex w-full flex-wrap items-center gap-3 lg:w-auto">
         <label for="sort-select" class="sr-only">{t('aria.sortBy')}</label>
         <select
           id="sort-select"

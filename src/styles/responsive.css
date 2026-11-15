@@ -439,7 +439,7 @@ html body .editorial-hero .site-container {
 
 html body main h1,
 html body [data-hero-section] h1 {
-  font-size: clamp(26px, 7vw, 44px) !important;
+  font-size: clamp(26px, 7vw, 52px) !important;
   line-height: 1.24 !important;
   padding-top: 2px !important;
   padding-bottom: 4px !important;

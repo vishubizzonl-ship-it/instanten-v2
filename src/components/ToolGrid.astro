@@ -14,19 +14,13 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <section aria-labelledby="tools-heading" id="tools">
   <h2 id="tools-heading" class="sr-only">{t('tools.allTools')}</h2>
-  <div
-    class="grid gap-6"
-    data-directory-grid
-    style="
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      @media (min-width: 768px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      @media (min-width: 1024px) {
-        grid-template-columns: repeat(3, minmax(0, 400px));
-      }
-    "
-  >
+  <!--
+    1 → 2 → 3 columns. Pehle yahan inline `style` mein @media daala gaya tha —
+    style attribute mein at-rule valid nahi hota, browser baaki declarations
+    drop kar deta hai, isliye desktop par bhi sirf 1 column bachta tha.
+    Ab Tailwind utilities (Rule 7): mobile 1, tablet 2, desktop 3.
+  -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:gap-7" data-directory-grid>
     {tools.map((tool, index) => (
       <ToolCard
         slug={tool.slug}

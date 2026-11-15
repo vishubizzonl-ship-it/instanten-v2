@@ -1,0 +1,82 @@
+/* ==========================================================================
+ * DESKTOP POLISH — 1024px se 1920px tak
+ * --------------------------------------------------------------------------
+ * mobile.css phone par tootne wali cheezein theek karta hai. Ye file ulta
+ * taraf dekhti hai: bade screens par jo cheezein chhoti lagti hain ya design
+ * se hatak kar behave karti hain.
+ *
+ *   1. gutter bade screens par thoda bada (24px → 32px), container 1200px
+ *      waisa hi — compilefuture ka laptop container
+ *   2. h1 ka desktop type scale wapas (52px / line-height 1.19) — mobile fix
+ *      ne clamp ki max value 44px kar di thi, jisse desktop heading chhoti
+ *      dikh rahi thi
+ *   3. directory grid desktop par 3 columns, aur 1536px+ par cards ko thoda
+ *      zyada gap (12 tools ek hi nazar mein)
+ *   4. sticky filter bar desktop header (80px) ke saath flush
+ *   5. ultra-wide par content centre rehta hai, par prose/lead lines bahut
+ *      lambi nahi hoti (90ch se zyada nahi)
+ *
+ * Rule 7: sirf layout rules + compilefuture tokens, koi naya rang/font nahi.
+ * ========================================================================== */
+
+@media (min-width: 1280px) {
+  :root {
+    --spacing-gutter: 2rem;
+  }
+}
+
+@media (min-width: 1020px) {
+  /* Desktop heading: compilefuture 52px / 62px line-height, -0.03em */
+  html body main h1,
+  html body [data-hero-section] h1 {
+    line-height: 1.19 !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  /* Lead paragraph ko bhi desktop par thoda saans mile */
+  html body [data-hero-section] p {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  /* Filter bar header ke saath flush — beech mein khaali patti na dikhe */
+  #filter-bar {
+    top: var(--header-h) !important;
+  }
+
+  /* Directory grid: desktop par teen columns, bade screens par thoda gap */
+  [data-directory-grid] {
+    column-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  [data-directory-grid] {
+    column-gap: 2rem;
+    row-gap: 2rem;
+  }
+}
+
+/* Prose aur lambe paragraphs: 1920px par bhi line length padhne layak rahe --- */
+@media (min-width: 1020px) {
+  .ror-prose,
+  main article p,
+  .prose-copy p {
+    max-width: 68ch;
+  }
+
+  /* ...magar card/grid ke andar wale paragraphs poori width lene chahiye */
+  [data-tool-card] p,
+  [data-cards-grid] p,
+  .blog-card p,
+  [data-directory-grid] p {
+    max-width: none;
+  }
+}
+
+/* Desktop-only affordances: pointer wale devices par hover clear dikhe ------ */
+@media (hover: hover) and (pointer: fine) {
+  [data-directory-grid] article:hover {
+    will-change: transform;
+  }
+}
