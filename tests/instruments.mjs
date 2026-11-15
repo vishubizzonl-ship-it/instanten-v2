@@ -299,7 +299,7 @@ export function run(pages, outDir) {
       check(/max-w-\[320px\]/.test(tag), `${name}: board max-w-[320px] nahi (qibla jitna hona chahiye)`);
       if (name === 'speedometer') {
         // speedometer par dial nahi, sirf readout — square ki khaali jagah nahi
-        check(/h-\[192px\]/.test(tag), 'speedometer: readout board h-[192px] nahi');
+        check(/h-\[184px\]/.test(tag), 'speedometer: readout board h-[184px] nahi');
         check(!/aspect-square/.test(tag), 'speedometer: khaali square board wapas aa gaya');
       } else {
         check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
@@ -353,17 +353,22 @@ export function run(pages, outDir) {
     // compass: p-4 + (title 28 + status 20, mb-2) + (angle 36 + status 16+8, mb-4) + py-2 + dial 320
     const compassCard = 16 * 2 + 28 + 20 + 8 + 36 + 16 + 8 + 16 + 8 * 2 + 320;
 
-    // speedometer: p-4 + (title 28 + status 20 + buttons mt-1.5 6 + 36, mb-1.5 6)
-    //             + board 192 (mb-1.5 6) + stats 2 rows (72 each) + gap 8
-    const speedCard = 16 * 2 + 28 + 20 + 6 + 36 + 6 + 192 + 6 + 72 * 2 + 8;
+    // speedometer: p-4 + (title 28 + status 20 + buttons mt-1 4 + 36, mb-1 4)
+    //             + board 184 (mb-1 4) + stats 2 rows (72 each) + gap 8
+    const speedCard = 16 * 2 + 28 + 20 + 4 + 36 + 4 + 184 + 4 + 72 * 2 + 8;
 
-    check(Math.abs(compassCard - speedCard) <= 24, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
+    // Speedometer ka card compass card se bada nahi hona chahiye, aur itna chhota
+    // bhi nahi ki board/stats squeeze ho jayein.
+    check(speedCard <= compassCard + 8, `speedometer card compass se lamba hai: compass ${compassCard} vs ${speedCard}`);
+    check(speedCard >= 430, `speedometer card bahut chhota ho gaya: ${speedCard}px`);
+    check(compassCard - speedCard <= 48, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
 
     // structure lock: gaps kam hone chahiye
     const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
-    check(/id="speed-head" class="text-center mb-1\.5"/.test(src), 'speed-head ka mb-1.5 nahi hua');
-    check(/flex gap-2 justify-center mt-1\.5"/.test(src), 'buttons ka mt-1.5 nahi hua');
-    check(/data-instrument-stage="speedometer" class="mx-auto mb-1\.5 flex h-\[192px\]/.test(src), 'board mb-1.5 + h-[192px] nahi hai');
+    check(/id="speed-head" class="text-center mb-1"/.test(src), 'speed-head ka mb-1 nahi hua');
+    check(/flex gap-2 justify-center mt-1"/.test(src), 'buttons ka mt-1 nahi hua');
+    check(/data-instrument-stage="speedometer" class="mx-auto mb-1 flex h-\[184px\]/.test(src), 'board mb-1 + h-[184px] nahi hai');
+    check(/flex items-center justify-center gap-3 mt-1"/.test(src), 'number->unit ka gap (mt-1) nahi hai');
     // ids/behaviour intact
     for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'start-btn', 'record-btn']) {
       check(src.includes(`id="${id}"`), `speedometer: ${id} gayab ho gaya`);
