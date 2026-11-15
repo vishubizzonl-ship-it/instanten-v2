@@ -1,0 +1,223 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const keywords =
+  'online compass, online compass tool, free online compass, online compass free, compass online, compass direction, live compass, mobile compass, compass tool, digital compass, directions compass, online compass direction, online compass to find north, compass to find north, where is north, north direction, north, south, east, west, direction, online tool, online tool compass';
+
+const title = 'How to Read a Compass Dial: Degrees, Cardinal Points, Bearings';
+const description =
+  'Read any compass dial correctly. Cardinal points, degrees, bearings and declination, with worked examples and fixes for the readings people get wrong most.';
+---
+
+<Layout title={title} description={description} keywords={keywords} type="article" chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlinecompass/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Compass Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">
+      How to Read a Compass Dial: Degrees, Cardinal Points, Bearings
+    </h1>
+    <p class="text-xs text-mute font-mono mb-8">November 7, 2026</p>
+
+    <p class="text-body text-base leading-relaxed mb-4">
+      A compass dial looks simple until you need to say exactly which way you are pointing. A needle
+      tells you roughly, a number tells you precisely, and the gap between the two is what makes people
+      mistrust the reading and walk the wrong way.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      This guide takes you from a <strong>compass direction</strong> you can only guess at to a bearing
+      you can write down and follow. It covers the four anchors of the dial, how to read degrees, how to
+      turn a number into words, and two worked examples. It uses the
+      <strong>online compass</strong> on this site, but the markings are identical on a baseplate or a
+      <strong>digital compass</strong>.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Before you start: the three numbers that matter
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Every dial shows the same three things. Learn to spot them and reading a dial stops being
+      guesswork, whether you are looking at a phone screen or at a needle.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li><strong>Your heading</strong> — the number at the top mark, which is the direction you face.</li>
+      <li><strong>The cardinal marks</strong> — north, east, south and west, fixed in place around the ring.</li>
+      <li><strong>The needle or arrow</strong> — the pointer that marks north as the sensor sees it.</li>
+    </ol>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 1: Learn the four cardinal points
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Start with four words. <strong>North</strong> is the reference, <strong>east</strong> is a quarter
+      turn right, <strong>south</strong> is straight behind, and <strong>west</strong> is a quarter turn
+      left. Everything else on the dial is built on those four.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      Between them sit four in-between points — north-east, south-east, south-west and north-west —
+      which is what most people actually need when they say “roughly that way”. A
+      <strong>directions compass</strong> names all eight for you, so you do not have to remember the
+      order.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 2: Read the degrees
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Degrees run clockwise from north, from 0 to 360. A <strong>live compass</strong> shows them as a
+      live number, which is easier than counting ticks on a needle.
+    </p>
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead>
+          <tr class="bg-canvas-elevated">
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Degrees</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Direction</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Short</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="border border-hairline px-3 py-2">0° / 360°</td><td class="border border-hairline px-3 py-2">North</td><td class="border border-hairline px-3 py-2">N</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">45°</td><td class="border border-hairline px-3 py-2">North-east</td><td class="border border-hairline px-3 py-2">NE</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">90°</td><td class="border border-hairline px-3 py-2">East</td><td class="border border-hairline px-3 py-2">E</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">135°</td><td class="border border-hairline px-3 py-2">South-east</td><td class="border border-hairline px-3 py-2">SE</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">180°</td><td class="border border-hairline px-3 py-2">South</td><td class="border border-hairline px-3 py-2">S</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">225°</td><td class="border border-hairline px-3 py-2">South-west</td><td class="border border-hairline px-3 py-2">SW</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">270°</td><td class="border border-hairline px-3 py-2">West</td><td class="border border-hairline px-3 py-2">W</td></tr>
+          <tr><td class="border border-hairline px-3 py-2">315°</td><td class="border border-hairline px-3 py-2">North-west</td><td class="border border-hairline px-3 py-2">NW</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Read a <strong>mobile compass</strong> or an <strong>online compass tool</strong> the same way. If it shows 200°, you are facing slightly west
+      of south. If it shows 350°, you are almost facing north.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      Anything between two marks is just a finer <strong>online compass direction</strong>, and that
+      precision is the whole point of a number: it tells you how far to turn, not only which way.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 3: Turn a number into a bearing
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      A bearing is simply a heading you can walk along, written down so you do not have to remember it.
+      Find your target, read the degrees, and hold that number as you move.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Face the target and let the dial settle.</li>
+      <li>Note the number — say, 118°.</li>
+      <li>Walk while keeping the reading near 118°.</li>
+      <li>Re-check every few minutes, because your body drifts without a landmark.</li>
+    </ol>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 4: Know magnetic north versus true north
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Whether you use the <strong>compass online</strong> on this page or a needle in your hand, every reading points to magnetic north, while maps are drawn to true north.
+      The gap is called declination and it changes with location.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      For daily use — which wall faces the sun, which way a door opens — the uncorrected
+      <strong>north direction</strong> is close enough. For route planning on a paper map, look up the
+      local declination once and write the corrected figure down.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Step 5: Pair the dial with a map
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      A dial on its own tells you which way you face. A map tells you where you are. Put the two
+      together and you can plan a route, which is where the number finally earns its keep.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Lay the map flat and turn it until the map’s top points to the heading you just read.</li>
+      <li>Find a landmark you can see — a tower, a bridge, a hill — and mark where it sits on the map.</li>
+      <li>Read the degrees between you and your target, then walk while holding that bearing.</li>
+      <li>Repeat the check at every junction instead of trusting your memory of the last turn.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-6">
+      If you have no map, the same reading still works: note the number you left on, and you can
+      retrace your steps by walking the reverse heading, which is that value plus 180°. This trick is
+      the reason a <strong>directions compass</strong> is worth learning properly. It also explains why
+      the <strong>online compass free</strong> page keeps the number large on screen: you glance once,
+      remember one value, and keep walking.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Worked examples
+    </h2>
+    <h3 class="font-sans text-base sm:text-lg font-semibold tracking-tight text-ink mt-8 mb-2">
+      Example 1: Which way does the balcony face?
+    </h3>
+    <ol class="list-decimal pl-6 mb-4 space-y-2 text-body text-base leading-relaxed">
+      <li>Stand clear of the railing and the metal frame.</li>
+      <li>Open the <strong>online compass to find north</strong> and allow the sensor.</li>
+      <li>Face out over the balcony and read the heading.</li>
+      <li>A reading of 95° means it faces east, so the morning sun arrives there.</li>
+    </ol>
+    <h3 class="font-sans text-base sm:text-lg font-semibold tracking-tight text-ink mt-8 mb-2">
+      Example 2: Describing a direction to someone else
+    </h3>
+    <ol class="list-decimal pl-6 mb-4 space-y-2 text-body text-base leading-relaxed">
+      <li>Stand where they will stand and take a reading.</li>
+      <li>Say the number and the words together: “head 240°, south-west”.</li>
+      <li>They repeat it back, which catches most mistakes.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-6">
+      That habit is what makes a <strong>compass tool</strong> genuinely useful to a group of people
+      walking together. One number plus one
+      word beats any amount of pointing, and it works over a phone call or a radio.
+    </p>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Troubleshooting
+    </h2>
+    <div class="overflow-x-auto mb-6">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead>
+          <tr class="bg-canvas-elevated">
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Problem</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Likely cause</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Number jumps around</td>
+            <td class="border border-hairline px-3 py-2">Metal or a magnet nearby</td>
+            <td class="border border-hairline px-3 py-2">Step away, hold still, re-read</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Off by the same amount every time</td>
+            <td class="border border-hairline px-3 py-2">Sensor needs calibrating</td>
+            <td class="border border-hairline px-3 py-2">Slow figure-eight, then re-read</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Reading disagrees with the map</td>
+            <td class="border border-hairline px-3 py-2">Magnetic versus true north</td>
+            <td class="border border-hairline px-3 py-2">Apply the local declination</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      The short version
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-6">
+      Learn <strong>north</strong>, <strong>east</strong>, <strong>south</strong> and
+      <strong>west</strong> as 0°, 90°, 180° and 270°. Hold the phone flat, let the dial settle, and read
+      both the number and the word. If you want a <strong>compass to find north</strong> that runs in the
+      browser with no install, this <strong>free online compass</strong> is the quickest option — and the
+      same <strong>online tool compass</strong> answers <strong>where is north</strong> whenever you need
+      a second opinion on your own <strong>direction</strong>.
+    </p>
+  </main>
+</Layout>

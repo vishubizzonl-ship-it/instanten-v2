@@ -1,0 +1,231 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const keywords =
+  'online qibla, qibla direction, qibla direction arrow, live gibla direction online, compass qibla, find qibla direction, quick qibla direction, where is qibla direction, qibla direction compass degrees, qibla finder, qibla direction compass, online qibla direction, online qibla finder, online qibla compass, online qibla location';
+
+const title = 'Why Is My Qibla Direction Wrong? 7 Fixes That Actually Work';
+const description =
+  'The qibla direction arrow looks wrong on your phone? Seven causes, from sensor calibration to steel walls, with fixes you can try in under a minute each.';
+---
+
+<Layout title={title} description={description} keywords={keywords} type="article" chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlineqibla/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Qibla Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">
+      Why Is My Qibla Direction Wrong? 7 Fixes That Actually Work
+    </h1>
+    <p class="text-xs text-mute font-mono mb-8">November 7, 2026</p>
+    <p class="text-body text-base leading-relaxed mb-4">
+      You are facing a wall, the arrow points somewhere else, and the number on screen disagrees with the one your friend’s phone shows. Nothing is broken in the calculation — the bearing to the Kaaba is fixed arithmetic and it does not drift between two phones in the same room. What drifts is everything else.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-4">
+      This guide takes you from a <strong>qibla direction</strong> that looks wrong to one you can act on. It covers the seven causes behind a bad reading, in the order you should check them, with a fix for each and a troubleshooting table at the end. It uses the <a href="/onlineqibla/" class="text-link hover:underline">Qibla finder</a> here, and the same checks apply to any <strong>online qibla compass</strong>.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Before you start: split the reading in two
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Every reading has a bearing and a heading. The bearing comes from your coordinates — a <strong>qibla direction compass degrees</strong> value that should be identical on every device at your address. The heading comes from the sensor, and that is the part that fails.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li><strong>Bearing</strong> — calculated, stable, city-wide. Patna is about 274°, Istanbul about 152°.</li>
+      <li><strong>Heading</strong> — measured, individual, drifts by degrees or tens of degrees.</li>
+      <li>If two phones show different numbers, the bearing agrees and the heading does not.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">
+      That single split eliminates most of the panic: the <strong>qibla direction</strong> is not wrong, the compass behind it is.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 1: Calibrate the sensor
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      The most common cause by a wide margin. A phone compass is a magnetometer, and after a software update, a drop, or a few weeks of not being used it can be several degrees off. The standard fix takes five seconds.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Hold the phone and trace a figure-eight in the air, twice, slowly.</li>
+      <li>Rotate it once around each axis — flat, upright, then on its side.</li>
+      <li>Reopen the <strong>online qibla</strong> page and read the degrees value again.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">
+      On some phones opening the maps app once forces the same recalibration. Either way, if the number moves after the figure-eight, the sensor was the problem.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 2: Get away from metal and magnets
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Steel distorts a magnetic field in exactly the way that makes a <strong>qibla direction arrow</strong> point the wrong way. The usual suspects are not exotic: a metal desk, a car roof, a lift shaft, a filing cabinet, a magnetic phone case, a speaker, a fridge door.
+    </p>
+    <ul class="list-disc pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Take the case off, especially anything with a magnetic clasp or a card holder.</li>
+      <li>Step two metres from the steel object and watch whether the number snaps back.</li>
+      <li>Avoid standing under a steel beam or next to a window with a metal shutter.</li>
+    </ul>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Indoors in a modern building the frame is often the culprit. A reading taken in the middle of a room is worth more than one taken comfortably close to a wall.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 3: Let the location fix settle
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      The bearing depends on coordinates, and indoor coordinates are guesses. With no satellite fix the browser falls back to Wi-Fi and cell towers, which in a dense city can be a kilometre out — enough to shift the reading by a degree or two, and occasionally more near a boundary. A trustworthy <strong>online qibla location</strong> is the difference between a reading you can follow and a reading you keep re-checking.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Allow location for the site once, then reload instead of re-prompting.</li>
+      <li>Step outside or to a window and wait until the reading stops moving.</li>
+      <li>Ignore a <strong>live gibla direction online</strong> value that changes while you stand still — it is still settling.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">
+      If you travel, load the <strong>online qibla finder</strong> once at the hotel and note the degrees value for the city. It will not change for the rest of the stay.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 4: Check what the arrow is actually pointing at
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      A <strong>qibla direction compass</strong> has two conventions and screens mix them. Some rotate the dial and keep the arrow fixed; others keep the dial fixed and rotate the arrow. People read the wrong one and conclude the tool is broken.
+    </p>
+    <ul class="list-disc pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Fixed dial, moving arrow: turn your body until the arrow points to the top mark.</li>
+      <li>Moving dial, fixed marker: turn until the qibla mark meets the top of the screen.</li>
+      <li>Either way, the top of the screen is the direction you are facing — that is what you line up with.</li>
+    </ul>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 5: Separate true north from magnetic north
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      If you are checking the phone against a paper map or a physical needle, or comparing a <strong>compass qibla</strong> reading from a baseplate compass with the screen, you are comparing two different norths. Magnetic declination is the gap, and it is large in some places: roughly 13° in New York, 25° in Cape Town. A browser using the device heading normally reports a true bearing already, so the phone can be right while the needle looks twenty degrees off.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-4">
+      For a <strong>quick qibla direction</strong> sanity check, do not use a needle at all. Use the sun: at solar noon it is due south from the northern hemisphere, and the shadow it casts is due north.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 6: Watch for a building that bends the signal
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Some rooms simply do not give a usable magnetic reading: basements, car parks, rooms with a steel mesh in the wall, anywhere within a few metres of a lift motor. No amount of calibration fixes physics.
+    </p>
+    <ol class="list-decimal pl-6 mb-6 space-y-2 text-body text-base leading-relaxed">
+      <li>Take one reading outside the building, in the open.</li>
+      <li>Mark the direction on a floor plan or with a phone photo of a landmark.</li>
+      <li>Indoors, follow the mark rather than the arrow.</li>
+    </ol>
+    <p class="text-body text-base leading-relaxed mb-4">
+      This is why a <strong>qibla finder</strong> used properly is a two-step tool: establish the bearing outside, then carry the answer indoors.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Fix 7: Do not expect indoor precision from a phone
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      If you need to find qibla direction to the last degree, this is the limit you are working against. A calibrated phone in the open is typically within 3–5° of a true bearing, and often better. In a steel-framed building that can widen to 15° or more. Five degrees over three metres of prayer space is about 25 cm — irrelevant in practice. Fifteen degrees over the same distance is most of a metre, which is why marking the direction once, rather than re-checking it every time, is the habit that actually solves the complaint.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Worked example: a reading that "looked wrong"
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-4">
+      A user in Delhi (roughly 28.6° N, 77.2° E) reports that the <strong>online qibla direction</strong> points west-north-west and is “clearly wrong” because a friend said it should be more westerly.
+    </p>
+    <div class="overflow-x-auto mb-6">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead>
+          <tr>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Check</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Result</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Bearing from coordinates</td>
+            <td class="border border-hairline px-3 py-2">about 267°</td>
+            <td class="border border-hairline px-3 py-2">Correct for Delhi</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Phone heading after figure-eight</td>
+            <td class="border border-hairline px-3 py-2">267°</td>
+            <td class="border border-hairline px-3 py-2">Sensor now settled</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Reading before calibration</td>
+            <td class="border border-hairline px-3 py-2">281°</td>
+            <td class="border border-hairline px-3 py-2">14° of drift, now fixed</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Reading beside a steel cupboard</td>
+            <td class="border border-hairline px-3 py-2">292°</td>
+            <td class="border border-hairline px-3 py-2">Interference, not calculation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-body text-base leading-relaxed mb-4">
+      Both numbers were the same calculation. One sensor was stale, the other was standing next to steel. The <em>where is qibla direction</em> question had a calculator answer all along.
+    </p>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      Troubleshooting: symptom to cause
+    </h2>
+    <div class="overflow-x-auto mb-6">
+      <table class="w-full text-sm text-body border border-hairline">
+        <thead>
+          <tr>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Problem</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Likely cause</th>
+            <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Arrow spins on the spot</td>
+            <td class="border border-hairline px-3 py-2">Uncalibrated magnetometer</td>
+            <td class="border border-hairline px-3 py-2">Figure-eight twice, relaunch the page</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Consistently 10–20° off indoors</td>
+            <td class="border border-hairline px-3 py-2">Steel frame or nearby metal</td>
+            <td class="border border-hairline px-3 py-2">Step away from walls, or mark the direction outside</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Number jumps by tens of degrees</td>
+            <td class="border border-hairline px-3 py-2">Location still settling</td>
+            <td class="border border-hairline px-3 py-2">Wait for the GPS fix at a window</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Phone and needle disagree</td>
+            <td class="border border-hairline px-3 py-2">Declination, true vs magnetic</td>
+            <td class="border border-hairline px-3 py-2">Trust the calculated bearing; correct the needle</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Arrow points opposite to expectation</td>
+            <td class="border border-hairline px-3 py-2">Dial versus arrow convention</td>
+            <td class="border border-hairline px-3 py-2">Read the degrees value, not the graphic</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">No reading at all</td>
+            <td class="border border-hairline px-3 py-2">Location blocked</td>
+            <td class="border border-hairline px-3 py-2">Allow location for the site and reload</td>
+          </tr>
+          <tr>
+            <td class="border border-hairline px-3 py-2">Works outdoors, fails indoors</td>
+            <td class="border border-hairline px-3 py-2">Physics, not software</td>
+            <td class="border border-hairline px-3 py-2">Read once outside, mark the spot</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mt-10 mb-3">
+      The short version
+    </h2>
+    <p class="text-body text-base leading-relaxed mb-6">
+      A wrong-looking <strong>qibla direction</strong> is almost never a wrong calculation. It is an uncalibrated sensor, a metal object, a location fix still settling, or a misread arrow. Do the figure-eight, step away from steel, let the fix settle, and read the degrees value instead of the graphic — that covers the overwhelming majority of complaints.
+    </p>
+    <p class="text-body text-base leading-relaxed mb-6">
+      Open the <a href="/onlineqibla/" class="text-link hover:underline">online qibla compass</a> and work through the list in order. If the number is steady and matches the table for your city, your <strong>qibla direction</strong> is right and the wall is the thing that needs marking.
+    </p>
+  </main>
+</Layout>

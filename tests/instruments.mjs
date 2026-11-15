@@ -623,10 +623,17 @@ export function run(pages, outDir) {
       // language dropdown + theme toggle
       check(navHtml.includes('id="tool-lang-menu"'), `${slug}/${lang}: language dropdown nahi`);
       check(navHtml.includes('id="tool-theme-btn"'), `${slug}/${lang}: theme toggle nahi`);
-      // company links usi locale par
+      // company links TOOL KE APNE silo par jaate hain (site-wide pages par nahi):
+      // /<lang>/<tool>/blog|about|privacy|terms|contact/ — warna user tool se
+      // bahar nikal jaata tha (user ki shikayat).
       const prefix = lang === 'en' ? '' : `/${lang}`;
-      for (const path of ['/blog/', '/about/', '/privacy-policy/', '/terms/', '/contact/']) {
-        check(navHtml.includes(`href="${prefix}${path}"`), `${slug}/${lang}: nav mein ${path} link nahi`);
+      for (const page of ['blog', 'about', 'privacy', 'terms', 'contact']) {
+        const href = `${prefix}/${slug}/${page}/`;
+        check(navHtml.includes(`href="${href}"`), `${slug}/${lang}: nav mein tool ka silo link nahi — ${href}`);
+        check(
+          !navHtml.includes(`href="${prefix}/${page === 'privacy' ? 'privacy-policy' : page}/"`),
+          `${slug}/${lang}: nav mein site-wide /${page}/ link bacha hua hai`
+        );
       }
 
       // tool card sabse upar: article ke andar pehla section hi #tool ho
@@ -643,6 +650,33 @@ export function run(pages, outDir) {
       // visible breadcrumb nahi (screenshot jaisa), schema mein hai
       check(!/<nav class="breadcrumbs/.test(article), `${slug}/${lang}: breadcrumb abhi bhi page par hai`);
     }
+  }
+
+  // --- 12c2. Har tool ke apne silo pages (about/blog/contact/privacy/terms) ---
+  {
+    const SILO_PAGES = ['about', 'blog', 'contact', 'privacy', 'terms'];
+    const LANGS = ['en', 'de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
+    let checked = 0;
+    for (const slug of SLUGS) {
+      for (const lang of LANGS) {
+        const base = lang === 'en' ? '' : `/${lang}`;
+        for (const page of SILO_PAGES) {
+          const url = `${base}/${slug}/${page}/`;
+          const html = pages.get(url);
+          check(Boolean(html), `silo page missing: ${url}`);
+          if (!html) continue;
+          checked++;
+          // tool ka hi chrome + silo se wapas tool par link
+          check(html.includes('data-nav-pill'), `${url}: instrument nav nahi`);
+          check(html.includes(`href="${base}/${slug}/"`), `${url}: tool par wapas jaane wala link nahi`);
+          // page khud ka title/description rakhta hai
+          const title = (html.match(/<title>([^<]*)<\/title>/i) ?? [, ''])[1];
+          check(title.length >= 10, `${url}: title khaali/chhota hai`);
+          check(/<meta name="description" content="[^"]{10,}"/.test(html), `${url}: description missing/chhota`);
+        }
+      }
+    }
+    check(checked === SLUGS.length * LANGS.length * SILO_PAGES.length, `silo pages count galat: ${checked}`);
   }
 
   // --- 12d. prose mein HTML tags literal text ban ke nahi dikhte ----------

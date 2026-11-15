@@ -1,0 +1,43 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LegalSections from '../../LegalSections.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { supportCopy } from '../../../i18n/supportCopy';
+import { bubbleSupport } from '../../../i18n/instruments/bubbleSupport';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const copy = supportCopy[lang] ?? supportCopy.en;
+const bubble = bubbleSupport[lang] ?? bubbleSupport.en;
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://instanten.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Online Bubble Level', item: 'https://instanten.com/onlinebubblelevel/' },
+    { '@type': 'ListItem', position: 3, name: 'Privacy', item: 'https://instanten.com/onlinebubblelevel/privacy/' },
+  ],
+};
+---
+<Layout
+  title={t('page.privacy.title')}
+  description={bubble.aboutDesc}
+  keywords={bubble.keywords}
+  ogImage="/og-bubble-level.png"
+  ogImageAlt={t('page.privacy.title')}
+  breadcrumbLd={breadcrumbLd} chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a href={translatePath('/onlinebubblelevel/')} class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← {bubble.back}</a>
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-2">{t('page.privacy.title')}</h1>
+    <p class="text-xs text-mute font-mono mb-8">{copy.updated}</p>
+
+    <LegalSections
+      sections={copy.privacy.sections}
+      contactHref={translatePath('/onlinebubblelevel/contact/')}
+      contactLabel={copy.contactLink}
+      contactCta={copy.about.contactCta}
+    />
+  </main>
+</Layout>

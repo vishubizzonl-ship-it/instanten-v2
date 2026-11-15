@@ -1,0 +1,33 @@
+---
+/**
+ * Localised silo pages: /<lang>/onlinecompass/about|blog|contact|privacy|terms/
+ * (English ke URLs prefix-free rehte hain — /onlinecompass/about/).
+ *
+ * Har page component locale Astro.url se padhta hai, isliye wahi markup saari
+ * bhashaon mein render hota hai; copy i18n files se aati hai.
+ */
+import CompassAboutPage from '../../../components/pages/compass/CompassAboutPage.astro';
+import CompassBlogIndexPage from '../../../components/pages/compass/CompassBlogIndexPage.astro';
+import CompassContactPage from '../../../components/pages/compass/CompassContactPage.astro';
+import CompassPrivacyPage from '../../../components/pages/compass/CompassPrivacyPage.astro';
+import CompassTermsPage from '../../../components/pages/compass/CompassTermsPage.astro';
+
+export function getStaticPaths() {
+  const locales = ['es', 'ja', 'fr', 'de', 'pt', 'ko', 'it', 'nl', 'sv'];
+  const pages = ['about', 'blog', 'contact', 'privacy', 'terms'];
+  return locales.flatMap((lang) => pages.map((page) => ({ params: { lang, page } })));
+}
+
+const components = {
+  about: CompassAboutPage,
+  blog: CompassBlogIndexPage,
+  contact: CompassContactPage,
+  privacy: CompassPrivacyPage,
+  terms: CompassTermsPage,
+} as const;
+
+const { page } = Astro.params as { page: keyof typeof components };
+const Page = components[page];
+---
+
+<Page />
