@@ -460,6 +460,39 @@ export function run(pages, outDir) {
     check(html.includes('id="bubble-area"'), 'build: bubble-area gayab');
   }
 
+  // --- 10n. Fullscreen: chaaron tools par koi layout change nahi ----------
+  {
+    const cards = {
+      compass: 'src/components/instruments/CompassIsland.astro',
+      bubble: 'src/components/instruments/BubbleIsland.astro',
+      qibla: 'src/components/instruments/QiblaIsland.astro',
+      speedometer: 'src/components/instruments/SpeedometerIsland.astro',
+    };
+    const required = ['[&:fullscreen]:flex', '[&:fullscreen]:flex-col', '[&:fullscreen]:items-center', '[&:fullscreen]:justify-center', '[&:fullscreen]:w-full', '[&:fullscreen]:h-full'];
+    for (const [name, rel] of Object.entries(cards)) {
+      const src = readFileSync(rel, 'utf8');
+      const card = src.match(/id="(?:compass|bubble|qibla|speed)-card"[^>]*/)?.[0] ?? '';
+      for (const cls of required) check(card.includes(cls), `${name}: card par ${cls} nahi`);
+      // fullscreen par koi size/layout override nahi (sirf card fill + center)
+      check(!/\[&:fullscreen\]:scale/.test(card), `${name}: fullscreen par scale hota hai`);
+      check(!/\[&:fullscreen\]>\*\]/.test(card), `${name}: fullscreen par children ka layout badalta hai`);
+      check(!/fullscreen\]:overflow-hidden/.test(card), `${name}: fullscreen par overflow-hidden hai`);
+    }
+    // speedometer: purana centreFullscreen() measurement JS + fullscreen-only
+    // records panel nahi hona chahiye
+    const speedSrc = readFileSync(cards.speedometer, 'utf8');
+    check(!speedSrc.includes('centreFullscreen'), 'speedometer: centreFullscreen() JS bacha hua hai');
+    check(!speedSrc.includes('records-in-card'), 'speedometer: fullscreen-only records panel bacha hua hai');
+    check(!speedSrc.includes('records-list-card'), 'speedometer: records list ka duplicate copy bacha hua hai');
+    check(/addEventListener\('fullscreenchange', syncFsIcon\)/.test(speedSrc), 'speedometer: fullscreenchange par sirf icon sync nahi hai');
+    // records feature (page ke andar wali list) intact
+    check(speedSrc.includes('id="records-list"'), 'speedometer: records-list gayab');
+    // build
+    const html = pages.get('/onlinespeedometer/') ?? '';
+    check(!html.includes('records-in-card'), 'build: records-in-card abhi bhi hai');
+    check(html.includes('id="records-list"'), 'build: records-list gayab');
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
