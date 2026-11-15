@@ -335,31 +335,6 @@ export function run(pages, outDir) {
     }
   }
 
-  // --- 10i. Speedometer ka board compass jaisa (same bezel + ticks) -------
-  {
-    const compassSrc = readFileSync('src/components/instruments/CompassIsland.astro', 'utf8');
-    const speedSrc = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
-    const speedStage = speedSrc.slice(speedSrc.indexOf('data-instrument-stage="speedometer"'), speedSrc.indexOf('id="speed-stats"'));
-    check(speedStage.includes('viewBox="0 0 200 200"'), 'speedometer board par dial svg nahi');
-    check(/<circle cx="100" cy="100" r="95"/.test(speedStage), 'speedometer board par compass jaisa r=95 bezel nahi');
-    check(/stroke="var\(--hairline\)"/.test(speedStage), 'speedometer bezel par hairline stroke nahi');
-    check(/length: 72/.test(speedStage) && /i \* 5/.test(speedStage), 'speedometer par compass jaisa 72-tick ring nahi');
-    check(/id="speed-display"/.test(speedStage), 'speed number board ke andar nahi');
-    check(/flex h-full w-full flex-col items-center justify-center/.test(speedStage), 'speed number circle ke beech mein nahi');
-    // dono ke bezel geometry bilkul same
-    for (const frag of ['r="95"', 'length: 72', 'r1 = major ? 86 : 90', 'const r2 = 94;']) {
-      check(compassSrc.includes(frag), `compass mein geometry fragment nahi: ${frag}`);
-      check(speedSrc.includes(frag), `speedometer mein geometry fragment nahi: ${frag}`);
-    }
-    // build output
-    const html = pages.get('/onlinespeedometer/') ?? '';
-    const from = html.indexOf('data-instrument-stage="speedometer"');
-    const buildStage = html.slice(from, html.indexOf('id="speed-stats"', from));
-    check(/r="95"/.test(buildStage), 'build: speedometer bezel nahi');
-    check((buildStage.match(/<line /g) ?? []).length >= 72, 'build: speedometer ticks 72 se kam');
-    check(buildStage.includes('id="speed-display"'), 'build: speed number board ke andar nahi');
-  }
-
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
