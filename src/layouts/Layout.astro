@@ -186,6 +186,35 @@ gtag('config', ${JSON.stringify(GA_MEASUREMENT_ID)}, {
         };
 
         applyTheme(theme);
+
+        /**
+         * Ek hi theme API har page par (sensor tool pages ka apna nav bhi isi ko
+         * use karta hai; wahan ThemeToggle component hota hi nahi). Isse light/
+         * dark ka chunav poore site par same rehta hai — key `theme`.
+         */
+        window.InstantenTheme = {
+          key: 'theme',
+          get() {
+            const now = localStorage.getItem('theme');
+            if (now === 'dark' || now === 'light') return now;
+            return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+          },
+          set(mode) {
+            const next = mode === 'dark' ? 'dark' : 'light';
+            applyTheme(next);
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+            window.dispatchEvent(new CustomEvent('instanten:theme', { detail: { mode: next } }));
+            return next;
+          },
+          toggle() {
+            return this.set(this.get() === 'dark' ? 'light' : 'dark');
+          },
+        };
+
         document.addEventListener('DOMContentLoaded', () => applyTheme(localStorage.getItem('theme') || theme));
         document.addEventListener('astro:after-swap', () => applyTheme(localStorage.getItem('theme') || 'light'));
       })();

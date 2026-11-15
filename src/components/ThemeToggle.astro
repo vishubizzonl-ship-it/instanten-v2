@@ -222,4 +222,11 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 
   bindCompileFutureThemeToggles();
   document.addEventListener('astro:page-load', bindCompileFutureThemeToggles);
+
+  // Ek hi theme API poori site ke liye (sensor pages ka toggle bhi isi ko
+  // use karta hai), aur saved theme is page par bhi lagao.
+  import('../scripts/theme.js').then((theme) => {
+    theme.installThemeApi();
+    theme.initTheme();
+  });
 </script>

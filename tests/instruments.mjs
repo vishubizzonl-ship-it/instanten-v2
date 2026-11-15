@@ -228,6 +228,61 @@ export function run(pages, outDir) {
     check(/:fullscreen\{justify-content:center\}/.test(cssBundle), 'fullscreen justify-content:center rule compile nahi hua');
   }
 
+  // --- 10e. Fullscreen button: koi rounded box nahi, sirf icon -----------
+  {
+    const ids = { onlinecompass: 'compass-fullscreen-btn', onlinebubblelevel: 'bubble-fullscreen-btn', onlineqibla: 'qibla-fullscreen-btn', onlinespeedometer: 'speed-fullscreen-btn' };
+    for (const [slug, id] of Object.entries(ids)) {
+      const html = pages.get(`/${slug}/`) ?? '';
+      const tag = html.match(new RegExp(`<button[^>]*id="${id}"[^>]*>`))?.[0] ?? '';
+      check(Boolean(tag), `${slug}: ${id} nahi mila`);
+      check(/rounded-none/.test(tag), `${slug}: fullscreen button par rounded box hai`);
+      check(/border-0/.test(tag), `${slug}: fullscreen button par border hai`);
+      check(/bg-transparent/.test(tag), `${slug}: fullscreen button par background hai`);
+      check(/w-10 h-10/.test(tag), `${slug}: fullscreen button ka tap area 40px nahi`);
+      check(/aria-label="[^"]+"/.test(tag), `${slug}: fullscreen button par aria-label nahi`);
+    }
+  }
+
+  // --- 10f. Theme: ek hi key, har page par, dono toggles ek API se --------
+  {
+    // (a) har page ke <head> mein paint se pehle saved theme lagti hai
+    const sample = ['/', '/onlinecompass/', '/onlineqibla/', '/tools/json-formatter/', '/de/', '/blog/', '/search/', '/404.html'];
+    for (const url of sample) {
+      const html = pages.get(url) ?? '';
+      const head = html.slice(0, html.indexOf('</head>'));
+      check(head.includes("localStorage.getItem('theme')"), `${url}: head mein saved-theme script nahi`);
+      check(head.includes('prefers-color-scheme'), `${url}: system preference fallback nahi`);
+      check(/applyTheme\(theme\)/.test(head), `${url}: paint se pehle theme apply nahi hoti`);
+      check(/classList\.toggle\('dark'/.test(head), `${url}: dark class set nahi hoti`);
+      check(/setAttribute\('data-theme'/.test(head), `${url}: data-theme set nahi hota`);
+    }
+
+    // (b) shared API har page ke head mein install hoti hai (sensor pages par
+    // ThemeToggle component nahi hota, isliye API head script se aati hai)
+    for (const url of sample) {
+      const head = (pages.get(url) ?? '').slice(0, (pages.get(url) ?? '').indexOf('</head>'));
+      check(head.includes('window.InstantenTheme'), `${url}: head mein InstantenTheme API nahi`);
+      check(/set\(mode\)/.test(head) && /toggle\(\)/.test(head), `${url}: API mein set/toggle nahi`);
+    }
+
+    // (c) sensor nav ka toggle bhi wahi API use karta hai (source lock)
+    const navSource = readFileSync('src/components/instruments/InstrumentNav.astro', 'utf8');
+    check(navSource.includes('window.InstantenTheme'), 'InstrumentNav toggle shared theme API use nahi karta');
+    check(!/html\.classList\.toggle\('dark', !dark\);\n\s*\/\/ instanten/.test(navSource), 'InstrumentNav sirf html.dark toggle karta hai');
+
+    // (d) theme.js ke exports maujood hain
+    const themeSrc = readFileSync('src/scripts/theme.js', 'utf8');
+    for (const fn of ['export function setTheme', 'export function initTheme', 'export function toggleTheme', 'export function installThemeApi']) {
+      check(themeSrc.includes(fn), `src/scripts/theme.js mein ${fn} nahi`);
+    }
+    check(themeSrc.includes("const THEME_KEY = 'theme'") || themeSrc.includes("THEME_KEY = 'theme'"), 'theme key "theme" nahi');
+    // dono jagah same key likhi jaaye
+    for (const rel of ['src/layouts/Layout.astro', 'src/components/ThemeToggle.astro']) {
+      const src = readFileSync(rel, 'utf8');
+      check(src.includes("'theme'") || src.includes('theme.js'), `${rel}: theme key/API wire nahi hai`);
+    }
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
