@@ -23,20 +23,45 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             </div>
           </div>
 
-          <div data-instrument-stage="speedometer" class="mx-auto mb-4 flex w-full max-w-[320px] aspect-square lg:w-80 lg:h-80 flex-col items-center justify-center text-center">
-            <p class="text-5xl lg:text-6xl font-semibold tracking-tighter text-ink tabular-nums transition-transform duration-200 origin-center" id="speed-display">0</p>
-            <div class="flex items-center justify-center gap-3 mt-2">
-              <p class="text-sm text-muted font-mono" id="speed-unit">KM/H</p>
-              <div class="relative" id="unit-dropdown-wrapper">
-                <button onclick="toggleUnitMenu()" id="unit-btn" class="inline-flex items-center gap-1.5 rounded-sm bg-surface border border-hairline text-ink text-xs font-medium px-3 py-1.5 hover:border-ink/20 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none" aria-label={ui['speed.ui.changeUnit']} aria-expanded="false" aria-haspopup="true">
-                  <span id="unit-label">KM/H</span>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
-                </button>
-                <div id="unit-menu" class="hidden absolute right-0 top-full mt-2 w-32 bg-surface border border-hairline rounded-md shadow-lg overflow-hidden z-50">
-                  <button onclick="selectUnit(0)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KM/H</button>
-                  <button onclick="selectUnit(1)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">MPH</button>
-                  <button onclick="selectUnit(2)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">M/S</button>
-                  <button onclick="selectUnit(3)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KN</button>
+          <!-- Board ka size compass/qibla ke dial jaisa hi hai (320px square):
+               wahi bezel (r=95 circle + 72 tick) taaki teeno tools ek jaise
+               size ke dikhein. Number circle ke beech mein baithta hai. -->
+          <div data-instrument-stage="speedometer" class="relative mx-auto mb-4 w-full max-w-[320px] aspect-square lg:w-80 lg:h-80">
+            <svg viewBox="0 0 200 200" class="absolute inset-0 h-full w-full" aria-hidden="true">
+              <defs>
+                <radialGradient id="speed-grad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="var(--canvas)" />
+                  <stop offset="100%" stop-color="var(--surface)" />
+                </radialGradient>
+              </defs>
+              <circle cx="100" cy="100" r="95" fill="url(#speed-grad)" stroke="var(--hairline)" stroke-width="1" />
+              {Array.from({ length: 72 }, (_, i) => i * 5).map((deg) => {
+                const major = deg % 10 === 0;
+                const r1 = major ? 86 : 90;
+                const r2 = 94;
+                const rad = (deg * Math.PI) / 180;
+                const x1 = 100 + r1 * Math.sin(rad);
+                const y1 = 100 - r1 * Math.cos(rad);
+                const x2 = 100 + r2 * Math.sin(rad);
+                const y2 = 100 - r2 * Math.cos(rad);
+                return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--muted)" stroke-width={major ? 1.5 : 0.7} opacity={major ? 0.9 : 0.4} />;
+              })}
+            </svg>
+            <div class="relative z-10 flex h-full w-full flex-col items-center justify-center text-center">
+              <p class="text-5xl lg:text-6xl font-semibold tracking-tighter text-ink tabular-nums transition-transform duration-200 origin-center" id="speed-display">0</p>
+              <div class="flex items-center justify-center gap-3 mt-2">
+                <p class="text-sm text-muted font-mono" id="speed-unit">KM/H</p>
+                <div class="relative" id="unit-dropdown-wrapper">
+                  <button onclick="toggleUnitMenu()" id="unit-btn" class="inline-flex items-center gap-1.5 rounded-sm bg-surface border border-hairline text-ink text-xs font-medium px-3 py-1.5 hover:border-ink/20 transition-colors focus-visible:ring-2 focus-visible:ring-accent-soft focus-visible:outline-none" aria-label={ui['speed.ui.changeUnit']} aria-expanded="false" aria-haspopup="true">
+                    <span id="unit-label">KM/H</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+                  </button>
+                  <div id="unit-menu" class="hidden absolute right-0 top-full mt-2 w-32 bg-surface border border-hairline rounded-md shadow-lg overflow-hidden z-50">
+                    <button onclick="selectUnit(0)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KM/H</button>
+                    <button onclick="selectUnit(1)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">MPH</button>
+                    <button onclick="selectUnit(2)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">M/S</button>
+                    <button onclick="selectUnit(3)" class="flex w-full items-center justify-between px-4 py-2.5 text-sm text-body hover:text-ink hover:bg-canvas transition-colors">KN</button>
+                  </div>
                 </div>
               </div>
             </div>
