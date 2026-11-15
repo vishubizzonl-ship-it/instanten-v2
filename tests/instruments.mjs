@@ -167,6 +167,19 @@ export function run(pages) {
     check(listed.length === SLUGS.length, `/${lang}/tools/ par ${SLUGS.length - listed.length} sensor card gayab`);
   }
 
+  // --- 10b. Sensor pages ka side spacing original (compassinstant) jaisa --
+  // compassinstant par content ke gutters mobile 24px (px-6), desktop 32px
+  // (lg:px-8) thay. instanten-v2 merge ke baad 12-16px ho gaye the.
+  const SENSOR_PAGES = SLUGS.flatMap((slug) => [slug, ...LOCALES.filter((l) => l !== 'en').map((l) => `${l}/${slug}`)]);
+  for (const page of SENSOR_PAGES) {
+    const html = pages.get(`/${page}/`);
+    if (!html) continue;
+    const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+    check(main.includes('mx-auto max-w-[48rem] px-6 lg:px-8'), `/${page}/: content ka original gutter (px-6 lg:px-8) nahi hai`);
+    check(!main.includes('px-4 sm:px-6 lg:px-0'), `/${page}/: content par purana patla gutter (px-4) wapas aa gaya`);
+    check(!main.includes('px-3 pb-2 pt-3'), `/${page}/: mobile gutter 24px se chhota (px-3) hai`);
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
@@ -269,10 +282,11 @@ export function run(pages) {
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
     const article = html.slice(html.indexOf('<article'));
-    // prose sections aur tool card dono par mobile horizontal padding
-    check(/class="px-3 pb-2 pt-3 sm:px-6 sm:pt-4 lg:px-8"/.test(article), `${slug}: tool card par mobile gutter nahi`);
+    // prose sections aur tool card dono par original (compassinstant) gutter:
+    // mobile 24px (px-6), desktop 32px (lg:px-8)
+    check(/class="px-6 pb-2 pt-3 lg:px-8"/.test(article), `${slug}: tool card par original mobile gutter (24px) nahi`);
     // how-to-use + about + (guides) + (faq) — compass par sirf do hain
-    check((article.match(/px-4 sm:px-6/g) ?? []).length >= 2, `${slug}: prose sections par mobile gutter nahi`);
+    check((article.match(/mx-auto max-w-\[48rem\] px-6 lg:px-8/g) ?? []).length >= 2, `${slug}: prose sections par original gutter nahi`);
     // pills mobile par ek row mein: chaaron pills ke liye nowrap + chhota text
     const nav = html.slice(html.indexOf('<body'), html.indexOf('</nav>'));
     const pills = nav.match(/whitespace-nowrap rounded-full px-2\.5 py-1 text-\[11px\]/g) ?? [];
