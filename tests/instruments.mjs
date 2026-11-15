@@ -283,6 +283,58 @@ export function run(pages, outDir) {
     }
   }
 
+  // --- 10g. Board size: chaaron tools qibla ke 320px board par -------------
+  {
+    const stageFiles = {
+      compass: 'src/components/instruments/CompassIsland.astro',
+      bubble: 'src/components/instruments/BubbleIsland.astro',
+      qibla: 'src/components/instruments/QiblaIsland.astro',
+      speedometer: 'src/components/instruments/SpeedometerIsland.astro',
+    };
+    const sizes = {};
+    for (const [name, rel] of Object.entries(stageFiles)) {
+      const src = readFileSync(rel, 'utf8');
+      const tag = src.match(new RegExp(`<div[^>]*data-instrument-stage="${name}"[^>]*>`))?.[0] ?? '';
+      check(Boolean(tag), `${name}: data-instrument-stage marker nahi mila`);
+      check(/max-w-\[320px\]/.test(tag), `${name}: board max-w-[320px] nahi (qibla jitna hona chahiye)`);
+      check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
+      check(/aspect-square/.test(tag), `${name}: board aspect-square nahi`);
+      // fullscreen par board ka size badalna nahi chahiye
+      check(!/\[&:fullscreen\]:[wh]-/.test(tag), `${name}: fullscreen par board ka size badalta hai`);
+      check(!/\[&:fullscreen\]:scale/.test(tag), `${name}: fullscreen par board scale hota hai`);
+      check(!/max-w-\[300px\]/.test(src), `${name}: purana 300px board bacha hua hai`);
+      sizes[name] = (tag.match(/max-w-\[\d+px\]/g) ?? []).join(',');
+    }
+    const unique = new Set(Object.values(sizes));
+    check(unique.size === 1, `boards ke size alag hain: ${JSON.stringify(sizes)}`);
+
+    // card padding bhi chaaron par same (qibla jaisa p-4 lg:p-6)
+    for (const [name, rel] of Object.entries(stageFiles)) {
+      const src = readFileSync(rel, 'utf8');
+      const card = src.match(/id="(?:compass|bubble|qibla|speed)-card"[^>]*/)?.[0] ?? '';
+      check(/p-4/.test(card), `${name}: card par p-4 nahi`);
+      check(/lg:p-6/.test(card), `${name}: card par lg:p-6 nahi`);
+      check(!/lg:p-8/.test(card) && !/sm:p-6/.test(card), `${name}: card padding qibla se alag hai`);
+    }
+  }
+
+  // --- 10h. Fullscreen par bhi board ka size wahi rehta hai (build) --------
+  {
+    const cssFiles = readdirSync('dist/_astro').filter((f) => f.endsWith('.css'));
+    check(cssFiles.length > 0, 'dist/_astro mein koi CSS nahi');
+    const css = cssFiles.map((f) => readFileSync(join('dist/_astro', f), 'utf8')).join('\n');
+    check(/:fullscreen[^{]*\{[^}]*align-items:center/.test(css), 'compiled CSS mein :fullscreen align-items:center nahi');
+    check(/:fullscreen[^{]*\{[^}]*justify-content:center/.test(css), 'compiled CSS mein :fullscreen justify-content:center nahi');
+    // 320px board mobile par bhi, fullscreen mein bhi — koi fullscreen width override nahi
+    check(!/\.max-w-\\\[320px\\\][^}]*fullscreen/.test(css), 'fullscreen board width override mila');
+    const pages_ = ['/onlinecompass/', '/onlinebubblelevel/', '/onlineqibla/', '/onlinespeedometer/'];
+    for (const url of pages_) {
+      const html = pages.get(url) ?? '';
+      check(/data-instrument-stage="/.test(html), `${url}: board marker build mein nahi`);
+      check(/max-w-\[320px\]/.test(html), `${url}: 320px board build mein nahi`);
+    }
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
