@@ -60,8 +60,9 @@ export function run(pages, outDir) {
     // --- 5. recovery links -------------------------------------------------
     const links = [...html.matchAll(/<a\b[^>]*href="([^"]*)"/g)].map((m) => m[1]);
     check(links.includes('/'), `${code}.html se home ka link nahi hai`);
-    check(links.includes('/tools/'), `${code}.html se /tools/ ka link nahi hai`);
-    check(links.includes('/tools/') && links.filter((l) => /^\/tools\/[a-z0-9-]+\/$/.test(l)).length >= 0, `${code}: tool links`);
+    // /tools/ hub hata diya — recovery link home (filter) par jaata hai
+    check(!links.includes('/tools/'), `${code}.html abhi bhi hataye /tools/ hub par link karta hai`);
+    check(links.some((l) => l === '/' || /^\/tools\/[a-z0-9-]+\/$/.test(l)), `${code}: tool links nahi`);
 
     // 404 par popular tools ke cards hone chahiye (exit route)
     if (code === '404') {

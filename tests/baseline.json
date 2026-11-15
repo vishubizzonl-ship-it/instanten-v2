@@ -1,11 +1,11 @@
 {
   "site-integrity": {
-    "meta description missing/chhota": 105,
-    "title length N (N-N chahiye)": 12,
+    "meta description missing/chhota": 80,
+    "title length N (N-N chahiye)": 2,
     "canonical galat": 60
   },
   "links": {
-    "broken link": 1560
+    "broken link": 1550
   },
   "i18n-silo": {
     "page missing": 9,
@@ -35,5 +35,6 @@
   "rules": {},
   "i18n-hreflang": {},
   "mobile": {},
-  "desktop": {}
+  "desktop": {},
+  "library-filter": {}
 }

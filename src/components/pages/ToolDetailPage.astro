@@ -148,10 +148,12 @@ const jsonLd = {
 const faqs = lang === 'en' ? (toolFaqs[tool.data.slug] ?? []) : [];
 const faqHeading = `Frequently asked questions about ${localized.name}`;
 
+// Browse pages hata diye: breadcrumb ke links home par wahi filter kholte hain.
+// "All Tools" hub hata diya — Home > Category > Tool (category link home par
+// wahi filter kholta hai). Browse pages delete ho chuke hain.
 const breadcrumbs = [
   { label: t('nav.home'), href: '/' },
-  { label: t('tools.allTools'), href: '/tools/' },
-  { label: categoryLabel, href: `/category/${categorySlug}/` },
+  { label: categoryLabel, href: `/?category=${categorySlug}` },
   { label: localized.name },
 ];
 ---
@@ -175,8 +177,9 @@ const breadcrumbs = [
   <article class="site-container py-section max-w-4xl">
     <header class="mb-10">
       <div class="flex flex-wrap items-center gap-2 mb-4">
-        <a href={translatePath(`/category/${categorySlug}/`)} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{categoryLabel}</a>
-        <a href={translatePath(`/pricing/${pricingSlug(pricing)}/`)} class={`text-caption font-medium px-2 py-0.5 rounded-[6px] transition-opacity hover:opacity-75 ${pricingColors[pricing]}`}>{pricingLabel}</a>
+        {/* category/site pages hata diye — link home par wahi filter kholta hai */}
+        <a href={translatePath(`/?category=${categorySlug}`)} class="text-caption text-muted font-medium uppercase tracking-wide hover:text-ink transition-colors">{categoryLabel}</a>
+        <a href={translatePath(`/?pricing=${pricing}`)} class={`text-caption font-medium px-2 py-0.5 rounded-[6px] transition-opacity hover:opacity-75 ${pricingColors[pricing]}`}>{pricingLabel}</a>
         {featured && <span class="text-caption font-medium px-2 py-0.5 rounded-full bg-accent/90 text-canvas">{t('tools.featured')}</span>}
       </div>
       <h1 class="font-display font-semibold text-display text-ink mb-4">{localized.name}</h1>
@@ -322,7 +325,7 @@ const breadcrumbs = [
           {maker && (
             <div>
               <dt class="text-caption text-muted uppercase tracking-wide mb-1">{t('tools.maker')}</dt>
-              <dd class="text-body-md text-ink"><a href={translatePath(`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`)} class="hover:text-accent-deep transition-colors">{maker}</a></dd>
+              <dd class="text-body-md text-ink">{maker}</dd>
             </div>
           )}
           {addedDate && (

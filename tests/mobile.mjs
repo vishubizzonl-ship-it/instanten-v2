@@ -311,7 +311,7 @@ export function run(pages, outDir) {
   /* ---------- Counts ---------------------------------------------------- */
   check(toolPages >= 48, `sirf ${toolPages} tool pages mile (interactive tools) — build adhoora?`);
   check(hubPages >= 24, `sirf ${hubPages} hub pages mile — build adhoora?`);
-  check(pages.size >= 1000, `sirf ${pages.size} pages build hue`);
+  check(pages.size >= 800, `sirf ${pages.size} pages build hue`);
 
   return suite;
 }

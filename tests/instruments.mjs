@@ -142,8 +142,9 @@ export function run(pages) {
   }
 
   // --- 9. hub par chaaron cards, aur koi tool list se gayab nahi ---------
-  const hub = pages.get('/tools/') ?? '';
-  check(Boolean(hub), '/tools/ page nahi mila');
+  // /tools/ hub hata diya — cards home (filter) par hain
+  const hub = pages.get('/') ?? '';
+  check(Boolean(hub), 'home page nahi mila');
   for (const slug of SLUGS) {
     check(hub.includes(`href="/${slug}/"`), `/tools/ par ${slug} ka card nahi`);
   }
@@ -161,7 +162,7 @@ export function run(pages) {
 
   // --- 10. localized card naam English se alag hai (7 locales) ----------
   for (const lang of LOCALES.filter((l) => !['en', 'nl', 'sv'].includes(l))) {
-    const langHub = pages.get(`/${lang}/tools/`) ?? '';
+    const langHub = pages.get(`/${lang}/`) ?? '';
     const listed = SLUGS.filter((slug) => langHub.includes(`href="/${lang}/${slug}/"`));
     check(listed.length === SLUGS.length, `/${lang}/tools/ par ${SLUGS.length - listed.length} sensor card gayab`);
   }
@@ -279,7 +280,7 @@ export function run(pages) {
   }
 
   // --- 12c. baaki site ka header waise hi (instrument chrome sirf 4 pages par) ---
-  for (const url of ['/', '/tools/', '/blog/', '/about/']) {
+  for (const url of ['/', '/blog/', '/about/', '/search/']) {
     const html = pages.get(url) ?? '';
     check(!html.includes('data-nav-pill'), `${url}: instrument nav site-wide leak ho gaya`);
   }

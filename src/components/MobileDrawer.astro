@@ -13,11 +13,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
+// Browse pages (/tools/, /categories/, /pricing/, /makers/) hata diye gaye —
+// saare tools home par ek jagah hain aur wahin filter se chhantte hain.
 const navLinks = [
-  { href: '/tools/', label: t('tools.allTools') },
-  { href: '/categories/', label: t('nav.categories') },
-  { href: '/pricing/', label: t('nav.pricing') },
-  { href: '/makers/', label: t('nav.makers') },
+  { href: '/', label: t('tools.allTools') },
   { href: '/about/', label: t('nav.about') },
   { href: '/blog/', label: t('nav.blog') },
   { href: '/contact/', label: t('nav.contact') },
@@ -94,7 +93,7 @@ const socialLinks = [
         {categories.map((cat, index) => (
           <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === categories.length - 1}>
             <a
-              href={translatePath(`/category/${cat.slug}/`)}
+              href={translatePath(`/?category=${cat.slug}`)}
               data-menu-link
               class="cs-offcanvas__link flex min-h-10 items-center rounded-md px-3 py-2 text-body transition-colors hover:text-muted"
               style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"

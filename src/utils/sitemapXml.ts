@@ -29,11 +29,7 @@ export async function buildSitemapEntries(baseUrl: string, siteName = 'Instanten
     { route: '/terms/', changefreq: 'monthly', priority: '0.7' },
     { route: '/submit/', changefreq: 'monthly', priority: '0.7' },
     { route: '/search/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/categories/', changefreq: 'weekly', priority: '0.8' },
     { route: '/tags/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/makers/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/pricing/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/tools/', changefreq: 'daily', priority: '0.9' },
     { route: '/page/1/', changefreq: 'weekly', priority: '0.7' },
     { route: '/page/2/', changefreq: 'weekly', priority: '0.7' },
   ];

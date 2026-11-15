@@ -27,7 +27,7 @@ export const REQUESTED_LOCALES = {
 export const ALL_LOCALES = ['en', 'de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
 
 /** In pages par hreflang hona hi chahiye (real, indexable pages). */
-const SAMPLE_PATHS = ['/', '/tools/', '/blog/', '/tarifs-lesson', '/tools/json-formatter/', '/blog/online-tools-hub-guide/'];
+const SAMPLE_PATHS = ['/', '/blog/', '/tarifs-lesson', '/tools/json-formatter/', '/blog/online-tools-hub-guide/'];
 
 /** Redirect stubs — in par hreflang nahi hona chahiye (Google ke liye galat signal). */
 const REDIRECT_PATHS = ['/privacy/', '/de/privacy/', '/es/privacy/'];
@@ -55,7 +55,7 @@ export function run(pages) {
     check(langOf(home).toLowerCase().startsWith(code), `${code}: <html lang> "${langOf(home)}" galat hai`);
 
     // tools hub + blog + ek tool page + ek blog post
-    for (const path of ['/tools/', '/blog/', '/tools/json-formatter/', '/blog/online-tools-hub-guide/']) {
+    for (const path of ['/', '/blog/', '/tools/json-formatter/', '/blog/online-tools-hub-guide/']) {
       const url = `/${code}${path}`;
       check(pages.has(url), `${code}: localized route missing — ${url}`);
     }

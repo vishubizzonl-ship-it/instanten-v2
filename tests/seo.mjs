@@ -4,7 +4,7 @@
  * Ye checks build hui HTML par chalte hain (wahi bytes jo browser/crawler dekhta hai).
  * Rule: keyword duplicate spelling ek hi baar ginti hai, isliye list dedup hai.
  */
-import { SITE, stripTags, createSuite } from './lib.mjs';
+import { SITE, LOCALES, stripTags, createSuite } from './lib.mjs';
 
 /** User ki di hui keyword list (dedup). Main keyword alag rakha hai. */
 export const MAIN_KEYWORD = 'instanten';
@@ -288,21 +288,21 @@ export function run(pages, outDir) {
     }
   }
 
-  // --- 4d. Tools hub listing page FAQ ------------------------------------
-  const toolsIndex = pages.get('/tools/');
-  check(Boolean(toolsIndex), '/tools/ build mein nahi hai');
-  if (toolsIndex) {
-    const { count, questions } = faqPageOf(toolsIndex);
-    check(count === 1, `/tools/: FAQPage blocks ${count} (1 hona chahiye)`);
-    check(questions.length >= 5, `/tools/: hub FAQ mein ${questions.length} questions (5 chahiye)`);
-    check(questions.every((q) => q.acceptedAnswer?.text?.length >= 90), '/tools/: koi hub answer chhota hai');
-    const hubNames = questions.map((q) => String(q.name));
-    const homeFaqNames = [
-      ...[...home.matchAll(/"name":"([^"]+)"[^}]*"acceptedAnswer"/g)].map((m) => m[1]),
-    ];
-    const shared = hubNames.filter((q) => homeFaqNames.includes(q));
-    check(shared.length === 0, `/tools/ aur home par same FAQ repeat: ${shared.slice(0, 2).join(' | ')}`);
+  // --- 4d. Hub page hata diya gaya: /tools/, /categories/, /pricing/,
+  // /makers/ aur /page/N ab build mein nahi hone chahiye (sab kuch home ke
+  // filter par hai) ----------------------------------------------------
+  for (const gone of ['/tools/', '/categories/', '/pricing/', '/makers/', '/page/2/']) {
+    check(!pages.has(gone), `${gone} abhi bhi build mein hai (browse page hataya gaya tha)`);
   }
+  for (const lang of LOCALES.filter((l) => l !== 'en')) {
+    for (const gone of [`/${lang}/tools/`, `/${lang}/categories/`, `/${lang}/pricing/`, `/${lang}/makers/`]) {
+      check(!pages.has(gone), `${gone} abhi bhi build mein hai`);
+    }
+  }
+  // home par wahi ek FAQPage rehta hai (duplicate nahi)
+  const homeFaq = faqPageOf(home);
+  check(homeFaq.count === 1, `home par FAQPage blocks ${homeFaq.count} (1 hona chahiye)`);
+  check(homeFaq.questions.length >= 5, `home FAQ mein ${homeFaq.questions.length} questions (5 chahiye)`);
 
   // --- 4b. Blog page par exactly 5 blogs, deleted wale gayab --------------
   const blogIndex = pages.get('/blog/');

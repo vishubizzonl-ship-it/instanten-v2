@@ -50,9 +50,6 @@ const pricingClasses = {
 const displayDate = updatedDate || addedDate;
 const formattedDate = displayDate ? formatLocalizedDate(displayDate, lang) : '';
 const toolHref = translatePathSafe(toolPath(slug), lang);
-const makerHref = maker
-  ? translatePathSafe(`/maker/${maker.toLowerCase().replace(/\s+/g, '-')}/`, lang)
-  : '';
 ---
 <article
   data-tool-card
@@ -95,15 +92,8 @@ const makerHref = maker
 
   <div class="mt-5 flex flex-col">
     <div class="flex items-center gap-2 text-[15px] leading-[18px] text-muted">
-      {maker && (
-        <a
-          href={makerHref}
-          class="font-medium transition-colors hover:text-ink"
-          aria-label={`${t('nav.makers')}: ${maker}`}
-        >
-          {maker}
-        </a>
-      )}
+      {/* makers page hata diya gaya — maker naam plain text (link nahi) */}
+      {maker && <span class="font-medium">{maker}</span>}
       {maker && formattedDate && <span aria-hidden="true">·</span>}
       {formattedDate && <time datetime={displayDate!} class="font-medium">{formattedDate}</time>}
     </div>

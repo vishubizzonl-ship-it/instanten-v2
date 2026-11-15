@@ -57,9 +57,10 @@ export async function run(pages, outDir) {
    * ==================================================================== */
 
   // Home page bhi: grid cards ke just upar wahi filter section.
-  const FILTER_PAGES = ['/', '/tools/', '/search/'];
+  // /tools/ hub hata diya — filter home aur search par hai
+  const FILTER_PAGES = ['/', '/search/'];
   for (const locale of ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt']) {
-    FILTER_PAGES.push(`/${locale}/tools/`, `/${locale}/`);
+    FILTER_PAGES.push(`/${locale}/`);
   }
 
   for (const url of FILTER_PAGES) {

@@ -43,7 +43,7 @@ const formattedDate = formatLocalizedDate(publishedAt, lang);
     <div class="blog-card__category-pills">
       {categories?.map((cat) => (
         <a
-          href={translatePathSafe(`/category/${cat.slug}/`, lang)}
+          href={translatePathSafe('/blog/', lang)}
           class="blog-card__category-pill"
           aria-label={`${t('aria.viewPostsIn')} ${localizeBlogCategory(lang, cat.name)}`}
         >
