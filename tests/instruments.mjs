@@ -544,8 +544,13 @@ export function run(pages, outDir) {
     // Fullscreen panel absolute hona chahiye (size/layout na badle)
     const panel = src.match(/id="records-in-card" class="([^"]*)"/)?.[1] ?? '';
     check(/absolute/.test(panel), 'speedometer: records panel absolute nahi (layout badal jayega)');
-    check(/\[&:fullscreen\]:flex/.test(panel), 'speedometer: records panel fullscreen mein dikhta nahi');
     check(/bottom-0/.test(panel), 'speedometer: records panel bottom par nahi');
+    // Bahut zaroori: fullscreen element CARD hai, panel nahi — isliye ancestor
+    // variant [:fullscreen_&] chahiye. [&:fullscreen] kabhi match nahi karta.
+    check(/\[:fullscreen_&\]:flex/.test(panel), 'speedometer: records panel par ancestor variant [:fullscreen_&] nahi (fullscreen mein dikhega hi nahi)');
+    check(!/\[&:fullscreen\]:flex/.test(panel), 'speedometer: records panel par galat variant [&:fullscreen] hai');
+    // tool apni jagah par rahe: panel overlay hai, layout ka hissa nahi
+    check(/inset-x-0/.test(panel), 'speedometer: records panel full width overlay nahi');
 
     // build
     const html = pages.get('/onlinespeedometer/') ?? '';
@@ -553,6 +558,12 @@ export function run(pages, outDir) {
     check(html.includes('id="records-empty-card"'), 'build: fullscreen empty message nahi');
     check(html.includes('id="records-clear-card"'), 'build: fullscreen clear button nahi');
     check(!html.includes('createElemenui'), 'build: typo abhi bhi hai');
+
+    // Compiled CSS: ancestor variant really compile hua (warna panel invisible)
+    const cssFiles = readdirSync('dist/_astro').filter((f) => f.endsWith('.css'));
+    const css = cssFiles.map((f) => readFileSync(join('dist/_astro', f), 'utf8')).join('\n');
+    check(/:fullscreen\s+\.[^{}]*fullscreen[^{}]*\{display:flex\}/.test(css), 'compiled CSS: :fullscreen descendant display:flex rule nahi');
+    check(/:fullscreen\s+\.[^{}]*fullscreen[^{}]*\{flex-direction:column\}/.test(css), 'compiled CSS: :fullscreen descendant flex-direction rule nahi');
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
