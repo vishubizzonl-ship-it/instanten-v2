@@ -493,6 +493,34 @@ export function run(pages, outDir) {
     check(html.includes('id="records-list"'), 'build: records-list gayab');
   }
 
+  // --- 10o. Speedometer: fullscreen par size badalna nahi chahiye ----------
+  {
+    const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
+    // Block children (head/stats) ek w-full wrapper ke andar hone chahiye,
+    // warna fullscreen ke flex-col + items-center unhe shrink-to-fit kar dete
+    // hain aur unboxes ki width badal jaati hai (compass par yeh nahi hota).
+    const body = src.slice(src.indexOf('id="speed-body"'), src.indexOf('id="speed-stats"'));
+    check(body.length > 0, 'speedometer: speed-body wrapper nahi mila');
+    check(/id="speed-body" class="w-full shrink-0"/.test(src), 'speedometer: wrapper w-full shrink-0 nahi hai');
+    check(body.includes('id="speed-head"'), 'speedometer: speed-head wrapper ke andar nahi hai');
+    // wrapper card ke andar hai aur head/stats uske andar (nested sahi)
+    check(src.indexOf('id="speed-card"') < src.indexOf('id="speed-body"'), 'speedometer: wrapper card ke bahar hai');
+    check(src.indexOf('id="speed-body"') < src.indexOf('id="speed-head"'), 'speedometer: head wrapper se pehle hai');
+    check(src.indexOf('id="speed-stats"') < src.indexOf('id="speed-records-title"'), 'speedometer: stats records section ke baad hai');
+
+    // build: head aur stats wrapper ke andar
+    const html = pages.get('/onlinespeedometer/') ?? '';
+    const wStart = html.indexOf('id="speed-body"');
+    check(wStart !== -1, 'build: speed-body wrapper nahi');
+    const wEnd = html.indexOf('id="speed-records-title"');
+    const wrapperHtml = html.slice(wStart, wEnd);
+    check(wrapperHtml.includes('id="speed-head"'), 'build: speed-head wrapper ke andar nahi');
+    check(wrapperHtml.includes('id="speed-stats"'), 'build: speed-stats wrapper ke andar nahi');
+    check(wrapperHtml.includes('max-w-[320px]'), 'build: board wrapper ke andar nahi');
+    // wrapper balanced
+    check((wrapperHtml.match(/<div/g) ?? []).length === (wrapperHtml.match(/<\/div>/g) ?? []).length, 'build: wrapper ke andar div balance galat');
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';

@@ -13,6 +13,12 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             <svg class="icon-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
             <svg class="icon-exit hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>
           </button>
+          <!-- Wrapper: fullscreen mein card flex-col + items-center ban jata hai,
+               jisse head/stats jaise block children shrink-to-fit ho jaate hain
+               (width badal jaati hai). Compass par yeh nahi hota kyunki wahan
+               sirf centered text hai. w-full wrapper se andar ka layout bilkul
+               normal (block) jaisa rehta hai — sirf card screen bharta hai. -->
+          <div id="speed-body" class="w-full shrink-0">
           <div id="speed-head" class="text-center mb-1">
             <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['speed.ui.title']}</h2>
             <p class="text-xs text-muted font-mono mt-1">{ui['speed.ui.gpsActive']}</p>
@@ -66,6 +72,7 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
               <p id="duration" class="text-lg font-semibold tabular-nums text-ink">00:00</p>
               <p class="text-[10px] text-faint">m:s</p>
             </div>
+          </div>
           </div>
 
         </div>
