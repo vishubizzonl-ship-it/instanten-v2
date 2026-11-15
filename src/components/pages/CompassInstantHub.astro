@@ -1,0 +1,149 @@
+---
+/**
+ * `/compassinstant/` — compassinstant wala poora setup, instanten-v2 ke andar.
+ *
+ * Ek hi page se saare 16 tools ke cards: 4 sensor instruments (compass, bubble
+ * level, speedometer, Qibla) aur 12 browser tools. Har card us tool ke APNE
+ * page par jaata hai — instruments ka poora silo (guides, about, contact,
+ * privacy, terms) card ke neeche hi link hota hai.
+ *
+ * Tools ke maujooda pages mein koi change nahi: ye page sirf naya entry point
+ * hai jo unhi pages ko kholta hai (jaise kisi website par doosri website ka
+ * link).
+ */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { localizeTool } from '../../i18n/toolContent';
+import { toolPath } from '../../utils/toolPaths';
+import { hubCopy } from '../../i18n/compassinstantHub';
+import type { LangCode } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const copy = hubCopy[lang] ?? hubCopy.en;
+
+/** Instruments ka order wahi jo nav pills mein hai. */
+const INSTRUMENTS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+
+const all = await getCollection('tools');
+const bySlug = new Map(all.map((entry) => [entry.data.slug, entry.data]));
+
+const instruments = INSTRUMENTS.map((slug) => {
+  const data = bySlug.get(slug);
+  const localized = localizeTool(lang as LangCode, {
+    slug,
+    name: data?.name ?? slug,
+    description: data?.description ?? '',
+  });
+  return {
+    slug,
+    name: localized.name,
+    description: localized.description,
+    href: translatePath(`/${slug}/`),
+    silo: [
+      { label: copy.siloBlog, href: translatePath(`/${slug}/blog/`) },
+      { label: copy.siloAbout, href: translatePath(`/${slug}/about/`) },
+      { label: copy.siloContact, href: translatePath(`/${slug}/contact/`) },
+      { label: copy.siloPrivacy, href: translatePath(`/${slug}/privacy/`) },
+    ],
+  };
+});
+
+const tools = all
+  .filter((entry) => !INSTRUMENTS.includes(entry.data.slug))
+  .sort((a, b) => a.data.name.localeCompare(b.data.name))
+  .map((entry) => {
+    const localized = localizeTool(lang as LangCode, {
+      slug: entry.data.slug,
+      name: entry.data.name,
+      description: entry.data.description,
+    });
+    return {
+      slug: entry.data.slug,
+      name: localized.name,
+      description: localized.description,
+      href: translatePath(toolPath(entry.data.slug)),
+    };
+  });
+
+// Sanity: page ka wada hai ki saare 16 tools dikhte hain.
+const total = instruments.length + tools.length;
+
+const canonicalURL = new URL(translatePath('/compassinstant/'), Astro.site ?? 'https://instanten.com').href;
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: copy.h1,
+  numberOfItems: total,
+  itemListElement: [...instruments, ...tools].map((tool, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: tool.name,
+    url: new URL(tool.href, Astro.site ?? 'https://instanten.com').href,
+  })),
+};
+---
+
+<Layout
+  title={copy.title}
+  description={copy.description}
+  canonicalURL={canonicalURL}
+  jsonLd={itemListLd}
+  lang={lang as LangCode}
+  chrome="instrument"
+>
+  <article class="mx-auto max-w-5xl px-6 pb-16 pt-10 lg:px-8">
+    <h1 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{copy.h1}</h1>
+    <p class="mt-2 inline-flex items-center rounded-sm border border-border-hairline px-2 py-1 font-mono text-xs text-mute">
+      {copy.badge}
+    </p>
+    <p class="mt-4 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.lead}</p>
+
+    {/* --- Instruments: har card ka apna silo --- */}
+    <section class="mt-12" aria-labelledby="hub-instruments">
+      <h2 id="hub-instruments" class="font-display text-heading-md text-ink">{copy.instrumentsH}</h2>
+      <p class="mt-2 mb-6 max-w-[48rem] text-body-sm leading-relaxed text-body">{copy.instrumentsLead}</p>
+      <ul class="grid gap-4 sm:grid-cols-2" role="list">
+        {instruments.map((tool) => (
+          <li class="flex flex-col rounded-card border border-border-hairline bg-surface p-5">
+            <a href={tool.href} class="group flex flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-link">
+              <span class="font-display text-body-lg font-semibold text-ink group-hover:text-link">{tool.name}</span>
+              <span class="mt-2 text-body-sm leading-relaxed text-body">{tool.description}</span>
+              <span class="mt-4 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-link">
+                {copy.open} →
+              </span>
+            </a>
+            <nav class="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-border-hairline pt-3 text-body-sm" aria-label={tool.name}>
+              {tool.silo.map((link) => (
+                <a href={link.href} class="text-body transition-colors hover:text-ink">{link.label}</a>
+              ))}
+            </nav>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* --- 12 browser tools --- */}
+    <section class="mt-14" aria-labelledby="hub-tools">
+      <h2 id="hub-tools" class="font-display text-heading-md text-ink">{copy.toolsH}</h2>
+      <p class="mt-2 mb-6 max-w-[48rem] text-body-sm leading-relaxed text-body">{copy.toolsLead}</p>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {tools.map((tool) => (
+          <li class="rounded-card border border-border-hairline bg-surface">
+            <a href={tool.href} class="group flex h-full flex-col p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-link">
+              <span class="font-display text-body-md font-semibold text-ink group-hover:text-link">{tool.name}</span>
+              <span class="mt-2 text-body-sm leading-relaxed text-body">{tool.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="mt-12">
+      <a href={translatePath('/')} class="text-body-md font-medium text-link hover:underline">← {t('nav.backHome')}</a>
+    </p>
+  </article>
+</Layout>

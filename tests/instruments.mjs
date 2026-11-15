@@ -744,6 +744,55 @@ export function run(pages, outDir) {
     check(Boolean(viewport) && viewport[1].includes('width=device-width'), `${slug}: viewport meta galat`);
   }
 
+  // --- 12e. /compassinstant/ hub: saare 16 tools ke cards, har card apna page ---
+  {
+    const LANGS = ['en', 'de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
+    const OTHER_TOOLS = [
+      'base64-encoder', 'color-palette', 'css-grid-generator', 'image-compressor',
+      'json-formatter', 'markdown-editor', 'meta-tag-generator', 'online-ruler',
+      'password-generator', 'qr-generator', 'regex-tester', 'word-counter',
+    ];
+    for (const lang of LANGS) {
+      const base = lang === 'en' ? '' : `/${lang}`;
+      const url = `${base}/compassinstant/`;
+      const html = pages.get(url);
+      check(Boolean(html), `hub page missing: ${url}`);
+      if (!html) continue;
+
+      // 4 instruments: card + poora silo (blog/about/contact/privacy)
+      for (const slug of SLUGS) {
+        check(html.includes(`href="${base}/${slug}/"`), `hub ${lang}: ${slug} ka card link nahi`);
+        for (const sub of ['blog', 'about', 'contact', 'privacy']) {
+          check(
+            html.includes(`href="${base}/${slug}/${sub}/"`),
+            `hub ${lang}: ${slug} ka silo link /${sub}/ nahi`
+          );
+        }
+      }
+      // 12 browser tools
+      for (const slug of OTHER_TOOLS) {
+        check(html.includes(`href="${base}/tools/${slug}/"`), `hub ${lang}: /tools/${slug}/ ka card nahi`);
+      }
+      // kart ki ginti: 16 (embed links isliye nav se zyada ho sakte hain, isliye
+      // list items par seedha check)
+      const items = html.match(/<li class="[^"]*rounded-card/g) ?? [];
+      check(items.length === 16, `hub ${lang}: 16 cards chahiye, mile ${items.length}`);
+      // ItemList JSON-LD mein bhi 16
+      check(
+        /"@type":"ItemList"/.test(html.replace(/\s/g, '')) || /"@type": "ItemList"/.test(html),
+        `hub ${lang}: ItemList schema nahi`
+      );
+      // mobile: kart grid single column se shuru hota hai
+      check(/grid gap-4 sm:grid-cols-2/.test(html), `hub ${lang}: mobile grid class nahi`);
+      // apna translated title (nav ka na ho)
+      const title = (html.match(/<title>([^<]*)<\/title>/i) ?? [, ''])[1];
+      check(/CompassInstant/.test(title), `hub ${lang}: title mein CompassInstant nahi ("${title}")`);
+      // canonical apna
+      const canonical = (html.match(/rel="canonical" href="([^"]*)"/) ?? [, ''])[1];
+      check(canonical.endsWith(`${url}`), `hub ${lang}: canonical galat (${canonical})`);
+    }
+  }
+
   return suite;
 }
 

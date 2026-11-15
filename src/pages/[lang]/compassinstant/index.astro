@@ -1,0 +1,14 @@
+---
+/**
+ * `/de/compassinstant/`, `/ja/compassinstant/` … — hub ka localised route.
+ * Markup ek hi component se aata hai, taaki dono copies drift na karein.
+ */
+import Hub from '../../../components/pages/CompassInstantHub.astro';
+import { nonDefaultLangs } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return nonDefaultLangs.map((lang) => ({ params: { lang } }));
+}
+---
+
+<Hub />
