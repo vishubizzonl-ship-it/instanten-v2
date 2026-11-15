@@ -10,7 +10,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
       <div class="mx-auto max-w-5xl sm:px-2 lg:px-0">
         <div id="qibla-card" class="bg-surface border border-hairline rounded-md p-4 lg:p-6 shadow-[0px_1px_2px_rgba(0,0,0,0.03)] relative [&:fullscreen]:flex [&:fullscreen]:flex-col [&:fullscreen]:items-center [&:fullscreen]:justify-center [&:fullscreen]:w-full [&:fullscreen]:h-full [&:fullscreen]:overflow-auto"
           data-t-ready={ui['qibla.ui.ready']}
-          data-t-bearing-prefix={ui['qibla.ui.bearingPrefix']}
           data-t-gps={ui['qibla.ui.gps']}
           data-t-gps-no-acc={ui['qibla.ui.gpsNoAcc']}
           data-t-blocked={ui['qibla.ui.blocked']}
@@ -34,10 +33,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['qibla.ui.title']}</h2>
             <p class="text-xs text-muted font-mono mt-1 min-h-[1rem]" id="qibla-status" aria-live="polite">{ui['qibla.ui.locating']}</p>
             <p class="text-3xl font-semibold tracking-tight tabular-nums text-ink mt-2 min-h-[2.25rem]" id="qibla-bearing">—</p>
-            <!-- The script writes the source of the bearing here: GPS with accuracy,
-                 or an approximate IP city. Without this element the visitor cannot
-                 tell an exact reading from a guess. -->
-            <p class="text-xs text-muted font-mono mt-1 min-h-[1rem]" id="qibla-location"></p>
           </div>
 
           <div class="relative flex items-center justify-center py-4 overflow-hidden" aria-label={ui['qibla.ui.title']}>
@@ -132,7 +127,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
     const plus = document.getElementById('qibla-plus');
     const bearingEl = document.getElementById('qibla-bearing');
     const statusEl = document.getElementById('qibla-status');
-    const locText = document.getElementById('qibla-location');
 
     const KAABA = { lat: 21.4225, lng: 39.8262 };
 
@@ -153,7 +147,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
       if (bearingEl) bearingEl.textContent = bearing.toFixed(1) + '°';
       if (marker) marker.style.transform = `translate(-50%, -50%) rotate(${bearing}deg) translateY(-120px)`;
       if (statusEl) statusEl.textContent = msg('ready', 'Qibla ready');
-      if (locText) locText.textContent = msg('bearing-prefix', 'Qibla bearing: ') + bearing.toFixed(1) + '°';
     }
 
     type Coords = { lat: number; lng: number; accuracy?: number };
@@ -190,25 +183,12 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
       return null;
     }
 
-    function setLocationLabel(text: string) {
-      if (locText) locText.textContent = text;
-    }
-
     async function getLocation() {
       if (statusEl) statusEl.textContent = msg('locating', 'Locating…');
 
       const gps = await locateWithGps();
       if (gps) {
         applyBearing(qiblaBearing(gps.lat, gps.lng));
-        const acc = gps.accuracy ? Math.round(gps.accuracy) : null;
-        setLocationLabel(
-          acc !== null
-            ? msg('gps', 'Qibla bearing from your location (GPS ±{acc} m)').replace(
-                '{acc}',
-                String(acc),
-              )
-            : msg('gps-no-acc', 'Qibla bearing from your location (GPS)'),
-        );
         return;
       }
 
@@ -216,15 +196,14 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
       const ip = await locateWithIp();
       if (ip) {
         applyBearing(qiblaBearing(ip.lat, ip.lng));
-        setLocationLabel(
-          msg('ip-approx', 'Approximate bearing from your IP city — allow location access for an exact one'),
-        );
+        // Degree aur dial ke beech koi text nahi — state sirf upar ki line par.
         if (statusEl) statusEl.textContent = msg('approx', 'Approximate location');
         return;
       }
 
-      if (statusEl) statusEl.textContent = msg('unavailable', 'Location unavailable');
-      setLocationLabel(msg('could-not', 'Could not determine location — allow location access and reload.'));
+      if (statusEl) {
+        statusEl.textContent = msg('could-not', 'Could not determine location — allow location access and reload.');
+      }
     }
 
     type E = DeviceOrientationEvent & { webkitCompassHeading?: number | null; alpha?: number | null; beta?: number | null; gamma?: number | null; absolute?: boolean };

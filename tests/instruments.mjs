@@ -35,7 +35,7 @@ export const INSTRUMENTS = {
   },
   onlineqibla: {
     root: 'onlineqibla',
-    ids: ['qibla-card', 'qibla-dial', 'qibla-bearing', 'qibla-status', 'qibla-location', 'qibla-marker', 'qibla-plus', 'qibla-fullscreen-btn'],
+    ids: ['qibla-card', 'qibla-dial', 'qibla-bearing', 'qibla-status', 'qibla-marker', 'qibla-plus', 'qibla-fullscreen-btn'],
     faqLangs: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'],
     guides: true,
   },
@@ -413,6 +413,31 @@ export function run(pages, outDir) {
       check(!/min-w-\[/.test(tag), `build: ${id} par min-width bacha hua hai`);
     }
     check(lineHeight['text-xl'] === 28, 'line-height table galat');
+  }
+
+  // --- 10l. Qibla: degree aur dial ke beech koi text nahi -------------------
+  {
+    const src = readFileSync('src/components/instruments/QiblaIsland.astro', 'utf8');
+    check(!src.includes('qibla-location'), 'Qibla mein degree ke neeche text element (qibla-location) bacha hua hai');
+    check(!/setLocationLabel|locText/.test(src), 'Qibla mein location-label likhne wala code bacha hua hai');
+    check(!/bearing-prefix/.test(src), 'Qibla degree ko dobara "Qibla bearing: X°" likhta hai');
+
+    // markup: head block degree par khatam, uske turant baad dial wrapper
+    const head = src.slice(src.indexOf('id="qibla-bearing"'), src.indexOf('id="qibla-dial"'));
+    check(!/<p[^>]*id=/.test(head), 'degree aur dial ke beech koi <p> element hai');
+    check((head.match(/<p /g) ?? []).length === 0, 'degree aur dial ke beech paragraph hai');
+    check(src.includes('id="qibla-status"'), 'qibla-status line gayab ho gayi');
+
+    // build output
+    const html = pages.get('/onlineqibla/') ?? '';
+    const from = html.indexOf('id="qibla-bearing"');
+    const to = html.indexOf('id="qibla-dial"', from);
+    const between = html.slice(from, to);
+    check(!/id="qibla-location"/.test(html), 'build: qibla-location element abhi bhi hai');
+    check(!/<p [^>]*class="text-xs[^"]*font-mono[^"]*"[^>]*>\s*</.test(between), 'build: degree ke neeche khaali text line hai');
+    check(between.includes('</div>'), 'build: head block degree ke baad band nahi hota');
+    // state line (upar) bani rahe — accessibility ke liye
+    check(html.includes('id="qibla-status"'), 'build: qibla-status gayab');
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
