@@ -68,10 +68,13 @@ for (const tool of tools) {
 }
 // Chip label sentence case: "open-graph" → "Open graph" (value lowercase hi
 // rehta hai, filtering usi par hoti hai).
-const tagLabel = (value: string) => {
-  const spaced = value.replace(/-/g, ' ');
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
-};
+const ACRONYMS = new Set(['seo', 'css', 'html', 'json', 'gps', 'ai', 'qr', 'url', 'svg', 'api']);
+const tagLabel = (value: string) =>
+  value
+    .replace(/-/g, ' ')
+    .split(' ')
+    .map((word) => (ACRONYMS.has(word) ? word.toUpperCase() : word.charAt(0).toUpperCase() + word.slice(1)))
+    .join(' ');
 
 const tags = [...tagCounts.entries()]
   .map(([value, count]) => ({ value, label: tagLabel(value), count }))
