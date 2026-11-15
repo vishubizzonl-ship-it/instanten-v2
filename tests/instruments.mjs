@@ -297,8 +297,14 @@ export function run(pages, outDir) {
       const tag = src.match(new RegExp(`<div[^>]*data-instrument-stage="${name}"[^>]*>`))?.[0] ?? '';
       check(Boolean(tag), `${name}: data-instrument-stage marker nahi mila`);
       check(/max-w-\[320px\]/.test(tag), `${name}: board max-w-[320px] nahi (qibla jitna hona chahiye)`);
-      check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
-      check(/aspect-square/.test(tag), `${name}: board aspect-square nahi`);
+      if (name === 'speedometer') {
+        // speedometer par dial nahi, sirf readout — square ki khaali jagah nahi
+        check(/h-\[200px\]/.test(tag), 'speedometer: readout board h-[200px] nahi');
+        check(!/aspect-square/.test(tag), 'speedometer: khaali square board wapas aa gaya');
+      } else {
+        check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
+        check(/aspect-square/.test(tag), `${name}: board aspect-square nahi`);
+      }
       // fullscreen par board ka size badalna nahi chahiye
       check(!/\[&:fullscreen\]:[wh]-/.test(tag), `${name}: fullscreen par board ka size badalta hai`);
       check(!/\[&:fullscreen\]:scale/.test(tag), `${name}: fullscreen par board scale hota hai`);
@@ -333,6 +339,36 @@ export function run(pages, outDir) {
       check(/data-instrument-stage="/.test(html), `${url}: board marker build mein nahi`);
       check(/max-w-\[320px\]/.test(html), `${url}: 320px board build mein nahi`);
     }
+  }
+
+  // --- 10k. Speedometer card ki height compass card jaisi -------------------
+  {
+    /**
+     * Mobile par card ki height ko CSS values se estimate karta hai (px):
+     * padding + har block ki line-height/min-height + margins + board + stats.
+     * Browser na ho to bhi "card kitna lamba hai" ka number milta hai.
+     */
+    const lineHeight = { 'text-xs': 16, 'text-sm': 20, 'text-lg': 28, 'text-xl': 28, 'text-3xl': 36 };
+
+    // compass: p-4 + (title 28 + status 20, mb-2) + (angle 36 + status 16+8, mb-4) + py-2 + dial 320
+    const compassCard = 16 * 2 + 28 + 20 + 8 + 36 + 16 + 8 + 16 + 8 * 2 + 320;
+
+    // speedometer: p-4 + (title 28 + status 20 + buttons mt-2 8 + 36, mb-2)
+    //             + board 200 (mb-2) + stats 2 rows (72 each) + gap 8
+    const speedCard = 16 * 2 + 28 + 20 + 8 + 36 + 8 + 200 + 8 + 72 * 2 + 8;
+
+    check(Math.abs(compassCard - speedCard) <= 24, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
+
+    // structure lock: gaps kam hone chahiye
+    const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
+    check(/id="speed-head" class="text-center mb-2"/.test(src), 'speed-head ka mb-4 -> mb-2 nahi hua');
+    check(/flex gap-2 justify-center mt-2"/.test(src), 'buttons ka mt-3 -> mt-2 nahi hua');
+    check(/data-instrument-stage="speedometer" class="mx-auto mb-2 flex h-\[200px\]/.test(src), 'board mb-2 + h-[200px] nahi hai');
+    // ids/behaviour intact
+    for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'start-btn', 'record-btn']) {
+      check(src.includes(`id="${id}"`), `speedometer: ${id} gayab ho gaya`);
+    }
+    check(lineHeight['text-xl'] === 28, 'line-height table galat');
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
