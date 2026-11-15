@@ -18,6 +18,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { toolPath } from '../../utils/toolPaths';
 import ToolFaq from '../ToolFaq.astro';
+import { getToolGuides, localeHref } from '../../i18n/instruments/toolGuides';
 import InlineCopy from '../InlineCopy.astro';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
@@ -56,6 +57,10 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
 
 const localized = localizeTool(lang, tool.data);
 const copy = prose[lang] ?? prose.en;
+/** Har tool ke apne blog cards — clicking opens that tool's own sub-page. */
+const toolGuides = getToolGuides(slug, lang);
+const guideHref = (href: string) => localeHref(href, lang);
+const blogIndexHref = localeHref(`/${slug}/blog/`, lang);
 const heading = copy.aboutH ?? copy.h2 ?? localized.name;
 
 const hasNativeFaq = faqLangs.includes(lang);
@@ -165,20 +170,31 @@ const breadcrumbs = crumbItems.map((crumb) => ({
     </section>
 
     {
-      copy.guides && copy.guides.length > 0 && (
+      (copy.guides?.length || toolGuides.items.length > 0) && (
         <section class="border-t border-border-hairline py-section" aria-labelledby="tool-guides">
           <div class="mx-auto max-w-[48rem] px-6 lg:px-8">
             <h2 id="tool-guides" class="mb-6 font-display text-heading-md text-ink">
-              {copy.guidesH}
+              {copy.guidesH || toolGuides.heading}
             </h2>
             <ul class="flex flex-col overflow-hidden rounded-card border border-border-hairline">
-              {copy.guides.map((guide) => (
-                <li class="border-b border-border-hairline px-4 py-4 last:border-b-0">
-                  <span class="block font-display text-body-md font-medium text-ink">{guide.title}</span>
-                  <span class="mt-1 block text-body-sm text-body">{guide.desc}</span>
+              {(copy.guides?.length ? copy.guides : toolGuides.items).map((guide: any) => (
+                <li class="border-b border-border-hairline last:border-b-0">
+                  <a
+                    href={guideHref(guide.href)}
+                    class="block px-4 py-4 transition-colors hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-link"
+                  >
+                    <span class="block font-display text-body-md font-medium text-ink">{guide.title}</span>
+                    <span class="mt-1 block text-body-sm text-body">{guide.desc}</span>
+                  </a>
                 </li>
               ))}
             </ul>
+            <a
+              href={blogIndexHref}
+              class="mt-6 inline-flex items-center gap-1 text-body-md font-medium text-link hover:underline"
+            >
+              {copy.guidesAll || toolGuides.allLabel} →
+            </a>
           </div>
         </section>
       )

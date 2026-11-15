@@ -28,9 +28,14 @@ export function run(pages, outDir) {
       // Blog headlines are editorial and get the "— Instanten" suffix; money
       // pages (home, tools, about…) must stay inside the SERP limit.
       const maxTitle = url.includes('/blog/') ? 110 : 70;
+      // CJK titles "same idea, fewer characters" hote hain — 10-char ja/ko title
+      // bilkul valid hai (e.g. "利用規約 — 水準器"). Isliye CJK locales ke liye
+      // min 8, baaki ke liye 15 (English SERP expectation).
+      const cjk = ['ja', 'ko'].includes(url.split('/')[1]);
+      const minTitle = cjk ? 8 : 15;
       check(
-        title.length >= 15 && title.length <= maxTitle,
-        `title length ${title.length} (15-${maxTitle} chahiye) :: ${url} -> "${title}"`
+        title.length >= minTitle && title.length <= maxTitle,
+        `title length ${title.length} (${minTitle}-${maxTitle} chahiye) :: ${url} -> "${title}"`
       );
       check(
         !/undefined|\[object Object\]/i.test(title),

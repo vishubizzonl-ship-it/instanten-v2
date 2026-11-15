@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { siloTitle } from '../../../i18n/instruments/toolGuides';
 import LegalSections from '../../LegalSections.astro';
 import CopyText from '../../CopyText.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
@@ -23,7 +24,7 @@ const breadcrumbLd = {
 };
 ---
 <Layout
-  title={t('page.terms.title')}
+  title={siloTitle('onlinebubblelevel', t('page.terms.title'), lang)}
   description={bubble.aboutDesc}
   keywords={bubble.keywords}
   ogImage="/og-bubble-level.png"

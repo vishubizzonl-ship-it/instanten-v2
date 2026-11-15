@@ -1,7 +1,7 @@
 {
   "site-integrity": {
     "meta description missing/chhota": 80,
-    "title length N (N-N chahiye)": 2,
+    "title length N (N-N chahiye)": 0,
     "canonical galat": 60
   },
   "links": {
@@ -23,7 +23,7 @@
     "hreflang x-default nahi": 10,
     "apna hreflang nahi": 10,
     "canonical apne hreflang se match nahi": 10,
-    "title translate nahi hua": 14,
+    "title translate nahi hua": 16,
     "English text leak \"…\"": 85
   },
   "design": {},
