@@ -1,0 +1,212 @@
+/* ==========================================================================
+ * MOBILE HARDENING — 320px se 1024px tak
+ * --------------------------------------------------------------------------
+ * responsive.css layout ka dhaancha sambhalta hai (header, drawer, grids).
+ * Ye file wo baaki cheezein pakadti hai jo phone par actually takraati hain:
+ *
+ *   1. sticky header ke neeche chhupe anchors (#tool, #main-content, skip link)
+ *   2. 100vh — iOS/Android browser bar ke saath page kata hua dikhta hai
+ *   3. filter bar ka sticky offset (desktop 88px par tika tha, mobile par
+ *      header sirf 64px hai → 24px khaali patti + content dhakta tha)
+ *   4. tap targets — 44x44 CSS px se chhote controls phone par miss hote hain
+ *   5. pagination 320px screen par overflow
+ *   6. safe-area (notch / home indicator) par chipke buttons
+ *   7. lambe URL / hashes jo layout ko chaudा kar dete hain
+ *
+ * Rule 7: sirf utilities nahi — ye global safety net hai jo Tailwind classes
+ * ke saath chalta hai (jaise responsive.css). Koi naya rang/font nahi, sirf
+ * compilefuture tokens.
+ * ========================================================================== */
+
+/* 1. Sticky header + in-page anchors -------------------------------------- */
+:root {
+  --header-h: 64px;
+}
+
+@media (min-width: 1020px) {
+  :root {
+    --header-h: 80px;
+  }
+}
+
+/* Har id wala target sticky bar ke neeche na chhupe. */
+main [id],
+main section[id],
+main [data-tool-root],
+main [data-hero-section],
+#main-content,
+[id^='tool'] {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+/* 2. Viewport height — dvh, vh fallback -------------------------------- */
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* 3. Filter bar sticky offset ------------------------------------------- */
+#filter-bar {
+  top: var(--header-h) !important;
+}
+
+/* 4. Tap targets -------------------------------------------------------- */
+@media (max-width: 1019px) {
+  /* header ke chhote icon buttons */
+  header [data-mobile-bar] button,
+  header [data-mobile-bar] > a {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* language button gol hi rahe (design lock) — sirf size 44px */
+  header [data-mobile-bar] .language-picker-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 9999px !important;
+    padding: 0 !important;
+  }
+
+  /* Sensor tool pages ka apna nav (InstrumentNav) — wahi 44px rule */
+  nav [id='tool-lang-btn'],
+  nav [id='tool-theme-btn'] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* mobile pill strip: har pill ek thumb ke neeche aaye */
+  nav [data-nav-pill] {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* drawer + footer ki list links: poora 44px row */
+  [data-drawer-body] a,
+  [data-drawer-footer] a,
+  [data-drawer-footer] button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* language menu items */
+  .language-picker-item {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* footer ke social / language buttons */
+  footer a,
+  footer button {
+    min-height: 44px;
+  }
+
+  footer a[role='listitem'],
+  footer .rounded-full.h-10 {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* pagination */
+  .cf-pager__item,
+  .cf-pagination__item,
+  [data-pagination] a,
+  [data-pagination] button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* breadcrumb links tap-friendly, warna 18px line height par miss hote hain */
+  .breadcrumbs a,
+  .breadcrumbs span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+  }
+}
+
+/* 5. Pagination 320px par bhi ek line mein --------------------------------- */
+@media (max-width: 400px) {
+  .cf-pager__inner,
+  .cf-pagination__links {
+    gap: 4px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .cf-pager__item,
+  .cf-pagination__item {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 44px !important;
+    font-size: 15px !important;
+  }
+
+  .cf-pager__item.is-active {
+    margin: 0 4px !important;
+  }
+}
+
+/* 6. Safe-area (notch / home indicator) ---------------------------------- */
+@supports (padding: max(0px)) {
+  footer {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* 7. Lambe URL, hash aur code — layout nahi tootna chahiye ---------------- */
+main a,
+.ror-prose a,
+main code,
+main kbd,
+main samp {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Tables: global rule inline table ko scrollable banata hai, par cell ke
+ * andar ka lamba token tab bhi bahar ja sakta hai. */
+main td,
+main th {
+  max-width: 42ch;
+  overflow-wrap: anywhere;
+}
+
+/* 8. background-attachment: fixed — iOS par jank -------------------------- */
+/* Phone par fixed background har scroll frame ko repaint karta hai (purane
+ * Android par visibly lag). Touch devices par scroll kar do. */
+@media (hover: none), (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* 9. Sticky elements aur mobile keyboard --------------------------------- */
+@media (max-width: 1019px) {
+  /* chhote screens par do sticky bars (header + filter) mil kar 40% screen
+   * kha jaate hain — filter bar ko scroll ke saath jaane do jab tak user
+   * /tools/ par khud scroll na kare */
+  body > header {
+    position: sticky;
+  }
+}
+
+/* 10. Bahut chhoti screen (320px) — hero aur cards ka text ek line mein ---- */
+@media (max-width: 359px) {
+  html body main h1 {
+    font-size: clamp(22px, 8.2vw, 30px) !important;
+  }
+
+  [data-cards-grid],
+  .tools-grid,
+  .blog-grid {
+    gap: 20px !important;
+  }
+}

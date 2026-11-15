@@ -51,7 +51,7 @@ const isHeader = placement === 'header';
     role="menu"
     aria-label={t('language.options')}
     class:list={[
-      'language-picker-menu absolute top-full z-50 mt-2 hidden min-w-[180px] rounded-xl border border-border-hairline bg-canvas shadow-xl overflow-hidden',
+      'language-picker-menu absolute top-full z-50 mt-2 hidden min-w-[180px] max-h-[70dvh] overflow-y-auto overscroll-contain rounded-xl border border-border-hairline bg-canvas shadow-xl',
       isHeader ? 'right-0' : 'left-1/2 -translate-x-1/2',
     ]}
   >
@@ -65,7 +65,7 @@ const isHeader = placement === 'header';
           href={href}
           role="menuitem"
           data-lang={code}
-          class={`language-picker-item block px-4 py-2.5 text-[13px] transition-colors ${isActive ? 'font-semibold text-ink bg-soft' : 'text-body hover:bg-soft hover:text-ink'}`}
+          class={`language-picker-item flex items-center px-4 py-1.5 text-[14px] transition-colors sm:py-2.5 sm:text-[13px] ${isActive ? 'font-semibold text-ink bg-soft' : 'text-body hover:bg-soft hover:text-ink'}`}
           aria-current={isActive ? 'true' : undefined}
         >
           <span class="flex items-center justify-between gap-3">

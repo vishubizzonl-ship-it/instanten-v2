@@ -173,6 +173,7 @@
 
   body {
     min-height: 100vh;
+    min-height: 100dvh;
     /* compilefuture: linear-gradient(180deg, #FDFDFF, #F8F7FF) */
     background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas-end) 100%);
     background-attachment: fixed;

@@ -35,7 +35,7 @@ const socialLinks = [
         {socialLinks.map((social) => (
           <a
             href={social.href}
-            class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-hairline bg-surface text-body transition-colors hover:border-faint hover:text-ink"
             aria-label={social.label}
             target={'href' in social && social.href.startsWith('http') ? '_blank' : undefined}
             rel={'href' in social && social.href.startsWith('http') ? 'noopener noreferrer' : undefined}

@@ -33,5 +33,6 @@
   "tools-inpage": {},
   "instruments": {},
   "rules": {},
-  "i18n-hreflang": {}
+  "i18n-hreflang": {},
+  "mobile": {}
 }
