@@ -299,7 +299,7 @@ export function run(pages, outDir) {
       check(/max-w-\[320px\]/.test(tag), `${name}: board max-w-[320px] nahi (qibla jitna hona chahiye)`);
       if (name === 'speedometer') {
         // speedometer par dial nahi, sirf readout — square ki khaali jagah nahi
-        check(/h-\[200px\]/.test(tag), 'speedometer: readout board h-[200px] nahi');
+        check(/h-\[192px\]/.test(tag), 'speedometer: readout board h-[192px] nahi');
         check(!/aspect-square/.test(tag), 'speedometer: khaali square board wapas aa gaya');
       } else {
         check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
@@ -353,17 +353,17 @@ export function run(pages, outDir) {
     // compass: p-4 + (title 28 + status 20, mb-2) + (angle 36 + status 16+8, mb-4) + py-2 + dial 320
     const compassCard = 16 * 2 + 28 + 20 + 8 + 36 + 16 + 8 + 16 + 8 * 2 + 320;
 
-    // speedometer: p-4 + (title 28 + status 20 + buttons mt-2 8 + 36, mb-2)
-    //             + board 200 (mb-2) + stats 2 rows (72 each) + gap 8
-    const speedCard = 16 * 2 + 28 + 20 + 8 + 36 + 8 + 200 + 8 + 72 * 2 + 8;
+    // speedometer: p-4 + (title 28 + status 20 + buttons mt-1.5 6 + 36, mb-1.5 6)
+    //             + board 192 (mb-1.5 6) + stats 2 rows (72 each) + gap 8
+    const speedCard = 16 * 2 + 28 + 20 + 6 + 36 + 6 + 192 + 6 + 72 * 2 + 8;
 
     check(Math.abs(compassCard - speedCard) <= 24, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
 
     // structure lock: gaps kam hone chahiye
     const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
-    check(/id="speed-head" class="text-center mb-2"/.test(src), 'speed-head ka mb-4 -> mb-2 nahi hua');
-    check(/flex gap-2 justify-center mt-2"/.test(src), 'buttons ka mt-3 -> mt-2 nahi hua');
-    check(/data-instrument-stage="speedometer" class="mx-auto mb-2 flex h-\[200px\]/.test(src), 'board mb-2 + h-[200px] nahi hai');
+    check(/id="speed-head" class="text-center mb-1\.5"/.test(src), 'speed-head ka mb-1.5 nahi hua');
+    check(/flex gap-2 justify-center mt-1\.5"/.test(src), 'buttons ka mt-1.5 nahi hua');
+    check(/data-instrument-stage="speedometer" class="mx-auto mb-1\.5 flex h-\[192px\]/.test(src), 'board mb-1.5 + h-[192px] nahi hai');
     // ids/behaviour intact
     for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'start-btn', 'record-btn']) {
       check(src.includes(`id="${id}"`), `speedometer: ${id} gayab ho gaya`);
