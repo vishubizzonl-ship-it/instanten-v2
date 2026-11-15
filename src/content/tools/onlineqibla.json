@@ -22,7 +22,7 @@
   "features": [
     "Qibla bearing in degrees, computed from your coordinates to the Kaaba",
     "Rotating compass dial with a marker that holds the Qibla direction",
-    "Clear status line for GPS, blocked permission and missing compass",
+    "Clear status line for GPS, approximate location, blocked permission and missing compass",
     "Bearing stays readable even when the orientation sensor is not available",
     "Fullscreen dial for reading the direction at arm's length",
     "No install, no account; coordinates are not stored or uploaded"
