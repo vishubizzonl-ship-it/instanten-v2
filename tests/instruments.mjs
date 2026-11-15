@@ -482,14 +482,15 @@ export function run(pages, outDir) {
     // records panel nahi hona chahiye
     const speedSrc = readFileSync(cards.speedometer, 'utf8');
     check(!speedSrc.includes('centreFullscreen'), 'speedometer: centreFullscreen() JS bacha hua hai');
-    check(!speedSrc.includes('records-in-card'), 'speedometer: fullscreen-only records panel bacha hua hai');
-    check(!speedSrc.includes('records-list-card'), 'speedometer: records list ka duplicate copy bacha hua hai');
+    // fullscreen records panel wapas hai, par absolute (size nahi badalta)
+    check(/id="records-in-card" class="[^"]*absolute/.test(speedSrc), 'speedometer: fullscreen records panel absolute nahi hai');
+    check(speedSrc.includes('id="records-list-card"'), 'speedometer: fullscreen records list gayab');
     check(/addEventListener\('fullscreenchange', syncFsIcon\)/.test(speedSrc), 'speedometer: fullscreenchange par sirf icon sync nahi hai');
     // records feature (page ke andar wali list) intact
     check(speedSrc.includes('id="records-list"'), 'speedometer: records-list gayab');
     // build
     const html = pages.get('/onlinespeedometer/') ?? '';
-    check(!html.includes('records-in-card'), 'build: records-in-card abhi bhi hai');
+    check(/id="records-in-card" class="[^"]*absolute/.test(html), 'build: fullscreen records panel absolute nahi');
     check(html.includes('id="records-list"'), 'build: records-list gayab');
   }
 
@@ -519,6 +520,39 @@ export function run(pages, outDir) {
     check(wrapperHtml.includes('max-w-[320px]'), 'build: board wrapper ke andar nahi');
     // wrapper balanced
     check((wrapperHtml.match(/<div/g) ?? []).length === (wrapperHtml.match(/<\/div>/g) ?? []).length, 'build: wrapper ke andar div balance galat');
+  }
+
+  // --- 10p. Speedometer records: save + fullscreen mein dikhein -------------
+  {
+    const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
+
+    // Real bug tha: document.createElemenui (typo) — rows ban hi nahi rahi thi
+    check(!src.includes('createElemenui'), 'speedometer: createElemenui typo wapas aa gaya');
+    const creates = (src.match(/document\.createElement\(/g) ?? []).length;
+    check(creates >= 7, `speedometer: createElement calls kam hain (${creates})`);
+
+    // Record save path
+    check(/\(window as any\)\.recordSpeed = function \(\)/.test(src), 'speedometer: recordSpeed() nahi');
+    check(/records\.unshift\(\{ kmh: currentSpeedKmh/.test(src), 'speedometer: record current speed save nahi karta');
+    check(src.includes("localStorage.setItem(REC_KEY"), 'speedometer: records localStorage mein save nahi hote');
+    check(/renderRecords\(\)/.test(src), 'speedometer: renderRecords() call nahi');
+
+    // Fullscreen copy bhi paint hota hai
+    check(/paint\(recordsListCard, recordsEmptyCard\)/.test(src), 'speedometer: fullscreen records copy paint nahi hoti');
+    check(src.includes('id="records-list-card"') && src.includes('id="records-empty-card"'), 'speedometer: fullscreen records elements nahi');
+
+    // Fullscreen panel absolute hona chahiye (size/layout na badle)
+    const panel = src.match(/id="records-in-card" class="([^"]*)"/)?.[1] ?? '';
+    check(/absolute/.test(panel), 'speedometer: records panel absolute nahi (layout badal jayega)');
+    check(/\[&:fullscreen\]:flex/.test(panel), 'speedometer: records panel fullscreen mein dikhta nahi');
+    check(/bottom-0/.test(panel), 'speedometer: records panel bottom par nahi');
+
+    // build
+    const html = pages.get('/onlinespeedometer/') ?? '';
+    check(html.includes('id="records-list-card"'), 'build: fullscreen records list nahi');
+    check(html.includes('id="records-empty-card"'), 'build: fullscreen empty message nahi');
+    check(html.includes('id="records-clear-card"'), 'build: fullscreen clear button nahi');
+    check(!html.includes('createElemenui'), 'build: typo abhi bhi hai');
   }
 
   // --- 11. koi external tool link nahi ---------------------------------
