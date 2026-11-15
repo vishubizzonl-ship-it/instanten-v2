@@ -171,7 +171,7 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
               class={tab}
               data-facet="category"
               data-value={category.value}
-              aria-pressed={currentCategory === category.value ? 'true' : 'false'}
+              aria-pressed={currentCategory.toLowerCase() === category.value.toLowerCase() ? 'true' : 'false'}
             >
               {category.label}
               <span class="opacity-60 tabular-nums font-normal" data-count>{category.count}</span>
@@ -343,7 +343,7 @@ const chipIcon = 'h-3.5 w-3.5 shrink-0';
                     class={chip}
                     data-facet="pricing"
                     data-value={pricing.value}
-                    aria-pressed={currentPricing === pricing.value ? 'true' : 'false'}
+                    aria-pressed={currentPricing.toLowerCase() === pricing.value.toLowerCase() ? 'true' : 'false'}
                     data-empty={pricing.count === 0 ? 'true' : 'false'}
                   >
                     {pricing.label}

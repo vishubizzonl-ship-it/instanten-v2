@@ -24,14 +24,6 @@ const navLinks = [
   { href: '/terms/', label: t('nav.terms') },
 ] as const;
 
-const categories = [
-  { slug: 'utility', label: t('category.utility') },
-  { slug: 'developer', label: t('category.developer') },
-  { slug: 'design', label: t('category.design') },
-  { slug: 'marketing', label: t('category.marketing') },
-  { slug: 'writing', label: t('category.writing') },
-  { slug: 'productivity', label: t('category.productivity') },
-] as const;
 
 const socialLinks = [
   { href: 'https://x.com/instanten', label: 'X (Twitter)', icon: TwitterIcon },
@@ -87,23 +79,6 @@ const socialLinks = [
       </ul>
     </nav>
 
-    <div style="margin-bottom: 24px;">
-      <h3 class="cs-offcanvas__section-title" style="font-family: var(--font-display); font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px 0;">{t('drawer.categories')}</h3>
-      <ul class="cs-offcanvas__list" role="list" style="list-style: none; padding: 0; margin: 0;">
-        {categories.map((cat, index) => (
-          <li style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; padding-bottom: 12px; color: var(--ink);" data-last={index === categories.length - 1}>
-            <a
-              href={translatePath(`/?category=${cat.slug}`)}
-              data-menu-link
-              class="cs-offcanvas__link flex min-h-10 items-center rounded-md px-3 py-2 text-body transition-colors hover:text-muted"
-              style="font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; text-decoration: none; color: var(--ink);"
-            >
-              {cat.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   </aside>
 
   <div data-drawer-footer class="cs-offcanvas__bottombar" role="list" aria-label={t('aria.socialLinks')}>

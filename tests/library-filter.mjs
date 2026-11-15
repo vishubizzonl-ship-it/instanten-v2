@@ -235,6 +235,20 @@ export async function run(pages, outDir) {
     }
   }
 
+  // Drawer/panel ke category links: filter ke saath home par, aur drawer mein
+  // categories ka alag block nahi (user ne wahi hatane ko kaha tha).
+  for (const url of ['/', '/de/']) {
+    const html = pages.get(url) ?? '';
+    const drawer = html.slice(html.indexOf('cs-offcanvas'), html.indexOf('</aside>'));
+    check(!/drawer\.categories/.test(drawer), `${url}: drawer mein categories block abhi bhi hai`);
+    const catLinks = [...html.matchAll(/href="([^"]*[?&]category=[^"]*)"/g)].map((m) => m[1]);
+    check(catLinks.length >= 6, `${url}: category links nahi mile (${catLinks.length})`);
+    check(
+      catLinks.every((href) => /\/\?category=[A-Za-z]+$/.test(href)),
+      `${url}: category link home filter par nahi ja raha — ${catLinks[0]}`
+    );
+  }
+
   // purana FilterBar grid pages se hata diya gaya hai
   for (const url of FILTER_PAGES) {
     const html = pages.get(url) ?? '';
@@ -275,6 +289,13 @@ export async function run(pages, outDir) {
   check(filterCards(CARDS, { q: 'compass' }).length === 1, 'search q kaam nahi kar raha');
   check(filterCards(CARDS, { q: 'SEO' }).length === 2, 'search case-insensitive nahi hai');
 
+  // URL se aane wale lowercase values bhi match hone chahiye
+  // (drawer ka link /?category=utility deta hai, card par "Utility" hai)
+  check(filterCards(CARDS, { category: 'design' }).length === 1, 'lowercase category match nahi hui');
+  check(filterCards(CARDS, { category: 'DESIGN' }).length === 1, 'uppercase category match nahi hui');
+  check(filterCards(CARDS, { pricing: 'freemium' }).length === 1, 'lowercase pricing match nahi hui');
+  check(filterCards(CARDS, fromQuery('?category=writing')).length === 1, 'fromQuery lowercase category fail');
+
   // ignore option (counts)
   check(cardMatches(CARDS[0], { category: 'Writing' }, { ignore: 'category' }), 'ignore category kaam nahi kar raha');
   check(!cardMatches(CARDS[0], { category: 'Writing' }, {}), 'bina ignore ke category match galat');
@@ -283,11 +304,11 @@ export async function run(pages, outDir) {
   const counts = computeCounts(CARDS, EMPTY_FACETS);
   check(counts.all === 5, `counts.all galat: ${counts.all}`);
   check(counts.total === 5, `counts.total galat: ${counts.total}`);
-  check(counts.categories.Design === 1, `category count galat: ${counts.categories.Design}`);
-  check(counts.categories.Developer === 1, `category count galat: ${counts.categories.Developer}`);
+  check(counts.categories.design === 1, `category count galat: ${counts.categories.design}`);
+  check(counts.categories.developer === 1, `category count galat: ${counts.categories.developer}`);
   check(counts.tags.seo === 2, `tag count galat: ${counts.tags.seo}`);
   check(counts.featured === 2, `featured count galat: ${counts.featured}`);
-  check(counts.pricings.Freemium === 1, `pricing count galat: ${counts.pricings.Freemium}`);
+  check(counts.pricings.freemium === 1, `pricing count galat: ${counts.pricings.freemium}`);
 
   // counts selection ke saath sahi rehte hain (doosre facets ignore hote hain)
   const countsDesign = computeCounts(CARDS, { category: 'Design' });
@@ -295,10 +316,10 @@ export async function run(pages, outDir) {
   // apna hi facet ignore hota hai: Design selected hone par baaki categories
   // ke counts 0 nahi hone chahiye, warna chip se switch karna namumkin ho jaata.
   check(
-    countsDesign.categories.Writing === 1,
-    `category counts par apna hi filter lag gaya: Writing=${countsDesign.categories.Writing}`
+    countsDesign.categories.writing === 1,
+    `category counts par apna hi filter lag gaya: Writing=${countsDesign.categories.writing}`
   );
-  check(countsDesign.categories.Design === 1, `selected category ka count galat: ${countsDesign.categories.Design}`);
+  check(countsDesign.categories.design === 1, `selected category ka count galat: ${countsDesign.categories.design}`);
   // baaki facets ka count selected category ke andar hi ginta hai
   check(countsDesign.tags.design === 1, `tag count selection ke baad galat: ${countsDesign.tags.design}`);
   check(!countsDesign.tags.seo, `doosri category ka tag count leak ho raha hai: ${countsDesign.tags.seo}`);
@@ -390,7 +411,8 @@ export async function run(pages, outDir) {
 
   // globals jo script padhta hai
   globalThis.document = doc;
-  globalThis.location = { search: '?category=Design', pathname: '/tools/' };
+  // drawer ka link lowercase slug bhejta hai — wahi shape test karo
+  globalThis.location = { search: '?category=design', pathname: '/tools/' };
   const replaced = [];
   globalThis.history = {
     replaceState: (_state, _title, url) => replaced.push(url),
@@ -406,7 +428,7 @@ export async function run(pages, outDir) {
   };
 
   // URL se initial state
-  check(api.getFacets().category === 'Design', `URL se category nahi aayi: ${api.getFacets().category}`);
+  check(api.getFacets().category === 'design', `URL se category nahi aayi: ${api.getFacets().category}`);
   check(visibleNames().join('|') === 'Color Palette', `URL state se grid filter nahi hua: ${visibleNames()}`);
   check(countEl.textContent === '1 tools', `result count galat: ${countEl.textContent}`);
   check(panelCount.textContent === '1', `panel count galat: ${panelCount.textContent}`);

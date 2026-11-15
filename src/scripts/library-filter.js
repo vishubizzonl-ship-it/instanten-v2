@@ -60,11 +60,13 @@ const cardText = (card) =>
 export function cardMatches(card, facets, { ignore = null } = {}) {
   const f = normalizeFacets(facets);
 
+  // Case-insensitive compare: URL se `?category=utility` (lowercase) aata hai
+  // aur card par "Utility" hota hai — dono match hone chahiye.
   if (ignore !== 'category' && f.category) {
-    if (norm(card.category) !== f.category) return false;
+    if (norm(card.category).toLowerCase() !== f.category.toLowerCase()) return false;
   }
   if (ignore !== 'pricing' && f.pricing) {
-    if (norm(card.pricing) !== f.pricing) return false;
+    if (norm(card.pricing).toLowerCase() !== f.pricing.toLowerCase()) return false;
   }
   if (ignore !== 'tags' && f.tags.length) {
     const have = cardTags(card);
@@ -119,8 +121,8 @@ export function computeCounts(cards, facets) {
   const tags = {};
 
   for (const card of cards) {
-    const category = norm(card.category);
-    const pricing = norm(card.pricing);
+    const category = norm(card.category).toLowerCase();
+    const pricing = norm(card.pricing).toLowerCase();
     if (category && cardMatches(card, f, { ignore: 'category' })) {
       categories[category] = (categories[category] ?? 0) + 1;
     }
@@ -236,11 +238,11 @@ export function mountLibraryFilter(root) {
       let count = null;
 
       if (facet === 'category') {
-        pressed = facets.category === value;
-        count = value ? counts.categories[value] : counts.all;
+        pressed = facets.category.toLowerCase() === value.toLowerCase();
+        count = value ? counts.categories[value.toLowerCase()] : counts.all;
       } else if (facet === 'pricing') {
-        pressed = facets.pricing === value;
-        count = value ? counts.pricings[value] : counts.all;
+        pressed = facets.pricing.toLowerCase() === value.toLowerCase();
+        count = value ? counts.pricings[value.toLowerCase()] : counts.all;
       } else if (facet === 'tag') {
         pressed = facets.tags.includes(value.toLowerCase());
         count = counts.tags[value.toLowerCase()] ?? 0;
@@ -309,9 +311,12 @@ export function mountLibraryFilter(root) {
     const value = chip.dataset.value || '';
 
     if (facet === 'category') {
-      facets = { ...facets, category: facets.category === value ? '' : value };
+      // toggle bhi case-insensitive (URL lowercase, chip value capital)
+      const same = facets.category.toLowerCase() === value.toLowerCase();
+      facets = { ...facets, category: same ? '' : value };
     } else if (facet === 'pricing') {
-      facets = { ...facets, pricing: facets.pricing === value ? '' : value };
+      const same = facets.pricing.toLowerCase() === value.toLowerCase();
+      facets = { ...facets, pricing: same ? '' : value };
     } else if (facet === 'tag') {
       const tag = value.toLowerCase();
       facets = {
