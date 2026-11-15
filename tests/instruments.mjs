@@ -485,7 +485,10 @@ export function run(pages, outDir) {
     // fullscreen records panel wapas hai, par absolute (size nahi badalta)
     check(/id="records-in-card" class="[^"]*absolute/.test(speedSrc), 'speedometer: fullscreen records panel absolute nahi hai');
     check(speedSrc.includes('id="records-list-card"'), 'speedometer: fullscreen records list gayab');
-    check(/addEventListener\('fullscreenchange', syncFsIcon\)/.test(speedSrc), 'speedometer: fullscreenchange par sirf icon sync nahi hai');
+    // fullscreenchange par icon sync + panel fit (layout/position change nahi)
+    check(/addEventListener\('fullscreenchange', onFsChange\)/.test(speedSrc), 'speedometer: fullscreenchange handler nahi');
+    check(/onFsChange = \(\) => \{[\s\S]{0,120}syncFsIcon\(\)/.test(speedSrc), 'speedometer: onFsChange mein icon sync nahi');
+    check(!/centreFullscreen/.test(speedSrc), 'speedometer: purana centreFullscreen measurement wapas aa gaya');
     // records feature (page ke andar wali list) intact
     check(speedSrc.includes('id="records-list"'), 'speedometer: records-list gayab');
     // build
@@ -551,6 +554,20 @@ export function run(pages, outDir) {
     check(!/\[&:fullscreen\]:flex/.test(panel), 'speedometer: records panel par galat variant [&:fullscreen] hai');
     // tool apni jagah par rahe: panel overlay hai, layout ka hissa nahi
     check(/inset-x-0/.test(panel), 'speedometer: records panel full width overlay nahi');
+
+    // Overlap fix: panel ki height sirf bachi hui jagah ke barabar (JS measure).
+    // Tool apni jagah par rehta hai — koi margin/translate nahi.
+    check(/function fitRecordsPanel\(\)/.test(src), 'speedometer: fitRecordsPanel() nahi');
+    check(/panelEl\.style\.maxHeight = Math\.max\(0, leftover\)/.test(src), 'speedometer: panel height leftover se set nahi hoti');
+    check(/cardRect\.bottom - contentBottom - 8/.test(src), 'speedometer: leftover calculation (card bottom - content bottom) nahi');
+    check(/window\.addEventListener\('resize', fitRecordsPanel\)/.test(src), 'speedometer: resize par panel fit nahi');
+    check(/addEventListener\('orientationchange', fitRecordsPanel\)/.test(src), 'speedometer: orientation par panel fit nahi');
+    // tool ki position nahi badalni chahiye
+    check(!/headEl\.style\.(margin|transform)/.test(src), 'speedometer: head ko shift kiya ja raha hai (position change)');
+    check(!/bodyEl\.style\.(margin|transform)/.test(src), 'speedometer: tool ko shift kiya ja raha hai (position change)');
+    check(!/\[&:fullscreen\]:pb-/.test(src), 'speedometer: card par fullscreen padding (tool shift) wapas hai');
+    // panel fullscreen-only aur overlay hi rahe
+    check(/\[:fullscreen_&\]:flex/.test(panel), 'speedometer: panel ancestor fullscreen variant nahi');
 
     // build
     const html = pages.get('/onlinespeedometer/') ?? '';
