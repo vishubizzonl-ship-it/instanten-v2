@@ -382,6 +382,19 @@ export function run(pages, outDir) {
     check(!build.includes('id="start-btn"'), 'build: Start button abhi bhi hai');
     check(!/onclick="resetTrip\(\)"/.test(build), 'build: Reset button abhi bhi hai');
     check(build.includes('id="record-btn"'), 'build: Record button gayab');
+
+    // Record button: label rounded square ke beech + button coloured (ink fill)
+    const recSrc = src.match(/<button[^>]*id="record-btn"[^>]*>/)?.[0] ?? '';
+    check(/items-center/.test(recSrc), 'record-btn: text vertically center nahi (items-center)');
+    check(/justify-center/.test(recSrc), 'record-btn: text horizontally center nahi (justify-center)');
+    check(/text-center/.test(recSrc), 'record-btn: text-center nahi');
+    check(/leading-none/.test(recSrc), 'record-btn: leading-none nahi (text baseline par latak sakta hai)');
+    check(/min-w-\[/.test(recSrc), 'record-btn: fixed min-width nahi (label ke hisaab se square badalta hai)');
+    check(/bg-ink/.test(recSrc) && /text-surface/.test(recSrc), 'record-btn: coloured fill (bg-ink/text-surface) nahi');
+    check(!/bg-surface/.test(recSrc), 'record-btn: purana plain (bg-surface) style bacha hua hai');
+    const recBuild = (pages.get('/onlinespeedometer/') ?? '').match(/<button[^>]*id="record-btn"[^>]*>/)?.[0] ?? '';
+    check(/items-center/.test(recBuild) && /justify-center/.test(recBuild), 'build: record-btn center nahi');
+    check(/bg-ink/.test(recBuild), 'build: record-btn coloured nahi');
     check(lineHeight['text-xl'] === 28, 'line-height table galat');
   }
 
