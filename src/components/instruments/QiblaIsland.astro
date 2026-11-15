@@ -14,8 +14,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
           data-t-gps={ui['qibla.ui.gps']}
           data-t-gps-no-acc={ui['qibla.ui.gpsNoAcc']}
           data-t-blocked={ui['qibla.ui.blocked']}
-          data-t-ip-approx={ui['qibla.ui.ipApprox']}
-          data-t-approx={ui['qibla.ui.approx']}
           data-t-unavailable={ui['qibla.ui.unavailable']}
           data-t-could-not={ui['qibla.ui.couldNot']}
           data-t-calibrating={ui['qibla.ui.calibrating']}
@@ -34,9 +32,8 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
             <h2 class="font-display text-xl font-semibold tracking-tight text-ink">{ui['qibla.ui.title']}</h2>
             <p class="text-xs text-muted font-mono mt-1 min-h-[1rem]" id="qibla-status" aria-live="polite">{ui['qibla.ui.locating']}</p>
             <p class="text-3xl font-semibold tracking-tight tabular-nums text-ink mt-2 min-h-[2.25rem]" id="qibla-bearing">—</p>
-            <!-- The script writes the source of the bearing here: GPS with accuracy,
-                 or an approximate IP city. Without this element the visitor cannot
-                 tell an exact reading from a guess. -->
+            <!-- The script writes the source of the bearing here (GPS with accuracy,
+                 or plain GPS). Bearing sirf device location se aata hai. -->
             <p class="text-xs text-muted font-mono mt-1 min-h-[1rem]" id="qibla-location"></p>
           </div>
 
@@ -175,21 +172,6 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
       });
     }
 
-    /**
-     * City-level guess from the IP address. Only used when the visitor blocks or
-     * has no GPS — it can be a whole city out, so the tool says so on screen.
-     */
-    async function locateWithIp(): Promise<Coords | null> {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const data = await r.json();
-        if (data && typeof data.latitude === 'number' && typeof data.longitude === 'number') {
-          return { lat: data.latitude, lng: data.longitude };
-        }
-      } catch {}
-      return null;
-    }
-
     function setLocationLabel(text: string) {
       if (locText) locText.textContent = text;
     }
@@ -212,19 +194,12 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
         return;
       }
 
-      if (statusEl) statusEl.textContent = msg('blocked', 'Location blocked — estimating your city…');
-      const ip = await locateWithIp();
-      if (ip) {
-        applyBearing(qiblaBearing(ip.lat, ip.lng));
-        setLocationLabel(
-          msg('ip-approx', 'Approximate bearing from your IP city — allow location access for an exact one'),
-        );
-        if (statusEl) statusEl.textContent = msg('approx', 'Approximate location');
-        return;
-      }
-
+      // Koi IP-based guess nahi: bearing sirf device location se aati hai.
+      // Location block ho to saaf message — approximate bearing nahi dikhate.
       if (statusEl) statusEl.textContent = msg('unavailable', 'Location unavailable');
-      setLocationLabel(msg('could-not', 'Could not determine location — allow location access and reload.'));
+      setLocationLabel(
+        msg('could-not', 'Could not determine location — allow location access and reload.'),
+      );
     }
 
     type E = DeviceOrientationEvent & { webkitCompassHeading?: number | null; alpha?: number | null; beta?: number | null; gamma?: number | null; absolute?: boolean };

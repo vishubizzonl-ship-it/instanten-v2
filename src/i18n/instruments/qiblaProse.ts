@@ -56,7 +56,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "Who this online Qibla tool is for",
     paras: [
       "Travellers in an unfamiliar hotel room, office workers looking for a corner to pray in, students in a new hostel, and anyone whose local mosque is out of sight. It is equally useful as a cross-check: if the sticker on the wall says one thing and the **online Qibla compass** says another, you now have a second opinion with a number attached.",
-      "The tool is free and needs no account. Your coordinates are used in the tab to calculate the bearing and are never stored, so an **online Qibla direction** check leaves nothing behind: allow location access for an exact bearing, or let the page fall back to an approximate city from your IP address if you decline.",
+      "The tool is free and needs no account. Your coordinates are used in the tab to calculate the bearing and are never stored, so an **online Qibla direction** check leaves nothing behind: allow location access and the bearing is computed on your device.",
     ],
   },
   {
@@ -172,7 +172,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "Para quién es esta herramienta de alquibla online",
     paras: [
       "Viajeros en una habitación de hotel desconocida, oficinistas que buscan un rincón donde rezar, estudiantes en un albergue nuevo y cualquiera que no tenga su mezquita a la vista. Es igual de útil como comprobación: si la pegatina de la pared dice una cosa y la **brújula de alquibla online** dice otra, ya tienes una segunda opinión con un número.",
-      "La herramienta es gratis y no necesita cuenta. Tus coordenadas se usan en la pestaña para calcular el rumbo y nunca se guardan, así que una comprobación de **dirección de la alquibla online** no deja nada: permite la ubicación para un rumbo exacto, o deja que la página use una ciudad aproximada a partir de tu IP si lo rechazas.",
+      "La herramienta es gratis y no necesita cuenta. Tus coordenadas se usan en la pestaña para calcular el rumbo y nunca se guardan, así que una comprobación de **dirección de la alquibla online** no deja nada: permite la ubicación y el rumbo se calcula en tu dispositivo.",
     ],
   },
   {
@@ -268,7 +268,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "このオンラインキブラツールは誰のためか",
     paras: [
       "見知らぬホテルの部屋にいる旅行者、礼拝できる一角を探す会社員、新しい寮の学生、地元のモスクが見えない人。確認用としても同じくらい役立ちます。壁のシールが示す方向と**オンラインキブラコンパス**が違うなら、数字付きの第二の意見が手に入るわけです。",
-      "ツールは無料でアカウント不要です。座標はタブ内で方位の計算に使われるだけで保存されないため、**オンラインキブラ方向**の確認は何も残しません。正確な方位には位置情報を許可し、拒否した場合はIPアドレスから推定したおおよその都市に切り替わります。",
+      "ツールは無料でアカウント不要です。座標はタブ内で方位の計算に使われるだけで保存されないため、**オンラインキブラ方向**の確認は何も残しません。位置情報を許可すると、方位は端末上で計算されます。",
     ],
   },
   {
@@ -364,7 +364,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "À qui sert cet outil de Qibla en ligne",
     paras: [
       "Aux voyageurs dans une chambre d'hôtel inconnue, aux salariés qui cherchent un coin pour prier, aux étudiants dans un nouveau foyer, et à tous ceux dont la mosquée n'est pas visible. Il est tout aussi utile comme contre-vérification : si l'autocollant du mur dit une chose et la **boussole Qibla en ligne** une autre, vous avez un second avis chiffré.",
-      "L'outil est gratuit et sans compte. Vos coordonnées servent dans l'onglet au calcul du relèvement et ne sont jamais stockées : une vérification de **direction de la Qibla en ligne** ne laisse donc rien derrière elle. Autorisez la localisation pour un relèvement exact, ou laissez la page utiliser une ville approximative à partir de votre adresse IP si vous refusez.",
+      "L'outil est gratuit et sans compte. Vos coordonnées servent dans l'onglet au calcul du relèvement et ne sont jamais stockées : une vérification de **direction de la Qibla en ligne** ne laisse donc rien derrière elle. Autorisez la localisation et le relèvement est calculé sur votre appareil.",
     ],
   },
   {
@@ -460,7 +460,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "Für wen dieses Online-Qibla-Tool ist",
     paras: [
       "Reisende in einem fremden Hotelzimmer, Büroangestellte, die eine Ecke zum Beten suchen, Studierende in einem neuen Wohnheim und alle, deren Moschee außer Sicht ist. Ebenso nützlich als Gegenprobe: Wenn der Aufkleber an der Wand etwas anderes sagt als der **Online-Qibla-Kompass**, haben Sie eine zweite Meinung mit Zahl.",
-      "Das Tool ist kostenlos und braucht kein Konto. Ihre Koordinaten werden im Tab zur Berechnung des Azimuts verwendet und nie gespeichert — eine Prüfung der **Online-Qibla-Richtung** hinterlässt also nichts. Erlauben Sie den Standort für einen exakten Azimut, oder lassen Sie die Seite ersatzweise eine ungefähre Stadt aus Ihrer IP-Adresse ableiten, wenn Sie ablehnen.",
+      "Das Tool ist kostenlos und braucht kein Konto. Ihre Koordinaten werden im Tab zur Berechnung des Azimuts verwendet und nie gespeichert — eine Prüfung der **Online-Qibla-Richtung** hinterlässt also nichts. Erlauben Sie den Standort, und der Azimut wird auf Ihrem Gerät berechnet.",
     ],
   },
   {
@@ -556,7 +556,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "Para quem é esta ferramenta de Qibla online",
     paras: [
       "Viajantes num quarto de hotel desconhecido, trabalhadores procurando um canto para orar, estudantes num alojamento novo e qualquer pessoa cuja mesquita não está à vista. É igualmente útil como conferência: se o adesivo na parede diz uma coisa e a **bússola de Qibla online** diz outra, agora você tem uma segunda opinião com número.",
-      "A ferramenta é gratuita e não precisa de conta. Suas coordenadas são usadas na aba para calcular o rumo e nunca são armazenadas, então uma checagem de **direção da Qibla online** não deixa nada. Permita a localização para um rumo exato, ou deixe a página usar uma cidade aproximada a partir do seu IP se você recusar.",
+      "A ferramenta é gratuita e não precisa de conta. Suas coordenadas são usadas na aba para calcular o rumo e nunca são armazenadas, então uma checagem de **direção da Qibla online** não deixa nada. Permita a localização e o rumo é calculado no seu dispositivo.",
     ],
   },
   {
@@ -652,7 +652,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "이 온라인 키블라 도구는 누구를 위한 것인가",
     paras: [
       "낯선 호텔 방에 있는 여행자, 예배할 자리를 찾는 직장인, 새 기숙사에 있는 학생, 지역 모스크가 보이지 않는 사람. 교차 확인용으로도 똑같이 유용합니다. 벽의 스티커가 한쪽을 가리키는데 **온라인 키블라 나침반**이 다른 쪽을 가리킨다면, 숫자가 붙은 두 번째 의견이 생기는 셈입니다.",
-      "도구는 무료이고 계정이 필요 없습니다. 좌표는 탭 안에서 방위 계산에만 쓰이고 저장되지 않으므로 **온라인 키블라 방향** 확인은 아무것도 남기지 않습니다. 정확한 방위를 위해 위치를 허용하고, 거부하면 IP 주소로 추정한 대략적인 도시로 대신합니다.",
+      "도구는 무료이고 계정이 필요 없습니다. 좌표는 탭 안에서 방위 계산에만 쓰이고 저장되지 않으므로 **온라인 키블라 방향** 확인은 아무것도 남기지 않습니다. 위치를 허용하면 방위가 기기에서 계산됩니다.",
     ],
   },
   {
@@ -748,7 +748,7 @@ export const qiblaProse: Record<string, QiblaProse> = {
     h: "A chi serve questo strumento di Qibla online",
     paras: [
       "A chi viaggia in una camera d'albergo sconosciuta, a chi in ufficio cerca un angolo per pregare, a chi studia in un nuovo ostello e a chiunque non abbia la moschea in vista. È altrettanto utile come controprova: se l'adesivo sulla parete dice una cosa e la **bussola Qibla online** un'altra, ora hai un secondo parere con un numero.",
-      "Lo strumento è gratuito e non richiede account. Le tue coordinate servono nella scheda per calcolare il rilevamento e non vengono mai memorizzate, quindi un controllo della **direzione della Qibla online** non lascia nulla. Consenti la posizione per un rilevamento esatto, oppure lascia che la pagina usi una città approssimativa dal tuo IP se rifiuti.",
+      "Lo strumento è gratuito e non richiede account. Le tue coordinate servono nella scheda per calcolare il rilevamento e non vengono mai memorizzate, quindi un controllo della **direzione della Qibla online** non lascia nulla. Consenti la posizione e il rilevamento viene calcolato sul tuo dispositivo.",
     ],
   },
   {

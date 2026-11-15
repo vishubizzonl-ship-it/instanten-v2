@@ -335,6 +335,42 @@ export function run(pages, outDir) {
     }
   }
 
+  // --- 10j. Qibla: koi IP-based approximate bearing nahi -------------------
+  {
+    const src = readFileSync('src/components/instruments/QiblaIsland.astro', 'utf8');
+    check(!src.includes('ipapi.co'), 'Qibla abhi bhi IP lookup (ipapi.co) karta hai');
+    check(!/locateWithIp|data-t-ip-approx|data-t-approx/.test(src), 'Qibla mein IP approx code bacha hua hai');
+    check(!/estimate your city|estimating your city/i.test(src), 'Qibla par "estimating your city" text hai');
+    // blocked hone par saaf message, guess nahi
+    check(src.includes("msg('unavailable'"), 'Qibla par "location unavailable" message nahi');
+    check(src.includes("msg('could-not'"), 'Qibla par "allow location access and reload" message nahi');
+
+    // koi locale mein IP-approx string na bache
+    const uiSrc = readFileSync('src/i18n/instruments/ui.ts', 'utf8');
+    check(!uiSrc.includes('qibla.ui.ipApprox'), 'ui.ts mein qibla.ui.ipApprox string bachi hui hai');
+    check(!/qibla\.ui\.approx"/.test(uiSrc), 'ui.ts mein qibla.ui.approx string bachi hui hai');
+
+    // har locale ke built qibla page par ye text nahi aana chahiye
+    const localized = ['/onlineqibla/', ...LOCALES.map((l) => `/${l}/onlineqibla/`)];
+    let checkedPages = 0;
+    for (const url of localized) {
+      const html = pages.get(url);
+      if (!html) continue;
+      checkedPages++;
+      const visible = stripTags(html);
+      check(!/approximate bearing/i.test(visible), `${url}: "Approximate bearing" text page par hai`);
+      check(!/bearing from your ip/i.test(visible), `${url}: "bearing from your IP" text page par hai`);
+      check(!/estimating your city/i.test(visible), `${url}: "estimating your city" text page par hai`);
+      check(!/ip-approx/.test(html), `${url}: ip-approx attribute build mein bacha hai`);
+    }
+    check(checkedPages >= 5, `qibla pages zyada check nahi hue (${checkedPages})`);
+
+    // prose copy mein bhi IP fallback ka zikr nahi (har locale)
+    const proseSrc = readFileSync('src/i18n/instruments/qiblaProse.ts', 'utf8');
+    check(!/\bIP\b/.test(proseSrc), 'qiblaProse mein IP fallback ka zikr bacha hua hai');
+    check(!/approximate city/i.test(proseSrc), 'qiblaProse mein "approximate city" bacha hua hai');
+  }
+
   // --- 11. koi external tool link nahi ---------------------------------
   for (const slug of SLUGS) {
     const html = pages.get(`/${slug}/`) ?? '';
