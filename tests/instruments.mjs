@@ -8,6 +8,7 @@
  * Har check built HTML par chalta hai (jo browser ko milta hai wahi bytes).
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { LOCALES, createSuite, jsonLdOf, localeOf, localize, stripTags } from './lib.mjs';
 
 /** slug -> us tool ka root attribute + island ke zaroori elements. */
@@ -53,7 +54,7 @@ function scriptsOf(html) {
   return [...inline, ...chunks].join('\n');
 }
 
-export function run(pages) {
+export function run(pages, outDir) {
   const suite = createSuite('instruments');
   const { check } = suite;
 
@@ -178,6 +179,35 @@ export function run(pages) {
     check(main.includes('mx-auto max-w-[48rem] px-6 lg:px-8'), `/${page}/: content ka original gutter (px-6 lg:px-8) nahi hai`);
     check(!main.includes('px-4 sm:px-6 lg:px-0'), `/${page}/: content par purana patla gutter (px-4) wapas aa gaya`);
     check(!main.includes('px-3 pb-2 pt-3'), `/${page}/: mobile gutter 24px se chhota (px-3) hai`);
+  }
+
+  // --- 10c. InstrumentNav: pills original size par, tap area alag ---------
+  // Pehle `mobile.css` pill par hi min-height 40/44px laga deta tha, jisse
+  // do-row nav rubber jaisa mota ho jaata tha. Ab hit-area pseudo-element se
+  // aata hai, pill ka box original (compassinstant) jaisa hi rehta hai.
+  {
+    const nav = (pages.get('/onlinecompass/') ?? '').match(/<nav[\s\S]*?<\/nav>/)?.[0] ?? '';
+    check(Boolean(nav), 'onlinecompass: InstrumentNav nahi mila');
+    // top bar + do mobile rows (original structure)
+    check(/class="flex h-16 items-center justify-between[^"]*"/.test(nav), 'InstrumentNav: top bar h-16 nahi');
+    check((nav.match(/md:hidden/g) ?? []).length >= 1, 'InstrumentNav: mobile rows wrapper nahi');
+    // pills apne natural size par (koi min-height class nahi)
+    const pills = [...nav.matchAll(/<a[^>]*data-nav-pill[^>]*>/g)].map((m) => m[0]);
+    check(pills.length >= 9, `InstrumentNav: sirf ${pills.length} pills (4 tool + 5 company chahiye)`);
+    check(
+      pills.every((pill) => !/min-h-\[/.test(pill) && !/h-(9|10|11)\b/.test(pill)),
+      'InstrumentNav: pill par fixed/min height class aa gayi (nav khinch jaayega)'
+    );
+    // bundle: pill par min-height nahi, hit-area rule hai
+    const cssBundle = readFileSync(join(outDir, '_astro', readdirSync(join(outDir, '_astro')).find((f) => f.endsWith('.css'))), 'utf8');
+    check(
+      !/nav \[data-nav-pill\][^{]*\{[^}]*min-height/.test(cssBundle),
+      'mobile.css phir se nav pills par min-height laga raha hai (nav stretch)'
+    );
+    check(
+      /nav \[data-nav-pill\]:after/.test(cssBundle) && /height:\s*44px/.test(cssBundle),
+      'nav pills ka 44px hit-area rule gayab hai'
+    );
   }
 
   // --- 11. koi external tool link nahi ---------------------------------

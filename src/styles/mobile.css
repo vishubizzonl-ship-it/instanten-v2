@@ -71,18 +71,28 @@ body {
     padding: 0 !important;
   }
 
-  /* Sensor tool pages ka apna nav (InstrumentNav) — wahi 44px rule */
+  /* Sensor tool pages ka apna nav (InstrumentNav).
+     Pehle yahan `min-height: 44px/40px` seedha pill par lagta tha — usse pill
+     apne natural size (~28px) se 40-44px tak khinch jaata tha aur do-row nav
+     "rubber" jaisa mota dikhta tha (original compassinstant par aisa nahi tha).
+     Ab pill ka box original jaisa hi rehta hai, aur tap target uske chaaron
+     taraf invisible hit-area se poora hota hai (>=44px, WCAG 2.5.8). */
   nav [id='tool-lang-btn'],
-  nav [id='tool-theme-btn'] {
-    min-width: 44px !important;
-    min-height: 44px !important;
+  nav [id='tool-theme-btn'],
+  nav [data-nav-pill] {
+    position: relative;
   }
 
-  /* mobile pill strip: har pill ek thumb ke neeche aaye */
-  nav [data-nav-pill] {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
+  nav [id='tool-lang-btn']::after,
+  nav [id='tool-theme-btn']::after,
+  nav [data-nav-pill]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
   }
 
   /* drawer + footer ki list links: poora 44px row */
