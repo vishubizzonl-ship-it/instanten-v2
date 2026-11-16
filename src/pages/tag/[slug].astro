@@ -7,19 +7,22 @@ import Pagination from '../../components/Pagination.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../utils/filters';
+import { tagSlug, tagFromSlug } from '../../utils/tagSlug';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
   const allTags = [...new Set(tools.flatMap(t => t.data.tags || []))];
   return allTags.map(tag => ({
-    params: { slug: tag.toLowerCase() },
+    // URL-safe slug: "instant convert" -> "instant-convert"
+    params: { slug: tagSlug(tag) },
   }));
 }
 
 const { slug } = Astro.params;
-const tagName = slug;
-
 const allTools = await getCollection('tools');
+const allTagNames = [...new Set(allTools.flatMap(t => t.data.tags || []))];
+/** Slug URL ke liye hai; filtering asli tag naam se hoti hai. */
+const tagName = tagFromSlug(allTagNames, slug) ?? slug;
 
 const searchParams = new URLSearchParams(Astro.url.search);
 const filters = parseFilters(searchParams);

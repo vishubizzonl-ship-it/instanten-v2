@@ -23,6 +23,7 @@ import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate
 import { localizeTool, localizeToolCategory, localizePricing, getPricingNote } from '../../i18n/toolContent';
 import { toolPath } from '../../utils/toolPaths';
 import { localizeToolLists } from '../../i18n/toolLists';
+import { tagSlug } from '../../utils/tagSlug';
 
 interface Props {
   tool: {
@@ -260,7 +261,7 @@ const breadcrumbs = [
         </h2>
         <div class="flex flex-wrap gap-2">
           {tags.map(tag => (
-            <a href={translatePath(`/tag/${tag.toLowerCase()}/`)} class="text-caption font-medium px-3 py-1 rounded-[6px] border border-border-hairline bg-surface text-muted hover:text-ink hover:border-faint transition-colors">{tag}</a>
+            <a href={translatePath(`/tag/${tagSlug(tag)}/`)} class="text-caption font-medium px-3 py-1 rounded-[6px] border border-border-hairline bg-surface text-muted hover:text-ink hover:border-faint transition-colors">{tag}</a>
           ))}
         </div>
       </section>

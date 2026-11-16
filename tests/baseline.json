@@ -1,12 +1,9 @@
 {
   "site-integrity": {
     "meta description missing/chhota": 80,
-    "title length N (N-N chahiye)": 0,
-    "canonical galat": 60
+    "canonical galat": 10
   },
-  "links": {
-    "broken link": 1550
-  },
+  "links": {},
   "i18n-silo": {
     "page missing": 9,
     "hreflang adhoora (N/N)": 10,
@@ -23,8 +20,8 @@
     "hreflang x-default nahi": 10,
     "apna hreflang nahi": 10,
     "canonical apne hreflang se match nahi": 10,
-    "title translate nahi hua": 16,
-    "English text leak \"…\"": 85
+    "English text leak \"…\"": 85,
+    "title translate nahi hua": 16
   },
   "design": {},
   "seo": {},
@@ -32,6 +29,11 @@
   "analytics": {},
   "tools-inpage": {},
   "instruments": {},
+  "theme": {},
+  "sitemaps": {},
+  "robots": {},
+  "tool-errors": {},
+  "onpage-root": {},
   "rules": {},
   "i18n-hreflang": {},
   "mobile": {},

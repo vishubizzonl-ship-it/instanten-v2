@@ -63,9 +63,8 @@ const formattedDate = formatLocalizedDate(publishedAt, lang);
 
   <div class="blog-card__body">
     <div class="blog-card__meta">
-      <a href={`/author/${author?.slug}/`} class="blog-card__author">
-        {author?.name}
-      </a>
+      {/* Author page nahi hai — byline plain text (post page bhi author ko /about/ par bhejta hai). */}
+      <span class="blog-card__author">{author?.name}</span>
       <time datetime={publishedAt} class="blog-card__date">
         {t('blog.on')} {formattedDate}
       </time>

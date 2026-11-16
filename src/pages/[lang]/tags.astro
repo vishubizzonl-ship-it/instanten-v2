@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
+import { tagSlug } from '../../utils/tagSlug';
 import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
 import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { getPageCopy } from '../../i18n/pageContent';
@@ -20,7 +21,7 @@ const allTags = [...new Set(allTools.flatMap(t => t.data.tags || []))].sort();
 const tagCounts = allTags.map(tag => ({
   name: tag,
   count: allTools.filter(t => (t.data.tags || []).includes(tag)).length,
-  slug: tag.toLowerCase(),
+  slug: tagSlug(tag),
 }));
 ---
 

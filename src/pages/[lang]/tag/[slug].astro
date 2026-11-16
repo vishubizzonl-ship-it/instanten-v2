@@ -10,6 +10,7 @@ import { nonDefaultLangs, type LangCode } from '../../../i18n/ui';
 import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
 import { getPageCopy } from '../../../i18n/pageContent';
 import { localizeTool } from '../../../i18n/toolContent';
+import { tagSlug, tagFromSlug } from '../../../utils/tagSlug';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
   const paths: { params: { lang: LangCode; slug: string } }[] = [];
   for (const lang of nonDefaultLangs) {
     for (const tag of allTags) {
-      paths.push({ params: { lang, slug: tag.toLowerCase() } });
+      paths.push({ params: { lang, slug: tagSlug(tag) } });
     }
   }
   return paths;
@@ -27,9 +28,10 @@ const { lang, slug } = Astro.params as { lang: LangCode; slug: string };
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const page = getPageCopy(lang);
-const tagName = slug;
-
 const allTools = await getCollection('tools');
+const allTagNames = [...new Set(allTools.flatMap(t => t.data.tags || []))];
+/** Slug URL ke liye hai; filtering asli tag naam se hoti hai. */
+const tagName = tagFromSlug(allTagNames, slug) ?? slug;
 const searchParams = new URLSearchParams(Astro.url.search);
 const filters = parseFilters(searchParams);
 filters.tags = [tagName];

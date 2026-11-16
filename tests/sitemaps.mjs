@@ -102,6 +102,13 @@ export function run(pages, outDir) {
       `${tool}/sitemap.xml mein ${missing.length} page chhoot gaya (jaise ${missing.slice(0, 3).join(', ')})`
     );
 
+    // --- 3.5 URL me space (%20) nahi — slug saaf hona chahiye ------------
+    const spacey = locs.filter((loc) => /%20|\s/.test(loc));
+    check(
+      spacey.length === 0,
+      `${tool}/sitemap.xml mein ${spacey.length} URL me space hai (jaise ${spacey[0] ?? ''})`
+    );
+
     // --- 4. har listed URL ka page dist mein sach mein hai ----------------
     for (const loc of locs) {
       const path = loc.replace(SITE, '');
@@ -245,6 +252,15 @@ export function run(pages, outDir) {
     const opens = (index.match(/<sitemap>/g) ?? []).length;
     const closes = (index.match(/<\/sitemap>/g) ?? []).length;
     check(opens === closes, `sitemap-index.xml mein ${opens} <sitemap> vs ${closes} </sitemap>`);
+  }
+
+  // --- har sitemap file: URL me space (%20) nahi ---------------------------
+  const sitemapFiles = readdirSync(outDir).filter((f) => /^sitemap.*\.xml$/.test(f));
+  check(sitemapFiles.length >= 3, `dist mein sitemap files kam hain (${sitemapFiles.length})`);
+  for (const file of sitemapFiles) {
+    const xml = readFileSync(`${outDir}/${file}`, 'utf8');
+    const spacey = (xml.match(/<loc>[^<]*%20[^<]*<\/loc>/g) ?? []).length;
+    check(spacey === 0, `${file} mein ${spacey} URL me space (%20) hai`);
   }
 
   return suite;

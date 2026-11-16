@@ -2,13 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
+import { tagSlug } from '../utils/tagSlug';
 
 const allTools = await getCollection('tools');
 const allTags = [...new Set(allTools.flatMap(t => t.data.tags || []))].sort();
 const tagCounts = allTags.map(tag => ({
   name: tag,
   count: allTools.filter(t => (t.data.tags || []).includes(tag)).length,
-  slug: tag.toLowerCase(),
+  slug: tagSlug(tag),
 }));
 
 const pageTitle = 'Tags — instanten';
