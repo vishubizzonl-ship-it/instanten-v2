@@ -2,6 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import BackLink from '../BackLink.astro';
 import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
+import {
+  PUBLIC_EMAIL,
+  DELIVERY_EMAIL,
+  WEB3FORMS_ENDPOINT,
+  WEB3FORMS_KEY,
+  CONTACT_FORM_LIVE,
+} from '../../config/contact';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { getPageCopy } from '../../i18n/pageContent';
 import RootSiloFaq from '../RootSiloFaq.astro';
@@ -22,6 +29,14 @@ const canonicalURL = lang === 'en' ? `${SITE_URL}/contact/` : `${SITE_URL}/${lan
 /** FAQ sirf English par — localized pages par English leak nahi. */
 const faqContent = rootSiloFaq['contact'];
 const faqs = lang === 'en' ? faqContent.faqs : [];
+
+/** Form messages — ek hi jagah se, dono modes (live + mailto) ke liye. */
+const messages = {
+  sending: t('contact.sending'),
+  sent: t('contact.success'),
+  mailto: t('contact.successMailto').replace('{email}', DELIVERY_EMAIL),
+  error: t('contact.error'),
+};
 ---
 
 <Layout
@@ -44,10 +59,21 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
 
       <h1 class="ror-h1">{t('contact.h1')}</h1>
       <p class="ror-lead">
-        {t('contact.leadBefore')} <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a>{t('contact.leadAfter')}
+        {t('contact.leadBefore')} <a href={`mailto:${PUBLIC_EMAIL}`} class="ror-link">{PUBLIC_EMAIL}</a>{t('contact.leadAfter')}
       </p>
 
-      <form id="contact-form" class="ror-form" novalidate>
+      <form
+        id="contact-form"
+        class="ror-form"
+        novalidate
+        data-email={DELIVERY_EMAIL}
+        data-endpoint={WEB3FORMS_ENDPOINT}
+        data-key={WEB3FORMS_KEY}
+        data-live={CONTACT_FORM_LIVE ? 'true' : 'false'}
+        data-messages={JSON.stringify(messages)}
+        action={`mailto:${DELIVERY_EMAIL}`}
+        method="post"
+        enctype="text/plain">
         <div class="ror-field">
           <label for="cf-name" class="ror-label">{t('contact.name')}</label>
           <input id="cf-name" name="name" type="text" placeholder={t('contact.placeholderName')} autocomplete="name" required class="ror-input" />
@@ -75,19 +101,21 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
           <textarea id="cf-message" name="message" rows="5" placeholder={t('contact.placeholderMessage')} required class="ror-textarea"></textarea>
         </div>
 
+        <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
+
         <div>
-          <button type="submit" class="ror-submit-btn">{t('contact.submit')}</button>
+          <button type="submit" class="ror-submit-btn" aria-busy="false">{t('contact.submit')}</button>
         </div>
 
-        <div id="cf-success" class="ror-alert-success">{t('contact.success')}</div>
-        <div id="cf-error" class="ror-alert-error">{t('contact.error')}</div>
+        <div id="cf-success" class="ror-alert-success" role="status" aria-live="polite" hidden></div>
+        <div id="cf-error" class="ror-alert-error" role="alert" hidden>{t('contact.error')}</div>
       </form>
 
       <section class="ror-section ror-section--contact-details" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #ebebeb;">
         <h2 class="ror-h2" style="font-size: 18px; margin-bottom: 12px;">{t('contact.channelsHeading')}</h2>
         <ul class="ror-ul" style="margin-top: 0;">
           <li><strong>{t('contact.channelWebsite')}</strong> — <a href={translatePath('/contact/')} class="ror-link">{t('contact.channelThisPage')}</a></li>
-          <li><strong>{t('contact.channelEmail')}</strong> — <a href="mailto:hello@instanten.com" class="ror-link">hello@instanten.com</a> ({t('contact.channelVerifiedEmail')})</li>
+          <li><strong>{t('contact.channelEmail')}</strong> — <a href={`mailto:${PUBLIC_EMAIL}`} class="ror-link">{PUBLIC_EMAIL}</a> ({t('contact.channelVerifiedEmail')})</li>
           <li><strong>{t('contact.channelSocial')}</strong> — {t('contact.channelSocialText')}</li>
         </ul>
         <p class="ror-p" style="margin-top: 16px; font-size: 14px; color: #888;">
@@ -100,32 +128,23 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
     </div>
   </main>
 
-  <script is:inline>
-    (function () {
-      const form = document.getElementById('contact-form');
-      const success = document.getElementById('cf-success');
-      const error = document.getElementById('cf-error');
+  <script>
+    import { wireContactForm } from '../../lib/contactSubmit';
 
-      if (!form || !success || !error) return;
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const name = document.getElementById('cf-name').value.trim();
-        const email = document.getElementById('cf-email').value.trim();
-        const subject = document.getElementById('cf-subject').value.trim();
-        const message = document.getElementById('cf-message').value.trim();
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!name || !email || !subject || !message || !emailRegex.test(email)) {
-          success.style.display = 'none';
-          error.style.display = 'block';
-          return;
-        }
-
-        error.style.display = 'none';
-        success.style.display = 'block';
-        form.reset();
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    if (form) {
+      const messages = JSON.parse(form.dataset.messages || '{}');
+      wireContactForm({
+        form,
+        statusEl: document.getElementById('cf-success'),
+        errorEl: document.getElementById('cf-error'),
+        messages: {
+          sending: messages.sending || 'Sending…',
+          sent: messages.sent || 'Message sent.',
+          mailto: messages.mailto || 'Your email app is opening.',
+          error: messages.error || 'Please fill in all required fields before submitting.',
+        },
       });
-    })();
+    }
   </script>
 </Layout>

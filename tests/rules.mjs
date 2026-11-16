@@ -173,5 +173,40 @@ export function run() {
   }
   check(/font-family:[^;]*DM Sans/i.test(layout) || /--font-display:[^;]*DM Sans/i.test(layout), 'Rule 2: DM Sans font token nahi mila');
 
+  /* ---------- Contact form: asli transport, jhootha "sent" nahi ---------- */
+  const submitLib = readFileSync('src/lib/contactSubmit.ts', 'utf8');
+  check(submitLib.includes('fetch('), 'Contact: submit logic mein asli network transport (fetch) nahi hai');
+  check(submitLib.includes('mailto:'), 'Contact: mailto fallback nahi hai (key na ho to form kaam karna chahiye)');
+  check(/if\s*\(!live \|\| !key \|\| !endpoint\)/.test(submitLib), 'Contact: live/fallback branch missing');
+
+  for (const file of ['src/components/ContactForm.astro', 'src/components/pages/ContactPage.astro']) {
+    const src = readFileSync(file, 'utf8');
+    check(src.includes('wireContactForm'), `${file}: shared submit logic (wireContactForm) use nahi karta`);
+    check(!/style\.display\s*=\s*['"]block['"]\s*;?\s*\n?\s*form\.reset/.test(src), `${file}: purana fake-success pattern (display=block + reset) wapas aa gaya`);
+    check(src.includes('name="botcheck"'), `${file}: honeypot (name="botcheck") missing`);
+    check(src.includes('data-live'), `${file}: data-live flag missing (live vs mailto mode)`)
+  }
+
+  const contactCfg = readFileSync('src/config/contact.ts', 'utf8');
+  check(/PUBLIC_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: PUBLIC_EMAIL missing');
+  check(/DELIVERY_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: DELIVERY_EMAIL missing');
+  check(contactCfg.includes('helloinstanten@gmail.com'), 'Contact config: public email helloinstanten@gmail.com nahi hai');
+  check(contactCfg.includes('vishubizz.onl@gmail.com'), 'Contact config: delivery inbox vishubizz.onl@gmail.com nahi hai');
+
+  // Retired address (hello@instanten.com) poore source me kahin na ho
+  const retired = [];
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const p = `${dir}/${entry.name}`;
+      if (entry.isDirectory()) walk(p);
+      else if (/\.(astro|ts|mjs|json|md|txt)$/.test(entry.name)) {
+        if (readFileSync(p, 'utf8').includes('hello@instanten.com')) retired.push(p);
+      }
+    }
+  };
+  walk('src');
+  check(retired.length === 0, `Contact: purana address hello@instanten.com ${retired.length} file(s) me bacha hai — ${retired.slice(0, 3).join(', ')}`);
+
   return suite;
 }
+
