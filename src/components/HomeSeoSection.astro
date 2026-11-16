@@ -119,10 +119,6 @@ export function getHomeFaqs(lang: LangCode) {
     </section>
   )}
 
-  {/* FAQ sirf us page par jahan questions hain (abhi sirf English route page).
-      Khaali array par section render hi nahi hota — warna khaali accordion
-      aur khaali FAQPage schema dono galat hote. */}
-  {copy.faqs.length > 0 && (
   <section class="ffa-band ffa-band--canvas" id="faq">
     <div class="ffa-container-wide">
       <h2 class="ffa-h2-lg">{copy.faqTitle}</h2>
@@ -141,7 +137,6 @@ export function getHomeFaqs(lang: LangCode) {
       </div>
     </div>
   </section>
-  )}
 </div>
 
 <style is:global>

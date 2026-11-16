@@ -4,6 +4,8 @@ import BackLink from '../BackLink.astro';
 import { SITE_NAME, LAST_UPDATED_ISO } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate, type UiKey } from '../../i18n/utils';
 import { seoAbout } from '../../i18n/seoContent';
+import RootSiloFaq from '../RootSiloFaq.astro';
+import { rootSiloFaq } from '../../i18n/pages/faqRootSilo';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -45,6 +47,9 @@ const featureKeys = [
   'feature8',
   'feature9',
 ] as const;
+/** FAQ sirf English par — localized pages par English leak nahi. */
+const faqContent = rootSiloFaq['about'];
+const faqs = lang === 'en' ? faqContent.faqs : [];
 ---
 
 <Layout
@@ -59,6 +64,7 @@ const featureKeys = [
     { name: 'Home', item: translatePath('/') },
     { name: t('nav.about'), item: translatePath('/about/') },
   ]}
+  faqs={faqs}
 >
   <main class="ror-main">
     <div class="ror-container">
@@ -129,6 +135,9 @@ const featureKeys = [
           {key('contactP1a')}{sep(key('contactForm'))}<a href={translatePath('/contact/')} class="ror-link">{key('contactForm')}</a>{sep(key('contactP1b'))}{key('contactP1b')}<a href="mailto:hello@instanten.com" class="ror-link">{key('helloEmail')}</a>{sep(key('contactP1c'))}{key('contactP1c')}
         </p>
       </section>
+      {lang === 'en' && (
+        <RootSiloFaq page="about" heading={faqContent.heading} lead={faqContent.lead} faqs={faqContent.faqs} />
+      )}
     </div>
   </main>
 </Layout>

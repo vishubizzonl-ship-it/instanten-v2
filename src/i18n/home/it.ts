@@ -99,5 +99,56 @@ export const home: HomeCopy = {
     },
   ],
   faqTitle: 'Domande frequenti',
-  faqs: [],
+  faqs: [
+    {
+      question: 'Che cos’è Instanten e in cosa è diverso dagli altri siti di strumenti online gratuiti?',
+      answer:
+        'Instanten è una raccolta di strumenti online gratuiti in cui ogni utilità viene eseguita dentro il tuo browser invece che su un server. È proprio questa scelta di progetto a fare la differenza: nulla di ciò che incolli o carichi lascia il tuo dispositivo, non c’è alcun obbligo di registrazione, nessun limite giornaliero e nessun piano a pagamento, e ogni strumento si apre come pagina statica utilizzabile in un secondo anche con una connessione mobile lenta.',
+    },
+    {
+      question: 'Quali strumenti online sono disponibili adesso su questo sito?',
+      answer:
+        'Al momento sono dodici: formattatore JSON, codificatore e decodificatore Base64, contatore di parole, generatore di password, generatore di QR code, compressore di immagini, palette di colori, generatore di griglie CSS, editor Markdown, generatore di meta tag, righello online e tester di espressioni regolari. Sono raggruppati in sviluppo, design, scrittura e utilità, così arrivi alla pagina giusta dalla griglia della home o con una sola parola nella ricerca.',
+    },
+    {
+      question: 'Questi strumenti sono davvero gratuiti o esiste un limite nascosto?',
+      answer:
+        'Sono gratuiti e il limite è esattamente zero: nessun conto alla rovescia di prova, nessuna schermata della carta, nessuna filigrana, nessun tetto di esportazione e nessuna coda. Un sito di strumenti gratuiti dovrebbe comportarsi come un servizio pubblico, quindi lo stesso strumento usato dieci volte di fila in una sessione di lavoro dà ogni volta lo stesso risultato. Non ci sarà nulla da abbonare in seguito perché non esiste un livello premium.',
+    },
+    {
+      question: 'È sicuro incollare password, token o documenti dei clienti in uno strumento online?',
+      answer:
+        'Su Instanten sì, perché l’elaborazione avviene nel tuo browser con semplice JavaScript: il testo o il file non viene mai trasmesso a un server e non viene salvato da nessuna parte dopo aver chiuso la scheda. È la prima domanda da porsi davanti a qualunque sito di strumenti gratuiti: se il sito carica ciò che scrivi sul proprio backend, quel contenuto diventa di fatto una copia dei tuoi dati presso qualcun altro.',
+    },
+    {
+      question: 'Questi strumenti funzionano su smartphone e tablet?',
+      answer:
+        'Sì. Ogni pagina usa un layout responsive con una sola colonna sugli schermi piccoli, aree di tocco di almeno 44 pixel e campi dimensionati in modo che il telefono non ingrandisca all’improvviso. Contatore di parole, generazione di QR code, generatore di password, compressione delle immagini e righello online si comportano allo stesso modo su Android Chrome, iPhone Safari, iPad, Windows e macOS, sia in modalità chiara sia in modalità scura.',
+    },
+    {
+      question: 'Devo installare un’app o creare un account?',
+      answer:
+        'Nessuna installazione e nessun account. Apri il sito, scegli lo strumento e inizia a scrivere: il risultato compare subito. Poiché non c’è un accesso, non devi attendere un’email di verifica, non devi ricordare una password e nessun profilo viene costruito dal tuo uso. La pagina dello strumento è autonoma e può essere salvata tra i segnalibri o aggiunta alla schermata iniziale del telefono.',
+    },
+    {
+      question: 'Gli strumenti continuano a funzionare se cade la connessione?',
+      answer:
+        'Una volta caricata la pagina, il lavoro prosegue senza connessione, perché formattazione, conteggio, codifica, compressione e misurazione avvengono localmente nel browser e non su un server remoto. Ricaricare la pagina, aprire un altro strumento o tornare il giorno dopo richiede invece una connessione: se sai che ti servirà di nuovo in treno o in aereo, lascia la scheda aperta.',
+    },
+    {
+      question: 'Quanto sono precisi il righello online, il tachimetro e gli strumenti di misura?',
+      answer:
+        'Gli strumenti di misura seguono standard pubblicati invece di stime: il righello online si calibra sulla dimensione della carta ID-1 di 85,60 per 53,98 millimetri usata dalle carte bancarie e d’identità in tutto il mondo, e le conversioni di unità usano definizioni esatte come 1 pollice uguale a 25,4 millimetri. La precisione dipende poi dal passaggio di calibrazione e dalla densità dello schermo, per questo la pagina mostra sempre il valore attuale in pixel per millimetro.',
+    },
+    {
+      question: 'Come scelgo lo strumento giusto su un sito che ne offre molti?',
+      answer:
+        'Parti dal compito, non dal nome dello strumento. Se il risultato deve essere leggibile o valido, apri il formattatore o il validatore; se qualcosa viene accorciato, ridimensionato o codificato, guarda nella conversione; se scrivi, conti o ripulisci testo vanno bene gli strumenti di scrittura; se controlli un layout o un colore, quelli di design. Una ricerca di una parola nella home è di solito più rapida che scorrere le categorie.',
+    },
+    {
+      question: 'Perché usare un sito di strumenti invece di cinque abbonamenti dedicati?',
+      answer:
+        'Perché il compito è piccolo e l’abbonamento no. Quattro o cinque abbonamenti specializzati costano in silenzio più di un piano di streaming e aggiungono ciascuno un account, un’informativa privacy e un ciclo di aggiornamenti. Un unico sito di strumenti mantiene un indirizzo, un linguaggio visivo e un comportamento da tastiera comuni a tutte le utilità, così cambiare compito non significa mai imparare un altro prodotto né ricordare dove fosse il buon formattatore.',
+    },
+  ],
 };
