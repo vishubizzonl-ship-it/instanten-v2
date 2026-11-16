@@ -11,6 +11,7 @@ import { getEntry } from 'astro:content';
 import { instrumentUi } from '../../i18n/instruments/ui';
 import { getLangFromUrl } from '../../i18n/utils';
 import { compassProse } from '../../i18n/instruments/compassProse';
+import { getToolBlog } from '../../i18n/blogs';
 import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
 
 export async function getStaticPaths() {
@@ -19,6 +20,18 @@ export async function getStaticPaths() {
 
 const tool = await getEntry('tools', 'onlinecompass');
 if (!tool) throw new Error('tool entry missing: onlinecompass');
+
+/**
+ * FAQ ke questions/answers pehle se likhe hue compass silo content se aate hain
+ * (`src/i18n/blogs/<lang>.ts` → `compass.faq`) — nayi copy invent nahi ki
+ * jaati, wahi original text page par aur FAQPage JSON-LD mein jaata hai.
+ */
+const proseWithFaq = Object.fromEntries(
+  Object.entries(compassProse).map(([code, copy]) => [
+    code,
+    { ...copy, faq: getToolBlog('compass', code)?.faq ?? [] },
+  ])
+);
 
 const lang = getLangFromUrl(Astro.url);
 const u = instrumentUi[lang] ?? instrumentUi.en;
@@ -35,7 +48,7 @@ const how = {
 <InstrumentToolPage
   slug="onlinecompass"
   tool={tool}
-  prose={compassProse}
+  prose={proseWithFaq}
   faqLangs={['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it']}
   how={how}
 >

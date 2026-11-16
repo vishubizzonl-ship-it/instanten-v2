@@ -16,9 +16,13 @@ export const INSTRUMENTS = {
   onlinecompass: {
     root: 'onlinecompass',
     ids: ['compass-island', 'compass-card', 'compass-dial', 'compass-angle', 'compass-status', 'compass-fullscreen-btn'],
-    /** Compass page ka apna FAQ (6 questions x 8 native locales). Har tool ka
-     *  FAQ uske apne silo mein rehta hai — root route ke FAQ se alag. */
+    /**
+     * Compass page ka FAQ wahi copy hai jo pehle se compass silo content
+     * (`src/i18n/blogs/<lang>.ts` → `compass.faq`) mein likhi hui hai — nayi
+     * copy invent nahi hoti. en 15 questions, baaki native locales 10.
+     */
     faqLangs: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'],
+    faqCounts: { en: 15, es: 10, ja: 10, fr: 10, de: 10, pt: 10, ko: 10, it: 10 },
     guides: false,
   },
   onlinebubblelevel: {
@@ -99,6 +103,14 @@ export function run(pages, outDir) {
       if (faqExpected) {
         const questions = JSON.stringify(faqSchema[0]?.data ?? '').match(/"@type":"Question"/g) ?? [];
         check(questions.length >= 3, `${slug}/${lang}: FAQ questions kam hain (${questions.length})`);
+        // Compass: existing silo copy ka exact count (15 en / 10 baaki)
+        const expectedCount = spec.faqCounts?.[lang];
+        if (expectedCount) {
+          check(
+            questions.length === expectedCount,
+            `${slug}/${lang}: FAQ ${questions.length} questions (existing copy mein ${expectedCount} hain)`
+          );
+        }
         check(html.includes('data-tool-faq'), `${slug}/${lang}: visible FAQ block nahi hai`);
       }
 
