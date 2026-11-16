@@ -4,8 +4,10 @@
  * Checks, on the built HTML:
  *   1. exactly one gtag loader + one gtag('config') per page — duplicate tags
  *      double-count every pageview,
- *   2. the measurement ID is a valid GA4 ID (G-XXXXXXXXXX), same value on
- *      every page (one shared property),
+ *   2. the measurement ID is a valid GA4 ID (G-XXXXXXXXXX) and, per silo,
+ *      consistent: instanten route + uska silo ek ID par, aur har sensor tool
+ *      apne ID par (paanch properties tak). Default build mein sab ek hi ID
+ *      par hote hain, par structure alag-alag data ke liye tayaar hai,
  *   3. content_group is correct per page: per-tool for tool pages, locale
  *      prefixes ignored, hub/home/blog groups as documented,
  *   4. error pages (403/404/500/503) carry no analytics at all,
@@ -30,7 +32,17 @@ export function run(pages) {
   const { check } = suite;
 
   const ids = new Set();
+  /** silo -> us silo par dikhe saare IDs */
+  const idsBySilo = new Map();
   let checkedPages = 0;
+
+  /** URL se analytics silo (locale prefix strip karke). */
+  const siloOf = (url) => {
+    const seg = url.split('/').filter(Boolean);
+    const clean = ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'].includes(seg[0]) ? seg.slice(1) : seg;
+    const INSTRUMENTS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+    return INSTRUMENTS.includes(clean[0] ?? '') ? clean[0] : 'instanten';
+  };
 
   for (const [url, html] of pages) {
     if (ERROR_PAGES.has(url) || /^\/(de|ja|fr|es|ko|nl|sv|it|pt)\/(403|404|500|503)(\.html|\/)$/.test(url)) {
@@ -57,6 +69,11 @@ export function run(pages) {
     check(GA_ID_RE.test(cfg.id), `${url}: measurement ID GA4 format mein nahi hai (${cfg.id})`);
     check(cfg.id === loaders[0], `${url}: loader ID ${loaders[0]} aur config ID ${cfg.id} match nahi`);
     ids.add(cfg.id);
+    {
+      const silo = siloOf(url);
+      if (!idsBySilo.has(silo)) idsBySilo.set(silo, new Set());
+      idsBySilo.get(silo).add(cfg.id);
+    }
 
     check(Boolean(cfg.group), `${url}: content_group set nahi hai`);
     check(/anonymize_ip:\s*true/.test(cfg.body), `${url}: anonymize_ip true nahi hai`);
@@ -129,11 +146,39 @@ export function run(pages) {
     }
   }
 
-  // --- poore site par ek hi measurement ID --------------------------------
-  check(ids.size <= 1, `site par ${ids.size} different measurement IDs hain: ${[...ids].join(', ')}`);
-  if (ids.size === 1) {
-    const only = [...ids][0];
-    check(GA_ID_RE.test(only), `measurement ID galat format mein hai: ${only}`);
+  // --- per-silo measurement ID -------------------------------------------
+  /**
+   * Alag-alag data ka rule: har silo ka apna GA4 ID ho sakta hai
+   * (instanten, onlinecompass, onlinebubblelevel, onlinespeedometer,
+   * onlineqibla). Isliye check ye hai ki ek silo ke andar ID kabhi na badle —
+   * warna ek hi silo ka data do properties mein bikhar jayega.
+   */
+  const SILOS = ['instanten', 'onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+  for (const silo of SILOS) {
+    const set = idsBySilo.get(silo);
+    if (!set) continue;
+    check(
+      set.size === 1,
+      `${silo} silo mein ${set.size} different measurement IDs hain: ${[...set].join(', ')} (1 hona chahiye)`
+    );
+    for (const id of set) check(GA_ID_RE.test(id), `${silo}: measurement ID GA4 format mein nahi (${id})`);
+  }
+  check(ids.size <= 5, `site par ${ids.size} measurement IDs hain (max 5 silos)`);
+  for (const id of ids) check(GA_ID_RE.test(id), `measurement ID galat format mein hai: ${id}`);
+
+  // instanten silo aur tool silos: agar alag properties hain to IDs alag hone
+  // chahiye, warna data mix ho jayega. (Default build mein sab same rehte hain,
+  // isliye ye check sirf tab lagta hai jab kisi tool ka ID instanten se alag ho.)
+  for (const silo of SILOS.slice(1)) {
+    const toolId = [...(idsBySilo.get(silo) ?? [])][0];
+    const instantenId = [...(idsBySilo.get('instanten') ?? [])][0];
+    if (toolId && instantenId && toolId !== instantenId) {
+      for (const other of SILOS.slice(1)) {
+        if (other === silo) continue;
+        const otherId = [...(idsBySilo.get(other) ?? [])][0];
+        if (otherId) check(otherId !== toolId, `${silo} aur ${other} ka measurement ID same hai (${toolId})`);
+      }
+    }
   }
 
   // --- sab indexable pages par analytics ho ------------------------------

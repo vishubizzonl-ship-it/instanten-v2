@@ -13,7 +13,7 @@ import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
-import { GA_MEASUREMENT_ID, analyticsEnabled } from '../config/analytics';
+import { analyticsEnabled, gaIdForSilo, type AnalyticsSilo } from '../config/analytics';
 import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { LangCode } from '../i18n/ui';
@@ -122,16 +122,28 @@ const gaContentGroup = (() => {
   return 'instanten-site';
 })();
 
+/**
+ * Analytics silo: instanten route + uska silo ek property, aur chaar sensor
+ * tools ki apni-apni property (data alag-alag). Bas path se decide hota hai —
+ * locale prefix pehle hi strip ho chuka hai, isliye /de/onlinecompass/ bhi
+ * compass silo hi hai.
+ */
+const analyticsSilo: AnalyticsSilo = isInstrument(cleanSegments[0] ?? '')
+  ? (cleanSegments[0] as AnalyticsSilo)
+  : 'instanten';
+/** Us silo ka measurement ID (`''` = us silo par analytics off). */
+const gaMeasurementId = gaIdForSilo(analyticsSilo);
+
 // Error pages + build ke waqt ID na ho to tag bilkul nahi.
 const errorPage = /^\/(403|404|500|503)(\.html)?$/.test(cleanPath);
-const loadAnalytics = analyticsEnabled && !noindex && !errorPage;
+const loadAnalytics = analyticsEnabled && gaMeasurementId.length > 0 && !noindex && !errorPage;
 
 // GA4 bootstrap — values build ke waqt bake hoti hain (define:vars is:inline ke
 // saath inline nahi hota, isliye string khud banate hain).
 const gaInlineScript = `window.dataLayer = window.dataLayer || [];
 function gtag() { window.dataLayer.push(arguments); }
 gtag('js', new Date());
-gtag('config', ${JSON.stringify(GA_MEASUREMENT_ID)}, {
+gtag('config', ${JSON.stringify(gaMeasurementId)}, {
   anonymize_ip: true,
   allow_google_signals: false,
   allow_ad_personalization_signals: false,
@@ -307,7 +319,7 @@ gtag('config', ${JSON.stringify(GA_MEASUREMENT_ID)}, {
           <script
             is:inline
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
           />
           <script is:inline set:html={gaInlineScript} />
         </>
