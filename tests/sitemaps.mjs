@@ -12,7 +12,10 @@
  *   5. duplicate <loc> nahi;
  *   6. root robots.txt aur sitemap-index.xml dono inhe reference karte hain;
  *   7. per-tool robots.txt uska sitemap batata hai aur error pages block nahi
- *      karta (warna noindex padha hi nahi jaata).
+ *      karta (warna noindex padha hi nahi jaata);
+ *   8. `/sitemap-instanten.xml` — instanten route page aur uske silo
+ *      (about/contact/privacy/terms/blog + saare articles) ka alag sitemap,
+ *      jaise wo ek alag website ho. Ismein tool pages bilkul nahi aate.
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createSuite, SITE, LOCALES } from './lib.mjs';
@@ -123,6 +126,86 @@ export function run(pages, outDir) {
     }
   }
 
+  // --- 5b. instanten route ka apna sitemap (/sitemap-instanten.xml) -------
+  /**
+   * User rule: instanten route page aur uske silo pages (About, Contact,
+   * Privacy, Terms, Blog) ko alag website maan kar chalao. Isliye unka apna
+   * sitemap — sirf EN + locale mirrors, saare blog articles ke saath.
+   * Tool pages, /tools/<slug>/ aur error pages ismein kabhi nahi.
+   */
+  const instantenSitemapPath = `${outDir}/sitemap-instanten.xml`;
+  check(existsSync(instantenSitemapPath), 'sitemap-instanten.xml build mein nahi hai');
+
+  if (existsSync(instantenSitemapPath)) {
+    const xml = readFileSync(instantenSitemapPath, 'utf8');
+    check(/^<\?xml/.test(xml), 'sitemap-instanten.xml XML declaration se shuru nahi hota');
+    check(/<urlset[\s>]/.test(xml), 'sitemap-instanten.xml mein <urlset> nahi');
+    check(xml.trim().endsWith('</urlset>'), 'sitemap-instanten.xml </urlset> par khatam nahi hota');
+
+    const locs = locsOf(xml);
+
+    // 1) route page + uske silo pages EN mein
+    const INSTANTEN_EN = ['/', '/blog/', '/about/', '/contact/', '/privacy-policy/', '/terms/'];
+    for (const path of INSTANTEN_EN) {
+      check(locs.includes(`${SITE}${path}`), `sitemap-instanten.xml mein ${path} nahi`);
+    }
+
+    // 2) saare blog articles (dist se slug, guess nahi) — EN + har locale
+    const postSlugs = readdirSync(`${outDir}/blog`, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && entry.name !== 'page')
+      .map((entry) => entry.name);
+    check(postSlugs.length > 0, 'dist/blog mein koi article nahi mila');
+    for (const slug of postSlugs) {
+      check(locs.includes(`${SITE}/blog/${slug}/`), `sitemap-instanten.xml mein /blog/${slug}/ nahi`);
+      for (const lang of LANGS) {
+        check(
+          locs.includes(`${SITE}/${lang}/blog/${slug}/`),
+          `sitemap-instanten.xml mein /${lang}/blog/${slug}/ nahi`
+        );
+      }
+    }
+
+    // 3) locale mirrors — route page + silo pages
+    for (const lang of LANGS) {
+      check(locs.includes(`${SITE}/${lang}/`), `sitemap-instanten.xml mein /${lang}/ nahi`);
+      for (const path of INSTANTEN_EN.slice(1)) {
+        check(
+          locs.includes(`${SITE}/${lang}${path}`),
+          `sitemap-instanten.xml mein /${lang}${path} nahi`
+        );
+      }
+    }
+
+    // 4) sirf instanten silo — tool pages / library / error pages bilkul nahi
+    const strays = locs.filter((loc) =>
+      /\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla|tools)\//.test(loc)
+    );
+    check(strays.length === 0, `sitemap-instanten.xml mein tool URLs ghus gaye: ${strays.slice(0, 3).join(', ')}`);
+
+    const errorLocs = locs.filter((loc) => /\/(403|404|500|503)(\.html|\/)/.test(loc));
+    check(errorLocs.length === 0, `sitemap-instanten.xml mein error pages hain: ${errorLocs.slice(0, 3).join(', ')}`);
+
+    // 5) duplicate <loc> nahi
+    const dupes = [...new Set(locs.filter((loc, i) => locs.indexOf(loc) !== i))];
+    check(dupes.length === 0, `sitemap-instanten.xml mein duplicate <loc>: ${dupes.slice(0, 3).join(', ')}`);
+
+    // 6) har URL ka page build mein sach mein maujood ho
+    for (const loc of locs) {
+      const path = loc.replace(SITE, '');
+      const file = path.endsWith('/') ? `${outDir}${path}index.html` : `${outDir}${path}`;
+      check(existsSync(file), `sitemap-instanten.xml ka URL build mein nahi: ${path}`);
+    }
+
+    // 7) sitemap ki har entry par lastmod/changefreq/priority
+    const urlBlocks = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
+    check(urlBlocks.length === locs.length, `sitemap-instanten.xml mein ${urlBlocks.length} <url> vs ${locs.length} <loc>`);
+    for (const b of urlBlocks) {
+      check(/<lastmod>\d{4}-\d{2}-\d{2}/.test(b), 'sitemap-instanten.xml: kisi <url> mein lastmod nahi');
+      check(/<changefreq>/.test(b), 'sitemap-instanten.xml: kisi <url> mein changefreq nahi');
+      check(/<priority>/.test(b), 'sitemap-instanten.xml: kisi <url> mein priority nahi');
+    }
+  }
+
   // --- 6. root robots.txt + sitemap-index dono inhe reference karte hain --
   const rootRobotsPath = `${outDir}/robots.txt`;
   if (existsSync(rootRobotsPath)) {
@@ -136,6 +219,10 @@ export function run(pages, outDir) {
     // purane sitemap lines bani rahein
     check(robots.includes(`${SITE}/sitemap.xml`), 'root robots.txt se sitemap.xml line gayi');
     check(robots.includes(`${SITE}/sitemap-index.xml`), 'root robots.txt se sitemap-index.xml line gayi');
+    check(
+      robots.includes(`${SITE}/sitemap-instanten.xml`),
+      'root robots.txt mein sitemap-instanten.xml nahi'
+    );
   }
 
   const indexPath = `${outDir}/sitemap-index.xml`;
@@ -149,6 +236,10 @@ export function run(pages, outDir) {
       );
     }
     check(index.includes(`${SITE}/sitemap-0.xml`), 'sitemap-index.xml se sitemap-0.xml gayi');
+    check(
+      index.includes(`${SITE}/sitemap-instanten.xml`),
+      'sitemap-index.xml mein sitemap-instanten.xml nahi'
+    );
     // index valid sitemapindex hi rahe
     check(/<sitemapindex[\s>]/.test(index), 'sitemap-index.xml <sitemapindex> nahi');
     const opens = (index.match(/<sitemap>/g) ?? []).length;

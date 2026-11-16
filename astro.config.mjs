@@ -103,23 +103,30 @@ export default defineConfig({
           const fs = await import('node:fs/promises');
           const path = await import('node:path');
           const root = dir.pathname;
-          const tools = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+          // Chaar per-tool silo sitemaps + instanten route ka apna sitemap.
+          const extraSitemaps = [
+            'onlinecompass/sitemap.xml',
+            'onlinebubblelevel/sitemap.xml',
+            'onlinespeedometer/sitemap.xml',
+            'onlineqibla/sitemap.xml',
+            'sitemap-instanten.xml',
+          ];
           const indexFile = path.join(root, 'sitemap-index.xml');
           try {
             const xml = await fs.readFile(indexFile, 'utf8');
             // integration index ko ek hi line par likhta hai — isliye naye
             // entries bhi usi compact shape mein add hote hain.
-            const missing = tools.filter((tool) => !xml.includes(`/${tool}/sitemap.xml`));
+            const missing = extraSitemaps.filter((path) => !xml.includes(`/${path}`));
             if (missing.length) {
               const entries = missing
                 .map(
-                  (tool) =>
-                    `<sitemap><loc>https://instanten.com/${tool}/sitemap.xml</loc><lastmod>${new Date().toISOString()}</lastmod></sitemap>`
+                  (path) =>
+                    `<sitemap><loc>https://instanten.com/${path}</loc><lastmod>${new Date().toISOString()}</lastmod></sitemap>`
                 )
                 .join('');
               const next = xml.replace('</sitemapindex>', `${entries}</sitemapindex>`);
               await fs.writeFile(indexFile, next, 'utf8');
-              logger.info(`sitemap-index: ${missing.length} per-tool sitemaps added`);
+              logger.info(`sitemap-index: ${missing.length} extra sitemaps added`);
             }
           } catch {
             // index na ho to build fail karne ki zarurat nahi
