@@ -305,7 +305,7 @@ export function run(pages, outDir) {
     }
   }
 
-  // --- 10g. Board size: chaaron tools qibla ke 320px board par -------------
+  // --- 10g. Board size: chaaron tools ek hi responsive size par (turn 63) ----
   {
     const stageFiles = {
       compass: 'src/components/instruments/CompassIsland.astro',
@@ -313,24 +313,28 @@ export function run(pages, outDir) {
       qibla: 'src/components/instruments/QiblaIsland.astro',
       speedometer: 'src/components/instruments/SpeedometerIsland.astro',
     };
+    // Turn 63: board 320px se bada — mobile par poora available width, desktop par 640px.
+    const SIZE = 'max-w-[420px] sm:max-w-[500px] lg:max-w-[640px]';
     const sizes = {};
     for (const [name, rel] of Object.entries(stageFiles)) {
       const src = readFileSync(rel, 'utf8');
       const tag = src.match(new RegExp(`<div[^>]*data-instrument-stage="${name}"[^>]*>`))?.[0] ?? '';
       check(Boolean(tag), `${name}: data-instrument-stage marker nahi mila`);
-      check(/max-w-\[320px\]/.test(tag), `${name}: board max-w-[320px] nahi (qibla jitna hona chahiye)`);
+      check(tag.includes(SIZE), `${name}: board size "${SIZE}" nahi hai`);
+      check(/w-full/.test(tag), `${name}: board w-full nahi (mobile par available width nahi bharti)`);
       if (name === 'speedometer') {
         // speedometer par dial nahi, sirf readout — square ki khaali jagah nahi
-        check(/h-\[184px\]/.test(tag), 'speedometer: readout board h-[184px] nahi');
+        check(/h-\[200px\]/.test(tag), 'speedometer: readout board h-[200px] nahi');
+        check(/sm:h-\[260px\]/.test(tag) && /lg:h-\[320px\]/.test(tag), 'speedometer: responsive board height nahi');
         check(!/aspect-square/.test(tag), 'speedometer: khaali square board wapas aa gaya');
       } else {
-        check(/lg:w-80/.test(tag) && /lg:h-80/.test(tag), `${name}: desktop board 20rem (lg:w-80 lg:h-80) nahi`);
         check(/aspect-square/.test(tag), `${name}: board aspect-square nahi`);
+        check(!/lg:w-80/.test(tag), `${name}: purana 20rem desktop lock bacha hua hai`);
       }
       // fullscreen par board ka size badalna nahi chahiye
       check(!/\[&:fullscreen\]:[wh]-/.test(tag), `${name}: fullscreen par board ka size badalta hai`);
       check(!/\[&:fullscreen\]:scale/.test(tag), `${name}: fullscreen par board scale hota hai`);
-      check(!/max-w-\[300px\]/.test(src), `${name}: purana 300px board bacha hua hai`);
+      check(!/max-w-\[320px\]/.test(src), `${name}: purana 320px board bacha hua hai`);
       sizes[name] = (tag.match(/max-w-\[\d+px\]/g) ?? []).join(',');
     }
     const unique = new Set(Object.values(sizes));
@@ -353,13 +357,14 @@ export function run(pages, outDir) {
     const css = cssFiles.map((f) => readFileSync(join('dist/_astro', f), 'utf8')).join('\n');
     check(/:fullscreen[^{]*\{[^}]*align-items:center/.test(css), 'compiled CSS mein :fullscreen align-items:center nahi');
     check(/:fullscreen[^{]*\{[^}]*justify-content:center/.test(css), 'compiled CSS mein :fullscreen justify-content:center nahi');
-    // 320px board mobile par bhi, fullscreen mein bhi — koi fullscreen width override nahi
-    check(!/\.max-w-\\\[320px\\\][^}]*fullscreen/.test(css), 'fullscreen board width override mila');
+    // responsive board mobile par bhi, fullscreen mein bhi — koi fullscreen width override nahi
+    check(!/\.max-w-\\\[420px\\\][^}]*fullscreen/.test(css), 'fullscreen board width override mila');
     const pages_ = ['/onlinecompass/', '/onlinebubblelevel/', '/onlineqibla/', '/onlinespeedometer/'];
     for (const url of pages_) {
       const html = pages.get(url) ?? '';
       check(/data-instrument-stage="/.test(html), `${url}: board marker build mein nahi`);
-      check(/max-w-\[320px\]/.test(html), `${url}: 320px board build mein nahi`);
+      check(/max-w-\[420px\]/.test(html), `${url}: naya board size build mein nahi`);
+      check(/lg:max-w-\[640px\]/.test(html), `${url}: desktop board (lg:max-w-[640px]) build mein nahi`);
     }
   }
 
@@ -372,24 +377,25 @@ export function run(pages, outDir) {
      */
     const lineHeight = { 'text-xs': 16, 'text-sm': 20, 'text-lg': 28, 'text-xl': 28, 'text-3xl': 36 };
 
-    // compass: p-4 + (title 28 + status 20, mb-2) + (angle 36 + status 16+8, mb-4) + py-2 + dial 320
-    const compassCard = 16 * 2 + 28 + 20 + 8 + 36 + 16 + 8 + 16 + 8 * 2 + 320;
+    // Turn 63: board 420px (mobile max) tak bada hai, isliye numbers update.
+    // compass: p-4 + (title 28 + status 20, mb-2 8) + (angle 44 + status 16 + mt-2 8, mb-4 16) + py-2 (8*2) + dial 420
+    const compassCard = 16 * 2 + 28 + 20 + 8 + 44 + 16 + 8 + 16 + 8 * 2 + 420;
 
     // speedometer: p-4 + (title 28 + status 20 + buttons mt-1 4 + 36, mb-1 4)
-    //             + board 184 (mb-1 4) + stats 2 rows (72 each) + gap 8
-    const speedCard = 16 * 2 + 28 + 20 + 4 + 36 + 4 + 184 + 4 + 72 * 2 + 8;
+    //             + board 200 (mb-1 4) + stats 2 rows (72 each) + gap 8
+    const speedCard = 16 * 2 + 28 + 20 + 4 + 36 + 4 + 200 + 4 + 72 * 2 + 8;
 
     // Speedometer ka card compass card se bada nahi hona chahiye, aur itna chhota
     // bhi nahi ki board/stats squeeze ho jayein.
     check(speedCard <= compassCard + 8, `speedometer card compass se lamba hai: compass ${compassCard} vs ${speedCard}`);
-    check(speedCard >= 430, `speedometer card bahut chhota ho gaya: ${speedCard}px`);
-    check(compassCard - speedCard <= 48, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
+    check(speedCard >= 480, `speedometer card bahut chhota ho gaya: ${speedCard}px`);
+    check(compassCard - speedCard <= 160, `card height farq zyada hai: compass ${compassCard} vs speedometer ${speedCard}`);
 
     // structure lock: gaps kam hone chahiye
     const src = readFileSync('src/components/instruments/SpeedometerIsland.astro', 'utf8');
     check(/id="speed-head" class="text-center mb-1"/.test(src), 'speed-head ka mb-1 nahi hua');
     check(/flex gap-2 justify-center mt-1"/.test(src), 'buttons ka mt-1 nahi hua');
-    check(/data-instrument-stage="speedometer" class="mx-auto mb-1 flex h-\[184px\]/.test(src), 'board mb-1 + h-[184px] nahi hai');
+    check(/data-instrument-stage="speedometer" class="mx-auto mb-1 flex h-\[200px\] sm:h-\[260px\] lg:h-\[320px\]/.test(src), 'board mb-1 + responsive height nahi hai');
     check(/flex items-center justify-center gap-3 mt-1"/.test(src), 'number->unit ka gap (mt-1) nahi hai');
     // ids/behaviour intact
     for (const id of ['speed-display', 'speed-unit', 'speed-stats', 'max-speed', 'avg-speed', 'altitude', 'duration', 'unit-btn', 'start-btn', 'record-btn']) {
@@ -542,7 +548,7 @@ export function run(pages, outDir) {
     const wrapperHtml = html.slice(wStart, wEnd);
     check(wrapperHtml.includes('id="speed-head"'), 'build: speed-head wrapper ke andar nahi');
     check(wrapperHtml.includes('id="speed-stats"'), 'build: speed-stats wrapper ke andar nahi');
-    check(wrapperHtml.includes('max-w-[320px]'), 'build: board wrapper ke andar nahi');
+    check(wrapperHtml.includes('max-w-[420px]'), 'build: board wrapper ke andar nahi');
     // wrapper balanced
     check((wrapperHtml.match(/<div/g) ?? []).length === (wrapperHtml.match(/<\/div>/g) ?? []).length, 'build: wrapper ke andar div balance galat');
   }

@@ -19,13 +19,13 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
           </div>
 
           <div class="flex w-full flex-col items-center gap-2 py-6">
-            <div class="flex items-center gap-6 text-xs font-mono tabular-nums text-ink" aria-live="polite">
+            <div class="flex items-center gap-6 text-sm font-mono tabular-nums text-ink" aria-live="polite">
               <span>X: <span id="bubble-x" class="font-semibold">0.0°</span></span>
               <span>Y: <span id="bubble-y" class="font-semibold">0.0°</span></span>
             </div>
             <div
               id="bubble-area"
-              data-instrument-stage="bubble" class="relative w-full max-w-[320px] aspect-square lg:w-80 lg:h-80 bg-surface border border-hairline shadow-[inset_0_3px_10px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.04)] overflow-hidden bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.9)_1px,transparent_1px)] [background-size:10%_10%] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.9)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.9)_1px,transparent_1px)]"
+              data-instrument-stage="bubble" class="relative w-full max-w-[420px] sm:max-w-[500px] lg:max-w-[640px] aspect-square bg-surface border border-hairline shadow-[inset_0_3px_10px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.04)] overflow-hidden bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.9)_1px,transparent_1px)] [background-size:10%_10%] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.9)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.9)_1px,transparent_1px)]"
               aria-label={ui['bubble.page.spirit']}
             >
               <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-ink -translate-x-1/2"></div>
@@ -34,7 +34,7 @@ const ui = instrumentUi[lang] ?? instrumentUi.en;
               <div class="absolute top-0 bottom-0 right-0 w-[1px] bg-ink"></div>
               <div
                 id="bubble-dot"
-                class="absolute top-1/2 left-1/2 w-3 h-3 rounded-[var(--radius-btn)] bg-ink shadow-md pointer-events-none z-20"
+                class="absolute top-1/2 left-1/2 w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-[var(--radius-btn)] bg-ink shadow-md pointer-events-none z-20"
                 style="transform: translate(-50%, -50%);"
               ></div>
             </div>
