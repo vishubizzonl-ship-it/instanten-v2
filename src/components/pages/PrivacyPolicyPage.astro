@@ -4,8 +4,6 @@ import BackLink from '../BackLink.astro';
 import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED_ISO, CONTACT_EMAIL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
 import { getPageCopy } from '../../i18n/pageContent';
-import RootSiloFaq from '../RootSiloFaq.astro';
-import { rootSiloFaq } from '../../i18n/pages/faqRootSilo';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,9 +17,6 @@ const pageDescription = lang === 'en'
   ? 'Instanten privacy policy: CCPA/CPRA, GDPR and COPPA clarity for a free online tools hub. No cross-context behavioural advertising, browser-first design.'
   : page.privacy.description;
 const canonicalURL = lang === 'en' ? `${SITE_URL}/privacy-policy/` : `${SITE_URL}/${lang}/privacy-policy/`;
-/** FAQ sirf English par — localized pages par English leak nahi. */
-const faqContent = rootSiloFaq['privacy'];
-const faqs = lang === 'en' ? faqContent.faqs : [];
 ---
 
 <Layout
@@ -36,7 +31,6 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
     { name: t('privacy.h1'), item: translatePath('/privacy-policy/') },
   ]}
   lang={lang}
-  faqs={faqs}
 >
   <main class="ror-main">
     <div class="ror-container">
@@ -145,9 +139,6 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
           {t('privacy.sec10P1a')} <a href={translatePath('/contact/')} class="ror-link">{t('privacy.sec1Li3b')}</a> {t('privacy.sec10P1b')} <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>{t('privacy.sec10P1c')}
         </p>
       </section>
-      {lang === 'en' && (
-        <RootSiloFaq page="privacy" heading={faqContent.heading} lead={faqContent.lead} faqs={faqContent.faqs} />
-      )}
     </div>
   </main>
 </Layout>

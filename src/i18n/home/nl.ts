@@ -99,56 +99,5 @@ export const home: HomeCopy = {
     },
   ],
   faqTitle: 'Veelgestelde vragen',
-  faqs: [
-    {
-      question: 'Wat is Instanten en hoe verschilt het van andere gratis online tools-websites?',
-      answer:
-        'Instanten is een gratis verzameling online tools waarbij elk hulpmiddel in je eigen browser draait in plaats van op een server. Die ene ontwerpkeuze maakt het verschil: niets van wat je plakt of uploadt verlaat je apparaat, er is geen verplichte aanmelding, geen daglimiet en geen betaald abonnement, en elke tool opent als een statische pagina die ook op een trage mobiele verbinding binnen een seconde bruikbaar is.',
-    },
-    {
-      question: 'Welke online tools staan er nu op deze site?',
-      answer:
-        'Er zijn nu twaalf hulpmiddelen: JSON-formatter, Base64-encoder en -decoder, woordenteller, wachtwoordgenerator, QR-generator, afbeeldingscompressor, kleurenpalet, CSS-gridgenerator, Markdown-editor, metatag-generator, online liniaal en regex-tester. Ze zijn gegroepeerd in ontwikkeling, ontwerp, schrijven en hulpmiddelen, zodat je via het overzicht op de startpagina of met één zoekwoord op de juiste pagina komt.',
-    },
-    {
-      question: 'Zijn deze online tools echt gratis, of zit er een verborgen limiet aan?',
-      answer:
-        'Ze zijn gratis en de limiet is precies nul: geen proefperiode met aftellen, geen betaalscherm, geen watermerk, geen exportlimiet en geen wachtrij. Een gratis verzameling tools hoort te werken als een openbaar hulpmiddel, dus dezelfde tool tien keer achter elkaar in één werksessie geeft tien keer hetzelfde resultaat. Er valt later niets te abonneren, want er is geen premium abonnement.',
-    },
-    {
-      question: 'Is het veilig om wachtwoorden, tokens of klantdocumenten in een online tool te plakken?',
-      answer:
-        'Bij Instanten wel, want de verwerking gebeurt in je browser met gewone JavaScript: de tekst of het bestand wordt nooit naar een server gestuurd en na het sluiten van het tabblad nergens opgeslagen. Dit is de eerste vraag die je bij elke gratis tools-website moet stellen: als een site je invoer naar zijn eigen backend uploadt, ligt die inhoud feitelijk als kopie van jouw gegevens bij iemand anders.',
-    },
-    {
-      question: 'Werken deze browsertools op telefoons en tablets?',
-      answer:
-        'Ja. Elke pagina gebruikt een responsieve lay-out met één kolom op kleine schermen, aanraakvlakken van minstens 44 pixels en invoervelden die zo zijn ingesteld dat de telefoon niet onverwacht inzoomt. Woordenteller, QR-generator, wachtwoordgenerator, afbeeldingscompressie en online liniaal werken hetzelfde op Android Chrome, iPhone Safari, iPad, Windows en macOS, in lichte en donkere modus.',
-    },
-    {
-      question: 'Moet ik een app installeren of een account aanmaken?',
-      answer:
-        'Geen installatie en geen account. Open de site, kies de tool en begin te typen: het resultaat verschijnt meteen. Omdat er geen login is, hoef je niet op een bevestigingsmail te wachten, geen wachtwoord te onthouden en er wordt geen profiel van je gebruik opgebouwd. De toolpagina staat op zichzelf en is te bewaren als bladwijzer of toe te voegen aan je startscherm.',
-    },
-    {
-      question: 'Blijven de tools werken als de internetverbinding wegvalt?',
-      answer:
-        'Zodra een toolpagina is geladen, gaat het werk zelf door zonder verbinding, want opmaken, tellen, coderen, comprimeren en meten gebeuren lokaal in de browser en niet op een externe server. De pagina herladen, een andere tool openen of de volgende dag terugkomen vraagt wel een verbinding, dus houd het tabblad open als je de tool in de trein of het vliegtuig opnieuw wilt gebruiken.',
-    },
-    {
-      question: 'Hoe nauwkeurig zijn de online liniaal, de snelheidsmeter en andere meettools?',
-      answer:
-        'Meettools volgen gepubliceerde normen in plaats van schattingen: de online liniaal kalibreert op de ID-1-kaartmaat van 85,60 bij 53,98 millimeter die wereldwijd voor bank- en identiteitskaarten wordt gebruikt, en eenheidsconversies gebruiken exacte definities zoals 1 inch is 25,4 millimeter. De nauwkeurigheid hangt daarna af van de kalibratiestap en de schermdichtheid, daarom toont de pagina altijd de actuele waarde in pixels per millimeter.',
-    },
-    {
-      question: 'Hoe kies ik de juiste tool op een site met veel hulpmiddelen?',
-      answer:
-        'Begin bij de taak, niet bij de naam van de tool. Moet de uitvoer leesbaar of geldig zijn, open dan de formatter of validator; wordt iets ingekort, verkleind of gecodeerd, kijk dan bij conversie; bij schrijven, tellen of opschonen van tekst passen de schrijftools, bij controle van lay-out of kleur de ontwerptools. Eén zoekwoord op de startpagina is meestal sneller dan door categorieën lopen.',
-    },
-    {
-      question: 'Waarom een verzameling webtools in plaats van vijf losse abonnementen?',
-      answer:
-        'Omdat de taak klein is en het abonnement niet. Vier of vijf gerichte abonnementen kosten samen vaak meer dan een streamingdienst en leveren elk een account, een privacybeleid en een updatecyclus op. Eén verzameling webtools houdt één adres, één beeldtaal en één toetsenbordgedrag voor alle hulpmiddelen, zodat een andere taak nooit betekent dat je een nieuw product moet leren of moet onthouden waar die goede formatter ook alweer stond.',
-    },
-  ],
+  faqs: [],
 };

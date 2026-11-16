@@ -99,56 +99,5 @@ export const home: HomeCopy = {
     },
   ],
   faqTitle: 'Preguntas frecuentes',
-  faqs: [
-    {
-      question: '¿Qué es Instanten y en qué se diferencia de otros sitios de herramientas en línea gratis?',
-      answer:
-        'Instanten es un conjunto de herramientas en línea gratuitas donde cada utilidad se ejecuta dentro de tu propio navegador en lugar de en un servidor. Esa sola decisión de diseño marca la diferencia: nada de lo que pegas o subes sale de tu dispositivo, no hay muro de registro, ni límite diario, ni plan de pago, y cada herramienta se abre como una página estática usable en un segundo incluso con una conexión móvil lenta.',
-    },
-    {
-      question: '¿Qué herramientas en línea hay ahora mismo en este sitio?',
-      answer:
-        'Ahora mismo hay doce utilidades: formateador JSON, codificador y decodificador Base64, contador de palabras, generador de contraseñas, generador de códigos QR, compresor de imágenes, paleta de colores, generador de rejilla CSS, editor Markdown, generador de metaetiquetas, regla en línea y probador de expresiones regulares. Están agrupadas en desarrollo, diseño, escritura y utilidades, así que llegas a la página correcta desde la cuadrícula de inicio o con una sola palabra en el buscador.',
-    },
-    {
-      question: '¿Estas herramientas son realmente gratis o hay un límite oculto?',
-      answer:
-        'Son gratis y el límite es exactamente cero: sin cuenta atrás de prueba, sin pantalla de tarjeta, sin marca de agua, sin tope de exportación y sin cola. Un sitio de herramientas gratuitas debería funcionar como un servicio público, así que puedes usar la misma herramienta diez veces seguidas en una sesión de trabajo y el resultado será idéntico cada vez. No habrá nada que contratar después porque no existe un plan premium.',
-    },
-    {
-      question: '¿Es seguro pegar contraseñas, tokens o documentos de clientes en una herramienta en línea?',
-      answer:
-        'En Instanten sí, porque el procesamiento ocurre en tu navegador con JavaScript sencillo: el texto o el archivo nunca se envía a un servidor y no se guarda en ningún sitio al cerrar la pestaña. Esta es la primera pregunta que conviene hacerse ante cualquier sitio de herramientas gratuitas: si el sitio sube tu entrada a su propio servidor, ese contenido pasa a ser una copia de tus datos en manos de otro.',
-    },
-    {
-      question: '¿Estas herramientas de navegador funcionan en móviles y tabletas?',
-      answer:
-        'Sí. Todas las páginas usan un diseño adaptable con una sola columna en pantallas pequeñas, áreas táctiles de al menos 44 píxeles y campos dimensionados para que el móvil no haga zoom por sorpresa. El contador de palabras, la generación de QR, el generador de contraseñas, la compresión de imágenes y la regla en línea funcionan igual en Android Chrome, iPhone Safari, iPad, Windows y macOS, en modo claro y en modo oscuro.',
-    },
-    {
-      question: '¿Necesito instalar una aplicación o crear una cuenta?',
-      answer:
-        'Sin instalación y sin cuenta. Abre el sitio, elige la herramienta y empieza a escribir: el resultado aparece al momento. Como no hay inicio de sesión, no hay correo de verificación que esperar, ni contraseña que recordar, ni perfil que se construya con tu uso. La página de la herramienta es autosuficiente y puedes guardarla en marcadores o añadirla a la pantalla de inicio del móvil.',
-    },
-    {
-      question: '¿Las herramientas siguen funcionando si se cae la conexión?',
-      answer:
-        'Una vez cargada la página, el trabajo continúa sin conexión, porque dar formato, contar, codificar, comprimir y medir se ejecutan localmente en el navegador y no en un servidor remoto. Recargar la página, abrir otra utilidad o volver al día siguiente sí necesita conexión, así que si vas en tren o en avión y vas a reutilizar la herramienta, deja la pestaña abierta.',
-    },
-    {
-      question: '¿Qué precisión tienen la regla en línea, el velocímetro y las herramientas de medición?',
-      answer:
-        'Las herramientas de medición siguen normas publicadas en lugar de estimaciones: la regla en línea se calibra con el tamaño de tarjeta ID-1 de 85,60 por 53,98 milímetros que usan las tarjetas bancarias y de identidad en todo el mundo, y las conversiones de unidades usan definiciones exactas como 1 pulgada igual a 25,4 milímetros. La precisión depende después del paso de calibración y de la densidad de la pantalla, por eso la página siempre muestra el valor actual de píxeles por milímetro.',
-    },
-    {
-      question: '¿Cómo elijo la herramienta adecuada en un sitio con muchas utilidades?',
-      answer:
-        'Empieza por la tarea, no por el nombre de la herramienta. Si el resultado debe ser legible o válido, abre el formateador o el validador; si algo se acorta, se redimensiona o se codifica, mira en conversión; si escribes, cuentas o limpias texto, sirven las herramientas de escritura; si revisas un diseño o un color, las de diseño. Una búsqueda de una palabra en el inicio suele ser más rápida que recorrer categorías.',
-    },
-    {
-      question: '¿Por qué usar un sitio de herramientas en lugar de cinco suscripciones dedicadas?',
-      answer:
-        'Porque la tarea es pequeña y la suscripción no. Cuatro o cinco suscripciones especializadas cuestan en silencio más que un plan de streaming y añaden cada una su cuenta, su política de privacidad y su ciclo de actualizaciones. Un único sitio de herramientas mantiene una dirección, un lenguaje visual y un comportamiento de teclado comunes para todas las utilidades, así que cambiar de tarea nunca implica aprender otro producto ni recordar dónde estaba el buen formateador.',
-    },
-  ],
+  faqs: [],
 };

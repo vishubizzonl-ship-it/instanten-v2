@@ -4,8 +4,6 @@ import BackLink from '../BackLink.astro';
 import { SITE_NAME, SITE_DOMAIN, SITE_URL, LAST_UPDATED_ISO, CONTACT_EMAIL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
 import { getPageCopy } from '../../i18n/pageContent';
-import RootSiloFaq from '../RootSiloFaq.astro';
-import { rootSiloFaq } from '../../i18n/pages/faqRootSilo';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,9 +17,6 @@ const pageDescription = lang === 'en'
   ? 'Instanten terms: browser-based instant tools for instant work, zero sign-up, no hidden subscriptions. An independent online tools hub with public standards.'
   : page.terms.description;
 const canonicalURL = lang === 'en' ? `${SITE_URL}/terms/` : `${SITE_URL}/${lang}/terms/`;
-/** FAQ sirf English par — localized pages par English leak nahi. */
-const faqContent = rootSiloFaq['terms'];
-const faqs = lang === 'en' ? faqContent.faqs : [];
 ---
 
 <Layout
@@ -36,7 +31,6 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
     { name: t('terms.h1'), item: translatePath('/terms/') },
   ]}
   lang={lang}
-  faqs={faqs}
 >
   <main class="ror-main">
     <div class="ror-container">
@@ -136,9 +130,6 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
           {t('terms.sec9P1a')} <a href={translatePath('/contact/')} class="ror-link">{t('terms.sec3P3b')}</a> {t('terms.sec9P1b')} <a href={`mailto:${CONTACT_EMAIL}`} class="ror-link">{CONTACT_EMAIL}</a>{t('terms.sec9P1c')}
         </p>
       </section>
-      {lang === 'en' && (
-        <RootSiloFaq page="terms" heading={faqContent.heading} lead={faqContent.lead} faqs={faqContent.faqs} />
-      )}
     </div>
   </main>
 </Layout>
