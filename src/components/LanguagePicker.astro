@@ -21,7 +21,17 @@ const cleanPath = stripLangFromPath(currentPath);
 const errorPageMatch = /^\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\/(403|404|500|503)(\.html|\/?)$/.exec(
   cleanPath
 );
-const cleanPathForLinks = errorPageMatch ? `/${errorPageMatch[1]}/` : cleanPath;
+/**
+ * Root error pages (`/404.html`, `/403.html`, `/500.html`, `/503.html`) bhi
+ * English-only hain. In par language switch us bhasha ke homepage par jaata
+ * hai — warna `/de/404/` jaisa link banta tha jo khud 404 hota hai.
+ */
+const rootErrorMatch = /^\/(403|404|500|503)(\.html|\/?)$/.exec(cleanPath);
+const cleanPathForLinks = errorPageMatch
+  ? `/${errorPageMatch[1]}/`
+  : rootErrorMatch
+    ? '/'
+    : cleanPath;
 const normalizedCurrent = currentPath.replace(/\/+$/, '') || '/';
 
 const allCodes = Object.keys(languages) as LangCode[];

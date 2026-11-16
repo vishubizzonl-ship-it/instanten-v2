@@ -97,12 +97,18 @@ const siloLinks = [
       </a>
       {
         retry && (
-          <a
-            href={Astro.url.pathname}
+          /**
+           * `Astro.url.pathname` build ke waqt `/onlinecompass/500/` ban jaata tha
+           * — aisa URL kahin exist nahi karta (file `500.html` hai), yaani error
+           * page ka "Try again" khud 404 deta tha. Reload hi asli retry hai.
+           */
+          <button
+            type="button"
+            onclick="location.reload()"
             class="inline-flex items-center rounded-sm border border-border-hairline px-5 py-2 text-body-sm font-medium text-ink transition-colors hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
           >
             Try again
-          </a>
+          </button>
         )
       }
     </div>

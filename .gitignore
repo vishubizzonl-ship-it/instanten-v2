@@ -26,3 +26,6 @@ releases/
 dist.next/
 dist/
 .run/
+
+# functional suite ka local dist symlink
+dist

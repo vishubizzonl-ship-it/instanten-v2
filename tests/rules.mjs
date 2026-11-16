@@ -260,6 +260,30 @@ export function run() {
     check(used, `public/${f} kahin use nahi hota — delete kar dein`);
   }
 
+  /* ---------- Regressions jo functional audit me mile (Nov 2026) ---------- */
+
+  // 1. Header me search trigger hona chahiye — warna SearchPanel ka koi raasta nahi.
+  const header = readFileSync('src/components/Header.astro', 'utf8');
+  const triggers = (header.match(/data-search-open/g) || []).length;
+  check(triggers >= 2, `Header me search button nahi (mobile + desktop chahiye, mile ${triggers})`);
+  check(
+    readFileSync('src/layouts/Layout.astro', 'utf8').includes('<SearchPanel />'),
+    'Layout me SearchPanel mount nahi hai'
+  );
+
+  // 2. Tool pages har locale me hain — language picker unhe localize kar sake.
+  const i18nUtils = readFileSync('src/i18n/utils.ts', 'utf8');
+  const prefixesBlock = i18nUtils.slice(i18nUtils.indexOf('localizedPrefixes'), i18nUtils.indexOf('];', i18nUtils.indexOf('localizedPrefixes')));
+  check(prefixesBlock.includes("'/tools'"), "localizedPrefixes me '/tools' nahi — tool page par language switch kaam nahi karega");
+
+  // 3. Error pages ke language links khud error page par na jaayein.
+  const picker = readFileSync('src/components/LanguagePicker.astro', 'utf8');
+  check(picker.includes('rootErrorMatch'), 'LanguagePicker root error pages (404.html) handle nahi karta — self-links banenge');
+
+  // 4. Silo error page ka "Try again" dead URL na ho (Astro.url.pathname se /500/ banta tha).
+  const toolError = readFileSync('src/components/pages/ToolErrorPage.astro', 'utf8');
+  check(!/href=\{Astro\.url\.pathname\}/.test(toolError), 'ToolErrorPage "Try again" link dead URL bana raha hai — location.reload() use karo');
+
   return suite;
 }
 

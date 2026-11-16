@@ -85,6 +85,8 @@ const localizedPrefixes = [
   '/tag',
   '/submit',
   '/search',
+  // Tool pages ka har locale me apna version hai — /de/tools/json-formatter/ aadi.
+  '/tools',
   // Sensor tools root par hain — /onlinecompass/, /de/onlinecompass/ …
   '/onlinecompass',
   '/onlinebubblelevel',
