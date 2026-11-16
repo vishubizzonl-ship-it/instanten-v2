@@ -66,10 +66,10 @@ if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort
 
 <Layout
   title={`${tagName} — ${t('nav.tools')} — Instanten`}
-  description={`${tagName}: ${page.tags.lead} ${sortedTools
+  description={`${tagName}: ${page.tags.description} ${sortedTools
     .slice(0, 5)
     .map((tool) => localizeTool(lang, tool.data).name)
-    .join(', ')}.`}
+    .join(lang === 'ja' ? '、' : ', ')}${lang === 'ja' ? '。' : '.'}`}
   canonicalURL={`https://instanten.com/${lang}/tag/${slug}/`}
   lang={lang}
 >

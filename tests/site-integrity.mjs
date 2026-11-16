@@ -42,8 +42,10 @@ export function run(pages, outDir) {
         `title mein placeholder :: ${url} -> "${title}"`
       );
     }
+    // noindex redirect stubs (/privacy/) par description ki zaroorat nahi
+    const isNoindex = /name="robots"[^>]*noindex/.test(html);
     const desc = meta(html, 'description');
-    check(!!desc && desc.length >= 50, `meta description missing/chhota :: ${url}`);
+    if (!isNoindex) check(!!desc && desc.length >= 50, `meta description missing/chhota :: ${url}`);
     if (desc) check(desc.length <= 320, `meta description ${desc.length} ch (max 320) :: ${url}`);
   }
 

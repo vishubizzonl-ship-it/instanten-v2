@@ -58,7 +58,10 @@ if (filters.pricing) queryParams.pricing = filters.pricing;
 if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort;
 
 const pageTitle = `${tagName} Tools — instanten`;
-const pageDescription = `Browse ${sortedTools.length} tools tagged with "${tagName}". Discover related tools and alternatives.`;
+const toolCount = sortedTools.length;
+const pageDescription =
+  `Browse ${toolCount} ${toolCount === 1 ? 'tool' : 'tools'} tagged with "${tagName}" on Instanten — ` +
+  `free browser-based utilities with no sign-up, plus related tools and alternatives worth trying.`;
 
 const jsonLd = {
   '@context': 'https://schema.org',

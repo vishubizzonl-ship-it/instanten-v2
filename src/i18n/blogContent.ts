@@ -57,7 +57,7 @@ const ja: BlogCopyBySlug = {
   'how-instant-convert-and-instant-help-tools-save-hours-daily': {
     title: '即時変換ツールとブラウザベースのヘルプが毎週数時間を節約する方法',
     excerpt:
-      '高速な変換、整形ツール、手順付きガイドが日々の反復作業をどう減らすかを実例で解説します。',
+      '高速な変換、整形ツール、手順付きガイドが日々の反復作業をどう減らすかを実例で解説します。毎週くり返す小さな作業をブラウザ内で数秒に短縮する具体的な手順を紹介します。',
   },
   'online-tools-hub-guide': {
     title: '無料オンラインツールハブ：1つのサイトで10個のブックマークを代替',
