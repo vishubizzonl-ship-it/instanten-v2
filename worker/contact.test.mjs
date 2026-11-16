@@ -25,7 +25,7 @@ function makeEnv(overrides = {}) {
         return new Response(`asset:${new URL(request.url).pathname}`, { status: 200 });
       },
     },
-    CONTACT_TO: 'vishubizz.onl@gmail.com',
+    CONTACT_TO: 'helloinstanten@gmail.com',
     CONTACT_FROM: 'contact@instanten.com',
     CONTACT_SITE: 'instanten.com',
     ...overrides,
@@ -62,7 +62,7 @@ test('valid message is emailed to the owner with Reply-To set', async () => {
   assert.equal(res.status, 200);
   assert.equal((await res.json()).ok, true);
   assert.equal(sent.length, 1);
-  assert.equal(sent[0].to, 'vishubizz.onl@gmail.com');
+  assert.equal(sent[0].to, 'helloinstanten@gmail.com');
   assert.equal(sent[0].from.email, 'contact@instanten.com');
   assert.equal(sent[0].replyTo.email, 'asha@example.com');
   assert.match(sent[0].subject, /Bug report/);
@@ -159,4 +159,41 @@ test('form-encoded bodies work too (no-JS friendly)', async () => {
   );
   assert.equal(res.status, 200);
   assert.equal(sent.length, 1);
+});
+
+/* ---------- deploy config consistency (free-plan guard) ------------------
+ * Cloudflare free plan par sirf VERIFIED destination par bhej sakte hain.
+ * Ye test pakadta hai ki jo address Worker bhejta hai (CONTACT_TO) wahi
+ * wrangler.jsonc ki allowed list me ho — warna live par
+ * E_RECIPIENT_NOT_ALLOWED aayega (form toota hua lagega).
+ */
+test('wrangler.jsonc: CONTACT_TO allowed destination me hai', async () => {
+  const { readFileSync } = await import('node:fs');
+  const raw = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
+  // JSONC: // line comments + trailing commas hata kar parse karo
+  const stripped = raw
+    .replace(/^\s*\/\/.*$/gm, '')
+    .replace(/,(\s*[}\]])/g, '$1');
+  const cfg = JSON.parse(stripped);
+
+  const binding = cfg.send_email?.[0];
+  assert.ok(binding, 'send_email binding missing');
+  assert.equal(binding.name, 'EMAIL');
+
+  const allowed = [binding.destination_address, ...(binding.allowed_destination_addresses ?? [])];
+  const to = cfg.vars?.CONTACT_TO;
+  assert.ok(to, 'CONTACT_TO set nahi hai');
+  assert.ok(
+    allowed.includes(to),
+    `CONTACT_TO (${to}) allowed destinations me nahi hai: ${allowed.join(', ')}`
+  );
+
+  // Free plan: sender domain par onboarded hona chahiye, koi external SMTP nahi
+  assert.ok((binding.allowed_sender_addresses ?? []).length > 0, 'allowed_sender_addresses khaali hai');
+  for (const addr of binding.allowed_sender_addresses) {
+    assert.match(addr, /@instanten\.com$/, `sender ${addr} site domain par nahi hai`);
+  }
+
+  // Free plan me max 50 destinations
+  assert.ok(allowed.length <= 50, 'destination limit (50) se zyada');
 });
