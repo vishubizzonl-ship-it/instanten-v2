@@ -46,7 +46,7 @@ const toolData = paginatedTools.map(tool => ({
   featured: tool.data.featured,
 }));
 
-const baseUrl = translatePath('/search');
+const baseUrl = translatePath('/search/');
 const queryParams: Record<string, string> = {};
 if (filters.q) queryParams.q = filters.q;
 if (filters.category) queryParams.category = filters.category;
@@ -63,7 +63,7 @@ const pageDescription = filters.q ? `${page.search.description} ${filters.q}` : 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonicalURL={`https://instanten.com/${lang}/search${filters.q ? `?q=${encodeURIComponent(filters.q)}` : ''}`}
+  canonicalURL={`https://instanten.com/${lang}/search/${filters.q ? `?q=${encodeURIComponent(filters.q)}` : ''}`}
   lang={lang}
 >
   <Breadcrumbs items={[

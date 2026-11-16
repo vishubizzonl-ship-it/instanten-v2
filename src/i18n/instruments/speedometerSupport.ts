@@ -55,9 +55,9 @@ const en: SpeedSiloCopy = {
     "Looking for something specific? The how-to covers an **online speedometer test** from a standing start, the accuracy notes explain why a phone and a dashboard disagree, and the trip section shows how to keep max and average meaningful. If you searched “speedometer online free”, “live speedometer” or “my speed km/h”, you are in the right place — the tool itself is one tap away on the main page.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "October 4, 2026", title: "How to Use an Online Speedometer (Step-by-Step)", desc: "Allow location, press Start, pick km/h or mph, and read your live speed with max, average, altitude and trip time." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "November 7, 2026", title: "How Accurate Is a Phone Speedometer? (And How to Check It)", desc: "Typical GPS error, how a phone compares with a car dashboard, and three tests you can run with an online speedometer." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "November 7, 2026", title: "Speedometer Units Explained: km/h, mph, m/s and Knots", desc: "When to use each unit, how to convert in your head, and how to compare a reading with a dashboard in another unit." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "October 4, 2026", title: "How to Use an Online Speedometer (Step-by-Step)", desc: "Allow location, press Start, pick km/h or mph, and read your live speed with max, average, altitude and trip time." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "November 7, 2026", title: "How Accurate Is a Phone Speedometer? (And How to Check It)", desc: "Typical GPS error, how a phone compares with a car dashboard, and three tests you can run with an online speedometer." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "November 7, 2026", title: "Speedometer Units Explained: km/h, mph, m/s and Knots", desc: "When to use each unit, how to convert in your head, and how to compare a reading with a dashboard in another unit." },
   ],
   contact: {
     contactTitle: "Contact Online Speedometer — Feedback & Bug Reports",
@@ -142,9 +142,9 @@ const es: SpeedSiloCopy = {
     "¿Buscas algo concreto? El tutorial cubre un **test de velocímetro online** desde parado, las notas de precisión explican por qué un móvil y un cuadro no coinciden, y la sección del viaje muestra cómo mantener útiles el máximo y la media. Si has buscado «velocímetro online gratis», «velocímetro en vivo» o «mi velocidad km/h», estás en el sitio correcto: la herramienta está a un toque en la página principal.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "4 de octubre de 2026", title: "Cómo usar un velocímetro online (paso a paso)", desc: "Permite la ubicación, pulsa Iniciar, elige km/h o mph y lee tu velocidad en vivo con máxima, media, altitud y duración." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "7 de noviembre de 2026", title: "¿Qué precisión tiene el velocímetro de un móvil? (y cómo comprobarlo)", desc: "Error típico del GPS, cómo se compara un móvil con el cuadro de un coche y tres pruebas que puedes hacer con un velocímetro online." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "7 de noviembre de 2026", title: "Unidades del velocímetro explicadas: km/h, mph, m/s y nudos", desc: "Cuándo usar cada unidad, cómo convertir de cabeza y cómo comparar una lectura con un cuadro en otra unidad." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 de octubre de 2026", title: "Cómo usar un velocímetro online (paso a paso)", desc: "Permite la ubicación, pulsa Iniciar, elige km/h o mph y lee tu velocidad en vivo con máxima, media, altitud y duración." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 de noviembre de 2026", title: "¿Qué precisión tiene el velocímetro de un móvil? (y cómo comprobarlo)", desc: "Error típico del GPS, cómo se compara un móvil con el cuadro de un coche y tres pruebas que puedes hacer con un velocímetro online." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 de noviembre de 2026", title: "Unidades del velocímetro explicadas: km/h, mph, m/s y nudos", desc: "Cuándo usar cada unidad, cómo convertir de cabeza y cómo comparar una lectura con un cuadro en otra unidad." },
   ],
   contact: {
     contactTitle: "Contactar con el velocímetro online — opiniones e informes de fallos",
@@ -229,9 +229,9 @@ const ja: SpeedSiloCopy = {
     "何か具体的に探していますか？使い方ガイドは停止状態からの**オンライン スピードメーター テスト**を扱い、精度の記事はスマホとメーターが食い違う理由を説明し、走行の節では最高速度と平均を意味のあるまま保つ方法を示します。「オンラインスピードメーター 無料」「ライブ スピードメーター」「自分の速度 km/h」で検索した方も、ここが正解です。ツールはメインページでワンタップの場所にあります。",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "2026年10月4日", title: "オンラインスピードメーターの使い方（手順つき）", desc: "位置情報を許可し、開始を押し、km/h か mph を選んで、最高・平均・高度・走行時間つきのライブ速度を読みます。" },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "2026年11月7日", title: "スマホのスピードメーターの精度は？（確認方法も）", desc: "一般的な GPS 誤差、車のメーターとの比較、オンラインスピードメーターで試せる3つの確認方法。" },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "2026年11月7日", title: "スピードメーターの単位を解説：km/h・mph・m/s・ノット", desc: "各単位を使う場面、頭の中での換算方法、別単位のメーターとの比べ方。" },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "2026年10月4日", title: "オンラインスピードメーターの使い方（手順つき）", desc: "位置情報を許可し、開始を押し、km/h か mph を選んで、最高・平均・高度・走行時間つきのライブ速度を読みます。" },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "2026年11月7日", title: "スマホのスピードメーターの精度は？（確認方法も）", desc: "一般的な GPS 誤差、車のメーターとの比較、オンラインスピードメーターで試せる3つの確認方法。" },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "2026年11月7日", title: "スピードメーターの単位を解説：km/h・mph・m/s・ノット", desc: "各単位を使う場面、頭の中での換算方法、別単位のメーターとの比べ方。" },
   ],
   contact: {
     contactTitle: "オンラインスピードメーターへのお問い合わせ — ご意見・不具合報告",
@@ -316,9 +316,9 @@ const fr: SpeedSiloCopy = {
     "Vous cherchez quelque chose de précis ? Le tutoriel couvre un **test de tachymètre en ligne** depuis l’arrêt, les notes de précision expliquent pourquoi un téléphone et un tableau de bord divergent, et la section trajet montre comment garder un maximum et une moyenne utiles. Si vous avez cherché « tachymètre en ligne gratuit », « tachymètre en direct » ou « ma vitesse km/h », vous êtes au bon endroit : l’outil est à un geste sur la page principale.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "4 octobre 2026", title: "Comment utiliser un tachymètre en ligne (pas à pas)", desc: "Autorisez la localisation, appuyez sur Démarrer, choisissez km/h ou mph et lisez votre vitesse en direct avec maximum, moyenne, altitude et durée." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "7 novembre 2026", title: "Quelle est la précision d’un tachymètre de téléphone ? (et comment le vérifier)", desc: "L’erreur GPS typique, la comparaison d’un téléphone avec un tableau de bord et trois tests à faire avec un tachymètre en ligne." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "7 novembre 2026", title: "Les unités du tachymètre expliquées : km/h, mph, m/s et nœuds", desc: "Quand utiliser chaque unité, comment convertir de tête et comment comparer une mesure à un compteur dans une autre unité." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 octobre 2026", title: "Comment utiliser un tachymètre en ligne (pas à pas)", desc: "Autorisez la localisation, appuyez sur Démarrer, choisissez km/h ou mph et lisez votre vitesse en direct avec maximum, moyenne, altitude et durée." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 novembre 2026", title: "Quelle est la précision d’un tachymètre de téléphone ? (et comment le vérifier)", desc: "L’erreur GPS typique, la comparaison d’un téléphone avec un tableau de bord et trois tests à faire avec un tachymètre en ligne." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 novembre 2026", title: "Les unités du tachymètre expliquées : km/h, mph, m/s et nœuds", desc: "Quand utiliser chaque unité, comment convertir de tête et comment comparer une mesure à un compteur dans une autre unité." },
   ],
   contact: {
     contactTitle: "Contacter le tachymètre en ligne — avis et rapports de bugs",
@@ -403,9 +403,9 @@ const de: SpeedSiloCopy = {
     "Suchst du etwas Bestimmtes? Die Anleitung behandelt einen **Online-Tachometer-Test** aus dem Stand, die Genauigkeitsnotizen erklären, warum Handy und Tacho nicht übereinstimmen, und der Fahrtabschnitt zeigt, wie Maximum und Durchschnitt aussagekräftig bleiben. Wenn du „Online-Tachometer kostenlos“, „Live-Tachometer“ oder „meine Geschwindigkeit km/h“ gesucht hast, bist du hier richtig — das Werkzeug ist auf der Hauptseite einen Tipp entfernt.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "4. Oktober 2026", title: "Online-Tachometer benutzen (Schritt für Schritt)", desc: "Standort erlauben, Start drücken, km/h oder mph wählen und die Live-Geschwindigkeit mit Maximum, Durchschnitt, Höhe und Fahrtzeit ablesen." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "7. November 2026", title: "Wie genau ist ein Handy-Tachometer? (und wie du es prüfst)", desc: "Typischer GPS-Fehler, der Vergleich eines Handys mit dem Tacho und drei Tests, die du mit einem Online-Tachometer machen kannst." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "7. November 2026", title: "Tachometer-Einheiten erklärt: km/h, mph, m/s und Knoten", desc: "Wann welche Einheit sinnvoll ist, wie du im Kopf umrechnest und wie du eine Messung mit einem Tacho in anderer Einheit vergleichst." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4. Oktober 2026", title: "Online-Tachometer benutzen (Schritt für Schritt)", desc: "Standort erlauben, Start drücken, km/h oder mph wählen und die Live-Geschwindigkeit mit Maximum, Durchschnitt, Höhe und Fahrtzeit ablesen." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7. November 2026", title: "Wie genau ist ein Handy-Tachometer? (und wie du es prüfst)", desc: "Typischer GPS-Fehler, der Vergleich eines Handys mit dem Tacho und drei Tests, die du mit einem Online-Tachometer machen kannst." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7. November 2026", title: "Tachometer-Einheiten erklärt: km/h, mph, m/s und Knoten", desc: "Wann welche Einheit sinnvoll ist, wie du im Kopf umrechnest und wie du eine Messung mit einem Tacho in anderer Einheit vergleichst." },
   ],
   contact: {
     contactTitle: "Online-Tachometer kontaktieren — Feedback & Fehlerberichte",
@@ -490,9 +490,9 @@ const pt: SpeedSiloCopy = {
     "Procurando algo específico? O tutorial cobre um **teste de velocímetro online** a partir do zero, as notas de precisão explicam por que um celular e um painel discordam, e a seção de trajeto mostra como manter máxima e média úteis. Se você pesquisou “velocímetro online grátis”, “velocímetro ao vivo” ou “minha velocidade km/h”, está no lugar certo: a ferramenta está a um toque na página principal.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "4 de outubro de 2026", title: "Como usar um velocímetro online (passo a passo)", desc: "Permita a localização, toque em Iniciar, escolha km/h ou mph e leia sua velocidade ao vivo com máxima, média, altitude e duração." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "7 de novembro de 2026", title: "Qual a precisão do velocímetro de um celular? (e como conferir)", desc: "Erro típico do GPS, como um celular se compara ao painel do carro e três testes que você pode fazer com um velocímetro online." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "7 de novembro de 2026", title: "Unidades do velocímetro explicadas: km/h, mph, m/s e nós", desc: "Quando usar cada unidade, como converter de cabeça e como comparar uma leitura com um painel em outra unidade." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 de outubro de 2026", title: "Como usar um velocímetro online (passo a passo)", desc: "Permita a localização, toque em Iniciar, escolha km/h ou mph e leia sua velocidade ao vivo com máxima, média, altitude e duração." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 de novembro de 2026", title: "Qual a precisão do velocímetro de um celular? (e como conferir)", desc: "Erro típico do GPS, como um celular se compara ao painel do carro e três testes que você pode fazer com um velocímetro online." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 de novembro de 2026", title: "Unidades do velocímetro explicadas: km/h, mph, m/s e nós", desc: "Quando usar cada unidade, como converter de cabeça e como comparar uma leitura com um painel em outra unidade." },
   ],
   contact: {
     contactTitle: "Falar com o velocímetro online — feedback e relatos de erros",
@@ -577,9 +577,9 @@ const ko: SpeedSiloCopy = {
     "무언가 특정한 것을 찾고 있나요? 사용법 가이드는 정지 상태에서 시작하는 **온라인 속도계 테스트**를 다루고, 정확도 글은 휴대폰과 계기판이 어긋나는 이유를 설명하며, 주행 섹션은 최고 속도와 평균을 의미 있게 유지하는 방법을 보여 줍니다. “온라인 속도계 무료”, “실시간 속도계”, “내 속도 km/h”를 검색했다면 여기가 정답입니다. 도구는 메인 페이지에서 한 번의 탭 거리에 있습니다.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "2026년 10월 4일", title: "온라인 속도계 사용법 (단계별)", desc: "위치를 허용하고 시작을 누른 뒤 km/h나 mph를 골라 최고·평균·고도·주행 시간과 함께 실시간 속도를 읽으세요." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "2026년 11월 7일", title: "휴대폰 속도계의 정확도는? (확인 방법 포함)", desc: "일반적인 GPS 오차, 자동차 계기판과의 비교, 온라인 속도계로 해볼 수 있는 세 가지 테스트." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "2026년 11월 7일", title: "속도계 단위 설명: km/h, mph, m/s, 노트", desc: "각 단위를 쓰는 상황, 머릿속 환산법, 다른 단위의 계기판과 비교하는 방법." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "2026년 10월 4일", title: "온라인 속도계 사용법 (단계별)", desc: "위치를 허용하고 시작을 누른 뒤 km/h나 mph를 골라 최고·평균·고도·주행 시간과 함께 실시간 속도를 읽으세요." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "2026년 11월 7일", title: "휴대폰 속도계의 정확도는? (확인 방법 포함)", desc: "일반적인 GPS 오차, 자동차 계기판과의 비교, 온라인 속도계로 해볼 수 있는 세 가지 테스트." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "2026년 11월 7일", title: "속도계 단위 설명: km/h, mph, m/s, 노트", desc: "각 단위를 쓰는 상황, 머릿속 환산법, 다른 단위의 계기판과 비교하는 방법." },
   ],
   contact: {
     contactTitle: "온라인 속도계 문의 — 의견 및 버그 신고",
@@ -664,9 +664,9 @@ const it: SpeedSiloCopy = {
     "Cerchi qualcosa di specifico? Il tutorial copre un **test del tachimetro online** da fermo, le note sulla precisione spiegano perché telefono e cruscotto non coincidono, e la sezione viaggio mostra come mantenere utili massima e media. Se hai cercato «tachimetro online gratuito», «tachimetro in tempo reale» o «la mia velocità km/h», sei nel posto giusto: lo strumento è a un tocco dalla pagina principale.",
   ],
   posts: [
-    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer", date: "4 ottobre 2026", title: "Come usare un tachimetro online (passo dopo passo)", desc: "Consenti la posizione, premi Start, scegli km/h o mph e leggi la velocità in tempo reale con massima, media, altitudine e durata." },
-    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer", date: "7 novembre 2026", title: "Quanto è preciso il tachimetro di un telefono? (e come verificarlo)", desc: "Errore GPS tipico, confronto tra telefono e cruscotto, e tre test che puoi fare con un tachimetro online." },
-    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots", date: "7 novembre 2026", title: "Le unità del tachimetro spiegate: km/h, mph, m/s e nodi", desc: "Quando usare ogni unità, come convertire a mente e come confrontare una lettura con un cruscotto in un’altra unità." },
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 ottobre 2026", title: "Come usare un tachimetro online (passo dopo passo)", desc: "Consenti la posizione, premi Start, scegli km/h o mph e leggi la velocità in tempo reale con massima, media, altitudine e durata." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 novembre 2026", title: "Quanto è preciso il tachimetro di un telefono? (e come verificarlo)", desc: "Errore GPS tipico, confronto tra telefono e cruscotto, e tre test che puoi fare con un tachimetro online." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 novembre 2026", title: "Le unità del tachimetro spiegate: km/h, mph, m/s e nodi", desc: "Quando usare ogni unità, come convertire a mente e come confrontare una lettura con un cruscotto in un’altra unità." },
   ],
   contact: {
     contactTitle: "Contatta il tachimetro online — feedback e segnalazioni",

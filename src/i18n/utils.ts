@@ -101,6 +101,22 @@ export function isLocalizedPath(path: string): boolean {
   );
 }
 
+/**
+ * Path ko trailing slash ke saath lauta do (file/assets ko chhod ke).
+ *
+ * Kyun: stripLangFromPath segments join karta hai, isliye `/de/tools/x/` se
+ * `/tools/x` ban jaata hai. Us par bane links (`/tools/x`) sirf un hosts par
+ * chalte hain jo 301 redirect karte hain — S3/nginx (bina rewrite) par 404.
+ */
+function ensureTrailingSlash(href: string): string {
+  const idx = href.search(/[?#]/);
+  const pathOnly = idx === -1 ? href : href.slice(0, idx);
+  const suffix = idx === -1 ? '' : href.slice(idx);
+  if (pathOnly === '/' || pathOnly.endsWith('/')) return pathOnly + suffix;
+  if (/\.[a-z0-9]+$/i.test(pathOnly)) return pathOnly + suffix; // file (404.html, sitemap.xml …)
+  return `${pathOnly}/${suffix}`;
+}
+
 export function translatePathSafe(path: string, targetLang: LangCode = defaultLang): string {
   const suffixIndex = path.search(/[?#]/);
   const pathname = suffixIndex === -1 ? path : path.slice(0, suffixIndex);
@@ -108,9 +124,9 @@ export function translatePathSafe(path: string, targetLang: LangCode = defaultLa
   const cleanPath = stripLangFromPath(pathname.startsWith('/') ? pathname : `/${pathname}`);
 
   if (isLocalizedPath(cleanPath) && targetLang !== defaultLang && !showDefaultLang) {
-    return (cleanPath === '/' ? `/${targetLang}/` : `/${targetLang}${cleanPath}`) + suffix;
+    return ensureTrailingSlash((cleanPath === '/' ? `/${targetLang}/` : `/${targetLang}${cleanPath}`) + suffix);
   }
-  return cleanPath + suffix;
+  return ensureTrailingSlash(cleanPath + suffix);
 }
 
 export function formatLocalizedDate(value: string | undefined, lang: LangCode): string {

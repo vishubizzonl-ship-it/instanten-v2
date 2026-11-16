@@ -38,7 +38,16 @@ const navLabels = instrumentNavLabels[lang] ?? instrumentNavLabels.en;
 /** Prefix-free path, taaki language switch usi page ka doosra locale de. */
 const rawPath = Astro.url.pathname;
 const segments = rawPath.split('/').filter(Boolean);
-const barePath = (segments[0] in languages ? '/' + segments.slice(1).join('/') : rawPath) || '/';
+/**
+ * Trailing slash bachao: `segments.join('/')` use karne se `/de/onlineqibla/blog/x/`
+ * ka slash ud jaata tha aur language-switch link `/onlineqibla/blog/x` ban jaata
+ * tha — S3/nginx (bina rewrite) par wo 404 hai.
+ */
+const bareRaw = (segments[0] in languages ? '/' + segments.slice(1).join('/') : rawPath) || '/';
+const barePath =
+  rawPath.endsWith('/') && bareRaw !== '/' && !/\.[a-z0-9]+$/i.test(bareRaw)
+    ? `${bareRaw.replace(/\/+$/, '')}/`
+    : bareRaw;
 /** path + locale → prefixed path (en prefix-free rehta hai). */
 const withLocale = (path: string, code: LangCode) =>
   code === 'en' ? path : `/${code}${path}`;

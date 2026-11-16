@@ -60,9 +60,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Two more cases get their own notes: the traveller's **online Qibla location** check on landing in a new city, and the car or train where a **live gibla direction online** reading keeps moving because the vehicle does. Keep an **online Qibla finder** tab open and both become a two-second glance.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "November 7, 2026", title: "Qibla Direction in Compass Degrees: How the Bearing Is Calculated", desc: "How the qibla direction compass degrees value is worked out: coordinates, the great-circle bearing, magnetic declination, and two worked examples you can repeat." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "November 7, 2026", title: "Why Is My Qibla Direction Wrong? 7 Fixes That Actually Work", desc: "The qibla direction arrow looks wrong on your phone? Seven causes, from sensor calibration to steel walls, with fixes you can try in under a minute each." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "October 4, 2026", title: "Qibla Finder: Find the Direction of Prayer Anywhere", desc: "Find the direction of the Kaaba from any location with compass and location integration — the full guide to the online qibla finder." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "November 7, 2026", title: "Qibla Direction in Compass Degrees: How the Bearing Is Calculated", desc: "How the qibla direction compass degrees value is worked out: coordinates, the great-circle bearing, magnetic declination, and two worked examples you can repeat." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "November 7, 2026", title: "Why Is My Qibla Direction Wrong? 7 Fixes That Actually Work", desc: "The qibla direction arrow looks wrong on your phone? Seven causes, from sensor calibration to steel walls, with fixes you can try in under a minute each." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "October 4, 2026", title: "Qibla Finder: Find the Direction of Prayer Anywhere", desc: "Find the direction of the Kaaba from any location with compass and location integration — the full guide to the online qibla finder." },
   ],
   contact: {
     contactTitle: "Contact Online Qibla — Feedback & Bug Reports",
@@ -154,9 +154,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Dos casos más tienen sus propias notas: la comprobación de **ubicación de la alquibla online** del viajero al aterrizar en una ciudad nueva, y el coche o el tren donde la lectura de **alquibla en vivo** no para de moverse porque el vehículo se mueve. Con una pestaña del **buscador de alquibla online** abierta, ambos son un vistazo de dos segundos.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "7 de noviembre de 2026", title: "Dirección de la alquibla en grados: cómo se calcula el rumbo", desc: "Cómo se obtiene el valor en grados de la dirección de la alquibla: coordenadas, rumbo de círculo máximo, declinación magnética y dos ejemplos que puedes repetir." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "7 de noviembre de 2026", title: "¿Por qué está mal mi dirección de la alquibla? 7 soluciones que funcionan", desc: "¿La flecha de la alquibla se ve mal en tu móvil? Siete causas, desde la calibración del sensor hasta las paredes de acero, con soluciones de menos de un minuto." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "4 de octubre de 2026", title: "Buscador de alquibla: encuentra la dirección del rezo en cualquier lugar", desc: "Encuentra la dirección de la Kaaba desde cualquier lugar con brújula y ubicación: la guía completa del buscador de alquibla online." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "7 de noviembre de 2026", title: "Dirección de la alquibla en grados: cómo se calcula el rumbo", desc: "Cómo se obtiene el valor en grados de la dirección de la alquibla: coordenadas, rumbo de círculo máximo, declinación magnética y dos ejemplos que puedes repetir." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "7 de noviembre de 2026", title: "¿Por qué está mal mi dirección de la alquibla? 7 soluciones que funcionan", desc: "¿La flecha de la alquibla se ve mal en tu móvil? Siete causas, desde la calibración del sensor hasta las paredes de acero, con soluciones de menos de un minuto." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "4 de octubre de 2026", title: "Buscador de alquibla: encuentra la dirección del rezo en cualquier lugar", desc: "Encuentra la dirección de la Kaaba desde cualquier lugar con brújula y ubicación: la guía completa del buscador de alquibla online." },
   ],
   contact: {
     contactTitle: "Contactar con la alquibla online — opiniones e informes de fallos",
@@ -248,9 +248,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "もう2つのケースにも記事があります。新しい街に着いたときの**オンラインキブラ位置情報**の確認と、車や電車の中で乗り物が動くために**オンラインのライブキブラ方向**が動き続ける場合です。**オンラインキブラファインダー**のタブを開いておけば、どちらも2秒の確認で済みます。",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "2026年11月7日", title: "キブラ方向をコンパスの度数で表すと？方位の計算方法", desc: "キブラ方向のコンパス度数の求め方。座標、大円方位、磁気偏角、そして自分で再現できる2つの計算例を解説します。" },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "2026年11月7日", title: "キブラ方向が違うのはなぜ？実際に効く7つの対処法", desc: "スマホのキブラ方向の矢印がおかしい？センサーの調整から鉄壁まで、7つの原因と1分以内で試せる対処法をまとめました。" },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "2026年10月4日", title: "キブラファインダー：どこでも礼拝方向を見つける方法", desc: "コンパスと位置情報を組み合わせて、どの場所からでもカアバの方向を見つける。オンラインキブラファインダーの完全ガイド。" },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "2026年11月7日", title: "キブラ方向をコンパスの度数で表すと？方位の計算方法", desc: "キブラ方向のコンパス度数の求め方。座標、大円方位、磁気偏角、そして自分で再現できる2つの計算例を解説します。" },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "2026年11月7日", title: "キブラ方向が違うのはなぜ？実際に効く7つの対処法", desc: "スマホのキブラ方向の矢印がおかしい？センサーの調整から鉄壁まで、7つの原因と1分以内で試せる対処法をまとめました。" },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "2026年10月4日", title: "キブラファインダー：どこでも礼拝方向を見つける方法", desc: "コンパスと位置情報を組み合わせて、どの場所からでもカアバの方向を見つける。オンラインキブラファインダーの完全ガイド。" },
   ],
   contact: {
     contactTitle: "オンラインキブラへのお問い合わせ — 感想と不具合報告",
@@ -342,9 +342,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Deux autres cas ont leurs propres notes : la vérification de **localisation de la Qibla en ligne** du voyageur qui atterrit dans une nouvelle ville, et la voiture ou le train où la **Qibla en direct** bouge sans cesse parce que le véhicule bouge. Gardez un onglet de **chercheur de Qibla en ligne** ouvert et les deux deviennent un coup d’œil de deux secondes.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "7 novembre 2026", title: "Direction de la Qibla en degrés de boussole : comment le relèvement est calculé", desc: "Comment la valeur en degrés de la direction de la Qibla est obtenue : coordonnées, relèvement orthodromique, déclinaison magnétique et deux exemples à refaire." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "7 novembre 2026", title: "Pourquoi ma direction de la Qibla est-elle fausse ? 7 solutions efficaces", desc: "La flèche de la Qibla semble fausse sur votre téléphone ? Sept causes, de la calibration du capteur aux murs en acier, avec des solutions en moins d’une minute." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "4 octobre 2026", title: "Chercheur de Qibla : trouver la direction de la prière partout", desc: "Trouvez la direction de la Kaaba depuis n’importe quel lieu grâce à la boussole et à la localisation : le guide complet du chercheur de Qibla en ligne." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "7 novembre 2026", title: "Direction de la Qibla en degrés de boussole : comment le relèvement est calculé", desc: "Comment la valeur en degrés de la direction de la Qibla est obtenue : coordonnées, relèvement orthodromique, déclinaison magnétique et deux exemples à refaire." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "7 novembre 2026", title: "Pourquoi ma direction de la Qibla est-elle fausse ? 7 solutions efficaces", desc: "La flèche de la Qibla semble fausse sur votre téléphone ? Sept causes, de la calibration du capteur aux murs en acier, avec des solutions en moins d’une minute." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "4 octobre 2026", title: "Chercheur de Qibla : trouver la direction de la prière partout", desc: "Trouvez la direction de la Kaaba depuis n’importe quel lieu grâce à la boussole et à la localisation : le guide complet du chercheur de Qibla en ligne." },
   ],
   contact: {
     contactTitle: "Contacter la Qibla en ligne — avis et signalements de bugs",
@@ -436,9 +436,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Zwei weitere Fälle haben eigene Notizen: die Prüfung des **Qibla-Standorts online** nach der Landung in einer neuen Stadt und das Auto oder der Zug, in dem die **Qibla-Richtung live** ständig wandert, weil das Fahrzeug fährt. Mit einem offenen Tab des **Online-Qibla-Finders** wird beides ein Blick von zwei Sekunden.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "7. November 2026", title: "Qibla-Richtung in Kompassgraden: Wie der Azimut berechnet wird", desc: "Wie der Wert der Qibla-Richtung in Kompassgraden entsteht: Koordinaten, Großkreis-Azimut, magnetische Deklination und zwei Rechenbeispiele zum Nachvollziehen." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "7. November 2026", title: "Warum ist meine Qibla-Richtung falsch? 7 Lösungen, die wirklich helfen", desc: "Der Qibla-Pfeil wirkt auf Ihrem Telefon falsch? Sieben Ursachen, von der Sensorkalibrierung bis zu Stahlwänden, mit Lösungen in unter einer Minute." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "4. Oktober 2026", title: "Qibla-Finder: die Gebetsrichtung überall finden", desc: "Finden Sie die Richtung der Kaaba von jedem Ort aus mit Kompass und Standort – der vollständige Leitfaden zum Online-Qibla-Finder." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "7. November 2026", title: "Qibla-Richtung in Kompassgraden: Wie der Azimut berechnet wird", desc: "Wie der Wert der Qibla-Richtung in Kompassgraden entsteht: Koordinaten, Großkreis-Azimut, magnetische Deklination und zwei Rechenbeispiele zum Nachvollziehen." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "7. November 2026", title: "Warum ist meine Qibla-Richtung falsch? 7 Lösungen, die wirklich helfen", desc: "Der Qibla-Pfeil wirkt auf Ihrem Telefon falsch? Sieben Ursachen, von der Sensorkalibrierung bis zu Stahlwänden, mit Lösungen in unter einer Minute." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "4. Oktober 2026", title: "Qibla-Finder: die Gebetsrichtung überall finden", desc: "Finden Sie die Richtung der Kaaba von jedem Ort aus mit Kompass und Standort – der vollständige Leitfaden zum Online-Qibla-Finder." },
   ],
   contact: {
     contactTitle: "Kontakt zu Qibla online — Feedback und Fehlerberichte",
@@ -530,9 +530,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Mais dois casos têm notas próprias: a checagem de **localização da Qibla online** do viajante ao chegar numa cidade nova e o carro ou trem onde a **Qibla ao vivo** não para de se mover porque o veículo se move. Com uma aba do **localizador de Qibla online** aberta, os dois viram uma olhada de dois segundos.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "7 de novembro de 2026", title: "Direção da Qibla em graus da bússola: como o rumo é calculado", desc: "Como o valor em graus da direção da Qibla é obtido: coordenadas, rumo de grande círculo, declinação magnética e dois exemplos que você pode repetir." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "7 de novembro de 2026", title: "Por que minha direção da Qibla está errada? 7 correções que funcionam", desc: "A seta da Qibla parece errada no seu celular? Sete causas, da calibração do sensor às paredes de aço, com correções de menos de um minuto." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "4 de outubro de 2026", title: "Localizador de Qibla: encontre a direção da oração em qualquer lugar", desc: "Encontre a direção da Caaba de qualquer lugar com bússola e localização — o guia completo do localizador de Qibla online." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "7 de novembro de 2026", title: "Direção da Qibla em graus da bússola: como o rumo é calculado", desc: "Como o valor em graus da direção da Qibla é obtido: coordenadas, rumo de grande círculo, declinação magnética e dois exemplos que você pode repetir." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "7 de novembro de 2026", title: "Por que minha direção da Qibla está errada? 7 correções que funcionam", desc: "A seta da Qibla parece errada no seu celular? Sete causas, da calibração do sensor às paredes de aço, com correções de menos de um minuto." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "4 de outubro de 2026", title: "Localizador de Qibla: encontre a direção da oração em qualquer lugar", desc: "Encontre a direção da Caaba de qualquer lugar com bússola e localização — o guia completo do localizador de Qibla online." },
   ],
   contact: {
     contactTitle: "Contato Qibla Online — feedback e relatos de erros",
@@ -624,9 +624,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "두 가지 경우는 따로 다룹니다. 새 도시에 도착했을 때의 **온라인 키블라 위치** 확인과, 차량이 움직이므로 **실시간 키블라 방향**이 계속 변하는 차나 기차 안입니다. **온라인 키블라 파인더** 탭을 열어 두면 둘 다 2초면 확인됩니다.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "2026년 11월 7일", title: "키블라 방향을 나침반 각도로: 방위는 어떻게 계산되나", desc: "키블라 방향의 나침반 각도 값을 구하는 방법. 좌표, 대권 방위, 자기 편각, 그리고 직접 재현할 수 있는 두 가지 계산 예를 설명합니다." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "2026년 11월 7일", title: "키블라 방향이 왜 틀릴까? 실제로 효과 있는 7가지 해결법", desc: "휴대폰의 키블라 방향 화살표가 이상한가요? 센서 보정부터 철제 벽까지 일곱 가지 원인과 1분 안에 해볼 수 있는 해결책을 정리했습니다." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "2026년 10월 4일", title: "키블라 파인더: 어디서든 예배 방향 찾는 방법", desc: "나침반과 위치 정보를 결합해 어느 장소에서든 카바 방향을 찾는 온라인 키블라 파인더 완전 가이드." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "2026년 11월 7일", title: "키블라 방향을 나침반 각도로: 방위는 어떻게 계산되나", desc: "키블라 방향의 나침반 각도 값을 구하는 방법. 좌표, 대권 방위, 자기 편각, 그리고 직접 재현할 수 있는 두 가지 계산 예를 설명합니다." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "2026년 11월 7일", title: "키블라 방향이 왜 틀릴까? 실제로 효과 있는 7가지 해결법", desc: "휴대폰의 키블라 방향 화살표가 이상한가요? 센서 보정부터 철제 벽까지 일곱 가지 원인과 1분 안에 해볼 수 있는 해결책을 정리했습니다." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "2026년 10월 4일", title: "키블라 파인더: 어디서든 예배 방향 찾는 방법", desc: "나침반과 위치 정보를 결합해 어느 장소에서든 카바 방향을 찾는 온라인 키블라 파인더 완전 가이드." },
   ],
   contact: {
     contactTitle: "온라인 키블라 문의 — 의견과 버그 신고",
@@ -718,9 +718,9 @@ export const qiblaSupport: Record<string, QiblaSiloCopy> = {
     "Altri due casi hanno note proprie: il controllo della **posizione della Qibla online** del viaggiatore appena atterrato in una città nuova e l'auto o il treno dove la **Qibla in tempo reale** continua a muoversi perché si muove il veicolo. Con una scheda del **cercatore di Qibla online** aperta, entrambi diventano un'occhiata di due secondi.",
   ],
   posts: [
-    { href: "/onlineqibla/blog/qibla-direction-compass-degrees", date: "7 novembre 2026", title: "Direzione della Qibla in gradi di bussola: come si calcola il rilevamento", desc: "Come si ottiene il valore in gradi della direzione della Qibla: coordinate, rilevamento ortodromico, declinazione magnetica e due esempi che puoi ripetere." },
-    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong", date: "7 novembre 2026", title: "Perché la mia direzione della Qibla è sbagliata? 7 soluzioni che funzionano", desc: "La freccia della Qibla sembra sbagliata sul telefono? Sette cause, dalla calibrazione del sensore ai muri in acciaio, con soluzioni in meno di un minuto." },
-    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere", date: "4 ottobre 2026", title: "Cercatore di Qibla: trovare la direzione della preghiera ovunque", desc: "Trova la direzione della Kaaba da qualsiasi luogo con bussola e posizione: la guida completa al cercatore di Qibla online." },
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", date: "7 novembre 2026", title: "Direzione della Qibla in gradi di bussola: come si calcola il rilevamento", desc: "Come si ottiene il valore in gradi della direzione della Qibla: coordinate, rilevamento ortodromico, declinazione magnetica e due esempi che puoi ripetere." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", date: "7 novembre 2026", title: "Perché la mia direzione della Qibla è sbagliata? 7 soluzioni che funzionano", desc: "La freccia della Qibla sembra sbagliata sul telefono? Sette cause, dalla calibrazione del sensore ai muri in acciaio, con soluzioni in meno di un minuto." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", date: "4 ottobre 2026", title: "Cercatore di Qibla: trovare la direzione della preghiera ovunque", desc: "Trova la direzione della Kaaba da qualsiasi luogo con bussola e posizione: la guida completa al cercatore di Qibla online." },
   ],
   contact: {
     contactTitle: "Contatta Qibla online — feedback e segnalazioni di bug",
