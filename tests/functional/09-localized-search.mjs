@@ -112,5 +112,59 @@ for (const lang of ['de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt']) {
   await p.cleanup();
 }
 
+
+// ---- Extra coverage: log jo sach me likhte hain (loanwords + concepts)
+const EXTRA = [
+  // bubble level — "mujhe bubble level chahiye" har bhasha me
+  ['/ja/search/', '水準器', '水準器'],
+  ['/ja/search/', '水平器', '水準器'],
+  ['/ja/search/', 'バブルレベル', '水準器'],
+  ['/ja/search/', 'レベル', '水準器'],
+  ['/ja/search/', '傾斜計', '水準器'],
+  ['/ja/search/', '角度', '水準器'],
+  ['/ko/search/', '수평계', '수준기'],
+  ['/ko/search/', '버블레벨', '수준기'],
+  ['/ko/search/', '각도', '수준기'],
+  ['/de/search/', 'libelle', 'Wasserwaage'],
+  ['/de/search/', 'neigung', 'Wasserwaage'],
+  ['/fr/search/', 'niveaux', 'Niveau'],
+  ['/es/search/', 'nivel de burbuja', 'Nivel'],
+  ['/it/search/', 'livella', 'Livella'],
+  ['/pt/search/', 'bolha', 'Nível'],
+  ['/nl/search/', 'helling', 'Waterpas'],
+  ['/sv/search/', 'vattenpass', 'Vattenpass'],
+  // compass
+  ['/ja/search/', '磁石', 'コンパス'],
+  ['/ja/search/', '北', 'コンパス'],
+  ['/ko/search/', '방위', '나침반'],
+  ['/de/search/', 'waage', 'Wasserwaage'],
+  ['/pt/search/', 'norte', 'Bússola'],
+  // speed
+  ['/ja/search/', '時速', 'スピード'],
+  ['/ja/search/', 'メーター', 'スピード'],
+  ['/ko/search/', '시속', '속도계'],
+  ['/fr/search/', 'vitesse', 'Tachymètre'],
+  ['/it/search/', 'tachimetro', 'Tachimetro'],
+  // qibla
+  ['/ja/search/', '礼拝', 'キブラ'],
+  ['/ko/search/', '메카', '키블라'],
+  ['/fr/search/', 'prière', 'Qibla'],
+  // ruler / word counter / password / qr
+  ['/ja/search/', '長さ', '定規'],
+  ['/ja/search/', 'センチ', '定規'],
+  ['/ko/search/', '길이', '자'],
+  ['/ja/search/', '原稿', '文字数'],
+  ['/ja/search/', '乱数', 'パスワード'],
+  ['/ko/search/', '비밀번호 만들기', '비밀번호'],
+  ['/ja/search/', '二次元', 'QR'],
+];
+
+for (const [route, query, expected] of EXTRA) {
+  const p = await open(route, { query: `?q=${encodeURIComponent(query)}` });
+  const names = visible(p);
+  r.check(`${route.replace('search/', '')} "${query}" → ${expected}`, names.some((n) => n.includes(expected)), `mila: ${names.join(', ') || '(kuch nahi)'}`);
+  await p.cleanup();
+}
+
 const fails = r.summary();
 process.exit(fails.length ? 1 : 0);
