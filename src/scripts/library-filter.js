@@ -90,9 +90,17 @@ export function cardMatches(card, facets, { ignore = null } = {}) {
   }
   if (ignore !== 'q' && f.q) {
     // Har shabd alag-alag match hona chahiye ("prettify json", "kompass nadel").
+    // Plural bhi chalta hai: "niveaux" → "niveau", "compasses" → "compass"
+    // (French/Spanish/Portuguese/English me log plural likhte hain).
     const text = cardText(card);
     const tokens = fold(f.q).split(/\s+/).filter(Boolean);
-    if (!tokens.every((token) => text.includes(token))) return false;
+    const variants = (token) => {
+      if (token.length <= 3) return [token];
+      // "niveaux" → "niveau" (French -eaux), "vitesses" → "vitesse" (s), "compasses" → "compass"
+      if (token.endsWith('x') || token.endsWith('s')) return [token, token.slice(0, -1)];
+      return [token];
+    };
+    if (!tokens.every((token) => variants(token).some((form) => text.includes(form)))) return false;
   }
   return true;
 }
