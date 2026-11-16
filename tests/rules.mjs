@@ -214,28 +214,30 @@ export function run() {
   const contactCfg = readFileSync('src/config/contact.ts', 'utf8');
   check(/PUBLIC_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: PUBLIC_EMAIL missing');
   check(/DELIVERY_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: DELIVERY_EMAIL missing');
-  check(contactCfg.includes('helloinstanten@gmail.com'), 'Contact config: public email helloinstanten@gmail.com nahi hai');
-  // User rule: receiving mailbox = helloinstanten@gmail.com. Delivery aur public
-  // ek hi hone chahiye — warna form ka mail kisi aur dabbe me chala jayega.
+  // User rule (turn 62): site par dikhne wala address hello@instanten.com hai,
+  // jo Cloudflare Email Routing se vishubizz.onl@gmail.com par forward hota hai.
+  const publicEmail = (contactCfg.match(/PUBLIC_EMAIL\s*=\s*'([^']+)'/) || [, ''])[1];
+  check(
+    publicEmail === 'hello@instanten.com',
+    `Contact config: public email ${publicEmail || '(missing)'} — hello@instanten.com chahiye`
+  );
   const delivery = (contactCfg.match(/DELIVERY_EMAIL\s*=\s*'([^']+)'/) || [, ''])[1];
   check(
-    delivery === 'helloinstanten@gmail.com',
-    `Contact config: delivery inbox ${delivery || '(missing)'} — helloinstanten@gmail.com chahiye`
+    delivery === 'vishubizz.onl@gmail.com',
+    `Contact config: delivery inbox ${delivery || '(missing)'} — vishubizz.onl@gmail.com chahiye`
+  );
+  check(
+    !/helloinstanten@gmail\.com/.test(contactCfg),
+    'Contact config: helloinstanten@gmail.com ab use nahi hona chahiye'
   );
 
-  // Retired address (hello@instanten.com) poore source me kahin na ho
-  const retired = [];
-  const walk = (dir) => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const p = `${dir}/${entry.name}`;
-      if (entry.isDirectory()) walk(p);
-      else if (/\.(astro|ts|mjs|json|md|txt)$/.test(entry.name)) {
-        if (readFileSync(p, 'utf8').includes('hello@instanten.com')) retired.push(p);
-      }
-    }
-  };
-  walk('src');
-  check(retired.length === 0, `Contact: purana address hello@instanten.com ${retired.length} file(s) me bacha hai — ${retired.slice(0, 3).join(', ')}`);
+  // Worker vars config se match karein — dono ek hi dabba.
+  const wranglerRaw = readFileSync('wrangler.jsonc', 'utf8');
+  check(wranglerRaw.includes('vishubizz.onl@gmail.com'), 'wrangler.jsonc: destination vishubizz.onl@gmail.com nahi hai');
+  check(
+    wranglerRaw.includes('"CONTACT_FROM": "hello@instanten.com"'),
+    'wrangler.jsonc: CONTACT_FROM hello@instanten.com nahi hai'
+  );
 
   /* ---------- Thin tag pages: noindex threshold ek hi jagah ---------- */
   check(existsSync('src/utils/tagIndexable.ts'), 'Tag indexability helper (src/utils/tagIndexable.ts) gayab hai');

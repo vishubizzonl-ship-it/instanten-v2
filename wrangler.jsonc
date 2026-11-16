@@ -13,18 +13,24 @@
     {
       "name": "EMAIL",
       // Receiving mailbox — free plan par sirf VERIFIED destination par bhej
-      // sakte hain. Dono Gmail verify ho to dono allowed hain (max 50 free).
-      "destination_address": "helloinstanten@gmail.com",
+      // sakte hain. Ye wahi Gmail hai jo Cloudflare Email Routing bhi use karta hai.
+      "destination_address": "vishubizz.onl@gmail.com",
       "allowed_destination_addresses": [
-        "helloinstanten@gmail.com",
-        "vishubizz.onl@gmail.com"
+        "vishubizz.onl@gmail.com",
+        "helloinstanten@gmail.com"
       ],
-      "allowed_sender_addresses": ["contact@instanten.com", "noreply@instanten.com"]
+      // Sender site ke apne domain par — hello@instanten.com Email Routing par
+      // onboarded hona chahiye, warna E_SENDER_NOT_VERIFIED.
+      "allowed_sender_addresses": [
+        "hello@instanten.com",
+        "contact@instanten.com",
+        "noreply@instanten.com"
+      ]
     }
   ],
   "vars": {
-    "CONTACT_TO": "helloinstanten@gmail.com",
-    "CONTACT_FROM": "contact@instanten.com",
+    "CONTACT_TO": "vishubizz.onl@gmail.com",
+    "CONTACT_FROM": "hello@instanten.com",
     "CONTACT_SITE": "instanten.com"
   }
 }

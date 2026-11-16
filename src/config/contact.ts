@@ -1,8 +1,8 @@
 /**
  * Contact details — ek hi jagah se poore site ke contact points control hote hain.
  *
- * PUBLIC_EMAIL      : jo address site par dikhta hai aur mailto: links me jaata hai.
- * DELIVERY_EMAIL    : form submit hone par mail yahan pahunchna chahiye.
+ * PUBLIC_EMAIL      : site par dikhne wala address — hello@instanten.com.
+ * DELIVERY_EMAIL    : form ki mail ka final dabba — vishubizz.onl@gmail.com.
  * CONTACT_API_PATH  : Cloudflare Worker ka endpoint (worker/index.mjs). Site Cloudflare
  *                     Workers par ho to yahi asli transport hai — koi third-party nahi.
  * WEB3FORMS_KEY     : optional backup (agar kabhi Cloudflare ke bina deploy karna pade).
@@ -11,13 +11,13 @@
  * Teeno fail ho jayein tab bhi visitor ka message waste nahi hota — uske mail app me
  * poora message ready khul jaata hai.
  */
-export const PUBLIC_EMAIL = 'helloinstanten@gmail.com';
+export const PUBLIC_EMAIL = 'hello@instanten.com';
 /**
- * Receiving mailbox — Worker ka CONTACT_TO aur ye dono ek hi hone chahiye
- * (warna form ka mail kisi aur dabbe me chala jayega). Worker ke bina deploy
- * (pure static) par bhi form isi address par mailto karta hai.
+ * Receiving dabba. Form submit hone par mail yahan jaati hai.
+ * Cloudflare Email Routing `hello@instanten.com` ko vishubizz.onl@gmail.com par
+ * forward karta hai (free), aur (worker ho to) send_email seedha Gmail par bhejta hai.
  */
-export const DELIVERY_EMAIL = 'helloinstanten@gmail.com';
+export const DELIVERY_EMAIL = 'vishubizz.onl@gmail.com';
 export const PUBLIC_EMAIL_MAILTO = `mailto:${PUBLIC_EMAIL}`;
 
 /** Cloudflare Worker endpoint — same-origin, isliye koi CORS/key nahi. */

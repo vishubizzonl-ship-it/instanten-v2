@@ -25,7 +25,7 @@ function makeEnv(overrides = {}) {
         return new Response(`asset:${new URL(request.url).pathname}`, { status: 200 });
       },
     },
-    CONTACT_TO: 'helloinstanten@gmail.com',
+    CONTACT_TO: 'vishubizz.onl@gmail.com',
     CONTACT_FROM: 'contact@instanten.com',
     CONTACT_SITE: 'instanten.com',
     ...overrides,
@@ -62,7 +62,7 @@ test('valid message is emailed to the owner with Reply-To set', async () => {
   assert.equal(res.status, 200);
   assert.equal((await res.json()).ok, true);
   assert.equal(sent.length, 1);
-  assert.equal(sent[0].to, 'helloinstanten@gmail.com');
+  assert.equal(sent[0].to, 'vishubizz.onl@gmail.com');
   assert.equal(sent[0].from.email, 'contact@instanten.com');
   assert.equal(sent[0].replyTo.email, 'asha@example.com');
   assert.match(sent[0].subject, /Bug report/);

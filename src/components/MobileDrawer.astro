@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import { PUBLIC_EMAIL } from '../config/contact';
 import ThemeToggle from './ThemeToggle.astro';
 import TwitterIcon from './icons/Twitter.astro';
 import YouTubeIcon from './icons/YouTube.astro';
@@ -31,7 +32,7 @@ const socialLinks = [
   { href: 'https://t.me/instanten', label: 'Telegram', icon: TelegramIcon },
   { href: 'https://www.youtube.com/@instanten', label: 'YouTube', icon: YouTubeIcon },
   { href: 'https://github.com/instanten', label: 'GitHub', icon: GitHubIcon },
-  { href: 'mailto:helloinstanten@gmail.com', label: 'Email', icon: EmailIcon },
+  { href: `mailto:${PUBLIC_EMAIL}`, label: 'Email', icon: EmailIcon },
 ] as const;
 ---
 <div id="mobile-drawer" data-drawer-panel class="cs-offcanvas fixed inset-y-0 left-0 z-[100] lg:hidden flex flex-col" role="dialog" aria-modal="true" aria-labelledby="drawer-title">

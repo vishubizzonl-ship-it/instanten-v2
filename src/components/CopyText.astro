@@ -1,4 +1,6 @@
 ---
+import { PUBLIC_EMAIL } from '../config/contact';
+
 /**
  * Renders one localised paragraph, turning the two markup conventions used in
  * src/i18n/supportCopy.ts into real markup:
@@ -6,7 +8,7 @@
  *   *italic*     → <em>
  *   {contact}    → link to the contact page, labelled with `contactLabel`
  *   {contactCta} → link to the contact page, labelled with `contactCta`
- *   {email}      → mailto link to helloinstanten@gmail.com
+ *   {email}      → mailto link to PUBLIC_EMAIL (config/contact.ts)
  *   {accuracyGuide} → link to the accuracy article, labelled with `guideLabel`
  *   {tool}       → the phrase that names the sensor use, e.g. "as a bubble level"
  * Everything else is HTML-escaped, so no translation can inject markup.
@@ -40,7 +42,7 @@ const esc = (value: string) =>
 const link = (label: string) =>
   `<a href="${contactHref}" class="text-link hover:underline">${esc(label)}</a>`;
 
-const mail = esc('helloinstanten@gmail.com');
+const mail = esc(PUBLIC_EMAIL);
 const html = esc(text)
   .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
   .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
