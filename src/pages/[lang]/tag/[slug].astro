@@ -11,6 +11,7 @@ import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
 import { getPageCopy } from '../../../i18n/pageContent';
 import { localizeTool } from '../../../i18n/toolContent';
 import { tagSlug, tagFromSlug } from '../../../utils/tagSlug';
+import { isTagIndexable } from '../../../utils/tagIndexable';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -56,6 +57,9 @@ const toolData = paginatedTools.map(tool => ({
   featured: tool.data.featured,
 }));
 
+/** Patle tag pages index nahi hote (dekho src/utils/tagIndexable.ts). */
+const tagIndexable = isTagIndexable(sortedTools.length);
+
 const baseUrl = translatePath(`/tag/${slug}/`);
 const queryParams: Record<string, string> = {};
 if (filters.q) queryParams.q = filters.q;
@@ -72,6 +76,7 @@ if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort
     .join(lang === 'ja' ? '、' : ', ')}${lang === 'ja' ? '。' : '.'}`}
   canonicalURL={`https://instanten.com/${lang}/tag/${slug}/`}
   lang={lang}
+  noindex={!tagIndexable}
 >
   <Breadcrumbs items={[
     { label: t('nav.home'), href: translatePath('/') },

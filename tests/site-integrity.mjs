@@ -114,7 +114,9 @@ export function run(pages, outDir) {
     const urls = [...readFileSync(sitemapPath, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(
       (m) => m[1]
     );
-    check(urls.length > 850, `sitemap mein sirf ${urls.length} URL (900+ expected)`);
+    // Thin/noindex tag pages sitemap se hata diye gaye hain (450 URLs) — isliye
+    // ab total ~690 hai. Threshold content badhne par hi badhao.
+    check(urls.length > 600, `sitemap mein sirf ${urls.length} URL (620+ expected)`);
     for (const errorUrl of ERROR_PAGES) {
       check(
         !urls.some((u) => u.endsWith(errorUrl) || u.endsWith(errorUrl.slice(0, -1))),

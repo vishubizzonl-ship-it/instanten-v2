@@ -2,7 +2,7 @@
 slug: complete-guide-to-instanten-tools-and-instant-online-workflows
 title: Complete Guide to Instanten Tools — Fast Instant Online Workflows Without Sign-Up
 excerpt: Discover how free Instanten tools, instant convert utilities, and practical instant help guides work together inside a single browser-based workspace. $0 cost, zero account required, full mobile and desktop support, with real NIST, W3C, and IETF standard references for U.S. users.
-thumbnail: /og-instanten.svg
+thumbnail: /og-instanten.png
 thumbnailAlt: Instanten — Free Instant Online Tools, Instant Convert & Instant Help
 categories:
   - name: Tools

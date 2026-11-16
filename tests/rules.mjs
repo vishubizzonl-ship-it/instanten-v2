@@ -231,6 +231,35 @@ export function run() {
   walk('src');
   check(retired.length === 0, `Contact: purana address hello@instanten.com ${retired.length} file(s) me bacha hai — ${retired.slice(0, 3).join(', ')}`);
 
+  /* ---------- Thin tag pages: noindex threshold ek hi jagah ---------- */
+  check(existsSync('src/utils/tagIndexable.ts'), 'Tag indexability helper (src/utils/tagIndexable.ts) gayab hai');
+  const tagIdx = readFileSync('src/utils/tagIndexable.ts', 'utf8');
+  check(/MIN_TOOLS_FOR_INDEX\s*=\s*3/.test(tagIdx), 'Thin tag threshold 3 nahi hai');
+  for (const file of ['src/pages/tag/[slug].astro', 'src/pages/[lang]/tag/[slug].astro']) {
+    const src = readFileSync(file, 'utf8');
+    check(src.includes('isTagIndexable'), `${file}: isTagIndexable use nahi hota`);
+    check(/noindex=\{!tagIndexable\}/.test(src), `${file}: noindex={!tagIndexable} missing`);
+  }
+
+  /* ---------- public/ me unused OG assets na padein ---------- */
+  const ogFiles = readdirSync('public').filter((f) => /^og-.*\.(svg|png)$/.test(f));
+  for (const f of ogFiles) {
+    if (!f.endsWith('.svg')) continue;
+    // SVG ko social crawlers ignore karte hain — sirf tab theek hai jab kahin use ho
+    let used = false;
+    const scan = (dir) => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const p = `${dir}/${entry.name}`;
+        if (entry.isDirectory()) scan(p);
+        else if (/\.(astro|ts|md|json|mjs)$/.test(entry.name)) {
+          if (readFileSync(p, 'utf8').includes(f)) used = true;
+        }
+      }
+    };
+    scan('src');
+    check(used, `public/${f} kahin use nahi hota — delete kar dein`);
+  }
+
   return suite;
 }
 

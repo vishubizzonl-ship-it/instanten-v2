@@ -263,5 +263,23 @@ export function run(pages, outDir) {
     check(spacey === 0, `${file} mein ${spacey} URL me space (%20) hai`);
   }
 
+  // --- noindex page kabhi sitemap me na ho (Search Console error se bacho) ---
+  const sitemapFiles2 = readdirSync(outDir).filter((f) => /^sitemap.*\.xml$/.test(f));
+  for (const file of sitemapFiles2) {
+    const xml = readFileSync(`${outDir}/${file}`, 'utf8');
+    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const urlPath = m[1].replace(SITE, '');
+      if (/\.xml$/.test(urlPath)) continue;
+      const target = urlPath === '/' ? 'index.html' : `${urlPath.replace(/^\//, '')}index.html`;
+      const filePath = `${outDir}/${target}`;
+      if (!existsSync(filePath)) continue;
+      const html = readFileSync(filePath, 'utf8');
+      check(
+        !/name="robots"[^>]*noindex/.test(html),
+        `${file} me noindex page listed hai :: ${urlPath}`
+      );
+    }
+  }
+
   return suite;
 }

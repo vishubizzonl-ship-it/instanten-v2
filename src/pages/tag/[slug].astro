@@ -8,6 +8,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import { parseFilters, filterTools, sortTools, paginateTools, getTotalPages } from '../../utils/filters';
 import { tagSlug, tagFromSlug } from '../../utils/tagSlug';
+import { isTagIndexable } from '../../utils/tagIndexable';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -59,6 +60,8 @@ if (filters.sort && filters.sort !== 'featured') queryParams.sort = filters.sort
 
 const pageTitle = `${tagName} Tools — instanten`;
 const toolCount = sortedTools.length;
+/** Patle tag pages index nahi hote (dekho src/utils/tagIndexable.ts). */
+const tagIndexable = isTagIndexable(toolCount);
 const pageDescription =
   `Browse ${toolCount} ${toolCount === 1 ? 'tool' : 'tools'} tagged with "${tagName}" on Instanten — ` +
   `free browser-based utilities with no sign-up, plus related tools and alternatives worth trying.`;
@@ -94,7 +97,13 @@ const breadcrumbs = [
   { label: tagName, href: `/tag/${slug}/` },
 ];
 ---
-<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} canonicalURL={`https://instanten.com/tag/${slug}/`}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  jsonLd={jsonLd}
+  canonicalURL={`https://instanten.com/tag/${slug}/`}
+  noindex={!tagIndexable}
+>
   <Breadcrumbs items={breadcrumbs} />
   <section class="site-container py-section">
     <header class="max-w-3xl mx-auto text-center mb-12">

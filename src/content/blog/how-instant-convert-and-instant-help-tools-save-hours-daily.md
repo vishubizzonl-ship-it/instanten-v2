@@ -2,7 +2,7 @@
 slug: how-instant-convert-and-instant-help-tools-save-hours-daily
 title: How Instant Convert Utilities and Browser-Based Instant Help Save Hours Every Week
 excerpt: A practical breakdown of how fast instant convert workflows, clean formatting helpers, and step-by-step instant help guides cut repetitive tasks from your daily routine — with $0 cost, zero sign-up, and real NIST, W3C, and IETF standard references for U.S. users.
-thumbnail: /og-instanten.svg
+thumbnail: /og-instanten.png
 thumbnailAlt: Instanten — Free Instant Online Tools, Instant Convert & Instant Help
 categories:
   - name: Productivity
