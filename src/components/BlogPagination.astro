@@ -161,7 +161,7 @@ const nextHref = current < total ? (props.page?.url?.next ?? buildPageUrl(curren
   }
 
   a.cf-pagination__item:hover {
-    color: #828282 !important;
+    color: var(--muted) !important;
     background: transparent !important;
   }
 
@@ -179,7 +179,7 @@ const nextHref = current < total ? (props.page?.url?.next ?? buildPageUrl(curren
 
   span.cf-pagination__dots {
     cursor: default !important;
-    color: #828282 !important;
+    color: var(--muted) !important;
   }
 
   :is(.dark, [data-theme="dark"], [data-scheme="dark"]) .cf-pagination__item {

@@ -10,8 +10,12 @@
   --surface-soft: #F8F7FF;
   --ink: #29294B;
   --body: #29294B;
-  --muted: #828282;
-  --faint: #C4C4C4;
+  /* WCAG 2.2 AA fix (audit item 1): pehle --muted #828282 = 3.78:1 aur
+     --faint #C4C4C4 = 1.72:1 tha, dono chhote text (11-13px) par fail.
+     Ab: muted #5F5F76 = 5.44-6.20:1, faint #696981 = 4.68-5.33:1 —
+     sab light backgrounds (#FDFDFF, #F8F7FF, #FFFFFF, #F0F0F0) par AA pass. */
+  --muted: #5F5F76;
+  --faint: #696981;
   --hairline: #E1E1E8;
   --hairline-soft: #F0F0F0;
   --accent: #514DCC;
@@ -21,7 +25,8 @@
   --accent-soft: #EAE8FD;
   --success: #067647;
   --success-soft: #ecfdf3;
-  --warning: #ab570a;
+  /* AA: #ab570a #F0F0F0 par exactly 4.50 — thoda dark kiya (4.93) */
+  --warning: #a0530a;
   --warning-soft: #fff6e5;
   --danger: #b42318;
   --danger-soft: #fef3f2;
@@ -47,11 +52,14 @@
   --surface-soft: #2A2A2A;
   --ink: #FFFFFF;
   --body: #E0E0E0;
+  /* Dark mode: muted already 9.0:1; faint #8A8AA0 surface-soft par 4.25:1 tha
+     (AA se neeche). #9494AC = 4.85-5.75:1 — sab dark surfaces par pass. */
   --muted: #CDCDCD;
-  --faint: #8A8AA0;
+  --faint: #9494AC;
   --hairline: #2E2E2E;
   --hairline-soft: #2A2A2A;
-  --accent: #6B5BE8;
+  /* AA: #6B5BE8 dark surfaces par 2.93-3.48:1 tha (fail) — #9A8DF0 = 5.09-6.04:1 */
+  --accent: #9A8DF0;
   --accent-deep: #8A7AE8;
   --accent-soft: #2A2A3A;
   --success: #4ade80;
