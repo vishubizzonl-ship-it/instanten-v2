@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:site": "node tests/run.mjs",
-    "test:site:update": "node tests/run.mjs --update-baseline"
+    "test:site:update": "node tests/run.mjs --update-baseline",
+    "test:worker": "node --test worker/contact.test.mjs"
   },
   "dependencies": {
     "astro": "^6.4.8"

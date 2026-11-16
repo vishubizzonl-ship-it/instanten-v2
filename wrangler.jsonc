@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "instanten",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "vishubizz.onl@gmail.com",
+      "allowed_sender_addresses": ["contact@instanten.com", "noreply@instanten.com"]
+    }
+  ],
+  "vars": {
+    "CONTACT_TO": "vishubizz.onl@gmail.com",
+    "CONTACT_FROM": "contact@instanten.com",
+    "CONTACT_SITE": "instanten.com"
+  }
+}

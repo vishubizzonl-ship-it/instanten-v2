@@ -1,13 +1,15 @@
 /**
  * Contact form ka submit logic — dono jagah se use hota hai:
- *   - src/components/ContactForm.astro      (chaar tool silo ke contact pages)
+ *   - src/components/ContactForm.astro       (chaar tool silo ke contact pages)
  *   - src/components/pages/ContactPage.astro (main /contact/ page)
  *
- * Do modes:
- *   1. LIVE  (Web3Forms key maujood)  → fetch() se message asli me bhejta hai.
- *   2. FALLBACK (key nahi)            → visitor ke mail app me ready message kholta hai.
- * Kabhi bhi "sent" ka jhootha green box nahi dikhta — success sirf tab jab bhejna
- * sach me ho gaya ho.
+ * Transport chain (pehla jo kaam kare, wahi):
+ *   1. Cloudflare Worker  → POST /api/contact  (send_email binding; koi third-party nahi)
+ *   2. Web3Forms          → sirf tab jab PUBLIC_WEB3FORMS_KEY set ho
+ *   3. mailto:            → visitor ke mail app me poora message ready
+ *
+ * "Message sent" sirf tab dikhta hai jab kisi ne sach me bheja ho (1 ya 2). Warna
+ * page saaf-saaf batata hai ki mail app khul raha hai — jhootha success kabhi nahi.
  */
 export type ContactMessages = {
   sending: string;
@@ -43,8 +45,46 @@ function val(data: FormData, key: string) {
   return String(data.get(key) ?? '').trim();
 }
 
+type Payload = { name: string; email: string; topic: string; message: string; botcheck: string };
+
+/** 1. Cloudflare Worker — same origin, JSON. */
+async function sendViaWorker(api: string, payload: Payload): Promise<'ok' | 'retry' | 'unavailable'> {
+  try {
+    const res = await fetch(api, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', accept: 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    // 404/405/501 = endpoint hi nahi (static hosting) → agla transport try karo.
+    if (res.status === 404 || res.status === 405 || res.status === 501) return 'unavailable';
+    if (res.ok) return 'ok';
+    return 'retry';
+  } catch {
+    return 'unavailable';
+  }
+}
+
+/** 2. Web3Forms — optional backup. */
+async function sendViaWeb3Forms(endpoint: string, key: string, payload: Payload): Promise<'ok' | 'retry'> {
+  try {
+    const body = new FormData();
+    body.set('access_key', key);
+    body.set('subject', `[${payload.topic}] ${payload.name}`);
+    body.set('from_name', payload.name);
+    body.set('name', payload.name);
+    body.set('email', payload.email);
+    body.set('topic', payload.topic);
+    body.set('message', payload.message);
+    const res = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body });
+    const data = (await res.json().catch(() => ({}))) as { success?: boolean };
+    return res.ok && data.success ? 'ok' : 'retry';
+  } catch {
+    return 'retry';
+  }
+}
+
 export function wireContactForm({ form, statusEl, errorEl, messages }: WireOptions) {
-  const live = form.dataset.live === 'true';
+  const api = form.dataset.api || '';
   const endpoint = form.dataset.endpoint || '';
   const key = form.dataset.key || '';
   const fallbackEmail = form.dataset.email || '';
@@ -60,10 +100,13 @@ export function wireContactForm({ form, statusEl, errorEl, messages }: WireOptio
     button.textContent = state ? messages.sending : buttonLabel;
   };
 
-  /** Key nahi hai (ya network fail) → visitor ke mail app me ready message kholo. */
-  const openMailApp = (subject: string, body: string) => {
+  const openMailApp = (payload: Payload) => {
+    const body = `Name: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.topic}\n\n${payload.message}`;
     const href =
-      `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      `mailto:${fallbackEmail}?subject=` +
+      encodeURIComponent(`[${payload.topic}] ${payload.name}`) +
+      '&body=' +
+      encodeURIComponent(body);
     window.location.href = href;
     show(statusEl, messages.mailto);
   };
@@ -73,55 +116,46 @@ export function wireContactForm({ form, statusEl, errorEl, messages }: WireOptio
     if (busy) return;
 
     const data = new FormData(form);
-    const name = val(data, 'name');
-    const email = val(data, 'email');
-    const topic = val(data, 'subject') || 'Website message';
-    const message = val(data, 'message');
+    const payload: Payload = {
+      name: val(data, 'name'),
+      email: val(data, 'email'),
+      topic: val(data, 'subject') || 'Website message',
+      message: val(data, 'message'),
+      botcheck: val(data, 'botcheck'),
+    };
 
     hide(errorEl);
     hide(statusEl);
 
-    if (!name || !email || !message || !EMAIL_RE.test(email)) {
+    if (!payload.name || !payload.email || !payload.message || !EMAIL_RE.test(payload.email)) {
       show(errorEl, messages.error);
-      return;
-    }
-
-    const body = `Name: ${name}\nEmail: ${email}\nSubject: ${topic}\n\n${message}`;
-    const mailSubject = `[${topic}] ${name}`;
-
-    if (!live || !key || !endpoint) {
-      openMailApp(mailSubject, body);
       return;
     }
 
     setBusy(true);
     try {
-      const payload = new FormData();
-      payload.set('access_key', key);
-      payload.set('subject', mailSubject);
-      payload.set('from_name', name);
-      payload.set('name', name);
-      payload.set('email', email);
-      payload.set('topic', topic);
-      payload.set('message', message);
-      payload.set('botcheck', '');
-
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: payload,
-      });
-      const json = (await res.json().catch(() => ({}))) as { success?: boolean; message?: string };
-
-      if (res.ok && json.success) {
-        show(statusEl, messages.sent);
-        form.reset();
-      } else {
-        // Server ne mana kiya → visitor ko chup-chaap chhodne ke bajaye mail app do.
-        openMailApp(mailSubject, body);
+      if (api) {
+        const result = await sendViaWorker(api, payload);
+        if (result === 'ok') {
+          show(statusEl, messages.sent);
+          form.reset();
+          return;
+        }
+        if (result === 'retry') {
+          // Endpoint hai par bhejne me dikkat aayi — mail app se pahuncha do.
+          openMailApp(payload);
+          return;
+        }
       }
-    } catch {
-      openMailApp(mailSubject, body);
+      if (key && endpoint) {
+        const result = await sendViaWeb3Forms(endpoint, key, payload);
+        if (result === 'ok') {
+          show(statusEl, messages.sent);
+          form.reset();
+          return;
+        }
+      }
+      openMailApp(payload);
     } finally {
       setBusy(false);
     }

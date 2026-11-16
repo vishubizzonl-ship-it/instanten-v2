@@ -5,6 +5,7 @@ import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import {
   PUBLIC_EMAIL,
   DELIVERY_EMAIL,
+  CONTACT_API_PATH,
   WEB3FORMS_ENDPOINT,
   WEB3FORMS_KEY,
   CONTACT_FORM_LIVE,
@@ -67,6 +68,7 @@ const messages = {
         class="ror-form"
         novalidate
         data-email={DELIVERY_EMAIL}
+        data-api={CONTACT_API_PATH}
         data-endpoint={WEB3FORMS_ENDPOINT}
         data-key={WEB3FORMS_KEY}
         data-live={CONTACT_FORM_LIVE ? 'true' : 'false'}

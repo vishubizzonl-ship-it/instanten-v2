@@ -176,8 +176,32 @@ export function run() {
   /* ---------- Contact form: asli transport, jhootha "sent" nahi ---------- */
   const submitLib = readFileSync('src/lib/contactSubmit.ts', 'utf8');
   check(submitLib.includes('fetch('), 'Contact: submit logic mein asli network transport (fetch) nahi hai');
-  check(submitLib.includes('mailto:'), 'Contact: mailto fallback nahi hai (key na ho to form kaam karna chahiye)');
-  check(/if\s*\(!live \|\| !key \|\| !endpoint\)/.test(submitLib), 'Contact: live/fallback branch missing');
+  check(submitLib.includes('mailto:'), 'Contact: mailto fallback nahi hai (Worker na ho to form kaam karna chahiye)');
+  check(submitLib.includes('sendViaWorker'), 'Contact: Cloudflare Worker transport missing');
+  check(submitLib.includes('sendViaWeb3Forms'), 'Contact: backup transport missing');
+
+  /* Cloudflare-only path: Worker + send_email binding (koi third-party service nahi) */
+  check(existsSync('worker/index.mjs'), 'Cloudflare: worker/index.mjs gayab hai');
+  const workerSrc = readFileSync('worker/index.mjs', 'utf8');
+  check(workerSrc.includes('env.EMAIL.send'), 'Cloudflare: worker send_email binding use nahi karta');
+  check(workerSrc.includes("'/api/contact'"), 'Cloudflare: worker /api/contact route nahi karta');
+  check(workerSrc.includes('env.ASSETS.fetch'), 'Cloudflare: worker static assets serve nahi karta');
+  check(workerSrc.includes('replyTo'), 'Cloudflare: worker Reply-To set nahi karta (visitor ko seedha reply)');
+  check(workerSrc.includes('botcheck'), 'Cloudflare: worker honeypot check nahi karta');
+  check(/cf-connecting-ip/.test(workerSrc), 'Cloudflare: worker rate limit (per-IP) nahi karta');
+  check(/origin/i.test(workerSrc), 'Cloudflare: worker origin check nahi karta');
+
+  check(existsSync('wrangler.jsonc'), 'Cloudflare: wrangler.jsonc gayab hai');
+  const wrangler = readFileSync('wrangler.jsonc', 'utf8');
+  check(/"send_email"/.test(wrangler), 'Cloudflare: wrangler.jsonc me send_email binding nahi');
+  check(/destination_address/.test(wrangler), 'Cloudflare: send_email binding kisi fixed address par locked nahi');
+  check(/"directory":\s*"\.\/dist"/.test(wrangler), 'Cloudflare: wrangler.jsonc static assets = ./dist nahi');
+  check(/"main":\s*"worker\/index\.mjs"/.test(wrangler), 'Cloudflare: wrangler.jsonc main worker nahi');
+  check(existsSync('worker/contact.test.mjs'), 'Cloudflare: worker test file gayab hai');
+
+  // Third-party form services (Web3Forms/Formspree) primary path nahi hone chahiye
+  const contactCfg2 = readFileSync('src/config/contact.ts', 'utf8');
+  check(contactCfg2.includes("'/api/contact'"), 'Contact config: CONTACT_API_PATH /api/contact nahi hai');
 
   for (const file of ['src/components/ContactForm.astro', 'src/components/pages/ContactPage.astro']) {
     const src = readFileSync(file, 'utf8');
