@@ -396,6 +396,98 @@ const it: CompassProse = {
   faqH: 'Domande frequenti sulla bussola online',
 };
 
+const nl: CompassProse = {
+  h2: 'Het gratis online kompas dat in je browser werkt',
+  intro: [
+    'Dit <strong>online kompas</strong> verandert elke telefoon, tablet of laptop met één tik in een werkend <strong>kompashulpmiddel</strong>. Je hoeft niets te downloaden, geen account aan te maken en niet te wachten op een appstore — je opent de pagina en de naald begint de richting te volgen waarin je kijkt. Het is een <strong>gratis online kompas</strong> met één taak: je vertellen waar het noorden is, nu meteen, waar je ook staat.',
+    'Heb je ooit gezocht op “<em>waar is het noorden</em>”, “<em>noordrichting</em>” of “<em>kompas om noorden te vinden</em>”, dan ken je het probleem. Je staat in een onbekende straat, in een geparkeerde auto, in een hotelkamer of op een camping, en je richtingsgevoel helpt niet meer. Een <strong>mobiel kompas</strong> op een scherm lost dat in seconden op. De uitlezing van het <strong>kompas online</strong> verandert terwijl je draait, zodat de naald nooit liegt over de kant waar je naartoe wijst.',
+  ],
+  sections: [
+    {
+      h3: 'Wat een online kompas je precies laat zien',
+      paras: [
+        'De wijzerplaat toont een <strong>kompasrichting</strong> in graden en in woorden. Graden lopen van 0° bij het noorden, met de klok mee via 90° bij het oosten, 180° bij het zuiden en 270° bij het westen. De woorden verdelen de cirkel in acht richtingen, zodat je noord, noordoost, oost, zuidoost, zuid, zuidwest, west en noordwest ziet zonder te rekenen. Als mensen om een <strong>richtingenkompas</strong> vragen, bedoelen ze dit: een uitlezing waar je meteen iets mee kunt, in dezelfde taal waarin je iemand de weg zou wijzen.',
+        'Omdat de wijzerplaat live is, is dit een <strong>live kompas</strong> in plaats van een plaatje ervan. Draai je toestel en de naald houdt zijn peiling vast terwijl de ring meedraait. Dat ene gedrag onderscheidt een echte <strong>digitale kompas</strong>-uitlezing van een stilstaande illustratie, en daarom werkt deze pagina als gids voor de <strong>online kompasrichting</strong> terwijl je loopt.',
+      ],
+    },
+    {
+      h3: 'Zo vind je het noorden met een online kompas',
+      paras: [
+        'Om dit <strong>online kompas om het noorden te vinden</strong> te gebruiken, houd je het toestel plat en uit de buurt van metaal, magneten en luidsprekers van een laptop. Tik op de knop om de magnetometer aan te zetten en draai daarna langzaam rond. De naald komt binnen een seconde of twee tot rust. De rode punt geeft het noorden aan; al het andere — zuid, oost en west — volgt daaruit. Springt de waarde heen en weer, til de telefoon dan van het bureau, loop naar buiten en probeer het opnieuw.',
+        'Browsers delen sensorgegevens pas nadat je toestemming geeft; daarom vraagt dit hulpmiddel het één keer en onthoudt het daarna. Die toestemmingsvraag is ook de reden dat een <strong>gratis online kompas</strong> als dit volledig op je toestel kan draaien: de uitlezing wordt lokaal berekend, dus er wordt geen locatiegeschiedenis geüpload en niets op een server opgeslagen. Dezelfde pagina blijft werken bij een zwak signaal, en zodra hij geladen is blijft hij een richting tonen, ook als je midden in het veld je data verliest.',
+      ],
+    },
+    {
+      h3: 'Online kompas versus een fysiek kompas',
+      paras: [
+        'Een traditioneel kaartkompas is betrouwbaar, stil en raakt nooit leeg. Het vraagt wel dat je het waterpas houdt, de ring uitlijnt en een schaal afleest. Een <strong>online kompas hulpmiddel</strong> vervangt dat ritueel door een getal. Voor een snelle controle welke kant je op staat is het sneller; voor een wandeling van meerdere uren in slecht weer blijven een fysiek kompas en een papieren kaart de veiligere combinatie. Veel mensen nemen beide mee en gebruiken de pagina met het <strong>kompas online</strong> als snelle tweede mening.',
+        'Het is ook goed om te weten wat dit hulpmiddel niet kan. Een telefoonkompas leest het magnetische noorden, dat afwijkt van het ware noorden — een verschil dat afhangt van waar je bent en dat magnetische declinatie heet. In de buurt van grote metalen constructies, in een auto of naast een magneet kan de uitlezing enkele graden afwijken tot je opnieuw kalibreert door het toestel in een achtbeweging te bewegen. Zie de <strong>online kompasrichting</strong> als een sterke aanwijzing en niet als landmeetinstrument; dan heb je er veel aan.',
+      ],
+    },
+    {
+      h3: 'Wie gebruikt elke dag een gratis online kompas',
+      paras: [
+        'Stadsreizigers gebruiken het om zich te oriënteren na het verlaten van een metrostation. Automobilisten gebruiken het om te controleren aan welke kant van een parkeerplaats ze binnenkwamen. fotografen noteren de richting van het licht. Wandelaars, landmeters, bezorgers, vogelaars en studenten op excursie grijpen naar hetzelfde: een <strong>gratis kompas</strong> zonder installatie, zonder advertenties over de wijzerplaat en zonder aanmeldschermen. Dat is precies het uitgangspunt hier — één wijzerplaat, één richting, geen ruis.',
+        'Op een desktop of laptop laadt de pagina nog steeds en legt hij de uitlezing nog steeds uit, maar de naald heeft een magnetometer nodig die de meeste computers niet hebben. Op zulke apparaten kun je dit hulpmiddel het best als naslagwerk gebruiken: lees over de <strong>noordrichting</strong> en open dezelfde pagina op je telefoon als je naar buiten gaat. Je verliest niets — de opmaak is responsief en de wijzerplaat schaalt mee met elk scherm.',
+      ],
+    },
+    {
+      h3: 'Kompasrichtingen lezen zonder te gokken',
+      paras: [
+        'De vier hoofdstreken zijn eenvoudig: <strong>noord</strong> voor de naald, <strong>zuid</strong> erachter, <strong>oost</strong> rechts en <strong>west</strong> links — zolang het toestel plat ligt en de wijzerplaat niet ondersteboven staat. De vier tussenliggende streken vullen de gaten op, en een uitlezing in graden vult de rest. Als je eenmaal weet dat een peiling van 135° zuidoost is, kun je elk getal dat het <strong>online kompas</strong> toont omzetten in een richting die je hardop kunt zeggen — precies wat je nodig hebt als jij degene bent die de weg wijst.',
+        'Oefen één keer thuis. Sta stil, noteer de richting, draai negentig graden en noteer opnieuw. Als de tweede uitlezing ongeveer de eerste plus of min negentig is, doet je <strong>mobiele kompas</strong> het goed. Zo niet, kalibreer en herhaal. Twee minuten oefenen maakt elke latere uitlezing betrouwbaar, of je nu het <strong>noorden</strong> zoekt in een onbekende stad of controleert of de tentdeur op de zonsopgang uitkomt.',
+      ],
+    },
+  ],
+  faqH: 'Veelgestelde vragen over het online kompas',
+};
+
+const sv: CompassProse = {
+  h2: 'Den gratis onlinekompassen som fungerar i din webbläsare',
+  intro: [
+    'Den här <strong>onlinekompassen</strong> gör vilken telefon, surfplatta eller laptop som helst till ett fungerande <strong>kompassverktyg</strong> med ett enda tryck. Det finns inget att ladda ner, inget konto att skapa och ingen väntan i en appbutik — du öppnar sidan och visaren börjar följa den riktning du står i. Det är en <strong>gratis onlinekompass</strong> byggd för en enda uppgift: att säga var norr är, just nu, var du än står.',
+    'Har du någon gång sökt på “<em>var är norr</em>”, “<em>nordriktning</em>” eller “<em>kompass för att hitta norr</em>” så känner du igen problemet. Du står i en okänd gata, i en parkerad bil, på ett hotellrum eller på en campingplats, och din riktningskänsla har slutat hjälpa. En <strong>mobil kompass</strong> på skärmen löser det på sekunder. Avläsningen från <strong>kompass online</strong> uppdateras när du vrider dig, så nålen ljuger aldrig om vilket håll du pekar åt.',
+  ],
+  sections: [
+    {
+      h3: 'Vad en onlinekompass faktiskt visar dig',
+      paras: [
+        'Ratten visar en <strong>kompassriktning</strong> i grader och i ord. Graderna går från 0° vid norr, medurs via 90° vid öster, 180° vid söder och 270° vid väster. Orden delar in cirkeln i åtta riktningar, så du ser norr, nordost, öster, sydost, söder, sydväst, väster och nordväst utan att räkna. När någon ber om en <strong>riktningskompass</strong> menar de det här: en avläsning du kan agera på direkt, på samma språk som du skulle förklara vägen för någon.',
+        'Eftersom ratten är levande är det här en <strong>livekompass</strong> och inte en bild av en. Vrider du på enheten håller nålen sin bäring medan ringen roterar. Det beteendet skiljer en riktig <strong>digital kompass</strong>-avläsning från en stillbild, och det är därför sidan fungerar som guide för <strong>kompassriktning online</strong> medan du går.',
+      ],
+    },
+    {
+      h3: 'Så hittar du norr med en onlinekompass',
+      paras: [
+        'För att använda <strong>onlinekompassen för att hitta norr</strong> håller du enheten plant och borta från metall, magneter och laptopens högtalare. Tryck på knappen så att webbläsaren får läsa magnetometern och vrid dig sedan långsamt på stället. Nålen stabiliseras inom en sekund eller två. Den röda spetsen markerar norr; allt annat — söder, öster och väster — följer av det. Hoppar värdet runt lyfter du telefonen från skrivbordet, går ut och försöker igen.',
+        'Webbläsare delar bara sensordata efter att du ger tillstånd, och därför frågar verktyget en gång och kommer sedan ihåg. Den tillståndsfrågan är också skälet till att en <strong>gratis onlinekompass</strong> som den här kan köras helt på din enhet: avläsningen beräknas lokalt, så ingen platshistorik laddas upp och inget sparas på en server. Samma sida fortsätter fungera med svag signal, och när den väl har laddats visar den en riktning även om du tappar uppkopplingen mitt ute på fältet.',
+      ],
+    },
+    {
+      h3: 'Onlinekompass kontra en fysisk kompass',
+      paras: [
+        'En traditionell kartkompass är pålitlig, tyst och tar aldrig slut på batteri. Den kräver å andra sidan att du håller den plant, linjerar in ringen och läser av en skala. Ett <strong>onlinekompassverktyg</strong> ersätter den ritualen med en siffra. För en snabb koll på vilket håll du står åt är den snabbare; för en flera timmar lång vandring i dåligt väder är en fysisk kompass plus en papperskarta fortfarande det säkrare paret. Många bär båda och använder sidan <strong>kompass online</strong> som en snabb andra åsikt.',
+        'Det är också värt att veta vad verktyget inte klarar. En telefonkompass läser magnetiskt norr, som avviker från rätt norr med ett belopp som beror på var du befinner dig — en skillnad som kallas magnetisk deklination. Nära stora metallkonstruktioner, i en bil eller bredvid en magnet kan avläsningen ligga flera grader fel tills du kalibrerar om genom att röra enheten i en åtta. Se <strong>kompassriktning online</strong> som en stark ledtråd och inte som ett mätinstrument, så tjänar den dig väl.',
+      ],
+    },
+    {
+      h3: 'Vem använder en gratis onlinekompass varje dag',
+      paras: [
+        'Stadsvandrare använder den för att orientera sig efter att ha lämnat en tunnelbanestation. Bilister använder den för att bekräfta vid vilken ände av en parkering de körde in. Fotografer noterar ljusets riktning. Vandrare, lantmätare, leveransbud, fågelskådare och studenter på exkursion sträcker sig efter samma sak: en <strong>gratis kompass</strong> utan installationsprogram, utan annonser över ratten och utan inloggningsskärmar. Det är hela designidén här — en ratt, en riktning, inget skräp.',
+        'På en stationär dator eller laptop laddas sidan fortfarande och förklarar fortfarande avläsningen, men nålen behöver en magnetometer som de flesta datorer inte har. På sådana enheter fungerar verktyget bäst som referens: läs om <strong>nordriktning</strong> och öppna samma sida i telefonen när du går ut. Inget går förlorat — layouten är responsiv och ratten skalar till vilken skärm du än håller i.',
+      ],
+    },
+    {
+      h3: 'Läsa kompassriktningar utan att gissa',
+      paras: [
+        'De fyra huvudstrecken är enkla: <strong>norr</strong> framför nålen, <strong>söder</strong> bakom den, <strong>öster</strong> till höger och <strong>väster</strong> till vänster — så länge enheten ligger plant och ratten inte är upp och ner. De fyra strecken däremellan täcker luckorna, och en avläsning i grader täcker resten. När du vet att en bäring på 135° är sydost kan du översätta vilken siffra <strong>onlinekompassen</strong> visar som helst till en riktning du kan säga högt, vilket är precis vad du behöver när det är du som visar vägen.',
+        'Öva en gång hemma. Stå stilla, notera riktningen, vrid nittio grader och notera igen. Om den andra avläsningen är ungefär den första plus eller minus nittio fungerar din <strong>mobila kompass</strong> som den ska. Om inte, kalibrera och upprepa. Två minuter av det gör varje senare avläsning trovärdig, vare sig du letar efter <strong>norr</strong> i en okänd stad eller kontrollerar att tältets öppning vetter mot soluppgången.',
+      ],
+    },
+  ],
+  faqH: 'Vanliga frågor om onlinekompassen',
+};
+
 export const compassProse: Record<string, CompassProse> = {
   en,
   ja,
@@ -405,5 +497,7 @@ export const compassProse: Record<string, CompassProse> = {
   pt,
   ko,
   it,
+  nl,
+  sv,
 };
 
