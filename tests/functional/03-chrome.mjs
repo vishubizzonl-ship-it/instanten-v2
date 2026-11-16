@@ -12,7 +12,10 @@ const home = p;
 // top pills / primary nav
 const navLinks = p.$$('header a[href]').map((a) => a.getAttribute('href'));
 r.check('home: header me saare nav links maujood', navLinks.length >= 4, navLinks.join(' '));
-r.check('home: header me search button', !!p.$('header [data-search-open]'), String(p.$$('header [data-search-open]').length));
+// Home par grid ke upar pehle se search field hai, isliye header ka icon
+// jaan-boojh kar nahi hota (duplicate nahi). Other pages par hota hai.
+r.check('home: grid ke upar inline search field hai', !!p.$('[data-lib-search]'));
+r.check('home: header me duplicate search button nahi', p.$$('header [data-search-open]').length === 0, String(p.$$('header [data-search-open]').length));
 
 // silo tabs (compass/bubble/speed/qibla)
 const tabs = p.$$('a[href^="/online"]').map((a) => a.getAttribute('href'));
@@ -78,7 +81,9 @@ if (langBtn) {
   r.check('language: current language highlight', active > 0, String(active));
 }
 
-// ------- search panel
+// ------- search panel (aisa page jahan header button hi entry point hai)
+await p.cleanup();
+p = await open('/blog/');
 const searchTrigger = p.$('[data-search-open]');
 r.check('search: trigger button hai', !!searchTrigger);
 if (searchTrigger) {

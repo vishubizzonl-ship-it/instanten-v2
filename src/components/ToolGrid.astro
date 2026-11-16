@@ -2,6 +2,8 @@
 import ToolCard from './ToolCard.astro';
 import { buildSearchText, type ToolData } from '../utils/filters';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { localizeTool } from '../i18n/toolContent';
+import { toolSearchAliases } from '../i18n/searchAliases';
 
 interface Props {
   tools: ToolData[];
@@ -10,7 +12,28 @@ interface Props {
 }
 
 const { tools, visibleStart = 0, visibleEnd = tools.length } = Astro.props;
-const t = useTranslations(getLangFromUrl(Astro.url));
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+/**
+ * Search index ek hi jagah se banta hai: us bhasha ka naam + description +
+ * tags + us bhasha ke synonyms (searchAliases.ts) + English text.
+ * Pehle sirf English text hota tha, isliye /ja/search/ par "速度" ya "方位磁針"
+ * se kuch nahi milta tha — jabki home ke grid par milta tha.
+ */
+const searchIndex = (tool: ToolData) => {
+  const localized = localizeTool(lang, { slug: tool.slug, name: tool.name, description: tool.description });
+  return [
+    localized.name,
+    localized.description,
+    tool.category,
+    ...(tool.tags ?? []),
+    toolSearchAliases(tool.slug, lang),
+    buildSearchText(tool),
+  ]
+    .filter(Boolean)
+    .join(' ');
+};
 ---
 <section aria-labelledby="tools-heading" id="tools">
   <h2 id="tools-heading" class="sr-only">{t('tools.allTools')}</h2>
@@ -36,7 +59,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
         updatedDate={tool.updatedDate}
         featured={tool.featured}
         hidden={index < visibleStart || index >= visibleEnd}
-        searchText={buildSearchText(tool)}
+        searchText={searchIndex(tool)}
       />
     ))}
   </div>

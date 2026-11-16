@@ -7,6 +7,7 @@ import BlogPagination from '../components/BlogPagination.astro';
 import HomeSeoSection, { getHomeFaqs } from '../components/HomeSeoSection.astro';
 import { defaultLang } from '../i18n/ui';
 import { localizePricing } from '../i18n/toolContent';
+import { toolSearchAliases } from '../i18n/searchAliases';
 import { getAllTools } from '../utils/standaloneTools';
 import { parseFilters, filterTools, sortTools, paginateTools, toolHref, type ToolData } from '../utils/filters';
 
@@ -103,7 +104,7 @@ const canonicalURL = currentPage === 1
           data-added={tool.addedDate ?? ''}
           data-updated={tool.updatedDate ?? tool.addedDate ?? ''}
           data-featured={tool.featured ? 'true' : 'false'}
-          data-search={[tool.name, tool.category, tool.description, ...(tool.tags ?? [])].join(' ')}
+          data-search={[tool.name, tool.category, tool.description, ...(tool.tags ?? []), toolSearchAliases(tool.slug, 'en')].join(' ')}
         >
           <a href={toolPath(tool.slug)} class="blog-card__thumbnail" aria-label={`View details for ${tool.name}`}>
             <img

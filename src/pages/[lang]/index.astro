@@ -11,6 +11,7 @@ import { nonDefaultLangs, type LangCode } from '../../i18n/ui';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { seoHome } from '../../i18n/seoContent';
 import { localizeTool, localizeToolCategory, localizePricing } from '../../i18n/toolContent';
+import { toolSearchAliases } from '../../i18n/searchAliases';
 
 export function getStaticPaths() {
   return nonDefaultLangs.map((lang) => ({ params: { lang } }));
@@ -97,7 +98,7 @@ const canonicalURL = currentPage === 1
           data-added={tool.addedDate ?? ''}
           data-updated={tool.updatedDate ?? tool.addedDate ?? ''}
           data-featured={tool.featured ? 'true' : 'false'}
-          data-search={[localized.name, tool.category, localized.description, ...(tool.tags ?? [])].join(' ')}
+          data-search={[localized.name, tool.category, localized.description, ...(tool.tags ?? []), toolSearchAliases(tool.slug, lang)].join(' ')}
         >
           <a href={toolHref} class="blog-card__thumbnail" aria-label={`${t('aria.viewDetails')} ${localized.name}`}>
             <img

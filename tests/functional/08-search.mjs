@@ -13,10 +13,15 @@ import { txt } from './routes.mjs';
 const r = reporter();
 r.section('08 — Search: entry point → panel → results');
 
+/**
+ * `gridSearch: true` = us page par grid ke upar pehle se search field hai,
+ * isliye header ka icon jaan-boojh kar nahi hota (duplicate na ho).
+ */
 const entryPages = [
-  { route: '/', expectAction: '/search/' },
-  { route: '/de/', expectAction: '/de/search/' },
-  { route: '/ja/', expectAction: '/ja/search/' },
+  { route: '/', expectAction: '/search/', gridSearch: true },
+  { route: '/de/', expectAction: '/de/search/', gridSearch: true },
+  { route: '/ja/', expectAction: '/ja/search/', gridSearch: true },
+  { route: '/search/', expectAction: '/search/', gridSearch: true },
   { route: '/blog/', expectAction: '/search/' },
   { route: '/tools/json-formatter/', expectAction: '/search/' },
   { route: '/tags/', expectAction: '/search/' },
@@ -24,11 +29,29 @@ const entryPages = [
   { route: '/404.html', expectAction: '/search/' },
 ];
 
-for (const { route, expectAction } of entryPages) {
+for (const { route, expectAction, gridSearch = false } of entryPages) {
   const p = await open(route);
+  const inlineField = p.$('[data-lib-search]');
   const buttons = p.$$('header [data-search-open]');
   const inMobileBar = p.$$('[data-mobile-bar] [data-search-open]').length;
   const inDesktopBar = p.$$('[data-desktop-bar] [data-search-open]').length;
+
+  if (gridSearch) {
+    // grid ke upar wala field hi entry point hai — header button duplicate nahi hona chahiye
+    r.check(`${route}: grid ke upar inline search field hai`, !!inlineField);
+    r.check(`${route}: header me duplicate button nahi`, buttons.length === 0, `${buttons.length} buttons`);
+    // form wahi hai jo us field ke saath chalta hai
+    const form = p.$('[data-search-form]') || inlineField?.closest('form');
+    r.check(`${route}: inline search ka form sahi jagah jaata hai`,
+      (form?.getAttribute('action') || '').includes('search'), form?.getAttribute('action'));
+    p.document.dispatchEvent(new p.window.KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }));
+    await p.settle(80);
+    r.check(`${route}: Ctrl+K phir bhi panel kholta hai`, p.$('#search-panel').hidden === false);
+    p.document.dispatchEvent(new p.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await p.settle(60);
+    await p.cleanup();
+    continue;
+  }
 
   r.check(`${route}: header me search button hai`, buttons.length >= 2, `${buttons.length} buttons (mobile ${inMobileBar}, desktop ${inDesktopBar})`);
   r.check(`${route}: mobile + desktop dono bars me`, inMobileBar >= 1 && inDesktopBar >= 1, `mobile=${inMobileBar} desktop=${inDesktopBar}`);

@@ -89,6 +89,7 @@ const categories = [
 <script>
   const panel = document.getElementById('search-panel');
   const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-search-open]'));
+
   const closeButton = panel?.querySelector<HTMLElement>('[data-search-close]');
   const backdrop = panel?.querySelector<HTMLElement>('[data-search-backdrop]');
   const input = panel?.querySelector<HTMLInputElement>('#search-input');

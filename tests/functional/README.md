@@ -20,7 +20,8 @@ node tests/functional/run.mjs dist
 | `05-library.mjs` | Directory filter, chips, sort, /search/?q=, blog, tags |
 | `06-contact.mjs` | Contact form: validation, worker POST, fallback, reset |
 | `07-sweep.mjs` | Har page type ka sample: JS errors + basics |
-| `08-search.mjs` | Search entry point: 8 page types × button → panel → results (108 checks) |
+| `08-search.mjs` | Search entry point: grid field vs header button, panel, Ctrl+K (88 checks) |
+| `09-localized-search.mjs` | Har bhasha me natural shabd se tool milna (コンパス/나침반/kompass/boussole/brújula…) — 51 checks |
 
 `jsdom` package.json me jaan-boojh kar nahi hai: Rule hai ki site me koi naya
 package na aaye. Ye sirf dev machine par `--no-save` se chalta hai.

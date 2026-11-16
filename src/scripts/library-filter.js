@@ -49,8 +49,21 @@ const cardTags = (card) =>
     .map((tag) => norm(tag).toLowerCase())
     .filter(Boolean);
 
+/**
+ * Accent/diacritic hata do: "brújula" → "brujula".
+ *
+ * Kyun: Spanish/French/Portuguese users bina accent wala shabd type karte hain.
+ * `toLowerCase()` sirf case theek karta hai, "brujula" se "brújula" match nahi
+ * hota tha. (CJK par normalise kuch nahi badalta.)
+ */
+export const fold = (value) =>
+  String(value ?? '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
 const cardText = (card) =>
-  `${card.name ?? ''} ${card.category ?? ''} ${card.search ?? ''} ${(card.tags || []).join(' ')}`.toLowerCase();
+  fold(`${card.name ?? ''} ${card.category ?? ''} ${card.search ?? ''} ${(card.tags || []).join(' ')}`);
 
 /**
  * Ek card facets se match karta hai ya nahi.
@@ -76,7 +89,10 @@ export function cardMatches(card, facets, { ignore = null } = {}) {
     if (!card.featured) return false;
   }
   if (ignore !== 'q' && f.q) {
-    if (!cardText(card).includes(f.q)) return false;
+    // Har shabd alag-alag match hona chahiye ("prettify json", "kompass nadel").
+    const text = cardText(card);
+    const tokens = fold(f.q).split(/\s+/).filter(Boolean);
+    if (!tokens.every((token) => text.includes(token))) return false;
   }
   return true;
 }
@@ -209,6 +225,14 @@ export function mountLibraryFilter(root) {
   // Directory pages ka grid `data-directory-grid`, home ka blog-grid `data-lib-grid`.
   const grid = document.querySelector('[data-directory-grid], [data-lib-grid]');
   if (!grid) return null;
+
+  /**
+   * Is page par search field pehle se maujood hai (yahi section), isliye header
+   * ka search icon duplicate lagta hai — hata dete hain. Jo pages filter section
+   * nahi rakhte (blog, tool detail, tags, contact…) wahan header ka button hi
+   * ekmatr raasta hai, wo chalta rehta hai. Ctrl+K / "/" har jagah chalta hai.
+   */
+  document.querySelectorAll('header [data-search-open]').forEach((trigger) => trigger.remove());
 
   const cards = [...grid.querySelectorAll('[data-tool-card]')].map(cardData);
   const searchInput = root.querySelector('[data-lib-search]');
