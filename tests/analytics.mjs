@@ -75,12 +75,45 @@ export function run(pages) {
     if (INSTRUMENTS.includes(clean[0])) expected = clean[0];
     else if (clean[0] === 'tools' && clean[1]) expected = clean[1];
     else if (clean[0] === 'tools') expected = 'tools-hub';
-    else if (['blog', 'category', 'tag', 'tags', 'page'].includes(clean[0])) expected = 'blog';
-    else if (['about', 'contact'].includes(clean[0])) expected = 'company';
-    else if (['privacy-policy', 'terms'].includes(clean[0])) expected = 'legal';
-    else expected = clean.length === 0 ? 'home' : 'site';
+    // instanten route + silo = alag website → sab groups par `instanten-` prefix
+    else if (['blog', 'category', 'tag', 'tags', 'page'].includes(clean[0])) expected = 'instanten-blog';
+    else if (['about', 'contact'].includes(clean[0])) expected = 'instanten-company';
+    else if (['privacy-policy', 'terms'].includes(clean[0])) expected = 'instanten-legal';
+    else if (clean[0] === 'compassinstant') expected = 'instanten-hub';
+    else expected = clean.length === 0 ? 'instanten-home' : 'instanten-site';
 
     check(cfg.group === expected, `${url}: content_group "${cfg.group}" hai, "${expected}" chahiye`);
+  }
+
+  // --- instanten route + uska silo: alag website ki tarah ek hi group family --
+  /**
+   * User rule: instanten route page aur uske silo (blog/about/contact/privacy/
+   * terms) ko alag website maan kar chalao — GA4 mein bhi. Isliye un sab par
+   * content_group `instanten-*` hona chahiye, aur wahi ek shared ID + ek loader.
+   */
+  const INSTANTEN_SILO = ['/', '/blog/', '/about/', '/contact/', '/privacy-policy/', '/terms/'];
+  const expectedGroups = {
+    '/': 'instanten-home',
+    '/blog/': 'instanten-blog',
+    '/about/': 'instanten-company',
+    '/contact/': 'instanten-company',
+    '/privacy-policy/': 'instanten-legal',
+    '/terms/': 'instanten-legal',
+  };
+  for (const base of INSTANTEN_SILO) {
+    for (const url of [base, `/de${base}`, `/ja${base}`]) {
+      const html = pages.get(url);
+      if (!html) continue;
+      const configs = gaConfigs(html);
+      check(configs.length === 1, `${url}: instanten silo par ${configs.length} gtag config (1 chahiye)`);
+      if (configs.length === 1) {
+        check(
+          configs[0].group === expectedGroups[base],
+          `${url}: content_group "${configs[0].group}" — "${expectedGroups[base]}" chahiye`
+        );
+      }
+      check(gtagLoaders(html).length === 1, `${url}: instanten silo par gtag loader 1 nahi hai`);
+    }
   }
 
   // --- privacy policy analytics ke baare mein sach bole -------------------

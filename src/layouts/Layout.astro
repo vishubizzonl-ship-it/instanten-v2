@@ -89,9 +89,12 @@ const t = useTranslations(detectedLang);
  *   /tools/json-formatter/      → json-formatter
  *   /de/tools/word-counter/     → word-counter   (locale prefix strip)
  *   /tools/                     → tools-hub
- *   /blog/…, /category/…, …     → blog
- *   /                           → home
- *   baaki sab                   → site
+ *   /                           → instanten-home
+ *   /blog/…, /category/…, …     → instanten-blog
+ *   /about/, /contact/          → instanten-company
+ *   /privacy-policy/, /terms/   → instanten-legal
+ *   /compassinstant/            → instanten-hub
+ *   baaki sab                   → instanten-site
  *
  * Error pages (403/404/500/503) par analytics load hi nahi hota — unka
  * traffic report ko ganda karta hai aur wo noindex hain.
@@ -107,10 +110,16 @@ const gaContentGroup = (() => {
   if (isInstrument(cleanSegments[0] ?? '')) return cleanSegments[0];
   if (cleanSegments[0] === 'tools' && cleanSegments[1]) return cleanSegments[1];
   if (cleanSegments[0] === 'tools') return 'tools-hub';
-  if (['blog', 'category', 'tag', 'tags', 'page'].includes(cleanSegments[0])) return 'blog';
-  if (cleanSegments[0] === 'about' || cleanSegments[0] === 'contact') return 'company';
-  if (cleanSegments[0] === 'privacy-policy' || cleanSegments[0] === 'terms') return 'legal';
-  return cleanSegments.length === 0 ? 'home' : 'site';
+
+  // Instanten route + uska silo "alag website" ki tarah report hota hai —
+  // isliye sab groups ka `instanten-` prefix, taaki GA4 mein ek hi jagah
+  // filter ho jaye aur tool silos ke numbers se mix na hon.
+  if (cleanSegments.length === 0) return 'instanten-home';
+  if (['blog', 'category', 'tag', 'tags', 'page'].includes(cleanSegments[0])) return 'instanten-blog';
+  if (cleanSegments[0] === 'about' || cleanSegments[0] === 'contact') return 'instanten-company';
+  if (cleanSegments[0] === 'privacy-policy' || cleanSegments[0] === 'terms') return 'instanten-legal';
+  if (cleanSegments[0] === 'compassinstant') return 'instanten-hub';
+  return 'instanten-site';
 })();
 
 // Error pages + build ke waqt ID na ho to tag bilkul nahi.
