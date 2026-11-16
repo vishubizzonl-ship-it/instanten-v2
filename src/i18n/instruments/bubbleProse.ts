@@ -867,4 +867,214 @@ const it: BubbleProse = {
     },
   ],
 };
-export const bubbleProse: Record<string, BubbleProse> = { en, es, ja, fr, de, pt, ko, it };
+const nl: BubbleProse = {
+  aboutH: "De gratis online waterpas die elk oppervlak controleert",
+  intro: [
+    "Dit **online waterpas** maakt van de telefoon in je hand met één tik een werkend **waterpas-hulpmiddel**. Niets te installeren, geen account nodig en geen wachttijd voor een download — je opent de pagina, legt het toestel op het oppervlak en de bel zegt je meteen of dat oppervlak vlak, scheef of loodrecht is. Het is een **gratis waterpas** met één taak: je de waarheid vertellen over een oppervlak voordat je een plank ophangt, een lijst rechtzet of een tafel waterpas zet.",
+    "Heb je ooit gezocht op “**waterpas online**”, “**waterpas app**” of “**waterpas telefoon**”, dan ken je het probleem al. Je houdt een fotolijst vast die recht lijkt, een wasmachine die schudt, of een bureau dat lijkt te hellen — en je ogen zijn geen meetinstrument. Een **waterpas controle online** haalt de gok er in twee seconden uit, met een getal in graden in plaats van een vermoeden.",
+  ],
+  sections: [
+    {
+      h: "Wat dit waterpas-hulpmiddel je echt laat zien",
+      paras: [
+        "Het **online waterpas** leest de versnellingsmeter in je toestel en tekent dezelfde informatie die een fysieke waterpas toont, alleen met meer detail. Je krijgt een horizontale libel voor vlakke oppervlakken, een **verticale waterpas online** voor loodrechte muren en deurkozijnen, en een bullseye-weergave die de helling in alle richtingen tegelijk laat zien — van links naar rechts en van voor naar achter. In plaats van te beoordelen waar een bel tussen twee lijnen staat, lees je een getal in graden, zodat “bijna waterpas” een exact getal wordt waar je iets mee kunt.",
+        "Omdat de uitlezing digitaal is, kan dit **waterpas hulpmiddel** dingen die een houten waterpas niet kan. Het ververst terwijl je het oppervlak kantelt, zodat je het getal naar nul ziet zakken terwijl je een vulplaatje onder een poot schuift. Het blijft werken in donkere hoeken waar je een bel niet goed ziet. En het verliest nooit zijn vloeistof, want er is geen vloeistof — de sensor is solid state en het nulpunt wordt in software gezet.",
+      ],
+    },
+    {
+      h: "Zo controleer je een oppervlak met het online waterpas",
+      paras: [
+        "Open de pagina, sta de sensorvraag één keer toe en leg het toestel plat op het oppervlak dat je wilt testen. Houd het een seconde stil zodat de uitlezing tot rust komt. Het getal in graden is je antwoord: een waarde rond 0,0° betekent dat het oppervlak waterpas is, en de richting van de afwijking vertelt je welke kant omhoog moet. Voor een loodcontrole zet je het toestel met de lange rand tegen de muur en gebruik je de verticale libel op dezelfde manier.",
+      ],
+      list: [
+        "Haal de telefoon uit de magnetische hoes en houd hem weg van metalen gereedschap, schroeven en leidingen.",
+        "Controleer hetzelfde oppervlak in twee richtingen, 90° ten opzichte van elkaar, voordat je gaat boren.",
+        "Loopt de uitlezing weg, leg het toestel dan op een vlak oppervlak dat je kent en kalibreer daar opnieuw.",
+        "Houd het toestel op het oppervlak zelf — in je hand voeg je je eigen helling toe.",
+      ],
+    },
+    {
+      h: "Waterpas versus een fysieke waterpas",
+      paras: [
+        "Een traditionele **waterpasliniaal** is een gesloten buis met een bel erin, en die is uitstekend in wat hij doet — maar je hebt hem alleen bij je als je eraan denkt hem mee te nemen. Een **waterpas online** zit al in je zak, en dat maakt uit wanneer een plank scheef lijkt en jij op een stoel staat. De ruil is precisie: een goede waterpas van 60 cm ziet een helling die een telefoonsensor wegrondeert. Voor ophangen, meubels, apparaten en snelle controles is de digitale uitlezing ruim genoeg; voor een vloer betegelen of een werkblad plaatsen wint een lange fysieke waterpas nog steeds.",
+        "Veel mensen zoeken op **waterpas gereedschap online** in de hoop op de slang-met-water-truc. Deze pagina doet hetzelfde werk elektronisch: geen water, geen slang, geen rommel, en het werkt op elke afstand tot het oppervlak. En als je via een zoekopdracht naar een **waterpas online** hier bent gekomen, dan is het hulpmiddel hieronder het interactieve antwoord — geen tekening ervan.",
+      ],
+    },
+    {
+      h: "Wie gebruikt een gratis online waterpas",
+      paras: [
+        "Iedereen die ophangt, bouwt, monteert of installeert. Huiseigenaren gebruiken het **gratis online waterpas** om fotolijsten, planken en spiegels in één keer recht te hangen. Huurders gebruiken het **online waterpas niveau** om te controleren of een kast of koelkast waterpas staat voordat ze de deur de schuld geven. Bij klussen en timmerwerk gebruik je de verticale libel voor deurkozijnen, staanders en palen. Fotografen en videomakers controleren of een statiefkop vlak staat. Ook het gebruik van een **online waterpas controle** piekt rond het in elkaar zetten van meubels — bouwtekeningen gaan uit van een vlakke vloer, en een telefoon is het enige gereedschap dat binnen bereik is.",
+        "Buiten de werkplaats helpt dezelfde **gratis waterpas online**-uitlezing op kleine alledaagse manieren. Controleer of een tafel wiebelt omdat de vloer helt of omdat één poot te kort is. Bevestig dat een wasmachine waterpas staat zodat hij niet meer door de kamer loopt. Zet een camper, caravan of daktent waterpas voordat je erin slaapt. Stel een pooltafel, pingpongtafel of dartbord op. Test een nieuwe telefoonhoes of een bureaustandaard op wiebelen. Al deze klussen vragen geen gereedschapskist — ze vragen één eerlijk getal.",
+      ],
+    },
+    {
+      h: "Nauwkeurigheid, privacy en wat je kunt verwachten",
+      paras: [
+        "De nauwkeurigheid hangt af van de sensor in je toestel, niet van de pagina. Versnellingsmeters in telefoons zijn meestal tot ongeveer één graad nauwkeurig, wat ruim voldoende is voor ophangen en meubelwerk, en de uitlezing wordt stabieler naarmate het toestel langer stil ligt. Niets wordt geüpload: de sensorgegevens worden in je browser gelezen en verlaten het toestel nooit, er is geen account nodig en je uitlezingen worden niet gevolgd. Zodra de pagina geladen is, blijft deze **waterpas controle** werken, ook zonder internetverbinding — handig in een kelder, een garage of op een bouwplaats.",
+        "Gebruik het als een snel **waterpas hulpmiddel** voordat je een gat in de muur boort, en houd een fysieke waterpas voor klussen waarbij millimeters tellen. Die combinatie — een telefoon voor het snelle antwoord, een waterpas voor de definitieve correctie — is hoe de meeste mensen echt werken. Lijkt de bel verkeerd, controleer dan het oppervlak, de kalibratie en metaal in de buurt voordat je het hulpmiddel de schuld geeft, en kalibreer opnieuw op een oppervlak dat je vertrouwt.",
+      ],
+    },
+  ],
+  guidesH: "Nieuwste gidsen uit de waterpas-blog",
+  guides: [
+    {
+      href: "/onlinebubblelevel/blog/how-to-use-an-online-bubble-level/",
+      title: "Een online waterpas gebruiken (stap voor stap)",
+      desc: "Open de pagina, leg de telefoon plat, kalibreer en lees de helling in graden.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/how-accurate-is-a-phone-bubble-level/",
+      title: "Hoe nauwkeurig is een waterpas in een telefoon?",
+      desc: "Typische fout, wat een meting verpest en hoe je kalibreert voor een betrouwbare controle.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/level-furniture-shelves-appliances/",
+      title: "Meubels, planken en apparaten waterpas zetten",
+      desc: "Stap-voor-stap controles voor een wiebelende tafel, een scheve boekenkast en een lopende wasmachine.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/bubble-level-vs-spirit-level/",
+      title: "Waterpas versus waterpasliniaal",
+      desc: "Nauwkeurigheid, kosten en snelheid vergeleken, en wanneer je een echte waterpas pakt.",
+    },
+  ],
+  guidesAll: "Bekijk alle online waterpas-gidsen →",
+  faqH: "Veelgestelde vragen over het online waterpas",
+  faq: [
+    {
+      q: "Hoe lees je een online waterpas af?",
+      a: "Leg de telefoon plat op het oppervlak en laat de bel tot rust komen. Drijft de bel naar links of rechts, dan zie je welk uiteinde hoog is: de bel drijft altijd naar het hoogste punt, dus de kant waar hij naartoe gaat is de hoge kant. Het getal ernaast is de helling in graden, en 0,0° betekent dat het oppervlak waterpas is.",
+    },
+    {
+      q: "Is een waterpas op een telefoon net zo goed als een echte waterpas?",
+      a: "Voor snelle controles wel. Een gekalibreerde telefoon leest binnen ongeveer een halve graad, wat genoeg is voor planken, lijsten, meubels en apparaten. Voor lange overspanningen zoals werkbladen, vloeren en muren wint een lange waterpas, omdat die een helling ziet die een kort telefoonlichaam niet kan zien.",
+    },
+    {
+      q: "Werkt een online waterpas op een laptop of desktop?",
+      a: "De pagina laadt overal, maar een laptop of desktop heeft geen versnellingsmeter, dus de bel beweegt niet. Gebruik een telefoon of tablet voor een echte controle, en een desktop om de gidsen te lezen en getallen te vergelijken.",
+    },
+    {
+      q: "Is een online waterpas nauwkeurig genoeg voor planken en fotolijsten?",
+      a: "Ja. Een gekalibreerde telefoon leest binnen ongeveer een halve graad, wat over een plank van 60 cm minder dan 5 mm is en ruim binnen wat het oog opmerkt. Voor alles langer dan een meter, of voor werkbladen en muren, gebruik je ook een waterpas, omdat een kort telefoonlichaam een helling over een lange overspanning niet ziet.",
+    },
+    {
+      q: "Waarom blijft mijn waterpas op 0,0 graden staan?",
+      a: "Bijna altijd de toestemming voor de bewegingssensor. Browsers blokkeren de apparaatoriëntatie tot je die toestaat, en het hulpmiddel toont dan zijn ruststand. Sta beweging toe in de vraag, herlaad de pagina en controleer als de uitlezing nog steeds niet beweegt of je niet in een desktopbrowser zonder versnellingsmeter zit.",
+    },
+    {
+      q: "Moet ik een app installeren om het gratis waterpas te gebruiken?",
+      a: "Nee. Het waterpas draait in de browser, dus er is niets te installeren en geen account nodig. Open de pagina op je telefoon, sta de bewegingssensor één keer toe, en het waterpas werkt meteen — en blijft offline werken na de eerste keer laden.",
+    },
+    {
+      q: "Hoe controleer ik met mijn telefoon of een muur loodrecht is?",
+      a: "Gebruik de verticale libel. Zet de telefoon met de lange rand tegen de muur, houd de achterkant van de telefoon plat tegen het oppervlak en lees het getal in graden: rond 0,0° betekent dat de muur loodrecht is. Controleer boven aan en onder aan de muur, want een muur kan scheef staan zonder dat het midden enige helling toont.",
+    },
+  ],
+};
+
+const sv: BubbleProse = {
+  aboutH: "Det gratis onlinevattenpasset som kontrollerar vilken yta som helst",
+  intro: [
+    "Det här **onlinevattenpasset** gör telefonen i din hand till ett fungerande **vattenpassverktyg** med ett enda tryck. Inget att installera, inget konto att skapa och ingen väntan på en nedladdning — du öppnar sidan, lägger enheten på ytan och bubblan säger direkt om ytan är plan, lutande eller i lod. Det är ett **gratis vattenpass** byggt för en enda uppgift: att säga sanningen om en yta innan du hänger en hylla, rätar upp en ram eller ställer ett bord i våg.",
+    "Har du någon gång sökt på “**vattenpass online**”, “**vattenpass app**” eller “**vattenpass mobil**” så känner du redan problemet. Du håller i en tavelram som ser rak ut, en tvättmaskin som skakar eller ett skrivbord som verkar luta — och dina ögon är inget mätinstrument. En **vattenpasskontroll online** tar bort gissningen på två sekunder, med en siffra i grader i stället för en känsla.",
+  ],
+  sections: [
+    {
+      h: "Vad det här vattenpassverktyget faktiskt visar",
+      paras: [
+        "**Onlinevattenpasset** läser accelerometern i din enhet och ritar samma information som ett fysiskt vattenpass visar, fast med mer detalj. Du får ett horisontellt rör för plana ytor, ett **vertikalt vattenpass online** för lodräta väggar och dörrkarmar, och en bullseye-vy som visar lutningen i alla riktningar samtidigt — från vänster till höger och framifrån och bak. I stället för att bedöma var en bubbla ligger mellan två linjer läser du en siffra i grader, så “nästan i våg” blir ett exakt värde du kan agera på.",
+        "Eftersom avläsningen är digital kan det här **vattenpassverktyget** göra saker som ett trävattenpass inte kan. Den uppdateras medan du lutar ytan, så du kan se siffran falla mot noll medan du skjuter in en kil under ett ben. Den fortsätter fungera i mörka hörn där du inte ser en bubbla tydligt. Och den förlorar aldrig sin vätska, för det finns ingen vätska — sensorn är fast och nollpunkten sätts i mjukvaran.",
+      ],
+    },
+    {
+      h: "Så kontrollerar du en yta med onlinevattenpasset",
+      paras: [
+        "Öppna sidan, tillåt sensorfrågan en gång och lägg sedan enheten plant på ytan du vill testa. Håll den stilla i en sekund så att avläsningen stabiliseras. Värdet i grader är ditt svar: en siffra nära 0,0° betyder att ytan är i våg, och avvikelsens riktning säger vilken sida som behöver lyftas. För en lodkontroll ställer du enheten mot väggen på långsidan och använder det vertikala röret på samma sätt.",
+      ],
+      list: [
+        "Ta telefonen ur det magnetiska fodralet och bort från metallverktyg, skruvar och rör.",
+        "Kontrollera samma yta i två riktningar, i 90° mot varandra, innan du borrar.",
+        "Driver avläsningen, lägg enheten på en yta du vet är plan och kalibrera om där.",
+        "Håll enheten på själva ytan — i handen lägger du till din egen lutning.",
+      ],
+    },
+    {
+      h: "Vattenpass kontra ett fysiskt vattenpass",
+      paras: [
+        "Ett traditionellt **vattenpass med linjal** är ett slutet rör med en bubbla i, och det är utmärkt på det det gör — men du har det bara när du kommer ihåg att ta med det. Ett **vattenpass online** finns redan i fickan, vilket spelar roll när en hylla ser sned ut och du står på en stol. Avvägningen är precision: ett bra vattenpass på 60 cm ser en lutning som en telefonsensor rundar bort. För att hänga upp saker, möbler, vitvaror och snabba kontroller räcker den digitala avläsningen gott; för att lägga klinker på ett golv eller montera en bänkskiva vinner fortfarande ett långt fysiskt vattenpass.",
+        "Många söker på **vattenpassverktyg online** och förväntar sig slangen-med-vatten-tricket. Den här sidan gör samma jobb elektroniskt: inget vatten, ingen slang, inget kladd, och den fungerar på vilket avstånd som helst från ytan. Och om en sökning på **vattenpass online** ledde dig hit, är verktyget nedan det interaktiva svaret — inte en ritning av ett.",
+      ],
+    },
+    {
+      h: "Vem använder ett gratis onlinevattenpass",
+      paras: [
+        "Alla som hänger upp, bygger, monterar eller installerar. Husägare använder det **gratis onlinevattenpasset** för att hänga tavelramar, hyllor och speglar rakt direkt. Hyresgäster använder det **online vattenpasset** för att kontrollera om en garderob eller ett kylskåp står i våg innan de skyller på dörren. I bygg- och snickeriarbete används det vertikala röret för dörrkarmar, reglar och stolpar. Fotografer och videofotografer kontrollerar att ett stativhuvud står plant. Användningen av **online vattenpasskontroll** toppar också kring möbelmontering — monteringsanvisningar utgår från ett plant golv, och telefonen är det enda verktyget inom räckhåll.",
+        "Utanför verkstaden hjälper samma avläsning från **gratis vattenpass online** på små vardagliga sätt. Kontrollera om ett bord vickar för att golvet lutar eller för att ett ben är kort. Bekräfta att en tvättmaskin står i våg så att den slutar vandra över golvet. Ställ en husbil, husvagn eller taktält i våg innan du sover i den. Ställ upp ett biljardbord, pingisbord eller en darttavla. Testa ett nytt telefonfodral eller ett skrivbordsställ för vickning. Ingen av de sakerna kräver en verktygslåda — de kräver en ärlig siffra.",
+      ],
+    },
+    {
+      h: "Noggrannhet, integritet och vad du kan förvänta dig",
+      paras: [
+        "Noggrannheten beror på sensorn i din enhet, inte på sidan. Accelerometrar i telefoner är oftast bra till ungefär en grad, vilket räcker gott för att hänga upp saker och för möbelarbete, och avläsningen blir stabilare ju längre enheten ligger stilla. Inget laddas upp: sensordata läses i din webbläsare och lämnar aldrig enheten, inget konto behövs och dina avläsningar spåras inte. När sidan väl har laddats fortsätter den här **vattenpasskontrollen** att fungera även utan nätverk, vilket är användbart i en källare, ett garage eller på en byggarbetsplats.",
+        "Använd den som ett snabbt **vattenpassverktyg** innan du borrar ett hål i väggen, och behåll ett fysiskt vattenpass för jobb där millimetrar spelar roll. Den kombinationen — telefonen för det snabba svaret, vattenpasset för den slutliga justeringen — är hur de flesta faktiskt arbetar. Ser bubblan fel ut, kontrollera ytan, kalibreringen och metall i närheten innan du skyller på verktyget, och kalibrera om på en yta du litar på.",
+      ],
+    },
+  ],
+  guidesH: "Senaste guiderna från vattenpassbloggen",
+  guides: [
+    {
+      href: "/onlinebubblelevel/blog/how-to-use-an-online-bubble-level/",
+      title: "Använda ett onlinevattenpass (steg för steg)",
+      desc: "Öppna sidan, lägg telefonen plant, kalibrera och läs lutningen i grader.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/how-accurate-is-a-phone-bubble-level/",
+      title: "Hur noggrant är ett vattenpass i en telefon?",
+      desc: "Typiskt fel, vad som förstör en mätning och hur du kalibrerar för en pålitlig kontroll.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/level-furniture-shelves-appliances/",
+      title: "Ställa möbler, hyllor och vitvaror i våg",
+      desc: "Steg för steg-kontroller för ett vickande bord, en sned bokhylla och en vandrande tvättmaskin.",
+    },
+    {
+      href: "/onlinebubblelevel/blog/bubble-level-vs-spirit-level/",
+      title: "Vattenpass kontra fysiskt vattenpass",
+      desc: "Noggrannhet, kostnad och snabbhet jämfört, och när du ska ta fram ett riktigt vattenpass.",
+    },
+  ],
+  guidesAll: "Se alla guider för onlinevattenpasset →",
+  faqH: "Vanliga frågor om onlinevattenpasset",
+  faq: [
+    {
+      q: "Hur läser man av ett onlinevattenpass?",
+      a: "Lägg telefonen plant på ytan och låt bubblan stabilisera sig. Driver bubblan åt vänster eller höger ser du vilken ände som är hög: bubblan flyter alltid mot den högsta punkten, så sidan den rör sig mot är den höga sidan. Siffran bredvid är lutningen i grader, och 0,0° betyder att ytan är i våg.",
+    },
+    {
+      q: "Är ett vattenpass i telefonen lika bra som ett riktigt vattenpass?",
+      a: "För snabba kontroller, ja. En kalibrerad telefon läser inom ungefär en halv grad, vilket räcker för hyllor, tavlor, möbler och vitvaror. För långa spann som bänkskivor, golv och väggar vinner ett långt vattenpass, eftersom det ser en lutning som en kort telefonkropp inte klarar.",
+    },
+    {
+      q: "Fungerar ett onlinevattenpass på en laptop eller stationär dator?",
+      a: "Sidan laddas överallt, men en laptop eller stationär dator har ingen accelerometer, så bubblan rör sig inte. Använd en telefon eller surfplatta för en riktig kontroll, och en dator för att läsa guiderna och jämföra siffror.",
+    },
+    {
+      q: "Är ett onlinevattenpass noggrant nog för hyllor och tavlor?",
+      a: "Ja. En kalibrerad telefon läser inom ungefär en halv grad, vilket är under 5 mm över en hylla på 60 cm och väl inom vad ögat märker. För allt längre än en meter, eller för bänkskivor och väggar, använd även ett vattenpass, eftersom en kort telefonkropp inte ser en lutning som sträcker sig över ett långt spann.",
+    },
+    {
+      q: "Varför står mitt vattenpass still på 0,0 grader?",
+      a: "Nästan alltid tillståndet för rörelsesensorn. Webbläsare blockerar enhetsorienteringen tills du tillåter den, och verktyget visar då sitt viloläge. Tillåt rörelse i frågan, ladda om sidan och kontrollera om avläsningen fortfarande inte rör sig att du inte sitter i en stationär webbläsare utan accelerometer.",
+    },
+    {
+      q: "Måste jag installera en app för att använda det gratis vattenpasset?",
+      a: "Nej. Vattenpasset körs i webbläsaren, så det finns inget att installera och inget konto att skapa. Öppna sidan i telefonen, tillåt rörelsesensorn en gång, och vattenpasset fungerar direkt — och fortsätter fungera offline efter första laddningen.",
+    },
+    {
+      q: "Hur kontrollerar jag om en vägg är i lod med telefonen?",
+      a: "Använd det vertikala röret. Ställ telefonen mot väggen på långsidan, håll telefonens baksida plant mot ytan och läs siffran i grader: nära 0,0° betyder att väggen är i lod. Kontrollera nära väggens överkant och underkant, eftersom en vägg kan luta utan att mitten visar någon lutning.",
+    },
+  ],
+};
+
+export const bubbleProse: Record<string, BubbleProse> = { en, es, ja, fr, de, pt, ko, it, nl, sv };

@@ -33,8 +33,9 @@ const GAPS_FILE = 'tests/locale-gaps.json';
 function stringValues(source) {
   const out = [];
   for (const line of source.split('\n')) {
+    // Key quoted ho (`"key": "value"`) ya bare ho (`key: "value"`) — dono shapes.
     const m = line.match(
-      /^\s*(?:"[^"]+"|'[^']+')\s*:\s*(?:"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)')\s*,?\s*$/
+      /^\s*(?:"[^"]+"|'[^']+'|[A-Za-z_$][\w$]*)\s*:\s*(?:"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)')\s*,?\s*$/
     );
     if (!m) continue;
     const value = m[1] ?? m[2];

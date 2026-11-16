@@ -1,12 +1,34 @@
 {
-  "src/i18n/instruments/bubbleProse.ts": ["nl", "sv"],
-  "src/i18n/instruments/bubbleSupport.ts": ["nl", "sv"],
-  "src/i18n/instruments/qiblaProse.ts": ["nl", "sv"],
-  "src/i18n/instruments/qiblaSupport.ts": ["nl", "sv"],
-  "src/i18n/instruments/speedometerProse.ts": ["nl", "sv"],
-  "src/i18n/instruments/speedometerSupport.ts": ["nl", "sv"],
-  "src/i18n/supportCopy.ts": ["nl", "sv"],
-  "src/i18n/qiblaLegal.ts": ["nl", "sv"],
-  "src/i18n/speedometerLegal.ts": ["nl", "sv"],
-  "src/i18n/contactForm.ts": ["nl", "sv"]
+  "src/i18n/instruments/qiblaProse.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/instruments/qiblaSupport.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/instruments/speedometerProse.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/instruments/speedometerSupport.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/supportCopy.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/qiblaLegal.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/speedometerLegal.ts": [
+    "nl",
+    "sv"
+  ],
+  "src/i18n/contactForm.ts": [
+    "nl",
+    "sv"
+  ]
 }
