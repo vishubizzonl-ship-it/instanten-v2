@@ -182,13 +182,24 @@ export default defineConfig({
               }
             }
             if (!noindexed.length) return;
+
+            /* Sirf <loc> hatana kaafi nahi — sitemap har <url> ke andar
+               <xhtml:link rel="alternate" hreflang="…"> bhi likhta hai, jo
+               noindex pages ko dobara advertise kar deta hai (galat bhasha ka
+               wahi jhooth, bas XML me). Isliye wo alternates bhi hatate hain. */
+            const noindexPaths = new Set(noindexed.map((loc) => loc.replace(/\/$/, '')));
+
             const next = xml
               .replace(/<url>[\s\S]*?<\/url>/g, (block) =>
                 noindexed.some((loc) => block.includes(`<loc>${loc}</loc>`)) ? '' : block
               )
+              .replace(/<xhtml:link\b[^>]*\/>/g, (tag) => {
+                const href = (tag.match(/href="([^"]+)"/) ?? [])[1];
+                return href && noindexPaths.has(href.replace(/\/$/, '')) ? '' : tag;
+              })
               .replace(/\n{2,}/g, '\n');
             await fs.writeFile(indexFile, next, 'utf8');
-            logger.info(`sitemap-0: ${noindexed.length} noindex URLs removed`);
+            logger.info(`sitemap-0: ${noindexed.length} noindex URLs removed (loc + hreflang alternates)`);
           } catch {
             // sitemap-0 na ho to build fail karne ki zarurat nahi
           }

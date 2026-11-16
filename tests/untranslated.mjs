@@ -160,10 +160,14 @@ export function run() {
       for (const slug of ARTICLES[silo]) {
         const html = read(pageFile(locale, silo, slug));
         if (!html || isNoindex(html)) {
-          // noindex → sitemap me bhi nahi hona chahiye
+          // noindex → sitemap me kahin bhi nahi hona chahiye: na <loc> me, na
+          // kisi <xhtml:link rel="alternate"> me (sitemap hreflang bhi advertise
+          // karta hai, isliye bas loc check karna kaafi nahi).
+          const path = `/${locale}/${silo}/blog/${slug}/`;
+          check(!xml.includes(path), `noindex article sitemap me hai :: ${path}`);
           check(
-            !xml.includes(`/${locale}/${silo}/blog/${slug}/`),
-            `noindex article sitemap me hai :: /${locale}/${silo}/blog/${slug}/`
+            !readFileSync('dist/sitemap-0.xml', 'utf8').includes(path),
+            `noindex article sitemap-0 ke hreflang alternates me hai :: ${path}`
           );
           continue;
         }
