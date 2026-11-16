@@ -1,0 +1,191 @@
+---
+/**
+ * English-only guide for the bubble level silo.
+ * URL: /onlinebubblelevel/blog/how-to-check-if-a-surface-is-level/
+ *
+ * Intent: "how to check if something is level", "check if a surface is level",
+ * "is my floor level" — practical tests with and without tools.
+ */
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const title = 'How to Check if a Surface Is Level: 5 Tests That Work';
+const description =
+  'Check whether a table, shelf, floor or wall is level with five practical tests — a phone, a marble, water, a spirit level and the two-reading trick that catches errors.';
+const keywords =
+  'how to check if something is level, check if a surface is level, is my floor level, level a table, bubble level test, spirit level check, phone level';
+
+const sections: { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] } }[] = [
+  {
+    heading: 'Start with the question you actually have',
+    paragraphs: [
+      '“Is this level?” means two different things. A surface can be locally flat — a table top that will not rock — or globally level — a floor that is parallel to gravity across three metres. A short tool answers the first question quickly and the second one badly, so decide which you need before you reach for anything.',
+      'For furniture, pictures, shelves and appliances you want local flatness plus a rough idea of the slope. For floors, patios and drainage you want the long-span answer, and that is where a phone alone stops being enough.',
+    ],
+  },
+  {
+    heading: '1. The phone test (fastest, good to about 0.5°)',
+    paragraphs: [
+      'Open the <a href="' + 'PLACEHOLDER_LEVEL' + '" class="text-link underline">online bubble level</a>, place the phone flat on the surface, and read the two degree numbers. Both axes near zero means the surface is level in that spot. Repeat at three or four places — front, back, left, right — because a table can be level on one corner and out by half a degree on the opposite side.',
+      'Two habits matter. Take the phone out of its case if the case has a magnet or a thick camera bump, and let the reading settle for a second before believing it. If the numbers keep sliding, calibrate on a surface you trust and try again.',
+    ],
+  },
+  {
+    heading: '2. The marble or ball-bearing test',
+    paragraphs: [
+      'Put a marble on the surface and watch which way it rolls. It is crude, but it answers a specific question nothing else answers as quickly: does water run that way? A marble rolling steadily to one corner is a slope you will notice when something spills.',
+      'Use it as a cross-check, not a measurement. A marble will roll on a 0.3° slope too small to bother a picture frame, and it stops dead on a surface that is level but not flat.',
+    ],
+  },
+  {
+    heading: '3. The two-reading trick that catches bad readings',
+    paragraphs: [
+      'Put the phone down, note the number, then rotate it exactly 180° in the same spot and note the second number. Add the two values and halve them: that is the true tilt of the surface. If the two readings are wildly different, the phone is the problem, not the table — usually a case, a camera bump or an uncalibrated sensor.',
+      'This is the same method that catches a bent spirit level, and it is the reason professional checks always include a reversal.',
+    ],
+  },
+  {
+    heading: '4. Water as a level (the oldest test there is)',
+    paragraphs: [
+      'A shallow dish of water settles parallel to gravity within seconds and never needs calibration. On a long surface where a phone cannot see the whole span, pour a thin line of water and watch which end pools. It will not give you a number, but it will not lie either.',
+      'For anything longer than a couple of metres — a patio, a shower floor, a driveway — water is often the most honest test, because the thing you actually care about is where the water goes.',
+    ],
+  },
+  {
+    heading: '5. A spirit level, when the answer has to be exact',
+    paragraphs: [
+      'A 60 cm box level reads to about 0.5 mm per metre and never runs out of battery. Buy one when you are hanging cabinets, laying a floor or building a wall — jobs where a five-degree error turns into a callback.',
+      'For the four holes behind a picture frame, the phone in your pocket is enough. That is the honest split: one-off checks on a phone, structural work on a proper level.',
+    ],
+  },
+  {
+    heading: 'Which test to use',
+    paragraphs: [
+      'If you only remember one thing, remember that the tool has to match the span. A phone or a marble reads the surface under it; water and a long level read the surface across the room.',
+    ],
+    table: {
+      headers: ['Job', 'Best test', 'Why'],
+      rows: [
+        ['Hanging a picture or mirror', 'Phone level', 'A degree of error is invisible at that size'],
+        ['Table that rocks', 'Phone + paper shim', 'You need the exact corner, not the whole room'],
+        ['Washing machine walking', 'Phone, both axes', 'Both axes must be near zero before it spins'],
+        ['Shelf against a wall', 'Phone, then reversal', 'The reversal catches a bad sensor'],
+        ['Shower floor or patio', 'Water', 'What matters is where the water drains'],
+        ['Kitchen cabinets', '60 cm spirit level', 'Long span, structural, no second chances'],
+      ],
+    },
+  },
+];
+
+const faq = [
+  {
+    q: 'Can I check if something is level with my phone?',
+    a: 'Yes. A calibrated phone reads within about 0.5° of true level on a flat surface, which is enough for furniture, shelves and pictures. Use the reversal trick — read, rotate 180°, read again — to confirm the reading.',
+  },
+  {
+    q: 'How do I know if my floor is level?',
+    a: 'Test in several places rather than one. A phone tells you the slope at a single spot; for a whole room, water or a long spirit level shows how the slope runs across the span.',
+  },
+  {
+    q: 'Why does my level app give different numbers each time?',
+    a: 'Usually an uncalibrated sensor, a magnetic or thick case, or a camera bump that stops the phone sitting flat. Take the case off, calibrate on a known-flat surface and repeat the reading.',
+  },
+  {
+    q: 'Is a marble test accurate?',
+    a: 'It is a slope test, not a measurement. A marble rolls on slopes as small as a third of a degree, so it is useful for spotting where water would run, but it cannot tell you the angle.',
+  },
+  {
+    q: 'How level is level enough?',
+    a: 'For a shelf or picture, under one degree is unnoticeable. For a fridge or washing machine, aim under half a degree. For floors and drainage, work to the millimetre the job calls for, with water or a long level.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const levelHref = translatePath('/onlinebubblelevel/');
+---
+
+<Layout title={title} description={description} keywords={keywords} type="article" chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlinebubblelevel/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Bubble Level Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-6">{title}</h1>
+    <p class="text-body text-base leading-relaxed mb-6">
+      Five tests, in order of how fast they are — from the phone already in your hand to the spirit level you borrow
+      from a neighbour. Every one of them answers a slightly different question, and knowing which is which is the
+      whole trick.
+    </p>
+
+    {sections.map((section) => (
+      <div class="mt-10">
+        <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-4">{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => (
+          <p class="text-body text-base leading-relaxed mb-4" set:html={paragraph.split('PLACEHOLDER_LEVEL').join(levelHref)} />
+        ))}
+        {section.list && (
+          <ul class="list-disc pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+            {section.list.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+        {section.table && (
+          <div class="overflow-x-auto mb-4">
+            <table class="w-full text-sm text-body border border-hairline">
+              <thead>
+                <tr class="bg-canvas-elevated">
+                  {section.table.headers.map((h) => (
+                    <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td class="border border-hairline px-3 py-2">{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <div class="mt-12">
+      <h2 class="font-sans text-2xl font-semibold tracking-tight text-ink mb-6">FAQ</h2>
+      <div class="flex flex-col gap-0 border border-hairline rounded-md overflow-hidden">
+        {faq.map((item) => (
+          <details class="border-b border-hairline last:border-b-0">
+            <summary class="font-sans text-base font-medium text-ink px-4 py-3 cursor-pointer list-none flex items-center justify-between gap-2">
+              {item.q}
+              <span aria-hidden="true" class="text-mute">▾</span>
+            </summary>
+            <p class="text-body text-base leading-relaxed px-4 pb-3">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <p class="text-body text-base leading-relaxed mt-10 italic">
+      Related: <a href={translatePath('/onlinebubblelevel/blog/how-accurate-is-a-phone-bubble-level/')} class="text-link underline">how accurate is a phone bubble level</a>
+      and <a href={translatePath('/onlinebubblelevel/blog/bubble-level-vs-spirit-level/')} class="text-link underline">bubble level vs spirit level</a>.
+    </p>
+  </main>
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />

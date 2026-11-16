@@ -52,22 +52,22 @@ const en: ToolCopyBySlug = {
   'password-generator': {
     name: 'Password Generator',
     description:
-      'Generate secure random passwords with customizable length, character sets, and entropy estimation.',
+      'Generate secure random passwords with custom length and character sets, see live entropy strength, and create passphrases — all offline in your browser, free, no sign-up.',
   },
   'qr-generator': {
     name: 'QR Generator',
     description:
-      'Create custom QR codes instantly. Generate codes for URLs, text, WiFi, contacts, and more with design options.',
+      'Create custom QR codes for URLs, text, Wi-Fi, contacts or phone numbers, pick size and colours, then download a high-resolution PNG — free, instant, no account needed.',
   },
   'regex-tester': {
     name: 'Regex Tester',
     description:
-      'Test and debug regular expressions with real-time matching, explanation, and cheat sheet.',
+      'Test and debug regular expressions with real-time match highlighting, capture-group explanation, flags, and a quick-reference cheat sheet — runs entirely in your browser.',
   },
   'word-counter': {
     name: 'Word Counter',
     description:
-      'Count words, characters, sentences, and paragraphs instantly. Real-time stats with reading time estimates.',
+      'Count words, characters, sentences and paragraphs as you type, with reading-time and speaking-time estimates plus keyword density — free, private, and instant on any device.',
   },
 };
 

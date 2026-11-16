@@ -110,6 +110,12 @@ const en: BubbleSiloCopy = {
   blogIntro2: "Start with the how-to if you are new to the tool, or jump to the accuracy guide if a level check has already given you a number you do not trust. If you are deciding whether to buy a spirit level at all, the comparison guide covers accuracy, cost and when a phone is genuinely enough.",
   posts: [
     {
+      href: "/onlinebubblelevel/blog/how-to-check-if-a-surface-is-level/",
+      date: "November 16, 2026",
+      title: "How to Check if a Surface Is Level: 5 Tests That Work",
+      desc: "Five practical tests for a surface that may be out of level — a phone, a marble, water, the reversal trick, and the jobs where only a proper spirit level will do.",
+    },
+    {
       href: "/onlinebubblelevel/blog/how-to-use-an-online-bubble-level/",
       date: "October 4, 2026",
       title: "How to Use an Online Bubble Level (Step-by-Step)",

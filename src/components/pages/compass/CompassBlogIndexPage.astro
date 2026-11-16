@@ -9,7 +9,7 @@ const translatePath = useTranslatedPath(lang);
 const copy = supportCopy[lang] ?? supportCopy.en;
 
 /** Dates are formatted per locale so no English month names appear on /ja/ pages. */
-const dates = ['2026-11-07', '2026-11-07', '2026-10-04'];
+const dates = ['2026-11-16', '2026-11-07', '2026-11-07', '2026-10-04'];
 const formatter = new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'long', day: 'numeric' });
 const posts = copy.blog.posts.map((post, i) => ({
   ...post,

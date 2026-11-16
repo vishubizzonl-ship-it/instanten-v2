@@ -107,6 +107,11 @@ const en: SupportCopy = {
     intro: "Guides and tips for navigating with onlinecompass.",
     posts: [
       {
+        href: "/onlinecompass/blog/online-compass-without-an-app/",
+        title: "Online Compass Without an App: Use Your Phone as a Compass",
+        desc: "Use your phone as a compass in the browser — no app, no install. What the magnetometer reads, how to calibrate in one tap, and when a browser compass is enough.",
+      },
+      {
         href: "/onlinecompass/blog/how-to-find-north-without-a-compass/",
         title: "How to Find North Without a Compass (And With Your Phone)",
         desc: "Find north in seconds with an online compass or with no tools at all. Step-by-step sensor setup, degree readings, and sun or shadow checks that confirm the result.",

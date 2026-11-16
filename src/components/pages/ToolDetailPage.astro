@@ -22,6 +22,7 @@ import { SITE_NAME, SITE_URL } from '../../config/siteInfo';
 import { getLangFromUrl, useTranslations, useTranslatedPath, formatLocalizedDate } from '../../i18n/utils';
 import { localizeTool, localizeToolCategory, localizePricing, getPricingNote } from '../../i18n/toolContent';
 import { toolPath } from '../../utils/toolPaths';
+import { toolSeoTitles } from '../../i18n/toolSeoTitles';
 import { localizeToolLists } from '../../i18n/toolLists';
 import { tagSlug } from '../../utils/tagSlug';
 
@@ -91,9 +92,41 @@ const pricingColors = {
 
 const allTools = await getCollection('tools');
 const otherTools = allTools.filter(t => t.data.slug !== tool.data.slug);
-const relatedTools = otherTools
-  .filter(t => t.data.category === category || (t.data.tags || []).some(tag => tags.includes(tag)))
-  .slice(0, 4);
+/**
+ * Related tools = same category pehle, phir shared tags, phir baaki tools.
+ * 4 ki jagah 8 isliye ki har tool page doosre tools tak kam se kam 8 internal
+ * links bheje — crawler jaldi discover karta hai aur har tool ko site-wide
+ * andar se links milte hain (pehle sirf 16-26 the).
+ */
+const SENSOR_SLUGS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
+const toolIndex = allTools.findIndex((t) => t.data.slug === tool.data.slug);
+// Related grid me sirf baaki 11 generic tools — sensor tools ke paas apna silo
+// aur 130+ inlinks hain, aur unki jagah yahan tool-to-tool links ko chahiye.
+const scored = otherTools
+  .filter((t) => !SENSOR_SLUGS.includes(t.data.slug))
+  .map(t => {
+    const sameCategory = t.data.category === category ? 2 : 0;
+    const sharedTags = (t.data.tags || []).filter(tag => tags.includes(tag)).length;
+    return { tool: t, score: sameCategory + sharedTags };
+  })
+  .sort((a, b) => b.score - a.score);
+
+/**
+ * 4 sabse relevant + 4 rotation se — rotation ki wajah se har tool kisi na
+ * kisi page ke list me aata hai, warna wahi 8 tools har jagah dikhte aur
+ * password/QR/regex jaise tools ko andar se link hi nahi milte.
+ */
+const HEAD = 4;
+const TAIL = 4;
+const head = scored.slice(0, HEAD);
+const tailPool = scored.slice(HEAD);
+const tail = [];
+for (let i = 0; i < Math.min(TAIL, tailPool.length); i++) {
+  tail.push(tailPool[(toolIndex + i * 3) % tailPool.length]);
+}
+const relatedTools = [...head, ...tail]
+  .filter((entry, i, arr) => arr.findIndex((e) => e.tool.data.slug === entry.tool.data.slug) === i)
+  .map(entry => entry.tool);
 
 /**
  * In-page tool: har listing ka apna working tool isi page par chalta hai.
@@ -116,7 +149,10 @@ const toolComponents = {
 
 const ToolIsland = toolComponents[tool.data.slug as keyof typeof toolComponents];
 
-const pageTitle = `${localized.name} — ${SITE_NAME}`;
+// English pages par query-style title (60 chars se kam), localized pages par
+// wahi localized naam — wahan phrase pehle se us bhasha me hai.
+const pageTitle =
+  lang === 'en' ? (toolSeoTitles[tool.data.slug] ?? `${localized.name} — ${SITE_NAME}`) : `${localized.name} — ${SITE_NAME}`;
 const pageDescription = localized.description;
 const canonicalURL = lang === 'en'
   ? `${SITE_URL}/tools/${tool.data.slug}/`

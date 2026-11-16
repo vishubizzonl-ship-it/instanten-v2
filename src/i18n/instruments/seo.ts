@@ -11,7 +11,7 @@ export const instrumentSeo: Record<string, Record<LangCode, { title: string; des
   "onlinecompass": {
     en: {
       title: "Online Compass \u2014 Free Live Compass in Your Browser",
-      description: "Real-time magnetometer direction with calibration, offline support, and location awareness.",
+      description: "Free online compass that reads your phone\u2019s magnetometer in real time: see your heading in degrees and N/E/S/W, calibrate in one tap, and use it offline \u2014 no app, no sign-up.",
     },
     de: {
       title: "Online-Kompass \u2014 Kostenloser Live-Kompass im Browser",

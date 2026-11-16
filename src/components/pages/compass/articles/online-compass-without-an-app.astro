@@ -1,0 +1,184 @@
+---
+/**
+ * English-only guide for the compass silo.
+ * URL: /onlinecompass/blog/online-compass-without-an-app/
+ *
+ * Intent: "online compass without app", "compass in browser", "phone compass
+ * in chrome". Content static hai (i18n blog data par depend nahi karta) taaki
+ * naya post publish karte waqt koi locale file chhedni na pade.
+ */
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const title = 'Online Compass Without an App: Use Your Phone as a Compass';
+const description =
+  'Use your phone as a compass in the browser — no app, no install. What the magnetometer reads, how to calibrate in one tap, and when a browser compass is enough.';
+const keywords =
+  'online compass without app, compass in browser, phone compass chrome, browser compass no download, use phone as compass, online compass free';
+
+const sections: { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] } }[] = [
+  {
+    heading: 'Why a browser compass beats another app install',
+    paragraphs: [
+      'If you need a direction once — which way is north, where does the wall face, which side of the building gets the morning sun — installing a 40 MB app for that is a bad trade. A browser compass opens in a second, reads the same magnetometer the app would read, and leaves nothing behind on your phone.',
+      'The catch is that a browser compass depends on two things apps hide from you: permission and calibration. Once you know how both work, the reading is as good as any free app, and often better because nothing is layered on top of the number.',
+    ],
+  },
+  {
+    heading: 'What the browser can and cannot read',
+    paragraphs: [
+      'Chrome, Safari, Firefox, Edge and Samsung Internet all expose device orientation to a web page, which is how a page can turn your phone into a compass. The sensor involved is the magnetometer — a tiny chip that measures the earth’s magnetic field — helped by the accelerometer, which tells the page how the phone is tilted.',
+      'What the browser cannot do is read that sensor before you give permission, and on iOS it also needs a motion-and-orientation prompt that only appears after a tap. That is not a bug in the website; it is the platform protecting a sensor that can fingerprint a device. So every honest browser compass starts with a button, not a needle.',
+    ],
+    list: [
+      'Android (Chrome, Samsung Internet, Firefox): permission shows as a single “Allow” banner.',
+      'iPhone / iPad (Safari, Chrome, Firefox): a tap is required with iOS 13+, and the prompt appears once per site visit.',
+      'Desktop or laptop: there is no magnetometer, so a compass cannot show a real heading — the page says so instead of inventing a number.',
+    ],
+  },
+  {
+    heading: 'Calibrating in one tap (and why figure-eights still matter)',
+    paragraphs: [
+      'A magnetometer is easily confused by nearby metal: a laptop lid, a phone case with magnets in it, a car dashboard, a steel desk. When the sensor is confused the needle drifts slowly even while you stand still — the classic “my compass is spinning” symptom.',
+      'The fix is the same one map apps use. Hold the phone away from metal, move it in a slow figure-eight three or four times, then open the compass and tap calibrate. On the online compass the calibrate control is on the compass page itself, so you can re-zero anywhere without losing your place.',
+      'If you are checking a wall or a gate, keep the phone flat rather than upright. Tilt changes the maths: upright, the phone reports the heading of its back face, which is noisier than a flat reading.',
+    ],
+  },
+  {
+    heading: 'Reading the dial correctly',
+    paragraphs: [
+      'A compass gives you a bearing between 0° and 359°, measured clockwise from north. North is 0°, east is 90°, south is 180°, west is 270°. The letters N, NE, E, SE, S, SW, W, NW are just shorthand for the same numbers.',
+      'Two habits make readings usable. First, take the reading twice — once as you hold it, once after turning the phone 90° — and check the numbers agree. Second, remember that magnetic north is not true north: depending on where you are the difference is a few degrees, and for anything structural you should adjust for it.',
+    ],
+    table: {
+      headers: ['Bearing', 'Direction', 'What people mean by it'],
+      rows: [
+        ['0° / 360°', 'North', 'Facing the reference direction of every map'],
+        ['45°', 'North-east', 'Between north and east'],
+        ['90°', 'East', 'Sunrise on an equinox, roughly'],
+        ['180°', 'South', 'Opposite the reference direction'],
+        ['270°', 'West', 'Sunset on an equinox, roughly'],
+      ],
+    },
+  },
+  {
+    heading: 'When you still want a real compass or an app',
+    paragraphs: [
+      'A browser compass is a fast second opinion, not a surveying instrument. If you are navigating off-trail for hours, an app that caches maps and uses GPS heading is a better companion, and a baseplate compass with a mirror remains the tool that never runs out of battery.',
+      'For everything else — which way the garden faces, where to point a satellite dish, whether a photo was shot facing the sea — the browser is enough, and it works on the phone you already have open.',
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: 'Does an online compass work without installing an app?',
+    a: 'Yes. The browser reads the same magnetometer an app would read, using the device orientation API. You only need to allow motion and orientation access once per visit — no download, no account, nothing installed.',
+  },
+  {
+    q: 'Why does my browser compass spin or drift?',
+    a: 'Usually nearby metal or magnets — a phone case, a laptop, a car dashboard — or a sensor that has not been calibrated since the device booted. Move away from metal, trace a figure-eight a few times and tap calibrate.',
+  },
+  {
+    q: 'Does it work on iPhone?',
+    a: 'Yes, in Safari and in Chrome on iOS. iOS asks for motion and orientation permission after a tap, so press the button on the compass page and allow access when the prompt appears.',
+  },
+  {
+    q: 'Why does a laptop show no direction?',
+    a: 'Laptops do not contain a magnetometer. A page that shows a heading on a desktop without any sensor is guessing; a correct page tells you the sensor is missing.',
+  },
+  {
+    q: 'Is the reading magnetic north or true north?',
+    a: 'The sensor gives magnetic north. True north differs by a few degrees depending on your location (magnetic declination), so adjust the number if you are aligning something structural.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<Layout title={title} description={description} keywords={keywords} type="article" chrome="instrument">
+  <main class="mx-auto max-w-[48rem] px-6 lg:px-8 py-16 lg:py-24">
+    <a
+      href={translatePath('/onlinecompass/blog/')}
+      class="inline-flex items-center gap-1 text-sm text-body hover:text-ink transition-colors mb-8">← Back to Compass Blog</a
+    >
+    <h1 class="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-ink mb-6">{title}</h1>
+    <p class="text-body text-base leading-relaxed mb-6">
+      A browser compass is the fastest way to answer “which way is north?” without installing anything. This guide
+      explains what the phone actually measures, how to calibrate it, and where the limits are. If you just want the
+      reading, open the <a href={translatePath('/onlinecompass/')} class="text-link underline">online compass</a> and
+      allow the sensor.
+    </p>
+
+    {sections.map((section) => (
+      <div class="mt-10">
+        <h2 class="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-4">{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => (
+          <p class="text-body text-base leading-relaxed mb-4">{paragraph}</p>
+        ))}
+        {section.list && (
+          <ul class="list-disc pl-6 space-y-2 text-body text-base leading-relaxed mb-4">
+            {section.list.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+        {section.table && (
+          <div class="overflow-x-auto mb-4">
+            <table class="w-full text-sm text-body border border-hairline">
+              <thead>
+                <tr class="bg-canvas-elevated">
+                  {section.table.headers.map((h) => (
+                    <th class="border border-hairline px-3 py-2 text-left font-semibold text-ink">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td class="border border-hairline px-3 py-2">{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <div class="mt-12">
+      <h2 class="font-sans text-2xl font-semibold tracking-tight text-ink mb-6">FAQ</h2>
+      <div class="flex flex-col gap-0 border border-hairline rounded-md overflow-hidden">
+        {faq.map((item) => (
+          <details class="border-b border-hairline last:border-b-0">
+            <summary class="font-sans text-base font-medium text-ink px-4 py-3 cursor-pointer list-none flex items-center justify-between gap-2">
+              {item.q}
+              <span aria-hidden="true" class="text-mute">▾</span>
+            </summary>
+            <p class="text-body text-base leading-relaxed px-4 pb-3">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <p class="text-body text-base leading-relaxed mt-10 italic">
+      Next: read the dial properly in <a href={translatePath('/onlinecompass/blog/how-to-read-a-compass-dial/')} class="text-link underline">how to read a compass dial</a>,
+      or check tilt with the <a href={translatePath('/onlinebubblelevel/')} class="text-link underline">online bubble level</a>.
+    </p>
+  </main>
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />

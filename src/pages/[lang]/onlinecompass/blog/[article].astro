@@ -6,10 +6,16 @@
 import A0 from '../../../../components/pages/compass/articles/how-to-find-north-without-a-compass.astro';
 import A1 from '../../../../components/pages/compass/articles/how-to-read-a-compass-dial.astro';
 import A2 from '../../../../components/pages/compass/articles/how-to-use-an-online-compass.astro';
+import A3 from '../../../../components/pages/compass/articles/online-compass-without-an-app.astro';
 
 export function getStaticPaths() {
   const locales = ['es', 'ja', 'fr', 'de', 'pt', 'ko', 'it', 'nl', 'sv'];
-  const slugs = ['how-to-find-north-without-a-compass', 'how-to-read-a-compass-dial', 'how-to-use-an-online-compass'];
+  const slugs = [
+    'how-to-find-north-without-a-compass',
+    'how-to-read-a-compass-dial',
+    'how-to-use-an-online-compass',
+    'online-compass-without-an-app',
+  ];
   return locales.flatMap((lang) => slugs.map((article) => ({ params: { lang, article } })));
 }
 
@@ -17,6 +23,7 @@ const articles: Record<string, any> = {
   'how-to-find-north-without-a-compass': A0,
   'how-to-read-a-compass-dial': A1,
   'how-to-use-an-online-compass': A2,
+  'online-compass-without-an-app': A3,
 };
 
 const { article } = Astro.params as { article: string };
