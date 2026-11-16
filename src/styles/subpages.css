@@ -1,9 +1,6 @@
-/* Google Fonts fallback import if Inter / JetBrains Mono not yet loaded */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 :root {
-  --ror-font-sans: "Inter", "DM Sans", system-ui, -apple-system, sans-serif;
-  --ror-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ror-font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --ror-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ror-primary: #171717;
   --ror-on-primary: #ffffff;
   --ror-ink: #171717;

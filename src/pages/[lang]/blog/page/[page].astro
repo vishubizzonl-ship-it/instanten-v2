@@ -72,8 +72,10 @@ const canonicalURL = pageNum === 1
   description={pageDescription}
   canonicalURL={canonicalURL}
   lang={lang}
+  noindex={pageNum === 1}
 >
   <section class="site-container pb-[64px]" aria-label={t('aria.latestPosts')}>
+    <h1 class="sr-only">{pageTitle}</h1>
     <BlogGrid posts={pagePosts} />
     <BlogPagination
       currentPage={pageNum}

@@ -154,9 +154,14 @@ export function run(pages) {
       // CJK text denser hota hai — ek character zyada maayne rakhta hai
       const minDesc = /[\u3040-\u30ff\u4e00-\u9fff]/.test(desc) ? 55 : 80;
       check(desc.length >= minDesc, `${url}: localized meta description chhota (${desc.length} < ${minDesc})`);
+      // Pehle yahan "non-ASCII character hona chahiye" check hota tha — wo galat
+      // tha (German/Italian titles me umlaut zaroori nahi) aur sirf brand ka
+      // em-dash ki wajah se pass ho raha tha. Asli test: title English title ka
+      // hi copy na ho.
+      const norm = (text) => text.toLowerCase().replace(/[^a-z0-9\u00c0-\u024f\u3040-\u9fff]+/g, ' ').trim();
       check(
-        /[^\x00-\x7F]/.test(title) || code === 'en',
-        `${url}: localized title mein target-language characters nahi hain (English lag raha hai)`
+        code === 'en' || !enTitle || norm(title) !== norm(enTitle),
+        `${url}: localized title English title ke barabar hai (translate nahi hua)`
       );
       check(!/Free Online Tools Hub: One Site Replaces Ten Bookmarks/.test(stripTags(html)), `${url}: English blog title page par leak ho raha hai`);
     }

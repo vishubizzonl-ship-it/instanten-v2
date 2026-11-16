@@ -15,6 +15,8 @@ export interface BreadcrumbItem {
 
 export interface Props {
   title?: string;
+  /** Poore length ka title — og:title / twitter:title ke liye (SERP trim ke bina). */
+  fullTitle?: string;
   description?: string;
   keywords?: string;
   canonicalPath?: string;
@@ -40,6 +42,7 @@ const BASE_URL = (Astro.site ? Astro.site.toString() : 'https://instanten.com').
 
 const {
   title = 'Instanten — Free Instant Online Tools, Instant Convert & Instant Help',
+  fullTitle,
   description = 'Instanten is a free online tools hub with 12 instant tools for instant work — no sign-up and nothing uploaded.',
   keywords = 'instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, free online tools, web tools hub, free online tools hub, online tools list',
   canonicalPath = Astro.url.pathname,
@@ -246,7 +249,7 @@ const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c 
 {alternateLocales.map((code) => (
   <meta property="og:locale:alternate" content={ogLocales[code]} />
 ))}
-<meta property="og:title" content={title} />
+<meta property="og:title" content={fullTitle || title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={absoluteOgImage} />
@@ -275,7 +278,7 @@ const alternateLocales = (Object.keys(ogLocales) as LangCode[]).filter((c) => c 
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={fullTitle || title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteOgImage} />
 <meta name="twitter:image:alt" content={ogImageAlt} />

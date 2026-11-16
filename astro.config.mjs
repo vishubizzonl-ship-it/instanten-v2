@@ -68,7 +68,11 @@ export default defineConfig({
       // Error pages (403/404/500/503) kabhi sitemap mein nahi — wo noindex hain.
       filter: (page) =>
         !page.endsWith('.xml') &&
-        !/\/(403|404|500|503)(\/|\.html)?$/.test(page),
+        !/\/(403|404|500|503)(\/|\.html)?$/.test(page) &&
+        // blog pagination ka pehla page /blog/ ka duplicate hai (noindex)
+        !/\/blog\/page\/1\/?$/.test(page) &&
+        // /privacy/ sirf redirect stub hai (asli page /privacy-policy/)
+        !/\/privacy\/?$/.test(page),
       serialize: (item) => {
         item.lastmod = new Date().toISOString();
         if (item.url === 'https://instanten.com/' || item.url === 'https://instanten.com') {

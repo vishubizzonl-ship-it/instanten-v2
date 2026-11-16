@@ -70,7 +70,23 @@ export const attr = (html, re) => {
   return m ? m[1] : null;
 };
 
-export const titleOf = (html) => attr(html, /<title>([^<]*)<\/title>/i);
+/**
+ * HTML entity decode — rendered text ki lambai naapne ke liye
+ * (`&amp;` 5 characters nahi, 1 hai).
+ */
+export const decodeEntities = (raw) => {
+  if (!raw) return raw;
+  return raw
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+};
+
+export const titleOf = (html) => decodeEntities(attr(html, /<title>([^<]*)<\/title>/i));
 export const canonicalOf = (html) => attr(html, /<link rel="canonical" href="([^"]*)"/i);
 export const hreflangOf = (html) =>
   [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/gi)].map((m) => ({

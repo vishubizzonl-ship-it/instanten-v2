@@ -41,6 +41,9 @@ export function run(pages) {
   const isErrorPage = (url) => /^(\/[a-z]+)?\/(403|404|500|503)(\.html|\/?)$/.test(url);
   for (const [url, html] of pages) {
     if (isErrorPage(url)) continue;
+    // noindex pages (redirect stubs, blog pagination page 1) — inka hreflang
+    // cluster jaan-boojh kar nahi hota.
+    if (/name="robots"[^>]*noindex/.test(html)) continue;
     const langs = hreflangOf(html);
     check(langs.length >= 11, `hreflang adhoora (${langs.length}/11) :: ${url}`);
     const codes = new Set(langs.map((l) => l.lang));

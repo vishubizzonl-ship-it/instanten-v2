@@ -86,6 +86,11 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
           );
         })}
       </ul>
+      {/* Tag pages ka ek hi entry point tha — isliye 530 tag page orphan the.
+          Yahan se link dene se wo crawlable/ discoverable ho jaate hain. */}
+      <p class="ror-p" style="margin-top: 32px;">
+        <a href={translatePath('/tags/')} class="ror-link">{lang === 'en' ? 'Browse all tool tags' : t('nav.tags')}</a>
+      </p>
       {lang === 'en' && (
         <RootSiloFaq page="blog" heading={faqContent.heading} lead={faqContent.lead} faqs={faqContent.faqs} />
       )}

@@ -32,9 +32,10 @@ const categories = [
     class="relative overflow-hidden rounded-2xl border border-border-hairline bg-surface shadow-float animate-in fade-in-0 zoom-in-95 duration-200 ease-out"
   >
     <div class="flex items-center justify-between border-b border-border-hairline px-6 py-4">
-      <h2 id="search-panel-title" class="font-display font-semibold text-heading-md text-ink">
+      {/* Dialog ka label — heading nahi, warna page ka pehla heading h2 ban jaata hai. */}
+        <p id="search-panel-title" class="font-display font-semibold text-heading-md text-ink">
         {t('search.panel.title')}
-      </h2>
+      </p>
       <button
         type="button"
         data-search-close

@@ -2,7 +2,7 @@
  * Site-wide invariants: titles, descriptions, canonicals, robots, JSON-LD,
  * sitemap and the error pages. Catches the things that silently rot.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   SITE,
@@ -49,7 +49,9 @@ export function run(pages, outDir) {
 
   // --- canonical + robots on normal pages ---------------------------------
   const normal = [...pages].filter(
-    ([url]) => !ERROR_PAGES.includes(url) && !url.endsWith('.html') // 404.html & co.
+    // noindex pages (/privacy/ stub, blog/page/1) jaan-boojh kar apne asli page
+    // par canonical karte hain — unka self-canonical expected nahi hai.
+    ([url, html]) => !ERROR_PAGES.includes(url) && !url.endsWith('.html') && !/name="robots"[^>]*noindex/.test(html)
   );
   for (const [url, html] of normal) {
     const canonical = canonicalOf(html);
@@ -121,5 +123,75 @@ export function run(pages, outDir) {
     check(unique.size === urls.length, `sitemap mein duplicate URL (${urls.length - unique.size})`);
   }
 
+  // --- har local asset build mein sach mein hai (og:image, src, srcset) ----
+  // Ye wahi rule hai jo missing OG images (P0) aur toote huye asset paths pakadta hai.
+  const ASSET_RE = /\.(png|jpe?g|svg|webp|gif|ico|css|js|woff2?|ttf|mp4|pdf)$/i;
+  const assetRefs = (html) => {
+    const out = [];
+    for (const m of html.matchAll(/(?:src|href)="(\/[^"]+)"/g)) out.push(m[1]);
+    for (const m of html.matchAll(/content="https:\/\/instanten\.com(\/[^"]+)"/g)) out.push(m[1]);
+    for (const m of html.matchAll(/srcset="([^"]+)"/g)) {
+      for (const part of m[1].split(',')) out.push(part.trim().split(/\s+/)[0]);
+    }
+    return out;
+  };
+  for (const [url, html] of pages) {
+    for (const ref of assetRefs(html)) {
+      const clean = ref.split('?')[0].split('#')[0];
+      if (!clean.startsWith('/') || clean.startsWith('//')) continue;
+      if (!ASSET_RE.test(clean)) continue;            // page URLs alag suite dekhti hai
+      const file = join(outDir, clean);
+      check(existsSync(file), `asset build mein nahi hai :: ${url} -> ${clean}`);
+    }
+  }
+
+  // --- sitemap ke URLs build mein hone chahiye + space-free ----------------
+  for (const file of readdirSync(outDir).filter((f) => /^sitemap.*\.xml$/.test(f))) {
+    const xml = readFileSync(join(outDir, file), 'utf8');
+    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const path = m[1].replace(SITE, '');
+      // sitemap-index.xml khud doosri sitemap files list karta hai
+      if (/\.xml$/.test(path)) continue;
+      check(!/%20|\s/.test(path), `${file} me space wala URL :: ${path}`);
+      const target = path === '/' ? 'index.html' : `${path.replace(/^\//, '')}index.html`;
+      check(existsSync(join(outDir, target)), `${file} ka URL build mein nahi :: ${path}`);
+    }
+  }
+
+  // --- deploy files: _headers / _redirects build me hain ------------------
+  for (const file of ['_headers', '_redirects']) {
+    check(existsSync(join(outDir, file)), `deploy file dist/${file} missing hai`);
+  }
+  if (existsSync(join(outDir, '_headers'))) {
+    const headers = readFileSync(join(outDir, '_headers'), 'utf8');
+    check(/_astro\/\*/.test(headers), '_headers me /_astro/* ka cache rule nahi');
+    check(/immutable/.test(headers), '_headers me immutable cache nahi');
+    check(/X-Content-Type-Options/.test(headers), '_headers me nosniff nahi');
+    check(/Permissions-Policy/.test(headers), '_headers me Permissions-Policy nahi (sensor pages ke liye)');
+  }
+  if (existsSync(join(outDir, '_redirects'))) {
+    const redirects = readFileSync(join(outDir, '_redirects'), 'utf8');
+    for (const [from, to] of [['/about', '/about/'], ['/privacy', '/privacy-policy/'], ['/blog/page/1', '/blog/']]) {
+      check(new RegExp(`${from.replace(/[/.]/g, '\\$&')}\\s+${to.replace(/[/.]/g, '\\$&')}`).test(redirects),
+        `_redirects me ${from} -> ${to} rule nahi`);
+    }
+  }
+
+  // --- title SERP limit + h1 -------------------------------------------------
+  for (const [url, html] of pages) {
+    if (url.endsWith('.html')) continue;                 // error pages
+    const t = titleOf(html);
+    if (t) check(t.length <= 60, `title 60 se lamba (${t.length}) :: ${url} -> ${t}`);
+    const robots = /name="robots"[^>]*noindex/.test(html);
+    if (!robots) {
+      const h1s = [...html.matchAll(/<h1[\s>]/gi)].length;
+      check(h1s === 1, `noindex page par exactly 1 <h1> chahiye (mile ${h1s}) :: ${url}`);
+      const first = /<h([1-6])[\s>]/i.exec(html);
+      check(!first || first[1] === '1', `page ka pehla heading <h${first?.[1]}> hai, <h1> chahiye :: ${url}`);
+    }
+  }
+
   return suite;
 }
+
+

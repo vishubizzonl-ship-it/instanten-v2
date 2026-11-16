@@ -1,0 +1,34 @@
+# Cloudflare Workers Static Assets / Pages — headers
+# (file dist/_headers me copy hoti hai; Workers static assets ise padhta hai)
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(self), accelerometer=(self), gyroscope=(self), magnetometer=(self), camera=(), microphone=()
+  X-Frame-Options: SAMEORIGIN
+
+# Hashed build assets — kabhi badalte nahi, isliye 1 saal cache
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images / icons / fonts
+/*.png
+  Cache-Control: public, max-age=604800
+/*.svg
+  Cache-Control: public, max-age=604800
+/*.ico
+  Cache-Control: public, max-age=604800
+
+# HTML — hamesha revalidate (naya deploy turant dikhe)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Sitemap / robots — roz
+/sitemap*.xml
+  Cache-Control: public, max-age=86400
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+# API — kabhi cache nahi
+/api/*
+  Cache-Control: no-store

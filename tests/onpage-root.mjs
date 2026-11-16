@@ -9,7 +9,7 @@
  *
  * Rule: keyword ki duplicate spelling ek hi baar ginti hai (dedup list).
  */
-import { SITE, stripTags, titleOf, canonicalOf, jsonLdOf, linksOf, createSuite } from './lib.mjs';
+import { SITE, stripTags, titleOf, canonicalOf, jsonLdOf, linksOf, createSuite, decodeEntities } from './lib.mjs';
 
 /** Main keyword. */
 export const MAIN_KEYWORD = 'instanten';
@@ -52,7 +52,7 @@ export const SEO_BLOG_SLUGS = [
 
 const words = (html) => stripTags(html).split(' ').filter(Boolean);
 const metaOf = (html, prop) =>
-  (html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`, 'i')) || [, null])[1];
+  decodeEntities((html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`, 'i')) || [, null])[1]);
 const countOf = (text, kw) => text.split(kw).length - 1;
 
 export function run(pages) {
@@ -119,7 +119,13 @@ export function run(pages) {
       check(Boolean((metaOf(html, prop) ?? '').trim()), `${label}: ${prop} missing :: ${path}`);
     }
     check(metaOf(html, 'og:type') === 'website', `${label}: og:type website nahi :: ${path}`);
-    check(metaOf(html, 'og:title') === title, `${label}: og:title title se match nahi :: ${path}`);
+    // <title> SERP ke liye 60 chars par trim hota hai; og:title poora rehta hai.
+    // Isliye og:title ya title ke barabar ho, ya title se shuru ho.
+    const ogTitle = metaOf(html, 'og:title') ?? '';
+    check(
+      ogTitle === title || (title.length >= 60 && ogTitle.startsWith(title.replace(/\s+$/, ''))),
+      `${label}: og:title title se match nahi :: ${path}`
+    );
     check(metaOf(html, 'og:description') === desc, `${label}: og:description description se match nahi :: ${path}`);
     check(metaOf(html, 'og:url') === canonical, `${label}: og:url canonical se match nahi :: ${path}`);
     const ogImage = metaOf(html, 'og:image') ?? '';
@@ -135,7 +141,11 @@ export function run(pages) {
 
     // --- 7. Twitter card ----------------------------------------------
     check(metaOf(html, 'twitter:card') === 'summary_large_image', `${label}: twitter:card galat :: ${path}`);
-    check(metaOf(html, 'twitter:title') === title, `${label}: twitter:title match nahi :: ${path}`);
+    const twTitle = metaOf(html, 'twitter:title') ?? '';
+    check(
+      twTitle === title || (title.length >= 60 && twTitle.startsWith(title.replace(/\s+$/, ''))),
+      `${label}: twitter:title match nahi :: ${path}`
+    );
     check(metaOf(html, 'twitter:description') === desc, `${label}: twitter:description match nahi :: ${path}`);
     check(metaOf(html, 'twitter:image') === ogImage, `${label}: twitter:image og:image se match nahi :: ${path}`);
     check(Boolean(metaOf(html, 'twitter:image:alt')), `${label}: twitter:image:alt missing :: ${path}`);

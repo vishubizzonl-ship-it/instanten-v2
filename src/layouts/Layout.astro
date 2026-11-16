@@ -1,4 +1,5 @@
 ---
+import { seoTitle } from '../utils/seoTitle';
 import '../styles/app.css';
 /** Theme bootstrap ka code — ek hi source: public/theme-bridge.js. */
 import themeBootstrap from '../scripts/themeBootstrap.js?raw';
@@ -160,7 +161,8 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
         par do nahi, ek hi theme implementation rehti hai. */}
     <script is:inline set:html={themeBootstrap}></script>
     <SeoHead
-      title={title}
+      title={seoTitle(title)}
+      fullTitle={title}
       description={description}
       keywords={keywords}
       {/* Error pages (noindex) apna canonical khud dete hain — /404.html — kyunki
@@ -188,7 +190,7 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@900&family=Montserrat:ital,wght@1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,900;1,900&display=swap"
       rel="stylesheet"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />

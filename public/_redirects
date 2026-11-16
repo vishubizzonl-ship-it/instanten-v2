@@ -1,0 +1,35 @@
+# Cloudflare redirects — purane/bina-slash URLs ko sahi page par bhejo.
+# (Workers static assets me ye file dist/_redirects ban jaati hai.)
+#
+# 1) Bina trailing slash wale puraane links (external sites, purane shares)
+
+/about            /about/            301
+/blog             /blog/             301
+/contact          /contact/          301
+/terms            /terms/            301
+/privacy-policy   /privacy-policy/   301
+/tags             /tags/             301
+/search           /search/           301
+/submit           /submit/           301
+
+/onlinecompass    /onlinecompass/    301
+/onlinebubblelevel /onlinebubblelevel/ 301
+/onlinespeedometer /onlinespeedometer/ 301
+/onlineqibla      /onlineqibla/      301
+/compassinstant   /compassinstant/   301
+
+# 2) /privacy/ ek redirect stub page hai — direct 301 behtar hai
+/privacy          /privacy-policy/   301
+
+# 3) Blog pagination ka pehla page = /blog/ (duplicate)
+/blog/page/1      /blog/             301
+
+# 4) Purane tag URLs jinme space tha (%20) — naye slug par
+/tag/instant%20convert   /tag/instant-convert/   301
+/tag/instant%20help      /tag/instant-help/      301
+/tag/instant%20tool      /tag/instant-tool/      301
+/tag/instant%20work      /tag/instant-work/      301
+/tag/instant%20tools     /tag/instant-tools/     301
+
+# 5) Purana author page kabhi bana hi nahi — about par bhejo
+/author/instanten-team    /about/    301

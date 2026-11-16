@@ -30,8 +30,6 @@ export async function buildSitemapEntries(baseUrl: string, siteName = 'Instanten
     { route: '/submit/', changefreq: 'monthly', priority: '0.7' },
     { route: '/search/', changefreq: 'weekly', priority: '0.7' },
     { route: '/tags/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/page/1/', changefreq: 'weekly', priority: '0.7' },
-    { route: '/page/2/', changefreq: 'weekly', priority: '0.7' },
   ];
 
   for (const page of staticPages) {
@@ -48,7 +46,7 @@ export async function buildSitemapEntries(baseUrl: string, siteName = 'Instanten
     const posts = await getCollection('blog');
     for (const post of posts) {
       const slug = (post.data as Record<string, any>).slug || (post as Record<string, any>).id || 'post';
-      const loc = `${baseUrl}/blog/${slug}`;
+      const loc = `${baseUrl}/blog/${slug}/`;
       const rawDate =
         (post.data as Record<string, any>).updatedDate ||
         (post.data as Record<string, any>).publishedAt ||

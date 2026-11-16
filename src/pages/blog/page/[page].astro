@@ -45,8 +45,11 @@ const canonicalURL = pageNum === 1
   ? 'https://instanten.com/blog/'
   : `https://instanten.com/blog/page/${pageNum}/`;
 ---
-<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL}>
+{/* page/1 = /blog/ ka duplicate — noindex, canonical /blog/. */}
+<Layout title={pageTitle} description={pageDescription} canonicalURL={canonicalURL} noindex={pageNum === 1}>
   <section class="site-container pb-[64px]" aria-label="Latest articles">
+    {/* Pagination pages par bhi ek h1 — pehle in par koi h1 nahi tha. */}
+    <h1 class="sr-only">{pageTitle}</h1>
     <BlogGrid posts={pagePosts} />
     <BlogPagination
       currentPage={pageNum}
