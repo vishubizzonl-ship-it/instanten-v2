@@ -87,6 +87,27 @@ Disallow: /api/
 # nahi sakta to unka "noindex, nofollow" bhi nahi dikhega. Block karne se
 # URL index mein aa sakta hai — noindex zyada safe hai.
 
+# ---------------------------------------------------------------- silos
+# Instanten route page aur uska silo (blog, about, contact, privacy, terms)
+# ko alag website maan kar chala rahe hain — isliye uske pages yahan alag se
+# allow hain, taaki crawl priority saaf rahe.
+Allow: /
+Allow: /blog/
+Allow: /about/
+Allow: /contact/
+Allow: /privacy-policy/
+Allow: /terms/
+
+# Chaar sensor tools ke apne silo — har SDK par us tool ka apna robots.txt
+# (/onlinecompass/robots.txt aadi) aur apna sitemap hai.
+Allow: /onlinecompass/
+Allow: /onlinebubblelevel/
+Allow: /onlinespeedometer/
+Allow: /onlineqibla/
+
+# -------------------------------------------------------------- sitemaps
+# Sitemaps for the instanten website: route + silo ka apna sitemap, site-wide
+# sitemap, index, aur chaar tool silos ke sitemaps.
 Sitemap: ${new URL('sitemap.xml', sitemapURL.origin).href}
 Sitemap: ${new URL('sitemap-index.xml', sitemapURL.origin).href}
 Sitemap: ${new URL('sitemap-instanten.xml', sitemapURL.origin).href}
