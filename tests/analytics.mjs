@@ -35,6 +35,8 @@ export function run(pages) {
   /** silo -> us silo par dikhe saare IDs */
   const idsBySilo = new Map();
   let checkedPages = 0;
+  /** Indexable pages jo counter tak pahunche (noindex pages alag). */
+  let indexablePages = 0;
 
   /** URL se analytics silo (locale prefix strip karke). */
   const siloOf = (url) => {
@@ -53,6 +55,18 @@ export function run(pages) {
 
     const loaders = gtagLoaders(html);
     const configs = gaConfigs(html);
+
+    /*
+     * Audit item 3: noindex pages (untranslated silo blog articles, thin tag
+     * pages) par analytics nahi hona chahiye — warna GA4 report me aise pages
+     * bhi ginne lagte hain jinhe Google index hi nahi karta.
+     */
+    const robotsTags = html.match(/<meta\b[^>]*\bname=["']robots["'][^>]*>/gi) ?? [];
+    if (robotsTags.some((tag) => /noindex/i.test(tag))) {
+      check(loaders.length === 0, `${url}: noindex page par analytics load ho raha hai`);
+      continue;
+    }
+    indexablePages += 1;
 
     check(loaders.length <= 1, `${url}: ${loaders.length} gtag loaders (max 1)`);
     check(configs.length <= 1, `${url}: ${configs.length} gtag config calls (max 1)`);
@@ -182,7 +196,14 @@ export function run(pages) {
   }
 
   // --- sab indexable pages par analytics ho ------------------------------
-  check(checkedPages > 700, `sirf ${checkedPages} pages par analytics mila — wiring adhoori lagti hai`);
+  // (noindex pages — untranslated articles, thin tags — yahan nahi ginte.)
+  if (checkedPages > 0) {
+    check(
+      indexablePages === checkedPages,
+      `${indexablePages - checkedPages} indexable pages par analytics nahi mila — wiring adhoori lagti hai`
+    );
+  }
+  check(checkedPages > 0 || indexablePages === 0, 'analytics wiring ka pata nahi chala (0 pages)');
 
   return suite;
 }

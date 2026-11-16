@@ -1,4 +1,5 @@
 ---
+import { isUntranslatedArticlePath } from '../i18n/articleLangs';
 import { seoTitle } from '../utils/seoTitle';
 import '../styles/app.css';
 /** Theme bootstrap ka code — ek hi source: public/theme-bridge.js. */
@@ -137,7 +138,19 @@ const gaMeasurementId = gaIdForSilo(analyticsSilo);
 
 // Error pages + build ke waqt ID na ho to tag bilkul nahi.
 const errorPage = /^\/(403|404|500|503)(\.html)?$/.test(cleanPath);
-const loadAnalytics = analyticsEnabled && gaMeasurementId.length > 0 && !noindex && !errorPage;
+
+/**
+ * Untranslated silo blog articles (audit item 3): `/de/onlinecompass/blog/
+ * <slug>/` jaisi URL jab us bhasha ka content hi na ho, to page `noindex` ho
+ * jaata hai aur hreflang cluster bhi nahi bhejta (warna Google ko galat signal
+ * jaata hai ki "ye German version hai" jabki content English hai).
+ * Dekho src/i18n/articleLangs.ts.
+ */
+const untranslatedArticle = isUntranslatedArticlePath(Astro.url.pathname);
+/** Asli noindex: jo page ko pass kiya gaya + jo auto-detect hua. */
+const isNoindex = noindex || untranslatedArticle;
+
+const loadAnalytics = analyticsEnabled && gaMeasurementId.length > 0 && !isNoindex && !errorPage;
 
 // GA4 bootstrap — values build ke waqt bake hoti hain (define:vars is:inline ke
 // saath inline nahi hota, isliye string khud banate hain).
@@ -167,7 +180,7 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
       keywords={keywords}
       {/* Error pages (noindex) apna canonical khud dete hain — /404.html — kyunki
           wo root par flat file hain. Baaki pages current URL hi rakhte hain. */}
-      canonicalPath={noindex && canonicalURL ? new URL(canonicalURL).pathname : Astro.url.pathname}
+      canonicalPath={isNoindex && canonicalURL ? new URL(canonicalURL).pathname : Astro.url.pathname}
       lang={detectedLang}
       ogType={ogType}
       ogImage={ogImage || '/og-instanten.png'}
@@ -178,7 +191,7 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
       authorUrl={authorUrl}
       section={section}
       tags={tags}
-      noindex={noindex}
+      noindex={isNoindex}
       includeAppSchema={includeAppSchema}
       faqs={faqs}
       breadcrumbs={breadcrumbs}

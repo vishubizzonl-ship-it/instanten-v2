@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { escapeXml } from './sitemapXml';
 import { nonDefaultLangs } from '../i18n/ui';
+import { getArticleLangs } from '../i18n/articleLangs';
 
 /**
  * Per-tool silo sitemap — compassinstant ka wahi pattern, instanten-v2 ke
@@ -21,6 +22,11 @@ import { nonDefaultLangs } from '../i18n/ui';
  *
  * 403/404/500/503 jaise noindex pages kabhi list nahi hote. Site-wide pages
  * (home, /tools/<slug>/, /blog/) bhi nahi — wo root sitemap ka kaam hai.
+ *
+ * Untranslated articles (audit item 3): jab kisi article ka us bhasha me asli
+ * content hi na ho, to uska locale URL noindex hota hai (dekho
+ * src/i18n/articleLangs.ts) — aur noindex URL sitemap me nahi jaata, warna
+ * Search Console "Submitted URL marked noindex" error deta hai.
  */
 
 export type SiloTool =
@@ -83,6 +89,9 @@ function entriesFor(tool: SiloTool): Entry[] {
       entries.push({ path: `/${locale}/${tool}/${page}/`, changefreq, priority });
     }
     for (const slug of posts) {
+      // Us bhasha me asli content nahi? → page noindex hai, sitemap me nahi.
+      const langs = getArticleLangs(slug);
+      if (langs && !langs.includes(locale)) continue;
       entries.push({
         path: `/${locale}/${tool}/blog/${slug}/`,
         changefreq: 'monthly',

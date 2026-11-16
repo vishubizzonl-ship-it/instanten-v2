@@ -20,6 +20,14 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createSuite, SITE, LOCALES } from './lib.mjs';
 
+/** Page par `noindex` hai? (robots meta ka attribute order guarantee nahi.) */
+function isNoindexPage(outDir, urlPath) {
+  const file = `${outDir}${urlPath}index.html`;
+  if (!existsSync(file)) return false;
+  const tags = readFileSync(file, 'utf8').match(/<meta\b[^>]*\bname=["']robots["'][^>]*>/gi) ?? [];
+  return tags.some((tag) => /noindex/i.test(tag));
+}
+
 const TOOLS = ['onlinecompass', 'onlinebubblelevel', 'onlinespeedometer', 'onlineqibla'];
 
 /** Site ke non-default locales (en root par hai). */
@@ -92,7 +100,13 @@ export function run(pages, outDir) {
     for (const lang of LANGS) {
       expected.push(`/${lang}/${tool}/`);
       for (const page of SILO_PAGES) expected.push(`/${lang}/${tool}/${page}/`);
-      for (const slug of slugs) expected.push(`/${lang}/${tool}/blog/${slug}/`);
+      for (const slug of slugs) {
+        // Untranslated article ka locale URL noindex hai (dekho
+        // src/i18n/articleLangs.ts) — noindex page sitemap me nahi jaata,
+        // isliye expectation bhi usse chhod deti hai.
+        if (isNoindexPage(outDir, `/${lang}/${tool}/blog/${slug}/`)) continue;
+        expected.push(`/${lang}/${tool}/blog/${slug}/`);
+      }
     }
 
     const listed = new Set(locs.map((loc) => loc.replace(SITE, '')));

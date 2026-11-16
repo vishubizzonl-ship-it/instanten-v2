@@ -140,13 +140,17 @@ export default defineConfig({
     },
     {
       /**
-       * Patle tag pages sitemap se hataata hai.
+       * Sitemap se wo URLs hataata hai jinke page par `noindex` lagta hai.
        *
-       * Tag pages par `noindex` lagta hai jab us tag me 3 se kam tools hon
-       * (dekho src/utils/tagIndexable.ts). Noindex page sitemap me nahi hona
-       * chahiye — warna Search Console "Submitted URL marked noindex" error
-       * deta hai. Build ke baad dist ki HTML padh ke wo URLs sitemap se nikal
-       * diye jaate hain, taaki dono jagah ek hi sach rahe.
+       * Do jagah se noindex aata hai:
+       *   1. Patle tag pages (3 se kam tools — dekho src/utils/tagIndexable.ts)
+       *   2. Untranslated silo blog articles (dekho src/i18n/articleLangs.ts)
+       *
+       * Noindex page sitemap me nahi hona chahiye — warna Search Console
+       * "Submitted URL marked noindex" error deta hai. Build ke baad dist ki
+       * HTML padh ke wo URLs sitemap se nikal diye jaate hain, taaki dono jagah
+       * ek hi sach rahe. Ye hook har sitemap URL par chalta hai (sirf tags par
+       * nahi), isliye aage jo bhi noindex page aaye wo khud hi nikal jayega.
        */
       name: 'drop-thin-tags-from-sitemap',
       hooks: {
@@ -159,13 +163,20 @@ export default defineConfig({
             const xml = await fs.readFile(indexFile, 'utf8');
             const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
             const noindexed = [];
+            /* robots meta ka attribute order guarantee nahi hota — pehle tag
+               nikaalo, phir usme noindex dhoondo (warna #828282 wali galti). */
+            const robotsIsNoindex = (html) => {
+              for (const tag of html.match(/<meta\b[^>]*\bname=["']robots["'][^>]*>/gi) ?? []) {
+                if (/noindex/i.test(tag)) return true;
+              }
+              return false;
+            };
             for (const loc of locs) {
-              if (!/\/tag\/[^/]+\/$/.test(loc)) continue;
               const rel = loc.replace('https://instanten.com/', '').replace(/\/$/, '');
               const file = path.join(root, rel, 'index.html');
               try {
                 const html = await fs.readFile(file, 'utf8');
-                if (/name="robots"[^>]*noindex/.test(html)) noindexed.push(loc);
+                if (robotsIsNoindex(html)) noindexed.push(loc);
               } catch {
                 // page hi nahi — koi baat nahi, sitemap suite wo alag pakadti hai
               }
@@ -177,7 +188,7 @@ export default defineConfig({
               )
               .replace(/\n{2,}/g, '\n');
             await fs.writeFile(indexFile, next, 'utf8');
-            logger.info(`sitemap-0: ${noindexed.length} thin/noindex tag URLs removed`);
+            logger.info(`sitemap-0: ${noindexed.length} noindex URLs removed`);
           } catch {
             // sitemap-0 na ho to build fail karne ki zarurat nahi
           }
