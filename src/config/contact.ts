@@ -12,7 +12,12 @@
  * poora message ready khul jaata hai.
  */
 export const PUBLIC_EMAIL = 'helloinstanten@gmail.com';
-export const DELIVERY_EMAIL = 'vishubizz.onl@gmail.com';
+/**
+ * Receiving mailbox — Worker ka CONTACT_TO aur ye dono ek hi hone chahiye
+ * (warna form ka mail kisi aur dabbe me chala jayega). Worker ke bina deploy
+ * (pure static) par bhi form isi address par mailto karta hai.
+ */
+export const DELIVERY_EMAIL = 'helloinstanten@gmail.com';
 export const PUBLIC_EMAIL_MAILTO = `mailto:${PUBLIC_EMAIL}`;
 
 /** Cloudflare Worker endpoint — same-origin, isliye koi CORS/key nahi. */

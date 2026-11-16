@@ -215,7 +215,13 @@ export function run() {
   check(/PUBLIC_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: PUBLIC_EMAIL missing');
   check(/DELIVERY_EMAIL\s*=\s*'[^']+@[^']+'/.test(contactCfg), 'Contact config: DELIVERY_EMAIL missing');
   check(contactCfg.includes('helloinstanten@gmail.com'), 'Contact config: public email helloinstanten@gmail.com nahi hai');
-  check(contactCfg.includes('vishubizz.onl@gmail.com'), 'Contact config: delivery inbox vishubizz.onl@gmail.com nahi hai');
+  // User rule: receiving mailbox = helloinstanten@gmail.com. Delivery aur public
+  // ek hi hone chahiye — warna form ka mail kisi aur dabbe me chala jayega.
+  const delivery = (contactCfg.match(/DELIVERY_EMAIL\s*=\s*'([^']+)'/) || [, ''])[1];
+  check(
+    delivery === 'helloinstanten@gmail.com',
+    `Contact config: delivery inbox ${delivery || '(missing)'} — helloinstanten@gmail.com chahiye`
+  );
 
   // Retired address (hello@instanten.com) poore source me kahin na ho
   const retired = [];
