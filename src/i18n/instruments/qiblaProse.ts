@@ -798,4 +798,235 @@ export const qiblaProse: Record<string, QiblaProse> = {
   ],
   },
 
+  nl: {
+  aboutH: "De online Qibla-zoeker die werkt vanaf waar je staat",
+  intro: [    "Deze **online Qibla**-tool beantwoordt één vraag met één tik: welke kant is de Qibla vanaf hier? Sta locatie toe, houd de telefoon plat en de pagina toont de **Qibla-richting** op een live kompas, samen met de peiling in graden. Er is niets te installeren, geen account nodig en je hoeft niet te wachten tot een app is bijgewerkt — het is een **online Qibla-zoeker** gebouwd voor het moment waarop je hem echt nodig hebt.",
+    "Heb je ooit gezocht op “waar is de qibla-richting”, “qibla-richting vinden” of een *live qibla-richting online* die je snel intypte, dan ken je het probleem. Hotelkamers hebben een sticker naar een muur, moskee-apps willen een download, en een gewoon kompas geeft je het noorden maar niet de peiling die je nodig hebt. Deze pagina dicht dat gat met een **Qibla-richtingpijl** en een getal dat je kunt vertrouwen.",
+  ],
+  sections: [
+  {
+    h: "Hoe de online Qibla-richting wordt berekend",
+    paras: [
+      "De Kaaba ligt op ongeveer 21,4225° N, 39,8262° O. Je telefoon geeft via de browser zijn eigen breedte- en lengtegraad door, en de pagina berekent de grootcirkelpeiling tussen de twee punten — het kortste pad over het aardoppervlak. Het resultaat is je waarde in **Qibla-richting kompasgraden**, gemeten met de klok mee vanaf het ware noorden.",
+      "Omdat de berekening je echte coördinaten gebruikt, is het antwoord in elke stad anders en klopt het waar je ook reist. Een **kompas Qibla**-peiling in Delhi is niet dezelfde als in Londen of Jakarta, en deze pagina herberekent op het moment dat je locatie verandert, zodat een **online Qibla-kompas** in een nieuwe stad nooit een gok is op basis van je vorige reis.",
+    ],
+  },
+  {
+    h: "Zo gebruik je het Qibla-richtingkompas",
+    paras: [
+      "Open de pagina, sta locatie toe en houd de telefoon plat voor je met de bovenkant van je af. Draai op de plek rond tot de pijl gelijkloopt met de markering; dan kijk je richting de Qibla. Voor een gebedskleed noteer je eerst de peiling en leg je het kleed daarna langs die lijn.",
+      "Dat is de hele routine voor een **snelle Qibla-richting**: locatie, platte telefoon, draaien tot de pijl vastklikt. Als je maar even hebt voor het gebed, kost het minder tijd dan een appstore-pagina openen, en de uitlezing van de **live Qibla-richting online** blijft verversen terwijl je draait in plaats van op één getal te bevriezen.",
+    ],
+    list: [
+      "Blijf uit de buurt van magneten, luidsprekers, laptops en metalen meubels voordat je de richting vertrouwt.",
+      "Beweeg de telefoon twee keer in een acht als het kompas traag of springerig aanvoelt.",
+      "Vergelijk de peiling met de stand van de zon rond het middaguur als ruwe controle.",
+      "Doe een magnetische hoes af — die beïnvloedt de sensor meer dan wat dan ook.",
+      "Gebruik een vaste ondergrond voor een gebedskleed in plaats van de telefoon in de hand te balanceren.",
+    ],
+    listAt: 0,
+  },
+  {
+    h: "Online Qibla-kompas versus een telefoon-app",
+    paras: [
+      "Een app is prima als je hem elke dag op dezelfde plek gebruikt. Het voordeel van een pagina met een **online Qibla-locatie** is dat hij werkt op elke telefoon die je oppakt — een geleende telefoon, een tablet op een hotelbureau, een laptop in een kamer waar je nooit eerder hebt gebeden — zonder installatietoestemmingen waar je doorheen moet.",
+      "Hij is ook eerlijk over onzekerheid. Een telefoonkompas heeft een paar graden fout, dus de pagina toont de peiling als getal: je ziet of je 2° of 40° ernaast zit, wat veel belangrijker is dan een naald die zelfverzekerd kijkt. Behandel een uitlezing van de **Qibla-zoeker** als nauwkeurig tot een paar graden, en gebruik de pijl als het praktische antwoord.",
+    ],
+  },
+  {
+    h: "Nauwkeurigheid, storing en wat je binnenshuis kunt verwachten",
+    paras: [
+      "Twee dingen bepalen hoe goed een uitlezing in **Qibla-richting kompasgraden** is: de magnetometer en je locatiebepaling. Binnen kan GPS tientallen meters afwijken, wat over grote afstanden de peiling nauwelijks verandert, maar wel uitmaakt als je ver van de Kaaba bent en bij een grote staalconstructie staat. Ga naar een raam voor een betere bepaling.",
+      "De fout van de magnetometer weegt zwaarder. Luidsprekers, magnetische telefoonhouders, stalen bureaus, auto's en zelfs een laptopventilator kunnen een kompas meerdere graden wegtrekken. Zwaait het getal van de **online Qibla-richting** terwijl je langzaam draait, kalibreer dan met de achtbeweging en stap weg van de storing voordat je verdergaat.",
+    ],
+  },
+  {
+    h: "Voor wie deze online Qibla-tool is",
+    paras: [
+      "Reizigers in een onbekende hotelkamer, kantoormedewerkers die een hoek zoeken om te bidden, studenten in een nieuw hostel, en iedereen wiens moskee buiten zicht is. Hij is net zo nuttig als tweede controle: als de sticker op de muur iets anders zegt dan het **online Qibla-kompas**, heb je nu een tweede mening met een getal erbij.",
+      "De tool is gratis en vraagt geen account. Je coördinaten worden in het tabblad gebruikt om de peiling te berekenen en nooit opgeslagen, dus een controle van de **online Qibla-richting** laat niets achter: sta locatietoegang toe voor een exacte peiling, of laat de pagina terugvallen op een geschatte stad op basis van je IP-adres als je weigert.",
+    ],
+  },
+  {
+    h: "De korte versie",
+    paras: [
+      "Sta locatie toe, houd de telefoon plat, draai tot de pijl gelijkloopt en noteer de graden als je een kleed wilt uitleggen. Blijf uit de buurt van magneten en metaal, kalibreer opnieuw als de naald traag aanvoelt, en beschouw de uitlezing als goed tot een paar graden. Of je nu zocht op een **Qibla-richtingpijl**, **Qibla-richting vinden** of een **online Qibla-locatie** vanuit een nieuwe stad, het antwoord is dezelfde pagina — gratis, privé en zonder installatie.",
+    ],
+  },
+  ],
+  guidesH: "Nieuwste gidsen uit de Qibla-blog",
+  guides: [
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", title: "Qibla-richting in kompasgraden: hoe de peiling wordt berekend", desc: "Hoe de waarde in qibla-richting kompasgraden tot stand komt: coördinaten, de grootcirkelpeiling, magnetische declinatie en twee uitgewerkte voorbeelden om te herhalen." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", title: "Waarom is mijn Qibla-richting verkeerd? 7 oplossingen die werken", desc: "Lijkt de Qibla-richtingpijl verkeerd op je telefoon? Zeven oorzaken, van sensorkalibratie tot stalen muren, met oplossingen die je elk in minder dan een minuut probeert." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", title: "Qibla-zoeker: vind de gebedsrichting overal", desc: "Vind de richting van de Kaaba vanaf elke locatie met kompas- en locatie-integratie — de volledige gids voor de online Qibla-zoeker." },
+  ],
+  guidesAll: "Bekijk alle online Qibla-gidsen →",
+  faqH: "Veelgestelde vragen over de online Qibla",
+  faq: [
+    {
+      q: "Hoe weet ik de Qibla-richting online?",
+      a: "Sta de pagina toe je locatie te lezen en houd de telefoon plat voor je. De pagina berekent de peiling van je eigen coördinaten naar de Kaaba en tekent die als pijl, zodat je op de plek kunt draaien tot de pijl gelijkloopt. Het getal ernaast is je Qibla-richting in graden vanaf het ware noorden.",
+    },
+    {
+      q: "Hoe vind ik de Qibla online?",
+      a: "Open de online Qibla-zoeker, sta locatietoegang toe en wacht een seconde op de GPS-bepaling. Houd de telefoon plat en waterpas, weg van magneten en metaal, en draai langzaam tot de pijl recht vooruit wijst. Er hoeft niets geïnstalleerd te worden en de uitlezing ververst live terwijl je draait.",
+    },
+    {
+      q: "Hoe vind ik de Qibla-richting online vanuit mijn huis?",
+      a: "Ga staan in de kamer waar je bidt, open de pagina en sta locatie toe. Heeft de kamer dikke muren of een stalen dak, ga dan naar een raam voor een betere bepaling en noteer daarna de peiling. Schrijf hem op of markeer de lijn op de vloer; dezelfde plek werkt elke dag zonder opnieuw te meten.",
+    },
+    {
+      q: "Hoe controleer ik de Qibla-richting online?",
+      a: "Vergelijk twee uitlezingen in dezelfde kamer: één bij de muur waarvan je denkt dat hij klopt, één aan de andere kant. Komen beide binnen een paar graden overeen, dan is de uitlezing schoon. Verschillen ze, dan wordt één plek beïnvloed door metaal of magneten, en meestal lost weglopen bij apparaten het op.",
+    },
+    {
+      q: "Hoe vind ik de Qibla-richting online zonder app?",
+      a: "Een browserpagina is genoeg. Deze Qibla-zoeker gebruikt de locatie en kompassensoren die je telefoon al heeft, dus er is geen download, geen account en geen toestemming nodig buiten locatie. Zodra de pagina geladen is blijft hij werken, ook zonder mobiele data.",
+    },
+    {
+      q: "Hoe controleer ik de Qibla online als ik reis?",
+      a: "In een nieuwe stad verandert de peiling, dus neem een nieuwe uitlezing in plaats van het getal van thuis te hergebruiken. Sta bij aankomst locatie toe, houd de telefoon plat en noteer de graden. Hotelkamers en luchthavens hebben veel staal, dus stap weg van de liftschacht, de tv en de minibar voordat je de pijl vertrouwt.",
+    },
+    {
+      q: "Is de Qibla-richting hetzelfde voor elke kamer in mijn stad?",
+      a: "In de praktijk wel. De Qibla is een grootcirkelpeiling naar de Kaaba, ongeveer 21,4225° N, 39,8262° O, en binnen één stad verandert die peiling veel minder dan de nauwkeurigheid van een telefoonsensor. Een paar kilometer verplaatsing verschuift de hoek met een fractie van een graad, dus het getal dat je thuis meet geldt ook in de moskee, op kantoor en in de buurstad.",
+    },
+    {
+      q: "Waarom wijkt de Qibla-pijl af van de kompasapp op mijn telefoon?",
+      a: "Twee redenen: ware noorden versus magnetische noorden, en sensorkalibratie. Een kompasapp toont misschien het magnetische noorden terwijl de Qibla-peiling vanaf het ware noorden wordt gemeten, en het verschil daartussen, de magnetische declinatie, loopt in sommige streken op tot 10–20°. Drift van de magnetometer voegt nog een paar graden toe. Leg de telefoon plat, beweeg hem in een acht door de lucht om opnieuw te kalibreren en vergelijk daarna opnieuw voordat je beslist welke uitlezing fout is.",
+    },
+    {
+      q: "Wat is magnetische declinatie en waarom is die belangrijk voor de Qibla?",
+      a: "Magnetische declinatie is de hoek tussen het magnetische noorden, dat een magnetometer waarneemt, en het ware noorden, dat kaarten en peilingen gebruiken. De Qibla-richting is gedefinieerd ten opzichte van het ware noorden, dus deze pagina past de declinatie van jouw locatie toe voordat de pijl wordt getekend. Kopieer je de graden en gebruik je ze met een magnetisch kompas in plaats van met een ware-noordenreferentie, dan wordt de declinatie twee keer toegepast en loopt de richting weg.",
+    },
+    {
+      q: "Kan ik de Qibla-zoeker gebruiken zonder GPS aan te zetten?",
+      a: "Dat kan, maar dan moet je de coördinaten op een andere manier aanleveren. Zonder locatietoestemming weet de pagina niet waar je bent, dus heeft de pijl niets om naar te wijzen. Wil je geen GPS delen, zoek dan je breedte- en lengtegraad op een kaart op, voer ze in waar de pagina handmatige invoer toestaat, of noteer de graden terwijl locatie even aan staat en zet hem daarna weer uit.",
+    },
+    {
+      q: "Hoe nauwkeurig is de Qibla-richting op deze pagina?",
+      a: "De wiskunde is exact tot een fractie van een graad; de beperkingen komen van GPS en de magnetometer. Een GPS-bepaling is meestal tot een paar meter nauwkeurig, wat op continentale afstanden niet uitmaakt, terwijl een telefoonkompas realistisch tot 2–5° nauwkeurig is. Dat is veel preciezer dan nodig, want zelfs één graad fout over twee meter gebedsruimte is maar drie centimeter afwijking.",
+    },
+    {
+      q: "Waar is de Qibla online vanaf mijn locatie?",
+      a: "Dat hangt af van waar je staat. De Qibla is de grootcirkelrichting naar de Kaaba op ongeveer 21,4225° N, 39,8262° O, dus het antwoord is in elke stad anders — westnoordwest vanaf India, zuidoost vanaf Europa, noordwest vanaf Indonesië. Deze pagina toont jouw eigen getal in plaats van een vaste gok van een kaart.",
+    },
+  ],
+  },
+
+  sv: {
+  aboutH: "Online qibla-sökaren som fungerar där du står",
+  intro: [    "Det här **online qibla**-verktyget svarar på en fråga med ett tryck: vilket håll är qibla åt härifrån? Tillåt plats, håll telefonen plant och sidan visar **qibla-riktningen** på en levande kompass tillsammans med bäringen i grader. Det finns inget att installera, inget konto att skapa och ingen väntan på en appuppdatering — det är en **online qibla-sökare** byggd för ögonblicket då du faktiskt behöver den.",
+    "Har du någon gång sökt på “var är qibla-riktningen”, “hitta qibla-riktning” eller en *live qibla-riktning online* som du skrev i all hast, så känner du igen problemet. Hotellrum har en dekal som pekar mot en vägg, moskéappar vill laddas ner, och en vanlig kompass ger dig norr men inte den bäring du behöver. Den här sidan stänger gapet med en **qibla-riktningspil** och en siffra du kan lita på.",
+  ],
+  sections: [
+  {
+    h: "Hur online qibla-riktning beräknas",
+    paras: [
+      "Kaba ligger på ungefär 21,4225° N, 39,8262° Ö. Din telefon rapporterar sin egen latitud och longitud via webbläsaren, och sidan beräknar storcirkelbäringen mellan de två punkterna — den kortaste vägen över jordytan. Resultatet är ditt värde i **qibla-riktning kompassgrader**, mätt medurs från rätt norr.",
+      "Eftersom matematiken använder dina verkliga koordinater är svaret olika i varje stad, och det stämmer var du än reser. En **kompass qibla**-bäring i Delhi är inte densamma som i London eller Jakarta, och den här sidan räknar om i samma stund som platsen ändras, så en **online qibla-kompass** i en ny stad aldrig är en gissning från förra resan.",
+    ],
+  },
+  {
+    h: "Så använder du qibla-riktningskompassen",
+    paras: [
+      "Öppna sidan, tillåt plats och håll telefonen plant framför dig med ovansidan bort från dig. Vrid dig på stället tills pilen linjerar med markören, och då är du vänd mot qibla. För en bönematta noterar du bäringen först och lägger sedan mattan längs den linjen.",
+      "Det är hela rutinen för en **snabb qibla-riktning**: plats, plan telefon, vrid tills pilen låser. När du bara har en stund före bönen tar det kortare tid än att öppna en appbutikssida, och avläsningen av **live qibla-riktning online** uppdateras medan du roterar i stället för att frysa på en siffra.",
+    ],
+    list: [
+      "Stå borta från magneter, högtalare, laptops och metallmöbler innan du litar på riktningen.",
+      "Rör telefonen i en åtta två gånger om kompassen känns trög eller hackig.",
+      "Jämför bäringen med solens läge vid middagstid som en grov kontroll.",
+      "Ta av eventuellt magnetiskt skal — det påverkar sensorn mer än något annat.",
+      "Använd ett fast underlag för bönemattan i stället för att balansera telefonen i handen.",
+    ],
+    listAt: 0,
+  },
+  {
+    h: "Online qibla-kompass kontra en telefonapp",
+    paras: [
+      "En app är bra om du använder den varje dag på samma plats. Fördelen med en sida för **online qibla-plats** är att den fungerar på vilken telefon du än tar upp — en lånad telefon, en surfplatta på ett hotellskrivbord, en laptop i ett rum där du aldrig har bett förut — utan installationstillstånd att kämpa sig igenom.",
+      "Den är också ärlig om osäkerheten. En telefonkompass har några graders fel, så sidan visar bäringen som en siffra: du ser om du ligger 2° eller 40° fel, vilket betyder långt mer än en nål som ser självsäker ut. Behandla en avläsning från **qibla-sökaren** som noggrann till ett par grader, och använd pilen som det praktiska svaret.",
+    ],
+  },
+  {
+    h: "Noggrannhet, störningar och vad du kan vänta dig inomhus",
+    paras: [
+      "Två saker avgör hur bra en avläsning i **qibla-riktning kompassgrader** är: magnetometern och din positionsbestämning. Inomhus kan GPS driva tiotals meter, vilket knappt ändrar bäringen över långa avstånd men spelar roll om du är långt från Kaba och nära en stor stålkonstruktion. Gå till ett fönster för en bättre bestämning.",
+      "Magnetometerns fel väger tyngre. Högtalare, magnetiska telefonhållare, stålbord, bilar och till och med en laptopfläkt kan dra en kompass flera grader. Svänger siffran för **online qibla-riktning** när du roterar långsamt, kalibrera med åttarörelsen och stig bort från störningen innan du bestämmer dig.",
+    ],
+  },
+  {
+    h: "Vem det här online qibla-verktyget är för",
+    paras: [
+      "Resenärer i ett okänt hotellrum, kontorsarbetare som letar efter ett hörn att be i, studenter i ett nytt vandrarhem, och alla vars lokala moské är utom synhåll. Den är lika användbar som en andra kontroll: säger dekalen på väggen en sak och **online qibla-kompassen** en annan har du nu en andra åsikt med en siffra på.",
+      "Verktyget är gratis och kräver inget konto. Dina koordinater används i fliken för att beräkna bäringen och sparas aldrig, så en kontroll av **online qibla-riktning** lämnar inget efter sig: tillåt platsåtkomst för en exakt bäring, eller låt sidan falla tillbaka på en ungefärlig stad från din IP-adress om du avböjer.",
+    ],
+  },
+  {
+    h: "Kortversionen",
+    paras: [
+      "Tillåt plats, håll telefonen plant, vrid tills pilen linjerar och notera graderna om du behöver lägga ut en matta. Håll dig borta från magneter och metall, kalibrera om om nålen känns trög, och se avläsningen som god till ett par grader. Vare sig du sökte på en **qibla-riktningspil**, **hitta qibla-riktning** eller en **online qibla-plats** från en ny stad är svaret samma sida — gratis, privat och utan installation.",
+    ],
+  },
+  ],
+  guidesH: "Senaste guiderna från qibla-bloggen",
+  guides: [
+    { href: "/onlineqibla/blog/qibla-direction-compass-degrees/", title: "Qibla-riktning i kompassgrader: så beräknas bäringen", desc: "Hur värdet i qibla-riktning kompassgrader tas fram: koordinater, storcirkelbäringen, magnetisk deklination och två uträknade exempel du kan upprepa." },
+    { href: "/onlineqibla/blog/why-is-my-qibla-direction-wrong/", title: "Varför är min qibla-riktning fel? 7 lösningar som fungerar", desc: "Ser qibla-riktningspilen fel ut i telefonen? Sju orsaker, från sensorkalibrering till stålväggar, med lösningar du kan prova på under en minut var." },
+    { href: "/onlineqibla/blog/how-to-find-qibla-direction-anywhere/", title: "Qibla-sökare: hitta bönens riktning var som helst", desc: "Hitta riktningen till Kaba från vilken position som helst med kompass- och platsintegration — den fullständiga guiden till online qibla-sökaren." },
+  ],
+  guidesAll: "Se alla guider för online qibla →",
+  faqH: "Vanliga frågor om online qibla",
+  faq: [
+    {
+      q: "Hur vet jag qibla-riktningen online?",
+      a: "Tillåt sidan att läsa din position och håll telefonen plant framför dig. Sidan beräknar bäringen från dina egna koordinater till Kaba och ritar den som en pil, så du kan vrida dig på stället tills pilen linjerar. Siffran bredvid är din qibla-riktning i grader från rätt norr.",
+    },
+    {
+      q: "Hur hittar jag qibla online?",
+      a: "Öppna online qibla-sökaren, tillåt platsåtkomst och vänta en sekund på GPS-bestämningen. Håll telefonen plant och i våg, borta från magneter och metall, och vrid långsamt tills pilen pekar rakt fram. Inget behöver installeras och avläsningen uppdateras live medan du roterar.",
+    },
+    {
+      q: "Hur hittar jag qibla-riktningen online från mitt hem?",
+      a: "Ställ dig i rummet där du ber, öppna sidan och tillåt plats. Har rummet tjocka väggar eller ståltak går du till ett fönster för en bättre bestämning och noterar sedan bäringen. Skriv upp den eller markera linjen på golvet, och samma plats fungerar varje dag utan att du mäter igen.",
+    },
+    {
+      q: "Hur kontrollerar jag qibla-riktningen online?",
+      a: "Jämför två avläsningar i samma rum: en nära väggen du tror är rätt, en på andra sidan. Stämmer båda inom ett par grader är avläsningen ren. Skiljer de sig påverkas en av platserna av metall eller magneter, och att flytta bort från apparater brukar lösa det.",
+    },
+    {
+      q: "Hur hittar jag qibla-riktningen online utan app?",
+      a: "En webbläsarsida räcker. Den här qibla-sökaren använder den plats och de kompassensorer som telefonen redan har, så det behövs ingen nedladdning, inget konto och inga tillstånd utöver plats. När sidan väl är laddad fortsätter den fungera även utan mobildata.",
+    },
+    {
+      q: "Hur kontrollerar jag qibla online när jag reser?",
+      a: "I en ny stad ändras bäringen, så ta en ny avläsning i stället för att återanvända siffran hemifrån. Tillåt plats vid ankomst, håll telefonen plant och notera graderna. Hotellrum och flygplatser innehåller mycket stål, så stig bort från hisschaktet, tv:n och minibaren innan du litar på pilen.",
+    },
+    {
+      q: "Är qibla-riktningen densamma för alla rum i min stad?",
+      a: "I praktiken ja. Qibla är en storcirkelbäring till Kaba, ungefär 21,4225° N, 39,8262° Ö, och inom en enda stad ändras den bäringen långt mindre än noggrannheten hos en telefonsensor. Några kilometers förflyttning ändrar vinkeln med en bråkdel av en grad, så siffran du mäter hemma gäller i moskén, på kontoret och i grannstaden.",
+    },
+    {
+      q: "Varför skiljer sig qibla-pilen från kompassappen i telefonen?",
+      a: "Två skäl: rätt norr kontra magnetiskt norr, och sensorkalibrering. En kompassapp kan visa magnetiskt norr medan qibla-bäringen mäts från rätt norr, och skillnaden dem emellan, den magnetiska deklinationen, når 10–20° i vissa regioner. Drift i magnetometern lägger till några grader till. Lägg telefonen plant, rör den i en åtta i luften för att kalibrera om och jämför igen innan du avgör vilken avläsning som är fel.",
+    },
+    {
+      q: "Vad är magnetisk deklination och varför spelar den roll för qibla?",
+      a: "Magnetisk deklination är vinkeln mellan magnetiskt norr, som en magnetometer känner av, och rätt norr, som kartor och bäringar använder. Qibla-riktningen definieras mot rätt norr, så den här sidan lägger till din plats deklination innan pilen ritas. Kopierar du graderna och använder dem med en magnetisk kompass i stället för en referens mot rätt norr, appliceras deklinationen två gånger och riktningen driver iväg.",
+    },
+    {
+      q: "Kan jag använda qibla-sökaren utan att slå på GPS?",
+      a: "Det går, men då måste du ange koordinaterna på annat sätt. Utan platsbehörighet vet sidan inte var du är, så pilen har inget att peka mot. Vill du inte dela GPS kan du slå upp din latitud och longitud på en karta, ange dem där sidan tillåter manuell inmatning, eller helt enkelt notera graderna medan platsen är på en kort stund och sedan stänga av den igen.",
+    },
+    {
+      q: "Hur noggrann är qibla-riktningen som visas här?",
+      a: "Matematiken är exakt till en bråkdel av en grad; begränsningarna kommer från GPS och magnetometern. En GPS-bestämning är oftast bra till några meter, vilket saknar betydelse på kontinentala avstånd, medan en telefonkompass realistiskt är bra till 2–5°. Det är långt mer precis än nödvändigt, eftersom till och med en grads fel över två meter böneutrymme bara är tre centimeters förskjutning.",
+    },
+    {
+      q: "Var är qibla online från min position?",
+      a: "Det beror på var du står. Qibla är storcirkelriktningen till Kaba på ungefär 21,4225° N, 39,8262° Ö, så svaret är olika i varje stad — västnordväst från Indien, sydost från Europa, nordväst från Indonesien. Den här sidan visar din egen siffra i stället för en fast gissning från en karta.",
+    },
+  ],
+  },
 };

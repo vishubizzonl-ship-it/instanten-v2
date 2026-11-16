@@ -1,12 +1,4 @@
 {
-  "src/i18n/instruments/qiblaProse.ts": [
-    "nl",
-    "sv"
-  ],
-  "src/i18n/instruments/qiblaSupport.ts": [
-    "nl",
-    "sv"
-  ],
   "src/i18n/instruments/speedometerProse.ts": [
     "nl",
     "sv"
