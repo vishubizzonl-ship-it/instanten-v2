@@ -19,6 +19,9 @@ export type CompassProse = {
   h2: string;
   intro: string[];
   sections: { h3: string; paras: string[] }[];
+  /** FAQ heading + questions — Layout ke faqs prop se ek hi FAQPage banta hai. */
+  faqH?: string;
+  faq?: { q: string; a: string }[];
 };
 
 const en: CompassProse = {
@@ -62,6 +65,46 @@ const en: CompassProse = {
         'The four cardinal points are easy: <strong>north</strong> ahead of the needle, <strong>south</strong> behind it, <strong>east</strong> to your right and <strong>west</strong> to your left — as long as the device is flat and the dial is not upside down. The four in-between points cover the gaps, and a degree reading covers everything else. Once you know that a bearing of 135° is south-east, you can translate any number the <strong>online compass</strong> shows into a direction you can say out loud, which is exactly what you need when you are the one giving directions.',
         'Practise once at home. Stand still, note the heading, turn ninety degrees and note it again. If the second reading is roughly the first plus or minus ninety, your <strong>mobile compass</strong> is behaving. If it is not, calibrate and repeat. Two minutes of that makes every later reading trustworthy, whether you are finding <strong>north</strong> in an unfamiliar city or checking that a tent door faces the sunrise.',
       ],
+    },
+  ],
+  faqH:
+    'Frequently asked questions about the online compass',
+  faq: [
+    {
+      q:
+        'Is this online compass free, and do I need to install anything?',
+      a:
+        'It is free and runs entirely in the browser. There is no app to install, no account to create and no usage limit: open the page on your phone, allow motion access once, and the dial starts tracking the direction you are facing.',
+    },
+    {
+      q:
+        'Why is my compass pointing in the wrong direction?',
+      a:
+        'Usually magnetic interference or an uncalibrated sensor. Move away from metal, magnets, a car dashboard, a speaker or a laptop, then calibrate by moving the device in a figure-eight two or three times. If the reading is still off, reload the page and allow motion access again.',
+    },
+    {
+      q:
+        'How accurate is a phone compass?',
+      a:
+        'A calibrated phone compass is typically within about 5 degrees, which is enough for walking directions and finding north. Metal objects, magnets and cases with magnetic clasps distort the reading, and a device that has never been calibrated can be off by tens of degrees.',
+    },
+    {
+      q:
+        'Does the compass work without an internet connection?',
+      a:
+        'After the first load the page keeps working offline, because the dial is drawn in the browser and the heading comes from the device sensor, not from a server. Keep the tab open; a full reload with no connection fails like any other web page.',
+    },
+    {
+      q:
+        'Does the compass work on a laptop or desktop computer?',
+      a:
+        'The page loads, but most laptops have no magnetometer, so the needle will not move. Use a phone or tablet for a real reading, and a desktop to read the guides or compare bearings.',
+    },
+    {
+      q:
+        'Is north on the dial the same as true north?',
+      a:
+        'The dial shows magnetic north, which is what a magnetometer measures. True north differs by the local declination, up to roughly 20 degrees in some regions, and many phones apply a correction automatically. Check the declination for your area before using the bearing on a paper map.',
     },
   ],
 };
@@ -109,6 +152,46 @@ const ja: CompassProse = {
       ],
     },
   ],
+  faqH:
+    'オンライン方位磁針についてよくある質問',
+  faq: [
+    {
+      q:
+        'このオンライン方位磁針は無料ですか。インストールは必要ですか。',
+      a:
+        '無料で、すべてブラウザ内で動作します。アプリのインストールもアカウント作成も利用回数の制限もありません。スマートフォンでページを開き、モーションセンサーの使用を一度許可すれば、向いている方位を針が追い始めます。',
+    },
+    {
+      q:
+        '方位が間違って表示されるのはなぜですか。',
+      a:
+        '多くは磁気の干渉か、センサーが未校正であることが原因です。金属・磁石・車のダッシュボード・スピーカー・ノートPCから離れ、端末を8の字に2〜3回動かして校正してください。それでもずれる場合はページを再読み込みし、モーションの許可をやり直してください。',
+    },
+    {
+      q:
+        'スマートフォンの方位磁針の精度はどれくらいですか。',
+      a:
+        '校正済みなら誤差はおよそ5度以内で、歩行時の方向確認や北を見つける用途には十分です。金属製品・磁石・マグネット式ケースは読み取りを乱し、一度も校正していない端末では数十度ずれることがあります。',
+    },
+    {
+      q:
+        'インターネット接続なしでも使えますか。',
+      a:
+        '一度読み込んだ後はオフラインでも動作します。文字盤はブラウザで描画され、方位はサーバーではなく端末のセンサーから取得しているためです。タブは開いたままにしてください。接続なしで再読み込みすると、他のウェブページと同様に表示できません。',
+    },
+    {
+      q:
+        'ノートPCやデスクトップでも使えますか。',
+      a:
+        'ページは開きますが、多くのノートPCには磁気センサーがないため針は動きません。実際の計測にはスマートフォンやタブレットを使い、パソコンではガイドの閲覧や方位の比較に使ってください。',
+    },
+    {
+      q:
+        '文字盤の北は真北と同じですか。',
+      a:
+        '文字盤が示すのは磁気センサーが測る磁北です。真北との差は地域の偏角で、場所によっては約20度にもなります。多くの端末は補正を自動で行いますが、紙の地図で使う前に自分の地域の偏角を確認してください。',
+    },
+  ],
 };
 
 const es: CompassProse = {
@@ -152,6 +235,46 @@ const es: CompassProse = {
         'Los cuatro puntos cardinales son fáciles: el <strong>norte</strong> delante de la aguja, el <strong>sur</strong> detrás, el <strong>este</strong> a tu derecha y el <strong>oeste</strong> a tu izquierda, siempre que el dispositivo esté plano y la esfera no esté al revés. Los cuatro puntos intermedios cubren los huecos y la lectura en grados cubre todo lo demás. Cuando sabes que un rumbo de 135° es sureste, puedes traducir cualquier número que muestre la <strong>brújula online</strong> en una dirección que puedas decir en voz alta, justo lo que necesitas cuando eres tú quien indica el camino.',
         'Practica una vez en casa. Quédate quieto, apunta el rumbo, gira noventa grados y vuelve a apuntarlo. Si la segunda lectura es más o menos la primera más o menos noventa, tu <strong>brújula para móvil</strong> funciona bien. Si no, calibra y repite. Dos minutos así hacen fiables todas las lecturas posteriores, ya sea para encontrar el <strong>norte</strong> en una ciudad desconocida o para comprobar que la puerta de la tienda mira al amanecer.',
       ],
+    },
+  ],
+  faqH:
+    'Preguntas frecuentes sobre la brújula online',
+  faq: [
+    {
+      q:
+        '¿Esta brújula online es gratis y hay que instalar algo?',
+      a:
+        'Es gratis y funciona entera en el navegador. No hay aplicación que instalar, ni cuenta que crear, ni límite de uso: abre la página en el móvil, permite una vez el acceso al sensor de movimiento y el limbo empieza a seguir la dirección hacia la que miras.',
+    },
+    {
+      q:
+        '¿Por qué mi brújula señala una dirección equivocada?',
+      a:
+        'Casi siempre por interferencia magnética o por un sensor sin calibrar. Aléjate de metales, imanes, del salpicadero del coche, de un altavoz o de un portátil y calibra moviendo el dispositivo en forma de ocho dos o tres veces. Si el error sigue, recarga la página y vuelve a permitir el movimiento.',
+    },
+    {
+      q:
+        '¿Qué precisión tiene la brújula de un móvil?',
+      a:
+        'Una brújula de móvil calibrada suele fallar unos 5 grados, suficiente para orientarte a pie y encontrar el norte. Los objetos metálicos, los imanes y las fundas con cierre magnético distorsionan la lectura, y un aparato nunca calibrado puede desviarse decenas de grados.',
+    },
+    {
+      q:
+        '¿Funciona la brújula sin conexión a internet?',
+      a:
+        'Después del primer carga la página sigue funcionando sin conexión, porque el limbo se dibuja en el navegador y el rumbo viene del sensor del dispositivo, no de un servidor. Mantén la pestaña abierta; una recarga completa sin conexión falla como cualquier página web.',
+    },
+    {
+      q:
+        '¿Funciona la brújula en un portátil o un ordenador de sobremesa?',
+      a:
+        'La página carga, pero la mayoría de los portátiles no tienen magnetómetro, así que la aguja no se moverá. Usa un móvil o una tableta para una lectura real y el ordenador para leer las guías o comparar rumbos.',
+    },
+    {
+      q:
+        '¿El norte del limbo es el norte verdadero?',
+      a:
+        'El limbo muestra el norte magnético, que es lo que mide un magnetómetro. El norte verdadero difiere según la declinación local, hasta unos 20 grados en algunas regiones, y muchos móviles aplican la corrección automáticamente. Comprueba la declinación de tu zona antes de usar el rumbo en un mapa de papel.',
     },
   ],
 };
@@ -199,6 +322,46 @@ const de: CompassProse = {
       ],
     },
   ],
+  faqH:
+    'Häufige Fragen zum Online-Kompass',
+  faq: [
+    {
+      q:
+        'Ist dieser Online-Kompass kostenlos, und muss ich etwas installieren?',
+      a:
+        'Er ist kostenlos und läuft vollständig im Browser. Es gibt keine App zu installieren, kein Konto und keine Nutzungsgrenze: Seite am Handy öffnen, den Bewegungssensor einmal erlauben, und die Nadel folgt der Richtung, in die du blickst.',
+    },
+    {
+      q:
+        'Warum zeigt mein Kompass die falsche Richtung?',
+      a:
+        'Meist magnetische Störungen oder ein unkalibrierter Sensor. Geh weg von Metall, Magneten, Armaturenbrett, Lautsprecher oder Laptop und kalibriere, indem du das Gerät zwei- bis dreimal in einer Acht bewegst. Bleibt die Abweichung, lade die Seite neu und erlaube den Bewegungssensor erneut.',
+    },
+    {
+      q:
+        'Wie genau ist ein Handy-Kompass?',
+      a:
+        'Ein kalibrierter Handy-Kompass liegt meist innerhalb von etwa 5 Grad — genug, um sich zu Fuß zu orientieren und Norden zu finden. Metall, Magnete und Hüllen mit Magnetverschluss verfälschen die Messung, und ein nie kalibriertes Gerät kann um mehrere Zehn Grad danebenliegen.',
+    },
+    {
+      q:
+        'Funktioniert der Kompass ohne Internetverbindung?',
+      a:
+        'Nach dem ersten Laden arbeitet die Seite offline weiter, denn die Scheibe wird im Browser gezeichnet und die Richtung kommt vom Sensor des Geräts, nicht von einem Server. Lass den Tab offen; ein vollständiges Neuladen ohne Verbindung scheitert wie bei jeder Webseite.',
+    },
+    {
+      q:
+        'Funktioniert der Kompass auf Laptop oder Desktop?',
+      a:
+        'Die Seite lädt, aber die meisten Laptops haben keinen Magnetometer, die Nadel bewegt sich dann nicht. Für eine echte Messung nimm Handy oder Tablet, und den Rechner für die Anleitungen.',
+    },
+    {
+      q:
+        'Ist Norden auf der Scheibe derselbe wie geografisch Nord?',
+      a:
+        'Die Scheibe zeigt magnetisch Nord, also das, was ein Magnetometer misst. Geografisch Nord weicht um die örtliche Deklination ab, in manchen Regionen bis etwa 20 Grad; viele Handys rechnen das automatisch heraus. Prüfe die Deklination deiner Region, bevor du den Wert auf einer Papierkarte nutzt.',
+    },
+  ],
 };
 
 const fr: CompassProse = {
@@ -242,6 +405,46 @@ const fr: CompassProse = {
         "Les quatre points cardinaux sont faciles : le <strong>nord</strong> devant l'aiguille, le <strong>sud</strong> derrière, l'<strong>est</strong> à droite et l'<strong>ouest</strong> à gauche, tant que l'appareil est à plat et que le cadran n'est pas à l'envers. Les quatre points intermédiaires comblent les écarts et la valeur en degrés couvre tout le reste. Une fois que vous savez qu'un cap de 135° correspond au sud-est, vous pouvez traduire n'importe quel nombre affiché par la <strong>boussole en ligne</strong> en une direction que vous pouvez dire à voix haute — exactement ce qu'il faut quand c'est vous qui guidez.",
         "Entraînez-vous une fois chez vous. Restez immobile, notez le cap, tournez de quatre-vingt-dix degrés et notez-le à nouveau. Si la seconde lecture vaut à peu près la première plus ou moins quatre-vingt-dix, votre <strong>boussole sur téléphone</strong> se comporte bien. Sinon, recalibrez et recommencez. Deux minutes de cet exercice rendent toutes les lectures suivantes fiables, que vous cherchiez le <strong>nord</strong> dans une ville inconnue ou que vous vérifiiez que la porte de la tente regarde le lever du soleil.",
       ],
+    },
+  ],
+  faqH:
+    'Questions fréquentes sur la boussole en ligne',
+  faq: [
+    {
+      q:
+        'Cette boussole en ligne est-elle gratuite, faut-il installer quelque chose ?',
+      a:
+        'Elle est gratuite et fonctionne entièrement dans le navigateur. Aucune application à installer, aucun compte à créer, aucune limite d\'usage : ouvrez la page sur votre téléphone, autorisez une fois le capteur de mouvement et le cadran suit la direction vers laquelle vous regardez.',
+    },
+    {
+      q:
+        'Pourquoi ma boussole indique-t-elle la mauvaise direction ?',
+      a:
+        'Le plus souvent à cause d\'interférences magnétiques ou d\'un capteur non calibré. Éloignez-vous du métal, des aimants, du tableau de bord, d\'une enceinte ou d\'un ordinateur portable, puis calibrez en décrivant un huit avec l\'appareil deux ou trois fois. Si l\'écart persiste, rechargez la page et réautorisez le mouvement.',
+    },
+    {
+      q:
+        'Quelle est la précision d\'une boussole de téléphone ?',
+      a:
+        'Une boussole de téléphone calibrée donne en général une erreur d\'environ 5 degrés, suffisante pour s\'orienter à pied et trouver le nord. Le métal, les aimants et les étuis à fermeture magnétique faussent la lecture, et un appareil jamais calibré peut se tromper de plusieurs dizaines de degrés.',
+    },
+    {
+      q:
+        'La boussole fonctionne-t-elle sans connexion internet ?',
+      a:
+        'Après le premier chargement, la page continue de fonctionner hors ligne : le cadran est dessiné dans le navigateur et le cap vient du capteur de l\'appareil, pas d\'un serveur. Gardez l\'onglet ouvert ; un rechargement complet sans connexion échoue comme toute page web.',
+    },
+    {
+      q:
+        'La boussole fonctionne-t-elle sur ordinateur portable ou de bureau ?',
+      a:
+        'La page s\'ouvre, mais la plupart des ordinateurs n\'ont pas de magnétomètre : l\'aiguille ne bougera pas. Utilisez un téléphone ou une tablette pour une vraie mesure, et l\'ordinateur pour lire les guides.',
+    },
+    {
+      q:
+        'Le nord du cadran est-il le nord géographique ?',
+      a:
+        'Le cadran indique le nord magnétique, celui que mesure un magnétomètre. Le nord géographique en diffère de la déclinaison locale, jusqu\'à une vingtaine de degrés dans certaines régions, et beaucoup de téléphones appliquent la correction automatiquement. Vérifiez la déclinaison de votre zone avant d\'utiliser le cap sur une carte papier.',
     },
   ],
 };
@@ -289,6 +492,46 @@ const pt: CompassProse = {
       ],
     },
   ],
+  faqH:
+    'Perguntas frequentes sobre a bússola online',
+  faq: [
+    {
+      q:
+        'Esta bússola online é grátis e precisa instalar alguma coisa?',
+      a:
+        'É grátis e funciona por completo no navegador. Não há aplicativo para instalar, conta para criar nem limite de uso: abra a página no celular, permita o sensor de movimento uma vez e o mostrador começa a seguir a direção para onde você aponta.',
+    },
+    {
+      q:
+        'Por que minha bússola aponta para a direção errada?',
+      a:
+        'Quase sempre por interferência magnética ou sensor sem calibração. Afaste-se de metal, ímãs, painel do carro, caixa de som ou notebook e calibre movendo o aparelho em forma de oito duas ou três vezes. Se continuar errado, recarregue a página e permita o movimento novamente.',
+    },
+    {
+      q:
+        'Qual é a precisão da bússola de um celular?',
+      a:
+        'Uma bússola de celular calibrada costuma errar cerca de 5 graus, o suficiente para se orientar a pé e encontrar o norte. Objetos de metal, ímãs e capas com fecho magnético distorcem a leitura, e um aparelho nunca calibrado pode errar dezenas de graus.',
+    },
+    {
+      q:
+        'A bússola funciona sem conexão com a internet?',
+      a:
+        'Depois do primeiro carregamento a página segue funcionando offline, porque o mostrador é desenhado no navegador e o rumo vem do sensor do aparelho, não de um servidor. Mantenha a aba aberta; recarregar sem conexão falha como qualquer página web.',
+    },
+    {
+      q:
+        'A bússola funciona em notebook ou computador de mesa?',
+      a:
+        'A página abre, mas a maioria dos notebooks não tem magnetômetro, então a agulha não se move. Use celular ou tablet para uma leitura real e o computador para ler os guias.',
+    },
+    {
+      q:
+        'O norte do mostrador é o norte verdadeiro?',
+      a:
+        'O mostrador mostra o norte magnético, que é o que o magnetômetro mede. O norte verdadeiro difere pela declinação local, chegando a cerca de 20 graus em algumas regiões, e muitos celulares aplicam a correção automaticamente. Confira a declinação da sua região antes de usar o rumo em um mapa de papel.',
+    },
+  ],
 };
 
 const ko: CompassProse = {
@@ -334,6 +577,46 @@ const ko: CompassProse = {
       ],
     },
   ],
+  faqH:
+    '온라인 나침반에 대한 자주 묻는 질문',
+  faq: [
+    {
+      q:
+        '이 온라인 나침반은 무료인가요? 설치할 것이 있나요?',
+      a:
+        '무료이며 모든 동작이 브라우저 안에서 이루어집니다. 설치할 앱도, 만들 계정도, 사용 횟수 제한도 없습니다. 휴대폰에서 페이지를 열고 동작 센서를 한 번 허용하면 지금 바라보는 방향을 바늘이 따라갑니다.',
+    },
+    {
+      q:
+        '나침반이 잘못된 방향을 가리키는 이유는 무엇인가요?',
+      a:
+        '대부분 자기 간섭이나 보정되지 않은 센서 때문입니다. 금속, 자석, 자동차 대시보드, 스피커, 노트북에서 떨어진 뒤 기기를 여덟 자 모양으로 두세 번 움직여 보정하세요. 그래도 어긋나면 페이지를 새로 고치고 동작 센서를 다시 허용하세요.',
+    },
+    {
+      q:
+        '휴대폰 나침반의 정확도는 어느 정도인가요?',
+      a:
+        '보정된 휴대폰 나침반은 보통 5도 안팎의 오차를 보이며, 걸어 다니며 방향을 잡거나 북쪽을 찾는 데 충분합니다. 금속 물체, 자석, 자석 잠금 케이스는 측정값을 왜곡하고, 한 번도 보정하지 않은 기기는 수십 도까지 어긋날 수 있습니다.',
+    },
+    {
+      q:
+        '인터넷 연결 없이도 나침반이 작동하나요?',
+      a:
+        '한 번 불러온 뒤에는 오프라인에서도 작동합니다. 문자판은 브라우저에서 그려지고 방위 값은 서버가 아니라 기기 센서에서 오기 때문입니다. 탭은 열어 두세요. 연결 없이 완전히 새로 고치면 다른 웹페이지처럼 열리지 않습니다.',
+    },
+    {
+      q:
+        '노트북이나 데스크톱에서도 쓸 수 있나요?',
+      a:
+        '페이지는 열리지만 대부분의 노트북에는 자기 센서가 없어 바늘이 움직이지 않습니다. 실제 측정에는 휴대폰이나 태블릿을 쓰고, 컴퓨터에서는 안내 글을 읽는 데 활용하세요.',
+    },
+    {
+      q:
+        '문자판의 북쪽은 진북과 같은가요?',
+      a:
+        '문자판은 자기 센서가 측정하는 자북을 보여 줍니다. 진북은 지역의 편각만큼 차이가 나며 일부 지역에서는 약 20도에 이릅니다. 많은 휴대폰이 자동으로 보정하지만, 종이 지도에 방위를 옮기기 전에 해당 지역의 편각을 확인하세요.',
+    },
+  ],
 };
 
 const it: CompassProse = {
@@ -377,6 +660,46 @@ const it: CompassProse = {
         "I quattro punti cardinali sono facili: il <strong>nord</strong> davanti all'ago, il <strong>sud</strong> dietro, l'<strong>est</strong> a destra e l'<strong>ovest</strong> a sinistra, purché il dispositivo sia piatto e il quadrante non sia capovolto. I quattro punti intermedi coprono gli spazi e la lettura in gradi copre tutto il resto. Quando sai che 135° è sud-est, puoi tradurre qualsiasi numero mostrato dalla <strong>bussola online</strong> in una direzione che sai dire ad alta voce: esattamente ciò che serve quando sei tu a dare indicazioni.",
         "Esercitati una volta a casa. Resta fermo, annota la direzione, ruota di novanta gradi e annotala di nuovo. Se la seconda lettura è all'incirca la prima più o meno novanta, la tua <strong>bussola sul telefono</strong> si comporta bene. Altrimenti ricalibra e ripeti. Due minuti così rendono affidabile ogni lettura successiva, che tu stia cercando il <strong>nord</strong> in una città sconosciuta o verificando che la porta della tenda sia rivolta verso l'alba.",
       ],
+    },
+  ],
+  faqH:
+    'Domande frequenti sulla bussola online',
+  faq: [
+    {
+      q:
+        'Questa bussola online è gratuita e serve installare qualcosa?',
+      a:
+        'È gratuita e funziona interamente nel browser. Nessuna app da installare, nessun account da creare e nessun limite d\'uso: apri la pagina sul telefono, consenti una volta l\'accesso al sensore di movimento e il quadrante inizia a seguire la direzione verso cui guardi.',
+    },
+    {
+      q:
+        'Perché la mia bussola indica la direzione sbagliata?',
+      a:
+        'Quasi sempre per interferenze magnetiche o per un sensore non calibrato. Allontanati da metallo, calamite, cruscotto dell\'auto, casse o portatile, poi calibra muovendo il dispositivo a forma di otto per due o tre volte. Se l\'errore resta, ricarica la pagina e consenti di nuovo il movimento.',
+    },
+    {
+      q:
+        'Quanto è precisa la bussola di uno smartphone?',
+      a:
+        'Una bussola calibrata di solito sbaglia circa 5 gradi, quanto basta per orientarsi a piedi e trovare il nord. Oggetti metallici, calamite e custodie con chiusura magnetica alterano la lettura, e un dispositivo mai calibrato può sbagliare di decine di gradi.',
+    },
+    {
+      q:
+        'La bussola funziona senza connessione a internet?',
+      a:
+        'Dopo il primo caricamento la pagina continua a funzionare offline, perché il quadrante è disegnato nel browser e il rilevamento arriva dal sensore del dispositivo, non da un server. Tieni la scheda aperta; un ricaricamento completo senza connessione fallisce come qualsiasi pagina web.',
+    },
+    {
+      q:
+        'La bussola funziona su portatile o computer desktop?',
+      a:
+        'La pagina si carica, ma la maggior parte dei portatili non ha un magnetometro, quindi l\'ago non si muove. Usa telefono o tablet per una lettura reale e il computer per leggere le guide.',
+    },
+    {
+      q:
+        'Il nord del quadrante è il nord geografico?',
+      a:
+        'Il quadrante mostra il nord magnetico, quello che misura un magnetometro. Il nord geografico differisce per la declinazione locale, fino a circa 20 gradi in alcune zone, e molti telefoni applicano la correzione automaticamente. Controlla la declinazione della tua zona prima di riportare il rilevamento su una carta.',
     },
   ],
 };

@@ -16,9 +16,9 @@ export const INSTRUMENTS = {
   onlinecompass: {
     root: 'onlinecompass',
     ids: ['compass-island', 'compass-card', 'compass-dial', 'compass-angle', 'compass-status', 'compass-fullscreen-btn'],
-    /** Compass page par FAQ section nahi hai — compassinstant ke source mein bhi
-     *  nahi thi, to yahan bhi nahi banayi (copy invent nahi ki). */
-    faqLangs: [],
+    /** Compass page ka apna FAQ (6 questions x 8 native locales). Har tool ka
+     *  FAQ uske apne silo mein rehta hai — root route ke FAQ se alag. */
+    faqLangs: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it'],
     guides: false,
   },
   onlinebubblelevel: {
