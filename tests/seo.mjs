@@ -155,10 +155,10 @@ export function run(pages, outDir) {
     }
 
     const visibleFaqs = (home.match(/class="ffa-faq-item"/g) || []).length;
-    check(visibleFaqs === 10, `home par ${visibleFaqs} visible FAQ items (exactly 10 chahiye)`);
+    check(visibleFaqs === 15, `home par ${visibleFaqs} visible FAQ items (exactly 15 chahiye)`);
 
     const ldQuestions = faqData?.mainEntity ?? [];
-    check(ldQuestions.length === 10, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (exactly 10 chahiye)`);
+    check(ldQuestions.length === 15, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (exactly 15 chahiye)`);
     check(
       ldQuestions.length === visibleFaqs,
       `home FAQ mismatch: visible ${visibleFaqs}, JSON-LD ${ldQuestions.length}`
@@ -182,8 +182,13 @@ export function run(pages, outDir) {
       'How accurate are the online ruler, speedometer and measurement style tools?',
       'How do I pick the right tool for a task on a multi tool website?',
       'Why use a web tools hub instead of five single-purpose subscriptions?',
+      'Does Instanten work in every browser, including mobile browsers?',
+      'What is the difference between the instant tools and the four sensor instruments?',
+      'Can I use results from these tools for paid client or commercial work?',
+      'Who builds the Instanten tools, and how do I request a new one?',
+      'Is Instanten available in languages other than English?',
     ];
-    check(expected.length === 10, 'expected FAQ list 10 honi chahiye');
+    check(expected.length === 15, 'expected FAQ list 15 honi chahiye');
     for (const q of expected) {
       check(home.includes(q), `home FAQ visible nahi hai: ${q}`);
       check(ldQuestions.some((item) => item.name === q), `home FAQ JSON-LD mein nahi hai: ${q}`);

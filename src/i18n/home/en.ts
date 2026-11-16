@@ -225,5 +225,30 @@ export const home: HomeCopy = {
       answer:
         'Because the job is small and the subscription is not. Four or five focused subscriptions quietly cost more than a streaming plan, and each one adds an account, a privacy policy and an update cycle to maintain. A single web tools hub keeps one address, one visual language and one keyboard behaviour across every utility, so switching tasks never means learning a new product or remembering which site had the good formatter.',
     },
+    {
+      question: 'Does Instanten work in every browser, including mobile browsers?',
+      answer:
+        'Every page is standard HTML, CSS and a small amount of JavaScript, so it runs in current versions of Chrome, Safari, Firefox and Edge on both desktop and mobile. The four sensor instruments need access to motion and location permissions, which some embedded browsers block; open those pages in the phone browser itself rather than an in-app preview. No plugin, extension or specific operating system is required.',
+    },
+    {
+      question: 'What is the difference between the instant tools and the four sensor instruments?',
+      answer:
+        'The instant tools are text and data utilities — a formatter, a counter, a converter, a generator — that work on content you paste in. The four sensor instruments (compass, bubble level, speedometer and Qibla finder) read your device hardware instead, using motion and location sensors to measure direction, tilt or speed. They share a design language but live in separate sections with their own guides and legal pages, so their documentation stays accurate.',
+    },
+    {
+      question: 'Can I use results from these tools for paid client or commercial work?',
+      answer:
+        'Yes. Formatted data, generated codes, compressed images and converted values that you produce are yours to use, including in client deliverables and commercial projects, with no attribution requirement and no licence fee. The only limits are on the site itself: the tools may not be resold or republished as your own product, and anything safety-critical should still be verified with a second method.',
+    },
+    {
+      question: 'Who builds the Instanten tools, and how do I request a new one?',
+      answer:
+        'An independent editorial and engineering team builds and reviews everything on the site, which is why each guide carries a byline and a review date. New tools are usually added because several readers described the same repeated job, so the contact page is the right place to ask. Describe what you paste in, what you need out, and how often you do it — that detail decides the priority.',
+    },
+    {
+      question: 'Is Instanten available in languages other than English?',
+      answer:
+        'Yes. Alongside English, the site is published in German, Japanese, French, Spanish, Korean, Dutch, Swedish, Italian and Portuguese, and the language picker takes you to the same page in the new language instead of dropping you back on the homepage. Localised pages are written for their own audience rather than machine-translated, so units, examples and legal wording stay correct in each language.',
+    },
   ],
 };

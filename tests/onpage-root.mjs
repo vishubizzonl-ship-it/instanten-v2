@@ -247,6 +247,100 @@ export function run(pages) {
     check(canonicalOf(html) === `${SITE}/blog/${slug}/`, `${slug}: canonical galat`);
   }
 
+  // ================= FAQ section + JSON-LD (root silo) =================
+  /**
+   * User rule: har root silo page par ek SEO-friendly FAQ section, aur uska
+   * structured data **ek hi** FAQPage JSON-LD se (duplicate kabhi nahi).
+   * Home ka FAQ 15 questions ka hai (10 purane + 5 naye hub questions),
+   * baaki silo pages par 5-5 page-specific questions.
+   */
+  const QUALITY = { min: 200, max: 620 };
+  const seenQuestions = new Map(); // question -> page label (cross-page duplicate guard)
+
+  const faqPageOf = (html) => {
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((m) => m[1])
+      .filter((raw) => raw.includes('FAQPage'));
+    if (!blocks.length) return { count: 0, questions: [] };
+    let parsed;
+    try {
+      parsed = JSON.parse(blocks[0]);
+    } catch {
+      return { count: blocks.length, questions: [], invalid: true };
+    }
+    const nodes = Array.isArray(parsed) ? parsed : (parsed['@graph'] ?? [parsed]);
+    const faq = nodes.find((n) => n && n['@type'] === 'FAQPage');
+    return { count: blocks.length, questions: faq?.mainEntity ?? [], invalid: !faq, node: faq };
+  };
+
+  const expectedFaqCount = (label) => (label === 'home' ? 15 : 5);
+
+  for (const { url, label } of ROOT_SILO) {
+    const html = pages.get(url);
+    if (!html) continue;
+
+    const { count, questions, invalid, node } = faqPageOf(html);
+    check(!invalid, `${label}: FAQPage JSON-LD parse nahi hua`);
+    check(count === 1, `${label}: FAQPage JSON-LD ${count} baar (exactly 1 chahiye)`);
+    check(node?.['@context'] === 'https://schema.org', `${label}: FAQPage ka @context schema.org nahi`);
+    check(node?.['@type'] === 'FAQPage', `${label}: FAQPage ka @type galat`);
+
+    const want = expectedFaqCount(label);
+    check(questions.length === want, `${label}: FAQ JSON-LD mein ${questions.length} questions (${want} chahiye)`);
+
+    // visible accordion bhi utna hi (Google ke rules: schema = visible content)
+    const visible = label === 'home'
+      ? (html.match(/class="ffa-faq-item"/g) || []).length
+      : (html.match(/<section[^>]*data-root-faq[^>]*>[\s\S]*?<\/section>/i) || [''])[0].includes('data-root-faq')
+        ? (html.match(/<details class="group border-b border-border-hairline/g) || []).length
+        : 0;
+    check(visible === questions.length, `${label}: visible FAQ ${visible} vs JSON-LD ${questions.length}`);
+    check(
+      label === 'home' ? /id="faq"/.test(html) : /data-root-faq/.test(html),
+      `${label}: FAQ section page par render nahi hui`,
+    );
+
+    const names = questions.map((q) => String(q.name));
+    const dupesInPage = names.filter((q, i) => names.indexOf(q) !== i);
+    check(dupesInPage.length === 0, `${label}: page par duplicate FAQ question`);
+
+    for (const item of questions) {
+      const name = String(item?.name ?? '');
+      const answer = String(item?.acceptedAnswer?.text ?? '');
+      check(item?.['@type'] === 'Question', `${label}: FAQ item ka @type Question nahi`);
+      check(item?.acceptedAnswer?.['@type'] === 'Answer', `${label}: acceptedAnswer ka @type Answer nahi`);
+      check(name.endsWith('?'), `${label}: FAQ question "?" par khatam nahi hota :: ${name.slice(0, 60)}`);
+      check(name.length >= 25, `${label}: FAQ question bahut chhota :: ${name}`);
+      check(
+        answer.length >= QUALITY.min && answer.length <= QUALITY.max,
+        `${label}: FAQ answer ${answer.length} chars (${QUALITY.min}-${QUALITY.max}) :: ${name.slice(0, 50)}`,
+      );
+      check(!/google/i.test(`${name} ${answer}`), `${label}: FAQ copy mein "Google" shabd :: ${name.slice(0, 40)}`);
+
+      // cross-page duplicate: ek hi question do pages par nahi
+      const prev = seenQuestions.get(name);
+      check(!prev || prev === label, `${label}: FAQ question "${name.slice(0, 40)}…" pehle ${prev} par hai`);
+      seenQuestions.set(name, label);
+    }
+
+    // FAQ copy hub keyword ke bina generic nahi lagni chahiye
+    if (label !== 'home') {
+      const faqText = questions.map((q) => `${q.name} ${q.acceptedAnswer?.text ?? ''}`).join(' ').toLowerCase();
+      check(/instanten|tools hub|instant tool|online tools/.test(faqText), `${label}: FAQ copy mein hub keyword nahi`);
+    }
+  }
+
+  // localized root silo pages par English FAQ leak nahi (aur koi FAQPage nahi)
+  for (const lang of ['de', 'ja', 'pt']) {
+    for (const { url, label } of ROOT_SILO) {
+      if (url === '/') continue; // home ka JSON-LD site-wide English hi rehta hai
+      const localized = pages.get(`/${lang}${url}`);
+      if (!localized) continue;
+      check(!/data-root-faq/.test(localized), `/${lang}${url}: English FAQ block leak (${label})`);
+      check(faqPageOf(localized).count === 0, `/${lang}${url}: localized page par FAQPage JSON-LD hai`);
+    }
+  }
+
   // ============ separation: root SEO per-tool silos mein leak na ho ====
   const rootTitles = ROOT_SILO.map(({ url }) => titleOf(pages.get(url) ?? '') ?? '').filter(Boolean);
   const toolPages = [...pages.keys()].filter((u) =>
