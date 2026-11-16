@@ -10,11 +10,18 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const seo = seoAbout[lang];
 
-const pageTitle = lang === 'en' ? `About — ${SITE_NAME}` : seo.title;
+const pageTitle = lang === 'en'
+  ? `About Instanten — Free Online Tools Hub for Instant Work`
+  : seo.title;
 const pageDescription =
   lang === 'en'
-    ? 'Instanten is an independent browser-based software project providing free instant tools, instant convert utilities, and instant help guides for U.S. developers, designers, students, and everyday users. No fake identity, no hidden subscriptions.'
+    ? 'About Instanten: an independent, free online tools hub with 12 instant tools for instant work. No sign-up, browser-side processing, public standards.'
     : seo.description;
+const pageKeywords =
+  lang === 'en'
+    ? 'instanten about, instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, web tools hub, free online tools hub, online tools list'
+    : seo.keywords;
+const canonicalURL = lang === 'en' ? 'https://instanten.com/about/' : `https://instanten.com/${lang}/about/`;
 
 const wordSpace = lang === 'ja' ? '' : ' ';
 const sep = (fragment: string): string => {
@@ -40,7 +47,19 @@ const featureKeys = [
 ] as const;
 ---
 
-<Layout title={pageTitle} description={pageDescription} keywords={lang === 'en' ? undefined : seo.keywords} lang={lang}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL={canonicalURL}
+  ogImage="/og-instanten.png"
+  ogImageAlt="About Instanten — free online tools hub for instant work"
+  lang={lang}
+  breadcrumbs={[
+    { name: 'Home', item: translatePath('/') },
+    { name: t('nav.about'), item: translatePath('/about/') },
+  ]}
+>
   <main class="ror-main">
     <div class="ror-container">
       <BackLink />

@@ -10,8 +10,12 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const page = getPageCopy(lang);
 
-const pageTitle = lang === 'en' ? `Contact — ${SITE_NAME}` : `${t('contact.h1')} — ${SITE_NAME}`;
-const pageDescription = page.contact.description;
+const pageTitle = lang === 'en'
+  ? `Contact Instanten — Support for Our Free Online Tools Hub`
+  : `${t('contact.h1')} — ${SITE_NAME}`;
+const pageDescription = lang === 'en'
+  ? 'Contact Instanten about any instant tool in the hub — tool requests, bug reports and data questions. Real replies, no fake addresses, no ticket robots.'
+  : page.contact.description;
 const canonicalURL = lang === 'en' ? `${SITE_URL}/contact/` : `${SITE_URL}/${lang}/contact/`;
 ---
 
@@ -19,7 +23,13 @@ const canonicalURL = lang === 'en' ? `${SITE_URL}/contact/` : `${SITE_URL}/${lan
   title={pageTitle}
   description={pageDescription}
   canonicalURL={canonicalURL}
-  keywords={`contact instanten, feedback, independent software, instant tools, $0 cost, ${lang}`}
+  keywords={`contact instanten, instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, web tools hub, free online tools hub, online tools list, ${lang}`}
+  ogImage="/og-instanten.png"
+  ogImageAlt="Contact Instanten — support for the free online tools hub"
+  breadcrumbs={[
+    { name: 'Home', item: translatePath('/') },
+    { name: t('contact.h1'), item: translatePath('/contact/') },
+  ]}
   lang={lang}
 >
   <main class="ror-main">

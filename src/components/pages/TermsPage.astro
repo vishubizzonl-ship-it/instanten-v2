@@ -10,8 +10,12 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const page = getPageCopy(lang);
 
-const pageTitle = `${t('terms.h1')} — ${SITE_NAME}`;
-const pageDescription = page.terms.description;
+const pageTitle = lang === 'en'
+  ? 'Terms & Conditions — Instanten Free Online Tools Hub'
+  : `${t('terms.h1')} — ${SITE_NAME}`;
+const pageDescription = lang === 'en'
+  ? 'Instanten terms: browser-based instant tools for instant work, zero sign-up, no hidden subscriptions. An independent online tools hub with public standards.'
+  : page.terms.description;
 const canonicalURL = lang === 'en' ? `${SITE_URL}/terms/` : `${SITE_URL}/${lang}/terms/`;
 ---
 
@@ -19,7 +23,13 @@ const canonicalURL = lang === 'en' ? `${SITE_URL}/terms/` : `${SITE_URL}/${lang}
   title={pageTitle}
   description={pageDescription}
   canonicalURL={canonicalURL}
-  keywords={`terms, conditions, free online tools, instant convert, independent software, $0 cost, ${lang}`}
+  keywords={`terms, conditions, instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, web tools hub, free online tools hub, online tools list, ${lang}`}
+  ogImage="/og-instanten.png"
+  ogImageAlt="Instanten terms and conditions for the free online tools hub"
+  breadcrumbs={[
+    { name: 'Home', item: translatePath('/') },
+    { name: t('terms.h1'), item: translatePath('/terms/') },
+  ]}
   lang={lang}
 >
   <main class="ror-main">

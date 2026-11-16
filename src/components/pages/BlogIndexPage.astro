@@ -16,10 +16,10 @@ const allBlogPosts = await getCollection('blog');
 const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 
 const pageTitle = lang === 'en'
-  ? `Instanten Blog — Instant Tools, Instant Convert & Instant Online Guides`
+  ? `Instanten Blog — Instant Tool Guides for Instant Work`
   : `${t('nav.blog')} — ${SITE_NAME}`;
 const pageDescription = lang === 'en'
-  ? 'Practical tutorials, instant convert tips, and step-by-step instant help guides to save hours with free Instanten tools online.'
+  ? 'Instant tool guides and instant work tutorials from the Instanten tools hub — plus an online tools list, worked examples and no sign-up, nothing uploaded.'
   : page.blog.description;
 const canonicalURL = lang === 'en' ? `${SITE_URL}/blog/` : `${SITE_URL}/${lang}/blog/`;
 ---
@@ -29,7 +29,8 @@ const canonicalURL = lang === 'en' ? `${SITE_URL}/blog/` : `${SITE_URL}/${lang}/
   description={pageDescription}
   canonicalURL={canonicalURL}
   ogImage="/og-instanten.png"
-  keywords={`instanten, Instanten tool, Instanten tools, Instant help, Instant tool, Instant tools, Instant online, Instant convert, ${lang}`}
+  keywords={`instanten, instant tool, tools hub, instant work, online tools, online tools hub, multi tool website, multi tools website, instant, free online tools website, online tools free, web tools hub, free online tools hub, online tools list, ${lang}`}
+  ogImageAlt="Instanten blog — instant tool guides for instant work"
   breadcrumbs={[{ name: t('nav.home') || 'Home', item: translatePath('/') }, { name: t('nav.blog') || 'Blog', item: translatePath('/blog/') }]}
   lang={lang}
 >
@@ -42,6 +43,27 @@ const canonicalURL = lang === 'en' ? `${SITE_URL}/blog/` : `${SITE_URL}/${lang}/
         <p class="ror-lead">Guides, practical tutorials, and smart workflows for developers, designers, writers, and builders using free <strong>Instanten tool</strong> collections, <strong>instant online</strong> utilities, and quick <strong>instant convert</strong> helpers — with <strong>instant help</strong> when you need it most.</p>
       ) : (
         <p class="ror-lead">{page.blog.lead}</p>
+      )}
+
+      {lang === 'en' && (
+        <section class="ror-section" data-blog-intro aria-labelledby="blog-intro-title" style="margin-top: 28px;">
+          <h2 class="ror-h2" id="blog-intro-title" style="font-size: 20px;">What this instanten blog covers</h2>
+          <p class="ror-p">
+            Every article here answers one question about <strong>instant work</strong>: how do you finish a small
+            digital job in one pass, on the device in front of you, without an install or an account? The guides walk
+            through a single <strong>instant tool</strong> at a time — a word counter, a JSON formatter, a Base64
+            encoder, an image compressor — and show the exact steps, the result to expect, and the mistakes that
+            waste the most time.
+          </p>
+          <p class="ror-p">
+            If you are still deciding which <strong>online tools hub</strong> deserves a permanent tab, start with the
+            <a href={translatePath('/blog/online-tools-hub-guide/')} class="ror-link">guide to choosing a free online tools hub</a>; if you want the short version, the{' '}
+            <a href={translatePath('/')} class="ror-link">online tools list on the homepage</a> already groups all
+            twelve tools and four instruments. For context on who runs this <strong>web tools hub</strong>, see the{' '}
+            <a href={translatePath('/about/')} class="ror-link">about page</a>, and send corrections or requests
+            through the <a href={translatePath('/contact/')} class="ror-link">contact page</a>.
+          </p>
+        </section>
       )}
 
       <ul class="ror-blog-list">
