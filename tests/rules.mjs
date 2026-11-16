@@ -270,6 +270,15 @@ export function run() {
     readFileSync('src/layouts/Layout.astro', 'utf8').includes('<SearchPanel />'),
     'Layout me SearchPanel mount nahi hai'
   );
+  check(
+    (header.match(/aria-controls="search-panel"/g) || []).length >= 2,
+    'Header ke search buttons par aria-controls="search-panel" nahi'
+  );
+  // Mobile bar aur desktop bar — dono me ek-ek button.
+  const mobileBar = header.slice(header.indexOf('data-mobile-bar'), header.indexOf('data-desktop-bar'));
+  const desktopBar = header.slice(header.indexOf('data-desktop-bar'));
+  check(mobileBar.includes('data-search-open'), 'Mobile bar me search button nahi');
+  check(desktopBar.includes('data-search-open'), 'Desktop bar me search button nahi');
 
   // 2. Tool pages har locale me hain — language picker unhe localize kar sake.
   const i18nUtils = readFileSync('src/i18n/utils.ts', 'utf8');

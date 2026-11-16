@@ -147,6 +147,20 @@ html body .cf-drawer-brand-link {
   text-overflow: clip !important;
 }
 
+/**
+ * Bahut chhoti screen (<=380px) par logo thoda chhota karo.
+ *
+ * Mobile bar me ab teen cheezein hain: hamburger (40px), centre logo aur
+ * dayein search + language (84px). 320px par logo ke liye 148px bachte hain
+ * aur "INSTANTEN" 23px par ~146px leta hai — bilkul kinare par chipak jaata.
+ * sirf isi width par 20px kar dete hain, baaki har jagah 23px hi rehta hai.
+ */
+@media (max-width: 380px) {
+  html body header [data-mobile-bar] .cs-logo-text {
+    font-size: 20px !important;
+  }
+}
+
 html body header [data-mobile-bar] [data-site-logo],
 html body header [data-mobile-bar] .site-brand-logo,
 html body header [data-mobile-bar] > a {

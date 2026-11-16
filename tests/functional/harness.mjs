@@ -172,7 +172,11 @@ export async function open(route, opts = {}) {
       } else {
         const code = s.textContent || '';
         if (!code.trim()) continue;
-        await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
+        // Har page ke liye URL alag rakho: ek hi data: URL dobara import karne par
+        // Node cached module lautata hai aur script dobara CHALTI hi nahi — phir
+        // naye document par koi listener bind nahi hota (test jhoothmot FAIL deta).
+        const unique = code + `\n// harness-run:${Date.now()}-${loaded.length}`;
+        await import('data:text/javascript;base64,' + Buffer.from(unique).toString('base64'));
         loaded.push('inline#' + loaded.length);
       }
     } catch (e) {
