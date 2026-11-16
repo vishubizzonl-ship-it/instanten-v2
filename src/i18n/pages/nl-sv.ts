@@ -52,12 +52,12 @@ export const nl: PageCopy = {
   },
   tags: {
     title: 'Tags',
-    description: 'Bekijk Instanten-tools per tag en workflowtrefwoord.',
+    description: 'Bekijk Instanten-tools per tag en workflowtrefwoord. Vind tools op onderwerp en zie meteen welke gerelateerde of alternatieve tools erbij passen — gratis, zonder account.',
     lead: 'Verken tools op onderwerp en ondersteunde workflows.',
   },
   submit: {
     title: 'Tool indienen',
-    description: 'Dien een gratis browsertool in voor de Instanten-map.',
+    description: 'Dien een gratis browsertool in voor de Instanten-map. We beoordelen elke inzending op nut, privacy en kwaliteit en laten je weten of de tool wordt opgenomen.',
     lead: 'Stel een tool voor de Instanten-map voor. We beoordelen elke inzending op nut, privacy en kwaliteit.',
   },
 };
@@ -114,12 +114,12 @@ export const sv: PageCopy = {
   },
   tags: {
     title: 'Taggar',
-    description: 'Bläddra bland Instanten-verktyg efter tagg och arbetsflödesnyckelord.',
+    description: 'Bläddra bland Instanten-verktyg efter tagg och arbetsflödesnyckelord. Hitta verktyg per ämne och se direkt vilka relaterade eller alternativa verktyg som passar — gratis, utan konto.',
     lead: 'Utforska verktyg efter ämnen och arbetsflöden de stöder.',
   },
   submit: {
     title: 'Skicka in ett verktyg',
-    description: 'Skicka in ett gratis webbläsarverktyg till Instanten-katalogen.',
+    description: 'Skicka in ett gratis webbläsarverktyg till Instanten-katalogen. Vi granskar varje bidrag utifrån nytta, integritet och kvalitet och återkommer om verktyget tas med.',
     lead: 'Föreslå ett verktyg för Instanten-katalogen. Vi granskar varje bidrag för nytta, integritet och kvalitet.',
   },
 };

@@ -103,7 +103,7 @@ const en: SupportCopy = {
   },
   blog: {
     title: "Online Compass Blog",
-    desc: "Guides and tips for reading direction with the online compass.",
+    desc: "Guides and tips for reading direction with the online compass — how to read a dial, find north without tools, and fix a heading that looks wrong.",
     intro: "Guides and tips for navigating with onlinecompass.",
     posts: [
       {
@@ -527,7 +527,7 @@ const es: SupportCopy = {
   },
   blog: {
     title: "Blog de la brújula online",
-    desc: "Guías y consejos para leer la dirección con la brújula online.",
+    desc: "Guías y consejos para leer la dirección con la brújula online: cómo leer el dial, encontrar el norte sin herramientas y corregir un rumbo que parece equivocado.",
     intro: "Guías y consejos para orientarte con onlinecompass.",
     posts: [
       {
@@ -949,7 +949,7 @@ const fr: SupportCopy = {
   },
   blog: {
     title: "Blog de la boussole en ligne",
-    desc: "Guides et conseils pour lire la direction avec la boussole en ligne.",
+    desc: "Guides et conseils pour lire la direction avec la boussole en ligne : lire le cadran, trouver le nord sans instrument et corriger un cap qui semble faux.",
     intro: "Guides et conseils pour s’orienter avec onlinecompass.",
     posts: [
       {
@@ -1160,7 +1160,7 @@ const pt: SupportCopy = {
   },
   blog: {
     title: "Blog da bússola online",
-    desc: "Guias e dicas para ler a direção com a bússola online.",
+    desc: "Guias e dicas para ler a direção com a bússola online: como ler o mostrador, encontrar o norte sem ferramentas e corrigir um rumo que parece errado.",
     intro: "Guias e dicas para se orientar com o onlinecompass.",
     posts: [
       {
@@ -1582,7 +1582,7 @@ const it: SupportCopy = {
   },
   blog: {
     title: "Blog della bussola online",
-    desc: "Guide e consigli per leggere la direzione con la bussola online.",
+    desc: "Guide e consigli per leggere la direzione con la bussola online: come leggere il quadrante, trovare il nord senza strumenti e correggere una direzione che sembra sbagliata.",
     intro: "Guide e consigli per orientarsi con onlinecompass.",
     posts: [
       {
