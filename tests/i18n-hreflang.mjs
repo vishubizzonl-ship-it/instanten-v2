@@ -162,44 +162,17 @@ export function run(pages) {
     }
   }
 
-  /* ---------- 6b. Home FAQ native language mein (English leak nahi) -------- */
-  const EN_FAQ = 'What is Instanten and how is it different from other free online tools websites?';
-  const enPage = pages.get('/') ?? '';
+  /* ---------- 6b. Home FAQ only on the English route page ------------------
+   * Route page par sirf 5 naye hub questions hain (English). Localized route
+   * pages par koi FAQ section ya FAQPage JSON-LD nahi hona chahiye. */
   for (const [code, label] of Object.entries(REQUESTED_LOCALES)) {
     const home = pages.get(`/${code}/`);
     if (!home) continue;
-    check(!home.includes(EN_FAQ), `${code}: home FAQ abhi bhi English mein hai (${label})`);
-
-    // FAQ heading bhi localized ho ("Frequently Asked Questions" kabhi na dikhe)
-    check(!home.includes('Frequently Asked Questions'), `${code}: FAQ heading English mein hai`);
-
-    // 10 FAQ aayein, aur unme se koi bhi English page ka sawaal na ho
     const faqBlocks = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
       .map((m) => m[1])
       .filter((raw) => raw.includes('FAQPage'));
-    check(faqBlocks.length === 1, `${code}: ${faqBlocks.length} FAQPage JSON-LD (1 chahiye)`);
-    let localizedQuestions = [];
-    try {
-      const parsed = JSON.parse(faqBlocks[0] ?? '{}');
-      const page = Array.isArray(parsed) ? parsed.find((n) => n['@type'] === 'FAQPage') : parsed;
-      localizedQuestions = (page?.mainEntity ?? []).map((q) => String(q.name ?? ''));
-    } catch {
-      check(false, `${code}: FAQPage JSON-LD parse nahi hua`);
-    }
-    check(localizedQuestions.length === 10, `${code}: ${localizedQuestions.length} localized FAQ questions (10 chahiye)`);
-    for (const q of localizedQuestions) {
-      check(q.length >= 12, `${code}: FAQ question bahut chhota — "${q.slice(0, 40)}"`);
-      check(!enPage?.includes(q), `${code}: FAQ question English home par bhi mila (translate nahi hua): ${q.slice(0, 50)}`);
-    }
-
-    // ja / ko ke liye native script zaroori (warna English fallback)
-    if (code === 'ja' || code === 'ko') {
-      const joined = localizedQuestions.join(' ');
-      check(
-        /[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af]/.test(joined),
-        `${code}: FAQ questions mein native script nahi hai — English fallback lag raha hai`
-      );
-    }
+    check(faqBlocks.length === 0, `${code}: localized route page par FAQPage JSON-LD hai (${label})`);
+    check(!/id="faq"/.test(home), `${code}: localized route page par FAQ section render ho raha hai (${label})`);
   }
 
   /* ---------- 6c. Hinglish/dev placeholder text kisi locale par na ho ------ */

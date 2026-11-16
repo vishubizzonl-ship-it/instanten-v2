@@ -273,7 +273,7 @@ export function run(pages) {
     return { count: blocks.length, questions: faq?.mainEntity ?? [], invalid: !faq, node: faq };
   };
 
-  const expectedFaqCount = (label) => (label === 'home' ? 15 : 5);
+  const expectedFaqCount = (label) => (label === 'home' ? 5 : 5);
 
   for (const { url, label } of ROOT_SILO) {
     const html = pages.get(url);

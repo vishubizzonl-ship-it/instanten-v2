@@ -155,10 +155,10 @@ export function run(pages, outDir) {
     }
 
     const visibleFaqs = (home.match(/class="ffa-faq-item"/g) || []).length;
-    check(visibleFaqs === 15, `home par ${visibleFaqs} visible FAQ items (exactly 15 chahiye)`);
+    check(visibleFaqs === 5, `home par ${visibleFaqs} visible FAQ items (exactly 5 chahiye)`);
 
     const ldQuestions = faqData?.mainEntity ?? [];
-    check(ldQuestions.length === 15, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (exactly 15 chahiye)`);
+    check(ldQuestions.length === 5, `home FAQPage JSON-LD mein ${ldQuestions.length} questions (exactly 5 chahiye)`);
     check(
       ldQuestions.length === visibleFaqs,
       `home FAQ mismatch: visible ${visibleFaqs}, JSON-LD ${ldQuestions.length}`
@@ -172,23 +172,13 @@ export function run(pages, outDir) {
 
     // 10 tools-hub questions jo search se aate hain (purane FAQ delete ho chuke)
     const expected = [
-      'What is Instanten and how is it different from other free online tools websites?',
-      'Which online tools are available on this tools hub right now?',
-      'Are these online tools really free, or is there a hidden limit?',
-      'Is it safe to paste passwords, tokens or client documents into an online tool?',
-      'Do these browser tools work on mobile phones and tablets?',
-      'Do I need to install an app or create an account to use instant tools?',
-      'Do the tools keep working when the internet connection drops?',
-      'How accurate are the online ruler, speedometer and measurement style tools?',
-      'How do I pick the right tool for a task on a multi tool website?',
-      'Why use a web tools hub instead of five single-purpose subscriptions?',
       'Does Instanten work in every browser, including mobile browsers?',
       'What is the difference between the instant tools and the four sensor instruments?',
       'Can I use results from these tools for paid client or commercial work?',
       'Who builds the Instanten tools, and how do I request a new one?',
       'Is Instanten available in languages other than English?',
     ];
-    check(expected.length === 15, 'expected FAQ list 15 honi chahiye');
+    check(expected.length === 5, 'expected FAQ list 5 honi chahiye');
     for (const q of expected) {
       check(home.includes(q), `home FAQ visible nahi hai: ${q}`);
       check(ldQuestions.some((item) => item.name === q), `home FAQ JSON-LD mein nahi hai: ${q}`);
