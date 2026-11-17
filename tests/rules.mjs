@@ -111,7 +111,9 @@ export function run() {
   check(deps.length === 1 && deps[0] === 'astro', `Rule 1: dependencies sirf astro honi chahiye (mile: ${deps.join(', ') || 'kuch nahi'})`);
 
   /* ---------- Rule 7: styling sirf Tailwind v4 ---------- */
-  const toolFiles = readdirSync('src/components/tools').filter((f) => f.endsWith('.astro'));
+  const toolFiles = existsSync('src/components/tools')
+    ? readdirSync('src/components/tools').filter((f) => f.endsWith('.astro'))
+    : [];
   // Generic /tools/ components ab nahi hain — site par sirf 4 sensor instruments
   // (jo apne silo components me rehte hain). Agar koi naya tools component
   // wapas aaya to yahan dikhega.
