@@ -10,7 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { LOCALES, createSuite, jsonLdOf, localeOf, localize, stripTags } from './lib.mjs';
-import { SQUIRCLE, TOOL_MARKS, toolFaviconPath, toolMarkId } from '../src/config/toolMarks.mjs';
+import { MARK_FONT, SQUIRCLE, TOOL_MARKS, toolFaviconPath, toolMarkId } from '../src/config/toolMarks.mjs';
 
 /** slug -> us tool ka root attribute + island ke zaroori elements. */
 export const INSTRUMENTS = {
@@ -846,6 +846,17 @@ export function run(pages, outDir) {
     check(
       /<mask id="tool-mark-[a-z]+">/.test(html) && /fill-rule="evenodd" mask="url\(#tool-mark-/.test(html),
       `${slug}: logo mark ka mask/evenodd construction nahi mila`
+    );
+    // 3. letter site ke logo font ka outline hai, hand-drawn nahi
+    check(
+      TOOL_MARKS[slug].path.length > 250,
+      `${slug}: letter path bahut chhota (hand-drawn lagta hai, font outline chahiye)`
+    );
+    check(MARK_FONT === 'Montserrat Black Italic', 'logo letters ka font site logo se match nahi karta');
+    // italic hone ka saboot: italic glyph me vertical se zyada slanted side hote hain
+    check(
+      /[A-Z]/.test(TOOL_MARKS[slug].letter) && TOOL_MARKS[slug].path.includes('Q'),
+      `${slug}: letter path curve commands ke bina`
     );
     // 3. favicon link usi tool ka hai
     check(
