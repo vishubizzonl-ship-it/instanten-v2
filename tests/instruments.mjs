@@ -830,7 +830,8 @@ export function run(pages, outDir) {
    * test chalati hai, isliye kabhi teen jagah alag nahi ho sakte.
    */
   const markSigs = new Map();
-  for (const slug of Object.keys(TOOL_MARKS)) {
+  const toolSlugs = Object.keys(TOOL_MARKS).filter((s) => s !== 'instanten');
+  for (const slug of toolSlugs) {
     const url = localize(`/${slug}/`, 'en');
     const html = pages.get(url) ?? '';
 
@@ -894,6 +895,43 @@ export function run(pages, outDir) {
   for (const url of ['/', '/about/', '/tools/json-formatter/', '/blog/']) {
     const html = pages.get(url) ?? '';
     check(html.includes('href="/favicon.svg"'), `${url}: site favicon hi nahi (tool wala le liya?)`);
+  }
+
+  /* ---------- instanten ka apna mark + black squircle ---------- */
+  const siteHome = pages.get('/') ?? '';
+  check(
+    siteHome.includes(`id="${toolMarkId('instanten')}"`),
+    'site logo par instanten ka mark nahi (squircle + I)'
+  );
+  check(
+    siteHome.includes(TOOL_MARKS.instanten.path),
+    'site logo me "I" letter ka font outline nahi'
+  );
+  // header/footer/mobile drawer — teeno jagah logo mark
+  check(
+    (siteHome.match(new RegExp(toolMarkId('instanten'), 'g')) ?? []).length >= 2,
+    'logo mark sirf ek jagah hai (header + footer dono par chahiye)'
+  );
+  // site favicon bhi wahi mark (I) hai — koi purana alag icon nahi
+  const siteFavicon = existsSync(join(outDir, 'favicon.svg'))
+    ? readFileSync(join(outDir, 'favicon.svg'), 'utf8')
+    : '';
+  check(siteFavicon.includes(TOOL_MARKS.instanten.path), 'site favicon me instanten ka I mark nahi');
+  check(/#000000/.test(siteFavicon), 'site favicon ka squircle pure black (#000000) nahi');
+
+  // har tool favicon ka shell bhi pure black ho (site logo ki tarah)
+  for (const slug of Object.keys(TOOL_MARKS)) {
+    const file = join(outDir, slug === 'instanten' ? 'favicon.svg' : join(slug, 'favicon.svg'));
+    const svg = existsSync(file) ? readFileSync(file, 'utf8') : '';
+    check(/#000000/.test(svg), `${slug}: favicon ka squircle pure black nahi`);
+    check(!/#29294B/i.test(svg), `${slug}: favicon me purana ink colour (#29294B) bacha hua hai`);
+    check(/#FFFFFF/.test(svg), `${slug}: favicon me dark-mode white nahi`);
+  }
+
+  // instrument header ka mark bhi pure black (dark me white) — site logo jaisa
+  for (const slug of toolSlugs) {
+    const html = pages.get(localize(`/${slug}/`, 'en')) ?? '';
+    check(/text-black dark:text-white/.test(html), `${slug}: header mark black/white shell class ke bina hai`);
   }
 
   return suite;

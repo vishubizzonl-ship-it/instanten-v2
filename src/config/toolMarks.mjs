@@ -1,7 +1,7 @@
 /**
  * Chaar sensor tools ke logo marks + favicons — "letter in a rounded square".
  *
- * Construction opendesignmd.com ke logo jaisa hai: filled squircle (rounded
+ * Construction opendesignmd.com ke logo jaisa hai: filled pure-black squircle (rounded
  * square) aur uske andar ek letter knockout. Unka logo copy nahi hota — sirf
  * construction apnayi hai.
  *
@@ -37,6 +37,12 @@ export const MARK_FONT = 'Montserrat Black Italic';
  * @type {Record<string, {letter: string, path: string}>}
  */
 export const TOOL_MARKS = {
+  /** Site ka apna mark — "INSTANTEN" logo ka pehla akshar. */
+  instanten: {
+    letter: 'I',
+    path:
+      'M8.83 17.9 11.19 6.1H15.17L12.81 17.9Z',
+  },
   onlinecompass: {
     letter: 'C',
     path:
@@ -96,8 +102,8 @@ export function toolFaviconSvg(slug) {
   const id = toolMarkId(slug);
   return (
     '<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">\n' +
-    '  <style>\n    path.sq { fill: #29294B; }\n' +
-    '    @media (prefers-color-scheme: dark) { path.sq { fill: #F0F0F5; } }\n  </style>\n' +
+    '  <style>\n    path.sq { fill: #000000; }\n' +
+    '    @media (prefers-color-scheme: dark) { path.sq { fill: #FFFFFF; } }\n  </style>\n' +
     '  <mask id="' + id + '"><rect width="24" height="24" fill="#fff"/>' +
     '<path d="' + mark.path + '" fill="#000"/></mask>\n' +
     '  <path class="sq" fill-rule="evenodd" mask="url(#' + id + ')" d="' + SQUIRCLE + '"/>\n</svg>\n'

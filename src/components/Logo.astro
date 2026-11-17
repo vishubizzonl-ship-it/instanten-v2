@@ -1,15 +1,30 @@
 ---
+/**
+ * Site logo — black squircle mark (Montserrat Black Italic "I") + instanten
+ * wordmark. Mark `src/config/toolMarks.mjs` se aata hai, wahi file jo chaaron
+ * tool silos ke marks chalati hai, isliye poore site ka brand ek jaisa rehta hai.
+ *
+ * Colour: Layout ka global CSS `[data-site-logo]` par light mode me pure black
+ * (#000000) aur dark mode me pure white (#FFFFFF) force karta hai — mark SVG
+ * bhi usi ke andar hai, isliye apne aap sahi ho jaata hai.
+ */
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { toolMarkSvg } from '../config/toolMarks.mjs';
 
-const { href = '/' } = Astro.props;
+const { href = '/', showMark = true } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <a
   href={href}
-  class="cs-logo inline-flex items-center site-brand-logo"
+  class="cs-logo inline-flex items-center gap-2 site-brand-logo"
   data-site-logo="true"
   aria-label={t('aria.siteLogo')}
 >
+  {
+    showMark && (
+      <span class="cs-logo-mark" aria-hidden="true" set:html={toolMarkSvg('instanten')} />
+    )
+  }
   <span class="cs-logo-text">
     instanten
   </span>
@@ -20,6 +35,19 @@ const t = useTranslations(getLangFromUrl(Astro.url));
     align-items: center;
     text-decoration: none;
     line-height: 1;
+  }
+
+  .cs-logo-mark {
+    display: inline-flex;
+    width: 26px;
+    height: 26px;
+    flex: none;
+  }
+
+  .cs-logo-mark :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .cs-logo-text {
@@ -59,6 +87,11 @@ const t = useTranslations(getLangFromUrl(Astro.url));
       font-size: 23px !important;
       max-width: 340px !important;
       height: 21px !important;
+    }
+
+    .cs-logo-mark {
+      width: 30px;
+      height: 30px;
     }
   }
 </style>

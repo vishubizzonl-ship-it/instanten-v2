@@ -8,7 +8,13 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { TOOL_MARKS, toolFaviconSvg } from '../src/config/toolMarks.mjs';
 
+/* Site ka apna favicon bhi isi geometry se banta hai (mark = "I"). */
+writeFileSync('public/favicon.svg', toolFaviconSvg('instanten'), 'utf8');
+console.log('· public/favicon.svg');
+
+/* Chaar tool silos ke apne favicons. */
 for (const slug of Object.keys(TOOL_MARKS)) {
+  if (slug === 'instanten') continue;
   mkdirSync(`public/${slug}`, { recursive: true });
   writeFileSync(`public/${slug}/favicon.svg`, toolFaviconSvg(slug), 'utf8');
   console.log(`· public/${slug}/favicon.svg`);
