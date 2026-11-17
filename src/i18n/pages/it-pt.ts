@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const it: PageCopy = {
   about: {
     p1: 'Instanten è un progetto software indipendente basato sul browser. Creiamo utilità rapide e trasparenti senza registrazione, abbonamento o limiti nascosti. Ogni funzione è disponibile a 0 $.',
-    p2: 'Non esistono indirizzi fisici inventati, registrazioni LLC false, foto di uffici finte o recensioni fabbricate. È un vero progetto indipendente creato da sviluppatori reali che citano standard pubblici: NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark e W3C CSS Grid Layout.',
+    p2: 'Non esistono indirizzi fisici inventati, registrazioni LLC false, foto di uffici finte o recensioni fabbricate. È un vero progetto indipendente creato da sviluppatori reali che citano standard pubblici: W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'L’elaborazione avviene nel browser quando possibile. Le preferenze del tema restano nel localStorage del dispositivo e non vengono mai inviate a un server. Rispettiamo CCPA/CPRA, VCDPA, CPA, CTDPA e le leggi statali statunitensi applicabili.',
   },
   contact: {
@@ -22,7 +22,7 @@ export const it: PageCopy = {
   terms: {
     title: 'Termini e condizioni',
     description: 'Termini Instanten: utilità gratuite nel browser, zero registrazione, standard pubblici reali. Nessuna dichiarazione aziendale falsa. Progetto indipendente.',
-    p1: 'Instanten offre strumenti online istantanei gratuiti e convertitori a 0 $ senza registrazione. Tutti i risultati seguono standard pubblici reali: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark e W3C CSS Grid Layout.',
+    p1: 'Instanten offre strumenti online istantanei gratuiti e convertitori a 0 $ senza registrazione. Tutti i risultati seguono standard pubblici reali: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Non ci sono abbonamenti nascosti, upsell camuffati da funzioni gratuite né dichiarazioni aziendali false. Questo è un progetto software indipendente.',
     p3: 'Non facciamo affermazioni inventate su uffici, registrazioni LLC o recensioni. Ogni riferimento standard è verificabile.',
   },
@@ -65,7 +65,7 @@ export const it: PageCopy = {
 export const pt: PageCopy = {
   about: {
     p1: 'O Instanten é um projeto de software independente baseado no navegador. Criamos utilitários rápidos e transparentes sem registo, subscrição ou limites ocultos. Cada funcionalidade está disponível por 0 $.',
-    p2: 'Não há moradas físicas falsas, registos LLC inventados, fotos de escritório falsas ou avaliações fabricadas. É um projeto real e independente criado por programadores reais que citam padrões públicos: NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark e W3C CSS Grid Layout.',
+    p2: 'Não há moradas físicas falsas, registos LLC inventados, fotos de escritório falsas ou avaliações fabricadas. É um projeto real e independente criado por programadores reais que citam padrões públicos: W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'O processamento ocorre no navegador sempre que possível. As preferências de tema ficam no localStorage do dispositivo e nunca são enviadas para um servidor. Cumprimos CCPA/CPRA, VCDPA, CPA, CTDPA e as leis estaduais dos EUA aplicáveis.',
   },
   contact: {
@@ -84,7 +84,7 @@ export const pt: PageCopy = {
   terms: {
     title: 'Termos e condições',
     description: 'Termos do Instanten: utilitários gratuitos no navegador, sem registo, padrões públicos reais. Sem alegações empresariais falsas. Projeto independente.',
-    p1: 'O Instanten disponibiliza ferramentas online instantâneas gratuitas e conversores por 0 $ sem registo. Todos os resultados seguem padrões públicos reais: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark e W3C CSS Grid Layout.',
+    p1: 'O Instanten disponibiliza ferramentas online instantâneas gratuitas e conversores por 0 $ sem registo. Todos os resultados seguem padrões públicos reais: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Não há subscrições ocultas, upsells disfarçados de funcionalidades gratuitas nem alegações empresariais falsas. Este é um projeto de software independente.',
     p3: 'Não fazemos alegações inventadas sobre escritórios, registos LLC ou avaliações. Cada referência a padrões é verificável.',
   },

@@ -23,7 +23,7 @@ r.check('home: 4 sensor tools ke pill links', ['onlinecompass', 'onlinebubblelev
 
 // home CTAs
 const ctas = p.$$('main a[href]').map((a) => ({ t: txt(a), h: a.getAttribute('href') }));
-r.check('home: hero/browse CTAs tools ki taraf jaate hain', ctas.some((c) => c.h.startsWith('/tools/') || c.h === '/tools/'), ctas.slice(0, 6).map((c) => `${c.t}→${c.h}`).join(' | '));
+r.check('home: hero/browse CTAs instruments ki taraf jaate hain', ctas.some((c) => /^\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\//.test(c.h)), ctas.slice(0, 6).map((c) => `${c.t}→${c.h}`).join(' | '));
 
 // ------- theme toggle
 const themeBtn = p.$('[data-cf-theme-toggle]');
@@ -124,13 +124,13 @@ r.check('footer: legal + company pages linked', ['/about/', '/contact/', '/priva
 
 // ------- tool page parity: language picker localizes the same page
 await home.cleanup();
-p = await open('/tools/json-formatter/');
+p = await open('/onlinecompass/');
 const lb = p.$('.language-picker-btn');
 p.click(lb);
 await p.settle(60);
 const toolHrefs = p.$$('.language-picker-item[href]').map((a) => a.getAttribute('href'));
 r.check('language: tool page par wahi tool localize hota hai',
-  toolHrefs.includes('/de/tools/json-formatter/') && toolHrefs.includes('/ja/tools/json-formatter/'),
+  toolHrefs.includes('/de/onlinecompass/') && toolHrefs.includes('/ja/onlinecompass/'),
   toolHrefs.slice(0, 4).join(' '));
 // copy widget on tool page (InlineCopy buttons)
 const copies = p.$$('[data-copy], [data-inline-copy], button[data-cp-copy]');

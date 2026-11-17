@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: '검증된 변환 정확도',
       body:
-        '결과는 표준 규칙을 따르며 복사하기 쉬운 형식입니다. 온라인 자는 ISO/IEC 7810 ID-1 카드 크기(3.370 × 2.125인치), 색상 팔레트는 WCAG 2.2 AA 대비를 참조합니다.',
+        '측정값은 공개 표준을 따릅니다. 방위와 기울기는 W3C DeviceOrientation Event, 키블라 방위는 W3C Geolocation API, 속도는 정확한 SI 환산(1노트 = 1.852 km/h)을 사용합니다.',
     },
     {
       title: '브라우저 우선 개인정보 보호',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         '불필요한 요소 없는 즉시 시작 — 정적 HTML 페이지가 최신 브라우저에서 거의 즉시 로드됩니다.',
-        '표준 기반의 복사 가능한 출력 — JSON Formatter는 IETF RFC 8259, Base64 Encoder는 IETF RFC 4648, Markdown Editor는 CommonMark, 메타 태그 생성기는 Google Search Central 및 Open Graph 지침을 따릅니다.',
+        '믿고 쓸 수 있는 측정값 — 방위와 기울기는 W3C DeviceOrientation Event, 키블라 방위는 W3C Geolocation API, 속도는 km/h·mph·노트 간 정확한 SI 환산을 따릅니다.',
         '도구 옆의 실용적 맥락 — 가이드가 예외와 모범 사례를 설명해 단순 숫자 이상의 도움을 줍니다.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: '온라인 도구가 무거운 설치 프로그램보다 나은 이유',
       paragraphs: [
         '네이티브 데스크톱 제품군은 수 GB 영상 렌더링에는 적합하지만 일상적인 작은 작업에는 과합니다. 브라우저 기반 온라인 도구는 OS 호환성, 저장 공간, 백그라운드 업데이트, 라이선스 문제를 없애고 Windows, macOS, Linux, Android, iOS에서 동일하게 작동합니다.',
-        'NIST, W3C, IETF 사양 검증 철학은 About 페이지에서 확인할 수 있습니다.',
+        '각 도구가 인용하는 W3C 사양에 따른 검증 철학은 About 페이지에서 확인할 수 있습니다.',
       ],
       links: [{ label: 'Instanten 소개', href: '/about/' }],
     },

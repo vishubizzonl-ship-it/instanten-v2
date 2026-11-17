@@ -80,8 +80,8 @@ export function run(pages, outDir) {
 
     // --- 2b. Long-form copy se tools tak internal links -------------------
     const longformHtml = block ? block[0] : '';
-    const toolLinks = (longformHtml.match(/href="\/tools\/[a-z0-9-]+\/"/g) || []).length;
-    check(toolLinks >= 5, `home long-form copy se tools tak ${toolLinks} internal links (5+ chahiye)`);
+    const instrumentLinks = (longformHtml.match(/href="\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\//g) || []).length;
+    check(instrumentLinks >= 3, `home long-form copy se instruments tak ${instrumentLinks} internal links (3+ chahiye)`);
 
     // --- 3. Title / description / keywords meta --------------------------
     const title = (home.match(/<title>([^<]*)<\/title>/i) || [, ''])[1];
@@ -217,12 +217,6 @@ export function run(pages, outDir) {
     check(!/google/i.test(stripTags(faqSection)), 'FAQ copy mein "Google" shabd hai');
   }
 
-  // --- 4c. Tool pages: per-tool FAQ + single FAQPage JSON-LD -------------
-  const TOOL_SLUGS = [
-    'json-formatter', 'base64-encoder', 'word-counter', 'password-generator',
-    'qr-generator', 'image-compressor', 'color-palette', 'css-grid-generator',
-    'markdown-editor', 'meta-tag-generator', 'online-ruler', 'regex-tester',
-  ];
   const faqPageOf = (html) => {
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
       .map((m) => m[1])
@@ -239,48 +233,10 @@ export function run(pages, outDir) {
     return { count: blocks.length, questions: faq?.mainEntity ?? [], invalid: !faq };
   };
 
-  for (const slug of TOOL_SLUGS) {
-    const url = `/tools/${slug}/`;
-    const html = pages.get(url);
-    check(Boolean(html), `tool page build mein nahi: ${url}`);
-    if (!html) continue;
-
-    const { count, questions, invalid } = faqPageOf(html);
-    check(!invalid, `${slug}: FAQPage JSON-LD parse nahi hua`);
-    check(count === 1, `${slug}: FAQPage blocks ${count} (1 hona chahiye)`);
-    check(questions.length >= 5, `${slug}: FAQ JSON-LD mein ${questions.length} questions (5 chahiye)`);
-
-    const visible = (html.match(/<summary class="flex items-center justify-between/g) || []).length;
-    check(visible === questions.length, `${slug}: visible FAQ ${visible} vs JSON-LD ${questions.length}`);
-    check(/data-tool-faq/.test(html), `${slug}: FAQ section page par render nahi hui`);
-
-    const names = questions.map((q) => String(q.name));
-    const dupes = names.filter((q, i) => names.indexOf(q) !== i);
-    check(dupes.length === 0, `${slug}: duplicate FAQ questions`);
-    check(
-      questions.every((q) => q.acceptedAnswer?.text && q.acceptedAnswer.text.length >= 90),
-      `${slug}: koi FAQ answer chhota hai`
-    );
-    // FAQ copy tool-specific ho, generic boilerplate nahi
-    const tokens = slug.split('-').filter((w) => w.length >= 2);
-    const faqText = questions.map((q) => `${q.name} ${q.acceptedAnswer?.text ?? ''}`).join(' ').toLowerCase();
-    check(
-      tokens.some((word) => faqText.includes(word)),
-      `${slug}: FAQ copy mein tool ka zikr (${tokens.join('/')}) nahi hai`
-    );
-
-    // "Google" shabd FAQ copy mein nahi
-    const faqBlock = (html.match(/<section[^>]*data-tool-faq[\s\S]*?<\/section>/i) || [''])[0];
-    check(!/google/i.test(stripTags(faqBlock)), `${slug}: FAQ copy mein "Google" shabd hai`);
-
-    // localized tool pages: English FAQ leak nahi
-    const de = pages.get(`/de/tools/${slug}/`);
-    check(Boolean(de), `${slug}: /de/ version nahi bana`);
-    if (de) {
-      check(!/data-tool-faq/.test(de), `${slug}: /de/ par English FAQ leak ho raha hai`);
-      const deFaq = faqPageOf(de);
-      check(deFaq.count === 0, `${slug}: /de/ par FAQPage JSON-LD hai (English copy ke bina nahi hona chahiye)`);
-    }
+  // --- 4c. Generic tool pages hata diye gaye: /tools/<slug>/ build mein nahi
+  // honi chahiye (sirf 4 sensor instrument silos bache hain) -----------------
+  for (const slug of ['json-formatter', 'online-ruler', 'qr-generator', 'word-counter']) {
+    check(!pages.has(`/tools/${slug}/`), `/tools/${slug}/ abhi bhi build mein hai`);
   }
 
   // --- 4d. Hub page hata diya gaya: /tools/, /categories/, /pricing/,

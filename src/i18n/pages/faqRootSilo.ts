@@ -39,7 +39,7 @@ export const rootSiloFaq: Record<RootSiloFaqPage, RootSiloFaqContent> = {
       {
         question: 'How do you check that a tool gives correct results?',
         answer:
-          'Each utility implements a published rule rather than a custom guess: JSON handling follows the RFC 8259 data-interchange format, Base64 follows RFC 4648, contrast checks use the W3C WCAG 2.2 Level AA ratios, and the online ruler calibrates against ISO/IEC 7810 ID-1 card dimensions. Where a measurement depends on hardware — a phone sensor, for instance — the tool states the tolerance instead of claiming laboratory accuracy.',
+          'Each instrument follows a published specification rather than a custom guess: heading and tilt come from the W3C DeviceOrientation Event, the Qibla bearing is a great-circle calculation from the W3C Geolocation API position, and speeds are converted with exact SI factors (1 knot = 1.852 km/h). Where a reading depends on hardware, the page states the limitation instead of claiming laboratory accuracy.',
       },
       {
         question: 'Can I request a tool that is missing from the hub?',
@@ -49,7 +49,7 @@ export const rootSiloFaq: Record<RootSiloFaqPage, RootSiloFaqContent> = {
       {
         question: 'Is Instanten the same as the four sensor instruments on the site?',
         answer:
-          'They share a design system but not their content. The twelve instant tools — formatter, counter, converter, generator utilities — sit under the tools library, while the compass, bubble level, speedometer and Qibla finder each run their own separate silo with their own guides, legal pages and error pages. Nothing is merged, so a guide about the compass never competes with an article about the JSON formatter.',
+          'They share a design system but not their content. Each of the four instruments — compass, bubble level, speedometer and Qibla finder — runs its own silo with its own guides, legal pages and error pages. Nothing is merged, so a guide about the compass never competes with an article about the Qibla bearing.',
       },
     ],
   },

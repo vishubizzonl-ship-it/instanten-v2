@@ -211,7 +211,7 @@ export function run(pages, outDir) {
     }
 
     /* 14. filter bar offset ---------------------------------------------- */
-    if (url.includes('/tools') || url.includes('/category/') || url.includes('/pricing/') || url.includes('/tag/')) hubPages++;
+    if (url.includes('/compassinstant/') || url.includes('/search/')) hubPages++;
 
     if (/data-tool-root/.test(html)) toolPages++;
 
@@ -309,9 +309,9 @@ export function run(pages, outDir) {
   );
 
   /* ---------- Counts ---------------------------------------------------- */
-  check(toolPages >= 48, `sirf ${toolPages} tool pages mile (interactive tools) — build adhoora?`);
-  check(hubPages >= 24, `sirf ${hubPages} hub pages mile — build adhoora?`);
-  check(pages.size >= 800, `sirf ${pages.size} pages build hue`);
+  check(toolPages >= 32, `sirf ${toolPages} instrument pages mile (interactive tools) — build adhoora?`);
+  check(hubPages >= 8, `sirf ${hubPages} hub pages mile — build adhoora?`);
+  check(pages.size >= 700, `sirf ${pages.size} pages build hue`);
 
   return suite;
 }

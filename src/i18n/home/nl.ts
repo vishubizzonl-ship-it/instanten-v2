@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Gecontroleerde conversienauwkeurigheid',
       body:
-        'Resultaten volgen standaardregels in kopieerbaar formaat. De online liniaal gebruikt ISO/IEC 7810 ID-1-kaartafmetingen (3,370 × 2,125 inch) en het kleurenpalet WCAG 2.2 AA-contrasten.',
+        'Metingen volgen openbare standaarden: koers en helling komen uit W3C DeviceOrientation Event, de qibla-peiling uit de W3C Geolocation API, en snelheden gebruiken exacte SI-omrekeningen (1 knoop = 1,852 km/h).',
     },
     {
       title: 'Privacy in de browser',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Directe start zonder ballast — statische HTML-pagina’s laden vrijwel meteen in moderne browsers.',
-        'Kopieerbare uitvoer volgens standaarden — JSON Formatter volgt IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark en de metataggenerator Google Search Central en Open Graph.',
+        'Metingen waar je op kunt bouwen — koers en helling uit W3C DeviceOrientation Event, de qibla-peiling uit de W3C Geolocation API en snelheden met exacte SI-omrekeningen tussen km/h, mph en knopen.',
         'Praktische context naast de tool — gidsen leggen randgevallen en best practices uit voor echte directe hulp.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Waarom online tools zware installaties verslaan',
       paragraphs: [
         'Native desktopsuites zijn zinvol voor videorendering van meerdere gigabytes, niet voor snelle dagelijkse hulpmiddelen. Een online toolkit in de browser voorkomt compatibiliteitsproblemen, opslagballast, achtergrondupdates en licentievragen — dezelfde tool werkt op Windows, macOS, Linux, Android en iOS.',
-        'Lees meer over onze filosofie en toetsing aan NIST-, W3C- en IETF-specificaties op de About-pagina.',
+        'Lees meer over onze filosofie en de toetsing van elk instrument aan de genoemde W3C-specificaties op de About-pagina.',
       ],
       links: [{ label: 'Over ons', href: '/about/' }],
     },

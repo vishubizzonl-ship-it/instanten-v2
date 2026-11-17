@@ -6,7 +6,7 @@ export const enArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'Every day, developers, designers, writers, students, and small teams run into dozens of small digital tasks — formatting JSON data, running an instant convert check, cleaning text snippets, calculating layout values, or verifying web standards. Opening heavy desktop software for a thirty-second task wastes valuable creative momentum. Paying $15 to $30 every month for a single-purpose SaaS subscription for that thirty-second job is unnecessary. Random web searches often lead to cluttered sites with intrusive ads, broken buttons, and confusing privacy policies.',
+          'Every day, developers, designers, writers, students, and small teams run into dozens of small digital tasks — checking a direction, levelling a shelf, measuring a speed, finding a bearing. Each one takes seconds, yet hunting for a separate app for every measurement takes minutes. Instanten puts four instruments on one page that opens ready to use, with no account and nothing to install.',
           '<strong>Instanten</strong> solves this challenge with a unified, clean, browser-based workspace. Built as an independent collection of free instant tools and practical guides, Instanten brings everyday utilities together with zero sign-up, zero paywalls, zero usage caps, and complete desktop and mobile compatibility.',
         ],
       },
@@ -14,7 +14,7 @@ export const enArticles: BlogArticlesBySlug = {
         heading: 'Why browser-based instant tools beat bulky installers',
         paragraphs: [
           'Native desktop suites make sense for multi-gigabyte video editing or heavy 3D rendering, but not for quick daily utilities. Running an instant tool directly in your web browser eliminates operating system compatibility headaches, hard drive bloat, background update daemons, and licensing prompts. The exact same utility operates identically on Windows 11, macOS Sequoia, Linux, Android, and iOS devices.',
-          'Because pages are statically pre-rendered with minimal client-side JavaScript, every utility responds in milliseconds. Processing occurs directly inside your local browser session whenever possible. For measurement tasks, the <strong>Online Ruler</strong> references the standard credit card size (ISO/IEC 7810 ID-1: 3.370 × 2.125 inches / 85.60 × 53.98 mm) and the official <strong>NIST</strong> definition (1 international inch = 25.4 millimeters exactly). For web accessibility, the <strong>Color Palette</strong> checks contrast against <strong>W3C WCAG 2.2 Level AA</strong> standards (4.5:1 for normal text, 3:1 for large text).',
+          'Because pages are statically pre-rendered with minimal client-side JavaScript, every instrument responds in milliseconds. Sensor readings are processed inside your browser session, so a heading or a tilt reading never has to leave your device for the page to work.',
         ],
       },
       {
@@ -23,11 +23,11 @@ export const enArticles: BlogArticlesBySlug = {
           'The library covers practical everyday formatting, rapid conversions, and developer utilities paired with transparent documentation based on published technical standards:',
         ],
         bullets: [
-          '<strong>JSON Formatter:</strong> Validate, format, and inspect JSON payloads against <strong>IETF RFC 8259</strong> with immediate syntax highlighting and error detection.',
-          '<strong>Base64 Encoder / Decoder:</strong> Convert strings, files, and data URIs according to <strong>IETF RFC 4648</strong> with UTF-8 character support.',
-          '<strong>CSS Grid Generator:</strong> Visually construct responsive layouts adhering to the <strong>W3C CSS Grid Layout Module Level 2</strong> specification.',
-          '<strong>Meta Tag Generator:</strong> Produce clean Open Graph, Twitter Cards, and search snippet metadata complying with Google Search Central guidelines.',
-          '<strong>Image Compressor:</strong> Client-side Canvas and WebP compression that optimizes photos for e-commerce and blogs without uploading images to any third-party server.',
+          '<strong>CompassInstant Hub:</strong> All four instruments in one place — compass, bubble level, speedometer and Qibla finder — each opening its own page with guides, about, contact and legal pages around it.',
+          '<strong>Online Compass:</strong> Reports a live heading in degrees from the device orientation sensor, with a dial that stays readable while the phone moves.',
+          '<strong>Bubble Level:</strong> Reads device orientation on both axes and shows tilt in degrees, so a shelf, frame or appliance can be checked without a physical spirit level.',
+          '<strong>Speedometer:</strong> Reads the device position sensor and displays current speed in km/h, mph and knots with the exact conversion factors between them.',
+          '<strong>Qibla Finder:</strong> Calculates the great-circle bearing from your own location to Makkah using the W3C Geolocation API, so the bearing matches the place you are standing.',
         ],
       },
       {
@@ -36,10 +36,10 @@ export const enArticles: BlogArticlesBySlug = {
           'We believe in transparency. Every technical claim, conversion formula, and design guideline implemented across our tools and guides is backed by official engineering bodies:',
         ],
         bullets: [
-          '<strong>NIST (National Institute of Standards and Technology):</strong> U.S. Customary and metric units verified against NIST PML guidelines.',
-          '<strong>W3C (World Wide Web Consortium):</strong> WCAG 2.2 accessibility ratios and CSS Grid Layout Module specifications.',
-          '<strong>IETF (Internet Engineering Task Force):</strong> RFC 8259 JSON data interchange format and RFC 4648 Base64 data encoding.',
-          '<strong>CommonMark:</strong> Markdown parsing and live rendering specifications.',
+          '<strong>SI units:</strong> Speeds are shown in km/h, mph and knots using exact conversion factors (1 knot = 1.852 km/h exactly), so no figure is rounded beyond what you can reverse.',
+          '<strong>W3C (World Wide Web Consortium):</strong> The DeviceOrientation Event Specification that defines how a browser reports heading, tilt and rotation.',
+          '<strong>W3C Geolocation API:</strong> The browser interface that supplies the position the Qibla bearing is calculated from.',
+          '<strong>SI units:</strong> Speed is displayed in km/h, mph and knots using exact conversion factors (1 knot = 1.852 km/h exactly), so no figure is rounded in a way you cannot reverse.',
         ],
         quote: 'The best way to learn and build is by doing — and the best way to do is with reliable, standardized tools immediately at hand.',
       },
@@ -48,7 +48,7 @@ export const enArticles: BlogArticlesBySlug = {
     keyTakeaways: [
       'Access every utility directly in your browser with $0 cost and zero account creation.',
       'All processing runs locally in your browser to safeguard your data and privacy.',
-      'Measurement, formatting, and accessibility calculations adhere strictly to NIST, W3C, and IETF standards.',
+      'Heading and tilt come from the W3C DeviceOrientation Event, the Qibla bearing from the W3C Geolocation API, and speeds from exact SI conversions.',
       'Responsive design provides identical workflows across phones, tablets, and desktop workstations.',
     ],
     callToAction: {
@@ -63,7 +63,7 @@ export const enArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'Most developers, designers, and digital creators lose more time to repetitive micro-tasks than to any single large project milestone. Cleaning a data snippet, converting unit dimensions, checking contrast ratios, or debugging malformed JSON might take only 30 to 45 seconds. However, when repeated a dozen times throughout a workday, those interruptions drain mental focus and cumulative hours each week.',
+          'Most developers, designers, and digital creators lose more time to repetitive micro-tasks than to any single large project milestone. Checking which way you are facing, whether a surface is level, how fast you are travelling, or which bearing points to the Qibla might take only 30 to 45 seconds. However, when repeated throughout a workday, those interruptions drain focus and add up to hours each week.',
           'When you need quick answers or immediate formatting, navigating search engine ads or scrolling through decade-old discussion forums wastes valuable time. <strong>Instanten</strong> provides direct, accurate instant convert utilities and concise instant help guides built for rapid resolution.',
         ],
       },
@@ -71,14 +71,14 @@ export const enArticles: BlogArticlesBySlug = {
         heading: 'How instant convert workflows ensure data precision',
         paragraphs: [
           'From data transformations to unit conversions, our utilities produce copy-ready results following standard specifications. You paste unformatted or raw input, inspect clean output in real time, and copy it directly into your code editor, document, or spreadsheet.',
-          'There are no opaque formulas, unannounced rounding errors, or hidden paywalls. This predictability builds trust into your everyday workflow — whether you are a frontend developer formatting API responses against <strong>IETF RFC 8259</strong>, a graphic designer calibrating physical dimensions with the <strong>Online Ruler</strong>, or an accessibility specialist verifying <strong>W3C WCAG 2.2</strong> contrast compliance.',
+          'There are no opaque formulas, unannounced rounding errors, or hidden paywalls. This predictability builds trust into your everyday workflow — whether you are checking a heading against <strong>W3C DeviceOrientation</strong> semantics, calibrating a level reading against a surface you trust, or comparing a speed reading in <strong>km/h and knots</strong> using the exact conversion factor.',
         ],
       },
       {
         heading: 'Why instant help beats long forum threads',
         paragraphs: [
           'When a technical question arises during a sprint or project deadline, you need accurate, actionable answers without distraction. Instead of skimming through conflicting forum advice or paywalled tutorials, our Blog guides provide focused, step-by-step instructions paired with the right utilities.',
-          'Our guides cover real-world use cases — calibrating screen measurements, structuring RFC-compliant Base64 payloads, crafting responsive CSS grids, and avoiding common syntax pitfalls. Pairing a direct utility with clear documentation helps you resolve issues and return to productive work in seconds.',
+          'Our guides cover real-world use cases — finding north without an app, checking whether a surface is level, reading a speedometer in the right unit, and confirming a Qibla bearing when the first reading looks wrong. Pairing a direct instrument with clear documentation helps you resolve the question and get back to work.',
         ],
         quote: 'Saving thirty seconds a dozen times a day preserves uninterrupted focus — the most valuable resource for modern creators.',
       },
@@ -86,14 +86,14 @@ export const enArticles: BlogArticlesBySlug = {
         heading: 'Universal access across modern devices',
         paragraphs: [
           'Because Instanten is built as a lightweight, static web platform, each page loads with near-zero latency on modern mobile networks and broadband connections. There are no native desktop apps to install, no background updater services eating system memory, and no device licensing limits.',
-          'Furthermore, privacy remains central: image compression and string encoding execute client-side inside your browser session. Your confidential files, tokens, and data never leave your local machine.',
+          'Furthermore, privacy stays central: the sensor readings your browser produces — orientation, tilt, position — are processed on your device. Nothing needs to be uploaded for a compass to know where north is.',
         ],
       },
     ],
     takeawaysTitle: 'Summary Checklist',
     keyTakeaways: [
       'Eliminate micro-delays by keeping standardized browser utilities bookmarked for quick access.',
-      'Rely on verified NIST, W3C, and IETF specifications to prevent conversion errors.',
+      'Rely on the W3C specifications and exact SI factors the instruments cite, so no reading is a guess.',
       'Maintain full data confidentiality with client-side processing.',
       'Seamlessly switch between mobile, tablet, and desktop environments without losing parity.',
     ],
@@ -121,26 +121,26 @@ export const enArticles: BlogArticlesBySlug = {
       {
         heading: 'What a tools hub really is',
         paragraphs: [
-          'The phrase <strong>web tools hub</strong> gets used loosely. In practice, a hub is defined by three things: a shared address, a shared interface, and a shared promise about privacy. You should be able to move from a JSON formatter to a word counter to a QR generator without relearning the layout, and you should be able to predict what happens to the text you paste in.',
-          'That consistency is the value. When each utility lives on a different site, you carry a mental map of a dozen interfaces, a dozen cookie banners and a dozen privacy policies. A single <strong>tools hub</strong> collapses that map into one, and the <strong>online tools list</strong> becomes one page instead of twelve bookmarks.',
+          'The phrase <strong>instrument hub</strong> gets used loosely. In practice, a hub is defined by three things: a small, fixed set of measurements, a page for each one that opens ready to work, and no account standing between you and the reading.',
+          'That consistency is the value. When each measurement lives in a different app, you carry a mental map of downloads, permissions and privacy policies. A single <strong>instrument hub</strong> collapses that map into one, and the list becomes one page instead of four installs.',
         ],
       },
       {
         heading: 'The online tools list: what belongs in a good one',
         paragraphs: [
-          'A useful list is short and honest. Every entry should correspond to a job people genuinely repeat, not to a category someone wanted to fill. Instanten keeps twelve utilities because those twelve cover the everyday ground most people hit in a normal week.',
+          'A useful instrument set is short and honest. Every entry should correspond to a measurement people genuinely repeat — direction, flatness, speed, bearing — not to a category someone wanted to fill. Instanten keeps four instruments because those four cover the measurements most people actually make in a normal week.',
         ],
         bullets: [
-          '<strong>Formatting and validation</strong> — a JSON formatter that validates against RFC 8259 and reports the line where parsing failed.',
-          '<strong>Conversion</strong> — a Base64 encoder and decoder that handles UTF-8 correctly, per RFC 4648.',
-          '<strong>Writing support</strong> — a word counter with live counts for words, characters, sentences and reading time.',
-          '<strong>Security</strong> — a password generator using a cryptographically secure random source, not Math.random.',
-          '<strong>Sharing</strong> — a QR generator for links, text and Wi-Fi credentials, with PNG export.',
-          '<strong>Media</strong> — an image compressor that shrinks JPEG, PNG and WebP files locally.',
-          '<strong>Design</strong> — a colour palette builder that checks every pair against WCAG 2.2 Level AA contrast.',
-          '<strong>Layout</strong> — a CSS Grid generator that outputs production-ready CSS you can paste into a stylesheet.',
-          '<strong>Measurement</strong> — an online ruler calibrated to the ISO/IEC 7810 ID-1 card size.',
-          '<strong>Metadata</strong> — a meta tag generator that assembles title, description and social tags in one block.',
+          
+          
+          
+          
+          
+          
+          '<strong>Bearing</strong> — a Qibla finder that calculates the great-circle bearing for your own location instead of showing a fixed number.',
+          '<strong>Speed</strong> — a speedometer that reads the position sensor and shows the same speed in km/h, mph and knots.',
+          '<strong>Flatness</strong> — a bubble level that reads tilt on two axes, because "is it straight" is a question people ask more often than any other measurement.',
+          '<strong>Direction</strong> — an online compass that shows a live heading in degrees from the device orientation sensor, readable at a glance.',
         ],
       },
       {
@@ -159,7 +159,7 @@ export const enArticles: BlogArticlesBySlug = {
         heading: 'How to fold a web tools hub into instant work',
         paragraphs: [
           'The practical benefits show up once the hub is one keystroke away. Bookmark the homepage, or add it to your home screen on Android and iOS — the site behaves like a lightweight app without an app-store update cycle.',
-          'From there, a simple routine works well. Start on the <strong>online tools list</strong> when you are not sure which utility you need. Use the search box on the homepage when you know the name. And when a task turns out to need context rather than a click — what valid JSON allows, how contrast ratios are computed, when Base64 inflates a payload — read the matching guide on the blog rather than guessing.',
+          'From there, a simple routine works well. Open the instrument that matches the measurement you need rather than the one you used last time: direction is a compass job, flatness is a level job, speed is a speedometer job and the Qibla bearing is its own job. Three of the four read the device sensor directly, so the number on screen changes as you move and you can tell a stale reading from a live one.',
           'Teams get a second benefit: policy. One <strong>free online tools website</strong> with local processing is easier to approve than five vendors, five data-processing agreements and five renewal dates. That is the quiet argument for a hub over a folder of bookmarks — it is not only faster, it is simpler to govern.',
         ],
       },
@@ -183,20 +183,20 @@ export const enArticles: BlogArticlesBySlug = {
       {
         paragraphs: [
           'Instant work is not a buzzword; it is a category of task. It covers everything you finish in under two minutes and everything you would resent opening a full application for — cleaning a string of text, checking a colour pair, turning a payload into something readable. These tasks are small, frequent and easy to postpone, which is exactly why they deserve a fixed set of <strong>instant tools</strong> rather than a fresh web search every time.',
-          '<strong>Instanten</strong> collects twelve of them in one <strong>online tools hub</strong>. This article walks through the list the way you would actually use it during a working day: morning setup, mid-task fixes, delivery checks and end-of-day cleanup.',
+          '<strong>Instanten</strong> collects four of them — a compass, a bubble level, a speedometer and a Qibla finder — in one <strong>instrument hub</strong>. This article walks through the set the way you would actually use it during a working day: morning checks, mid-task measurements, travel and end-of-day wrap-up.',
         ],
       },
       {
         heading: 'Morning: prepare the things you will need',
         paragraphs: [
-          'Start with credentials and layout, because both are cheap to prepare and expensive to improvise. The <strong>password generator</strong> produces random passwords from a cryptographically secure source, with adjustable length and character sets, plus an entropy estimate so you can see what you gained by adding characters rather than by adding symbols. The <strong>CSS Grid generator</strong> and the <strong>colour palette</strong> builder cover the other half of setup: lay out a responsive grid visually, then check every foreground and background pair against WCAG 2.2 Level AA contrast before the design reaches a review.',
+          'Start with the two instruments you can check against the world around you, because a wrong reading is easy to spot and easy to correct. The <strong>online compass</strong> shows a live heading in degrees; hold the phone flat and compare it with a known direction — sunrise, a street grid, a landmark. The <strong>bubble level</strong> reads tilt in degrees on both axes, and zeroing it on a surface you already trust calibrates your eye for the rest of the day.',
         ],
       },
       {
         heading: 'Mid-task: fix the small things without breaking flow',
         paragraphs: [
-          'This is where a <strong>free online tools hub</strong> earns its place. The <strong>JSON formatter</strong> validates against RFC 8259 and points at the exact line where parsing failed, which is usually faster than reading a stack trace. The <strong>Base64 encoder and decoder</strong> handles text, files and images with proper UTF-8 support, so accented characters and emoji survive the round trip. The <strong>regex tester</strong> shows matches and capture groups as you type, which beats a guess-and-reload cycle in code.',
-          'Two more belong in the same block. The <strong>markdown editor</strong> gives a live preview while you write and exports CommonMark-compliant output, so the document you paste into a repository renders the way it did on screen. The <strong>word counter</strong> covers the opposite direction: live counts for words, characters, sentences and reading time, plus keyword density for writers working to a limit.',
+          'This is where a <strong>browser instrument</strong> earns its place. The <strong>bubble level</strong> shows tilt on both axes in degrees and settles in a second, which beats guessing whether a shelf is straight. The <strong>speedometer</strong> reads the position sensor and shows current speed in km/h, mph and knots, so a single page covers three unit conventions. The <strong>online compass</strong> reports the heading the device sensor provides, with a dial that stays readable while the phone moves.',
+          'Two more belong in the same block. The <strong>online compass</strong> gives a live heading in degrees with a needle you can read at a glance, and it keeps working when the screen is held flat because it reads the device orientation sensor rather than a picture of a dial. The <strong>Qibla finder</strong> uses your location to calculate the great-circle bearing to Makkah, so the number on screen is a real bearing for where you are standing, not a fixed number copied from a chart.',
         ],
       },
       {
@@ -208,8 +208,8 @@ export const enArticles: BlogArticlesBySlug = {
       {
         heading: 'Delivery: make sure what you send is correct',
         paragraphs: [
-          'Before something leaves your machine, three checks pay for themselves. The <strong>image compressor</strong> shrinks JPEG, PNG and WebP files in the browser without uploading the originals, which matters when an attachment limit is the last obstacle. The <strong>meta tag generator</strong> assembles the title, description, Open Graph and Twitter Card tags in one copy-paste block, so a shared link does not render as a blank card. And the <strong>QR generator</strong> turns a URL, a block of text or Wi-Fi credentials into a code you can export immediately.',
-          'For anything measured rather than transmitted, the <strong>online ruler</strong> completes the set. It calibrates against the standard card size defined in ISO/IEC 7810 ID-1 — 3.370 by 2.125 inches, or 85.60 by 53.98 millimetres — and uses the exact NIST definition of the international inch, 25.4 millimetres, so on-screen measurement stays honest.',
+          'Before something leaves your hands, three checks pay for themselves. The <strong>speedometer</strong> confirms how fast you are moving using the device position sensor, so a walk, a cycle ride or a drive can be measured without mounting a second device. The <strong>compass</strong> confirms direction, and the <strong>Qibla finder</strong> turns that heading into a bearing you can act on.',
+          'For anything that tilts, the <strong>bubble level</strong> completes the set. It reads the device orientation sensor in degrees on both axes, so a shelf, a picture frame or a washing machine can be judged without hunting for a physical spirit level. Zeroing the reading on a surface you already trust is the fastest way to confirm the numbers mean what they say.',
         ],
       },
       {
@@ -225,12 +225,12 @@ export const enArticles: BlogArticlesBySlug = {
     keyTakeaways: [
       'Prepare credentials and layout in the morning so mid-task fixes stay short.',
       'Keep formatting, conversion and testing tools in one tab to protect your flow.',
-      'Check compression, metadata and QR output before anything is sent or printed.',
+      'Check the heading against a known landmark, hold the phone flat while the level settles, and confirm the Qibla bearing from where you are actually standing — not from where you were yesterday.',
       'Static pages with local processing are what make an instant tool feel instant.',
     ],
     callToAction: {
-      heading: 'Try the twelve tools',
-      text: 'Open the full tools hub and run one real task end to end, or tell us which utility your week is missing through the',
+      heading: 'Try the four instruments',
+      text: 'Open the instrument hub and run one real measurement end to end, or tell us which reading your week is missing through the',
       contactLabel: 'contact form',
     },
   },
@@ -246,7 +246,7 @@ export const enArticles: BlogArticlesBySlug = {
       {
         heading: 'Coverage: what a hub actually covers',
         paragraphs: [
-          'A good <strong>multi tools website</strong> covers the frequent, small jobs: formatting and validating JSON, encoding and decoding Base64, counting words, generating passwords, creating QR codes, compressing images, checking contrast, generating grids, measuring on screen, building meta tags, testing regex and editing Markdown. That list is not exhaustive, and it is not meant to be. It is the set of tasks most people repeat weekly.',
+          'A good <strong>tools hub</strong> covers the frequent, small jobs in one place: a compass that works from the phone in your pocket, a bubble level that reads tilt in degrees, a speedometer that shows how fast you are actually moving, and a Qibla finder that gives a bearing you can trust. Four tools, four jobs, no installer.',
           'Paid software covers the deep end: long-form document editing with track changes, professional image retouching, video production, CAD and large-scale data transformation. Those are real requirements and a hub does not pretend to meet them. The useful framing is that most knowledge workers need the deep end occasionally and the shallow end daily — and paying subscription prices for the daily work is where budgets leak.',
         ],
       },

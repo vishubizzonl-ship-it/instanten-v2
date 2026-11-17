@@ -3,9 +3,10 @@
  *
  * Chaar sensor tools (compass, bubble level, speedometer, Qibla) site ke root
  * par rehte hain — `/onlinebubblelevel/`, `/<lang>/onlinebubblelevel/` — kyunki
- * ye apne poore page ke saath aate hain (compassinstant silo jaisa). Baaki 12
- * tools `/tools/<slug>/` par hain. Dono jagah se link banane ke liye yahi
- * function use karo, taaki URL kahin bhi hard-code na ho.
+ * ye apne poore page ke saath aate hain (compassinstant silo jaisa). Silo ke
+ * bahar ka koi tool nahi hai, isliye `/tools/<slug>/` branch sirf safety ke
+ * liye rakha hai. Dono jagah se link banane ke liye yahi function use karo,
+ * taaki URL kahin bhi hard-code na ho.
  */
 export const INSTRUMENT_SLUGS = [
   'onlinecompass',
@@ -20,7 +21,7 @@ export function isInstrument(slug: string): slug is InstrumentSlug {
   return (INSTRUMENT_SLUGS as readonly string[]).includes(slug);
 }
 
-/** Prefix-free tool path: `/onlineqibla/` ya `/tools/json-formatter/`. */
+/** Prefix-free tool path: `/onlinecompass/` ya `/onlineqibla/`. */
 export function toolPath(slug: string): string {
   return isInstrument(slug) ? `/${slug}/` : `/tools/${slug}/`;
 }

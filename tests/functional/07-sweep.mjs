@@ -9,10 +9,10 @@ r.section('07 — Page sweep (har page type)');
 const ROUTES = [
   '/', '/de/', '/ja/', '/ko/', '/pt/',
   '/about/', '/contact/', '/terms/', '/privacy-policy/', '/privacy/',
-  '/submit/', '/search/', '/tags/', '/tag/json/', '/tag/instant-help/',
+  '/submit/', '/search/', '/tags/', '/tag/compass/', '/tag/qibla/',
   '/blog/', '/blog/page/2/', '/blog/complete-guide-to-instanten-tools-and-instant-online-workflows/',
   '/de/blog/', '/ja/tags/', '/ko/submit/',
-  '/tools/json-formatter/', '/de/tools/json-formatter/', '/ja/tools/word-counter/',
+  '/onlinecompass/', '/de/onlinecompass/', '/ja/onlineqibla/',
   '/onlinecompass/', '/de/onlinecompass/', '/onlinebubblelevel/', '/onlinespeedometer/', '/onlineqibla/',
   '/onlinecompass/blog/', '/onlinecompass/contact/', '/onlinecompass/faq/'.replace('/faq/', '/'),
   '/compassinstant/',
@@ -39,7 +39,7 @@ for (const route of ROUTES) {
   // /privacy/ = noindex redirect stub (jaan-boojh kar minimal), sensor silos ka
   // apna header/footer hai (global site chrome nahi) — dono expected hain.
   const isStub = route === '/privacy/';
-  const isSilo = /^\/(de\/)?(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)\//.test(route) || route === '/compassinstant/';
+  const isSilo = /^(?:\/(?:de|ja|ko|fr|es|it|pt|nl|sv))?\/(onlinecompass|onlinebubblelevel|onlinespeedometer|onlineqibla)(\/|$)/.test(route) || route === '/compassinstant/';
   const ok = scriptErrs.length === 0 && (isStub || !!h1) && (isStub || isSilo || (hasNav && hasFooter));
   if (!ok) errors += 1;
   const detail = [
@@ -47,7 +47,7 @@ for (const route of ROUTES) {
     h1 ? `h1="${(h1.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 34)}"` : 'h1 GAYAB',
     hasNav ? '' : (isStub ? 'stub' : isSilo ? 'silo-nav' : 'header GAYAB'),
     hasFooter ? '' : (isStub ? '' : isSilo ? '' : 'footer GAYAB'),
-    isSilo ? `siloLinks=${p.$$('a[href^="/online"], a[href="/"], a[href^="/tools/"]').length}` : '',
+    isSilo ? `siloLinks=${p.$$('a[href^="/online"], a[href="/"], a[href^="/online"]').length}` : '',
     searchBtn ? 'search✓' : 'search✗',
   ].filter(Boolean).join(' · ');
   ok ? r.ok(`${route}`, detail) : r.fail(`${route}`, detail);

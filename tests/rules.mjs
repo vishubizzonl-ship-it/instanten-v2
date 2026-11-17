@@ -112,7 +112,10 @@ export function run() {
 
   /* ---------- Rule 7: styling sirf Tailwind v4 ---------- */
   const toolFiles = readdirSync('src/components/tools').filter((f) => f.endsWith('.astro'));
-  check(toolFiles.length === 12, `Rule 7: 12 tool components hone chahiye (mile ${toolFiles.length})`);
+  // Generic /tools/ components ab nahi hain — site par sirf 4 sensor instruments
+  // (jo apne silo components me rehte hain). Agar koi naya tools component
+  // wapas aaya to yahan dikhega.
+  check(toolFiles.length === 0, `Rule 7: generic tool components wapas aa gaye (${toolFiles.length} mile)`);
 
   const styles = readdirSync('src/styles');
   check(!styles.includes('tools.css'), 'Rule 7: alag tools.css wapas aa gayi (Tailwind use karo)');
@@ -140,13 +143,11 @@ export function run() {
       check(TOKEN_HEX.has(hex[0].toLowerCase()), `Rule 2: ${path} mein token ke bahar ka rang — ${hex[0]}`);
     }
   }
-  check(utilityClasses === 12, `Rule 7: sirf ${utilityClasses}/12 tool components Tailwind utilities use karte hain`);
+  check(utilityClasses === 0, `Rule 7: ${utilityClasses} tool component Tailwind utilities use karta hai (koi hona nahi chahiye)`);
 
   /* ---------- Rule 1: tools ka library code bhi apna ---------- */
   const coreFiles = readdirSync('src/lib/tools');
   check(coreFiles.includes('core.mjs'), 'Rule 1: src/lib/tools/core.mjs gayab hai');
-  check(coreFiles.includes('qr.mjs'), 'Rule 1: apna QR encoder (src/lib/tools/qr.mjs) gayab hai');
-  check(!existsSync('node_modules/qrcode-generator'), 'Rule 1: qrcode-generator package abhi bhi installed hai');
   const qrSource = readFileSync('src/lib/tools/qr.mjs', 'utf8');
   check(!/from\s+['"]qrcode/.test(qrSource), 'Rule 1: qr.mjs kisi package se import karta hai');
 

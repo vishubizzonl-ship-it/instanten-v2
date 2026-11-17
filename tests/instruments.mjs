@@ -165,13 +165,10 @@ export function run(pages, outDir) {
   const toolJsonCount = existsSync('src/content/tools')
     ? readdirSync('src/content/tools').filter((f) => f.endsWith('.json')).length
     : 0;
-  const hubCards = new Set([
-    ...[...hub.matchAll(/href="\/tools\/([a-z0-9-]+)\//g)].map((m) => m[1]),
-    ...[...hub.matchAll(/href="\/(online[a-z]+)\//g)].map((m) => m[1]),
-  ]);
+  const hubCards = new Set([...hub.matchAll(/href="\/(online[a-z]+)\//g)].map((m) => m[1]));
   check(
     hubCards.size >= toolJsonCount,
-    `/tools/ par ${hubCards.size} cards hain, ${toolJsonCount} tools kolekshan mein hain (list adhoori)`
+    `home par ${hubCards.size} instrument cards hain, ${toolJsonCount} tools kolekshan mein hain (list adhoori)`
   );
 
   // --- 10. localized card naam English se alag hai (7 locales) ----------
@@ -259,7 +256,7 @@ export function run(pages, outDir) {
   // --- 10f. Theme: ek hi key, har page par, dono toggles ek API se --------
   {
     // (a) har page ke <head> mein paint se pehle saved theme lagti hai
-    const sample = ['/', '/onlinecompass/', '/onlineqibla/', '/tools/json-formatter/', '/de/', '/blog/', '/search/', '/404.html'];
+    const sample = ['/', '/onlinecompass/', '/onlineqibla/', '/de/', '/blog/', '/search/', '/404.html'];
     for (const url of sample) {
       const html = pages.get(url) ?? '';
       const head = html.slice(0, html.indexOf('</head>'));
@@ -776,11 +773,6 @@ export function run(pages, outDir) {
   // --- 12e. /compassinstant/ hub: saare 16 tools ke cards, har card apna page ---
   {
     const LANGS = ['en', 'de', 'ja', 'fr', 'es', 'ko', 'nl', 'sv', 'it', 'pt'];
-    const OTHER_TOOLS = [
-      'base64-encoder', 'color-palette', 'css-grid-generator', 'image-compressor',
-      'json-formatter', 'markdown-editor', 'meta-tag-generator', 'online-ruler',
-      'password-generator', 'qr-generator', 'regex-tester', 'word-counter',
-    ];
     for (const lang of LANGS) {
       const base = lang === 'en' ? '' : `/${lang}`;
       const url = `${base}/compassinstant/`;
@@ -798,14 +790,10 @@ export function run(pages, outDir) {
           );
         }
       }
-      // 12 browser tools
-      for (const slug of OTHER_TOOLS) {
-        check(html.includes(`href="${base}/tools/${slug}/"`), `hub ${lang}: /tools/${slug}/ ka card nahi`);
-      }
-      // kart ki ginti: 16 (embed links isliye nav se zyada ho sakte hain, isliye
-      // list items par seedha check)
+      // sirf 4 instrument cards (generic /tools/ hub hata diya gaya)
+      check(!html.includes('/tools/'), `hub ${lang}: hataye gaye /tools/ ka link hai`);
       const items = html.match(/<li class="[^"]*rounded-card/g) ?? [];
-      check(items.length === 16, `hub ${lang}: 16 cards chahiye, mile ${items.length}`);
+      check(items.length === 4, `hub ${lang}: 4 instrument cards chahiye, mile ${items.length}`);
       // ItemList JSON-LD mein bhi 16
       check(
         /"@type":"ItemList"/.test(html.replace(/\s/g, '')) || /"@type": "ItemList"/.test(html),
@@ -897,7 +885,7 @@ export function run(pages, outDir) {
   );
 
   // 8. silo ke bahar wale pages par site ka apna favicon hi rahe
-  for (const url of ['/', '/about/', '/tools/json-formatter/', '/blog/']) {
+  for (const url of ['/', '/about/', '/blog/']) {
     const html = pages.get(url) ?? '';
     check(html.includes('href="/favicon.svg"'), `${url}: site favicon hi nahi (tool wala le liya?)`);
   }

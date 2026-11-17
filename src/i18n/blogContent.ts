@@ -37,9 +37,9 @@ const de: BlogCopyBySlug = {
       'Ein kostenloser Online-Tools-Hub hält jedes Sofort-Tool nur einen Klick entfernt. So funktioniert die Online-Tools-Liste von Instanten und so erledigst du Sofort-Arbeit ohne Installation.',
   },
   'instant-tools-for-daily-work': {
-    title: '12 Sofort-Tools für Sofort-Arbeit: die tägliche Checkliste',
+    title: 'Vier Messinstrumente für den Alltag: die tägliche Checkliste',
     excerpt:
-      'Zwölf Sofort-Tools für die kleinen digitalen Aufgaben, die du jede Woche wiederholst — JSON, Wortzählung, Passwörter, Bildkomprimierung — kostenlos und ohne Konto.',
+      'Vier Messinstrumente für die Aufgaben, die du jede Woche wiederholst — Richtung, Neigung, Geschwindigkeit, Qibla-Peilung — kostenlos und ohne Konto.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'Web-Tools-Hub gegen Bezahl-Abos: Wer gewinnt?',
@@ -65,9 +65,9 @@ const ja: BlogCopyBySlug = {
       '無料オンラインツールハブなら、どの即時ツールもワンクリックで開けます。Instanten のオンラインツール一覧の仕組みと、インストールなしで即時作業を終える方法を解説します。',
   },
   'instant-tools-for-daily-work': {
-    title: '即時作業のための12の即時ツール：毎日のチェックリスト',
+    title: '毎日のための4つの計測ツール：デイリーチェックリスト',
     excerpt:
-      '毎週くり返す小さなデジタル作業のための12の即時ツールをまとめました。JSON整形、文字数カウント、パスワード生成、画像圧縮、QRコード作成、カラーコントラスト確認まで、すべてブラウザ内で完結し、無料でアカウント登録も不要です。',
+      '毎週くり返す小さな作業のための4つの計測ツールをまとめました。方位、傾き、速度、キブラの方位——すべてブラウザ内で完結し、無料でアカウント登録も不要です。',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'ウェブツールハブと有料サブスクリプション、勝つのはどっち？',
@@ -93,9 +93,9 @@ const fr: BlogCopyBySlug = {
       'Un hub d’outils en ligne gratuits garde chaque outil instantané à un clic. Comment fonctionne la liste d’outils en ligne d’Instanten et comment terminer un travail instantané sans rien installer.',
   },
   'instant-tools-for-daily-work': {
-    title: '12 outils instantanés pour le travail instantané : la liste quotidienne',
+    title: 'Quatre instruments de mesure pour le quotidien : la liste de chaque jour',
     excerpt:
-      'Douze outils instantanés pour les petites tâches numériques que vous répétez chaque semaine — JSON, comptage de mots, mots de passe, compression d’images — gratuits et sans compte.',
+      'Quatre instruments de mesure pour les tâches que vous répétez chaque semaine — direction, inclinaison, vitesse, relèvement de la Qibla — gratuits et sans compte.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'Hub d’outils web ou abonnements payants : qui gagne ?',
@@ -121,9 +121,9 @@ const es: BlogCopyBySlug = {
       'Un hub de herramientas online gratis mantiene cada herramienta instantánea a un clic. Cómo funciona la lista de herramientas online de Instanten y cómo terminar el trabajo instantáneo sin instalar nada.',
   },
   'instant-tools-for-daily-work': {
-    title: '12 herramientas instantáneas para el trabajo instantáneo: lista diaria',
+    title: 'Cuatro instrumentos de medición para el día a día: lista diaria',
     excerpt:
-      'Doce herramientas instantáneas para las pequeñas tareas digitales que repites cada semana: JSON, recuento de palabras, contraseñas y compresión de imágenes, gratis y sin cuenta.',
+      'Cuatro instrumentos de medición para las tareas que repites cada semana: dirección, inclinación, velocidad y rumbo de la alquibla, gratis y sin cuenta.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'Hub de herramientas web frente a suscripciones de pago: ¿quién gana?',
@@ -149,9 +149,9 @@ const ko: BlogCopyBySlug = {
       '무료 온라인 도구 허브는 모든 즉시 도구를 클릭 한 번으로 유지합니다. Instanten 온라인 도구 목록이 어떻게 작동하는지, 설치 없이 즉시 작업을 끝내는 방법을 설명합니다.',
   },
   'instant-tools-for-daily-work': {
-    title: '즉시 작업을 위한 12가지 즉시 도구: 매일 체크리스트',
+    title: '일상을 위한 네 가지 측정 도구: 매일 체크리스트',
     excerpt:
-      '매주 반복하는 작은 디지털 작업을 위한 12가지 즉시 도구 — JSON, 단어 수 세기, 비밀번호, 이미지 압축 — 무료이고 계정도 필요 없습니다.',
+      '매주 반복하는 작은 작업을 위한 네 가지 측정 도구 — 방향, 기울기, 속도, 키블라 방위 — 모두 브라우저에서 무료로, 가입 없이 사용할 수 있습니다.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: '웹 도구 허브 vs 유료 구독: 어느 쪽이 이길까?',
@@ -203,9 +203,9 @@ const it: BlogCopyBySlug = {
       'Un hub di strumenti online gratis tiene ogni strumento istantaneo a un clic. Come funziona l’elenco di strumenti online di Instanten e come chiudere il lavoro istantaneo senza installare nulla.',
   },
   'instant-tools-for-daily-work': {
-    title: '12 strumenti istantanei per il lavoro istantaneo: la checklist quotidiana',
+    title: 'Quattro strumenti di misura per la giornata: la checklist quotidiana',
     excerpt:
-      'Dodici strumenti istantanei per le piccole attività digitali che ripeti ogni settimana — JSON, conteggio parole, password, compressione immagini — gratis e senza account.',
+      'Quattro strumenti di misura per le attività che ripeti ogni settimana — direzione, inclinazione, velocità, rilevamento della Qibla — gratis e senza account.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'Hub di strumenti web contro abbonamenti a pagamento: chi vince?',
@@ -231,9 +231,9 @@ const pt: BlogCopyBySlug = {
       'Um hub de ferramentas online grátis mantém cada ferramenta instantânea a um clique. Como funciona a lista de ferramentas online do Instanten e como concluir trabalho instantâneo sem instalar nada.',
   },
   'instant-tools-for-daily-work': {
-    title: '12 ferramentas instantâneas para trabalho instantâneo: lista diária',
+    title: 'Quatro instrumentos de medição para o dia a dia: lista diária',
     excerpt:
-      'Doze ferramentas instantâneas para as pequenas tarefas digitais que você repete toda semana — JSON, contagem de palavras, senhas, compressão de imagens — grátis e sem conta.',
+      'Quatro instrumentos de medição para as tarefas que repete todas as semanas — direção, inclinação, velocidade, rumo da Qibla — grátis e sem conta.',
   },
   'web-tools-hub-vs-subscriptions': {
     title: 'Hub de ferramentas web ou assinaturas pagas: quem ganha?',

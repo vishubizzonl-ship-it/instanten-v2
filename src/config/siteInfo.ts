@@ -8,8 +8,8 @@ export { PUBLIC_EMAIL as CONTACT_EMAIL } from './contact';
 export const KEY_FEATURES = [
   'Independent browser-based software project built and maintained for developers, designers, students, and everyday users across the United States and worldwide',
   'Free instant tools and instant help guides — $0 cost with zero sign-up, zero accounts, and zero hidden subscriptions',
-  'Every tool references verifiable public standards: NIST (1 inch = 25.4 mm exactly), W3C WCAG 2.2 (4.5:1 / 3:1 contrast ratios), IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark (Markdown), W3C CSS Grid, and Google Search Central meta tag guidelines',
-  '12 free online utilities: Online Ruler (U.S. inches with 1/16" fractions, NIST calibration), Image Compressor (client-side Canvas/WebP for U.S. e-commerce), JSON Formatter (IETF RFC 8259), Base64 Encoder (IETF RFC 4648), Color Palette (W3C WCAG 2.2 AA), CSS Grid Generator (W3C Grid Layout), Markdown Editor (CommonMark), Meta Tag Generator (Google Search Central & Open Graph), and more',
+  'Every tool references verifiable public standards: NIST (1 inch = 25.4 mm exactly), W3C WCAG 2.2 (4.5:1 / 3:1 contrast ratios), IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), and W3C DeviceOrientation semantics',
+  'Four sensor instruments: Online Compass (live heading in degrees from the device orientation sensor), Bubble Level (tilt on both axes), Speedometer (km/h, mph and knots with exact SI conversions) and Qibla Finder (great-circle bearing from your own location using the W3C Geolocation API).',
   'Fast, responsive experience on desktop, laptop, tablet, and phone — no app to install, no download, no tracking pixels',
   'Built with Astro for maximum performance — static HTML, minimal JavaScript, instant page loads optimized for U.S. mobile 5G and broadband',
   'Light and Dark mode support with instant theme switching via browser localStorage — your preference never leaves your device',

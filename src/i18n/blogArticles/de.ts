@@ -6,7 +6,7 @@ export const deArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'Jeden Tag stehen Entwickler, Designer, Texter, Studierende und kleine Teams vor Dutzenden kleiner digitaler Aufgaben: JSON-Daten formatieren, Einheiten umrechnen, Textpassagen bereinigen oder Webstandards abgleichen. Schwere Desktop-Software für eine 30-Sekunden-Aufgabe zu starten, unterbricht den kreativen Arbeitsfluss. 15 bis 30 Euro monatlich für ein einzelnes SaaS-Abonnement zu bezahlen, ist oft überflüssig. Zudem führen zufällige Websuchen meist zu unübersichtlichen Seiten mit störender Werbung und defekten Buttons.',
+          'Jeden Tag stehen Menschen vor kleinen digitalen Aufgaben: Richtung prüfen, eine Fläche ausrichten, eine Geschwindigkeit messen, eine Peilung bestimmen. Jede dauert Sekunden — die Suche nach einer eigenen App dauert Minuten. Instanten legt vier Instrumente auf eine Seite, die sofort einsatzbereit ist.',
           '<strong>Instanten</strong> löst dieses Problem mit einem sauberen, browserbasierten Arbeitsbereich. Als unabhängige Sammlung kostenloser Sofort-Tools und praxisnaher Leitfäden vereint Instanten alltägliche Hilfsmittel – ohne Registrierung, ohne Paywall, ohne Nutzungslimits und mit voller Kompatibilität für Mobilgeräte und Desktops.',
         ],
       },
@@ -14,7 +14,7 @@ export const deArticles: BlogArticlesBySlug = {
         heading: 'Warum browserbasierte Sofort-Tools schwere Installer schlagen',
         paragraphs: [
           'Klassische Desktop-Suiten haben ihre Berechtigung bei rechenintensivem Videoschnitt oder 3D-Rendering, nicht jedoch bei schnellen Alltagsaufgaben. Ein browserbasiertes Tool eliminiert Kompatibilitätsprobleme mit dem Betriebssystem, Festplattenüberlastung und störende Update-Dienste im Hintergrund. Das identische Werkzeug funktioniert nahtlos unter Windows 11, macOS Sequoia, Linux, Android und iOS.',
-          'Da die Seiten mit minimalem clientseitigen JavaScript statisch vorgeneriert werden, reagiert jedes Tool in Millisekunden. Die Verarbeitung findet direkt in Ihrer lokalen Browsersitzung statt. Für Messaufgaben orientiert sich das <strong>Online-Lineal</strong> an der Standardgröße von Kreditkarten (ISO/IEC 7810 ID-1: 3.370 × 2.125 Zoll / 85.60 × 53.98 mm) und der <strong>NIST</strong>-Definition (1 internationaler Zoll = 25.4 mm exakt). Für Barrierefreiheit prüft die <strong>Farbpalette</strong> Kontrastverhältnisse gemäß <strong>W3C WCAG 2.2 Level AA</strong> (4.5:1 für Fließtext, 3:1 für großen Text).',
+          'Da die Seiten statisch vorgerendert werden, reagiert jedes Instrument in Millisekunden. Die Sensordaten werden im Browser verarbeitet; eine Peilung oder eine Neigung muss das Gerät nie verlassen.',
         ],
       },
       {
@@ -23,11 +23,11 @@ export const deArticles: BlogArticlesBySlug = {
           'Die Bibliothek deckt Formatierungen, Einheitenumrechnungen und Entwickler-Tools ab – transparent dokumentiert nach anerkannten Standards:',
         ],
         bullets: [
-          '<strong>JSON-Formatierer:</strong> Validieren und formatieren Sie JSON-Strukturen nach <strong>IETF RFC 8259</strong> mit Echtzeit-Syntaxhervorhebung.',
-          '<strong>Base64-Konverter:</strong> Kodieren und dekodieren Sie Texte, Dateien und Data-URIs nach <strong>IETF RFC 4648</strong> mit vollständiger UTF-8-Unterstützung.',
-          '<strong>CSS Grid Generator:</strong> Erstellen Sie responsive Layouts gemäß der <strong>W3C CSS Grid Layout Module Level 2</strong> Spezifikation.',
-          '<strong>Meta-Tag-Generator:</strong> Generieren Sie standardkonforme Open-Graph- und Twitter-Card-Metadaten nach den Richtlinien von Google Search Central.',
-          '<strong>Bildkomprimierer:</strong> Clientseitige Canvas- und WebP-Komprimierung optimiert Bilder direkt im Browser, ohne sensible Daten auf externe Server hochzuladen.',
+          '<strong>CompassInstant-Hub:</strong> Alle vier Instrumente an einem Ort — Kompass, Wasserwaage, Tachometer und Qibla-Finder —, jedes mit eigener Seite, Anleitungen und Rechtstexten.',
+          '<strong>Online-Kompass:</strong> Zeigt die aktuelle Himmelsrichtung in Grad über den Lage-Sensor des Geräts.',
+          '<strong>Wasserwaage:</strong> Liest die Gerätelage auf beiden Achsen und zeigt die Neigung in Grad — für Regal, Bilderrahmen oder Waschmaschine.',
+          '<strong>Tachometer:</strong> Liest den Positionssensor des Geräts und zeigt die aktuelle Geschwindigkeit in km/h, mph und Knoten.',
+          '<strong>Qibla-Finder:</strong> Berechnet die Großkreis-Peilung von Ihrem Standort nach Makkah über die W3C-Geolocation-API.',
         ],
       },
       {
@@ -36,10 +36,10 @@ export const deArticles: BlogArticlesBySlug = {
           'Wir setzen auf technische Transparenz. Jede Umrechnungsformel und Designregel auf Instanten basiert auf offiziellen technischen Normen:',
         ],
         bullets: [
-          '<strong>NIST (National Institute of Standards and Technology):</strong> Metrische und angloamerikanische Maßeinheiten nach NIST PML-Leitlinien.',
-          '<strong>W3C (World Wide Web Consortium):</strong> WCAG 2.2 Kontrastrichtlinien und CSS Grid Layout Module Spezifikationen.',
-          '<strong>IETF (Internet Engineering Task Force):</strong> RFC 8259 JSON-Datenformat und RFC 4648 Base64-Kodierung.',
-          '<strong>CommonMark:</strong> Standardisierte Markdown-Formatierung und Vorschau.',
+          '<strong>SI-Einheiten:</strong> Geschwindigkeiten erscheinen in km/h, mph und Knoten mit exakten Umrechnungsfaktoren (1 Knoten = 1,852 km/h exakt), sodass kein Wert unumkehrbar gerundet wird.',
+          '<strong>W3C (World Wide Web Consortium):</strong> Die DeviceOrientation-Event-Spezifikation, die festlegt, wie ein Browser Himmelsrichtung, Neigung und Drehung meldet.',
+          '<strong>W3C Geolocation API:</strong> Die Browser-Schnittstelle, die die Position für die Qibla-Peilung liefert.',
+          'SI-Einheiten: Geschwindigkeit in km/h, mph und Knoten mit exakten Umrechnungsfaktoren (1 Knoten = 1,852 km/h exakt).',
         ],
         quote: 'Am besten lernt und baut man durch praktische Anwendung – und am besten gelingt dies mit verlässlichen, standardisierten Werkzeugen zur Hand.',
       },
@@ -48,7 +48,7 @@ export const deArticles: BlogArticlesBySlug = {
     keyTakeaways: [
       'Nutzen Sie jedes Werkzeug direkt im Browser ohne Kosten und ohne Registrierung.',
       'Sämtliche Verarbeitungsschritte laufen lokal ab, um Ihre Privatsphäre zu schützen.',
-      'Messungen, Formatierungen und Barrierefreiheitsberechnungen folgen strengen NIST-, W3C- und IETF-Standards.',
+      'Richtung und Neigung stammen aus dem W3C DeviceOrientation Event, die Qibla-Peilung aus der W3C Geolocation API, Geschwindigkeiten aus exakten SI-Umrechnungen.',
       'Das responsive Design gewährleistet dieselbe Benutzererfahrung auf Smartphones, Tablets und PCs.',
     ],
     callToAction: {
@@ -63,7 +63,7 @@ export const deArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'Die meisten Entwickler, Designer und Wissensarbeiter verlieren mehr Zeit durch repetitive Kleinigkeiten als durch große Meilensteine. Einen Wert umzurechnen, einen Textbaustein zu säubern, Kontraste zu prüfen oder fehlerhaftes JSON zu reparieren, dauert oft nur 30 bis 45 Sekunden. Wiederholt sich dies jedoch zehnmal am Tag, summieren sich diese Unterbrechungen zu verlorenen Stunden pro Woche.',
+          'Die meisten Menschen verlieren mehr Zeit durch wiederkehrende kleine Messungen als durch große Meilensteine. Zu prüfen, in welche Richtung man blickt, ob eine Fläche waagerecht ist, wie schnell man unterwegs ist oder welche Peilung zur Qibla führt, dauert jeweils nur Sekunden — doch ohne festen Platz für diese Messungen kostet jede einzelne eine Suche.',
           'Suchergebnisse voller Werbung oder unübersichtliche Forenbeiträge kosten wertvolle Nerven. <strong>Instanten</strong> stellt zielgerichtete Sofort-Konverter und prägnante Anleitungen bereit, die Probleme unmittelbar lösen.',
         ],
       },
@@ -71,7 +71,7 @@ export const deArticles: BlogArticlesBySlug = {
         heading: 'Wie standardisierte Konverter Fehler vermeiden',
         paragraphs: [
           'Von Datenumwandlungen bis hin zu Maßeinheiten liefern unsere Werkzeuge kopierfertige Resultate. Sie fügen Ihre Rohdaten ein, prüfen das Ergebnis in Echtzeit und übernehmen es direkt in Ihren Editor oder Ihre Tabelle.',
-          'Es gibt keine versteckten Rundungsfehler oder unklare Formeln. Das schafft Vertrauen im Alltag – egal ob Sie als Frontend-Entwickler API-Daten nach <strong>IETF RFC 8259</strong> aufbereiten oder als Designer Farben nach <strong>W3C WCAG 2.2</strong> überprüfen.',
+          'Es gibt keine versteckten Rundungsfehler oder unklare Formeln. Das schafft Vertrauen im Alltag – egal ob Sie mit dem <strong>Online-Kompass</strong> eine Richtung ablesen oder mit der <strong>Wasserwaage</strong> prüfen, ob eine Fläche wirklich waagerecht ist.',
         ],
       },
       {
@@ -93,7 +93,7 @@ export const deArticles: BlogArticlesBySlug = {
     takeawaysTitle: 'Praxis-Checkliste',
     keyTakeaways: [
       'Legen Sie Lesezeichen für häufig benötigte Tools an, um Verzögerungen im Alltag zu vermeiden.',
-      'Verlassen Sie sich auf erprobte NIST-, W3C- und IETF-Standards für akkurate Resultate.',
+      'Verlassen Sie sich auf die W3C-Spezifikationen und exakten SI-Faktoren, die die Instrumente nennen.',
       'Schützen Sie vertrauliche Daten durch lokale Datenverarbeitung im Browser.',
       'Wechseln Sie nahtlos zwischen Smartphone, Tablet und Arbeitsplatzrechner.',
     ],

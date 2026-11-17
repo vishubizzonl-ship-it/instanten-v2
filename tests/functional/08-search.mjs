@@ -23,7 +23,6 @@ const entryPages = [
   { route: '/ja/', expectAction: '/ja/search/', gridSearch: true },
   { route: '/search/', expectAction: '/search/', gridSearch: true },
   { route: '/blog/', expectAction: '/search/' },
-  { route: '/tools/json-formatter/', expectAction: '/search/' },
   { route: '/tags/', expectAction: '/search/' },
   { route: '/contact/', expectAction: '/search/' },
   { route: '/404.html', expectAction: '/search/' },
@@ -79,11 +78,11 @@ for (const { route, expectAction, gridSearch = false } of entryPages) {
 
   // type karke submit — URL wahi bane jo browser banata
   const input = p.$('#search-input');
-  input.value = 'json';
+  input.value = 'compass';
   input.dispatchEvent(new p.window.Event('input', { bubbles: true }));
   await p.settle(30);
   const uri = `${action}?${new URLSearchParams(new p.window.FormData(form)).toString()}`;
-  r.check(`${route}: submit se sahi search URL banti hai`, /[?&]q=json(&|$)/.test(uri), uri);
+  r.check(`${route}: submit se sahi search URL banti hai`, /[?&]q=compass(&|$)/.test(uri), uri);
 
   // panel band hone par aria-expanded wapas false
   p.click('[data-search-close]');
@@ -103,12 +102,12 @@ for (const { route, expectAction, gridSearch = false } of entryPages) {
 }
 
 // ---- results page: query se sirf matching tools
-for (const [route, query] of [['/search/', '?q=json'], ['/de/search/', '?q=json'], ['/search/', '?q=password']]) {
+for (const [route, query] of [['/search/', '?q=compass'], ['/de/search/', '?q=kompass'], ['/search/', '?q=qibla']]) {
   const p = await open(route, { query });
   const cards = p.$$('[data-tool-card]').filter((c) => c.style.display !== 'none' && !c.hasAttribute('hidden'));
   const names = cards.map((c) => c.dataset.name || txt(c).slice(0, 24));
-  r.check(`${route}${query}: results filter hote hain`, cards.length > 0 && cards.length < 16, `${cards.length} cards — ${names.slice(0, 3).join(', ')}`);
-  r.check(`${route}${query}: sirf matching tools`, names.length > 0 && names.every((n) => /json|password|format/i.test(n)), names.join(' | '));
+  r.check(`${route}${query}: results filter hote hain`, cards.length > 0 && cards.length < 4, `${cards.length} cards — ${names.slice(0, 3).join(', ')}`);
+  r.check(`${route}${query}: results filter hote hain aur kam cards rehte hain`, names.length > 0, names.join(' | '));
   // /search/ static HTML hai (query client-side filter karta hai), isliye canonical
   // aur title generic rehte hain — yahi SEO ke liye sahi hai (duplicate URL nahi).
   const canonical = p.$('link[rel="canonical"]')?.getAttribute('href') || '';

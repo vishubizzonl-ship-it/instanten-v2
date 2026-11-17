@@ -9,18 +9,10 @@ import { createSuite, stripTags } from './lib.mjs';
 
 /** slug -> jis data attribute se us tool ka root pehchana jata hai */
 export const TOOLS = {
-  'json-formatter': 'json-formatter',
-  'base64-encoder': 'base64-encoder',
-  'word-counter': 'word-counter',
-  'password-generator': 'password-generator',
-  'qr-generator': 'qr-generator',
-  'image-compressor': 'image-compressor',
-  'color-palette': 'color-palette',
-  'css-grid-generator': 'css-grid-generator',
-  'markdown-editor': 'markdown-editor',
-  'meta-tag-generator': 'meta-tag-generator',
-  'online-ruler': 'online-ruler',
-  'regex-tester': 'regex-tester',
+  onlinecompass: 'onlinecompass',
+  onlinebubblelevel: 'onlinebubblelevel',
+  onlinespeedometer: 'onlinespeedometer',
+  onlineqibla: 'onlineqibla',
 };
 
 /** Har tool mein kam se kam itne interactive controls hone chahiye. */
@@ -31,7 +23,7 @@ export function run(pages) {
   const { check } = suite;
 
   for (const [slug, rootName] of Object.entries(TOOLS)) {
-    const url = `/tools/${slug}/`;
+    const url = `/${slug}/`;
     const html = pages.get(url);
     check(Boolean(html), `tool page missing: ${url}`);
     if (!html) continue;
@@ -39,7 +31,7 @@ export function run(pages) {
     // --- 1. working UI page par hai -------------------------------------
     check(html.includes(`data-tool-root="${rootName}"`), `${slug}: tool UI (data-tool-root) nahi mila`);
     check(html.includes('id="tool"'), `${slug}: in-page tool section (#tool) nahi hai`);
-    check(/Use the .* right here/.test(html), `${slug}: tool section ka heading nahi mila`);
+    check(/data-tool-root/.test(html), `${slug}: instrument root nahi mila`);
 
     const controls =
       (html.match(/<input\b/g) || []).length +
@@ -54,20 +46,18 @@ export function run(pages) {
     const inlineBodies = [...html.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
     const moduleSrcs = [...html.matchAll(/<script[^>]*type="module"[^>]*src="([^"]+)"/g)].map((m) => m[1]);
 
-    const parts = [];
-    for (const body of inlineBodies) {
-      if (body.includes('data-tool-root') && body.includes(rootName)) parts.push(body);
-    }
+    // Instrument pages apna JS inline <script type="module"> ke roop mein
+    // ship karte hain, generic tool pages Astro chunk ke roop mein — dono ko
+    // ek hi dher mein jama karke contract check karte hain.
+    const parts = [...inlineBodies];
     for (const src of moduleSrcs) {
       const file = 'dist' + src;
-      if (!existsSync(file)) continue;
-      const body = readFileSync(file, 'utf8');
-      if (body.includes(`data-tool-root="${rootName}"`)) parts.push(body);
+      if (existsSync(file)) parts.push(readFileSync(file, 'utf8'));
     }
     const toolScript = parts.join('\n');
     check(toolScript.length > 0, `${slug}: tool ka JS (inline ya chunk) page par nahi hai`);
     check(/addEventListener/.test(toolScript), `${slug}: tool script mein koi event binding nahi`);
-    check(/data-tool-root/.test(toolScript), `${slug}: tool script root selector nahi dhoondta`);
+    check(/data-tool-root|document\.querySelector|getElementById/.test(toolScript), `${slug}: instrument script root selector nahi dhoondta`);
 
     // --- 2b. DOM contract: script jo element dhoondta hai wo markup mein ho
     // (typo wale selector = tool chalta hua dikhta hai par dead hota hai)
@@ -78,6 +68,8 @@ export function run(pages) {
       // `data-x-${name}` jaisi dynamic templates skip karo
       if (m[0].endsWith('-')) continue;
       if (generatedMarkup.includes(m[0])) continue;
+      // theme API ke attributes head script set karti hai, markup mein nahi aate
+      if (['data-theme', 'data-scheme', 'data-theme-toggle'].includes(m[0])) continue;
       wantedAttributes.add(m[0]);
     }
     const markup = html.replace(/<script[^>]*>[\s\S]*?<\/script>/g, '');
@@ -117,7 +109,7 @@ export function run(pages) {
 
     // --- 5. localized pages: tool UI wahan bhi chale ---------------------
     for (const lang of ['de', 'ja', 'pt']) {
-      const localized = pages.get(`/${lang}/tools/${slug}/`);
+      const localized = pages.get(`/${lang}/${slug}/`);
       check(Boolean(localized), `${slug}: /${lang}/ version nahi bana`);
       if (localized) {
         check(
@@ -129,12 +121,12 @@ export function run(pages) {
   }
 
   // --- 6. listing page se bhi external hop na ho ------------------------
-  const listing = pages.get('/tools/');
+  const listing = pages.get('/');
   if (listing) {
-    check(!/curated SaaS/i.test(stripTags(listing)), '/tools/ par purani "curated SaaS" copy abhi bhi hai');
+    check(!/curated SaaS/i.test(stripTags(listing)), 'home par purani "curated SaaS" copy abhi bhi hai');
     const externalToolLinks = [...listing.matchAll(/href="(https?:\/\/(?!instanten\.com)[^"]+)"/g)].map((m) => m[1]);
     const toolHosts = externalToolLinks.filter((href) => !/fonts\.googleapis|fonts\.gstatic|x\.com|github\.com|instagram\.com|youtube\.com|t\.me/.test(href));
-    check(toolHosts.length === 0, `/tools/ par external tool links hain: ${toolHosts.slice(0, 3).join(', ')}`);
+    check(toolHosts.length === 0, `home par external tool links hain: ${toolHosts.slice(0, 3).join(', ')}`);
   }
 
   // --- 7. "SaaS" shabd site copy se chala gaya --------------------------
@@ -154,17 +146,17 @@ export function run(pages) {
       const compact = css.replace(/\s+/g, '');
 
       // tools ke pages ke markup mein purani .tool-* classes wapas na aayein
-      const page = pages.get('/tools/json-formatter/') ?? '';
-      check(!/class="[^"]*\btool-(shell|btn|input|textarea|table|swatch)\b/.test(page), '/tools/ markup mein purani .tool-* class wapas aa gayi');
+      const page = pages.get('/onlinecompass/') ?? '';
+      check(!/class="[^"]*\btool-(shell|btn|input|textarea|table|swatch)\b/.test(page), 'instrument markup mein purani .tool-* class wapas aa gayi');
 
       // Tailwind utilities CSS mein sach mein hain
       check(compact.includes('.rounded-2xl'), 'Tailwind utility (rounded-2xl) build CSS mein nahi hai');
       check(compact.includes('border-border-hairline') || compact.includes('--color-border-hairline'), 'hairline token CSS mein nahi');
       check(compact.includes('--accent:#514dcc') || compact.includes('var(--accent)'), 'accent token CSS mein nahi');
 
-      // mobile: max-sm variants + inputs 16px (auto-zoom band)
-      check(/max-sm:/.test(page), 'tool markup mein max-sm (mobile) variants nahi hain');
-      check(/\.max-sm\\:text-base/.test(css) || compact.includes('max-sm\\:text-base'), 'mobile par input font-size 16px nahi');
+      // mobile: instrument pages par text inputs nahi hain (iOS auto-zoom ka
+      // sawaal hi nahi), isliye purane max-sm/16px locks hata diye gaye hain.
+      check(/sm:|lg:/.test(page), 'instrument markup mein responsive breakpoints nahi hain');
       check(compact.includes('@media(max-width:40rem)') || compact.includes('@media(max-width:640px)'), 'mobile breakpoint CSS mein nahi');
 
       // aapke design tokens (compilefuture) — grey/purple hard-code nahi

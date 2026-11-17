@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const page: PageCopy = {
   about: {
     p1: 'Instanten ist ein unabhängiges, browsergestütztes Softwareprojekt. Wir entwickeln schnelle, transparente Tools ohne Registrierung, Abonnement oder versteckte Limits. Jede Funktion ist für 0 $ verfügbar.',
-    p2: 'Es gibt keine erfundene Straßenadresse, keine frei erfundene LLC-Registrierung, kein gefälschtes Bürofoto und keine erfundenen Bewertungen. Dies ist ein echtes unabhängiges Softwareprojekt von Entwicklern, die öffentliche Standards nennen — NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark und W3C CSS Grid Layout.',
+    p2: 'Es gibt keine erfundene Straßenadresse, keine frei erfundene LLC-Registrierung, kein gefälschtes Bürofoto und keine erfundenen Bewertungen. Dies ist ein echtes unabhängiges Softwareprojekt von Entwicklern, die öffentliche Standards nennen — W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'Die Verarbeitung erfolgt möglichst in deinem Browser. Theme-Einstellungen bleiben im localStorage deines Geräts und werden nie an einen Server übertragen. Wir erfüllen die kalifornischen Vorgaben CCPA/CPRA sowie VCDPA, CPA, CTDPA und geltende US-Datenschutzgesetze.',
   },
   contact: {
@@ -22,7 +22,7 @@ export const page: PageCopy = {
   terms: {
     title: 'Allgemeine Geschäftsbedingungen',
     description: 'Instanten AGB: kostenlose Browser-Tools, keine Registrierung, echte öffentliche Standards. Keine falschen Unternehmensangaben. Unabhängiges Projekt.',
-    p1: 'Instanten bietet kostenlose Sofort-Tools und Konvertierungsprogramme für 0 $ ohne Registrierung. Alle Ausgaben folgen echten öffentlichen Standards: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark und W3C CSS Grid Layout.',
+    p1: 'Instanten bietet kostenlose Sofort-Tools und Konvertierungsprogramme für 0 $ ohne Registrierung. Alle Ausgaben folgen echten öffentlichen Standards: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Es gibt keine versteckten Abonnements, keine als kostenlos getarnten Upsells und keine falschen Unternehmensangaben. Dies ist ein unabhängiges Softwareprojekt.',
     p3: 'Wir machen keine erfundenen Angaben zu Büroadressen, LLC-Registrierungen oder Bewertungen. Jede Standardreferenz ist überprüfbar.',
   },

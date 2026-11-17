@@ -80,9 +80,10 @@ export async function run(pages, outDir) {
     const tabEls = [
       ...html.matchAll(/<button[^>]*class="[^"]*h-\[34px\][^"]*"[^>]*data-facet="category"[^>]*>/g),
     ].map((m) => m[0]);
-    // Row 1 = segmented category group: "All" + har category (screenshot jaisa
-    // 4+ buttons ka group, site ke saare categories ke saath).
-    check(tabEls.length >= 6, `${url}: segmented group mein sirf ${tabEls.length} segments (All + categories chahiye)`);
+    // Row 1 = segmented category group: "All" + har category. Ab site par sirf
+    // 4 sensor instruments hain aur sab ek hi category ("Utility") mein, isliye
+    // 2 segments (All + Utility) expected hain.
+    check(tabEls.length >= 2, `${url}: segmented group mein sirf ${tabEls.length} segments (All + category chahiye)`);
     check(tabEls.some((t) => /data-value=""/.test(t)), `${url}: tabs mein "All" segment nahi hai`);
     check(/aria-pressed="true"/.test(tabEls[0] ?? ''), `${url}: default tab pressed nahi hai`);
     for (const tab of tabEls) check(/h-\[34px\]/.test(tab), `${url}: segment ki height reference se alag (34px)`);
@@ -220,7 +221,7 @@ export async function run(pages, outDir) {
       check(/data-lib-fixed-grid/.test(gridTag), `${url}: home grid par data-lib-fixed-grid nahi hai`);
       check(/blog-grid/.test(gridTag), `${url}: home grid par blog-grid layout nahi hai`);
       const cards = [...html.matchAll(/<article[^>]*data-tool-card[^>]*>/g)].map((m) => m[0]);
-      check(cards.length >= 16, `${url}: home par sirf ${cards.length} filterable cards`);
+      check(cards.length >= 4, `${url}: home par sirf ${cards.length} filterable cards`);
       for (const attr of ['data-name', 'data-category', 'data-pricing', 'data-tags', 'data-featured', 'data-search']) {
         check(cards.every((card) => card.includes(attr)), `${url}: home cards par ${attr} nahi hai`);
       }
@@ -229,7 +230,7 @@ export async function run(pages, outDir) {
     // filter poori list par chalta hai: page par hi saare cards hone chahiye
     // (static build par `?page=2` ka koi matlab nahi — wo page 1 hi deta hai).
     const cardCount = (html.match(/data-tool-card/g) ?? []).length;
-    check(cardCount >= 16, `${url}: grid mein sirf ${cardCount} cards (16 tools chahiye — pagination ne kaat diya)`);
+    check(cardCount >= 4, `${url}: grid mein sirf ${cardCount} cards (4 instruments chahiye — pagination ne kaat diya)`);
     check(!/\?page=2/.test(html), `${url}: dead pagination link (?page=2) abhi bhi hai`);
 
     // chips grid ke just upar hain, grid ke andar nahi

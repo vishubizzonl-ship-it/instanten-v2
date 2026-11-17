@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Geprüfte Konvertierungsgenauigkeit',
       body:
-        'Ergebnisse folgen Standardregeln in kopierfertigem Format. Das Online-Lineal nutzt ISO/IEC-7810-ID-1-Kartenmaße (3,370 × 2,125 Zoll), die Farbpalette WCAG 2.2 AA-Kontraste.',
+        'Messwerte folgen öffentlichen Standards: Richtung und Neigung stammen aus dem W3C DeviceOrientation Event, die Qibla-Peilung aus der W3C Geolocation API, und Geschwindigkeiten nutzen exakte SI-Umrechnungen (1 Knoten = 1,852 km/h).',
     },
     {
       title: 'Datenschutz im Browser',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Sofortiger Start ohne Ballast – statische HTML-Seiten laden in modernen Browsern nahezu sofort.',
-        'Kopierfertige Ausgabe nach Standards – JSON Formatter folgt IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark und der Meta-Tag-Generator den Google-Search-Central- und Open-Graph-Empfehlungen.',
+        'Messwerte, auf die Sie sich verlassen können – Richtung und Neigung aus dem W3C DeviceOrientation Event, die Qibla-Peilung aus der W3C Geolocation API und Geschwindigkeiten mit exakten SI-Umrechnungen zwischen km/h, mph und Knoten.',
         'Praktischer Kontext direkt beim Tool – Anleitungen erklären Sonderfälle und Best Practices für echte Sofort-Hilfe.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Warum Online-Tools schwere Installer schlagen',
       paragraphs: [
         'Native Desktop-Suiten lohnen sich für mehrgigabyte Videorendering, nicht für schnelle Alltagstools. Ein Online-Toolkit im Browser vermeidet Kompatibilitätsprobleme, Speicherlast, Hintergrund-Updater und Lizenzabfragen – es läuft identisch unter Windows, macOS, Linux, Android und iOS.',
-        'Mehr zu unserer Philosophie und zur Prüfung gegen NIST-, W3C- und IETF-Spezifikationen steht auf der About-Seite.',
+        'Mehr zu unserer Philosophie und zur Prüfung jedes Instruments gegen die zitierten W3C-Spezifikationen steht auf der About-Seite.',
       ],
       links: [{ label: 'Über uns', href: '/about/' }],
     },

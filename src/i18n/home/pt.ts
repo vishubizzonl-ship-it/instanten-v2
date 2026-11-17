@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Precisão de conversão verificada',
       body:
-        'Os resultados seguem regras padrão em formato pronto a copiar. A régua online usa dimensões ISO/IEC 7810 ID-1 (3,370 × 2,125 polegadas) e a paleta os contrastes WCAG 2.2 AA.',
+        'As leituras seguem padrões públicos: a direção e a inclinação vêm do W3C DeviceOrientation Event, o rumo da Qibla da API Geolocation do W3C, e as velocidades usam conversões SI exatas (1 nó = 1,852 km/h).',
     },
     {
       title: 'Privacidade no navegador',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Início imediato sem peso — páginas HTML estáticas carregam quase instantaneamente em navegadores modernos.',
-        'Resultados prontos a copiar e baseados em padrões — JSON Formatter segue IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark e o gerador de meta tags as orientações Google Search Central e Open Graph.',
+        'Leituras em que pode confiar — direção e inclinação do W3C DeviceOrientation Event, rumo da Qibla da API Geolocation do W3C e velocidades com conversões SI exatas entre km/h, mph e nós.',
         'Contexto prático junto à ferramenta — os guias explicam casos limite e boas práticas para ajuda real.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Porque as ferramentas online superam instaladores pesados',
       paragraphs: [
         'Suites nativas fazem sentido para renderização de vídeo com vários gigabytes, não para utilitários diários. Uma caixa de ferramentas online no navegador elimina problemas de compatibilidade, armazenamento, atualizações em segundo plano e licenças — a mesma ferramenta funciona em Windows, macOS, Linux, Android e iOS.',
-        'Saiba mais sobre a nossa filosofia e verificação face a NIST, W3C e IETF na página About.',
+        'Saiba mais sobre a nossa filosofia e a verificação de cada instrumento face às especificações do W3C citadas na página About.',
       ],
       links: [{ label: 'Sobre nós', href: '/about/' }],
     },

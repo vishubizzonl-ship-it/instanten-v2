@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Verified instant convert accuracy',
       body:
-        'Outputs follow standard rules in copy-ready format. Online Ruler calibration references ISO/IEC 7810 ID-1 card dimensions (3.370 × 2.125 inches). Color Palette contrast follows W3C WCAG 2.2 Level AA ratios.',
+        'Readings follow public standards: heading and tilt come from the W3C DeviceOrientation Event, the Qibla bearing from the W3C Geolocation API, and speeds use exact SI conversions (1 knot = 1.852 km/h).',
     },
     {
       title: 'Browser-first privacy',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Instant startup with zero bloat — static HTML pages load almost immediately across modern browsers.',
-        'Copy-ready, standards-based output — JSON Formatter validates against IETF RFC 8259, Base64 Encoder follows IETF RFC 4648, Markdown Editor outputs CommonMark, and Meta Tag Generator follows Google Search Central and Open Graph guidance.',
+        'Readings you can act on — headings come from the W3C DeviceOrientation Event, the Qibla bearing from the W3C Geolocation API, and speeds use exact SI conversions between km/h, mph and knots.',
         'Practical context right beside the tool — guides explain edge cases and best practices so you get genuine instant help, not just raw numbers.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Why instant online tools beat heavy installers',
       paragraphs: [
         'Native desktop suites make sense for multi-gigabyte video rendering, not quick daily utilities. Running an instant online toolkit directly in your browser removes OS compatibility headaches, storage bloat, background updaters, and license prompts — the same instant tool works on Windows, macOS, Linux, Android, and iOS.',
-        'Learn more about our philosophy on the About page, where we explain how Instanten verifies tools against NIST, W3C, and IETF specifications without making false corporate claims.',
+        'Learn more about our philosophy on the About page, where we explain how Instanten checks each instrument against the W3C specifications it cites without making false corporate claims.',
       ],
       links: [{ label: 'About page', href: '/about/' }],
     },
@@ -106,9 +106,9 @@ export const home: HomeCopy = {
     {
       title: 'What is Instanten?',
       paragraphs: [
-        'Instanten is an independent web tools hub: a single website where twelve focused utilities live side by side and every one of them opens ready to work. The idea is simple. Most digital chores — formatting JSON, counting words, generating a password, compressing an image — take seconds, while finding, installing and paying for separate software for each takes far longer. Instanten removes that overhead and gives you the tool, the result and nothing else.',
-        'Every instant tool on the site is browser-based. That means there is nothing to download, nothing to license and nothing to update. You open the page, use the tool and copy the result; the tab can be closed afterwards. Because the pages are pre-rendered and ship with almost no client-side JavaScript, they load quickly even on a modest mobile connection and behave identically on Windows, macOS, Linux, Android and iOS.',
-        'The name says what it is meant to do. Instanten is where instant online work happens: short, focused tasks that should never turn into a project. A student formatting JSON, a developer decoding a Base64 string, a designer checking contrast, a writer trimming a draft — all finished in seconds here.',
+        'Instanten is an independent instrument hub: a single website where four sensor tools live side by side and every one of them opens ready to read. The idea is simple. Most measurements — which way you are facing, whether a surface is level, how fast you are moving, which bearing points to the Qibla — take seconds, while finding, installing and paying for separate apps for each takes far longer. Instanten removes that overhead and gives you the reading and nothing else.',
+        'Every instrument on the site is browser-based. That means there is nothing to download, nothing to license and nothing to update. You open the page, read the number and act on it; the tab can be closed afterwards. Because the pages are pre-rendered and ship with almost no client-side JavaScript, they load quickly even on a modest mobile connection and behave identically on Windows, macOS, Linux, Android and iOS.',
+        'The name says what it is meant to do. Instanten is where instant online work happens: short, focused tasks that should never turn into a project. A walker checking which way they are facing, a traveller confirming the Qibla bearing, a designer checking contrast, a writer trimming a draft — all finished in seconds here.',
       ],
     },
     {
@@ -122,8 +122,8 @@ export const home: HomeCopy = {
     {
       title: 'One multi tool website instead of ten tabs and ten subscriptions',
       paragraphs: [
-        'A multi tool website such as Instanten replaces a long row of browser bookmarks. Instead of remembering which site has the good JSON formatter, which one has a word counter that does not mangle emoji, and which password generator is safe to use, you keep one address. Navigation, keyboard behaviour and visual language stay the same across every utility, so switching tools never feels like learning a new product.',
-        'This is also why a multi tools website tends to win on price. Four or five single-purpose subscriptions quietly cost more than a streaming plan. The online tools list here covers the same ground — formatting, conversion, measurement, validation, generation — for nothing, with no mid-task upsell.',
+        'A multi tool website such as Instanten replaces a long row of browser bookmarks. Instead of remembering which app has a usable compass, which one shows tilt in degrees, and which one gives the Qibla bearing for where you stand.',
+        'This is also why a multi tools website tends to win on price. Four or five single-purpose subscriptions quietly cost more than a streaming plan. The instrument set here covers the same ground — direction, conversion, measurement, validation, generation — for nothing, with no mid-task upsell.',
         'For teams it simplifies policy too: one web tools hub to review instead of five vendors and five privacy policies.',
       ],
     },
@@ -133,18 +133,10 @@ export const home: HomeCopy = {
         'The online tools list is short on purpose. Every entry earns its place by being a job people genuinely do every week, not by filling out a category grid.',
       ],
       bullets: [
-        'JSON Formatter — format, validate and minify JSON against RFC 8259, with line-numbered errors and a collapsible tree view.',
-        'Base64 Encoder and Decoder — encode or decode text, files and images with full UTF-8 support, following RFC 4648.',
-        'Word Counter — live counts for words, characters, sentences and reading time, with a keyword-density view for writers.',
-        'Password Generator — cryptographically random passwords with adjustable length, character sets and an entropy estimate.',
-        'QR Generator — create QR codes for links, text, Wi-Fi credentials and contact cards, then export them instantly.',
-        'Image Compressor — shrink JPEG, PNG and WebP files in the browser without uploading the originals.',
-        'Color Palette — build accessible palettes from one colour and check every pair against WCAG 2.2 Level AA contrast.',
-        'CSS Grid Generator — lay out responsive grids visually and copy production-ready CSS.',
-        'Markdown Editor — write with a live preview and export clean, CommonMark-compliant output.',
-        'Meta Tag Generator — assemble title, description, Open Graph and Twitter Card tags in one copy-paste block.',
-        'Online Ruler — measure real-world objects on screen using standard card-sized calibration.',
-        'Regex Tester — test patterns against sample text and read the match groups as you type.',
+        'Online Compass — a live heading in degrees from the device orientation sensor, with a dial that stays readable in motion.',
+        'Bubble Level — tilt on both axes in degrees, so a shelf, frame or appliance can be checked without a physical spirit level.',
+        'Speedometer — current speed in km/h, mph and knots from the device position sensor, with exact SI conversions.',
+        'Qibla Finder — the great-circle bearing from your own location to Makkah, calculated with the W3C Geolocation API.',
       ],
     },
     {
@@ -158,17 +150,15 @@ export const home: HomeCopy = {
     {
       title: 'How to get instant results from the tools hub',
       paragraphs: [
-        'Start from the homepage grid or use the search box to filter by name, category or tag. Open the tool, paste or type your input, and the result appears as you work — most utilities update on every keystroke, so there is no submit button to hunt for. Copy the output with the copy button, or download the file when the tool produces one.',
-        'If a task needs context rather than a click, the blog guides explain the standards behind each utility: what valid JSON allows, how contrast ratios are calculated, and when Base64 inflates a payload.',
+        'Start from the homepage grid or use the search box to filter by name or category. Open an instrument and start reading: heading, tilt and speed update continuously once the device sensors are enabled, and the Qibla bearing appears as soon as you allow location. There is no submit button to hunt for.',
+        'If a reading needs context, the blog guides explain the standards behind each instrument: how a browser reports heading and tilt, how the Qibla bearing is calculated, and when a sensor reading should not be trusted.',
         'Nothing is saved between visits, which keeps the site fast and private. If you want the tools hub one keystroke away, bookmark the homepage or add it to your home screen — on Android and iOS the site behaves like a lightweight app without the app-store update cycle. Popular starting points:',
       ],
       links: [
-        { label: 'JSON Formatter', href: '/tools/json-formatter/' },
-        { label: 'Word Counter', href: '/tools/word-counter/' },
-        { label: 'QR Generator', href: '/tools/qr-generator/' },
-        { label: 'Password Generator', href: '/tools/password-generator/' },
-        { label: 'Image Compressor', href: '/tools/image-compressor/' },
-        { label: 'Base64 Encoder', href: '/tools/base64-encoder/' },
+        { label: 'Online Compass', href: '/onlinecompass/' },
+        { label: 'Bubble Level', href: '/onlinebubblelevel/' },
+        { label: 'Speedometer', href: '/onlinespeedometer/' },
+        { label: 'Qibla Finder', href: '/onlineqibla/' },
       ],
     },
   ],

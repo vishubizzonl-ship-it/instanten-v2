@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Precisione di conversione verificata',
       body:
-        'I risultati seguono regole standard in formato copiabile. Il righello online usa dimensioni ISO/IEC 7810 ID-1 (3,370 × 2,125 pollici) e la tavolozza i contrasti WCAG 2.2 AA.',
+        'Le letture seguono standard pubblici: direzione e inclinazione provengono da W3C DeviceOrientation Event, il rilevamento Qibla dall’API Geolocation del W3C e le velocità usano conversioni SI esatte (1 nodo = 1,852 km/h).',
     },
     {
       title: 'Privacy nel browser',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Avvio immediato senza pesantezza — le pagine HTML statiche si caricano quasi subito nei browser moderni.',
-        'Output copiabile e conforme agli standard — JSON Formatter segue IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark e il generatore di meta tag le linee guida Google Search Central e Open Graph.',
+        'Letture su cui contare — direzione e inclinazione da W3C DeviceOrientation Event, rilevamento Qibla dall’API Geolocation del W3C e velocità con conversioni SI esatte tra km/h, mph e nodi.',
         'Contesto pratico accanto allo strumento — le guide spiegano casi limite e best practice per un aiuto reale.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Perché gli strumenti online battono i programmi pesanti',
       paragraphs: [
         'Le suite desktop native hanno senso per il rendering video di più gigabyte, non per utilità quotidiane. Un toolkit online nel browser elimina problemi di compatibilità, ingombro di archiviazione, aggiornamenti in background e licenze — lo stesso strumento funziona su Windows, macOS, Linux, Android e iOS.',
-        'Scopri la nostra filosofia e la verifica rispetto a NIST, W3C e IETF nella pagina About.',
+        'Scopri la nostra filosofia e la verifica di ogni strumento rispetto alle specifiche W3C citate nella pagina About.',
       ],
       links: [{ label: 'Chi siamo', href: '/about/' }],
     },

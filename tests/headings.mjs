@@ -73,7 +73,7 @@ export function run() {
     }
   }
 
-  check(checked > 1000, `sirf ${checked} pages me headings mili (build adhoora?)`);
+  check(checked > 600, `sirf ${checked} pages me headings mili (build adhoora?)`);
   check(skipPages === 0, `${skipPages} pages me heading skip hai`);
 
   /* ---------- 4. Wahi 4 articles jo pehle toote the ---------- */

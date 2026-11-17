@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Précision de conversion vérifiée',
       body:
-        'Les résultats suivent des règles standard dans un format prêt à copier. La règle en ligne référence les dimensions ISO/IEC 7810 ID-1 (3,370 × 2,125 pouces) et la palette les contrastes WCAG 2.2 AA.',
+        'Les mesures suivent des normes publiques : le cap et l’inclinaison viennent de la spécification DeviceOrientation du W3C, le relèvement de la Qibla de l’API Geolocation du W3C, et les vitesses utilisent des conversions SI exactes (1 nœud = 1,852 km/h).',
     },
     {
       title: 'Confidentialité dans le navigateur',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Démarrage instantané sans surcharge — les pages HTML statiques se chargent presque immédiatement.',
-        'Résultats prêts à copier et conformes — JSON Formatter suit IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark et le générateur de meta tags les recommandations Google Search Central et Open Graph.',
+        'Des mesures fiables — cap et inclinaison issus de la spécification DeviceOrientation du W3C, relèvement de la Qibla issu de l’API Geolocation du W3C, et vitesses converties avec des facteurs SI exacts entre km/h, mph et nœuds.',
         'Contexte pratique à côté de l’outil — les guides expliquent les cas limites et les bonnes pratiques pour une véritable aide immédiate.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Pourquoi les outils en ligne battent les installateurs lourds',
       paragraphs: [
         'Les suites natives se justifient pour le rendu vidéo de plusieurs gigaoctets, pas pour les petits utilitaires. Une boîte à outils en ligne évite les problèmes de compatibilité, l’encombrement du stockage, les mises à jour d’arrière-plan et les licences — le même outil fonctionne sous Windows, macOS, Linux, Android et iOS.',
-        'Découvrez notre philosophie et notre vérification des spécifications NIST, W3C et IETF sur la page À propos.',
+        'Découvrez notre philosophie et la vérification de chaque instrument face aux spécifications du W3C citées sur la page À propos.',
       ],
       links: [{ label: 'À propos', href: '/about/' }],
     },

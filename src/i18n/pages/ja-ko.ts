@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const ja: PageCopy = {
   about: {
     p1: 'Instanten はブラウザで動く独立したソフトウェアプロジェクトです。登録・サブスク・隠れた制限のない、高速で透明なツールを提供し、すべての機能を 0 ドルで利用できます。',
-    p2: '架空の住所、でっち上げた LLC 登録、偽のオフィス写真、捏造したレビューはありません。実際の開発者が NIST、W3C WCAG 2.2、IETF RFC 8259（JSON）、IETF RFC 4648（Base64）、CommonMark、W3C CSS Grid Layout などの公開標準を参照して作ったプロジェクトです。',
+    p2: '架空の住所、でっち上げた LLC 登録、偽のオフィス写真、捏造したレビューはありません。実際の開発者が W3C DeviceOrientation（方位と傾き）、W3C Geolocation API（キブラの方位）、正確なSI換算 などの公開標準を参照して作ったプロジェクトです。',
     p3: '処理は可能な限りブラウザ内で行われます。テーマ設定は端末の localStorage に保存され、サーバーに送信されません。CCPA/CPRA、VCDPA、CPA、CTDPA および適用される米国州法を遵守します。',
   },
   contact: {
@@ -22,7 +22,7 @@ export const ja: PageCopy = {
   terms: {
     title: '利用規約',
     description: 'Instanten 利用規約：無料のブラウザツール、登録不要、実際の公開標準。虚偽の企業情報はありません。独立プロジェクト。',
-    p1: 'Instanten は登録不要で 0 ドルの無料即時オンラインツールと変換ユーティリティを提供します。すべての出力は NIST、W3C WCAG 2.2、IETF RFC 8259 / 4648、CommonMark、W3C CSS Grid Layout などの実際の公開標準に従います。',
+    p1: 'Instanten は登録不要で 0 ドルの無料即時オンラインツールと変換ユーティリティを提供します。すべての出力は W3C DeviceOrientation、W3C Geolocation API、正確なSI換算 などの実際の公開標準に従います。',
     p2: '隠れたサブスク、無料機能を装った有料アップセル、虚偽の企業情報はありません。これは独立したソフトウェアプロジェクトです。',
     p3: 'オフィス所在地、LLC 登録、レビューについて捏造した主張は行いません。すべての標準参照は検証可能です。',
   },
@@ -65,7 +65,7 @@ export const ja: PageCopy = {
 export const ko: PageCopy = {
   about: {
     p1: 'Instanten은 브라우저 기반의 독립 소프트웨어 프로젝트입니다. 가입, 구독, 숨은 제한 없이 빠르고 투명한 도구를 만들며 모든 기능을 0달러에 제공합니다.',
-    p2: '가짜 실제 주소, 꾸며낸 LLC 등록, 가짜 사무실 사진, 조작된 리뷰는 없습니다. 실제 개발자가 NIST, W3C WCAG 2.2, IETF RFC 8259(JSON), IETF RFC 4648(Base64), CommonMark, W3C CSS Grid Layout 같은 공개 표준을 참조해 만든 프로젝트입니다.',
+    p2: '가짜 실제 주소, 꾸며낸 LLC 등록, 가짜 사무실 사진, 조작된 리뷰는 없습니다. 실제 개발자가 W3C DeviceOrientation(방위와 기울기), W3C Geolocation API(키블라 방위), 정확한 SI 환산 같은 공개 표준을 참조해 만든 프로젝트입니다.',
     p3: '가능한 한 브라우저에서 처리합니다. 테마 설정은 기기의 localStorage에 저장되며 서버로 전송되지 않습니다. CCPA/CPRA, VCDPA, CPA, CTDPA 및 적용되는 미국 주법을 준수합니다.',
   },
   contact: {
@@ -84,7 +84,7 @@ export const ko: PageCopy = {
   terms: {
     title: '이용약관',
     description: 'Instanten 이용약관: 무료 브라우저 도구, 가입 없음, 실제 공개 표준. 허위 기업 정보 없음. 독립 프로젝트.',
-    p1: 'Instanten은 가입 없이 0달러로 무료 즉시 온라인 도구와 변환 유틸리티를 제공합니다. 모든 출력은 NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark, W3C CSS Grid Layout 등 실제 공개 표준을 따릅니다.',
+    p1: 'Instanten은 가입 없이 0달러로 무료 즉시 온라인 도구와 변환 유틸리티를 제공합니다. 모든 출력은 W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions 등 실제 공개 표준을 따릅니다.',
     p2: '숨은 구독, 무료 기능으로 위장한 유료 업셀, 허위 기업 정보는 없습니다. 독립 소프트웨어 프로젝트입니다.',
     p3: '사무실 위치, LLC 등록, 리뷰에 대해 꾸며낸 주장을 하지 않습니다. 모든 표준 참조는 검증 가능합니다.',
   },

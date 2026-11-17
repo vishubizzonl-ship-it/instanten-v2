@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const nl: PageCopy = {
   about: {
     p1: 'Instanten is een onafhankelijk browsergebaseerd softwareproject. We bouwen snelle, transparante tools zonder registratie, abonnement of verborgen limieten. Elke functie is beschikbaar voor $ 0.',
-    p2: 'Er is geen verzonnen straatadres, geen verzonnen LLC-registratie, geen neppe kantoarfoto en geen verzonnen reviews. Dit is een echt onafhankelijk softwareproject van echte ontwikkelaars die echte openbare standaarden noemen: NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark en W3C CSS Grid Layout.',
+    p2: 'Er is geen verzonnen straatadres, geen verzonnen LLC-registratie, geen neppe kantoarfoto en geen verzonnen reviews. Dit is een echt onafhankelijk softwareproject van echte ontwikkelaars die echte openbare standaarden noemen: W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'Verwerking gebeurt waar mogelijk in je browser. Thema-instellingen blijven in de localStorage van je apparaat en worden nooit naar een server verzonden. We voldoen aan CCPA/CPRA, VCDPA, CPA, CTDPA en toepasselijke Amerikaanse staatsprivacywetten.',
   },
   contact: {
@@ -22,7 +22,7 @@ export const nl: PageCopy = {
   terms: {
     title: 'Algemene voorwaarden',
     description: 'Instanten voorwaarden: gratis browsertools, geen registratie, echte openbare standaarden. Geen neppe bedrijfsclaims. Onafhankelijk project.',
-    p1: 'Instanten biedt gratis directe online tools en conversie-utilities voor $ 0 zonder registratie. Alle uitvoer volgt echte openbare standaarden: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark en W3C CSS Grid Layout.',
+    p1: 'Instanten biedt gratis directe online tools en conversie-utilities voor $ 0 zonder registratie. Alle uitvoer volgt echte openbare standaarden: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Er zijn geen verborgen abonnementen, geen betaalde upsells vermomd als gratis functies en geen neppe bedrijfsclaims. Dit is een onafhankelijk softwareproject.',
     p3: 'We doen geen verzonnen uitspraken over kantoorlocaties, LLC-registraties of reviews. Elke standaardreferentie is verifieerbaar.',
   },
@@ -65,7 +65,7 @@ export const nl: PageCopy = {
 export const sv: PageCopy = {
   about: {
     p1: 'Instanten är ett oberoende webbläsarbaserat mjukvaruprojekt. Vi bygger snabba, transparenta verktyg utan registrering, prenumeration eller dolda gränser. Varje funktion är tillgänglig för 0 kr.',
-    p2: 'Det finns ingen påhittad gatuadress, ingen fabricerad LLC-registrering, inget falskt kontorsfoto och inga påhittade recensioner. Detta är ett riktigt oberoende mjukvaruprojekt av riktiga utvecklare som hänvisar till offentliga standarder: NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark och W3C CSS Grid Layout.',
+    p2: 'Det finns ingen påhittad gatuadress, ingen fabricerad LLC-registrering, inget falskt kontorsfoto och inga påhittade recensioner. Detta är ett riktigt oberoende mjukvaruprojekt av riktiga utvecklare som hänvisar till offentliga standarder: W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'Bearbetning sker i webbläsaren när det är möjligt. Temainställningar stannar i enhetens localStorage och skickas aldrig till en server. Vi följer CCPA/CPRA, VCDPA, CPA, CTDPA och tillämpliga amerikanska delstatslagar.',
   },
   contact: {
@@ -84,7 +84,7 @@ export const sv: PageCopy = {
   terms: {
     title: 'Villkor',
     description: 'Instanten-villkor: gratis webbverktyg, ingen registrering, riktiga offentliga standarder. Inga falska företagspåståenden. Oberoende projekt.',
-    p1: 'Instanten tillhandahåller gratis direkta onlineverktyg och konverteringsverktyg för 0 kr utan registrering. All utdata följer riktiga offentliga standarder: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark och W3C CSS Grid Layout.',
+    p1: 'Instanten tillhandahåller gratis direkta onlineverktyg och konverteringsverktyg för 0 kr utan registrering. All utdata följer riktiga offentliga standarder: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Det finns inga dolda prenumerationer, inga betalda uppgraderingar förklädda till gratis funktioner och inga falska företagspåståenden. Detta är ett oberoende mjukvaruprojekt.',
     p3: 'Vi gör inga påhittade påståenden om kontorsplatser, LLC-registreringar eller recensioner. Varje standardreferens är verifierbar.',
   },

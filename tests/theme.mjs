@@ -16,7 +16,7 @@ import { createSuite } from './lib.mjs';
 import vm from 'node:vm';
 
 /** Sirf yahan hi white surface jaan-boojh kar hai: QR code ko white quiet zone chahiye. */
-const WHITE_ALLOWED = ['qr-generator'];
+const WHITE_ALLOWED = [];
 
 const isRedirectStub = (html) => /http-equiv="refresh"/i.test(html);
 
@@ -96,7 +96,7 @@ export function run(pages, outDir) {
     check(Boolean(code), 'entry-mode: bootstrap code nahi mila');
 
     // (a) entry page dark tha (saved) -> har page dark
-    for (const url of ['/', '/onlinecompass/', '/de/onlineqibla/blog/', '/tools/json-formatter/', '/compassinstant/', '/blog/', '/404.html']) {
+    for (const url of ['/', '/onlinecompass/', '/de/onlineqibla/blog/', '/onlinespeedometer/', '/compassinstant/', '/blog/', '/404.html']) {
       const html = pages.get(url) ?? '';
       check(html.includes('InstantenTheme'), `entry-mode: ${url} par bootstrap nahi`);
     }

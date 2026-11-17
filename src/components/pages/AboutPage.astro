@@ -18,7 +18,7 @@ const pageTitle = lang === 'en'
   : seo.title;
 const pageDescription =
   lang === 'en'
-    ? 'About Instanten: an independent, free online tools hub with 12 instant tools for instant work. No sign-up, browser-side processing, public standards.'
+    ? 'About Instanten: a free online tools hub with four sensor tools — compass, bubble level, speedometer and Qibla finder. No sign-up, nothing to install.'
     : seo.description;
 const pageKeywords =
   lang === 'en'
@@ -80,7 +80,7 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
           <strong>{SITE_NAME}</strong>{sep(key('whatP1a'))}{key('whatP1a')}{(lang === 'fr' ? '' : sep(key('instantTools')))}<strong>{key('instantTools')}</strong>{sep(key('whatP1b'))}{key('whatP1b')}{sep(key('instantHelp'))}<strong>{key('instantHelp')}</strong>{sep(key('whatP1c'))}{key('whatP1c')}
         </p>
         <p class="ror-p">
-          {key('whatP2a')}{sep(key('ruler'))}<a href={translatePath('/tools/online-ruler/')} class="ror-link">{key('ruler')}</a>{sep(key('whatP2b'))}{key('whatP2b')}{sep(key('compressor'))}<a href={translatePath('/tools/image-compressor/')} class="ror-link">{key('compressor')}</a>{sep(key('whatP2c'))}{key('whatP2c')}{sep(key('palette'))}<a href={translatePath('/tools/color-palette/')} class="ror-link">{key('palette')}</a>{sep(key('whatP2d'))}{key('whatP2d')}{sep(key('json'))}<a href={translatePath('/tools/json-formatter/')} class="ror-link">{key('json')}</a>{sep(key('whatP2e'))}{key('whatP2e')}
+          {key('whatP2a')}
         </p>
       </section>
 
@@ -89,18 +89,17 @@ const faqs = lang === 'en' ? faqContent.faqs : [];
         <p class="ror-p">
           {key('honestP1a')}{sep(key('contactForm'))}<a href={translatePath('/contact/')} class="ror-link">{key('contactForm')}</a>{sep(key('honestP1b'))}{key('honestP1b')}<a href={`mailto:${PUBLIC_EMAIL}`} class="ror-link">{PUBLIC_EMAIL}</a>{sep(key('honestP1c'))}{key('honestP1c')}
         </p>
-        <p class="ror-p">
-          {key('honestP2a')}{sep(key('nistLink'))}<a href="https://www.nist.gov/pml/owm/metric-si/si-units-length" target="_blank" rel="noopener noreferrer" class="ror-link">{key('nistLink')}</a>{sep(key('honestP2b'))}{key('honestP2b')}{sep(key('wcagLink'))}<a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('wcagLink')}</a>{sep(key('honestP2c'))}{key('honestP2c')}{sep(key('rfc8259Link'))}<a href="https://datatracker.ietf.org/doc/html/rfc8259" target="_blank" rel="noopener noreferrer" class="ror-link">{key('rfc8259Link')}</a>{sep(key('honestP2d'))}{key('honestP2d')}{sep(key('rfc4648Link'))}<a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank" rel="noopener noreferrer" class="ror-link">{key('rfc4648Link')}</a>{sep(key('honestP2e'))}{key('honestP2e')}{sep(key('commonmarkLink'))}<a href="https://spec.commonmark.org/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('commonmarkLink')}</a>{sep(key('honestP2f'))}{key('honestP2f')}{sep(key('cssgridLink'))}<a href="https://www.w3.org/TR/css-grid-2/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('cssgridLink')}</a>{sep(key('honestP2g'))}{key('honestP2g')}{sep(key('googleLink'))}<a href="https://developers.google.com/search/docs" target="_blank" rel="noopener noreferrer" class="ror-link">{key('googleLink')}</a>{sep(key('honestP2h'))}{key('honestP2h')}
+        <p class="ror-p">{key('honestP2a')} <a href="https://www.w3.org/TR/orientation-event/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('orientationLink')}</a>{sep(key('honestP2b'))}{key('honestP2b')}<a href="https://www.w3.org/TR/geolocation/" target="_blank" rel="noopener noreferrer" class="ror-link">{key('geolocationLink')}</a>{sep(key('honestP2c'))}{key('honestP2c')}
         </p>
       </section>
 
       <section class="ror-section ror-section--about">
         <h2 class="ror-h2">{key('verifyTitle')}</h2>
         <p class="ror-p">
-          {key('verifyP1a')}{sep(key('ruler'))}<strong>{key('ruler')}</strong>{sep(key('verifyP1b'))}{key('verifyP1b')}{sep(key('palette'))}<strong>{key('palette')}</strong>{sep(key('verifyP1c'))}{key('verifyP1c')}{sep(key('json'))}<strong>{key('json')}</strong>{sep(key('verifyP1d'))}{key('verifyP1d')}
+          {key('verifyP1a')}
         </p>
         <p class="ror-p">
-          {key('verifyP2a')}{sep(key('ruler'))}<strong>{key('ruler')}</strong>{sep(key('verifyP2b'))}{key('verifyP2b')}
+          {key('verifyP2a')}{key('verifyP2b')}
         </p>
       </section>
 

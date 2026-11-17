@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Verifierad konverteringsprecision',
       body:
-        'Resultat följer standardregler i kopieringsklart format. Online-linjalen använder ISO/IEC 7810 ID-1-kortmått (3,370 × 2,125 tum) och färgpaletten WCAG 2.2 AA-kontraster.',
+        'Mätvärden följer offentliga standarder: riktning och lutning kommer från W3C DeviceOrientation Event, qibla-bäringen från W3C Geolocation API, och hastigheter använder exakta SI-omräkningar (1 knop = 1,852 km/h).',
     },
     {
       title: 'Integritet i webbläsaren',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Direkt start utan ballast — statiska HTML-sidor laddas nästan omedelbart i moderna webbläsare.',
-        'Kopieringsklart resultat enligt standarder — JSON Formatter följer IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark och metatagg-generatorn Google Search Central och Open Graph.',
+        'Mätvärden att lita på — riktning och lutning från W3C DeviceOrientation Event, qibla-bäringen från W3C Geolocation API och hastigheter med exakta SI-omräkningar mellan km/h, mph och knop.',
         'Praktisk kontext bredvid verktyget — guider förklarar edge cases och bästa praxis för genuin direkthjälp.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Varför onlineverktyg slår tunga installationer',
       paragraphs: [
         'Inbyggda skrivbordssviter passar för videorendering på flera gigabyte, inte för snabba vardagsverktyg. En onlineverktygslåda i webbläsaren tar bort kompatibilitetsproblem, lagringsbelastning, bakgrundsuppdateringar och licensfrågor — samma verktyg fungerar på Windows, macOS, Linux, Android och iOS.',
-        'Läs mer om vår filosofi och granskning mot NIST-, W3C- och IETF-specifikationer på About-sidan.',
+        'Läs mer om vår filosofi och granskningen av varje instrument mot de W3C-specifikationer som anges på About-sidan.',
       ],
       links: [{ label: 'Om oss', href: '/about/' }],
     },

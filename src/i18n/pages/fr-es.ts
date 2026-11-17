@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const fr: PageCopy = {
   about: {
     p1: 'Instanten est un projet logiciel indépendant exécuté dans le navigateur. Nous créons des utilitaires rapides et transparents, sans inscription, abonnement ni limite cachée. Chaque fonction est disponible à 0 $.',
-    p2: 'Aucune adresse physique fictive, immatriculation LLC inventée, photo de bureau truquée ou avis fabriqué. Il s’agit d’un véritable projet indépendant réalisé par de vrais développeurs qui citent de vraies normes publiques : NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark et W3C CSS Grid Layout.',
+    p2: 'Aucune adresse physique fictive, immatriculation LLC inventée, photo de bureau truquée ou avis fabriqué. Il s’agit d’un véritable projet indépendant réalisé par de vrais développeurs qui citent de vraies normes publiques : W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'Le traitement s’effectue dans votre navigateur lorsque c’est possible. Les préférences de thème restent dans le localStorage de votre appareil et ne sont jamais transmises à un serveur. Nous respectons CCPA/CPRA, VCDPA, CPA, CTDPA et les lois américaines applicables.',
   },
   contact: {
@@ -22,7 +22,7 @@ export const fr: PageCopy = {
   terms: {
     title: 'Conditions générales',
     description: 'Conditions Instanten : utilitaires gratuits dans le navigateur, zéro inscription, vraies normes publiques. Aucune fausse déclaration. Projet indépendant.',
-    p1: 'Instanten fournit des outils en ligne instantanés gratuits et des convertisseurs à 0 $ sans inscription. Tous les résultats suivent de vraies normes publiques : NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark et W3C CSS Grid Layout.',
+    p1: 'Instanten fournit des outils en ligne instantanés gratuits et des convertisseurs à 0 $ sans inscription. Tous les résultats suivent de vraies normes publiques : W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'Aucun abonnement caché, aucune vente supplémentaire déguisée en fonction gratuite et aucune fausse déclaration d’entreprise. Il s’agit d’un projet logiciel indépendant.',
     p3: 'Nous ne faisons aucune déclaration inventée sur des bureaux, immatriculations LLC ou avis. Chaque référence de norme est vérifiable.',
   },
@@ -65,7 +65,7 @@ export const fr: PageCopy = {
 export const es: PageCopy = {
   about: {
     p1: 'Instanten es un proyecto de software independiente basado en el navegador. Creamos utilidades rápidas y transparentes sin registro, suscripción ni límites ocultos. Cada función está disponible por 0 $.',
-    p2: 'No hay direcciones físicas falsas, registros LLC inventados, fotos de oficina falsas ni reseñas fabricadas. Es un proyecto real e independiente creado por desarrolladores reales que citan estándares públicos: NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark y W3C CSS Grid Layout.',
+    p2: 'No hay direcciones físicas falsas, registros LLC inventados, fotos de oficina falsas ni reseñas fabricadas. Es un proyecto real e independiente creado por desarrolladores reales que citan estándares públicos: W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: 'El procesamiento ocurre en tu navegador cuando es posible. Las preferencias de tema permanecen en el localStorage de tu dispositivo y nunca se envían a un servidor. Cumplimos CCPA/CPRA, VCDPA, CPA, CTDPA y las leyes estatales de EE. UU. aplicables.',
   },
   contact: {
@@ -84,7 +84,7 @@ export const es: PageCopy = {
   terms: {
     title: 'Términos y condiciones',
     description: 'Términos de Instanten: utilidades gratuitas en el navegador, sin registro, estándares públicos reales. Sin afirmaciones corporativas falsas. Proyecto independiente.',
-    p1: 'Instanten ofrece herramientas instantáneas gratuitas y conversores por 0 $ sin registro. Todos los resultados siguen estándares públicos reales: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark y W3C CSS Grid Layout.',
+    p1: 'Instanten ofrece herramientas instantáneas gratuitas y conversores por 0 $ sin registro. Todos los resultados siguen estándares públicos reales: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'No hay suscripciones ocultas, ventas adicionales disfrazadas de funciones gratuitas ni afirmaciones corporativas falsas. Es un proyecto de software independiente.',
     p3: 'No hacemos afirmaciones inventadas sobre oficinas, registros LLC o reseñas. Cada referencia de estándar es verificable.',
   },

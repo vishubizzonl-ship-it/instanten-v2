@@ -3,7 +3,7 @@ import type { PageCopy } from './types';
 export const page: PageCopy = {
   about: {
     p1: 'Instanten is an independent browser-based software project. We build fast, transparent utilities with zero sign-up, zero subscriptions, and zero hidden limits. Every feature is available at $0 cost.',
-    p2: 'There is no fake physical street address, no fabricated LLC registration, no fake office photo, and no fabricated reviews. This is a real independent software project built by real developers who reference real public engineering standards — NIST, W3C WCAG 2.2, IETF RFC 8259 (JSON), IETF RFC 4648 (Base64), CommonMark, and W3C CSS Grid Layout.',
+    p2: 'There is no fake physical street address, no fabricated LLC registration, no fake office photo, and no fabricated reviews. This is a real independent software project built by real developers who reference real public engineering standards — W3C DeviceOrientation Event (heading and tilt), W3C Geolocation API (Qibla bearing), and exact SI conversions.',
     p3: "All processing happens in your browser when possible. Theme preferences stay in your device's localStorage and are never transmitted to any server. We comply with California CCPA/CPRA, Virginia VCDPA, Colorado CPA, Connecticut CTDPA, and applicable U.S. state privacy laws.",
   },
   contact: {
@@ -25,7 +25,7 @@ export const page: PageCopy = {
     title: 'Terms & Conditions',
     description:
       'Instanten terms and conditions: free browser-based utilities, zero sign-up, real public standards. No fake corporate claims. Independent project.',
-    p1: 'Instanten provides free instant online tools and instant convert utilities at $0 cost with zero sign-up. All outputs follow real public engineering standards: NIST, W3C WCAG 2.2, IETF RFC 8259 / 4648, CommonMark, W3C CSS Grid Layout.',
+    p1: 'Instanten provides free instant online tools and instant convert utilities at $0 cost with zero sign-up. All outputs follow real public engineering standards: W3C DeviceOrientation Event, W3C Geolocation API, and exact SI conversions.',
     p2: 'There are no hidden subscriptions, no paid upsells disguised as free features, and no fake corporate claims. This is an independent software project.',
     p3: 'We do not make fabricated claims about office locations, LLC registrations, or fabricated reviews. Every standard reference is verifiable.',
   },

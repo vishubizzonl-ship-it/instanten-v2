@@ -6,7 +6,7 @@ export const nlArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'Elke dag lopen ontwikkelaars, ontwerpers, schrijvers, studenten en kleine teams tegen tientallen kleine digitale taken aan: JSON-gegevens formatteren, een snelle eenhedenomrekening doen, tekstfragmenten opschonen of webstandaarden verifiëren. Zware desktopsoftware opstarten voor een taak van dertig seconden onderbreekt je workflow. Elke maand 15 tot 30 euro betalen voor een SaaS-abonnement met één enkel doel is zonde van het geld. Bovendien leiden willekeurige zoekopdrachten vaak naar rommelige websites vol opdringerige advertenties en kapotte knoppen.',
+          'Elke dag staan ontwikkelaars, ontwerpers, schrijvers, studenten en kleine teams voor kleine digitale taken: een richting controleren, een plank waterpas zetten, een snelheid meten, een peiling bepalen. Elke taak kost seconden; een aparte app zoeken voor elke meting kost minuten. Instanten zet vier instrumenten op één pagina die direct klaarstaat.',
           '<strong>Instanten</strong> lost dit probleem op met een uniforme, schone, browsergebaseerde werkruimte. Als onafhankelijke verzameling van gratis instant tools en praktische handleidingen brengt Instanten dagelijkse hulpmiddelen samen zonder registratie, zonder betaalmuur, zonder gebruikslimieten en met volledige ondersteuning voor zowel mobiel als desktop.',
         ],
       },
@@ -14,7 +14,7 @@ export const nlArticles: BlogArticlesBySlug = {
         heading: 'Waarom browsergebaseerde tools zware installatieprogramma’s verslaan',
         paragraphs: [
           'Klassieke desktoppakketten zijn nuttig voor zware 3D-rendering of videobewerking van gigabytes, maar niet voor snelle dagelijkse taken. Een tool direct in je browser uitvoeren elimineert compatibiliteitsproblemen met het besturingssysteem, schijfruimteverlies en achtergrond-updates. Precies hetzelfde hulpmiddel werkt identiek op Windows 11, macOS Sequoia, Linux, Android en iOS.',
-          'Omdat pagina’s statisch worden voorgebouwd met een minimum aan JavaScript, reageert elke tool binnen milliseconden. De verwerking vindt plaats in je lokale browsersessie. Voor meettaken baseert de <strong>Online Liniaal</strong> zich op de standaard creditcardmaat (ISO/IEC 7810 ID-1: 85,60 × 53,98 mm) en de officiële <strong>NIST</strong>-definitie (1 inch = exact 25,4 mm). Voor webtoegankelijkheid toetst het <strong>Kleurenpalet</strong> het contrast aan de <strong>W3C WCAG 2.2 Niveau AA</strong>-normen (4,5:1 voor normale tekst, 3:1 voor grote tekst).',
+          'Omdat pagina’s statisch worden voorgebouwd, reageert elk meetinstrument binnen milliseconden. Sensorgegevens worden in je browser verwerkt; een peiling of helling hoeft je apparaat nooit te verlaten.',
         ],
       },
       {
@@ -23,11 +23,10 @@ export const nlArticles: BlogArticlesBySlug = {
           'De bibliotheek omvat praktische formatting, snelle conversies en ontwikkelaarstools op basis van transparante standaarden:',
         ],
         bullets: [
-          '<strong>JSON Formatter:</strong> Valideer en formatteer JSON-data volgens <strong>IETF RFC 8259</strong> met directe syntaxismarkering.',
-          '<strong>Base64 Encoder / Decoder:</strong> Converteer tekst, bestanden en data-URI’s volgens <strong>IETF RFC 4648</strong> met volledige UTF-8-ondersteuning.',
-          '<strong>CSS Grid Generator:</strong> Bouw visueel responsieve rasters conform de <strong>W3C CSS Grid Layout Module Level 2</strong>-specificatie.',
-          '<strong>Meta Tag Generator:</strong> Genereer schone Open Graph- en Twitter Card-metadata volgens Google Search Central-richtlijnen.',
-          '<strong>Beeldcompressor:</strong> Client-side Canvas- en WebP-compressie optimaliseert afbeeldingen zonder bestanden naar externe servers te sturen.',
+          '<strong>Online kompas:</strong> toont de actuele richting in graden uit de oriëntatiesensor van het apparaat.',
+          '<strong>Waterpas:</strong> leest de apparaatstand op beide assen en toont de helling in graden.',
+          '<strong>Snelheidsmeter:</strong> leest de posititiesensor van het apparaat en toont de snelheid in km/h, mph en knopen.',
+          '<strong>Qibla-zoeker:</strong> berekent de grootcirkelpeiling van jouw locatie naar Mekka via de W3C Geolocation API.',
         ],
       },
       {
@@ -36,10 +35,10 @@ export const nlArticles: BlogArticlesBySlug = {
           'Wij geloven in transparantie. Elke formule en ontwerprichtlijn in onze tools is gebaseerd op officiële specificaties:',
         ],
         bullets: [
-          '<strong>NIST (National Institute of Standards and Technology):</strong> Maateenheden gecontroleerd volgens NIST PML-normen.',
-          '<strong>W3C (World Wide Web Consortium):</strong> WCAG 2.2 contrastnormen en CSS Grid-specificaties.',
-          '<strong>IETF (Internet Engineering Task Force):</strong> RFC 8259 JSON-indeling en RFC 4648 Base64-codering.',
-          '<strong>CommonMark:</strong> Gestandaardiseerde Markdown-verwerking.',
+          '<strong>SI-eenheden:</strong> Snelheden verschijnen in km/h, mph en knopen met exacte omrekenfactoren (1 knoop = 1,852 km/h exact).',
+          '<strong>W3C (World Wide Web Consortium):</strong> de DeviceOrientation Event-specificatie die bepaalt hoe een browser richting, helling en rotatie doorgeeft.',
+          '<strong>W3C Geolocation API:</strong> de browserinterface die de positie levert waarop de qibla-peiling wordt berekend.',
+          'SI-eenheden: snelheid wordt getoond in km/h, mph en knopen met exacte omrekenfactoren (1 knoop = 1,852 km/h exact).',
         ],
         quote: 'De beste manier om te leren en te bouwen is door te doen — met betrouwbare, gestandaardiseerde tools binnen handbereik.',
       },
@@ -48,7 +47,7 @@ export const nlArticles: BlogArticlesBySlug = {
     keyTakeaways: [
       'Gebruik elke tool direct in je browser zonder kosten en zonder account.',
       'Alle verwerking vindt lokaal plaats om je gegevens en privacy te waarborgen.',
-      'Berekeningen en formaten voldoen strikt aan NIST-, W3C- en IETF-normen.',
+      'Koers en helling komen uit W3C DeviceOrientation, de qibla-peiling uit de W3C Geolocation API en snelheden uit exacte SI-omrekeningen.',
       'Uniforme responsieve werking op smartphone, tablet en desktop.',
     ],
     callToAction: {
@@ -63,7 +62,7 @@ export const nlArticles: BlogArticlesBySlug = {
     sections: [
       {
         paragraphs: [
-          'De meeste digitale makers verliezen meer tijd aan herhalende microtaken dan aan grote mijlpalen. Een snippet opschonen, eenheden omrekenen of een JSON-fout opsporen kost vaak maar 30 tot 45 seconden. Maar als je dit tien keer per dag doet, kosten die onderbrekingen uren per week.',
+          'De meeste mensen verliezen meer tijd aan terugkerende kleine metingen dan aan grote mijlpalen. Controleren welke kant je op kijkt, of een oppervlak waterpas staat, hoe snel je gaat of welke peiling de qibla heeft, kost seconden; zonder vaste plek kost elke controle een zoekopdracht.',
           'Eindeloos zoeken tussen advertenties of verouderde forumberichten kost kostbare tijd. <strong>Instanten</strong> biedt directe converters en beknopte handleidingen waarmee je vragen onmiddellijk oplost.',
         ],
       },
@@ -71,14 +70,14 @@ export const nlArticles: BlogArticlesBySlug = {
         heading: 'Hoe standaardconversies fouten voorkomen',
         paragraphs: [
           'Van datatransformaties tot maateenheden: onze tools leveren direct kopieerbare resultaten volgens standaarden. Je plakt onbewerkte invoer, ziet direct het resultaat en kopieert het naar je editor.',
-          'Geen ondoorzichtige afrondingen of verborgen kosten. Dat schept dagelijks vertrouwen — of je nu API-antwoorden formatteert volgens <strong>IETF RFC 8259</strong> of afmetingen controleert met de <strong>Online Liniaal</strong>.',
+          
         ],
       },
       {
         heading: 'Waarom directe hulp beter werkt dan lange forums',
         paragraphs: [
           'Bij een technisch vraagstuk tijdens een sprint wil je een beknopt en doeltreffend antwoord. In plaats van tegenstrijdige forumberichten door te spitten, combineren onze gidsen duidelijke uitleg met het juiste hulpmiddel.',
-          'We behandelen praktijksituaties: beeldschermkalibratie, RFC-conforme Base64-payloads, CSS-rasters en veelvoorkomende fouten. Je lost het probleem op en kunt direct verder.',
+          
         ],
         quote: 'Kleine vertragingen wegnemen beschermt je concentratie — het meest waardevolle bezit van de moderne maker.',
       },
@@ -93,7 +92,7 @@ export const nlArticles: BlogArticlesBySlug = {
     takeawaysTitle: 'Samenvattende checklist',
     keyTakeaways: [
       'Maak een bladwijzer van veelgebruikte tools om microvertragingen te vermijden.',
-      'Vertrouw op geverifieerde NIST-, W3C- en IETF-normen om fouten te voorkomen.',
+      'Vertrouw op de W3C-specificaties en exacte SI-factoren die de instrumenten noemen.',
       'Bescherm je gegevens met lokale verwerking in de browser.',
       'Wissel probleemloos tussen mobiel, tablet en computer.',
     ],

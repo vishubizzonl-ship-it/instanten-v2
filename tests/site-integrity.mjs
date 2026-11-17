@@ -114,12 +114,10 @@ export function run(pages, outDir) {
     const urls = [...readFileSync(sitemapPath, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(
       (m) => m[1]
     );
-    // Sitemap me sirf indexable pages hain: thin/noindex tag pages aur
-    // untranslated silo blog articles build ke baad apne aap nikal jaate hain
-    // (dekho astro.config.mjs ka drop-thin-tags-from-sitemap hook), isliye ab
-    // total ~603 hai. Ye threshold sirf toota hua/khaali sitemap pakadne ke
-    // liye hai — content badhne par hi badhao, kam na karo.
-    check(urls.length > 600, `sitemap mein sirf ${urls.length} URL (620+ expected)`);
+    // 12 generic tool pages hataye ja chuke hain (sirf 4 instrument silos bache
+    // hain), isliye sitemap chhota hai — ~330 URL. Threshold sirf toota
+    // hua/khaali sitemap pakadne ke liye hai.
+    check(urls.length > 300, `sitemap mein sirf ${urls.length} URL (330+ expected)`);
     for (const errorUrl of ERROR_PAGES) {
       check(
         !urls.some((u) => u.endsWith(errorUrl) || u.endsWith(errorUrl.slice(0, -1))),

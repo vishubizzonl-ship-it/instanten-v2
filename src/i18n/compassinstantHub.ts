@@ -24,11 +24,11 @@ export type HubCopy = {
 };
 
 const en: HubCopy = {
-  title: 'CompassInstant — 4 instrument tools + 12 instant tools',
+  title: 'CompassInstant — four sensor instruments in one place',
   description:
-    'The complete CompassInstant toolset inside Instanten: online compass, bubble level, speedometer and Qibla finder — each with its own guides, about, contact and legal pages — plus twelve browser tools. Every card opens its own page.',
+    'The complete CompassInstant toolset inside Instanten: online compass, bubble level, speedometer and Qibla finder — each with its own guides, about, contact and legal pages. Every card opens its own page.',
   h1: 'CompassInstant tools',
-  lead: 'Four sensor instruments and twelve browser tools. Every card opens that tool\'s own page — each instrument keeps its own guides, about, contact and legal pages.',
+  lead: 'Four sensor instruments — a compass, a bubble level, a speedometer and a Qibla finder. Every card opens its own page, and each instrument keeps its own guides, about, contact and legal pages.',
   instrumentsH: 'Instruments',
   instrumentsLead: 'Live sensor tools that run entirely in your browser: put the phone flat, allow the sensor, read the value.',
   toolsH: 'Browser tools',
@@ -46,7 +46,7 @@ export const hubCopy: Record<string, HubCopy> = {
   en,
   de: {
     ...en,
-    title: 'CompassInstant — 4 Instrumente + 12 Sofort-Tools',
+    title: 'CompassInstant — vier Messinstrumente an einem Ort',
     description:
       'Das komplette CompassInstant-Set in Instanten: Online-Kompass, Wasserwaage, Tachometer und Qibla-Finder — jeweils mit eigenen Guides, Über-uns-, Kontakt- und Rechtsseiten — plus zwölf Browser-Tools.',
     h1: 'CompassInstant-Tools',
@@ -65,7 +65,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   es: {
     ...en,
-    title: 'CompassInstant — 4 instrumentos + 12 herramientas instantáneas',
+    title: 'CompassInstant — 4 instrumentos + four instruments instantáneas',
     description:
       'El conjunto completo de CompassInstant dentro de Instanten: brújula online, nivel de burbuja, velocímetro y alquibla — cada uno con sus guías, sobre nosotros, contacto y páginas legales — más doce herramientas de navegador.',
     h1: 'Herramientas CompassInstant',
@@ -84,7 +84,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   fr: {
     ...en,
-    title: 'CompassInstant — 4 instruments + 12 outils instantanés',
+    title: 'CompassInstant — 4 instruments + four instruments instantanés',
     description:
       'L\'ensemble CompassInstant complet dans Instanten : boussole en ligne, niveau à bulle, tachymètre et boussole Qibla — chacun avec ses guides, à propos, contact et pages légales — plus douze outils de navigateur.',
     h1: 'Outils CompassInstant',
@@ -103,7 +103,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   it: {
     ...en,
-    title: 'CompassInstant — 4 strumenti + 12 strumenti istantanei',
+    title: 'CompassInstant — 4 strumenti + four instruments istantanei',
     description:
       'Il set CompassInstant completo dentro Instanten: bussola online, livella, tachimetro e bussola Qibla — ognuno con guide, chi siamo, contatti e pagine legali — più dodici strumenti del browser.',
     h1: 'Strumenti CompassInstant',
@@ -122,7 +122,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   pt: {
     ...en,
-    title: 'CompassInstant — 4 instrumentos + 12 ferramentas instantâneas',
+    title: 'CompassInstant — 4 instrumentos + four instruments instantâneas',
     description:
       'O conjunto CompassInstant completo dentro do Instanten: bússola online, nível de bolha, velocímetro e alquibla — cada um com guias, sobre, contacto e páginas legais — mais doze ferramentas de navegador.',
     h1: 'Ferramentas CompassInstant',
@@ -141,7 +141,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   nl: {
     ...en,
-    title: 'CompassInstant — 4 instrumenten + 12 directe tools',
+    title: 'CompassInstant — vier meetinstrumenten op één plek',
     description:
       'De complete CompassInstant-set binnen Instanten: online kompas, waterpas, snelheidsmeter en Qibla-kompas — elk met eigen gidsen, over ons, contact en juridische pagina\'s — plus twaalf browsertools.',
     h1: 'CompassInstant-tools',
@@ -160,7 +160,7 @@ export const hubCopy: Record<string, HubCopy> = {
   },
   sv: {
     ...en,
-    title: 'CompassInstant — 4 instrument + 12 snabba verktyg',
+    title: 'CompassInstant — fyra mätinstrument på ett ställe',
     description:
       'Hela CompassInstant-uppsättningen i Instanten: online kompass, vattenpass, hastighetsmätare och Qibla-kompass — var och en med egna guider, om oss, kontakt och juridiska sidor — plus tolv webbläsarverktyg.',
     h1: 'CompassInstant-verktyg',

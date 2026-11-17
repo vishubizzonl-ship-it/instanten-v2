@@ -3,7 +3,7 @@
  * ke liye. Naam/description compassinstant silo se aaye hain (8 languages),
  * nl aur sv wahan nahi the — wo is file mein likhe gaye hain.
  *
- * localizeTool() ise toolCopy ke baad dekhta hai, taaki purane 12 tools ka
+ * localizeTool() ise toolCopy ke baad dekhta hai, taaki instrument ka
  * data jahan tha wahi rahe.
  */
 import type { LangCode } from "../ui";

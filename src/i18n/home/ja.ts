@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: '検証された変換精度',
       body:
-        '出力は標準ルールに従い、コピーしやすい形式です。オンライン定規は ISO/IEC 7810 ID-1 カード寸法（3.370 × 2.125 インチ）、カラーパレットは WCAG 2.2 AA のコントラスト比を参照します。',
+        '計測値は公開標準に基づきます。方位と傾きは W3C DeviceOrientation Event、キブラの方位は W3C Geolocation API、速度は正確な SI 換算（1ノット = 1.852 km/h）を使用します。',
     },
     {
       title: 'ブラウザ優先のプライバシー',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         '無駄のない即時起動 — 静的 HTML ページは最新ブラウザでほぼ即座に読み込まれます。',
-        '標準準拠のコピー可能な出力 — JSON Formatter は IETF RFC 8259、Base64 Encoder は IETF RFC 4648、Markdown Editor は CommonMark、メタタグ生成は Google Search Central と Open Graph に従います。',
+        '信頼できる計測値 — 方位と傾きは W3C DeviceOrientation Event、キブラの方位は W3C Geolocation API、速度は km/h・mph・ノット間の正確な SI 換算によるものです。',
         'ツールの隣に実用的な文脈 — ガイドが例外やベストプラクティスを説明し、単なる数値ではない即時ヘルプを提供します。',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'オンラインツールが重いインストーラーに勝る理由',
       paragraphs: [
         'ネイティブのデスクトップスイートは数 GB の動画処理には向いていますが、日常の小さな作業には不向きです。ブラウザで動くオンラインツールなら、OS 互換性、ストレージ、バックグラウンド更新、ライセンスの手間がなく、Windows、macOS、Linux、Android、iOS で同じように使えます。',
-        'NIST、W3C、IETF の仕様に基づく検証方針については About ページをご覧ください。',
+        '各計測ツールが引用する W3C 仕様に基づく検証方針については About ページをご覧ください。',
       ],
       links: [{ label: 'Instanten について', href: '/about/' }],
     },

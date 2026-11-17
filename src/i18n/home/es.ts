@@ -36,7 +36,7 @@ export const home: HomeCopy = {
     {
       title: 'Precisión de conversión verificada',
       body:
-        'Los resultados siguen reglas estándar en formato listo para copiar. La regla online referencia medidas ISO/IEC 7810 ID-1 (3,370 × 2,125 pulgadas) y la paleta los contrastes WCAG 2.2 AA.',
+        'Las lecturas siguen estándares públicos: el rumbo y la inclinación provienen de W3C DeviceOrientation Event, el rumbo de la alquibla de la API Geolocation del W3C, y las velocidades usan conversiones SI exactas (1 nudo = 1,852 km/h).',
     },
     {
       title: 'Privacidad en el navegador',
@@ -63,7 +63,7 @@ export const home: HomeCopy = {
       ],
       bullets: [
         'Inicio instantáneo sin lastre: las páginas HTML estáticas cargan casi de inmediato en navegadores modernos.',
-        'Resultados listos para copiar y basados en estándares: JSON Formatter sigue IETF RFC 8259, Base64 Encoder IETF RFC 4648, Markdown Editor CommonMark y el generador de metaetiquetas las recomendaciones de Google Search Central y Open Graph.',
+        'Lecturas en las que puedes confiar: rumbo e inclinación desde W3C DeviceOrientation Event, el rumbo de la alquibla desde la API Geolocation del W3C y velocidades con conversiones SI exactas entre km/h, mph y nudos.',
         'Contexto práctico junto a la herramienta: las guías explican casos límite y buenas prácticas para una ayuda real.',
       ],
     },
@@ -81,7 +81,7 @@ export const home: HomeCopy = {
       title: 'Por qué las herramientas online superan a los instaladores pesados',
       paragraphs: [
         'Los programas nativos tienen sentido para renderizar vídeo de varios gigabytes, no para utilidades diarias. Una caja de herramientas online evita problemas de compatibilidad, almacenamiento, actualizaciones en segundo plano y licencias; la misma herramienta funciona en Windows, macOS, Linux, Android e iOS.',
-        'Conoce nuestra filosofía y la verificación frente a NIST, W3C e IETF en la página Acerca de.',
+        'Conoce nuestra filosofía y cómo comprobamos cada instrumento frente a las especificaciones del W3C que cita en la página Acerca de.',
       ],
       links: [{ label: 'Acerca de', href: '/about/' }],
     },

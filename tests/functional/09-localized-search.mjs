@@ -25,8 +25,7 @@ const CASES = [
   ['/ja/search/', '速度', 'スピード'],
   ['/ja/search/', '水準器', '水準器'],
   ['/ja/search/', 'メッカ', 'キブラ'],
-  ['/ja/search/', '定規', '定規'],
-  ['/ja/search/', '文字数', '文字数'],
+  ['/ja/search/', '方位', 'コンパス'],
   ['/ko/search/', '나침반', '나침반'],
   ['/ko/search/', '속도계', '속도계'],
   ['/ko/search/', '수평계', '수준기'],
@@ -50,8 +49,8 @@ const CASES = [
   ['/search/', 'compass', 'Online Compass'],
   ['/search/', 'spirit level', 'Bubble Level'],
   ['/search/', 'speed', 'Speedometer'],
-  ['/search/', 'prettify', 'JSON Formatter'],
-  ['/search/', 'prettify json', 'JSON Formatter'], // do-shabd query
+  ['/search/', 'qibla', 'Qibla'],
+  ['/search/', 'spirit level', 'Bubble Level'], // do-shabd query
 ];
 
 for (const [route, query, expected] of CASES) {
@@ -149,14 +148,11 @@ const EXTRA = [
   ['/ja/search/', '礼拝', 'キブラ'],
   ['/ko/search/', '메카', '키블라'],
   ['/fr/search/', 'prière', 'Qibla'],
-  // ruler / word counter / password / qr
-  ['/ja/search/', '長さ', '定規'],
-  ['/ja/search/', 'センチ', '定規'],
-  ['/ko/search/', '길이', '자'],
-  ['/ja/search/', '原稿', '文字数'],
-  ['/ja/search/', '乱数', 'パスワード'],
-  ['/ko/search/', '비밀번호 만들기', '비밀번호'],
-  ['/ja/search/', '二次元', 'QR'],
+  // four instruments ke natural shabd
+  ['/ja/search/', '傾き', '水準器'],
+  ['/ko/search/', '기울기', '수준기'],
+  ['/ja/search/', '方角', 'コンパス'],
+  ['/ko/search/', '나침', '나침반'],
   // speedometer — har translated bhasha me natural shabd (turn 57)
   ['/search/', 'speedometer', 'Speedometer'],
   ['/search/', 'gps speed', 'Speedometer'],

@@ -94,8 +94,8 @@ export function run(pages, outDir) {
     }
   }
 
-  check(directoryPages >= 60, `sirf ${directoryPages} pages par directory grid mila`);
-  check(toolDetailPages >= 48, `sirf ${toolDetailPages} tool pages mile`);
+  check(directoryPages >= 40, `sirf ${directoryPages} pages par directory grid mila`);
+  check(toolDetailPages >= 32, `sirf ${toolDetailPages} instrument pages mile`);
 
   /* ---------- 3. Container discipline ---------------------------------- */
   check(
