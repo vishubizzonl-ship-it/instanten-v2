@@ -49,6 +49,16 @@ export const home: HomeCopy = {
     'Comment fonctionnent nos outils instantanés, ce que vous accomplissez en quelques secondes et pourquoi les utilitaires web rapides surpassent les gros téléchargements.',
   blocks: [
     {
+      title: 'Ce que chaque instrument mesure réellement',
+      paragraphs: [
+        'La boussole en ligne transforme le capteur d’orientation du téléphone ou de l’ordinateur en un cap en degrés. C’est la façon la plus rapide de répondre à « dans quelle direction je regarde » sans ouvrir une seconde application : le cadran suit l’appareil pendant la rotation et le chiffre reste lisible quand l’aiguille bouge. Comme elle lit un magnétomètre, les haut-parleurs, cadres métalliques et étuis magnétiques proches faussent la lecture.',
+        'Le niveau à bulle affiche l’inclinaison sur les deux axes en même temps, ce qui permet de contrôler une étagère, un cadre ou une machine à laver sans avoir de niveau physique sous la main. Deux valeurs en degrés et une bulle visible indiquent si la surface est de niveau dans la longueur et dans la largeur, ce qu’un seul tube à bulle ne montre jamais.',
+        'Le compteur de vitesse indique l’allure en km/h, mph et nœuds simultanément, convertie avec des facteurs SI exacts pour que les trois chiffres ne se contredisent jamais. Il lit la position transmise par le navigateur : utile en voiture, à vélo ou en bateau, sans compte, sans suivi et sans installation.',
+        'Le chercheur de Qibla calcule le relèvement orthodromique entre vos coordonnées et La Mecque, puis l’affiche comme une direction de boussole. Ce n’est pas la même chose que « pointer vers l’est » : le relèvement correct change selon l’endroit où vous vous tenez, et la page indique la valeur utilisée pour que vous puissiez la vérifier.',
+      ],
+    },
+
+    {
       title: 'Ce que fait Instanten',
       paragraphs: [
         'Chaque jour, étudiants, développeurs, rédacteurs, designers et équipes enchaînent de petites tâches numériques : formater des données, convertir, nettoyer du texte, calculer ou chercher une réponse technique. Ouvrir un logiciel lourd pour trente secondes fait perdre du temps.',
@@ -97,6 +107,21 @@ export const home: HomeCopy = {
       ],
       links: [{ label: 'Contact', href: '/contact/' }],
     },
+    {
+      title: 'D’où viennent les mesures, et où elles s’arrêtent',
+      paragraphs: [
+        'Chaque instrument d’Instanten lit une grandeur que votre appareil mesure déjà. La boussole et le niveau lisent l’événement d’orientation exposé par le navigateur, le compteur lit les variations de la position transmise, et le chercheur de Qibla combine cette position avec une formule de trigonométrie sphérique. Rien n’est envoyé, rien n’est conservé entre deux visites et aucun résultat ne vient d’un serveur : c’est pourquoi chaque page continue de fonctionner après fermeture de l’onglet.',
+        'Cela fixe aussi la limite honnête. Un capteur de téléphone n’est pas un instrument de mesure étalonné : un magnétomètre dérive près du métal et des aimants, une position de navigateur peut être précise à quelques mètres ou à quelques centaines selon le signal, et un ordinateur tenu incliné ne signale pas la même chose qu’un téléphone posé à plat. Chaque page indique donc ce qui a été mesuré plutôt que de promettre une précision de laboratoire.',
+        'Les valeurs s’affichent dans l’unité utile. Cap et inclinaison en degrés, vitesse simultanément en km/h, mph et nœuds avec des facteurs SI exacts, et la page Qibla donne le relèvement en degrés depuis le nord avec la distance calculée. Si un chiffre paraît faux, vérifiez d’abord le capteur, pas le calcul.',
+      ],
+      bullets: [
+        'Aucun envoi : chaque mesure est calculée dans la page.',
+        'Les unités et la spécification associée sont affichées à côté du chiffre.',
+        'Les limites des capteurs figurent sur la page, pas dans une note de bas de page.',
+        'Vous pouvez recalibrer l’appareil et relire la même valeur pour comparer.',
+      ],
+    },
+
   ],
   faqTitle: 'Questions fréquentes',
   faqs: [],

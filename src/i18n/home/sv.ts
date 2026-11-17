@@ -49,6 +49,16 @@ export const home: HomeCopy = {
     'Hur våra direktverktyg fungerar, vad du klarar på sekunder och varför snabba webbverktyg slår tunga nedladdningar — kontrollerat mot offentliga standarder.',
   blocks: [
     {
+      title: 'Vad varje instrument faktiskt mäter',
+      paragraphs: [
+        'Onlinekompassen omvandlar telefonens eller laptopens orienteringssensor till en riktning i grader. Det är snabbaste sättet att svara på ”vilket håll tittar jag åt” utan att öppna en andra app: skivan följer enheten när du vrider dig och siffran går att läsa medan nålen rör sig. Eftersom den läser en magnetometer påverkas resultatet av högtalare, metallramar och magnetiska skal i närheten.',
+        'Vattenpasset visar lutningen på båda axlarna samtidigt, så en hylla, en tavelram eller en tvättmaskin kan kontrolleras utan ett fysiskt vattenpass i rummet. Två gradvärden och en synlig bubbla visar om ytan är vågrät både på längden och på bredden — något ett enda rör aldrig visar.',
+        'Hastighetsmätaren visar farten i km/h, mph och knop samtidigt, omräknad med exakta SI-faktorer så att de tre siffrorna aldrig motsäger varandra. Den läser positionen som webbläsaren anger: användbar i bil, på cykel eller i båt, utan konto, utan spårning och utan installation.',
+        'Qibla-sökaren beräknar storcirkelbäringen från dina koordinater till Mecka och visar den som kompassriktning. Det är inte samma sak som ”peka österut”: rätt bäring ändras med var du står, och sidan anger vilket värde som användes så att du kan kontrollera det.',
+      ],
+    },
+
+    {
       title: 'Vad Instanten gör',
       paragraphs: [
         'Varje dag gör studenter, utvecklare, författare, formgivare och team många små digitala uppgifter: formatera data, konvertera direkt, rensa text, beräkna värden eller slå upp tekniska svar. Tunga skrivbordsprogram för trettio sekunder slösar tid.',
@@ -97,6 +107,20 @@ export const home: HomeCopy = {
       ],
       links: [{ label: 'Kontakt', href: '/contact/' }],
     },
+    {
+      title: 'Var mätvärdena kommer från – och var de tar slut',
+      paragraphs: [
+        'Varje instrument på Instanten läser något som din enhet redan mäter. Kompassen och vattenpasset läser orienteringshändelsen som webbläsaren tillhandahåller, hastighetsmätaren läser ändringar i den rapporterade positionen och qibla-sökaren kombinerar positionen med en storcirkelformel. Inget laddas upp, inget sparas mellan besök och inget resultat hämtas från en server – därför fungerar varje sida även efter att fliken stängts och öppnats.',
+        'Det anger också den ärliga gränsen. En telefonsensor är inget kalibrerat mätinstrument: en magnetometer driver nära metall och magneter, en webbläsarposition kan stämma på några meter eller några hundra beroende på signal, och en sned bärbar dator rapporterar lutning annorlunda än en telefon som ligger plant. Därför anger varje sida vad som mättes i stället för att lova laboratorieprecision.',
+        'Värdena visas i den enhet som passar uppgiften. Riktning och lutning i grader, hastighet samtidigt i km/h, mph och knop med exakta SI-faktorer, och qibla-sidan anger bäringen i grader från norr tillsammans med den beräknade distansen. Verkar en siffra fel, kontrollera sensorn först och inte uträkningen.',
+      ],
+      bullets: [
+        'Inget laddas upp; varje mätvärde beräknas inuti sidan.',
+        'Enheter och specifikationen bakom dem står bredvid siffran.',
+        'Sensorernas gränser står på sidan, inte i en fotnot.',
+      ],
+    },
+
   ],
   faqTitle: 'Vanliga frågor',
   faqs: [],

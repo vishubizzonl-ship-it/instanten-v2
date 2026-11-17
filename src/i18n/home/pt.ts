@@ -49,6 +49,16 @@ export const home: HomeCopy = {
     'Como funcionam as ferramentas instantâneas, o que consegue fazer em segundos e porque os utilitários web rápidos superam downloads pesados.',
   blocks: [
     {
+      title: 'O que cada instrumento mede de facto',
+      paragraphs: [
+        'A bússola online transforma o sensor de orientação do telemóvel ou do portátil numa direção em graus. É a forma mais rápida de responder a «para onde estou a olhar» sem abrir uma segunda aplicação: o mostrador acompanha o dispositivo quando roda e o número mantém-se legível enquanto a agulha se move. Como lê um magnetómetro, colunas, molduras metálicas e capas magnéticas por perto desviam a leitura.',
+        'O nível de bolha mostra a inclinação nos dois eixos ao mesmo tempo, pelo que pode verificar uma prateleira, um quadro ou uma máquina de lavar sem ter um nível físico à mão. Dois valores em graus e uma bolha visível indicam se a superfície está nivelada no comprimento e na largura, algo que um único tubo de bolha nunca mostra.',
+        'O velocímetro indica a velocidade em km/h, mph e nós em simultâneo, convertida com fatores SI exatos para que os três números nunca se contradigam. Lê a posição comunicada pelo navegador: útil no carro, na bicicleta ou no barco, sem conta, sem rastreio e sem instalação.',
+        'O localizador de Qibla calcula o rumo de círculo máximo das suas coordenadas até Meca e apresenta-o como direção de bússola. Não é o mesmo que «apontar a leste»: o rumo correto muda conforme o local onde está, e a página indica o valor usado para que o possa confirmar.',
+      ],
+    },
+
+    {
       title: 'O que o Instanten faz',
       paragraphs: [
         'Todos os dias, estudantes, programadores, escritores, designers e equipas enfrentam dezenas de pequenas tarefas digitais: formatar dados, converter instantaneamente, limpar texto, calcular valores ou procurar respostas técnicas. Abrir software pesado para trinta segundos desperdiça tempo.',
@@ -97,6 +107,21 @@ export const home: HomeCopy = {
       ],
       links: [{ label: 'Contacto', href: '/contact/' }],
     },
+    {
+      title: 'De onde vêm as leituras e onde elas param',
+      paragraphs: [
+        'Cada instrumento do Instanten lê algo que o seu dispositivo já mede. A bússola e o nível leem o evento de orientação exposto pelo navegador, o velocímetro lê variações da posição comunicada e o localizador de Qibla combina essa posição com uma fórmula de círculo máximo. Nada é enviado, nada fica guardado entre visitas e nenhum resultado vem de um servidor: por isso cada página continua a funcionar depois de fechar e reabrir o separador.',
+        'Daí vem também o limite honesto. Um sensor de telemóvel não é um instrumento topográfico calibrado: um magnetómetro desvia-se perto de metais e ímanes, uma posição do navegador pode acertar a poucos metros ou a algumas centenas conforme o sinal, e um portátil inclinado comunica a inclinação de forma diferente de um telemóvel deitado. Por isso cada página diz o que mediu em vez de prometer precisão de laboratório.',
+        'As leituras aparecem na unidade adequada. Direção e inclinação em graus, velocidade em simultâneo em km/h, mph e nós com fatores SI exatos, e a página de Qibla indica o rumo em graus a partir do norte com a distância calculada. Se um número parecer errado, verifique primeiro o sensor e não a conta.',
+      ],
+      bullets: [
+        'Nada é enviado: cada leitura é calculada dentro da página.',
+        'Unidades e o padrão que as sustenta junto ao número.',
+        'Os limites do sensor são explicados na página, não numa nota de rodapé.',
+        'Pode recalibrar o dispositivo e voltar a ler o mesmo valor para comparar.',
+      ],
+    },
+
   ],
   faqTitle: 'Perguntas frequentes',
   faqs: [],

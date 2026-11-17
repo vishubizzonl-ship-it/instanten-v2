@@ -128,7 +128,7 @@ export const enArticles: BlogArticlesBySlug = {
       {
         heading: 'The online tools list: what belongs in a good one',
         paragraphs: [
-          'A useful instrument set is short and honest. Every entry should correspond to a measurement people genuinely repeat — direction, flatness, speed, bearing — not to a category someone wanted to fill. Instanten keeps four instruments because those four cover the measurements most people actually make in a normal week.',
+          'A useful instrument set is short and honest. Every entry should correspond to a measurement people genuinely repeat — direction, flatness, speed, bearing — not to a category someone wanted to fill. Instanten keeps four instruments because those four cover the measurements most people actually make in a normal week. The test for a fifth instrument is the same one the first four had to pass: can we explain, on its own page, what it measures, which specification it follows and where the reading stops being trustworthy? If the answer is no, the instrument set stays at four, and the four keep getting better guides instead of new neighbours.',
         ],
         bullets: [
           

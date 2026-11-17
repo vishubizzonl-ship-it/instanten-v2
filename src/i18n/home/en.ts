@@ -49,6 +49,22 @@ export const home: HomeCopy = {
     'How our instant tools work, what you can accomplish in seconds, and why fast browser utilities beat bulky downloads — all validated against real public engineering standards.',
   blocks: [
     {
+      title: 'What each instrument actually reads',
+      paragraphs: [
+        'The online compass turns the phone or laptop orientation sensor into a heading in degrees. It is the quickest way to answer "which way am I facing" without unlocking a second app: the dial follows the device as you turn, and the numeric heading stays readable while the needle moves. Because it reads a magnetometer, it is affected by nearby speakers, metal frames and magnetic cases.',
+        'The bubble level shows tilt on both axes at once, so a shelf, a picture frame or a washing machine can be checked without a physical spirit level in the room. Two values in degrees plus a visual bubble tell you whether a surface is level along its length and across its width, which a single bubble tube never shows.',
+        'The speedometer reports how fast you are moving in km/h, mph and knots at the same time, converted with exact SI factors so the three numbers never disagree. It reads the position your browser reports, which makes it useful in a car, on a bike or on a boat — and it needs no account, no tracking and no install.',
+        'The Qibla finder calculates the great-circle bearing from your own coordinates to Makkah and shows it as a compass direction. That is a different calculation from "point east": the correct bearing changes with where you stand, and the page states the figure it used so you can verify it.',
+      ],
+      bullets: [
+        'One reading per instrument, on its own page, with no form to fill in first.',
+        'Every figure labelled with its unit and the specification behind it.',
+        'Sensor limits stated plainly instead of a laboratory-accuracy claim.',
+        'Each instrument keeps its own guides, contact page and legal pages.',
+      ],
+    },
+
+    {
       title: 'What Instanten does',
       paragraphs: [
         'Every day, students, developers, writers, designers, and teams run into dozens of small digital tasks — formatting data, running an instant convert check, cleaning text, calculating values, or looking up technical answers. Opening heavy desktop software for a thirty-second job wastes momentum.',
@@ -97,6 +113,21 @@ export const home: HomeCopy = {
       ],
       links: [{ label: 'Contact page', href: '/contact/' }],
     },
+    {
+      title: 'Where the readings come from, and where they stop',
+      paragraphs: [
+        'Every instrument on Instanten reads something your device already measures. The compass and the bubble level read the orientation event your browser exposes, the speedometer reads changes in the position your browser reports, and the Qibla finder combines that position with a great-circle formula. Nothing is uploaded, nothing is stored between visits and no result is fetched from a server, which is why each page keeps working after the tab has been closed and reopened.',
+        'That also sets the honest limit. A phone sensor is not a calibrated survey instrument: a magnetometer drifts near metal and magnets, a browser position can be accurate to a few metres or to a few hundred depending on the signal, and a laptop held at an angle reports tilt differently from a phone laid flat. Each page therefore states what it measured rather than promising laboratory precision.',
+        'Readings are shown in the unit that suits the job. Headings and tilt are in degrees, speed is simultaneously in km/h, mph and knots using exact SI factors, and the Qibla page gives the bearing in degrees from north together with the distance it calculated. If a number looks wrong, the first thing to check is the sensor rather than the maths.',
+      ],
+      bullets: [
+        'Nothing is uploaded; each reading is computed inside the page.',
+        'Units and the specification behind them are printed next to the figure.',
+        'Sensor limits are stated on the page, not hidden in a footnote.',
+        'You can recalibrate the device and re-read the same number to compare.',
+      ],
+    },
+
   ],
   // ---- English-only long-form SEO copy (target: 800–1200 words) ----------
   seoLongformTitle: 'Instanten: the free online tools hub built for instant work',

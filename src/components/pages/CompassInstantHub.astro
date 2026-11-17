@@ -127,19 +127,13 @@ const itemListLd = {
     </section>
 
     {/* --- 12 browser tools --- */}
-    <section class="mt-14" aria-labelledby="hub-tools">
-      <h2 id="hub-tools" class="font-display text-heading-md text-ink">{copy.toolsH}</h2>
-      <p class="mt-2 mb-6 max-w-[48rem] text-body-sm leading-relaxed text-body">{copy.toolsLead}</p>
-      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        {tools.map((tool) => (
-          <li class="rounded-card border border-border-hairline bg-surface">
-            <a href={tool.href} class="group flex h-full flex-col p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-link">
-              <span class="font-display text-body-md font-semibold text-ink group-hover:text-link">{tool.name}</span>
-              <span class="mt-2 text-body-sm leading-relaxed text-body">{tool.description}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+    <section class="mt-14" aria-labelledby="hub-how">
+      <h2 id="hub-how" class="font-display text-heading-md text-ink">{copy.instrumentsH}</h2>
+      <p class="mt-3 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.detailP1}</p>
+      <p class="mt-3 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.detailP2}</p>
+      <p class="mt-3 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.detailP3}</p>
+      <p class="mt-3 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.detailP4}</p>
+      <p class="mt-3 max-w-[48rem] text-body-md leading-relaxed text-body">{copy.detailP5}</p>
     </section>
 
     <p class="mt-12">

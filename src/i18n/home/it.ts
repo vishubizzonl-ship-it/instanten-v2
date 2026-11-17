@@ -49,6 +49,16 @@ export const home: HomeCopy = {
     'Come funzionano i nostri strumenti istantanei, cosa puoi completare in pochi secondi e perché le utilità web veloci battono i download pesanti.',
   blocks: [
     {
+      title: 'Che cosa misura davvero ogni strumento',
+      paragraphs: [
+        'La bussola online trasforma il sensore di orientamento del telefono o del portatile in una direzione in gradi. È il modo più rapido per rispondere a «verso dove sto guardando» senza aprire una seconda app: il quadrante segue il dispositivo mentre ruoti e la cifra resta leggibile mentre l’ago si muove. Poiché legge un magnetometro, casse, telai metallici e custodie magnetiche vicine alterano la lettura.',
+        'La livella mostra l’inclinazione su entrambi gli assi contemporaneamente, così puoi controllare una mensola, una cornice o una lavatrice senza avere una livella fisica in casa. Due valori in gradi e una bolla visibile dicono se la superficie è in piano lungo la lunghezza e lungo la larghezza, cosa che un solo tubo non mostra mai.',
+        'Il tachimetro mostra la velocità in km/h, mph e nodi insieme, convertita con fattori SI esatti perché le tre cifre non si contraddicano. Legge la posizione comunicata dal browser: utile in auto, in bici o in barca, senza account, senza tracciamento e senza installazione.',
+        'La ricerca Qibla calcola il rilevamento di circolo massimo dalle tue coordinate alla Mecca e lo mostra come direzione di bussola. Non è la stessa cosa di «puntare a est»: il rilevamento corretto cambia con il luogo in cui ti trovi, e la pagina indica il valore usato perché tu possa verificarlo.',
+      ],
+    },
+
+    {
       title: 'Cosa fa Instanten',
       paragraphs: [
         'Ogni giorno studenti, sviluppatori, scrittori, designer e team affrontano decine di piccole attività digitali: formattare dati, convertire subito, pulire testo, calcolare valori o cercare risposte tecniche. Aprire software desktop pesante per trenta secondi è uno spreco.',
@@ -97,6 +107,20 @@ export const home: HomeCopy = {
       ],
       links: [{ label: 'Contatti', href: '/contact/' }],
     },
+    {
+      title: 'Da dove arrivano le letture e dove finiscono',
+      paragraphs: [
+        'Ogni strumento di Instanten legge una grandezza che il tuo dispositivo misura già. La bussola e la livella leggono l’evento di orientamento esposto dal browser, il tachimetro legge le variazioni della posizione comunicata e la ricerca Qibla combina quella posizione con una formula di trigonometria sferica. Niente viene caricato, niente resta tra una visita e l’altra e nessun risultato arriva da un server: per questo ogni pagina continua a funzionare dopo aver chiuso e riaperto la scheda.',
+        'Da qui deriva anche il limite onesto. Un sensore del telefono non è uno strumento topografico tarato: un magnetometro deriva vicino a metalli e calamite, una posizione del browser può essere precisa a pochi metri o a qualche centinaio secondo il segnale, e un portatile inclinato comunica l’inclinazione in modo diverso da un telefono appoggiato. Per questo ogni pagina dice cosa ha misurato invece di promettere precisione da laboratorio.',
+        'Le letture appaiono nell’unità adatta. Direzione e inclinazione in gradi, velocità insieme in km/h, mph e nodi con fattori SI esatti, e la pagina Qibla fornisce il rilevamento in gradi dal nord con la distanza calcolata. Se un numero sembra sbagliato, controlla prima il sensore, non il calcolo.',
+      ],
+      bullets: [
+        'Nessun caricamento: ogni lettura è calcolata dentro la pagina.',
+        'Unità e specifica di riferimento accanto alla cifra.',
+        'I limiti dei sensori sono scritti nella pagina, non in una nota.',
+      ],
+    },
+
   ],
   faqTitle: 'Domande frequenti',
   faqs: [],
