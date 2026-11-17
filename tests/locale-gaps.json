@@ -1,16 +1,4 @@
 {
-  "src/i18n/supportCopy.ts": [
-    "nl",
-    "sv"
-  ],
-  "src/i18n/qiblaLegal.ts": [
-    "nl",
-    "sv"
-  ],
-  "src/i18n/speedometerLegal.ts": [
-    "nl",
-    "sv"
-  ],
   "src/i18n/contactForm.ts": [
     "nl",
     "sv"

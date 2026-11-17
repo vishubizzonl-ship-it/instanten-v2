@@ -125,4 +125,33 @@ export const speedometerLegal: Record<string, SpeedLegal> = {
       "Non usare il risultato di un **test tachimetro online** come riferimento legale o di sicurezza. I limiti di velocità vanno valutati con gli strumenti del veicolo e con la segnaletica, e un **test di velocità in tempo reale** su un telefono è una misura di comodità, non una misura tarata.",
     ],
   },
+
+  nl: {
+    privacyExtraH: "1a. Wat de tool met GPS doet",
+    privacyExtra: [
+      "Een **gps snelheidsmeter** heeft je positie nodig, en dat is de enige gevoelige invoer die deze pagina vraagt. De browser geeft je coördinaten aan de pagina, de pagina rekent de beweging tussen twee fixes om in een snelheid en de coördinaat wordt daarna weggegooid. Niets wordt in een database geschreven, er ontstaat geen ritlogboek, en wij kunnen een sessie van de **live snelheidsmeter** niet zien nadat je het tabblad sluit.",
+      "Hetzelfde geldt voor de ritcijfers. Topsnelheid, gemiddelde snelheid, afstand en hoogte worden in het tabblad berekend en gewist zodra je op Reset drukt of herlaadt. Een **online snelheidsmeter gratis** zonder accounts betekent dat er geen profiel is om ze aan te koppelen, en een **digitale snelheidsmeter**-meting wordt nooit aan een identiteit gekoppeld. Daarom is de **gratis online snelheidsmeter** bruikbaar op een geleende telefoon: start een **live snelheidstest**, sluit het tabblad en niets van de rit blijft aan onze kant achter.",
+    ],
+    termsIntro: "Lees deze Algemene voorwaarden (\\\"Voorwaarden\\\") zorgvuldig voordat je de online snelheidsmeter (\\\"de Dienst\\\") gebruikt. Door de Dienst te bezoeken of te gebruiken, ga je akkoord gebonden te zijn aan deze Voorwaarden.",
+    termsUse: "Deze gratis online snelheidsmeter wordt kosteloos aangeboden voor persoonlijk en professioneel gebruik. Je mag de Dienst gebruiken om snelheid, afstand en ritstatistieken te meten, dus een **live snelheidstest** kost niets en vereist geen registratie of betaling.",
+    termsAccuracy: [
+      "Een **gps snelheidsmeter online**-meting is zo goed als de satellietfix erachter. Onder bomen, in tunnels, in parkeergarages met meerdere lagen en in gebouwen driftt of stokt de positie, en het getoonde getal kan achterlopen of bevriezen. Zie elke **online snelheidsmeter mph**-waarde uit zulke omstandigheden als indicatief, niet als bewijs.",
+      "Gebruik de uitkomst van een **snelheidsmeter test online** niet als juridische of veiligheidsreferentie. Snelheidslimieten beoordeel je met de instrumenten van het voertuig zelf en met de bebording, en een **live snelheidstest** op een telefoon is een gemaksmeting, geen gekalibreerde meting.",
+    ],
+  },
+
+  sv: {
+    privacyExtraH: "1a. Vad verktyget gör med GPS",
+    privacyExtra: [
+      "En **gps hastighetsmätare** behöver din position, och det är den enda känsliga uppgift sidan frågar efter. Webbläsaren lämnar dina koordinater till sidan, sidan räknar om rörelsen mellan två fixar till en hastighet och koordinaten kastas sedan. Inget skrivs till en databas, ingen reselogg skapas, och vi kan inte se en session med **live hastighetsmätare** efter att du stängt fliken.",
+      "Detsamma gäller resans siffror. Toppfart, medelhastighet, distans och höjd beräknas i fliken och nollställs när du trycker på Återställ eller laddar om. En **online hastighetsmätare gratis** utan konton innebär att det inte finns någon profil att koppla dem till, och ett värde från den **digitala hastighetsmätaren** kopplas aldrig till en identitet. Det är därför den **gratis online hastighetsmätaren** fungerar på en lånad telefon: starta ett **live hastighetstest**, stäng fliken, och inget av resan finns kvar hos oss.",
+    ],
+    termsIntro: "Läs dessa villkor (\\\"Villkoren\\\") noggrant innan du använder online hastighetsmätaren (\\\"Tjänsten\\\"). Genom att öppna eller använda Tjänsten godkänner du att vara bunden av dessa Villkor.",
+    termsUse: "Denna gratis online hastighetsmätare tillhandahålls kostnadsfritt för personligt och professionellt bruk. Du får använda Tjänsten för att mäta hastighet, distans och resestatistik, så ett **live hastighetstest** kostar inget och kräver varken registrering eller betalning.",
+    termsAccuracy: [
+      "En mätning från **gps hastighetsmätare online** är bara så bra som satellitfixen bakom den. Under träd, i tunnlar, i parkeringshus med flera plan och inomhus driver eller stannar positionen, och siffran som visas kan släpa eller frysa. Betrakta varje **online hastighetsmätare mph**-värde från sådana förhållanden som vägledande, inte som bevis.",
+      "Använd inte resultatet från ett **hastighetsmätare test online** som juridisk eller säkerhetsmässig referens. Hastighetsgränser ska bedömas med fordonets egna instrument och med vägmärken, och ett **live hastighetstest** i en telefon är en bekvämlighetsmätning, inte en kalibrerad mätning.",
+    ],
+  },
+
 };

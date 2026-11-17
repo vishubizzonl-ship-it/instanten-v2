@@ -1753,4 +1753,438 @@ const it: SupportCopy = {
   },
 };
 
-export const supportCopy: Record<string, SupportCopy> = { en, ja, es, de, fr, pt, ko, it };
+const nl: SupportCopy = {
+  updated: "Laatst bijgewerkt: oktober 2026",
+  back: "Terug naar Kompas",
+  contactLink: "neem contact op",
+  about: {
+    whatH: "Wat is onlinecompass?",
+    what: [
+      "onlinecompass is een gratis navigatiegereedschap in de browser dat elke telefoon, tablet of laptop omzet in een precisiekompas, waterpas, snelheidsmeter en qibla-zoeker. Meet richting, helling, snelheid en gebedsrichting met echte nauwkeurigheid, zonder app te installeren en zonder account.",
+      "Anders dan de meeste online kompassen, die je oriëntatie gokken, leest onlinecompass je magnetometer, versnellingsmeter en GPS rechtstreeks via standaard browser-API's. Zodra de pagina geladen is, werkt alles offline en blijven je sensorgegevens op je toestel.",
+    ],
+    missionH: "Onze missie",
+    mission: [
+      "Navigeren moet direct en gratis zijn. We bouwden onlinecompass omdat we steeds een kompas, waterpas of snelheidsmeter zochten die niet binnen handbereik was — en de online alternatieven waren onnauwkeurig, vol advertenties of vroegen onnodige downloads. onlinecompass is snel, privé en standaard nauwkeurig.",
+    ],
+    featuresH: "Belangrijkste functies",
+    features: [
+      "Live kompasrichting om noord, zuid, oost en west te vinden",
+      "Waterpas: horizontaal, verticaal en rondom-niveau",
+      "Snelheidsmeter: GPS-snelheid, top, gemiddelde, hoogte en reistijd",
+      "Qibla-zoeker: gebedsrichting vanaf elke locatie",
+      "Vier precieze kalibratiemethoden voor elk toestel",
+      "Linialen en tools aan elke schermrand, volledig scherm",
+      "Donkere modus die je systeemvoorkeur volgt",
+      "Werkt in elke moderne browser — geen download, geen account",
+    ],
+    featuresCompass: [
+      "Live kompasrichting om noord, zuid, oost en west te vinden",
+      "Nauwkeurige peiling in graden",
+      "Vier precieze kalibratiemethoden voor elk toestel",
+      "Linialen en tools aan elke schermrand, volledig scherm",
+      "Donkere modus die je systeemvoorkeur volgt",
+      "Werkt in elke moderne browser — geen download, geen account",
+    ],
+    privacyH: "Privacy voorop",
+    privacy:
+      "Je sensorgegevens blijven op je toestel. We verzamelen, bewaren of versturen je koers, locatie of oriëntatie niet. Je kalibratie-instellingen worden lokaal op je eigen toestel opgeslagen.",
+    contactH: "Contact",
+    contact: "Heb je een vraag, heb je een bug gevonden of wil je een functie voorstellen? We horen het graag.",
+    privacyPre: "Lees ons ",
+    privacyLink: "Privacybeleid",
+    privacyPost: " voor alle details.",
+    contactCta: "Neem hier contact op.",
+  },
+  blog: {
+    title: "Online Kompas Blog",
+    desc: "Gidsen en tips voor het lezen van richting met het online kompas — hoe je een kompas afleest, noord vindt zonder hulpmiddelen en een koers herstelt die verkeerd lijkt.",
+    intro: "Gidsen en tips voor navigeren met onlinecompass.",
+    posts: [
+      {
+        href: "/onlinecompass/blog/online-compass-without-an-app/",
+        title: "Online kompas zonder app: je telefoon als kompas",
+        desc: "Gebruik je telefoon als kompas in de browser — geen app, geen installatie. Wat de magnetometer leest, hoe je met één tik kalibreert en wanneer een browserkompas genoeg is.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-find-north-without-a-compass/",
+        title: "Hoe je noord vindt zonder kompas (en met je telefoon)",
+        desc: "Vind noord in seconden met een online kompas of zonder enig hulpmiddel. Stapsgewijze sensorinstelling, gradenwaarden en controle met zon of schaduw.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-read-a-compass-dial/",
+        title: "Een kompas aflezen: graden, windstreken en peilingen",
+        desc: "Lees elk kompas correct af. Windstreken, graden, peilingen en declinatie, met uitgewerkte voorbeelden en oplossingen voor de meest gemaakte leesfouten.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-use-an-online-compass/",
+        title: "Een online kompas gebruiken (stap voor stap, met voorbeelden)",
+        desc: "Een praktische gids voor het meten van richting met je telefoon. Kalibreer, lees N/Z/O/W en werk echte voorbeelden door.",
+      },
+    ],
+  },  contact: {
+    emailH: "E-mail",
+    sendH: "Bericht sturen",
+    intro:
+      "We zijn een klein team en lezen elk bericht. Of je een bug hebt gevonden, een functie wenst of gewoon hallo wilt zeggen — gebruik het formulier hieronder.",
+    email: "Bereik ons op {email}. We antwoorden meestal binnen een paar werkdagen.",
+  },
+  toolPhrase: { compass: "als kompas", level: "als waterpas", speed: "als snelheidsmeter", qibla: "als qibla-zoeker" },
+  privacy: {
+    sections: [
+      {
+        h: "Overzicht",
+        paras: [
+          "onlinecompass (“wij”, “ons”, “de dienst”) zet zich in voor het beschermen van je privacy. Dit beleid legt uit welke gegevens we verzamelen, hoe we ze gebruiken en wat je rechten zijn. De korte versie: we verzamelen bijna niets en we verkopen of delen je gegevens niet.",
+        ],
+      },
+      {
+        h: "1. Gegevens die we verzamelen",
+        paras: [
+          "**Je hoeft geen account aan te maken en geen persoonsgegevens te geven om onlinecompass te gebruiken.**",
+          "Het kompas, de waterpas, de snelheidsmeter en de qibla-zoeker draaien volledig in je browser. Kalibratiegegevens (je sensormetingen, de gekozen kalibratiemethode, je themavoorkeur) worden alleen in de localStorage van je browser opgeslagen en nooit naar onze servers verstuurd.",
+          "Via standaard serverlogs en statistieken kunnen we de volgende niet-persoonlijke, geaggregeerde gegevens verzamelen:",
+        ],
+        listAt: 2,
+        list: [
+          "Bezochte pagina's en geschatte sessieduur",
+          "Browsertype en besturingssysteem (geaggregeerd)",
+          "Verwijzende website of zoekmachine",
+          "Geografische regio op landniveau (geen precieze locatie)",
+        ],
+      },
+      {
+        h: "2. Cookies",
+        paras: [
+          "onlinecompass gebruikt geen advertentiecookies. We gebruiken één externe analysedienst om paginaweergaven te tellen, met IP-anonimisering aan en zonder advertentie- of cross-site-trackingfuncties; die dienst plaatst zijn eigen analytische cookies. We gebruiken ook localStorage (geen cookies) om je kalibratie en themavoorkeur tussen bezoeken te bewaren, en die gegevens verlaten je toestel nooit.",
+          "Je kunt deze gegevens op elk moment wissen door de sitegegevens van onlinecompass in je browser te wissen.",
+        ],
+      },
+      {
+        h: "3. Diensten van derden",
+        paras: [
+          "We laden het lettertype Geist van een extern netwerk voor lettertypelevering. Wanneer je browser deze lettertypen downloadt, kan die aanbieder je IP-adres loggen als onderdeel van de normale levering. Raadpleeg het privacybeleid van die aanbieder voor details.",
+          "We plaatsen geen widgets van sociale media, advertentienetwerken of advertentietrackers. Het enige externe script op de pagina is de hierboven beschreven statistiektag.",
+        ],
+      },
+      {
+        h: "4. Bewaartermijn",
+        paras: [
+          "We bewaren geen persoonsgegevens op onze servers. Serverlogboeken worden, als ze worden bewaard, niet langer dan 90 dagen bewaard en alleen gebruikt om technische problemen te diagnosticeren.",
+        ],
+      },
+      {
+        h: "5. Privacy van kinderen",
+        paras: [
+          "onlinecompass is een algemeen hulpmiddel voor alle leeftijden. We verzamelen niet bewust persoonsgegevens van kinderen onder de 13 jaar. Omdat we van geen enkele gebruiker persoonsgegevens verzamelen, voldoet deze dienst door zijn opzet aan COPPA.",
+        ],
+      },
+      {
+        h: "6. Jouw rechten",
+        paras: [
+          "Omdat we geen identificeerbare persoonsgegevens verzamelen, valt er namens jou doorgaans niets op te vragen, te corrigeren of te verwijderen. Heb je bezwaren, {contact} dan en we reageren snel.",
+          "Als je in de Europese Economische Ruimte bent, heb je het recht om persoonsgegevens die wij hebben in te zien, te laten corrigeren of te laten wissen, en om een klacht in te dienen bij je lokale toezichthoudende autoriteit.",
+        ],
+      },
+      {
+        h: "7. Wijzigingen in dit beleid",
+        paras: [
+          "We kunnen dit privacybeleid van tijd tot tijd bijwerken. De datum “Laatst bijgewerkt” bovenaan deze pagina geeft de meest recente versie aan. Voortgezet gebruik van de dienst na het plaatsen van wijzigingen geldt als aanvaarding van het herziene beleid.",
+        ],
+      },
+      {
+        h: "8. Contact",
+        paras: [
+          "Vragen over dit privacybeleid? {contactCta}",
+        ],
+      },
+    ],
+  },
+  terms: {
+    intro: "Lees deze Algemene voorwaarden (“Voorwaarden”) zorgvuldig voordat je onlinecompass (“de Dienst”) gebruikt. Door de Dienst te bezoeken of te gebruiken, ga je akkoord gebonden te zijn aan deze Voorwaarden.",
+    sections: [
+      {
+        h: "1. Gebruik van de dienst",
+        paras: [
+          "onlinecompass wordt gratis aangeboden voor persoonlijk en professioneel gebruik. Je mag de Dienst gebruiken om kompasrichting te bepalen, oppervlakken waterpas te zetten, snelheid te meten en de qibla te vinden. Registratie of betaling is niet nodig.",
+          "Je gaat ermee akkoord om niet:",
+        ],
+        listAt: 1,
+        list: [
+          "De Dienst voor onwettige doeleinden te gebruiken",
+          "Te proberen de Dienst terug te ontwerpen, te scrapen of te kopiëren voor herdistributie zonder toestemming",
+          "De servers of netwerken die de Dienst hosten te verstoren of te hinderen",
+        ],
+      },
+      {
+        h: "2. Disclaimer over nauwkeurigheid",
+        paras: [
+          "onlinecompass is ontworpen om nauwkeurige metingen te geven bij correcte kalibratie. De nauwkeurigheid hangt echter af van:",
+          "**Vertrouw niet op onlinecompass voor veiligheidskritische metingen** — zoals medische, technische of bouwkundige toepassingen waarbij meetfouten schade kunnen veroorzaken. Gebruik voor precisiewerk gekalibreerde fysieke instrumenten.",
+        ],
+        listAt: 0,
+        list: [
+          "Correcte kalibratie door de gebruiker",
+          "De fysieke eigenschappen van jouw specifieke toestel",
+          "Het zoomniveau van de browser (metingen gaan uit van 100% zoom)",
+          "De schermschalingsinstellingen van je besturingssysteem",
+        ],
+      },
+      {
+        h: "3. Intellectueel eigendom",
+        paras: [
+          "Het ontwerp, de code, de tekst en de visuele middelen van onlinecompass zijn ons eigendom en beschermd door het auteursrecht. Je mag ze niet verveelvoudigen of herdistribueren zonder voorafgaande schriftelijke toestemming. De meetfunctionaliteit van de Dienst — het gebruiken van de sensoren van een toestel {tool} — wordt niet als eigendom opgeëist; alleen onze specifieke implementatie is beschermd.",
+        ],
+      },
+      {
+        h: "4. Uitsluiting van garanties",
+        paras: [
+          "De Dienst wordt geleverd “zoals hij is” en “zoals beschikbaar”, zonder enige garantie, uitdrukkelijk of impliciet. We garanderen niet dat de Dienst ononderbroken, foutloos of volledig nauwkeurig is voor alle toestellen en schermen.",
+        ],
+      },
+      {
+        h: "5. Beperking van aansprakelijkheid",
+        paras: [
+          "Voor zover wettelijk toegestaan zijn we niet aansprakelijk voor indirecte, incidentele, bijzondere, gevolg- of strafschade die voortvloeit uit je gebruik van, of het onvermogen om te gebruiken, de Dienst — ook als we op de mogelijkheid van zulke schade zijn gewezen.",
+        ],
+      },
+      {
+        h: "6. Links naar derden",
+        paras: [
+          "De Dienst kan links naar websites van derden bevatten. Deze links worden alleen voor het gemak gegeven. We hebben geen controle over inhoud van derden en aanvaarden daarvoor geen verantwoordelijkheid.",
+        ],
+      },
+      {
+        h: "7. Wijzigingen in deze voorwaarden",
+        paras: [
+          "We behouden ons het recht voor deze Voorwaarden op elk moment te wijzigen. De datum “Laatst bijgewerkt” bovenaan deze pagina geeft de meest recente versie aan. Voortgezet gebruik van de Dienst na het plaatsen van wijzigingen geldt als aanvaarding van de herziene Voorwaarden.",
+        ],
+      },
+      {
+        h: "8. Contact",
+        paras: [
+          "Vragen over deze Voorwaarden? {contactCta}",
+        ],
+      },
+    ],
+  },
+};
+
+const sv: SupportCopy = {
+  updated: "Senast uppdaterad: oktober 2026",
+  back: "Tillbaka till Kompass",
+  contactLink: "kontakta oss",
+  about: {
+    whatH: "Vad är onlinecompass?",
+    what: [
+      "onlinecompass är en gratis navigeringsverktygslåda i webbläsaren som gör vilken telefon, surfplatta eller laptop som helst till en precisionskompass, vattenpass, hastighetsmätare och qibla-sökare. Mät riktning, lutning, hastighet och böneriktning med verklig noggrannhet, utan att installera en app och utan konto.",
+      "Till skillnad från de flesta online-kompasar som gissar din orientering läser onlinecompass din magnetometer, accelerometer och GPS direkt via webbläsarens standard-API:er. När sidan har laddats fungerar den offline och dina sensordata stannar på enheten.",
+    ],
+    missionH: "Vårt uppdrag",
+    mission: [
+      "Navigering ska vara direkt och gratis. Vi byggde onlinecompass för att vi ständigt letade efter en kompass, ett vattenpass eller en hastighetsmätare som inte fanns i närheten — och online-alternativen var opålitliga, fulla av annonser eller krävde onödiga nedladdningar. onlinecompass är snabbt, privat och korrekt från start.",
+    ],
+    featuresH: "Viktiga funktioner",
+    features: [
+      "Live kompassriktning för att hitta norr, söder, öster och väster",
+      "Vattenpass: horisontellt, vertikalt och ovalt nivåmått",
+      "Hastighetsmätare: GPS-hastighet, topp, medel, höjd och restid",
+      "Qibla-sökare: böneriktning från vilken plats som helst",
+      "Fyra noggranna kalibreringsmetoder för alla enheter",
+      "Linjaler och verktyg vid varje skärmkant, helskärm",
+      "Mörkt läge som följer systeminställningen",
+      "Fungerar i alla moderna webbläsare — ingen nedladdning, inget konto",
+    ],
+    featuresCompass: [
+      "Live kompassriktning för att hitta norr, söder, öster och väster",
+      "Exakt bäring i grader",
+      "Fyra noggranna kalibreringsmetoder för alla enheter",
+      "Linjaler och verktyg vid varje skärmkant, helskärm",
+      "Mörkt läge som följer systeminställningen",
+      "Fungerar i alla moderna webbläsare — ingen nedladdning, inget konto",
+    ],
+    privacyH: "Integritet först",
+    privacy:
+      "Dina sensordata stannar på enheten. Vi samlar inte in, lagrar eller skickar din kurs, position eller orientering. Dina kalibreringsinställningar sparas lokalt på din egen enhet.",
+    contactH: "Kontakt",
+    contact: "Har du en fråga, hittat en bugg eller vill föreslå en funktion? Vi vill gärna höra från dig.",
+    privacyPre: "Läs vår ",
+    privacyLink: "integritetspolicy",
+    privacyPost: " för alla detaljer.",
+    contactCta: "Kontakta oss här.",
+  },
+  blog: {
+    title: "Online Kompass Blogg",
+    desc: "Guider och tips för att läsa riktning med online-kompassen — hur du läser en kompass, hittar norr utan verktyg och rättar en kurs som ser fel ut.",
+    intro: "Guider och tips för att navigera med onlinecompass.",
+    posts: [
+      {
+        href: "/onlinecompass/blog/online-compass-without-an-app/",
+        title: "Online-kompass utan app: använd telefonen som kompass",
+        desc: "Använd telefonen som kompass i webbläsaren — ingen app, ingen installation. Vad magnetometern läser, hur du kalibrerar med ett tryck och när en webbläsarkompass räcker.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-find-north-without-a-compass/",
+        title: "Hur du hittar norr utan kompass (och med telefonen)",
+        desc: "Hitta norr på sekunder med en online-kompass eller helt utan verktyg. Steg för steg med sensorinställning, gradvärden och kontroll med sol eller skugga.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-read-a-compass-dial/",
+        title: "Så läser du en kompass: grader, väderstreck och bäringar",
+        desc: "Läs vilken kompass som helst korrekt. Väderstreck, grader, bäringar och missvisning, med genomräknade exempel och rättelser för de vanligaste felen.",
+      },
+      {
+        href: "/onlinecompass/blog/how-to-use-an-online-compass/",
+        title: "Så använder du en online-kompass (steg för steg, med exempel)",
+        desc: "En praktisk guide för att mäta riktning med telefonen. Kalibrera, läs N/S/O/V och arbeta igenom verkliga exempel.",
+      },
+    ],
+  },  contact: {
+    emailH: "E-post",
+    sendH: "Skicka ett meddelande",
+    intro:
+      "Vi är ett litet team och läser varje meddelande. Har du hittat en bugg, vill du föreslå en funktion eller bara säga hej — använd formuläret nedan.",
+    email: "Nå oss på {email}. Vi svarar oftast inom några arbetsdagar.",
+  },
+  toolPhrase: { compass: "som kompass", level: "som vattenpass", speed: "som hastighetsmätare", qibla: "som qibla-sökare" },
+  privacy: {
+    sections: [
+      {
+        h: "Översikt",
+        paras: [
+          "onlinecompass (”vi”, ”vår”, ”tjänsten”) värnar om din integritet. Den här policyn förklarar vilka uppgifter vi samlar in, hur vi använder dem och vilka rättigheter du har. Kort version: vi samlar in nästan ingenting och vi säljer eller delar inte dina uppgifter.",
+        ],
+      },
+      {
+        h: "1. Uppgifter vi samlar in",
+        paras: [
+          "**Du behöver inte skapa ett konto eller lämna personuppgifter för att använda onlinecompass.**",
+          "Kompassen, vattenpasset, hastighetsmätaren och qibla-sökaren körs helt i din webbläsare. Kalibreringsdata (dina sensormätningar, vald kalibreringsmetod, tema) lagras bara i webbläsarens localStorage och skickas aldrig till våra servrar.",
+          "Vi kan samla in följande icke-personliga, aggregerade uppgifter via vanliga serverloggar och statistik:",
+        ],
+        listAt: 2,
+        list: [
+          "Besökta sidor och ungefärlig sessionstid",
+          "Webbläsartyp och operativsystem (aggregerat)",
+          "Hänvisande webbplats eller sökmotor",
+          "Geografisk region på landsnivå (inte exakt position)",
+        ],
+      },
+      {
+        h: "2. Cookies",
+        paras: [
+          "onlinecompass använder inga reklamcookies. Vi använder en tredjepartstjänst för analys för att räkna sidvisningar, med IP-anonymisering påslagen och utan reklam- eller spårningsfunktioner över webbplatser; den sätter sina egna analyscookies. Vi använder också localStorage (inte cookies) för att komma ihåg din kalibrering och ditt tema mellan besök, och de uppgifterna lämnar aldrig din enhet.",
+          "Du kan rensa dessa uppgifter när som helst genom att rensa webbplatsdata för onlinecompass i webbläsaren.",
+        ],
+      },
+      {
+        h: "3. Tredjepartstjänster",
+        paras: [
+          "Vi laddar typsnittet Geist från ett externt nätverk för typsnittsleverans. När din webbläsare hämtar typsnitten kan leverantören logga din IP-adress som en del av den normala leveransen. Se leverantörens integritetspolicy för detaljer.",
+          "Vi bäddar inte in widgetar för sociala medier, annonsnätverk eller reklamspårare. Det enda tredjepartsskriptet på sidan är analystaggen som beskrivs ovan.",
+        ],
+      },
+      {
+        h: "4. Lagringstid",
+        paras: [
+          "Vi lagrar inga personuppgifter på våra servrar. Serverloggar, om de sparas, behålls i högst 90 dagar och används endast för att diagnostisera tekniska problem.",
+        ],
+      },
+      {
+        h: "5. Barns integritet",
+        paras: [
+          "onlinecompass är ett allmänt verktyg för alla åldrar. Vi samlar inte medvetet in personuppgifter från barn under 13 år. Eftersom vi inte samlar in personuppgifter från någon användare uppfyller tjänsten COPPA genom sin utformning.",
+        ],
+      },
+      {
+        h: "6. Dina rättigheter",
+        paras: [
+          "Eftersom vi inte samlar in identifierbara personuppgifter finns det i regel inget för oss att hämta ut, rätta eller radera för din räkning. Har du synpunkter, {contact} så svarar vi snabbt.",
+          "Om du befinner dig inom Europeiska ekonomiska samarbetsområdet har du rätt att få tillgång till, rätta eller radera personuppgifter vi har, och att lämna klagomål till din lokala tillsynsmyndighet.",
+        ],
+      },
+      {
+        h: "7. Ändringar av denna policy",
+        paras: [
+          "Vi kan uppdatera denna integritetspolicy då och då. Datumet ”Senast uppdaterad” högst upp på sidan visar den senaste versionen. Fortsatt användning av tjänsten efter att ändringar publicerats innebär att du godkänner den reviderade policyn.",
+        ],
+      },
+      {
+        h: "8. Kontakt",
+        paras: [
+          "Frågor om denna integritetspolicy? {contactCta}",
+        ],
+      },
+    ],
+  },
+  terms: {
+    intro: "Läs dessa villkor (”Villkoren”) noggrant innan du använder onlinecompass (”Tjänsten”). Genom att öppna eller använda Tjänsten godkänner du att vara bunden av dessa Villkor.",
+    sections: [
+      {
+        h: "1. Användning av tjänsten",
+        paras: [
+          "onlinecompass tillhandahålls gratis för personligt och professionellt bruk. Du får använda Tjänsten för att hitta kompassriktning, nolla ytor, mäta hastighet och hitta qibla. Ingen registrering eller betalning krävs.",
+          "Du godkänner att inte:",
+        ],
+        listAt: 1,
+        list: [
+          "Använda Tjänsten för olagliga ändamål",
+          "Försöka bakåtkompilera, skrapa eller kopiera Tjänsten för vidare distribution utan tillstånd",
+          "Störa eller hindra de servrar eller nätverk som är värdar för Tjänsten",
+        ],
+      },
+      {
+        h: "2. Ansvarsfriskrivning om noggrannhet",
+        paras: [
+          "onlinecompass är utformat för att ge noggranna mätningar vid korrekt kalibrering. Noggrannheten beror dock på:",
+          "**Förlita dig inte på onlinecompass för säkerhetskritiska mätningar** — som medicinska, tekniska eller byggtekniska tillämpningar där mätfel kan orsaka skada. Använd kalibrerade fysiska instrument för precisionsarbete.",
+        ],
+        listAt: 0,
+        list: [
+          "Korrekt kalibrering av användaren",
+          "Den fysiska utrustningen i just din enhet",
+          "Webbläsarens zoomnivå (mätningar förutsätter 100 % zoom)",
+          "Skärmens skalningsinställningar i ditt operativsystem",
+        ],
+      },
+      {
+        h: "3. Immateriella rättigheter",
+        paras: [
+          "Design, kod, text och visuella tillgångar i onlinecompass ägs av oss och skyddas av upphovsrätt. Du får inte reproducera eller distribuera dem utan föregående skriftligt tillstånd. Tjänstens mätfunktion — att använda en enhets sensorer {tool} — görs inte anspråk på som proprietär; endast vår specifika implementation skyddas.",
+        ],
+      },
+      {
+        h: "4. Friskrivning från garantier",
+        paras: [
+          "Tjänsten tillhandahålls ”i befintligt skick” och ”i mån av tillgång” utan garantier av något slag, uttryckliga eller underförstådda. Vi garanterar inte att Tjänsten är oavbruten, felfri eller helt korrekt för alla enheter och skärmar.",
+        ],
+      },
+      {
+        h: "5. Ansvarsbegränsning",
+        paras: [
+          "I den utsträckning lagen tillåter ansvarar vi inte för indirekta, tillfälliga, särskilda, följd- eller straffskador som uppstår genom din användning av, eller oförmåga att använda, Tjänsten — även om vi har informerats om möjligheten till sådana skador.",
+        ],
+      },
+      {
+        h: "6. Länkar till tredje part",
+        paras: [
+          "Tjänsten kan innehålla länkar till tredje parts webbplatser. Dessa länkar tillhandahålls endast för bekvämlighet. Vi har ingen kontroll över tredje parts innehåll och ansvarar inte för det.",
+        ],
+      },
+      {
+        h: "7. Ändringar av dessa villkor",
+        paras: [
+          "Vi förbehåller oss rätten att ändra dessa Villkor när som helst. Datumet ”Senast uppdaterad” högst upp på sidan visar den senaste versionen. Fortsatt användning av Tjänsten efter att ändringar publicerats innebär att du godkänner de reviderade Villkoren.",
+        ],
+      },
+      {
+        h: "8. Kontakt",
+        paras: [
+          "Frågor om dessa Villkor? {contactCta}",
+        ],
+      },
+    ],
+  },
+};
+
+export const supportCopy: Record<string, SupportCopy> = { en, ja, es, de, fr, pt, ko, it, nl, sv };

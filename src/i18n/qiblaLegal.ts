@@ -230,4 +230,60 @@ export const qiblaLegal: Record<string, QiblaLegal> = {
   ],
   },
 
+  nl: {
+  privacy1aH: "1a. Wat de tool met je locatie doet",
+  privacy1a: [
+      "Een qibla-zoeker kan niet werken zonder ongeveer te weten waar je bent, en dat is de enige gevoelige invoer die deze pagina vraagt. De browser geeft je coördinaten aan de pagina, de pagina berekent de peiling naar de Kaäba en daarna wordt de coördinaat weggegooid. Er wordt geen locatiegeschiedenis geschreven, geen coördinaat in een database opgeslagen, en wij kunnen onmogelijk zien waar je gebeden hebt.",
+    "De kompasrichting wordt op dezelfde manier behandeld. De magnetometer van je telefoon voedt de **qibla richting pijl** binnen het tabblad, en niets over je richting verlaat het toestel. Omdat er geen account is, kan een controle van de **online qibla locatie** zelfs in theorie niet aan jou worden gekoppeld.",
+  ],
+  privacy1bH: "1b. De locatievraag en de IP-terugval",
+  privacy1b: [
+      "Het openen van de qibla-zoeker start de locatievraag van de browser zelf. Sta je het toe, dan worden je coördinaten in het tabblad gelezen, wordt de peiling lokaal berekend en wordt er niets verstuurd. Weiger je, of krijgt je toestel geen fix, dan vraagt de pagina een locatie op stadsniveau aan een externe IP-zoekservice zodat er nog steeds een **qibla richting** staat in plaats van een leeg kompas. Alleen in dat geval wordt je IP-adres voor die aanvraag naar die service gestuurd; het resultaat wordt één keer in het tabblad gebruikt en door ons niet gelogd of opgeslagen. De terugval wordt volledig overgeslagen zodra locatietoegang is toegestaan.",
+    "De terugval wordt bewust op het scherm als benadering gelabeld, omdat een IP-zoekopdracht een stad oplevert en geen straat. Zegt het **online qibla kompas** \\\"benaderd\\\", dan kan het getal een graad of twee afwijken — sta locatietoegang toe en herlaad voor een exacte **online qibla locatie**.",
+  ],
+  privacy2aH: "2a. Wat nooit wordt verzameld",
+  privacy2a: [
+      "Er is geen locatiegeschiedenis, geen bewaarde gebedsrichting en geen account dat een van beide zou kunnen bevatten — of je het nu één keer gebruikte om de **qibla richting te vinden** of elke dag. Een **kompas qibla**-meting wordt één keer per paginalading berekend en daarna vergeten. Sluit je het tabblad, dan is de waarde van het **qibla richting kompas** weg, en de pagina opnieuw openen betekent een nieuwe fix in plaats van een bewaard antwoord.",
+    "Hetzelfde geldt voor een **snelle qibla richting**-controle op een gedeelde telefoon: niets op het toestel legt vast dat je hem gebruikte, afgezien van de gewone browsercache. Wil je zelfs dat niet achterlaten, gebruik dan een privévenster — de **online qibla richting** werkt nog steeds, want de berekening draait op je eigen toestel.",
+    "Wij kunnen geen **qibla richting pijl** zien die je getoond werd, geen **qibla richting kompasgraden** die je las, en evenmin het feit dat je überhaupt op *waar is de qibla richting* zocht. Alleen geaggregeerde paginaweergaven bereiken onze statistieken, en die bevatten een paginapad, geen coördinaat. Iedereen kan hetzelfde gedrag verifiëren met een **live qibla richting online**-controle in een privévenster en de netwerkinspecteur. Eén praktisch gevolg: omdat er geen opgeslagen laatste locatie is, vraagt deze **online qibla zoeker** de browser altijd om een nieuwe fix (of, als je weigert, om een nieuwe schatting op basis van IP). Dat is bewust minder handig dan een app en aanzienlijk privacyvriendelijker — het **online qibla kompas** heeft geen geheugen dat kan lekken als de telefoon van eigenaar wisselt.",
+  ],
+  termsIntro: "Lees deze Algemene voorwaarden (\\\"Voorwaarden\\\") zorgvuldig voordat je de online qibla-zoeker (\\\"de Dienst\\\") gebruikt. Door de Dienst te bezoeken of te gebruiken, ga je akkoord gebonden te zijn aan deze Voorwaarden.",
+  termsUse: "Deze online qibla-zoeker wordt gratis aangeboden voor persoonlijk gebruik. Je mag de Dienst gebruiken om de qibla-richting voor je locatie te berekenen, dus een **snelle qibla richting**-controle voor het gebed kost niets en vereist geen registratie.",
+  termsAccuracy: [
+      "Een hier getoonde **qibla richting** is een berekening plus een telefoonsensor, geen gemeten peiling. Een magnetometerfout van twee tot vijf graden is normaal, en die groeit in de buurt van speakers, magneethouders, auto's en staalconstructies. Zie het aantal **qibla richting kompasgraden** als een goede aanwijzing en bevestig het met een lokale markering waar die bestaat.",
+    "Een **kompas qibla**-meting is ook persoons- en toestelgebonden. Twee telefoons in dezelfde kamer kunnen enkele graden verschillen, en aan deze pagina \\\"waar is de qibla richting\\\" vragen is niet hetzelfde als een landmeting bestellen. Waar nauwkeurigheid telt, gebruik je een recent gekalibreerd toestel en accepteer je dat een **online qibla richting**-waarde een gids is en geen uitspraak.",
+    "Vertrouw niet op dit **online qibla kompas** wanneer een juridische of bouwkundige beslissing van de exacte oriëntatie afhangt — voor moskeebouw of een permanente qiblamuur gebruik je een bevoegde landmeter. Voor het dagelijkse gebed in een onbekende kamer is de hier getoonde peiling bedoeld als voldoende.",
+    "Concreet: een **qibla richting pijl** op basis van een telefoonmeting kan enkele graden scheef staan, en een **online qibla locatie**-fix binnenshuis kan nog slechter zijn. Heb je zekerheid nodig, zoek de **qibla richting dan twee keer** vanaf twee verschillende plekken in de kamer, en als de **qibla richting kompas**-metingen overeenkomen, is de storing waarschijnlijk laag. Wijken ze af, dan is een van de plekken verstoord.",
+    "We garanderen ook niet dat een **snelle qibla richting**-controle overeenkomt met de markering van de plaatselijke moskee. Waar een gemeenschap een qiblamuur heeft ingemeten, gaat die gemeten peiling voor op elke meting van het **online qibla kompas**, ook de onze. De tool wordt als gemak aangeboden en een **live qibla richting online**-resultaat moet als richtlijn gelden, niet als uitspraak.",
+  ],
+  },
+
+  sv: {
+  privacy1aH: "1a. Vad verktyget gör med din position",
+  privacy1a: [
+      "En qibla-sökare kan inte fungera utan att ungefär veta var du är, och det är den enda känsliga uppgift sidan frågar efter. Webbläsaren lämnar dina koordinater till sidan, sidan räknar ut bäringen mot Kaba och sedan kastas koordinaten. Ingen positionshistorik skrivs, ingen koordinat sparas i en databas, och det finns inget sätt för oss att se var du bad.",
+    "Kompassriktningen behandlas på samma sätt. Telefonens magnetometer matar **qibla riktning pil** inuti fliken, och inget om din riktning lämnar enheten. Eftersom det inte finns något konto kan en kontroll av **online qibla position** inte kopplas till dig ens i teorin.",
+  ],
+  privacy1bH: "1b. Positionsfrågan och IP-reserven",
+  privacy1b: [
+      "När du öppnar qibla-sökaren startar webbläsarens egen positionsfråga. Tillåter du den läses dina koordinater inuti fliken, bäringen beräknas lokalt och ingenting skickas någonstans. Nekar du, eller får enheten ingen fix, begär sidan en position på stadsnivå från en extern IP-tjänst så att en **qibla riktning** fortfarande kan visas i stället för en tom urtavla. Endast i det fallet skickas din IP-adress till den tjänsten för förfrågan; resultatet används en gång, i fliken, och loggas eller sparas inte av oss. Reservlösningen hoppas helt över när platsåtkomst beviljas.",
+    "Reserven märks medvetet som ungefärlig på skärmen, eftersom en IP-sökning ger en stad och inte en gata. Säger **online qibla kompass** \\\"ungefärlig\\\", kan siffran vara en eller två grader fel — tillåt plats och ladda om för en exakt **online qibla position**.",
+  ],
+  privacy2aH: "2a. Vad som aldrig samlas in",
+  privacy2a: [
+      "Det finns ingen positionshistorik, ingen sparad bönriktning och inget konto som skulle kunna innehålla någon av dem — oavsett om du använde den för att **hitta qibla riktning** en gång eller varje dag. En **kompass qibla**-mätning beräknas en gång per sidladdning och glöms bort. Stänger du fliken är värdet i **qibla riktning kompass** borta, och att öppna sidan igen innebär en ny fix i stället för ett sparat svar.",
+    "Detsamma gäller en **snabb qibla riktning**-kontroll på en delad telefon: inget på enheten registrerar att du använde den, förutom webbläsarens vanliga cache. Vill du inte lämna ens det, använd ett privat fönster — **online qibla riktning** fungerar ändå, eftersom beräkningen körs på din egen enhet.",
+    "Vi kan inte se en **qibla riktning pil** som du fick visad, ett värde i **qibla riktning kompassgrader** som du läste, eller ens att du sökte efter *var är qibla riktningen*. Endast aggregerade sidvisningar når vår statistik, och de bär en sidsökväg, inte en koordinat. Vem som helst kan verifiera samma beteende med en **live qibla riktning online**-kontroll i ett privat fönster och webbläsarens nätverksinspektör. En praktisk följd: eftersom ingen senaste position sparas ber denna **online qibla sökare** alltid webbläsaren om en ny fix (eller, om du nekar, om en ny IP-baserad uppskattning). Det är medvetet mindre bekvämt än en app och betydligt mer privat — **online qibla kompass** har inget minne som kan läcka om telefonen byter ägare.",
+  ],
+  termsIntro: "Läs dessa villkor (\\\"Villkoren\\\") noggrant innan du använder online qibla-sökaren (\\\"Tjänsten\\\"). Genom att öppna eller använda Tjänsten godkänner du att vara bunden av dessa Villkor.",
+  termsUse: "Denna online qibla-sökare tillhandahålls gratis för personligt bruk. Du får använda Tjänsten för att beräkna qibla-riktningen för din position, så en **snabb qibla riktning**-kontroll före bönen kostar inget och kräver ingen registrering.",
+  termsAccuracy: [
+      "En **qibla riktning** som visas här är en beräkning plus en telefonsensor, inte en uppmätt bäring. Ett magnetometerfel på två till fem grader är normalt, och det ökar nära högtalare, magnetiska hållare, bilar och stålkonstruktioner. Se antalet **qibla riktning kompassgrader** som en god vägledning och bekräfta med en lokal markering där en sådan finns.",
+    "En **kompass qibla**-mätning är också personlig för enheten. Två telefoner i samma rum kan skilja några grader, och att fråga den här sidan \\\"var är qibla riktningen\\\" är inte samma sak som att beställa en lantmätning. Där noggrannhet spelar roll använder du en nyligen kalibrerad enhet och accepterar att ett **online qibla riktning**-värde är en vägledning och inte ett utslag.",
+    "Förlita dig inte på denna **online qibla kompass** när ett juridiskt eller strukturellt beslut beror på exakt orientering — för moskébygge eller en permanent qiblavägg använder du en kvalificerad lantmätare. För daglig bön i ett okänt rum är bäringen här avsedd att räcka.",
+    "Konkret: en **qibla riktning pil** ritad efter en telefonmätning kan vara några grader fel, och en **online qibla position** inomhus kan vara ännu sämre. Behöver du säkerhet, **hitta qibla riktning** två gånger från två olika platser i rummet, och om **qibla riktning kompass**-mätningarna stämmer överens är störningen troligen låg. Skiljer de sig är en av platserna påverkad.",
+    "Vi garanterar inte heller att en **snabb qibla riktning**-kontroll stämmer med den lokala moskéns egen markering. Där en församling har mätt upp en qiblavägg gäller den uppmätta bäringen före varje mätning från **online qibla kompass**, inklusive vår. Verktyget erbjuds som en bekvämlighet, och ett **live qibla riktning online**-resultat bör betraktas som vägledning snarare än som utslag.",
+  ],
+  },
+
 };
