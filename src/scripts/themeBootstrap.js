@@ -23,16 +23,47 @@
 
   function writeCookieTheme(mode) {
     try {
+      var secure = window.location.protocol === 'https:' ? '; Secure' : '';
       document.cookie =
-        COOKIE + '=' + mode + '; path=/; max-age=' + COOKIE_MAX_AGE + '; SameSite=Lax';
+        COOKIE + '=' + mode + '; path=/; max-age=' + COOKIE_MAX_AGE + '; SameSite=Lax' + secure;
     } catch (e) {}
   }
 
   /**
+   * Kya user ka koi chunav pehle se saved hai? (localStorage YA cookie)
+   *
+   * Iska matlab hai: "user ne khud light/dark chuna tha". Sirf tab hum system
+   * preference ko ignore karte hain aur follow karte hain. Agar kuch bhi saved
+   * nahi, to site system ko follow karti hai — aur OS mode badalne par khud
+   * badal jaati hai (neeche matchMedia listener).
+   */
+  function hasSavedTheme() {
+    try {
+      for (var i = 0; i < KEYS.length; i++) {
+        var val = localStorage.getItem(KEYS[i]);
+        if (val === 'dark' || val === 'light') return true;
+      }
+    } catch (e) {}
+    return readCookieTheme() !== null;
+  }
+
+  /** System preference — sirf tab use hoti hai jab user ne kuch choose na kiya ho. */
+  function systemTheme() {
+    try {
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    } catch (e) {
+      return 'light';
+    }
+  }
+
+  /**
    * Site ka mode: pehle URL override, phir localStorage, phir cookie, aur agar
-   * kuch bhi saved nahi to system preference. Jo mode yahan resolve hota hai
-   * wahi turant save ho jaata hai — yaani jis page/mode se user site mein
-   * aaya, wahi mode poore site ka mode ban jaata hai.
+   * kuch bhi saved nahi to system preference.
+   *
+   * User ka chunav hamesha jeetta hai — system baad mein badle to bhi saved mode
+   * hi lagega. Isliye "jis mode me chhod kar gaya tha, wahi mode" milta hai.
    */
   function readSavedTheme() {
     try {
@@ -49,9 +80,7 @@
     } catch (e) {}
     var fromCookie = readCookieTheme();
     if (fromCookie) return fromCookie;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return systemTheme();
   }
 
   function writeSavedTheme(mode) {
@@ -122,8 +151,27 @@
   };
 
   var initial = readSavedTheme();
-  writeSavedTheme(initial);
+  // Sirf tab save karo jab pehle se koi chunav ho (localStorage ya cookie).
+  // Warna system preference live follow hoti rahegi — pehli visit par OS ka
+  // mode "lock" nahi hona chahiye.
+  if (hasSavedTheme()) writeSavedTheme(initial);
   applyThemeToDOM(initial);
+
+  /**
+   * OS mode badle (raat ka auto dark, ya user ne system setting badli) aur user
+   * ne khud kuch choose nahi kiya — to site bhi saath badle. Agar user ne chunav
+   * kiya hua hai to kabhi nahi badlegi.
+   */
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', function () {
+        if (!hasSavedTheme()) applyThemeToDOM(mq.matches ? 'dark' : 'light');
+      });
+    }
+  } catch (e) {
+    /* purane browser — koi baat nahi, load par hi mode lag jaata hai */
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     applyThemeToDOM(readSavedTheme());

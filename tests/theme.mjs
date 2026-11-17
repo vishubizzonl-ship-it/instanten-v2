@@ -114,14 +114,52 @@ export function run(pages, outDir) {
       );
     }
 
-    // (c) kuch bhi saved nahi -> system preference mode, aur wahi lock ho jaata hai
+    // (c) kuch bhi saved nahi -> system preference ka mode lagta hai, par SAVE
+    //     nahi hota. Iska matlab: jab tak user khud choose na kare, site OS ko
+    //     follow karti rahegi (raat ka auto-dark bhi kaam karega). User ke
+    //     chunav ke baad hi mode "lock" hota hai — yahi "yaad rehna" hai.
     const sysDark = runBootstrap(code, null, { prefersDark: true });
     check(sysDark.dataTheme === 'dark', `first-visit: system dark par "${sysDark.dataTheme}" mila`);
-    check(sysDark.storedAfterLoad === 'dark', 'first-visit: entry page ka mode save nahi hua');
+    check(
+      sysDark.storedAfterLoad === null,
+      `first-visit: system mode lock ho gaya (${sysDark.storedAfterLoad}) — OS follow nahi karega`
+    );
 
     const sysLight = runBootstrap(code, null, { prefersDark: false });
     check(sysLight.dataTheme === 'light', `first-visit: system light par "${sysLight.dataTheme}" mila`);
-    check(sysLight.storedAfterLoad === 'light', 'first-visit(light): entry page ka mode save nahi hua');
+    check(
+      sysLight.storedAfterLoad === null,
+      `first-visit(light): system mode lock ho gaya (${sysLight.storedAfterLoad})`
+    );
+
+    // (c2) OS mode badalne par site bhi badalti hai — sirf jab user ne choose
+    //      na kiya ho. Isliye bootstrap media-query listener lagata hai.
+    check(
+      /prefers-color-scheme/.test(code) && /addEventListener\(\s*'change'/.test(code),
+      'system-follow: prefers-color-scheme change listener nahi hai'
+    );
+    check(/hasSavedTheme/.test(code), 'system-follow: "saved hai ya nahi" ka check nahi hai');
+
+    // (d2) ASLI SCENARIO: user ne dark chuna, site band ki, agli baar aaya —
+    //      wahi mode milna chahiye (chahe OS ka mode kuch bhi ho).
+    for (const chosen of ['dark', 'light']) {
+      const other = chosen === 'dark' ? 'light' : 'dark';
+      // agli visit: saved chunav + ulta OS preference
+      const revisit = runBootstrap(code, chosen, { prefersDark: other === 'dark' });
+      check(
+        revisit.dataTheme === chosen,
+        `yaad rakhna: saved "${chosen}" ke bawajood "${revisit.dataTheme}" mila (OS ${other})`
+      );
+      check(
+        revisit.htmlClass.includes(chosen),
+        `yaad rakhna: html class "${chosen}" nahi mili`
+      );
+      // aur system mode badalne se chunav nahi badalna chahiye
+      check(
+        revisit.storedAfterToggle === other,
+        `yaad rakhna: toggle ne "${other}" save nahi kiya`
+      );
+    }
 
     // (d) toggle ke baad dono store — localStorage AUR cookie — update hon
     const toggled = runBootstrap(code, 'dark', { cookie: 'instanten_theme=dark' });

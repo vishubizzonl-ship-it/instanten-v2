@@ -18,16 +18,33 @@
 
 export const THEME_KEY = 'theme';
 
+/** Wahi keys jo head ka bootstrap likhta hai — dono jagah ek hi sach. */
+const THEME_KEYS = ['instanten-theme', 'theme', 'site-theme', 'color-scheme'];
+const THEME_COOKIE = 'instanten_theme';
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
 /** @typedef {'light' | 'dark'} ThemeMode */
+
+/** Cookie se saved mode — localStorage clear/private mode ka fallback. */
+export function readCookieTheme() {
+  try {
+    const raw = document.cookie || '';
+    const match = new RegExp(`${THEME_COOKIE}=(dark|light)`).exec(raw);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
 
 /** localStorage se saved mode (galat value ho to null). */
 export function readTheme() {
   try {
     const saved = localStorage.getItem(THEME_KEY);
-    return saved === 'dark' || saved === 'light' ? saved : null;
+    if (saved === 'dark' || saved === 'light') return saved;
   } catch {
-    return null;
+    /* private mode */
   }
+  return readCookieTheme();
 }
 
 /** System preference — saved mode na ho tab default. */
@@ -72,11 +89,29 @@ export function setTheme(mode, { persist = true } = {}) {
   }
 
   if (persist) {
+    // Bootstrap ke saath same keys + cookie — warna cookie purane mode par
+    // atak jaati hai aur storage clear hone par galat mode wapas aata hai.
     try {
-      localStorage.setItem(THEME_KEY, next);
+      for (const key of THEME_KEYS) localStorage.setItem(key, next);
     } catch {
       /* private mode — theme sirf is page par */
     }
+    try {
+      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = `${THEME_COOKIE}=${next}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
+    } catch {
+      /* cookie band ho to bhi localStorage kaafi hai */
+    }
+  }
+
+  // Mobile address bar ka rang bhi mode ke saath
+  try {
+    document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+      meta.setAttribute('content', isDark ? '#1C1C1C' : '#FDFDFF');
+      meta.removeAttribute('media');
+    });
+  } catch {
+    /* meta na ho to bhi theme lagti rahe */
   }
 
   // Toggles ko batao (icon sync, doosre components)
@@ -85,13 +120,41 @@ export function setTheme(mode, { persist = true } = {}) {
   } catch {
     /* purane browser */
   }
+  try {
+    document.dispatchEvent(new CustomEvent('instanten:themechange', { detail: { theme: next } }));
+  } catch {
+    /* purane browser */
+  }
 
   return next;
 }
 
-/** Saved (ya system) theme lagao — page load / navigation par. */
+/**
+ * Saved (ya system) theme lagao — page load / navigation par.
+ *
+ * User ka chunav saved ho to hi persist karte hain: pehli visit par system ka
+ * mode "lock" nahi hota, isliye OS raat mein dark ho jaye to site bhi dark ho
+ * jaati hai (jab tak user khud kuch choose na kare).
+ */
 export function initTheme() {
-  return setTheme(readTheme() ?? systemTheme());
+  const saved = readTheme();
+  return setTheme(saved ?? systemTheme(), { persist: saved !== null });
+}
+
+/**
+ * OS mode badle aur user ne khud kuch choose na kiya ho to site saath badle.
+ * (Bootstrap bhi yahi karta hai — ye sirf module-side mirror hai.)
+ */
+export function watchSystemTheme() {
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (typeof mq.addEventListener !== 'function') return;
+    mq.addEventListener('change', () => {
+      if (readTheme() === null) setTheme(mq.matches ? 'dark' : 'light', { persist: false });
+    });
+  } catch {
+    /* purane browser */
+  }
 }
 
 /** Ulta mode. */
@@ -105,6 +168,7 @@ export function installThemeApi() {
     get: currentTheme,
     set: (mode) => setTheme(mode),
     toggle: toggleTheme,
+    sync: () => setTheme(readTheme() ?? systemTheme(), { persist: readTheme() !== null }),
     key: THEME_KEY,
   };
   return window.InstantenTheme;

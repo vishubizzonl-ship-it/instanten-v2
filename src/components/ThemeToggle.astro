@@ -228,5 +228,6 @@ const t = useTranslations(getLangFromUrl(Astro.url));
   import('../scripts/theme.js').then((theme) => {
     theme.installThemeApi();
     theme.initTheme();
+    theme.watchSystemTheme();
   });
 </script>
