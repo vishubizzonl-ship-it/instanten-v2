@@ -10,7 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { LOCALES, createSuite, jsonLdOf, localeOf, localize, stripTags } from './lib.mjs';
-import { TOOL_MARKS, toolFaviconPath, toolMarkPath } from '../src/config/toolMarks.mjs';
+import { SQUIRCLE, TOOL_MARKS, toolFaviconPath, toolMarkId } from '../src/config/toolMarks.mjs';
 
 /** slug -> us tool ka root attribute + island ke zaroori elements. */
 export const INSTRUMENTS = {
@@ -834,12 +834,18 @@ export function run(pages, outDir) {
     const url = localize(`/${slug}/`, 'en');
     const html = pages.get(url) ?? '';
 
-    // 1. nav me isi tool ka mark inline hai (poora `d` attribute match)
-    check(html.includes(toolMarkPath(slug)), `${slug}: header me apna logo mark nahi (shared icon wapas aa gaya?)`);
-    // 2. squircle + evenodd construction bani hui hai
+    // 1. nav me isi tool ka mark inline hai — squircle + mask + us tool ka letter
+    check(html.includes(SQUIRCLE), `${slug}: header me rounded-square (squircle) mark nahi mila`);
     check(
-      /<path fill-rule="evenodd" d="M7\.5 0H16\.5C22\.65 0 24 1\.35 24 7\.5/.test(html),
-      `${slug}: logo mark ka squircle shape nahi mila`
+      html.includes(`id="${toolMarkId(slug)}"`),
+      `${slug}: header me is tool ka mask id nahi (shared icon wapas aa gaya?)`
+    );
+    const glyph = TOOL_MARKS[slug].path;
+    check(html.includes(glyph), `${slug}: header me "${TOOL_MARKS[slug].letter}" letter ka path nahi`);
+    // 2. mask + evenodd = letter squircle me se knockout hota hai
+    check(
+      /<mask id="tool-mark-[a-z]+">/.test(html) && /fill-rule="evenodd" mask="url\(#tool-mark-/.test(html),
+      `${slug}: logo mark ka mask/evenodd construction nahi mila`
     );
     // 3. favicon link usi tool ka hai
     check(
@@ -853,7 +859,7 @@ export function run(pages, outDir) {
     for (const lang of LOCALES) {
       if (lang === 'en') continue;
       const localized = pages.get(localize(`/${slug}/`, lang)) ?? '';
-      check(localized.includes(toolMarkPath(slug)), `${slug}/${lang}: localized page par apna logo nahi`);
+      check(localized.includes(glyph), `${slug}/${lang}: localized page par apna logo nahi`);
       check(
         localized.includes(`href="${toolFaviconPath(slug)}"`),
         `${slug}/${lang}: localized page par apna favicon nahi`
@@ -861,13 +867,17 @@ export function run(pages, outDir) {
     }
 
     // 6. sign unique hona chahiye (do tools same mark use na karein)
-    markSigs.set(slug, toolMarkPath(slug));
+    markSigs.set(slug, TOOL_MARKS[slug].letter);
     // 7. silo ke andar ke pages (about/blog/contact) par bhi apna favicon
     const sub = pages.get(`/${slug}/about/`) ?? '';
     check(sub.includes(`href="${toolFaviconPath(slug)}"`), `${slug}/about: favicon silo ka nahi hai`);
   }
   const sigs = [...markSigs.values()];
   check(new Set(sigs).size === sigs.length, 'do tools ka logo mark ek jaisa hai');
+  check(
+    sigs.every((letter) => /^[A-Z]$/.test(letter)),
+    'har tool ke mark me ek capital letter hona chahiye (rounded square + letter style)'
+  );
 
   // 8. silo ke bahar wale pages par site ka apna favicon hi rahe
   for (const url of ['/', '/about/', '/tools/json-formatter/', '/blog/']) {

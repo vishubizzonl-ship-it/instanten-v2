@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
   <style>
-    path { fill: #29294B; }
-    @media (prefers-color-scheme: dark) { path { fill: #F0F0F5; } }
+    path.sq { fill: #29294B; }
+    @media (prefers-color-scheme: dark) { path.sq { fill: #F0F0F5; } }
   </style>
-  <path fill-rule="evenodd" d="M7.5 0H16.5C22.65 0 24 1.35 24 7.5V16.5C24 22.65 22.65 24 16.5 24H7.5C1.35 24 0 22.65 0 16.5V7.5C0 1.35 1.35 0 7.5 0ZM7 9.4h10a2.6 2.6 0 0 1 0 5.2H7a2.6 2.6 0 0 1 0-5.2ZM12 10.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z"/>
+  <mask id="tool-mark-onlinebubblelevel"><rect width="24" height="24" fill="#fff"/><path d="M8.9 6.6v10.8M8.9 6.6h3.5a2.7 2.7 0 0 1 0 5.4H8.9M8.9 12h3.9a2.7 2.7 0 0 1 0 5.4H8.9" fill="none" stroke="#000" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round"/></mask>
+  <path class="sq" fill-rule="evenodd" mask="url(#tool-mark-onlinebubblelevel)" d="M7.5 0H16.5C22.65 0 24 1.35 24 7.5V16.5C24 22.65 22.65 24 16.5 24H7.5C1.35 24 0 22.65 0 16.5V7.5C0 1.35 1.35 0 7.5 0Z"/>
 </svg>

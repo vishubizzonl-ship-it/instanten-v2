@@ -13,7 +13,7 @@
  */
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { toolPath } from '../../utils/toolPaths';
-import { toolMarkPath } from '../../config/toolMarks.mjs';
+import { toolMarkSvg } from '../../config/toolMarks.mjs';
 import { instrumentUi } from '../../i18n/instruments/ui';
 import { instrumentNavLabels } from '../../i18n/instruments/navLabels';
 import { languages, nonDefaultLangs, type LangCode } from '../../i18n/ui';
@@ -98,9 +98,7 @@ const langList = ['en', ...nonDefaultLangs] as LangCode[];
         aria-label={`${slug} — ${t('nav.home')}`}
       >
         <span class="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center shrink-0 text-ink" aria-hidden="true">
-          <svg viewBox="0 0 24 24" class="h-full w-full" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d={toolMarkPath(slug)} />
-          </svg>
+          <Fragment set:html={toolMarkSvg(slug)} />
         </span>
         <span class="font-display text-sm sm:text-base font-bold tracking-tight text-ink whitespace-nowrap truncate max-w-[9.5rem] sm:max-w-none">
           {slug}
