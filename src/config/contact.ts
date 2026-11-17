@@ -20,8 +20,26 @@ export const PUBLIC_EMAIL = 'hello@instanten.com';
 export const DELIVERY_EMAIL = 'vishubizz.onl@gmail.com';
 export const PUBLIC_EMAIL_MAILTO = `mailto:${PUBLIC_EMAIL}`;
 
-/** Cloudflare Worker endpoint — same-origin, isliye koi CORS/key nahi. */
-export const CONTACT_API_PATH = '/api/contact';
+/**
+ * Transport mode. Do hi valid modes hain:
+ *
+ *   'mailto' (default) — site Pages par static hai, koi backend nahi. Form ka
+ *                        submit seedha visitor ke mail app me same message
+ *                        kholta hai, addressed to DELIVERY_EMAIL. Koi request
+ *                        nahi jaati, koi jhootha "sent" nahi dikhta.
+ *   'api'              — Cloudflare Worker deploy hua hai to `PUBLIC_CONTACT_TRANSPORT=api`
+ *                        build ke waqt set karo; form `POST /api/contact` par
+ *                        jaata hai aur `send_email` binding se mail jaati hai.
+ *
+ * Default 'mailto' hi rakha hai kyunki default deploy Pages par hota hai aur
+ * wahan `/api/contact` maujood nahi hota — bekaar 404 probe se bachne ke liye
+ * path hi khaali rakhte hain.
+ */
+export const CONTACT_TRANSPORT: 'mailto' | 'api' =
+  (import.meta.env.PUBLIC_CONTACT_TRANSPORT ?? '').trim() === 'api' ? 'api' : 'mailto';
+
+/** Cloudflare Worker endpoint — sirf 'api' mode me. Same-origin, koi CORS/key nahi. */
+export const CONTACT_API_PATH = CONTACT_TRANSPORT === 'api' ? '/api/contact' : '';
 
 /** optional backup transport */
 export const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';

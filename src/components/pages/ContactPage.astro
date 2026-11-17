@@ -68,7 +68,7 @@ const messages = {
         class="ror-form"
         novalidate
         data-email={DELIVERY_EMAIL}
-        data-api={CONTACT_API_PATH}
+        data-api={CONTACT_API_PATH || undefined}
         data-endpoint={WEB3FORMS_ENDPOINT}
         data-key={WEB3FORMS_KEY}
         data-live={CONTACT_FORM_LIVE ? 'true' : 'false'}

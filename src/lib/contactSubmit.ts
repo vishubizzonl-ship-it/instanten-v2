@@ -107,6 +107,9 @@ export function wireContactForm({ form, statusEl, errorEl, messages }: WireOptio
       encodeURIComponent(`[${payload.topic}] ${payload.name}`) +
       '&body=' +
       encodeURIComponent(body);
+    /* Href form par likh dete hain: (a) test isse padh sakta hai, (b) visitor
+       mail app se wapas aaye to dekh sake ki kya bhejne ke liye tayyar tha. */
+    form.dataset.mailto = href;
     window.location.href = href;
     show(statusEl, messages.mailto);
   };

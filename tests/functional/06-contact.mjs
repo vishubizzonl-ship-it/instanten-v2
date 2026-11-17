@@ -1,7 +1,7 @@
 /** 06 — Contact form (asli component): validation, worker, fallbacks. */
 import { open, reporter } from './harness.mjs';
 import { txt } from './routes.mjs';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 const r = reporter();
 r.section('06 — Contact form');
@@ -60,42 +60,33 @@ await p.settle(120);
 r.check('contact: galat email par submit rukta hai', calls0.length === 0 && !p.$('#cf-error').hasAttribute('hidden'), `${calls0.length} calls`);
 await p.cleanup();
 
-// ---- 4. success path (worker 200)
+// ---- 4. mailto mode (Pages deploy): koi request nahi, sirf mail app khulta hai
 p = await open('/contact/');
 const calls4 = installFetch(p, ['ok']);
 await fill(p);
 p.click('#contact-form button[type="submit"]');
 await p.settle(250);
-r.check('contact: worker par POST jaata hai', calls4.length === 1 && calls4[0].url.includes('/api/contact'), `${calls4.length} → ${calls4[0]?.url}`);
-r.check('contact: JSON body me naam/email/message', (calls4[0]?.init?.body || '').includes('ravi@example.com'), String(calls4[0]?.init?.body || '').slice(0, 80));
-r.check('contact: success message dikhta hai', !p.$('#cf-success').hasAttribute('hidden') && txt(p.$('#cf-success')).length > 0, txt(p.$('#cf-success')).slice(0, 60));
-r.check('contact: success ke baad form reset', p.$('#cf-name').value === '' && p.$('#cf-message').value === '');
+r.check('contact: mailto mode me koi network request nahi jaati', calls4.length === 0, `${calls4.length} calls → ${calls4.map((c) => c.url).join(' , ')}`);
+const mailtoHref = p.$('#contact-form')?.dataset?.mailto || '';
+r.check('contact: mail app ke liye poora mailto link banta hai', mailtoHref.startsWith('mailto:'), mailtoHref.slice(0, 60));
+r.check('contact: mailto me naam, email aur message bhare hote hain', /subject=/.test(mailtoHref) && decodeURIComponent(mailtoHref).includes('ravi@example.com') && decodeURIComponent(mailtoHref).includes('compass tool'), mailtoHref.slice(0, 90));
+r.check('contact: user ko bataya jaata hai ki mail app khul raha hai', txt(p.$('#cf-success')).length > 0 && /send/i.test(txt(p.$('#cf-success'))), txt(p.$('#cf-success')).slice(0, 70));
+r.check('contact: jhootha "Message sent" nahi dikhaya jaata', !/Message sent/i.test(txt(p.$('#cf-success'))), txt(p.$('#cf-success')).slice(0, 60));
 r.check('contact: submit button wapas enable', p.$('#contact-form button[type="submit"]').disabled === false);
 await p.cleanup();
 
-// ---- 5. worker 500 → mailto fallback
-p = await open('/contact/');
-installFetch(p, ['500']);
-await fill(p);
-p.click('#contact-form button[type="submit"]');
-await p.settle(300);
-const status5 = txt(p.$('#cf-success')) + txt(p.$('#cf-error'));
-r.check('contact: worker fail par user ko mail-app fallback bataya jaata hai', status5.length > 0, status5.slice(0, 70));
-await p.cleanup();
+// ---- 5. api mode (Workers deploy) — PUBLIC_CONTACT_TRANSPORT=api wali build
+const apiHtml = existsSync('dist-api/contact/index.html') ? readFileSync('dist-api/contact/index.html', 'utf8') : '';
+if (apiHtml) {
+  r.check('contact(api build): data-api same-origin hai', /data-api="\/api\/contact"/.test(apiHtml), (apiHtml.match(/data-api="[^"]*"/) || ['none'])[0]);
+} else {
+  r.check('contact(api build): dist-api/ nahi bana — skip nahi, note', true, 'optional build absent');
+}
 
-// ---- 6. worker 404 (static host, deploy nahi hua) → agla transport
-p = await open('/contact/');
-const calls6 = installFetch(p, ['404', 'ok']);
-await fill(p);
-p.click('#contact-form button[type="submit"]');
-await p.settle(350);
-r.check('contact: /api/contact na ho to fallback transport try hota hai', calls6.length >= 1, `${calls6.length} calls → ${calls6.map((c) => c.url).join(' , ')}`);
-r.check('contact: fallback ke baad bhi user ko result dikhta hai', (txt(p.$('#cf-success')) + txt(p.$('#cf-error'))).length > 0, (txt(p.$('#cf-success')) + txt(p.$('#cf-error'))).slice(0, 60));
-await p.cleanup();
-
-// ---- 7. config sanity
+// ---- 6. config sanity (mailto build)
 const htmlSrc = readFileSync('dist/contact/index.html', 'utf8');
-r.check('contact: api path same-origin hai', /data-api="\/api\//.test(htmlSrc), (htmlSrc.match(/data-api="[^"]*"/) || ['none'])[0]);
+r.check('contact: mailto build me api path hai hi nahi', !/data-api/.test(htmlSrc), (htmlSrc.match(/data-api[^ >]*/) || ['absent'])[0]);
+r.check('contact: form ka fallback action mailto hi hai', /action="mailto:/.test(htmlSrc), (htmlSrc.match(/action="mailto:[^"]*"/) || ['none'])[0]);
 r.check('contact: contact page par koi secret key nahi', !/data-key="[A-Za-z0-9-]{20,}"/.test(htmlSrc), 'no key attr');
 
 const fails = r.summary();

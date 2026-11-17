@@ -47,6 +47,19 @@ Free plan par sirf verified destinations par bhej sakte hain (yehi
 `wrangler.jsonc` ki `allowed_destination_addresses` me listed hain). Random
 recipients chahiye to Workers Paid ($5/mo) — abhi zarurat nahi.
 
+## Contact form ka transport switch
+
+Default build (`PUBLIC_CONTACT_TRANSPORT` set nahi) **mailto** mode me banta hai —
+Pages deploy ke liye. Workers deploy karke sach me server-side email chahiye to
+build ke waqt flag do:
+
+```bash
+PUBLIC_CONTACT_TRANSPORT=api npm run build && npx wrangler@4 deploy
+```
+
+Tab form `POST /api/contact` par jaata hai aur `send_email` binding mail bhejti hai.
+Flag ke bina `/api/contact` endpoint form use hi nahi karta (bekaar 404 probe nahi).
+
 ## Local check, deploy se pehle
 
 ```bash

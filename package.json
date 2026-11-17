@@ -17,9 +17,12 @@
     "test:site:update": "node tests/run.mjs --update-baseline",
     "test:worker": "node --test worker/*.test.mjs",
     "test:functional": "node tests/functional/run.mjs",
-    "deploy": "npm run build && npx wrangler@4 deploy",
-    "deploy:dry": "npm run build && npx wrangler@4 deploy --dry-run",
-    "cf:whoami": "npx wrangler@4 whoami"
+    "deploy": "npm run build && npx wrangler@4 pages deploy dist --project-name=instanten",
+    "deploy:dry": "npm run build && node scripts/pages-check.mjs",
+    "cf:whoami": "npx wrangler@4 whoami",
+    "pages:create": "npx wrangler@4 pages project create instanten --production-branch=main",
+    "deploy:workers": "npm run build && npx wrangler@4 deploy",
+    "deploy:workers:dry": "npm run build && npx wrangler@4 deploy --dry-run"
   },
   "dependencies": {
     "astro": "^6.4.8"
