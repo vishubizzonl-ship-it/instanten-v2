@@ -1,12 +1,4 @@
 {
-  "src/i18n/instruments/speedometerProse.ts": [
-    "nl",
-    "sv"
-  ],
-  "src/i18n/instruments/speedometerSupport.ts": [
-    "nl",
-    "sv"
-  ],
   "src/i18n/supportCopy.ts": [
     "nl",
     "sv"

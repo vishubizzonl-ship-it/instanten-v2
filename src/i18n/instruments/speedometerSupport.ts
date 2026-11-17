@@ -704,6 +704,202 @@ const it: SpeedSiloCopy = {
   },
 };
 
+const nl: SpeedSiloCopy = {
+  back: "Terug naar Snelheidsmeter",
+  toolTitle: "Online Snelheidsmeter — Gratis GPS Snelheidstest in km/u en mph",
+  toolDesc: "Gratis online snelheidsmeter: meet je actuele snelheid in km/u of mph met GPS, plus topsnelheid, gemiddelde snelheid, hoogte en reistijd. Geen installatie, geen account.",
+  ogAlt: "Online snelheidsmeter — gratis GPS-snelheidstest die je actuele snelheid in km/u en mph in de browser toont",
+  keywords: "online snelheidsmeter, gratis online snelheidsmeter, online snelheidsmeter gratis, online snelheidsmeter test, online snelheidsmeter mph, hardspeedometer test, snelheidsmeter online trein, snelheidsmeter test online, digitale snelheidsmeter, gps snelheidsmeter online, mijn snelheid km/u, live snelheidstest, live snelheidsmeter, zspeed, gps snelheidsmeter",
+  aboutTitle: "Over Online Snelheidsmeter — Gratis GPS Snelheidstest",
+  aboutDesc: "Over de online snelheidsmeter: hoe een telefoon snelheid meet met GPS, voor wie de gratis online snelheidsmeter is en hoe nauwkeurig een live snelheidstest is.",
+  about: {
+    whatH: "Wat is onlinecompass?",
+    what: [
+      "onlinecompass is een gratis snelheidsmeter in de browser die elke telefoon, tablet of laptop omzet in een GPS-snelheidstracker. Meet actuele, maximale en gemiddelde snelheid, afstand, hoogte en reistijd zonder app te installeren en zonder account.",
+      "Anders dan de meeste online snelheidstools, die op kaartdata schatten, leest onlinecompass je GPS rechtstreeks via standaard browser-API's. Zodra de pagina geladen is, blijft je route op je toestel en wordt niets geüpload.",
+    ],
+    howH: "Hoe een snelheidsmeter in je telefoon echt werkt",
+    how: [
+      "Je telefoon bevat een GPS-ontvanger die ongeveer één keer per seconde een positie doorgeeft. Deze **online snelheidsmeter** vergelijkt elke nieuwe positie met de vorige, deelt de afstand door de tijd en toont de uitkomst als snelheid. Een **speedometer digital**-uitlezing vervangt de naald door een getal, dus je leest 62 km/u in plaats van te schatten waar een wijzer tussen twee streepjes staat.",
+      "Daarom kan een **GPS speedometer online** ook afwijken van het dashboard van een auto. Het dashboard telt wielomwentelingen en gaat uit van een bandenmaat; de telefoon meet hoeveel je werkelijk over de grond bent verplaatst. Bij een andere velgmaat of versleten banden heeft de telefoon meestal gelijk.",
+      "De keerzijde is dat GPS vrije lucht nodig heeft. Onder bomen, in tunnels en in gebouwen valt de fix weg en blijft het getal op de laatste waarde staan of bevriest het. Een **live speedometer** in een browser heeft geen betere bron dan de chip, dus zie een stilstand als een signaalprobleem en niet als een bug.",
+    ],
+    missionH: "Onze missie",
+    mission: [
+      "Navigeren moet direct en gratis zijn. We bouwden onlinecompass omdat we steeds een snelheidsmeter zochten die niet binnen handbereik was — en de online alternatieven waren onnauwkeurig, vol advertenties of vroegen onnodige downloads. onlinecompass is snel, privé en standaard nauwkeurig.",
+    ],
+    featuresH: "Belangrijkste functies",
+    features: [
+      "Live GPS-snelheid met topsnelheid, gemiddelde en afgelegde afstand",
+      "Hoogte en verstreken reistijd",
+      "Digitale uitlezing in km/u, mph, m/s en knopen",
+      "Lijst met opnames die de nieuwste meting bovenaan zet",
+      "Donkere modus die je systeemvoorkeur volgt",
+      "Werkt in elke moderne browser — geen download, geen account",
+    ],
+    whoH: "Voor wie de gratis snelheidsmeter is",
+    who: [
+      "De meeste mensen komen hier om een van vier redenen: ze willen een **live speed test** als passagier, ze willen het dashboard controleren na een bandenwissel, ze willen een **speedometer online train**-meting op een traject zonder scherm in de stoel, of ze willen een **online speedometer mph**-waarde voor een auto waarvan de wijzer in km/u staat.",
+      "Het is ook een eerlijke **speedometer test online** voor een tweedehands auto: noteer de waarde bij een constante 50 km/u en vergelijk die met het dashboard. En omdat het **online speedometer free** is zonder account, is het een verstandig alternatief voor weer een app voor één losse vraag.",
+    ],
+    accuracyH: "Nauwkeurigheid die je kunt verwachten",
+    accuracy: [
+      "Onder open lucht leest een telefoon snelheid tot op ongeveer 1–2 km/u, nauwkeuriger dan de meeste dashboards. Het getal wordt één keer per seconde bijgewerkt, dus bij felle acceleratie loopt het iets achter, en een meting in een tunnel is waardeloos tot de fix terug is. Voor een gecertificeerde waarde wint een gekalibreerd instrument altijd van welke **speedometer online**-pagina dan ook.",
+      "Ziet een meting er verkeerd uit, rijd dan hetzelfde stuk twee keer en vergelijk. Een getal dat zich herhaalt, is een getal waar je iets aan hebt — dezelfde gewoonte die een **speedometer test online** nuttig maakt in plaats van decoratief, en waarom een **online speedometer test** beter is dan één blik op een wijzer. De {accuracyGuide} loopt de controles in volgorde langs.",
+    ],
+  },
+  guideLabel: "nauwkeurigheidsgids",
+  blogTitle: "Online Snelheidsmeter Blog — Gidsen voor Snelheidstests",
+  blogDesc: "Gidsen en tips voor het volgen van snelheid en ritten met de online snelheidsmeter: live snelheidstest, GPS-nauwkeurigheid, km/u- en mph-eenheden en checklists voor ritten.",
+  blogIntro: "Praktische gidsen voor de online snelheidsmeter: hoe een live snelheidstest werkt, hoe nauwkeurig een GPS-meting op een telefoon echt is, wanneer je km/u gebruikt en wanneer je op mph overstapt, en hoe je een rit instelt zodat de top- en gemiddelde waarden iets betekenen.",
+  blogIntro2: "Elke gids gebruikt dezelfde gratis online snelheidsmeter, dus je kunt een stap lezen en die in het volgende tabblad proberen. Begin met de handleiding hieronder.",
+  blogExtra: [
+    "Een **gps speedometer** is maar de helft van het verhaal: wat je met de getallen doet, telt zwaarder. Deze notities gaan over eenheden, resetten en het verschil tussen een **speedometer digital**-uitlezing en de naald op een dashboard. Er is ook een handleiding voor een **speedometer test online** die je op hetzelfde stuk weg kunt herhalen, en uitleg waarom een **online speedometer mph**-waarde en een km/u-wijzer nooit helemaal overeenkomen.",
+    "Iets specifieks zoeken? De handleiding behandelt een **online speedometer test** vanuit stilstand, de nauwkeurigheidsnotities leggen uit waarom telefoon en dashboard verschillen, en het gedeelte over ritten laat zien hoe je top en gemiddelde betekenisvol houdt. Zocht je op “speedometer online free”, “live speedometer” of “my speed km/h”, dan ben je hier goed — de tool zelf is één tik verwijderd op de hoofdpagina.",
+  ],
+  posts: [
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 oktober 2026", title: "Een online snelheidsmeter gebruiken (stap voor stap)", desc: "Sta locatietoegang toe, druk op Start, kies km/u of mph en lees je live snelheid met topsnelheid, gemiddelde, hoogte en reistijd." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 november 2026", title: "Hoe nauwkeurig is een snelheidsmeter in een telefoon? (En hoe je het controleert)", desc: "Typische GPS-fout, hoe een telefoon zich verhoudt tot een autodashboard, en drie tests die je met een online snelheidsmeter kunt doen." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 november 2026", title: "Snelheidsmeter-eenheden uitgelegd: km/u, mph, m/s en knopen", desc: "Wanneer je welke eenheid gebruikt, hoe je in je hoofd omrekent en hoe je een meting vergelijkt met een dashboard in een andere eenheid." },
+  ],
+  contact: {
+    contactTitle: "Contact Online Snelheidsmeter — Feedback & Bugmeldingen",
+    contactDesc: "Neem contact op met het team van de online snelheidsmeter. Meld een GPS-nauwkeurigheidsprobleem met de gratis snelheidsmeter, stel een functie voor of stel een privacyvraag.",
+    contactIntro: "We zijn een klein team en lezen elk bericht. Of je een bug hebt gevonden, een functie wenst of gewoon hallo wilt zeggen — gebruik het formulier hieronder.",
+    howH: "Hoe de snelheidsmeting werkt",
+    how: [
+      "Voor je schrijft, is het handig te weten wat de tool doet. De **online speedometer** leest de GPS-positie van je toestel via de browser en zet beweging tussen fixes om in een snelheid in km/u, mph, m/s of knopen. Niets wordt geüpload, daarom blijft de **free online speedometer** doortellen nadat de pagina is geladen, ook zonder dataverbinding.",
+      "Dat ontwerp verklaart de meeste supportvragen. Een getal dat bevriest betekent dat de GPS-fix wegviel, niet dat de tool stopte. Een meting die laat begint is normaal — een **live speed test** heeft de eerste paar posities nodig voor er iets te berekenen valt.",
+    ],
+    fixesH: "Snelle oplossingen voor je schrijft",
+    fixes: [
+      { h: "Snelheid blijft op 0", p: "sta locatietoegang toe wanneer de browser het vraagt en herlaad daarna de pagina." },
+      { h: "Getal springt of bevriest", p: "ga naar buiten — gebouwen, bomen en tunnels blokkeren GPS." },
+      { h: "Meting wijkt af van het dashboard", p: "verwacht; een dashboard is een paar procent optimistisch." },
+      { h: "Eenheid ontbreekt", p: "gebruik de eenheidsknop voor km/u, mph, m/s of knopen." },
+    ],
+    tellH: "Wat je ons kunt melden",
+    tell: [
+      "Bij een bugmelding: vertel welke telefoon, welke browser, of je reed of stilstond, en wat het getal aangaf. Bij een nauwkeurigheidsvraag: noem waarmee je vergeleek — een dashboard, een fietscomputer of een bekende afstand met een stopwatch — en of je op de open weg was of onder een overkapping.",
+      "Bij een functieverzoek: beschrijf de rit in plaats van de knop. “Ik wil twee auto's op hetzelfde stuk vergelijken” zegt ons meer dan “voeg export van een log toe”, en leidt meestal tot een betere **speedometer digital**-tool.",
+    ],
+    emailH: "E-mail",
+    emailPre: "Bereik ons op ",
+    emailPost: ". We antwoorden meestal binnen een paar werkdagen.",
+    sendH: "Bericht sturen",
+    extraH: "Voor je een schermafbeelding stuurt",
+    extra: [
+      "Een schermafbeelding helpt het meest als eenheid, reistijd en topsnelheid er samen op staan. Als je een **gps speedometer online**-meting met een autowijzer vergeleek, noem beide getallen; als je te voet was, zeg dat dan, want een **live speedometer** tijdens een wandeling beweegt in kleine stappen en lijkt “vast” voor wie autosnelheden verwacht.",
+      "De vragen die we het vaakst krijgen gaan over eenheden en vergelijken: een **online speedometer mph**-meting tegen een km/u-wijzer, een **online speedometer test** tegen een resultaat van een andere site, of een **speedometer online train**-meting die in een tunnel bevroor. Vermeld welke van deze je deed en we kunnen meestal in één antwoord helpen.",
+    ],
+    responseH: "Reactietijden",
+    response: [
+      "Dit is een klein project, dus antwoorden zijn niet direct. Meldingen over nauwkeurigheid krijgen voorrang omdat ze elke gebruiker van de online snelheidsmeter raken; functie-ideeën worden gelezen en genoteerd, maar krijgen niet altijd een persoonlijk antwoord. Privacyvragen over ritgegevens beantwoorden we altijd.",
+    ],
+    guidesPre: "In de tussentijd behandelen de ",
+    guidesLink: "snelheidsmetergidsen",
+    guidesPost: " de veelgestelde vragen over een gps-snelheidsmeting, het wisselen van eenheden en het resetten van ritten.",
+  },
+};
+
+const sv: SpeedSiloCopy = {
+  back: "Tillbaka till Hastighetsmätare",
+  toolTitle: "Online Hastighetsmätare — Gratis GPS-hastighetstest i km/h och mph",
+  toolDesc: "Gratis online hastighetsmätare: mät din aktuella hastighet i km/h eller mph med GPS, plus toppfart, medelhastighet, höjd och restid. Ingen installation, inget konto.",
+  ogAlt: "Online hastighetsmätare — gratis GPS-hastighetstest som visar aktuell hastighet i km/h och mph i webbläsaren",
+  keywords: "online hastighetsmätare, gratis online hastighetsmätare, online hastighetsmätare gratis, online hastighetsmätare test, online hastighetsmätare mph, hardspeedometer test, hastighetsmätare online tåg, hastighetsmätare test online, digital hastighetsmätare, gps hastighetsmätare online, min hastighet km/h, live hastighetstest, live hastighetsmätare, zspeed, gps hastighetsmätare",
+  aboutTitle: "Om Online Hastighetsmätare — Gratis GPS-hastighetsverktyg",
+  aboutDesc: "Om online hastighetsmätaren: hur en telefon mäter hastighet med GPS, vem den gratis online hastighetsmätaren är för och hur exakt en live hastighetstest är.",
+  about: {
+    whatH: "Vad är onlinecompass?",
+    what: [
+      "onlinecompass är en gratis hastighetsmätare i webbläsaren som gör vilken telefon, surfplatta eller laptop som helst till en GPS-hastighetsmätare. Mät aktuell, högsta och genomsnittlig hastighet, distans, höjd och restid utan att installera en app och utan konto.",
+      "Till skillnad från de flesta online-verktyg för hastighet, som uppskattar från kartdata, läser onlinecompass din GPS direkt via webbläsarens standard-API:er. När sidan har laddats stannar din rutt på enheten och laddas aldrig upp.",
+    ],
+    howH: "Så fungerar en hastighetsmätare i telefonen",
+    how: [
+      "Din telefon har en GPS-mottagare som rapporterar en position ungefär en gång i sekunden. Den här **online hastighetsmätaren** jämför varje ny position med den förra, delar sträckan med tiden och visar resultatet som en hastighet. En **speedometer digital**-visning ersätter nålen med en siffra, så du läser 62 km/h i stället för att gissa var visaren står mellan två streck.",
+      "Det är också därför en **GPS speedometer online** kan gå isär med bilens instrumentbräda. Brädan räknar hjulvarv och utgår från en däckdimension; telefonen mäter hur långt du faktiskt förflyttat dig över marken. Har bilen bytt fälgar, eller är däcken slitna, har telefonen oftast rätt.",
+      "Avvägningen är att GPS behöver öppen himmel. Under träd, i tunnlar och inomhus tappas fixen och siffran står kvar på sitt senaste värde eller fryser. En **live speedometer** i en webbläsare har ingen bättre källa än chippet, så se ett stopp som ett signalproblem och inte som en bugg.",
+    ],
+    missionH: "Vårt uppdrag",
+    mission: [
+      "Navigering ska vara direkt och gratis. Vi byggde onlinecompass för att vi ständigt letade efter en hastighetsmätare som inte fanns i närheten — och online-alternativen var opålitliga, fulla av annonser eller krävde onödiga nedladdningar. onlinecompass är snabbt, privat och korrekt från start.",
+    ],
+    featuresH: "Viktiga funktioner",
+    features: [
+      "Live GPS-hastighet med topp, medel och rest sträcka",
+      "Höjd och förfluten restid",
+      "Digital visning i km/h, mph, m/s och knop",
+      "Lista över registreringar där senaste mätningen ligger överst",
+      "Mörkt läge som följer systeminställningen",
+      "Fungerar i alla moderna webbläsare — ingen nedladdning, inget konto",
+    ],
+    whoH: "Vem den gratis hastighetsmätaren är för",
+    who: [
+      "De flesta kommer hit av en av fyra anledningar: de vill göra en **live speed test** som passagerare, de vill kontrollera instrumentbrädan efter ett däckbyte, de vill ha en **speedometer online train**-mätning på en sträcka utan skärm i sätet, eller de vill ha ett **online speedometer mph**-värde för en bil vars visare står i km/h.",
+      "Det är också ett ärligt **speedometer test online** för en begagnad bil: notera värdet vid jämn 50 km/h och jämför med brädan. Och eftersom det är **online speedometer free** utan konto är det ett vettigt alternativ till ännu en app för en enda fråga.",
+    ],
+    accuracyH: "Noggrannhet du kan förvänta dig",
+    accuracy: [
+      "Under öppen himmel läser en telefon hastigheten med ungefär 1–2 km/h, vilket är snävare än de flesta instrumentbrädor. Siffran uppdateras en gång i sekunden, så kraftig acceleration släpar något, och en mätning i en tunnel är värdelös till fixen är tillbaka. För ett certifierat värde vinner alltid ett kalibrerat instrument över vilken **speedometer online**-sida som helst.",
+      "Ser en mätning fel ut, kör samma sträcka två gånger och jämför. En siffra som upprepas är en siffra du kan använda — samma vana som gör en **speedometer test online** användbar i stället för dekorativ, och skälet till att en **online speedometer test** slår en enda blick på en visare. {accuracyGuide} går igenom kontrollerna i ordning.",
+    ],
+  },
+  guideLabel: "noggrannhetsguide",
+  blogTitle: "Online Hastighetsmätare Blogg — Guider för Hastighetstester",
+  blogDesc: "Guider och tips för att följa hastighet och resor med online hastighetsmätaren: live hastighetstest, GPS-noggrannhet, enheterna km/h och mph samt checklistor för resan.",
+  blogIntro: "Praktiska guider för online hastighetsmätaren: hur en live hastighetstest fungerar, hur exakt en GPS-mätning i telefonen egentligen är, när du använder km/h och när du byter till mph, och hur du ställer in en resa så att topp- och medelvärdena betyder något.",
+  blogIntro2: "Varje guide använder samma gratis online hastighetsmätare, så du kan läsa ett steg och prova det i nästa flik. Börja med steg-för-steg-guiden nedan.",
+  blogExtra: [
+    "En **gps speedometer** är bara halva historien: vad du gör med siffrorna spelar större roll. De här anteckningarna handlar om enheter, återställningar och skillnaden mellan en **speedometer digital**-visning och nålen på en bräda. Det finns också en genomgång av ett **speedometer test online** som du kan upprepa på samma vägsträcka, och en förklaring till varför ett **online speedometer mph**-värde och en km/h-visare aldrig stämmer helt.",
+    "Letar du efter något särskilt? Guiden täcker ett **online speedometer test** från stillastående, noggrannhetsnoterna förklarar varför telefon och instrumentbräda går isär, och reseavsnittet visar hur du håller topp och medel meningsfulla. Sökte du på “speedometer online free”, “live speedometer” eller “my speed km/h” är du på rätt plats — själva verktyget är ett tryck bort på startsidan.",
+  ],
+  posts: [
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", date: "4 oktober 2026", title: "Så använder du en online hastighetsmätare (steg för steg)", desc: "Tillåt plats, tryck Start, välj km/h eller mph och läs din livehastighet med topp, medel, höjd och restid." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", date: "7 november 2026", title: "Hur exakt är en hastighetsmätare i telefonen? (Och hur du kontrollerar den)", desc: "Typiskt GPS-fel, hur telefonen står sig mot bilens instrumentbräda och tre tester du kan göra med en online hastighetsmätare." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", date: "7 november 2026", title: "Hastighetsmätarens enheter förklarade: km/h, mph, m/s och knop", desc: "När du använder vilken enhet, hur du räknar om i huvudet och hur du jämför en mätning med en bräda i en annan enhet." },
+  ],
+  contact: {
+    contactTitle: "Kontakta Online Hastighetsmätare — Feedback & Buggrapporter",
+    contactDesc: "Kontakta teamet bakom online hastighetsmätaren. Rapportera ett GPS-noggrannhetsproblem med den gratis hastighetsmätaren, föreslå en funktion eller ställ en integritetsfråga.",
+    contactIntro: "Vi är ett litet team och läser varje meddelande. Har du hittat en bugg, vill du föreslå en funktion eller bara säga hej — använd formuläret nedan.",
+    howH: "Så fungerar hastighetsmätningen",
+    how: [
+      "Innan du skriver är det bra att veta vad verktyget gör. Den **online speedometer** läser enhetens GPS-position via webbläsaren och omvandlar rörelse mellan fixar till en hastighet i km/h, mph, m/s eller knop. Inget laddas upp, vilket är varför den **free online speedometer** fortsätter räkna efter att sidan laddats, även utan datauppkoppling.",
+      "Den designen förklarar de flesta supportfrågor. En siffra som fryser betyder att GPS-fixen föll bort, inte att verktyget stannade. En mätning som börjar sent är normal — en **live speed test** behöver de första positionerna innan något kan beräknas.",
+    ],
+    fixesH: "Snabba åtgärder innan du skriver",
+    fixes: [
+      { h: "Hastigheten står kvar på 0", p: "tillåt platsåtkomst när webbläsaren frågar och ladda sedan om sidan." },
+      { h: "Siffran hoppar eller fryser", p: "gå utomhus — byggnader, träd och tunnlar blockerar GPS." },
+      { h: "Mätningen skiljer sig från bilens bräda", p: "förväntat; en bräda är några procent optimistisk." },
+      { h: "En enhet saknas", p: "använd enhetsknappen för km/h, mph, m/s eller knop." },
+    ],
+    tellH: "Vad du kan berätta för oss",
+    tell: [
+      "Vid en buggrapport: berätta vilken telefon, vilken webbläsare, om du rörde dig eller stod stilla och vad siffran visade. Vid en noggrannhetsfråga: nämn vad du jämförde med — en instrumentbräda, en cykeldator eller en känd sträcka med stoppur — och om du var på öppen väg eller under tak.",
+      "Vid ett funktionsönskemål: beskriv resan i stället för knappen. ”Jag vill jämföra två bilar på samma sträcka” säger oss mer än ”lägg till loggexport”, och det leder oftast till ett bättre **speedometer digital**-verktyg.",
+    ],
+    emailH: "E-post",
+    emailPre: "Nå oss på ",
+    emailPost: ". Vi svarar oftast inom några arbetsdagar.",
+    sendH: "Skicka ett meddelande",
+    extraH: "Innan du skickar en skärmbild",
+    extra: [
+      "En skärmbild hjälper mest när den visar enhet, restid och topphastighet tillsammans. Om du jämförde en **gps speedometer online**-mätning med en bilvisare, nämn båda siffrorna; var du till fots, säg det, för en **live speedometer** på en promenad rör sig i små steg och ser ”fast” ut för den som väntar sig bilhastigheter.",
+      "Frågorna vi får oftast handlar om enheter och jämförelser: en **online speedometer mph**-mätning mot en km/h-visare, ett **online speedometer test** mot ett resultat från en annan sajt, eller en **speedometer online train**-mätning som frös i en tunnel. Berätta vilken av dessa du gjorde, så kan vi oftast svara i ett enda svar.",
+    ],
+    responseH: "Svarstider",
+    response: [
+      "Det här är ett litet projekt, så svaren är inte omedelbara. Rapporter om noggrannhet prioriteras eftersom de påverkar alla användare av online hastighetsmätaren; funktionsidéer läses och loggas men får inte alltid ett personligt svar. Integritetsfrågor om resedata besvaras alltid.",
+    ],
+    guidesPre: "Medan du väntar täcker ",
+    guidesLink: "hastighetsmätarguiderna",
+    guidesPost: " de vanliga frågorna om gps-hastighetsmätning, enhetsbyte och återställning av resor.",
+  },
+};
+
 export const speedometerSupport: Record<string, SpeedSiloCopy> = {
   en,
   es,
@@ -713,4 +909,6 @@ export const speedometerSupport: Record<string, SpeedSiloCopy> = {
   pt,
   ko,
   it,
+  nl,
+  sv,
 };

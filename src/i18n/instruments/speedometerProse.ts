@@ -14,7 +14,7 @@ import type { SpeedProse } from './speedometerProseTypes';
 
 export type { SpeedProse, SpeedSection } from './speedometerProseTypes';
 
-export const en: SpeedProse = {
+const en: SpeedProse = {
   aboutH: "The free online speedometer that reads your real speed",
   intro: [    "This **online speedometer** turns the phone in your hand into a working speed readout in one tap. There is nothing to install, no account to create and no download waiting time — you open the page, allow location once, and the number on screen is your speed right now. It is a **free online speedometer** built for one job: telling you how fast you are actually moving, on a bike, in a car, on a train, or on foot.",
     "If you have ever searched for “speedometer online”, “live speedometer” or “gps speedometer”, you already know the problem. Your car dashboard is optimistic by a few percent, your bike computer needs mounting, and you just want an answer. A **live speed test** removes the guesswork in two seconds, with a number instead of a needle you have to squint at.",
@@ -103,7 +103,7 @@ export const en: SpeedProse = {
   ],
 };
 
-export const es: SpeedProse = {
+const es: SpeedProse = {
   aboutH: "El velocímetro online gratis que lee tu velocidad real",
   intro: [    "Este **velocímetro online** convierte el móvil que tienes en la mano en un lector de velocidad en un solo toque. No hay nada que instalar, ni cuenta que crear, ni descarga que esperar: abres la página, permites la ubicación una vez y el número en pantalla es tu velocidad ahora mismo. Es un **velocímetro online gratis** hecho para una sola cosa: decirte a qué velocidad te mueves de verdad, en bici, en coche, en tren o a pie.",
     "Si alguna vez has buscado «velocímetro online», «velocímetro en vivo» o «velocímetro GPS», ya conoces el problema. El cuadro de tu coche es optimista en unos puntos porcentuales, el cuentakilómetros de la bici hay que montarlo y tú solo quieres una respuesta. Un **test de velocidad en vivo** quita la duda en dos segundos, con un número en lugar de una aguja que hay que mirar con lupa.",
@@ -192,7 +192,7 @@ export const es: SpeedProse = {
   ],
 };
 
-export const ja: SpeedProse = {
+const ja: SpeedProse = {
   aboutH: "実際の速度がわかる無料のオンラインスピードメーター",
   intro: [    "この**オンラインスピードメーター**は、手元のスマートフォンをワンタップで速度計に変えます。インストールも、アカウント作成も、ダウンロード待ちもありません。ページを開いて位置情報を一度許可すれば、画面の数字が今のあなたの速度です。自転車でも車でも電車でも徒歩でも、実際にどれくらいの速さで動いているかを伝えるためだけに作られた**無料のオンラインスピードメーター**です。",
     "「スピードメーター オンライン」「ライブ スピードメーター」「GPS スピードメーター」で検索したことがあるなら、問題はもう分かっているはずです。車のメーターは数パーセント高めに出て、自転車のサイクルコンピューターは取り付けが必要で、あなたはただ答えがほしいだけ。**ライブ速度テスト**なら2秒で迷いが消えます。目を細めて針を読む代わりに、数字が出ます。",
@@ -281,7 +281,7 @@ export const ja: SpeedProse = {
   ],
 };
 
-export const fr: SpeedProse = {
+const fr: SpeedProse = {
   aboutH: "Le tachymètre en ligne gratuit qui lit votre vitesse réelle",
   intro: [    "Ce **tachymètre en ligne** transforme le téléphone que vous tenez en indicateur de vitesse en un geste. Rien à installer, aucun compte à créer, aucun téléchargement à attendre : vous ouvrez la page, vous autorisez la localisation une fois, et le chiffre affiché est votre vitesse maintenant. C’est un **tachymètre en ligne gratuit** conçu pour une seule tâche : vous dire à quelle vitesse vous vous déplacez vraiment, à vélo, en voiture, en train ou à pied.",
     "Si vous avez déjà cherché « tachymètre en ligne », « tachymètre en direct » ou « tachymètre GPS », vous connaissez le problème. Le compteur de votre voiture est optimiste de quelques pour cent, le compteur de vélo demande un montage, et vous voulez juste une réponse. Un **test de vitesse en direct** supprime le doute en deux secondes, avec un chiffre au lieu d’une aiguille qu’il faut déchiffrer en plissant les yeux.",
@@ -370,7 +370,7 @@ export const fr: SpeedProse = {
   ],
 };
 
-export const de: SpeedProse = {
+const de: SpeedProse = {
   aboutH: "Das kostenlose Online-Tachometer, das deine echte Geschwindigkeit anzeigt",
   intro: [    "Dieses **Online-Tachometer** macht aus dem Handy in deiner Hand mit einem Tippen eine funktionierende Geschwindigkeitsanzeige. Nichts zu installieren, kein Konto, keine Download-Wartezeit: Seite öffnen, einmal den Standort erlauben, und die Zahl auf dem Bildschirm ist deine Geschwindigkeit genau jetzt. Es ist ein **kostenloses Online-Tachometer** für eine einzige Aufgabe: dir zu sagen, wie schnell du wirklich unterwegs bist — mit dem Rad, im Auto, im Zug oder zu Fuß.",
     "Wenn du schon einmal nach „Tachometer online“, „Live-Tachometer“ oder „GPS-Tachometer“ gesucht hast, kennst du das Problem. Dein Auto-Tacho ist um ein paar Prozent zu optimistisch, dein Fahrradcomputer muss montiert werden, und du willst einfach eine Antwort. Ein **Live-Geschwindigkeitstest** nimmt die Unsicherheit in zwei Sekunden weg — mit einer Zahl statt einer Nadel, die du mit zusammengekniffenen Augen ablesen musst.",
@@ -459,7 +459,7 @@ export const de: SpeedProse = {
   ],
 };
 
-export const pt: SpeedProse = {
+const pt: SpeedProse = {
   aboutH: "O velocímetro online grátis que mostra sua velocidade real",
   intro: [    "Este **velocímetro online** transforma o celular na sua mão em uma leitura de velocidade com um toque. Não há nada para instalar, nenhuma conta para criar e nenhuma espera de download: você abre a página, permite a localização uma vez e o número na tela é a sua velocidade agora. É um **velocímetro online grátis** feito para uma tarefa só: dizer a que velocidade você está de verdade, de bike, de carro, de trem ou a pé.",
     "Se você já pesquisou “velocímetro online”, “velocímetro ao vivo” ou “velocímetro GPS”, conhece o problema. O painel do seu carro é otimista em alguns por cento, o ciclocomputador precisa ser instalado e você só quer uma resposta. Um **teste de velocidade ao vivo** tira a dúvida em dois segundos, com um número em vez de um ponteiro que você precisa apertar os olhos para ler.",
@@ -548,7 +548,7 @@ export const pt: SpeedProse = {
   ],
 };
 
-export const ko: SpeedProse = {
+const ko: SpeedProse = {
   aboutH: "실제 속도를 보여 주는 무료 온라인 속도계",
   intro: [    "이 **온라인 속도계**는 손에 든 스마트폰을 한 번의 탭으로 속도 표시기로 바꿉니다. 설치할 것도, 만들 계정도, 기다릴 다운로드도 없습니다. 페이지를 열고 위치를 한 번 허용하면 화면의 숫자가 지금의 속도입니다. 자전거든 자동차든 기차든 도보든, 실제로 얼마나 빠르게 움직이는지 알려 주는 한 가지 일만 하는 **무료 온라인 속도계**입니다.",
     "“온라인 속도계”, “실시간 속도계”, “GPS 속도계”를 검색해 본 적이 있다면 문제를 이미 알고 있을 겁니다. 자동차 계기판은 몇 퍼센트 높게 표시되고, 자전거 속도계는 장착이 필요하며, 당신은 그냥 답이 필요합니다. **실시간 속도 테스트**는 2초 만에 추측을 없애 줍니다. 눈을 가늘게 뜨고 바늘을 읽는 대신 숫자가 나옵니다.",
@@ -637,7 +637,7 @@ export const ko: SpeedProse = {
   ],
 };
 
-export const it: SpeedProse = {
+const it: SpeedProse = {
   aboutH: "Il tachimetro online gratuito che legge la tua velocità reale",
   intro: [    "Questo **tachimetro online** trasforma il telefono che hai in mano in un indicatore di velocità con un tocco. Niente da installare, nessun account da creare, nessuna attesa di download: apri la pagina, consenti la posizione una volta e il numero sullo schermo è la tua velocità adesso. È un **tachimetro online gratuito** costruito per un solo compito: dirti quanto veloce ti stai muovendo davvero, in bici, in auto, in treno o a piedi.",
     "Se hai mai cercato «tachimetro online», «tachimetro in tempo reale» o «tachimetro GPS», conosci già il problema. Il cruscotto dell’auto è ottimista di qualche punto percentuale, il ciclocomputer va montato e tu vuoi solo una risposta. Un **test di velocità in tempo reale** toglie il dubbio in due secondi, con un numero invece di una lancetta da leggere strizzando gli occhi.",
@@ -726,6 +726,184 @@ export const it: SpeedProse = {
   ],
 };
 
+const nl: SpeedProse = {
+  aboutH: "De gratis online snelheidsmeter die je echte snelheid meet",
+  intro: [    "Deze **online snelheidsmeter** maakt van de telefoon in je hand met één tik een werkende snelheidsuitlezing. Niets te installeren, geen account nodig en geen wachttijd voor een download — je opent de pagina, staat locatie één keer toe, en het getal op het scherm is je snelheid op dit moment. Het is een **gratis online snelheidsmeter** met één taak: je vertellen hoe snel je echt gaat, op de fiets, in de auto, in de trein of te voet.",
+    "Heb je ooit gezocht op “snelheidsmeter online”, “live snelheidsmeter” of “gps snelheidsmeter”, dan ken je het probleem. Je autodashboard is een paar procent optimistisch, je fietscomputer moet gemonteerd worden, en je wilt gewoon een antwoord. Een **live snelheidstest** haalt de gok er in twee seconden uit, met een getal in plaats van een naald waar je naar moet turen.",
+  ],
+  sections: [
+  {
+    h: "Wat deze online snelheidsmeter je echt laat zien",
+    paras: [      "De **digitale snelheidsmeter**-uitlezing is het belangrijkste: één groot getal dat ververst terwijl je beweegt. Daaronder krijg je de ritcijfers die het hulpmiddel echt bruikbaar maken — je maximumsnelheid, je gemiddelde snelheid, de afgelegde afstand, de hoogte waarop je bent en hoe lang de rit al loopt. De eenheidsknop wisselt tussen km/h, mph, m/s en knopen, zodat dezelfde pagina “mijn snelheid km/h” op een weg in India beantwoordt en mph op een buitenlandse snelweg, zonder tweede hulpmiddel.",
+      "Alles komt van de GPS-chip die je telefoon al heeft. De pagina leest je positie één keer per seconde, berekent hoeveel je bent opgeschoven en zet dat om in snelheid. Daarom kan een **GPS-snelheidsmeter online** eerlijker zijn dan een dashboard: hij meet je beweging over de grond in plaats van wielomwentelingen tegen een aangenomen bandenmaat.",
+    ],
+  },
+  {
+    h: "Zo voer je een snelheidsmeting online uit",
+    paras: [      "Open de pagina buiten met vrij zicht op de lucht — GPS moet satellieten zien, en een uitlezing binnen of in een tunnel stokt of springt. Sta locatie toe wanneer de browser het vraagt, druk dan op Start en ga rijden. De eerste paar seconden is de sensor aan het settelen; daarna volgt het getal soepel.",
+      "Dat is de hele **online snelheidsmeting**: geen kabels, geen OBD-lezer, geen abonnement. Een **snelheidstest online** geeft je ook een tweede mening wanneer een dashboard verkeerd lijkt na een wiel- of bandenwissel, omdat het getal uit beweging komt en niet uit een gekalibreerd instrument.",
+    ],
+    list: [      "Haal de telefoon uit een metalen hoes en houd hem bij een raam of op een dashboardhouder.",
+      "Druk op Reset vóór een rit, zodat max en gemiddelde alleen bij die rit horen.",
+      "Kies eerst de eenheid — km/h voor weggebruik, mph voor Britse en Amerikaanse limieten.",
+      "Houd het scherm wakker; een vergrendelde telefoon kan in sommige browsers de GPS-updates pauzeren.",
+      "Vergelijk de uitlezing met een vaste afstand en een stopwatch als je de nauwkeurigheid wilt controleren.",
+    ],
+    listAt: 0,
+  },
+  {
+    h: "Snelheidsmeter online, offline en alles daartussen",
+    paras: [      "Het hulpmiddel is **gratis online snelheidsmeter**, maar zodra de pagina geladen is blijft hij werken zonder dataverbinding — de GPS-ontvanger doet het werk, niet een server. Wil je een **snelheidsmeter online trein**-controle op een traject met wisselend bereik, dan maakt dat uit: de pagina blijft open en blijft meetellen terwijl het signaal wegvalt.",
+      "In een trein, bus of lange rit is het ook de enige snelheidsuitlezing die je als passagier hebt. Zoek een recht stuk, noteer het getal en vergelijk het met de dienstregeling als je nieuwsgierig bent. Wie zoekt op merknamen als *zspeed* of iets dergelijks doet hetzelfde; deze pagina doet het simpelweg zonder app, en daarom houden mensen hem in een tabblad.",
+    ],
+  },
+  {
+    h: "Nauwkeurigheid die je van een telefoonsnelheidsmeter kunt verwachten",
+    paras: [      "Een telefoon-GPS leest snelheid tot ongeveer 1–2 km/h nauwkeurig onder open lucht, wat strakker is dan de meeste autodashboards. Dashboards zijn bewust optimistisch — fabrikanten staan een paar procent toe, en bandenslijtage of een andere wielmaat voegt daar meer aan toe. Komen de getallen niet overeen, doe dan een uitlezing in **online snelheidsmeter mph** op hetzelfde stuk en vertrouw degene die zichzelf herhaalt.",
+      "Verwacht twee beperkingen. Hoge gebouwen, bomen en tunnels veroorzaken wegvallende signalen, en de uitlezing blijft een paar seconden staan voordat hij terugvalt naar nul tot de bepaling terugkomt. En snelle acceleratie kan een seconde achterlopen, omdat de chip posities middelt. Geen van beide maakt uit bij normaal gebruik, maar zie een **HardSpeedometer-test** bij hoge snelheid niet als precisiemeting — daarvoor wint een gekalibreerd instrument nog steeds.",
+    ],
+  },
+  {
+    h: "Voor wie de gratis snelheidsmeter is",
+    paras: [      "Fietsers gebruiken hem om een fietscomputer te bevestigen. Automobilisten gebruiken hem om een dashboard te controleren na een wielwissel. Passagiers gebruiken hem uit nieuwsgierigheid op een snelweg of in een trein. Hardlopers en wandelaars gebruiken het gemiddelde als tempocontrole. En wie een auto vergelijkt met een huurauto, de auto van een ouder of een nieuwe aankoop krijgt een neutraal getal zonder iets te installeren.",
+      "Omdat het hulpmiddel in de browser werkt, werkt het hetzelfde op Android, iPhone, tablet of laptop (laptops hebben zelden GPS, dus een telefoon is de praktische keuze). Je locatie wordt gebruikt om de snelheid te berekenen en nooit geüpload, dus een **digitale snelheidsmeter**-controle op een geleende telefoon laat niets achter.",
+    ],
+  },
+  {
+    h: "De korte versie",
+    paras: [      "Open de pagina, sta locatie toe, druk op Start en lees je snelheid in km/h of mph. Reset tussen ritten zodat max en gemiddelde eerlijk blijven, houd de telefoon buiten voor een schoon signaal, en verwacht dat een telefoon-GPS net iets nauwkeuriger is dan een autodashboard. Of je hier kwam via een zoekopdracht naar *snelheidsmeter online*, een *live snelheidstest* of een **snelheidstest online** op een tweedehands auto, het antwoord is dezelfde pagina — gratis, privé en zonder installatie.",
+    ],
+  },
+  ],
+  guidesH: "Nieuwste gidsen uit de snelheidsmeter-blog",
+  guides: [
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", title: "Een online snelheidsmeter gebruiken (stap voor stap)", desc: "Sta locatie toe, druk op Start, kies km/h of mph en lees je live snelheid." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", title: "Hoe nauwkeurig is een snelheidsmeter in een telefoon?", desc: "Typische GPS-fout, hoe die zich verhoudt tot een dashboard, en drie tests om te doen." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", title: "Snelheidseenheden: km/h, mph, m/s en knopen", desc: "Wanneer je welke eenheid gebruikt, en hoe je in je hoofd omrekent." },
+  ],
+  guidesAll: "Bekijk alle online snelheidsmeter-gidsen →",
+  faqH: "Veelgestelde vragen over de online snelheidsmeter",
+  faq: [
+    {
+      q: "Online snelheidsmeter — hoe snel ga ik nu?",
+      a: "Het grote getal op de pagina is je huidige snelheid in de gekozen eenheid, meestal km/h of mph. Sta locatietoegang toe, druk op Start en het cijfer ververst één keer per seconde op basis van GPS. Staat het getal op 0 terwijl je beweegt, dan is de locatietoestemming geblokkeerd of heeft de telefoon nog geen satellietbepaling.",
+    },
+    {
+      q: "Hoe controleer ik mijn huidige snelheid met een online snelheidsmeter?",
+      a: "Open de pagina buiten, sta locatietoegang toe, druk op Start en ga rijden. Houd de telefoon bij een raam, op een dashboardhouder of in je hand, en lees het getal na een paar seconden terwijl de GPS tot rust komt. Druk tussen ritten op Reset zodat maximum en gemiddelde alleen bij die rit horen.",
+    },
+    {
+      q: "Is deze online snelheidsmeter gratis en heb ik een app nodig?",
+      a: "Hij is gratis en werkt volledig in de browser, dus er is niets te installeren en geen account nodig. Zodra de pagina geladen is blijft hij werken zonder mobiele data, omdat de snelheid van de GPS-ontvanger in de telefoon komt en niet van een server.",
+    },
+    {
+      q: "Hoe nauwkeurig is een telefoonsnelheidsmeter vergeleken met een autodashboard?",
+      a: "Onder open lucht leest een telefoon-GPS binnen ongeveer 1–2 km/h, wat meestal strakker is dan een autodashboard. Dashboards zijn bewust een paar procent optimistisch en lopen verder weg na een wiel- of bandenwissel. Spreken de twee elkaar tegen op een constant stuk, dan is de uitlezing van de telefoon over de grond normaal gesproken de eerlijkere.",
+    },
+    {
+      q: "Waarom blijft de snelheid op 0 staan of bevriest hij?",
+      a: "Bijna altijd de GPS-bepaling. Gebouwen, tunnels, parkeergarages, dichte bomen en metalen daken blokkeren satellieten, en de uitlezing houdt zijn laatste waarde vast tot de bepaling terugkomt. Sta eerst locatie toe, ga naar buiten, houd het scherm wakker en herlaad de pagina als het getal nooit gaat bewegen.",
+    },
+    {
+      q: "Kan ik mijn snelheid in mph, km/h, m/s en knopen zien?",
+      a: "Ja. Gebruik de eenheidsknop naast de uitlezing om op elk moment tussen km/h, mph, m/s en knopen te wisselen. Het wijzigen van de eenheid reset de rit niet, dus de maximum- en gemiddelde cijfers worden mee omgerekend.",
+    },
+    {
+      q: "Kan ik een online snelheidsmeter in een trein, bus of als passagier gebruiken?",
+      a: "Ja, dat is een van de meest voorkomende toepassingen. Als passagier heb je geen dashboard, dus een live snelheidstest is de enige uitlezing die je hebt. Houd de telefoon in een trein bij een raam, en verwacht wegvallende signalen in tunnels en diepe uitgravingen.",
+    },
+  ],
+};
+
+const sv: SpeedProse = {
+  aboutH: "Den gratis onlinemätaren som visar din verkliga hastighet",
+  intro: [    "Den här **onlinemätaren** gör telefonen i din hand till en fungerande hastighetsvisning med ett enda tryck. Inget att installera, inget konto att skapa och ingen väntan på en nedladdning — du öppnar sidan, tillåter plats en gång, och siffran på skärmen är din hastighet just nu. Det är en **gratis onlinehastighetsmätare** byggd för en enda uppgift: att säga hur snabbt du faktiskt rör dig, på cykel, i bil, på tåg eller till fots.",
+    "Har du någon gång sökt på “hastighetsmätare online”, “live hastighetsmätare” eller “gps hastighetsmätare” så känner du igen problemet. Bilens instrumentpanel är några procent optimistisk, din cykeldator måste monteras, och du vill bara ha ett svar. Ett **live hastighetstest** tar bort gissningen på två sekunder, med en siffra i stället för en visare du måste kisa mot.",
+  ],
+  sections: [
+  {
+    h: "Vad den här onlinemätaren faktiskt visar dig",
+    paras: [      "Avläsningen från den **digitala hastighetsmätaren** är det viktigaste: en stor siffra som uppdateras medan du rör dig. Under den får du de resesiffror som gör verktyget riktigt användbart — din maxhastighet, din medelhastighet, sträckan du kört, höjden du är på och hur länge resan pågått. Enhetsknappen växlar mellan km/h, mph, m/s och knop, så samma sida svarar “min hastighet km/h” på en väg i Indien och mph på en motorväg utomlands utan ett andra verktyg.",
+      "Allt kommer från det GPS-chip som telefonen redan har. Sidan läser din position en gång i sekunden, räknar ut hur långt du flyttat dig och omvandlar det till hastighet. Det är därför en **GPS-hastighetsmätare online** kan vara ärligare än en instrumentpanel: den mäter din rörelse över marken i stället för att räkna hjulvarv mot en antagen däckdimension.",
+    ],
+  },
+  {
+    h: "Så gör du ett hastighetstest online",
+    paras: [      "Öppna sidan utomhus med fri sikt mot himlen — GPS behöver se satelliter, och en avläsning inomhus eller i en tunnel stannar eller hoppar. Tillåt plats när webbläsaren frågar, tryck sedan på Starta och börja röra dig. De första sekunderna stabiliseras sensorn; efter det följer siffran mjukt.",
+      "Det är hela **hastighetstestet online**: inga kablar, ingen OBD-läsare, inget abonnemang. Ett **onlinetest av hastighetsmätare** ger dig också en andra åsikt när instrumentpanelen verkar fel efter ett hjul- eller däckbyte, eftersom siffran kommer från rörelse och inte från ett kalibrerat instrument.",
+    ],
+    list: [      "Ta telefonen ur ett metallskal och håll den nära ett fönster eller på ett instrumentbrädefäste.",
+      "Tryck på Återställ före en tur så att max och medel bara gäller den turen.",
+      "Välj enhet först — km/h för väg, mph för brittiska och amerikanska hastighetsgränser.",
+      "Håll skärmen vaken; en låst telefon kan pausa GPS-uppdateringar i vissa webbläsare.",
+      "Jämför avläsningen med en känd sträcka och ett stoppur om du vill kontrollera noggrannheten.",
+    ],
+    listAt: 0,
+  },
+  {
+    h: "Hastighetsmätare online, offline och allt däremellan",
+    paras: [      "Verktyget är **gratis onlinehastighetsmätare**, men när sidan väl laddats fortsätter den fungera utan dataanslutning — det är GPS-mottagaren som gör jobbet, inte en server. Vill du göra en kontroll med **hastighetsmätare online tåg** på en sträcka med ojämn täckning spelar det roll: sidan ligger kvar öppen och räknar vidare medan signalen försvinner.",
+      "På ett tåg, en buss eller en lång bilresa är den också den enda hastighetsvisning du får som passagerare. Leta upp en rak sträcka, notera siffran och jämför med tidtabellen om du är nyfiken. Den som söker på märkesnamn som *zspeed* eller liknande gör samma sak; den här sidan gör det bara utan app, och därför behåller folk den i en flik.",
+    ],
+  },
+  {
+    h: "Noggrannhet du kan vänta dig av en telefonhastighetsmätare",
+    paras: [      "En telefon-GPS läser hastighet inom ungefär 1–2 km/h under öppen himmel, vilket är tätare än de flesta bilpaneler. Instrumentpaneler är medvetet optimistiska — tillverkare tillåter några procent, och däckslitage eller en annan hjulstorlek lägger till mer. Stämmer siffrorna inte överens, gör en avläsning i **online hastighetsmätare mph** på samma sträcka och lita på den som upprepar sig.",
+      "Räkna med två begränsningar. Höga byggnader, träd och tunnlar orsakar avbrott, och avläsningen håller sig några sekunder innan den faller tillbaka till noll tills bestämningen kommer tillbaka. Och snabb acceleration kan släpa en sekund eftersom chippet medelvärdesbildar positioner. Ingen av dem spelar roll vid normal användning, men se inte ett **HardSpeedometer-test** i hög hastighet som en precisionsmätning — för det vinner en kalibrerad enhet fortfarande.",
+    ],
+  },
+  {
+    h: "Vem den gratis hastighetsmätaren är för",
+    paras: [      "Cykling använder den för att bekräfta en cykeldator. Bilförare använder den för att kontrollera instrumentpanelen efter ett hjulbyte. Passagerare använder den av nyfikenhet på en motorväg eller ett tåg. Löpare och fotgängare använder medelhastigheten som tempokontroll. Och den som jämför en bil med en hyrbil, en förälders bil eller ett nytt köp får en neutral siffra utan att installera något.",
+      "Eftersom verktyget körs i webbläsaren fungerar det likadant på Android, iPhone, surfplatta eller laptop (laptops har sällan GPS, så telefonen är det praktiska valet). Din position används för att räkna ut hastigheten och laddas aldrig upp, så en kontroll med **digital hastighetsmätare** på en lånad telefon lämnar inget efter sig.",
+    ],
+  },
+  {
+    h: "Kortversionen",
+    paras: [      "Öppna sidan, tillåt plats, tryck på Starta och läs din hastighet i km/h eller mph. Återställ mellan turer så att max och medel förblir ärliga, håll telefonen utomhus för en ren signal, och räkna med att en telefon-GPS är något mer exakt än en bilpanel. Vare sig du kom hit via en sökning på *hastighetsmätare online*, en *live hastighetstest* eller ett **hastighetstest online** på en begagnad bil är svaret samma sida — gratis, privat och utan installation.",
+    ],
+  },
+  ],
+  guidesH: "Senaste guiderna från hastighetsmätarbloggen",
+  guides: [
+    { href: "/onlinespeedometer/blog/how-to-use-an-online-speedometer/", title: "Använda en onlinehastighetsmätare (steg för steg)", desc: "Tillåt plats, tryck på Starta, välj km/h eller mph och läs din livehastighet." },
+    { href: "/onlinespeedometer/blog/how-accurate-is-a-phone-speedometer/", title: "Hur noggrann är en hastighetsmätare i en telefon?", desc: "Typiskt GPS-fel, hur det står sig mot en instrumentpanel, och tre tester att göra." },
+    { href: "/onlinespeedometer/blog/speedometer-units-kmh-mph-knots/", title: "Hastighetsenheter: km/h, mph, m/s och knop", desc: "När du använder vilken enhet, och hur du räknar om i huvudet." },
+  ],
+  guidesAll: "Se alla guider för onlinehastighetsmätaren →",
+  faqH: "Vanliga frågor om onlinehastighetsmätaren",
+  faq: [
+    {
+      q: "Onlinemätare — hur snabbt går jag just nu?",
+      a: "Den stora siffran på sidan är din aktuella hastighet i vald enhet, oftast km/h eller mph. Tillåt platsåtkomst, tryck på Starta och siffran uppdateras en gång i sekunden från GPS. Står siffran på 0 medan du rör dig är platsbehörigheten blockerad eller så har telefonen ingen satellitbestämning än.",
+    },
+    {
+      q: "Hur kontrollerar jag aktuell hastighet med en onlinehastighetsmätare?",
+      a: "Öppna sidan utomhus, tillåt platsåtkomst, tryck på Starta och börja röra dig. Håll telefonen nära ett fönster, på ett fäste eller i handen, och läs siffran efter några sekunder medan GPS:en stabiliseras. Tryck på Återställ mellan turer så att max- och medelhastigheten bara gäller den turen.",
+    },
+    {
+      q: "Är den här onlinehastighetsmätaren gratis och behöver jag en app?",
+      a: "Den är gratis och körs helt i webbläsaren, så det finns inget att installera och inget konto att skapa. När sidan väl har laddats fortsätter den fungera utan mobildata, eftersom hastigheten kommer från telefonens GPS-mottagare och inte från en server.",
+    },
+    {
+      q: "Hur noggrann är en telefonhastighetsmätare jämfört med en bilpanel?",
+      a: "Under öppen himmel läser en telefon-GPS inom ungefär 1–2 km/h, vilket oftast är tätare än en bilpanel. Instrumentpaneler är medvetet några procent optimistiska och driver längre efter ett hjul- eller däckbyte. När de två inte stämmer på en jämn sträcka är telefonens avläsning över marken normalt den ärligare.",
+    },
+    {
+      q: "Varför står hastigheten på 0 eller fryser?",
+      a: "Nästan alltid GPS-bestämningen. Byggnader, tunnlar, parkeringshus, tät skog och metaltak blockerar satelliter, och avläsningen behåller sitt senaste värde tills bestämningen kommer tillbaka. Tillåt plats först, gå utomhus, håll skärmen vaken och ladda om sidan om siffran aldrig börjar röra sig.",
+    },
+    {
+      q: "Kan jag se min hastighet i mph, km/h, m/s och knop?",
+      a: "Ja. Använd enhetsknappen bredvid avläsningen för att växla mellan km/h, mph, m/s och knop när som helst. Att byta enhet återställer inte resan, så max- och medelsiffrorna räknas om med den.",
+    },
+    {
+      q: "Kan jag använda en onlinehastighetsmätare på tåg, buss eller som passagerare?",
+      a: "Ja, det är ett av de vanligaste användningsområdena. Som passagerare har du ingen instrumentpanel, så ett live hastighetstest är den enda avläsning som finns. Håll telefonen nära ett fönster på ett tåg, och räkna med avbrott i tunnlar och djupa skärningar.",
+    },
+  ],
+};
+
 export const speedometerProse: Record<string, SpeedProse> = {
   en,
   es,
@@ -735,4 +913,6 @@ export const speedometerProse: Record<string, SpeedProse> = {
   pt,
   ko,
   it,
+  nl,
+  sv,
 };
