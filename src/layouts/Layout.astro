@@ -10,6 +10,7 @@ import '../styles/mobile.css';
 import '../styles/desktop.css';
 import Header from '../components/Header.astro';
 import InstrumentNav from '../components/instruments/InstrumentNav.astro';
+import { toolFaviconPath } from '../config/toolMarks.mjs';
 import { isInstrument } from '../utils/toolPaths';
 import Footer from '../components/Footer.astro';
 import SearchPanel from '../components/SearchPanel.astro';
@@ -198,7 +199,12 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
       extraSchemas={jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []}
     />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/* Chaar sensor tools ka apna favicon — har tab me alag pehchan. */}
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={chrome === 'instrument' ? toolFaviconPath(instrumentSlug) : '/favicon.svg'}
+    />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

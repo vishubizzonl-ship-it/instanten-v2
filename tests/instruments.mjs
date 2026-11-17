@@ -10,6 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { LOCALES, createSuite, jsonLdOf, localeOf, localize, stripTags } from './lib.mjs';
+import { TOOL_MARKS, toolFaviconPath, toolMarkPath } from '../src/config/toolMarks.mjs';
 
 /** slug -> us tool ka root attribute + island ke zaroori elements. */
 export const INSTRUMENTS = {
@@ -819,6 +820,59 @@ export function run(pages, outDir) {
       const canonical = (html.match(/rel="canonical" href="([^"]*)"/) ?? [, ''])[1];
       check(canonical.endsWith(`${url}`), `hub ${lang}: canonical galat (${canonical})`);
     }
+  }
+
+
+  /* ---------- apna logo, apna favicon (har tool ki alag pehchan) ----------
+   * Chaaron tools ka header mark aur tab icon alag hona chahiye. Style
+   * opendesignmd jaisa hai: filled squircle + knockout glyph, single colour.
+   * Geometry `src/config/toolMarks.mjs` se aati hai — wahi nav, favicon aur ye
+   * test chalati hai, isliye kabhi teen jagah alag nahi ho sakte.
+   */
+  const markSigs = new Map();
+  for (const slug of Object.keys(TOOL_MARKS)) {
+    const url = localize(`/${slug}/`, 'en');
+    const html = pages.get(url) ?? '';
+
+    // 1. nav me isi tool ka mark inline hai (poora `d` attribute match)
+    check(html.includes(toolMarkPath(slug)), `${slug}: header me apna logo mark nahi (shared icon wapas aa gaya?)`);
+    // 2. squircle + evenodd construction bani hui hai
+    check(
+      /<path fill-rule="evenodd" d="M7\.5 0H16\.5C22\.65 0 24 1\.35 24 7\.5/.test(html),
+      `${slug}: logo mark ka squircle shape nahi mila`
+    );
+    // 3. favicon link usi tool ka hai
+    check(
+      html.includes(`rel="icon" type="image/svg+xml" href="${toolFaviconPath(slug)}"`),
+      `${slug}: favicon link apna nahi (${toolFaviconPath(slug)} chahiye)`
+    );
+    // 4. favicon file build me maujood hai
+    check(existsSync(join(outDir, slug, 'favicon.svg')), `${slug}: dist me favicon.svg nahi bana`);
+
+    // 5. har locale par bhi wahi mark + favicon
+    for (const lang of LOCALES) {
+      if (lang === 'en') continue;
+      const localized = pages.get(localize(`/${slug}/`, lang)) ?? '';
+      check(localized.includes(toolMarkPath(slug)), `${slug}/${lang}: localized page par apna logo nahi`);
+      check(
+        localized.includes(`href="${toolFaviconPath(slug)}"`),
+        `${slug}/${lang}: localized page par apna favicon nahi`
+      );
+    }
+
+    // 6. sign unique hona chahiye (do tools same mark use na karein)
+    markSigs.set(slug, toolMarkPath(slug));
+    // 7. silo ke andar ke pages (about/blog/contact) par bhi apna favicon
+    const sub = pages.get(`/${slug}/about/`) ?? '';
+    check(sub.includes(`href="${toolFaviconPath(slug)}"`), `${slug}/about: favicon silo ka nahi hai`);
+  }
+  const sigs = [...markSigs.values()];
+  check(new Set(sigs).size === sigs.length, 'do tools ka logo mark ek jaisa hai');
+
+  // 8. silo ke bahar wale pages par site ka apna favicon hi rahe
+  for (const url of ['/', '/about/', '/tools/json-formatter/', '/blog/']) {
+    const html = pages.get(url) ?? '';
+    check(html.includes('href="/favicon.svg"'), `${url}: site favicon hi nahi (tool wala le liya?)`);
   }
 
   return suite;

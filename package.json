@@ -22,7 +22,9 @@
     "cf:whoami": "npx wrangler@4 whoami",
     "pages:create": "npx wrangler@4 pages project create instanten --production-branch=main",
     "deploy:workers": "npm run build && npx wrangler@4 deploy",
-    "deploy:workers:dry": "npm run build && npx wrangler@4 deploy --dry-run"
+    "deploy:workers:dry": "npm run build && npx wrangler@4 deploy --dry-run",
+    "favicons": "node scripts/generateToolFavicons.mjs",
+    "prebuild": "node scripts/generateToolFavicons.mjs"
   },
   "dependencies": {
     "astro": "^6.4.8"
