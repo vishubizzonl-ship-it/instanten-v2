@@ -10,7 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { LOCALES, createSuite, jsonLdOf, localeOf, localize, stripTags } from './lib.mjs';
-import { MARK_FONT, SQUIRCLE, TOOL_MARKS, toolFaviconPath, toolMarkId } from '../src/config/toolMarks.mjs';
+import { MARK_FONT, SQUIRCLE, TOOL_MARKS, WORDMARK, toolFaviconPath, toolMarkId } from '../src/config/toolMarks.mjs';
 
 /** slug -> us tool ka root attribute + island ke zaroori elements. */
 export const INSTRUMENTS = {
@@ -853,8 +853,11 @@ export function run(pages, outDir) {
       TOOL_MARKS[slug].path.length > 250,
       `${slug}: letter path bahut chhota (hand-drawn lagta hai, font outline chahiye)`
     );
-    check(MARK_FONT === 'Montserrat Black Italic', 'logo letters ka font site logo se match nahi karta');
-    // italic hone ka saboot: italic glyph me vertical se zyada slanted side hote hain
+    check(
+      MARK_FONT === 'Inter Bold',
+      'logo letters ka font opendesignmd.com ke logo se match nahi karta (Inter)'
+    );
+    // Inter ke outlines quadratic curves (Q) se bante hain — hand-drawn nahi
     check(
       /[A-Z]/.test(TOOL_MARKS[slug].letter) && TOOL_MARKS[slug].path.includes('Q'),
       `${slug}: letter path curve commands ke bina`
@@ -906,6 +909,26 @@ export function run(pages, outDir) {
   check(
     siteHome.includes(TOOL_MARKS.instanten.path),
     'site logo me "I" letter ka font outline nahi'
+  );
+
+  // wordmark bhi vector hai — Inter Bold outlines, koi webfont nahi
+  check(MARK_FONT === 'Inter Bold', 'wordmark ka font Inter nahi hai');
+  check(
+    WORDMARK.word === 'instanten' && WORDMARK.path.length > 3000,
+    'wordmark Inter ke outlines nahi (path chhota / galat)'
+  );
+  check(siteHome.includes(WORDMARK.path), 'site header/footer me vector wordmark nahi');
+  check(
+    (siteHome.match(new RegExp(WORDMARK.path.slice(0, 40), 'g')) ?? []).length >= 2,
+    'wordmark header aur footer dono jagah nahi'
+  );
+  check(
+    !/font-family:\s*["']Montserrat/i.test(siteHome),
+    'logo abhi bhi Montserrat webfont par depend karta hai'
+  );
+  check(
+    !/family=Montserrat/.test(siteHome),
+    'Montserrat webfont ab bekaar load ho raha hai (logo vector hai)'
   );
   // header/footer/mobile drawer — teeno jagah logo mark
   check(
