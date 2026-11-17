@@ -82,8 +82,10 @@ if (langBtn) {
 }
 
 // ------- search panel (aisa page jahan header button hi entry point hai)
+// /blog/ par header button jaan-boojh kar nahi hai (info pages se search hataya gaya),
+// isliye panel yahan /tags/ se test hota hai.
 await p.cleanup();
-p = await open('/blog/');
+p = await open('/tags/');
 const searchTrigger = p.$('[data-search-open]');
 r.check('search: trigger button hai', !!searchTrigger);
 if (searchTrigger) {

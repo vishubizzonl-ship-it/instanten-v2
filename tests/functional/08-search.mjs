@@ -22,11 +22,42 @@ const entryPages = [
   { route: '/de/', expectAction: '/de/search/', gridSearch: true },
   { route: '/ja/', expectAction: '/ja/search/', gridSearch: true },
   { route: '/search/', expectAction: '/search/', gridSearch: true },
-  { route: '/blog/', expectAction: '/search/' },
   { route: '/tags/', expectAction: '/search/' },
-  { route: '/contact/', expectAction: '/search/' },
   { route: '/404.html', expectAction: '/search/' },
 ];
+
+/**
+ * Info pages (About / Contact / Privacy / Terms / Blog + blog posts, har locale)
+ * ke top bar par search button nahi hona chahiye — ye jaan-boojh ka decision hai.
+ * Panel phir bhi mounted rehta hai, isliye Ctrl/Cmd+K aur blog cards ke buttons
+ * se search khulta hai.
+ */
+const noHeaderSearchPages = [
+  { route: '/about/', expectAction: '/search/' },
+  { route: '/contact/', expectAction: '/search/' },
+  { route: '/privacy-policy/', expectAction: '/search/' },
+  { route: '/terms/', expectAction: '/search/' },
+  { route: '/blog/', expectAction: '/search/' },
+  { route: '/blog/online-tools-hub-guide/', expectAction: '/search/' },
+  { route: '/de/about/', expectAction: '/de/search/' },
+  { route: '/ja/blog/', expectAction: '/ja/search/' },
+];
+
+for (const { route, expectAction } of noHeaderSearchPages) {
+  const p = await open(route);
+  const inHeader = p.$$('header [data-search-open]').length;
+  r.check(`${route}: top bar me search button nahi`, inHeader === 0, `${inHeader} buttons`);
+  r.check(`${route}: search panel mounted hai`, !!p.$('#search-panel'));
+  const form = p.$('#search-panel [data-search-form]') || p.$('[data-search-form]');
+  r.check(`${route}: panel ka form usi bhasha ke search par jaata hai`, (form?.getAttribute('action') || '') === expectAction,
+    `${form?.getAttribute('action')} (expected ${expectAction})`);
+  p.document.dispatchEvent(new p.window.KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }));
+  await p.settle(90);
+  r.check(`${route}: Ctrl+K se panel khulta hai`, p.$('#search-panel').hidden === false);
+  p.document.dispatchEvent(new p.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  await p.settle(60);
+  await p.cleanup();
+}
 
 for (const { route, expectAction, gridSearch = false } of entryPages) {
   const p = await open(route);
