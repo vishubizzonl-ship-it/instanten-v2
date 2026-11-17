@@ -10,7 +10,7 @@ const ALLOWED = new Set(['instanten', 'json', 'qr', 'css', 'base64', 'url', 'url
 /** English-only markers — if one of these appears on a localized page, copy leaked. */
 const ENGLISH_MARKERS = [
   'Free Online', 'Sign in', 'Read more', 'Learn more', 'Get started', 'Privacy Policy',
-  'Terms of Service', 'All rights reserved', 'Contact us', 'Search tools', 'Related tools',
+  'Terms of Service', 'All rights reserved', 'Free to use, no sign-up required', 'Contact us', 'Search tools', 'Related tools',
   'Frequently asked', 'Table of contents', 'Back to top', 'Share this', 'Latest posts',
 ];
 
