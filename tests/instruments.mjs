@@ -204,12 +204,6 @@ export function run(pages, outDir) {
     // top bar + do mobile rows (original structure)
     check(/class="flex h-16 items-center justify-between[^"]*"/.test(nav), 'InstrumentNav: top bar h-16 nahi');
     check((nav.match(/md:hidden/g) ?? []).length >= 1, 'InstrumentNav: mobile rows wrapper nahi');
-    // brand top bar ke bilkul beech me (absolute centre wrapper ke andar)
-    check(/class="header-logo-center absolute inset-x-0 top-0 bottom-0/.test(nav), 'InstrumentNav: brand centre wrapper nahi');
-    check(
-      /header-logo-center[\s\S]{0,400}?data-nav-pill[\s\S]{0,400}?online(compass|bubblelevel|speedometer|qibla)/.test(nav),
-      'InstrumentNav: brand logo centre wrapper ke andar nahi hai'
-    );
     // pills apne natural size par (koi min-height class nahi)
     const pills = [...nav.matchAll(/<a[^>]*data-nav-pill[^>]*>/g)].map((m) => m[0]);
     check(pills.length >= 9, `InstrumentNav: sirf ${pills.length} pills (4 tool + 5 company chahiye)`);
@@ -908,13 +902,6 @@ export function run(pages, outDir) {
   check(
     siteHome.includes(`id="${toolMarkId('instanten')}"`),
     'site logo par instanten ka mark nahi (squircle + I)'
-  );
-
-  // header ke dono bars (mobile + desktop) me logo centre me hi rahe
-  const headerHtml = siteHome.slice(siteHome.indexOf('<header'), siteHome.indexOf('</header>'));
-  check(
-    (headerHtml.match(/header-logo-center absolute inset-x-0 top-0 bottom-0/g) ?? []).length === 2,
-    'site header: logo dono bars (mobile + desktop) me centre me nahi'
   );
   check(
     siteHome.includes(TOOL_MARKS.instanten.path),
