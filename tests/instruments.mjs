@@ -859,6 +859,11 @@ export function run(pages, outDir) {
       /[A-Z]/.test(TOOL_MARKS[slug].letter) && TOOL_MARKS[slug].path.includes('Q'),
       `${slug}: letter path curve commands ke bina`
     );
+    // letter ke aage full stop (opendesignmd ke "D." jaisa) — chhota rounded square
+    check(
+      /A0\.62 0\.62 0 0 1/.test(TOOL_MARKS[slug].path),
+      `${slug}: letter ke aage dot nahi hai`
+    );
     // 3. favicon link usi tool ka hai
     check(
       html.includes(`rel="icon" type="image/svg+xml" href="${toolFaviconPath(slug)}"`),
@@ -918,6 +923,23 @@ export function run(pages, outDir) {
     : '';
   check(siteFavicon.includes(TOOL_MARKS.instanten.path), 'site favicon me instanten ka I mark nahi');
   check(/#000000/.test(siteFavicon), 'site favicon ka squircle pure black (#000000) nahi');
+
+  // favicon.ico (purana Astro logo) hata kar apna mark; iOS icon bhi apna
+  const ico = existsSync(join(outDir, 'favicon.ico')) ? readFileSync(join(outDir, 'favicon.ico')) : Buffer.alloc(0);
+  check(ico.length > 200, 'favicon.ico nahi mila');
+  check(
+    ico.subarray(0, 4).equals(Buffer.from([0x00, 0x00, 0x01, 0x00])),
+    'favicon.ico asli ICO file nahi hai'
+  );
+  check(
+    ico.includes(Buffer.from('instanten-mark')),
+    'favicon.ico abhi bhi Astro ka default icon hai (hamara mark nahi)'
+  );
+  const apple = existsSync(join(outDir, 'apple-touch-icon.png'))
+    ? readFileSync(join(outDir, 'apple-touch-icon.png'))
+    : Buffer.alloc(0);
+  check(apple.includes(Buffer.from('instanten-mark')), 'apple-touch-icon.png nahi hai ya hamara mark nahi');
+  check(siteHome.includes('rel="apple-touch-icon"'), 'Layout me apple-touch-icon link nahi');
 
   // har tool favicon ka shell bhi pure black ho (site logo ki tarah)
   for (const slug of Object.keys(TOOL_MARKS)) {

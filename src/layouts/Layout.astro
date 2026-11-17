@@ -205,7 +205,9 @@ gtag('config', ${JSON.stringify(gaMeasurementId)}, {
       type="image/svg+xml"
       href={chrome === 'instrument' ? toolFaviconPath(instrumentSlug) : '/favicon.svg'}
     />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    {/* iOS/Android home-screen icon — Astro ka default icon nahi, apna mark. */}
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
