@@ -1,27 +1,19 @@
 ---
 /**
- * Site logo — opendesignmd.com ke logo jaisa: filled black rounded square
- * (squircle) ke andar white letter, uske saath "instanten" wordmark.
+ * Site logo — black squircle mark (Montserrat Black Italic "I") + instanten
+ * wordmark. Mark `src/config/toolMarks.mjs` se aata hai, wahi file jo chaaron
+ * tool silos ke marks chalati hai, isliye poore site ka brand ek jaisa rehta hai.
  *
- * Font bhi wahi hai jo opendesignmd.com ka logo use karta hai: **Inter**
- * (Bold 700, tracking -0.03em). Yahan wordmark ek inline SVG path hai, isliye
- * har device/browser par bilkul wahi shape aati hai — koi webfont load nahi,
- * koi fallback font nahi.
- *
- * Mark aur wordmark dono `src/config/toolMarks.mjs` se aate hain, wahi file jo
- * chaaron tool silos ke marks chalati hai — poore site ka brand ek jaisa.
- *
- * Colour: Layout ka global rule `[data-site-logo]` light mode me pure black
- * (#000000) aur dark mode me pure white (#FFFFFF) force karta hai; SVG
- * `currentColor` use karti hai, isliye apne aap sahi ho jaata hai.
+ * Colour: Layout ka global CSS `[data-site-logo]` par light mode me pure black
+ * (#000000) aur dark mode me pure white (#FFFFFF) force karta hai — mark SVG
+ * bhi usi ke andar hai, isliye apne aap sahi ho jaata hai.
  */
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { toolMarkSvg, wordmarkSvg } from '../config/toolMarks.mjs';
+import { toolMarkSvg } from '../config/toolMarks.mjs';
 
 const { href = '/', showMark = true } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
-
 <a
   href={href}
   class="cs-logo inline-flex items-center gap-2 site-brand-logo"
@@ -33,7 +25,9 @@ const t = useTranslations(getLangFromUrl(Astro.url));
       <span class="cs-logo-mark" aria-hidden="true" set:html={toolMarkSvg('instanten')} />
     )
   }
-  <span class="cs-logo-text" set:html={wordmarkSvg(21)} />
+  <span class="cs-logo-text">
+    instanten
+  </span>
 </a>
 <style>
   .cs-logo {
@@ -41,12 +35,6 @@ const t = useTranslations(getLangFromUrl(Astro.url));
     align-items: center;
     text-decoration: none;
     line-height: 1;
-    color: #000000;
-  }
-
-  .dark .cs-logo,
-  [data-theme='dark'] .cs-logo {
-    color: #FFFFFF;
   }
 
   .cs-logo-mark {
@@ -63,16 +51,29 @@ const t = useTranslations(getLangFromUrl(Astro.url));
   }
 
   .cs-logo-text {
-    display: inline-flex;
-    align-items: center;
-    flex: none;
-    max-width: 320px;
+    font-family: "Montserrat", "Arial Black", sans-serif !important;
+    font-weight: 900 !important;
+    font-variation-settings: 'wght' 1000;
+    font-style: italic !important;
+    font-size: 23px !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    -webkit-text-stroke: 0.7px currentColor !important;
+    paint-order: stroke fill !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0 4px !important;
+    max-width: 280px !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 
-  .cs-logo-text :global(svg) {
-    display: block;
-    height: 21px;
-    width: auto;
+  .dark .cs-logo-text {
+    color: #FFFFFF !important;
+    -webkit-text-stroke: 0.7px currentColor !important;
   }
 
   .cs-logo:focus-visible {
@@ -82,13 +83,15 @@ const t = useTranslations(getLangFromUrl(Astro.url));
   }
 
   @media (min-width: 992px) {
+    .cs-logo-text {
+      font-size: 23px !important;
+      max-width: 340px !important;
+      height: 21px !important;
+    }
+
     .cs-logo-mark {
       width: 30px;
       height: 30px;
-    }
-
-    .cs-logo-text :global(svg) {
-      height: 23px;
     }
   }
 </style>
