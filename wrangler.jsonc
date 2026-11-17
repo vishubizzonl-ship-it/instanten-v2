@@ -7,14 +7,19 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Worker sirf API ke liye chalta hai. Baaki har request (HTML, CSS, images,
+    // sitemap) Cloudflare ke free static-asset path se jaati hai — Worker
+    // requests bill nahi hoti. `/api/contact` pehle Worker par aata hai.
+    "run_worker_first": ["/api/*"]
   },
   "send_email": [
     {
       "name": "EMAIL",
       // Receiving mailbox — free plan par sirf VERIFIED destination par bhej
       // sakte hain. Ye wahi Gmail hai jo Cloudflare Email Routing bhi use karta hai.
-      "destination_address": "vishubizz.onl@gmail.com",
+      // Wrangler 4.16x: "destination_address" aur "allowed_destination_addresses"
+      // dono ek saath allowed nahi — list hi kaafi hai (CONTACT_TO isi list se aata hai).
       "allowed_destination_addresses": [
         "vishubizz.onl@gmail.com",
         "helloinstanten@gmail.com"

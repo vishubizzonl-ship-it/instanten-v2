@@ -29,3 +29,6 @@ dist/
 
 # functional suite ka local dist symlink
 dist
+
+# wrangler local state
+.wrangler/

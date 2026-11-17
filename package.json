@@ -17,7 +17,9 @@
     "test:site:update": "node tests/run.mjs --update-baseline",
     "test:worker": "node --test worker/*.test.mjs",
     "test:functional": "node tests/functional/run.mjs",
-    "deploy:api": "wrangler deploy --config wrangler.api.jsonc"
+    "deploy": "npm run build && npx wrangler@4 deploy",
+    "deploy:dry": "npm run build && npx wrangler@4 deploy --dry-run",
+    "cf:whoami": "npx wrangler@4 whoami"
   },
   "dependencies": {
     "astro": "^6.4.8"
